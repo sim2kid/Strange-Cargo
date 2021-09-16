@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 17196266}
   - component: {fileID: 17196265}
   - component: {fileID: 17196264}
+  - component: {fileID: 17196267}
   - component: {fileID: 17196263}
   m_Layer: 0
   m_Name: Sphere
@@ -218,6 +219,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &17196267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17196262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95edd89afbf8d354ab74c608ed2f6727, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OverlayTexture: {fileID: 2800000, guid: 99ecf10651d004c44aac0d089c6cb5ad, type: 3}
+  colors:
+  - {r: 0, g: 0.50931454, b: 1, a: 1}
+  - {r: 0.6039216, g: 0, b: 0.51383895, a: 1}
+  - {r: 0, g: 0.5, b: 0.18032312, a: 1}
 --- !u!1 &1438122993
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,6 +330,7 @@ GameObject:
   - component: {fileID: 1887824943}
   - component: {fileID: 1887824942}
   - component: {fileID: 1887824941}
+  - component: {fileID: 1887824944}
   - component: {fileID: 1887824940}
   m_Layer: 0
   m_Name: Cube
@@ -396,6 +415,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1887824944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887824939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95edd89afbf8d354ab74c608ed2f6727, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OverlayTexture: {fileID: 2800000, guid: 99ecf10651d004c44aac0d089c6cb5ad, type: 3}
+  colors:
+  - {r: 0.7169057, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0.6037736, b: 0.011924456, a: 1}
 --- !u!1 &1948252920
 GameObject:
   m_ObjectHideFlags: 0
