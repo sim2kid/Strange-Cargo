@@ -22,6 +22,7 @@ namespace EditorAid
         private bool showOriginal = true;
         private bool baseOperation = false;
         private Color[] colors = new Color[3];
+        private string[] hexStrings = new string[3];
 
         [MenuItem("Window/Dev Aid/Texture Aid", false, 3110)]
         private static void OpenTextureAid() 
@@ -35,6 +36,10 @@ namespace EditorAid
             SetUp();
             GenerateToolbar();
             GenerateUI();
+            if (output == null) 
+            {
+                runConversion();
+            }
         }
 
         private void SetUp()
@@ -44,6 +49,12 @@ namespace EditorAid
                 colors[0] = Color.clear;
                 colors[1] = Color.clear;
                 colors[2] = Color.clear;
+            }
+            if (hexStrings[0] == null) 
+            {
+                hexStrings[0] = string.Empty;
+                hexStrings[1] = string.Empty;
+                hexStrings[2] = string.Empty;
             }
         }
 
@@ -80,6 +91,39 @@ namespace EditorAid
                 else
                     UI.Add(sample);
             }
+
+            TextField[] hexs = new TextField[3];
+
+            for (int i = 0; i < 3; i++) 
+            {
+                Label label = new Label($"Color {i+1}: ");
+                UI.Add(label);
+                hexs[i] = new TextField();
+                hexs[i].value = hexStrings[i];
+                if (ColorUtility.TryParseHtmlString($"#{hexs[i].value}", out Color color))
+                {
+                    color.a = 1;
+                    colors[i] = color;
+                }
+                else 
+                {
+                    hexs[i].value = ColorUtility.ToHtmlStringRGB(colors[i]);
+                }
+                hexStrings[i] = hexs[i].value;
+                UI.Add(hexs[i]);
+            }
+
+            Button confirm = new Button();
+            confirm.text = "Save Colors";
+            UI.Add(confirm);
+            confirm.clicked += () =>
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    hexStrings[i] = hexs[i].value;
+                }
+                ReDraw();
+            };
 
 
             rootVisualElement.Add(UI);
@@ -148,6 +192,13 @@ namespace EditorAid
                     foward.text = "Colors to RGB";
                 else
                     foward.text = "RGB to Colors";
+                foward.RegisterCallback<ChangeEvent<bool>>((ChangeEvent<bool> evt) => 
+                {
+                    baseOperation = foward.value;
+                    runConversion();
+                    ReDraw();
+                });
+
                 _toolbar.Add(foward);
             }
 
@@ -157,7 +208,16 @@ namespace EditorAid
 
         private void runConversion() 
         {
-            if(baseOperation)
+            if (working == null)
+                return;
+            if (baseOperation)
+            {
+                output = TextureConversions.GenerateBaseTexture(working, colors);
+            }
+            else 
+            {
+                output = TextureConversions.ConvertTexture(working, colors);
+            }
 
         }
 
