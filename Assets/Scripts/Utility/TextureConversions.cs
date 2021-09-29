@@ -91,6 +91,9 @@ namespace Utility
                         (float.IsInfinity(b.x) ? 1 : b.x) * (n.z / t),
                         (float.IsInfinity(a.x) ? 1 : a.x) * (n.w / t));
 
+                    //TECHNICAL DEBT - Set transparency to 1;
+                    outColor.w = 1;
+
                     output.SetPixel(width, height, outColor);
                 }
             }

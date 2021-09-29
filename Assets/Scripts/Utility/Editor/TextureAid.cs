@@ -145,33 +145,7 @@ namespace EditorAid
         {
             _toolbar = new Toolbar();
 
-            TextElement getFileText = new TextElement();
-            getFileText.text = " File Location: ";
-            _toolbar.Add(getFileText);
-
-            TextField fileLocation = new TextField();
-            fileLocation.value = path;
-            _toolbar.Add(fileLocation);
-
-            ToolbarButton fileExplorer = new ToolbarButton();
-            fileExplorer.text = "Load File";
-            _toolbar.Add(fileExplorer);
-            fileExplorer.clicked += () =>
-            {
-                string fileURI = fileLocation.value;
-                path = fileURI;
-                try
-                {
-                    working = LoadImage(fileURI);
-                    ReDraw();
-                }
-                catch (Exception e) 
-                {
-                    fileLocation.value = path = string.Empty;
-                    working = null;
-                    output = null;
-                }
-            };
+            
 
             if (!showAbout) {
                 ToolbarButton originalOrNot = new ToolbarButton();
@@ -195,13 +169,47 @@ namespace EditorAid
                 foward.RegisterCallback<ChangeEvent<bool>>((ChangeEvent<bool> evt) => 
                 {
                     baseOperation = foward.value;
-                    runConversion();
                     ReDraw();
                 });
-
                 _toolbar.Add(foward);
+                Button redraw = new Button();
+                redraw.text = "Convert";
+                redraw.clicked += () =>
+                {
+                    runConversion();
+                };
+                _toolbar.Add(redraw);
             }
 
+
+            TextElement getFileText = new TextElement();
+            getFileText.text = " File Location: ";
+            _toolbar.Add(getFileText);
+
+            TextField fileLocation = new TextField();
+            fileLocation.value = path;
+            _toolbar.Add(fileLocation);
+
+            ToolbarButton fileExplorer = new ToolbarButton();
+            fileExplorer.text = "Load File";
+            _toolbar.Add(fileExplorer);
+            fileExplorer.clicked += () =>
+            {
+                string fileURI = fileLocation.value;
+                path = fileURI;
+                try
+                {
+                    working = LoadImage(fileURI);
+                    runConversion();
+                    ReDraw();
+                }
+                catch (Exception e)
+                {
+                    fileLocation.value = path = string.Empty;
+                    working = null;
+                    output = null;
+                }
+            };
 
             rootVisualElement.Add(_toolbar);
         }
@@ -218,7 +226,13 @@ namespace EditorAid
             {
                 output = TextureConversions.ConvertTexture(working, colors);
             }
+            SaveImage("C:\\Users\\2simm\\Downloads\\image.png", output);
+        }
 
+        private void SaveImage(string path, Texture2D texture) 
+        {
+            byte[] imageData = ImageConversion.EncodeToPNG(texture);
+            File.WriteAllBytes(path, imageData);
         }
 
         private Texture2D LoadImage(string path) 
