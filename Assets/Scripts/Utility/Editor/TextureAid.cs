@@ -23,6 +23,8 @@ namespace EditorAid
         private bool baseOperation = false;
         private Color[] colors = new Color[3];
         private string[] hexStrings = new string[3];
+        private string savePathString = "C:\\temp\\";
+        private string saveNameString = "output.png";
 
         [MenuItem("Window/Dev Aid/Texture Aid", false, 3110)]
         private static void OpenTextureAid() 
@@ -124,6 +126,29 @@ namespace EditorAid
                 }
                 ReDraw();
             };
+
+            if (output != null)
+            {
+                Label pathLabel = new Label("Save Path:");
+                TextField savePath = new TextField();
+                savePath.value = savePathString;
+                Label nameLabel = new Label("File Name:");
+                TextField fileName = new TextField();
+                fileName.value = saveNameString;
+                Button saveButton = new Button();
+                saveButton.text = "Save File";
+                saveButton.clicked += () => 
+                {
+                    savePathString = savePath.value;
+                    saveNameString = fileName.value;
+                    SaveImage($"{savePathString}\\{saveNameString}", output);
+                };
+                UI.Add(pathLabel);
+                UI.Add(savePath);
+                UI.Add(nameLabel);
+                UI.Add(fileName);
+                UI.Add(saveButton);
+            }
 
 
             rootVisualElement.Add(UI);
