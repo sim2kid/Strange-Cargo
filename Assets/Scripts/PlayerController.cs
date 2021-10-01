@@ -39,7 +39,17 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        moveTo.y -= gravityForce * Time.fixedDeltaTime;
+        HandleGravity();
+        HandleMovement();
+    }
+
+    void HandleMovement()
+    {
         characterController.Move(moveTo.normalized * Time.fixedDeltaTime * moveSpeed);
+    }
+
+    void HandleGravity()
+    {
+        moveTo.y -= gravityForce * Time.fixedDeltaTime;
     }
 }
