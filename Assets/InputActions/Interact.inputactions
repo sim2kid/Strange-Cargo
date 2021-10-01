@@ -1,5 +1,5 @@
 {
-    "name": "Player",
+    "name": "Interact",
     "maps": [
         {
             "name": "Player",
@@ -25,6 +25,14 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "0d5b96d6-c431-43b8-b86a-0f7ff2833582",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "735db484-bc09-4a6d-a473-7bd35a20524d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -248,6 +256,17 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2a70ca42-7da7-44aa-95c2-0a48df5954b9",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Gamepad",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
