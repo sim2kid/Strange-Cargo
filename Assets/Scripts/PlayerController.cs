@@ -21,15 +21,11 @@ public class PlayerController : MonoBehaviour
     {
         moveValue = value.Get<Vector2>();
 
-        Debug.Log($"Current movement value is: ({moveValue.x},{moveValue.y})");
-
         moveTo = new Vector3(moveValue.x, 0, moveValue.y);
     }
 
     void OnJump()
     {
-        Debug.Log("Jump input received.");
-
         HandleJumping();
     }
 
