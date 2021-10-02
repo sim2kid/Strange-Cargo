@@ -1,5 +1,5 @@
 #if UNITY_2017_1_OR_NEWER
-using UnityEditor.Experimental.AssetImporters;
+using UnityEditor.AssetImporters;
 using UnityEditor;
 using System.IO;
 using UnityEngine;
