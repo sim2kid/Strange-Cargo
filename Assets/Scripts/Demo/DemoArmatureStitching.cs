@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using Siccity.GLTFUtility;
+using System.IO;
 
 public class DemoArmatureStitching : MonoBehaviour
 {
@@ -15,19 +17,20 @@ public class DemoArmatureStitching : MonoBehaviour
     {
         try
         {
-            await Load();
+            GameObject t1 = ImportGLTF("Assets/Models/GLTFs/Demo/Test1.gltf");
+            GameObject t2 = ImportGLTF("Assets/Models/GLTFs/Demo/Test2.gltf");
         }
         catch (Exception e) 
         {
             Debug.LogError($"Failed to load test files, retrying...\n{e}");
             await Task.Delay((int)(3 * 1000));
-            Start();
+            //Start();
         }
-        var gltf = Resources.Load("Models/Demo/Test1.gltf");
     }
 
-    async Task Load() 
+    GameObject ImportGLTF(string filepath)
     {
+        return Importer.LoadFromFile(filepath);
     }
 
     // Get list of Models
@@ -39,5 +42,5 @@ public class DemoArmatureStitching : MonoBehaviour
     //      -- NOTE: The Transforms will need to have the right GameObject parent (found by name in out Transform[])
     // Then we go through each SkinnedMeshRenderer and set SkinnedMeshRenderer#bones to our Transform[]
     // Then that's our finished model! We can delete everything else!
-    
+
 }
