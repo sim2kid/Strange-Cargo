@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class DemoArmatureStitching : MonoBehaviour
@@ -7,9 +9,25 @@ public class DemoArmatureStitching : MonoBehaviour
     //Technical debt. This should be generated from a 'DNA' code and passed in
     [SerializeField]
     List<GameObject> bodyparts = new List<GameObject>();
-    void Start()
+
+
+    async void Start()
     {
-        
+        try
+        {
+            await Load();
+        }
+        catch (Exception e) 
+        {
+            Debug.LogError($"Failed to load test files, retrying...\n{e}");
+            await Task.Delay((int)(3 * 1000));
+            Start();
+        }
+        var gltf = Resources.Load("Models/Demo/Test1.gltf");
+    }
+
+    async Task Load() 
+    {
     }
 
     // Get list of Models
