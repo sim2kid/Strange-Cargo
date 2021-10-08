@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Siccity.GLTFUtility;
 using System.IO;
+using Utility;
 
 public class DemoArmatureStitching : MonoBehaviour
 {
@@ -12,13 +13,16 @@ public class DemoArmatureStitching : MonoBehaviour
     [SerializeField]
     List<GameObject> bodyparts = new List<GameObject>();
 
-
     async void Start()
     {
         try
         {
             GameObject t1 = ImportGLTF("Assets/Models/GLTFs/Demo/Test1.gltf");
             GameObject t2 = ImportGLTF("Assets/Models/GLTFs/Demo/Test2.gltf");
+            bodyparts.Add(t1);
+            bodyparts.Add(t2);
+            GameObject singleObj = ArmatureStitching.StitchObjects(bodyparts);
+            singleObj.name = "Bobbert";
         }
         catch (Exception e) 
         {
@@ -33,14 +37,8 @@ public class DemoArmatureStitching : MonoBehaviour
         return Importer.LoadFromFile(filepath);
     }
 
-    // Get list of Models
-    // Select first model as the base model (maybe rename the parent game object)
-    // Split the model into objects and armatures
-    // Objects have a SkinnedMeshRenderer component
     // All other bones will get compiled down into 1 armature (found by name)
     // We will make a new Transform[] and put the compiled armature into it
     //      -- NOTE: The Transforms will need to have the right GameObject parent (found by name in out Transform[])
-    // Then we go through each SkinnedMeshRenderer and set SkinnedMeshRenderer#bones to our Transform[]
-    // Then that's our finished model! We can delete everything else!
 
 }
