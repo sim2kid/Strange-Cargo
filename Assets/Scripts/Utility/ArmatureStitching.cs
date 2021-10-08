@@ -13,130 +13,70 @@ namespace Utility
         /// <returns></returns>
         public static GameObject StitchObjects(List<GameObject> gameObjects) 
         {
-            // Make sure we're working with some objects
-            if(gameObjects.Count <= 0) 
+            if(gameObjects.Count == 0)
                 return null;
 
-            // This is our new root gameobject. This is what we will return as well
-            GameObject baseArmature = new GameObject();
-            List<Transform> knownBones = new List<Transform>();
+            GameObject baseObj = gameObjects[0];
 
-            // We loop though all the armatures
-            foreach (GameObject obj in gameObjects) 
+            for (int i = 1; i < gameObjects.Count; i++) 
             {
-                // Gather known bones
-                Transform throwawayBone = GetArmature(obj, knownBones);
-                foreach (Transform babyBone in GetBones(throwawayBone)) 
-                    if (babyBone.parent.name == throwawayBone.name) 
-                        babyBone.parent = baseArmature.transform;
-                // Don't keep the throwaway bone
-                GameObject.Destroy(throwawayBone.gameObject);
-
-                // We grab and loop through the bodyparts (not bones but models)
-                foreach (GameObject bodyPart in GetModelGameObjects(obj))
-                {
-                    // We put the bodypart set to the base armature.
-                    bodyPart.transform.SetParent(baseArmature.transform);
-                }
-
-                // Then we destroy the unused models
-                GameObject.Destroy(obj);
+                AddLimb(gameObjects[i], baseObj);
+                GameObject.Destroy(gameObjects[i]);
             }
-
-            // We then loop through one more time and assign the bones for each model
-            foreach (GameObject bodyPart in GetModelGameObjects(baseArmature)) 
-                bodyPart.GetComponent<SkinnedMeshRenderer>().bones = knownBones.ToArray(); // TO-DO Fill this in! or no animations will work!
-
-
-            return baseArmature;
+            return baseObj;
         }
 
         /// <summary>
-        /// This will recursivly loop through the <paramref name="rootObj"/>'s transform component to find all models with SkinnedMeshRenderers.
+        /// This will copy the Meshs from <paramref name="Limb"/> and put them on the <paramref name="Body"/> gameobject
         /// </summary>
-        /// <param name="rootObj"></param>
-        /// <returns></returns>
-        private static List<GameObject> GetModelGameObjects(GameObject rootObj) 
+        /// <param name="Limb"></param>
+        /// <param name="Body"></param>
+        public static void AddLimb(GameObject Limb, GameObject Body) 
         {
-            List<GameObject> models = new List<GameObject>();
-            for (int i = 0; i < rootObj.transform.childCount; i++) 
+            SkinnedMeshRenderer[] BonedObjs = Limb.GetComponentsInChildren<SkinnedMeshRenderer>();
+            foreach (SkinnedMeshRenderer renderer in BonedObjs) 
             {
-                GameObject temp = rootObj.transform.GetChild(i).gameObject;
-                if (temp.GetComponent<SkinnedMeshRenderer>() != null)
-                    models.Add(temp);
-                if(temp.transform.childCount > 0)
-                    foreach(GameObject obj in GetModelGameObjects(temp))
-                        models.Add(obj);
+                ProcessBonedObject(renderer, Body);
             }
-            return models;
+        }
+
+        private static void ProcessBonedObject(SkinnedMeshRenderer renderer, GameObject root) 
+        {
+            // Create SubObj
+            GameObject newObj = new GameObject(renderer.name);
+            newObj.transform.SetParent(root.transform);
+            // Add renderer
+            SkinnedMeshRenderer newRenderer = newObj.AddComponent<SkinnedMeshRenderer>();
+            // Assemble Bones
+            Transform[] myBones = new Transform[renderer.bones.Length];
+            for (int i = 0; i < renderer.bones.Length; i++) 
+            {
+                myBones[i] = FindChildByName(renderer.bones[i].name, root.transform);
+            }
+            // Assemble Renderer
+            newRenderer.bones = myBones;
+            newRenderer.sharedMesh = renderer.sharedMesh;
+            newRenderer.materials = renderer.materials;
         }
 
         /// <summary>
-        /// Returns a list of all the children transforms
+        /// Return a child transform in the <paramref name="obj"/> transform
         /// </summary>
-        /// <param name="parent"></param>
+        /// <param name="name"></param>
+        /// <param name="obj"></param>
         /// <returns></returns>
-        private static List<Transform> GetBones(Transform parent) 
+        private static Transform FindChildByName(string name, Transform obj) 
         {
-            List<Transform> children = new List<Transform>();
-            for (int i = 0; i < parent.childCount; i++) 
+            Transform returnObj;
+            if (obj.name == name) 
+                return obj;
+            foreach (Transform child in obj) 
             {
-                Transform child = parent.GetChild(i);
-                children.Add(child);
-                if(parent.childCount > 0)
-                    foreach(Transform baby in GetBones(child))
-                        children.Add(baby);
+                returnObj = FindChildByName(name, child);
+                if(returnObj)
+                    return returnObj;
             }
-            return children;
+            return null;
         }
-
-        /// <summary>
-        /// Boils down an an Armature to a single parent
-        /// </summary>
-        /// <param name="rootObj"></param>
-        /// <param name="knownBones"></param>
-        /// <returns></returns>
-        private static Transform GetArmature(GameObject rootObj, List<Transform> knownBones) 
-        {
-            Transform BaseBone = new GameObject().transform;
-            BaseBone.name = "Returned Armature";
-            if (knownBones == null)
-                knownBones = new List<Transform>();
-            for (int i = 0; i < rootObj.transform.childCount; i++) 
-            {
-                GameObject bone = rootObj.transform.GetChild(i).gameObject;
-
-                // If it has a meshrenderer it's not a bone
-                if (bone.GetComponent<SkinnedMeshRenderer>() != null)
-                    continue;
-
-                // Check if bone is in the KnownBones
-                if (knownBones.Find(x => x.name == bone.name) == null) 
-                {
-                    Transform parentBone = knownBones.Find(x => (x.name == bone.transform.parent.name));
-                    if (parentBone == null)
-                    {
-                        bone.transform.SetParent(BaseBone);
-                    }
-                    else
-                    {
-                        bone.transform.SetParent(parentBone);
-                    }
-                    knownBones.Add(bone.transform);
-
-                }
-
-                // Repeat on all children bones
-                if (bone.transform.childCount > 0) {
-                    Transform throwawayBone = GetArmature(bone, knownBones);
-                    foreach (Transform babyBone in GetBones(throwawayBone))
-                        knownBones.Add(babyBone);
-                    // Don't keep the throwaway bone
-                    GameObject.Destroy(throwawayBone.gameObject);
-                }
-            }
-            return BaseBone;
-        }
-
     }
 }
