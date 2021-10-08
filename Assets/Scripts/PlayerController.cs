@@ -35,8 +35,6 @@ public class PlayerController : MonoBehaviour
     void OnMove(InputValue value)
     {
         moveValue = value.Get<Vector2>();
-
-        moveTo = transform.right * moveValue.x + transform.forward * moveValue.y;
     }
 
     void OnJump()
@@ -60,7 +58,8 @@ public class PlayerController : MonoBehaviour
 
     void HandleMovement()
     {
-        characterController.Move(moveTo.normalized * Time.fixedDeltaTime * moveSpeed);//gameObject.transform.forward * moveValue.normalized * Time.fixedDeltaTime * moveSpeed);
+        moveTo = transform.right * moveValue.x + transform.forward * moveValue.y;
+        characterController.Move(moveTo.normalized * Time.fixedDeltaTime * moveSpeed);
     }
 
     void HandleGravity()
