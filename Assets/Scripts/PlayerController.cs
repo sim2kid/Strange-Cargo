@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
     void HandleMovement()
     {
-        characterController.Move(moveTo.normalized * Time.fixedDeltaTime * moveSpeed);
+        characterController.Move(moveTo.normalized * Time.fixedDeltaTime * moveSpeed); //TODO: Mend or outright replace movement logic; current logic causes player to gradually slow to a crawl the longer a movement key is held
     }
 
     void HandleGravity()
