@@ -74,6 +74,8 @@ public class MouseLooker : MonoBehaviour
         euler.x = ClampVerticalAngle(euler.x);
         transform.localEulerAngles = euler;
         rotation = new Vector2(euler.y, euler.x);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     float ClampVerticalAngle(float angle)
