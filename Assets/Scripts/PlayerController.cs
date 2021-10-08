@@ -72,4 +72,9 @@ public class PlayerController : MonoBehaviour
         velocity.y -= gravityForce * Time.fixedDeltaTime;
         characterController.Move(velocity * Time.fixedDeltaTime);
     }
+
+    void OnInteract()
+    {
+        //TODO: Insert logic to run whenever the Interact key is pressed
+    }
 }
