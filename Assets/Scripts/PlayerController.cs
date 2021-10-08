@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     {
         moveValue = value.Get<Vector2>();
 
-        moveTo = new Vector3(moveValue.x, 0, moveValue.y);
+        moveTo = transform.right * moveValue.x + transform.forward * moveValue.y;
     }
 
     void OnJump()
@@ -39,17 +39,17 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        HandleGravity();
+        //HandleGravity();
         HandleMovement();
     }
 
     void HandleMovement()
     {
-        characterController.Move(moveTo.normalized * Time.fixedDeltaTime * moveSpeed); //TODO: Mend or outright replace movement logic; current logic causes player to gradually slow to a crawl the longer a movement key is held
+        characterController.Move(moveTo.normalized * Time.fixedDeltaTime * moveSpeed);
     }
 
     void HandleGravity()
     {
-        moveTo.y -= gravityForce * Time.fixedDeltaTime;
+        moveTo.y -= gravityForce * Time.fixedDeltaTime; //TODO: Mend or outright replace gravity logic; current logic causes player to gradually slow to a crawl the longer a movement key is held
     }
 }
