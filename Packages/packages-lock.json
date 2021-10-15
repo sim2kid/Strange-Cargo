@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.unity.adaptiveperformance": {
+      "version": "2.2.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.subsystemregistration": "1.1.0"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.collab-proxy": {
       "version": "1.9.0",
       "depth": 0,
@@ -47,11 +56,13 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.probuilder": {
-      "version": "4.5.2",
+      "version": "5.0.3",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.settings-manager": "1.0.3"
+        "com.unity.settings-manager": "1.0.3",
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.modules.imgui": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -105,6 +116,15 @@
       "dependencies": {
         "com.unity.render-pipelines.core": "10.6.0",
         "com.unity.searcher": "4.3.2"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.subsystemregistration": {
+      "version": "1.1.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.subsystems": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
