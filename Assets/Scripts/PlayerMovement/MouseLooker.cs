@@ -10,13 +10,13 @@ public class MouseLooker : MonoBehaviour
 {
     [Tooltip("Invert the Vertical input (Usually on)")]
     [SerializeField]
-    public bool invertYAxis = true;
+    public bool InvertYAxis = true;
     [Tooltip("Invert the Horizontal input (Usually off)")]
     [SerializeField]
-    public bool invertXAxis = false;
+    public bool InvertXAxis = false;
     [Tooltip("Hoe fast the camera will turn")]
     [SerializeField] 
-    private float mouseSensitivity;
+    public float MouseSensitivity;
     [Tooltip("The thing that will turn virtically (The game camera)")]
     [SerializeField] 
     private new GameObject camera;
@@ -62,12 +62,12 @@ public class MouseLooker : MonoBehaviour
         Vector2 rotation = new Vector2(transform.localEulerAngles.x, camera.transform.localEulerAngles.y); 
 
         // Where we want to go based on player input
-        Vector2 targetChange = look.ReadValue<Vector2>() * mouseSensitivity * Time.deltaTime;
+        Vector2 targetChange = look.ReadValue<Vector2>() * MouseSensitivity * Time.deltaTime;
         targetChange.y = Mathf.Clamp(targetChange.y, -90, 90); // Clamp the vertical to up and down
         // Invert any axis that need to be inverted
-        if(invertYAxis)
+        if(InvertYAxis)
             targetChange.y = -targetChange.y;
-        if (invertXAxis)
+        if (InvertXAxis)
             targetChange.x = -targetChange.x;
 
         // Add those onto our current rotation
