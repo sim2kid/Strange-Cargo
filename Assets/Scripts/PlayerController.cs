@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour
     //references for handling jumping
     [SerializeField] float jumpHeight = 2.0f;
 
+    //references for handling interaction
+    [SerializeField] float cameraRaycastDistance = 10.0f;
+    private RaycastHit cameraHit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +79,12 @@ public class PlayerController : MonoBehaviour
 
     void OnInteract()
     {
-        //TODO: Insert logic to run whenever the Interact key is pressed
+        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out cameraHit, cameraRaycastDistance))
+        {
+            if(cameraHit.transform.gameObject.TryGetComponent(out Interactable interactable))
+            {
+                interactable.Interact();
+            }
+        }
     }
 }
