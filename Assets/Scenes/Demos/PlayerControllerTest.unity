@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 112203761}
   m_Layer: 0
   m_Name: Cube (6)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 147806405}
   - component: {fileID: 147806409}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Player Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 433331500}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 1021637481}
   m_Layer: 0
   m_Name: Cube (2)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -727,7 +727,7 @@ GameObject:
   - component: {fileID: 1491138577}
   m_Layer: 0
   m_Name: Cube (5)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -822,7 +822,7 @@ GameObject:
   - component: {fileID: 1755678550}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -938,7 +938,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db871c6ae1ea443408277a6f6f21e468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  MoveSpeed: 10
+  jumpHeight: 2
   gravityForce: 14
   feet: {fileID: 2000762609}
   groundCheckDistance: 0.4
@@ -946,7 +947,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   groundCheckVelocityReset: -2
-  jumpHeight: 1
 --- !u!114 &1921411293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1086,9 +1086,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ffd268d934331148823dece738a2a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invertYAxis: 1
-  invertXAxis: 0
-  mouseSensitivity: 10
+  InvertYAxis: 1
+  InvertXAxis: 0
+  MouseSensitivity: 50
   camera: {fileID: 147806404}
 --- !u!1 &1981058540
 GameObject:
@@ -1104,7 +1104,7 @@ GameObject:
   - component: {fileID: 1981058541}
   m_Layer: 0
   m_Name: Cube (3)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1199,7 +1199,7 @@ GameObject:
   - component: {fileID: 1986867682}
   m_Layer: 0
   m_Name: Cube (4)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
