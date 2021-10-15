@@ -28,12 +28,20 @@ public class PlayerController : MonoBehaviour
     //references for handling interaction
     [SerializeField] float cameraRaycastDistance = 10.0f;
     private RaycastHit cameraRaycastHit;
+    private RaycastHit[] cameraRaycastHits;
+    private List<float> cameraRaycastHitDistances;
 
     // Start is called before the first frame update
     void Start()
     {
+        InitializeVars();
+    }
+
+    void InitializeVars()
+    {
         characterController = GetComponent<CharacterController>();
         jumpForceFormula = Mathf.Sqrt(jumpHeight * -2.0f * -gravityForce);
+        cameraRaycastHitDistances = new List<float>();
     }
 
     void OnMove(InputValue value)
@@ -79,11 +87,30 @@ public class PlayerController : MonoBehaviour
 
     void OnInteract()
     {
-        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out cameraRaycastHit, cameraRaycastDistance))
+        /*if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out cameraRaycastHit, cameraRaycastDistance))
         {
             if(cameraRaycastHit.transform.gameObject.TryGetComponent(out Interactable interactable))
             {
                 interactable.Interact();
+            }
+        }*/
+
+
+        cameraRaycastHits = Physics.RaycastAll(Camera.main.transform.position, Camera.main.transform.forward, cameraRaycastDistance);
+        foreach(RaycastHit hit in cameraRaycastHits)
+        {
+            cameraRaycastHitDistances.Add(hit.distance);
+        }
+        cameraRaycastHitDistances.Sort();
+        foreach(RaycastHit hit in cameraRaycastHits)
+        {
+            if(hit.distance == cameraRaycastHitDistances[0])
+            {
+                if(hit.transform.gameObject.TryGetComponent(out Interactable interactable))
+                {
+                    interactable.Interact();
+                    break;
+                }
             }
         }
     }
