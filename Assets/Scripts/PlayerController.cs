@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     //references for handling interaction
     [SerializeField] float cameraRaycastDistance = 10.0f;
-    private RaycastHit cameraHit;
+    private RaycastHit cameraRaycastHit;
 
     // Start is called before the first frame update
     void Start()
@@ -79,9 +79,9 @@ public class PlayerController : MonoBehaviour
 
     void OnInteract()
     {
-        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out cameraHit, cameraRaycastDistance))
+        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out cameraRaycastHit, cameraRaycastDistance))
         {
-            if(cameraHit.transform.gameObject.TryGetComponent(out Interactable interactable))
+            if(cameraRaycastHit.transform.gameObject.TryGetComponent(out Interactable interactable))
             {
                 interactable.Interact();
             }
