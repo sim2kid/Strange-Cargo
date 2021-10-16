@@ -245,13 +245,12 @@ namespace EditorAid
                 return;
             if (baseOperation)
             {
-                output = TextureConversions.GenerateBaseTexture(working, colors);
+                TextureConversions.GenerateBaseTexture((finished) => { output = finished; }, working, colors);
             }
             else 
             {
-                output = TextureConversions.ConvertTexture(working, colors);
+                //EditorCoroutineUtility.StartCoroutine(TextureConversions.ConvertTexture((finished) => { output = finished; }, working, colors));
             }
-            SaveImage("C:\\Users\\2simm\\Downloads\\image.png", output);
         }
 
         private void SaveImage(string path, Texture2D texture) 
