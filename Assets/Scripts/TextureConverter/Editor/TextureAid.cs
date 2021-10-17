@@ -8,8 +8,9 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.Windows;
 using Utility;
+using TextureConverter;
 
-namespace EditorAid
+namespace DevAid
 {
     public class TextureAid : EditorWindow
     {
@@ -251,7 +252,6 @@ namespace EditorAid
             {
                 output = TextureConversions.ConvertTexture(working, colors);
             }
-            SaveImage("C:\\Users\\2simm\\Downloads\\image.png", output);
         }
 
         private void SaveImage(string path, Texture2D texture) 
