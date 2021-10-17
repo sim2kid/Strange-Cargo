@@ -23,6 +23,9 @@ namespace TextureConverter
         [Tooltip("This is the default shader to use on every material.")]
         [SerializeField]
         public Shader shader;
+        [Tooltip("Wheather or not the script will convert textures on start")]
+        [SerializeField]
+        private bool convert = true;
 
         [SerializeField]
         float LoadingProgress;
@@ -54,7 +57,7 @@ namespace TextureConverter
 
         private void OnEnable()
         {
-            Finished = false;
+            Finished = true;
             OnFinished = new UnityEvent();
             myChildren = new List<MaterialConversion>();
         }
@@ -78,7 +81,8 @@ namespace TextureConverter
                 myChildren.Add(converter);
             }
 
-            Convert();
+            if(convert)
+                Convert();
         }
 
         private void Update()
@@ -96,6 +100,7 @@ namespace TextureConverter
             {
                 converter.colors = colors;
                 converter.CONVERSION_SPEED = CONVERSION_SPEED/myChildren.Count;
+
                 converter.Convert();
             }
         }

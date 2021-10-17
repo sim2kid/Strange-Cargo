@@ -65,6 +65,7 @@ namespace TextureConverter
 
         private void OnEnable()
         {
+            Finished = true;
             CONVERSION_SPEED = 0;
             OnFinished = new UnityEvent();
         }
