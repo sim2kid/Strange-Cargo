@@ -2,11 +2,11 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace Utility
+namespace TextureConverter
 {
     public static class TextureConversions
     {
-        public const int PIXELS_PER_FRAME = 5000;
+        public const int PIXELS_PER_FRAME = 1000;
 
         /// <summary>
         /// Converts a RGB image into a new color space provided by <paramref name="newColors"/>.

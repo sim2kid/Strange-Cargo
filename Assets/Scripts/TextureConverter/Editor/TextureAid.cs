@@ -8,8 +8,9 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.Windows;
 using Utility;
+using TextureConverter;
 
-namespace EditorAid
+namespace DevAid
 {
     public class TextureAid : EditorWindow
     {
