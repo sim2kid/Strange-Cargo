@@ -33,7 +33,7 @@ namespace Utility
         public static Color RetriveRandomColor(string resourceFileLocation, char seperationChar)
         {
             string[] colorHex = grabColorsFromFile(resourceFileLocation, seperationChar);
-            string returnHex = colorHex[Random.Range(0, colorHex.Length)];
+            string returnHex = colorHex[Random.Range(0, colorHex.Length)].Trim();
             return hexToColor(returnHex);
         }
 
@@ -48,7 +48,9 @@ namespace Utility
                 int green = int.Parse(g, System.Globalization.NumberStyles.HexNumber);
                 int blue = int.Parse(b, System.Globalization.NumberStyles.HexNumber);
 
-                return new Color(red, green, blue);
+                Color returnColor = new Color(red/255f, green/255f, blue/255f);
+
+                return returnColor;
             }
             catch 
             {
