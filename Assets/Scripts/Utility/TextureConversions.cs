@@ -91,6 +91,75 @@ namespace Utility
             callback.Invoke(output);
         }
 
+        /// <summary>
+        /// Converts a RGB image into a new color space provided by <paramref name="newColors"/>.
+        /// This will be applied to the <paramref name="toModify"/> image and will add the greyscale image of <paramref name="textureDetails"/> on top.
+        /// This process is non destructive of <paramref name="toModify"/>
+        /// WARNING: This method is BLOCKING and if it takes a while, will block your thread
+        /// Use <see cref="ConvertTexture(Action{Texture2D}, Texture2D, Color[], Texture2D, int)"/> when possible to avoid blocking your thread!
+        /// </summary>
+        /// <param name="toModify"></param>
+        /// <param name="newColors"></param>
+        /// <param name="textureDetails"></param>
+        /// <returns></returns>
+        public static Texture2D ConvertTexture(Texture2D toModify, Color[] newColors, Texture2D textureDetails = null, int pixelsPerUpdate = 0)
+        {
+            // Warning if the modify and details texture are different sizes. Cropping will happen since this is a pixel perfect operation.
+            CheckDetailTexture(textureDetails, toModify);
+
+            // The new texture's output so we aren't overriding a texture.
+            Texture2D output = new Texture2D(toModify.width, toModify.height);
+
+            // Loop through each pixel and set it's new color based on the old ones.
+            for (int width = 0; width < output.width; width++)
+            {
+                for (int height = 0; height < output.height; height++)
+                {
+                    Vector4 patternColor = toModify.GetPixel(width, height);
+                    //Only get this color if the texture isn't null or out of bounds
+                    Vector4 detailColor = (textureDetails != null && textureDetails.width > width && textureDetails.height > height ?
+                        textureDetails.GetPixel(width, height) : Color.clear);
+
+                    output.SetPixel(width, height, forwardConvert(patternColor, detailColor, newColors));
+                }
+            }
+            // Apply our changes!
+            output.Apply();
+            return output;
+        }
+
+        /// <summary>
+        /// Converts a texture to a representation of 4 values provided in <paramref name="baseColors"/>.
+        /// The imange being converted is <paramref name="toModify"/>.
+        /// This process is non destructive of <paramref name="toModify"/>
+        /// NOTE: This process is not perfect and will get muddy with mixes of colors!!
+        /// WARNING: This method is BLOCKING and if it takes a while, will block your thread
+        /// /// Use <see cref="ConvertTexture(Action{Texture2D}, Texture2D, Color[], Texture2D, int)"/> when possible to avoid blocking your thread!
+        /// </summary>
+        /// <param name="toModify"></param>
+        /// <param name="baseColors"></param>
+        /// <returns></returns>
+        public static Texture2D GenerateBaseTexture(Texture2D toModify, Color[] baseColors, int pixelsPerUpdate = 0)
+        {
+            // The new texture's output so we aren't overriding a texture.
+            Texture2D output = new Texture2D(toModify.width, toModify.height);
+
+            // Loop through each pixel and set it's new color based on the old ones.
+            for (int width = 0; width < output.width; width++)
+            {
+                for (int height = 0; height < output.height; height++)
+                {
+                    Vector4 patternColor = toModify.GetPixel(width, height);
+                    //Only get this color if the texture isn't null or out of bounds
+
+                    output.SetPixel(width, height, backwardsConvert(patternColor, baseColors));
+                }
+            }
+            // Apply our changes!
+            output.Apply();
+            return output;
+        }
+
         private static Vector4 forwardConvert(Vector4 patternColor, Vector4 detailColor, Color[] newColors) 
         {
             // We multiply each channel with the associated color

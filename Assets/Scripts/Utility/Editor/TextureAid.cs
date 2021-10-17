@@ -245,11 +245,11 @@ namespace EditorAid
                 return;
             if (baseOperation)
             {
-                TextureConversions.GenerateBaseTexture((finished) => { output = finished; }, working, colors);
+                output = TextureConversions.GenerateBaseTexture(working, colors);
             }
             else 
             {
-                //EditorCoroutineUtility.StartCoroutine(TextureConversions.ConvertTexture((finished) => { output = finished; }, working, colors));
+                output = TextureConversions.ConvertTexture(working, colors);
             }
         }
 
