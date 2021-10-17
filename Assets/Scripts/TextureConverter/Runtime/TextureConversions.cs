@@ -19,7 +19,7 @@ namespace TextureConverter
         /// <param name="newColors"></param>
         /// <param name="textureDetails"></param>
         /// <returns></returns>
-        public static IEnumerator ConvertTexture(Action<Texture2D> callback, Texture2D toModify, Color[] newColors, Texture2D textureDetails = null, int pixelsPerUpdate = 0) 
+        public static IEnumerator ConvertTexture(Action<Texture2D> callback, Texture2D toModify, Color[] newColors, Texture2D textureDetails = null, int pixelsPerUpdate = 0, Action<float> ProgressReport = null) 
         {
             // Warning if the modify and details texture are different sizes. Cropping will happen since this is a pixel perfect operation.
             CheckDetailTexture(textureDetails, toModify);
@@ -41,6 +41,9 @@ namespace TextureConverter
 
                     if ((width * output.height + height) % (pixelsPerUpdate <= 0 ? PIXELS_PER_FRAME : pixelsPerUpdate) == 0) 
                     {
+                        // Report progress
+                        if (ProgressReport != null)
+                            ProgressReport.Invoke((float)(width * output.height + height) / (output.width * output.height));
                         // Pause our conversion until next frame
                         yield return null;
                     }
@@ -63,7 +66,7 @@ namespace TextureConverter
         /// <param name="toModify"></param>
         /// <param name="baseColors"></param>
         /// <returns></returns>
-        public static IEnumerator GenerateBaseTexture(Action<Texture2D> callback, Texture2D toModify, Color[] baseColors, int pixelsPerUpdate = 0)
+        public static IEnumerator GenerateBaseTexture(Action<Texture2D> callback, Texture2D toModify, Color[] baseColors, int pixelsPerUpdate = 0, Action<float> ProgressReport = null)
         {
             // The new texture's output so we aren't overriding a texture.
             Texture2D output = new Texture2D(toModify.width, toModify.height);
@@ -80,6 +83,9 @@ namespace TextureConverter
 
                     if ((width * output.height + height) % (pixelsPerUpdate <= 0 ? PIXELS_PER_FRAME : pixelsPerUpdate) == 0)
                     {
+                        // Report progress
+                        if (ProgressReport != null)
+                            ProgressReport.Invoke((width * output.height + height) / (output.width * output.height));
                         // Pause our conversion until next frame
                         yield return null;
                     }
@@ -102,7 +108,7 @@ namespace TextureConverter
         /// <param name="newColors"></param>
         /// <param name="textureDetails"></param>
         /// <returns></returns>
-        public static Texture2D ConvertTexture(Texture2D toModify, Color[] newColors, Texture2D textureDetails = null, int pixelsPerUpdate = 0)
+        public static Texture2D ConvertTexture(Texture2D toModify, Color[] newColors, Texture2D textureDetails = null)
         {
 #if !UNITY_EDITOR
             Debug.LogWarning("Texture2D ConvertTexture is a thread blocking function! Try not to use for your final project!");
@@ -144,7 +150,7 @@ namespace TextureConverter
         /// <param name="toModify"></param>
         /// <param name="baseColors"></param>
         /// <returns></returns>
-        public static Texture2D GenerateBaseTexture(Texture2D toModify, Color[] baseColors, int pixelsPerUpdate = 0)
+        public static Texture2D GenerateBaseTexture(Texture2D toModify, Color[] baseColors)
         {
 #if !UNITY_EDITOR
             Debug.LogWarning("Texture2D GenerateBaseTexture is a thread blocking function! Try not to use for your final project!");

@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using Utility;
 
 namespace TextureConverter
 {
 
     [RequireComponent(typeof(Renderer))]
     [DisallowMultipleComponent]
-    public class MaterialConversion : MonoBehaviour
+    public class MaterialConversion : MonoBehaviour, IProgress
     {
         private const int MAX_COLORS = 3;
         private int conversionSpeed = 1000;
@@ -27,13 +28,18 @@ namespace TextureConverter
         public Color[] colors;
 
         /// <summary>
+        /// [0,1] range representing how far along the conversion is.
+        /// </summary>
+        private float progress;
+
+        /// <summary>
         /// The unconverted texture
         /// </summary>
         public Texture2D OriginalTexture;
         /// <summary>
         /// Displays true after the conversion has finished
         /// </summary>
-        public bool ConversionFinished { get; protected set; }
+        public bool Finished { get; protected set; }
         /// <summary>
         /// Controls the number of pixels processed per frame per component. 
         /// If you have a lot of componenets running at the same time, lower this number. 
@@ -77,25 +83,37 @@ namespace TextureConverter
             if(OriginalTexture == null)
                 OriginalTexture = (Texture2D)this.GetComponent<Renderer>().material.mainTexture;
 
-            ConversionFinished = false;
+            Finished = false;
             // Take time to update the texture
             ModifyTexture(OriginalTexture, colors, OverlayTexture);
+        }
+
+        public float Report() 
+        {
+            if (Finished)
+                return 1;
+            return progress;
         }
 
         private void ReapplyTexture(Texture2D newTexture)
         {
             // Set the main texture to our new texture
             this.GetComponent<Renderer>().material.mainTexture = newTexture;
-            ConversionFinished = true;
+            Finished = true;
             OnFinished.Invoke();
+        }
+
+        private void GetProgress(float progress) 
+        {
+            this.progress = progress;
         }
 
         private void ModifyTexture(Texture2D toModify, Color[] newColors, Texture2D textureDetails = null)
         {
             if (ForwardConvert)
-                StartCoroutine(TextureConversions.ConvertTexture(ReapplyTexture, toModify, newColors, textureDetails, CONVERSION_SPEED));
+                StartCoroutine(TextureConversions.ConvertTexture(ReapplyTexture, toModify, newColors, textureDetails, CONVERSION_SPEED, GetProgress));
             else
-                StartCoroutine(TextureConversions.GenerateBaseTexture(ReapplyTexture, toModify, newColors, CONVERSION_SPEED));
+                StartCoroutine(TextureConversions.GenerateBaseTexture(ReapplyTexture, toModify, newColors, CONVERSION_SPEED, GetProgress));
 
         }
     }

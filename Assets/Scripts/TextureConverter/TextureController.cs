@@ -3,15 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Utility;
 
 namespace TextureConverter
 {
     [DisallowMultipleComponent]
-    public class TextureController : MonoBehaviour
+    public class TextureController : MonoBehaviour, IProgress
     {
         private const int MAX_COLORS = 3;
         private List<MaterialConversion> myChildren;
-        private int conversionSpeed = 10000;
+        private int conversionSpeed = 40000;
 
         [Tooltip("If true, it goes RGB -> Colors. Vise Vera on false.")]
         [SerializeField]
@@ -20,10 +21,13 @@ namespace TextureConverter
         [SerializeField]
         public Color[] colors;
 
+        [SerializeField]
+        float LoadingProgress;
+
         /// <summary>
         /// Displays true after the conversion has finished
         /// </summary>
-        public bool ConversionFinished { get; protected set; }
+        public bool Finished { get; protected set; }
         /// <summary>
         /// The number of pixels this model will spend on converting per frame
         /// </summary>
@@ -47,6 +51,7 @@ namespace TextureConverter
 
         private void OnEnable()
         {
+            Finished = false;
             OnFinished = new UnityEvent();
             myChildren = new List<MaterialConversion>();
         }
@@ -69,12 +74,17 @@ namespace TextureConverter
             Convert();
         }
 
+        private void Update()
+        {
+            LoadingProgress = Report();
+        }
+
         /// <summary>
         /// Run a conversion on the model.
         /// </summary>
         public void Convert() 
         {
-            ConversionFinished = false;
+            Finished = false;
             foreach (MaterialConversion converter in myChildren) 
             {
                 converter.colors = colors;
@@ -83,12 +93,24 @@ namespace TextureConverter
             }
         }
 
+        public float Report() 
+        {
+            if (Finished)
+                return 1;
+            float temp = 0;
+            foreach (MaterialConversion converter in myChildren)
+            {
+                temp += converter.Report();
+            }
+            return temp / myChildren.Count;
+        }
+
 
         private void CheckIfFinished()
         {
             foreach (MaterialConversion converter in myChildren)
             {
-                if (!converter.ConversionFinished)
+                if (!converter.Finished)
                     return;
             }
             OnFinished.Invoke();
