@@ -104,6 +104,11 @@ namespace Utility
         /// <returns></returns>
         public static Texture2D ConvertTexture(Texture2D toModify, Color[] newColors, Texture2D textureDetails = null, int pixelsPerUpdate = 0)
         {
+#if !UNITY_EDITOR
+            Debug.LogWarning("Texture2D ConvertTexture is a thread blocking function! Try not to use for your final project!");
+#endif
+
+
             // Warning if the modify and details texture are different sizes. Cropping will happen since this is a pixel perfect operation.
             CheckDetailTexture(textureDetails, toModify);
 
@@ -141,6 +146,10 @@ namespace Utility
         /// <returns></returns>
         public static Texture2D GenerateBaseTexture(Texture2D toModify, Color[] baseColors, int pixelsPerUpdate = 0)
         {
+#if !UNITY_EDITOR
+            Debug.LogWarning("Texture2D GenerateBaseTexture is a thread blocking function! Try not to use for your final project!");
+#endif
+
             // The new texture's output so we aren't overriding a texture.
             Texture2D output = new Texture2D(toModify.width, toModify.height);
 
