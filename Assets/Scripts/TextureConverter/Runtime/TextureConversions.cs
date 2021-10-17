@@ -185,6 +185,10 @@ namespace TextureConverter
 
             // We add those colors together, then we apply the coat texture over that.
             Vector4 outColor = (r + g + b + a) * (1 - (((detailColor.x + detailColor.y + detailColor.z) / 3) * detailColor.w));
+            
+            // We're just passing alpha for now
+            outColor.w = patternColor.w;
+
             return outColor;
         }
 

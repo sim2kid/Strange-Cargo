@@ -20,6 +20,9 @@ namespace TextureConverter
         [Tooltip("The colors (3) to convert the Red, Green, and Blue channels to respectivly.")]
         [SerializeField]
         public Color[] colors;
+        [Tooltip("This is the default shader to use on every material.")]
+        [SerializeField]
+        public Shader shader;
 
         [SerializeField]
         float LoadingProgress;
@@ -58,9 +61,13 @@ namespace TextureConverter
 
         private void Start()
         {
-            Component[] Renderers = GetComponentsInChildren<Renderer>();
-            foreach (Component render in Renderers) 
+            Renderer[] Renderers = GetComponentsInChildren<Renderer>();
+            foreach (Renderer render in Renderers) 
             {
+                if (shader != null) 
+                {
+                    render.material.shader = this.shader;
+                }
                 MaterialConversion converter = render.GetComponent<MaterialConversion>();
                 if (converter == null)
                 {
