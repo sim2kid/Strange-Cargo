@@ -20,12 +20,13 @@ namespace TextureConverter
         [Tooltip("The colors (3) to convert the Red, Green, and Blue channels to respectivly.")]
         [SerializeField]
         public Color[] colors;
-        [Tooltip("This is the default shader to use on every material.")]
-        [SerializeField]
-        public Shader shader;
         [Tooltip("Wheather or not the script will convert textures on start")]
         [SerializeField]
         private bool convert = true;
+        [Tooltip("DEPRECIATED: This is the default shader to use on every material.")]
+        [SerializeField]
+        public Shader shader;
+
 
         [SerializeField]
         float LoadingProgress;
