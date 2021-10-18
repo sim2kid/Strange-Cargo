@@ -25,7 +25,7 @@ Ashlyn ([Website]())
 
 # Other Contributors
 ### Code Contributions
-* [Siccity's GLTFUtility](https://github.com/Siccity/GLTFUtility/pulse)
+* [Siccity's GLTFUtility](https://github.com/Siccity/GLTFUtility)
 * [sim2kid's DialogueSystem](https://github.com/SimmGames/ProductionTools)
 ### Art Contributions
 ### Music/Sound Contributions
