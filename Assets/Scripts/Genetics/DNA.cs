@@ -6,8 +6,8 @@ using System;
 namespace Genetics
 {
     [Serializable]
-    public class DNA
+    public struct DNA
     {
-
-}
+        public List<string> BodyParts;
+    }
 }

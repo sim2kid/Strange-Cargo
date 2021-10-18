@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShaderEnum : MonoBehaviour
+namespace Genetics
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum ShaderEnum
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Default = 0,
+        Fur = 1,
+        Scales = 2,
     }
 }
