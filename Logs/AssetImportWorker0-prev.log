@@ -1,0 +1,1694 @@
+Using pre-set license
+Built from '2020.3/staging' branch; Version is '2020.3.18f1 (a7d1c678663c) revision 10998214'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Home; OS build 19043.1288; Version 2009; 64bit' Language: 'en' Physical Memory: 16057 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2020.3.18f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+C:/Users/Brooklyn/Documents/Workspace/Unity/Strange-Cargo
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+59008
+Successfully changed project path to: C:/Users/Brooklyn/Documents/Workspace/Unity/Strange-Cargo
+C:/Users/Brooklyn/Documents/Workspace/Unity/Strange-Cargo
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 52.26 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.18f1 (a7d1c678663c)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.18f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/Brooklyn/Documents/Workspace/Unity/Strange-Cargo/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) Iris(R) Xe Graphics (ID=0x9a49)
+    Vendor:   
+    VRAM:     8028 MB
+    Driver:   27.20.100.9415
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.18f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.18f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.18f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56660
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.18f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001299 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 50.01 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.812 seconds
+Domain Reload Profiling:
+	ReloadAssembly (812ms)
+		BeginReloadAssembly (36ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (333ms)
+			LoadAssemblies (35ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (105ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (22ms)
+			SetupLoadedEditorAssemblies (154ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (3ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (50ms)
+				BeforeProcessingInitializeOnLoad (7ms)
+				ProcessInitializeOnLoadAttributes (65ms)
+				ProcessInitializeOnLoadMethodAttributes (29ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.002513 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 61.05 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.148 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1149ms)
+		BeginReloadAssembly (130ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (8ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (21ms)
+		EndReloadAssembly (970ms)
+			LoadAssemblies (68ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (268ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (46ms)
+			SetupLoadedEditorAssemblies (472ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (3ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (61ms)
+				BeforeProcessingInitializeOnLoad (89ms)
+				ProcessInitializeOnLoadAttributes (312ms)
+				ProcessInitializeOnLoadMethodAttributes (3ms)
+				AfterProcessingInitializeOnLoad (4ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
+Refreshing native plugins compatible for Editor in 0.54 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3263 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 146.9 MB.
+System memory in use after: 147.1 MB.
+
+Unloading 102 unused Assets to reduce memory usage. Loaded Objects now: 3692.
+Total: 3.266600 ms (FindLiveObjects: 0.210000 ms CreateObjectMapping: 0.088200 ms MarkObjects: 2.657400 ms  DeleteObjects: 0.307100 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  path: Assets/ExampleAssets/Character Movement Fundamentals/Source/Capguy/Model/Materials/Cap_Texture.mat
+  artifactKey: Guid(f90064b5ababb324a956cbd5b5f92a11) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/Character Movement Fundamentals/Source/Capguy/Model/Materials/Cap_Texture.mat using Guid(f90064b5ababb324a956cbd5b5f92a11) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '56ce977771b5366b4c809648e2bf0e1e') in 0.180885 seconds 
+  Import took 0.185564 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000228 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_05_Daybreak/CloudyCrown_Daybreak.mat
+  artifactKey: Guid(3930fc89a28b29746bde6a2389a513e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_05_Daybreak/CloudyCrown_Daybreak.mat using Guid(3930fc89a28b29746bde6a2389a513e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0a3521e9cad874ab424fdf3966d45811') in 0.032557 seconds 
+  Import took 0.037081 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000202 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_03_Midnight/CloudyCrown_Midnight.mat
+  artifactKey: Guid(ceb0a3ed2cb53a94fa21843cc958c52b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_03_Midnight/CloudyCrown_Midnight.mat using Guid(ceb0a3ed2cb53a94fa21843cc958c52b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '93cc39f880e69fa06df4c1c3ae4fd601') in 0.025220 seconds 
+  Import took 0.031383 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000233 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_04_Sunset/CloudyCrown_Sunset.mat
+  artifactKey: Guid(169a1b8f06c17c84e8de491f2bfef986) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_04_Sunset/CloudyCrown_Sunset.mat using Guid(169a1b8f06c17c84e8de491f2bfef986) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd84a463e91be9d74a623f3a2d0bf45b7') in 0.024342 seconds 
+  Import took 0.030286 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000138 seconds.
+  path: Assets/ExampleAssets/Character Movement Fundamentals/Source/Capguy/Model/Materials/Capguy_Texture_Body.mat
+  artifactKey: Guid(cba1f6de4ef9d5843810382a765ce94c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/Character Movement Fundamentals/Source/Capguy/Model/Materials/Capguy_Texture_Body.mat using Guid(cba1f6de4ef9d5843810382a765ce94c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5acc083bd8090170f01b15fad561a7b9') in 0.014134 seconds 
+  Import took 0.020346 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000196 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_02_Evening/CloudyCrown_Evening.mat
+  artifactKey: Guid(77715b8b6b248994891d3ccad1ad330b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_02_Evening/CloudyCrown_Evening.mat using Guid(77715b8b6b248994891d3ccad1ad330b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '34d9d5b5352f490a8ea98ea8b1ca8af3') in 0.024577 seconds 
+  Import took 0.031295 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000228 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_01_Midday/CloudyCrown_Midday.mat
+  artifactKey: Guid(617d9be015db68348a623b01ea51a8c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_01_Midday/CloudyCrown_Midday.mat using Guid(617d9be015db68348a623b01ea51a8c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '56088086f8226b75c083a15bf502516c') in 0.022916 seconds 
+  Import took 0.028690 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000315 seconds.
+  path: Assets/Plugins/Banana Yellow Games/Characters/Banana Man/Materials/Body.mat
+  artifactKey: Guid(945e2f586a1a63a49a99d9080a8e9f24) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/Banana Yellow Games/Characters/Banana Man/Materials/Body.mat using Guid(945e2f586a1a63a49a99d9080a8e9f24) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b373434d923572fef28aca975d9f4af6') in 0.020903 seconds 
+  Import took 0.027495 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 350.361257 seconds.
+  path: Assets/Materials/image0.jfif
+  artifactKey: Guid(2c133172d848dc748b9c8c40b540725e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/image0.jfif using Guid(2c133172d848dc748b9c8c40b540725e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '99a7278f9b0f70c193ae35ec400798a1') in 0.010113 seconds 
+  Import took 0.016086 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 29.490942 seconds.
+  path: Assets/Materials/Grass.mat
+  artifactKey: Guid(d90234d702d19604186e7c59ae34c707) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Grass.mat using Guid(d90234d702d19604186e7c59ae34c707) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d34858709deb307e1cbe2a0d967cd56') in 0.017132 seconds 
+  Import took 0.023746 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 53.765267 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_05_Daybreak/Textures/CloudyCrown_Daybreak_Back.png
+  artifactKey: Guid(ab78a862493ed7f42a9d16bc994e6697) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_05_Daybreak/Textures/CloudyCrown_Daybreak_Back.png using Guid(ab78a862493ed7f42a9d16bc994e6697) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '183758207070bb210b613056b4ad4046') in 0.023877 seconds 
+  Import took 0.029427 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000246 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_04_Sunset/Textures/CloudyCrown_Sunset_Up.png
+  artifactKey: Guid(53897097b1cb7644eb130bc157b99eaf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_04_Sunset/Textures/CloudyCrown_Sunset_Up.png using Guid(53897097b1cb7644eb130bc157b99eaf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '467ef80482435f7c34f76e3667e21c2d') in 0.017530 seconds 
+  Import took 0.023011 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000180 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_05_Daybreak/Textures/CloudyCrown_Daybreak_Front.png
+  artifactKey: Guid(32dd115bed46a474ab32a88684606180) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_05_Daybreak/Textures/CloudyCrown_Daybreak_Front.png using Guid(32dd115bed46a474ab32a88684606180) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b7ce4012c01d077b0fd831705aa64722') in 0.012005 seconds 
+  Import took 0.017336 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000153 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_02_Evening/Textures/CloudyCrown_Evening_Right.png
+  artifactKey: Guid(f33d9e3a86071394c83b568257570dd5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_02_Evening/Textures/CloudyCrown_Evening_Right.png using Guid(f33d9e3a86071394c83b568257570dd5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b9c2cc2301da8e3c07dac36834fac448') in 0.012166 seconds 
+  Import took 0.017265 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000153 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_03_Midnight/Textures/CloudyCrown_Midnight_Back.png
+  artifactKey: Guid(da973bcda49f771409235bfe5c155ce0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_03_Midnight/Textures/CloudyCrown_Midnight_Back.png using Guid(da973bcda49f771409235bfe5c155ce0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b9ae9f5af88ca38ddc37fa5b02ec14b3') in 0.010363 seconds 
+  Import took 0.015111 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000148 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_03_Midnight/Textures/CloudyCrown_Midnight_Right.png
+  artifactKey: Guid(8c84ddb32342f7a409915f46705fcc5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_03_Midnight/Textures/CloudyCrown_Midnight_Right.png using Guid(8c84ddb32342f7a409915f46705fcc5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '92f190ccfea1641cb1973ddf020a8e90') in 0.010262 seconds 
+  Import took 0.017468 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000148 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Demo/Textures/grid_black_128.psd
+  artifactKey: Guid(3833a7e6653de9049bfaf69e25deaf66) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Demo/Textures/grid_black_128.psd using Guid(3833a7e6653de9049bfaf69e25deaf66) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '77518fc877f13ba95a6b68b6aae1be50') in 0.036067 seconds 
+  Import took 0.040837 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000156 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_01_Midday/Textures/CloudyCrown_Midday_Down.png
+  artifactKey: Guid(b064041c87bd8fb4ba2c21aa4863127e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_01_Midday/Textures/CloudyCrown_Midday_Down.png using Guid(b064041c87bd8fb4ba2c21aa4863127e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '02d663c941cbf75bd775526cdfb45447') in 0.011326 seconds 
+  Import took 0.016809 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000188 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_03_Midnight/Textures/CloudyCrown_Midnight_Up.png
+  artifactKey: Guid(3af6f93d7b7b2b842ae6ac2a4e817fd4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_03_Midnight/Textures/CloudyCrown_Midnight_Up.png using Guid(3af6f93d7b7b2b842ae6ac2a4e817fd4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6986c1eb130ca3d9c1fe409e5a047c7b') in 0.012035 seconds 
+  Import took 0.017573 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000159 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_01_Midday/Textures/CloudyCrown_Midday_Back.png
+  artifactKey: Guid(fd76a3d85fa584e42834036916a79b6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_01_Midday/Textures/CloudyCrown_Midday_Back.png using Guid(fd76a3d85fa584e42834036916a79b6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '514728f8a63d1291d15f171a5817a05e') in 0.011171 seconds 
+  Import took 0.016926 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000159 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_04_Sunset/Textures/CloudyCrown_Sunset_Back.png
+  artifactKey: Guid(fb83d65eeed886840908f1c4482ffbe4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_04_Sunset/Textures/CloudyCrown_Sunset_Back.png using Guid(fb83d65eeed886840908f1c4482ffbe4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c93ee7ae7bd42a3351b8c288e52f658e') in 0.013444 seconds 
+  Import took 0.019954 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000220 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_01_Midday/Textures/CloudyCrown_Midday_Left.png
+  artifactKey: Guid(fd5f7c807ca1ea643b0ae501ff889a70) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_01_Midday/Textures/CloudyCrown_Midday_Left.png using Guid(fd5f7c807ca1ea643b0ae501ff889a70) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'afcd2750b2e25d62d19d3075327932ec') in 0.011529 seconds 
+  Import took 0.017068 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000168 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_04_Sunset/Textures/CloudyCrown_Sunset_Front.png
+  artifactKey: Guid(438f35e5e8d7c0c42aee582a2e2ec8e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_04_Sunset/Textures/CloudyCrown_Sunset_Front.png using Guid(438f35e5e8d7c0c42aee582a2e2ec8e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '80da8b34e0a7db9e7d86b3e202cc507c') in 0.016624 seconds 
+  Import took 0.021563 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000185 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_04_Sunset/Textures/CloudyCrown_Sunset_Left.png
+  artifactKey: Guid(3a1c3cd9f2f146245be4af3a1123a528) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_04_Sunset/Textures/CloudyCrown_Sunset_Left.png using Guid(3a1c3cd9f2f146245be4af3a1123a528) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e93b6b4b4667de991588617ad2818a4c') in 0.011286 seconds 
+  Import took 0.016433 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000162 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_05_Daybreak/Textures/CloudyCrown_Daybreak_Back.png
+  artifactKey: Guid(ab78a862493ed7f42a9d16bc994e6697) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_05_Daybreak/Textures/CloudyCrown_Daybreak_Back.png using Guid(ab78a862493ed7f42a9d16bc994e6697) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '183758207070bb210b613056b4ad4046') in 0.007327 seconds 
+  Import took 0.013037 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000146 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_05_Daybreak/Textures/CloudyCrown_Daybreak_Down.png
+  artifactKey: Guid(bf4af9078f5bbcc42911f76a84aaa1e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_05_Daybreak/Textures/CloudyCrown_Daybreak_Down.png using Guid(bf4af9078f5bbcc42911f76a84aaa1e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ceef4b78e03c7e500e2c6971f95e5111') in 0.013717 seconds 
+  Import took 0.018830 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000161 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_05_Daybreak/Textures/CloudyCrown_Daybreak_Up.png
+  artifactKey: Guid(2037768ff8c6b6845a0eac7217b4ba18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_05_Daybreak/Textures/CloudyCrown_Daybreak_Up.png using Guid(2037768ff8c6b6845a0eac7217b4ba18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dc575fbec3387afbb54af639492dd069') in 0.011088 seconds 
+  Import took 0.015998 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000226 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_02_Evening/Textures/CloudyCrown_Evening_Back.png
+  artifactKey: Guid(87bee338d047997489ce40bc10f18466) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_02_Evening/Textures/CloudyCrown_Evening_Back.png using Guid(87bee338d047997489ce40bc10f18466) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '328e8a6714b4410bc389376ea9785521') in 0.012766 seconds 
+  Import took 0.017923 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000188 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_04_Sunset/Textures/CloudyCrown_Sunset_Right.png
+  artifactKey: Guid(7f934c5ce832dfb4991233d48e1cd7e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_04_Sunset/Textures/CloudyCrown_Sunset_Right.png using Guid(7f934c5ce832dfb4991233d48e1cd7e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cbcaa38bb15a96b933fc3780efb4e23c') in 0.011123 seconds 
+  Import took 0.015990 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000160 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_02_Evening/Textures/CloudyCrown_Evening_Front.png
+  artifactKey: Guid(1333dafd22b43974091d9c55f2169cde) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_02_Evening/Textures/CloudyCrown_Evening_Front.png using Guid(1333dafd22b43974091d9c55f2169cde) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c35d79fcf9cbce260ff06ced6d830eae') in 0.011334 seconds 
+  Import took 0.015940 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000154 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_02_Evening/Textures/CloudyCrown_Evening_Down.png
+  artifactKey: Guid(1fe26ef1655e3424b8a9a77e4ef0523d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_02_Evening/Textures/CloudyCrown_Evening_Down.png using Guid(1fe26ef1655e3424b8a9a77e4ef0523d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ff6eb0275bd64b61c4e7a2ca537540dc') in 0.012563 seconds 
+  Import took 0.017509 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000160 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_01_Midday/Textures/CloudyCrown_Midday_Up.png
+  artifactKey: Guid(4e02df907356e0848a5d76021b80192a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_01_Midday/Textures/CloudyCrown_Midday_Up.png using Guid(4e02df907356e0848a5d76021b80192a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c195dc6a75c5c9211816d6a202365b42') in 0.011399 seconds 
+  Import took 0.016269 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000159 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_03_Midnight/Textures/CloudyCrown_Midnight_Down.png
+  artifactKey: Guid(c78764efdf38d934da9064e52fdd1357) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_03_Midnight/Textures/CloudyCrown_Midnight_Down.png using Guid(c78764efdf38d934da9064e52fdd1357) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5b00ea25a297daf4a05e6fa90a4df9c4') in 0.010783 seconds 
+  Import took 0.015328 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000156 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_02_Evening/Textures/CloudyCrown_Evening_Left.png
+  artifactKey: Guid(90494e0797812be488f2fbe703461966) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_02_Evening/Textures/CloudyCrown_Evening_Left.png using Guid(90494e0797812be488f2fbe703461966) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd778119b04afef38c7e606b0589a21b9') in 0.011593 seconds 
+  Import took 0.016742 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000184 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_04_Sunset/Textures/CloudyCrown_Sunset_Down.png
+  artifactKey: Guid(dd10416b224641b459fe04b5eb7aec37) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_04_Sunset/Textures/CloudyCrown_Sunset_Down.png using Guid(dd10416b224641b459fe04b5eb7aec37) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7ff0b78995128945fed1d7cea8c96cb2') in 0.009801 seconds 
+  Import took 0.015013 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000179 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_02_Evening/Textures/CloudyCrown_Evening_Up.png
+  artifactKey: Guid(3157d3aa6a8bd694e9cc4c05e3303c06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_02_Evening/Textures/CloudyCrown_Evening_Up.png using Guid(3157d3aa6a8bd694e9cc4c05e3303c06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8fdbbec6ee4057e7d388d26d616fcafc') in 0.013182 seconds 
+  Import took 0.018177 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000142 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_03_Midnight/Textures/CloudyCrown_Midnight_Front.png
+  artifactKey: Guid(6c2f5f53cf8256c42b90da9a536584c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_03_Midnight/Textures/CloudyCrown_Midnight_Front.png using Guid(6c2f5f53cf8256c42b90da9a536584c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a473f8db81decf0e0dc299ace82b75a3') in 0.011606 seconds 
+  Import took 0.017927 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000135 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_03_Midnight/Textures/CloudyCrown_Midnight_Left.png
+  artifactKey: Guid(d349eb2db22ec0746a14ade881ac087f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_03_Midnight/Textures/CloudyCrown_Midnight_Left.png using Guid(d349eb2db22ec0746a14ade881ac087f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '167ec852a211b6ec6d6f942a8270ca03') in 0.011669 seconds 
+  Import took 0.016574 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000179 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_01_Midday/Textures/CloudyCrown_Midday_Front.png
+  artifactKey: Guid(dffdb4378818bc5469033648c57bd0b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_01_Midday/Textures/CloudyCrown_Midday_Front.png using Guid(dffdb4378818bc5469033648c57bd0b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9960d43b9e4999b548ede38a1b4c6017') in 0.012167 seconds 
+  Import took 0.016824 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000152 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_01_Midday/Textures/CloudyCrown_Midday_Right.png
+  artifactKey: Guid(14877617607f5fb47af48fcd766426ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_01_Midday/Textures/CloudyCrown_Midday_Right.png using Guid(14877617607f5fb47af48fcd766426ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1d4db8c291885e0eaaa16bd0fecdaac5') in 0.012580 seconds 
+  Import took 0.017552 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000187 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_05_Daybreak/Textures/CloudyCrown_Daybreak_Left.png
+  artifactKey: Guid(4bc70c48f58c2c44bb60f3c8719f38c7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_05_Daybreak/Textures/CloudyCrown_Daybreak_Left.png using Guid(4bc70c48f58c2c44bb60f3c8719f38c7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '59bb28e16b2b2863e3ec656c0504e3a6') in 0.011917 seconds 
+  Import took 0.018093 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000140 seconds.
+  path: Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_05_Daybreak/Textures/CloudyCrown_Daybreak_Right.png
+  artifactKey: Guid(a233316cd5c3fd84bbad0597bd05102f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/FarlandSkies/Skyboxes/CloudyCrown_05_Daybreak/Textures/CloudyCrown_Daybreak_Right.png using Guid(a233316cd5c3fd84bbad0597bd05102f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd19986f2895d251bf94940fe82cc0384') in 0.016519 seconds 
+  Import took 0.022069 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.376210 seconds.
+  path: Assets/ExampleAssets/Character Movement Fundamentals/Example Scenes/Showcase/EmptyShowcaseScene/ReflectionProbe-0.exr
+  artifactKey: Guid(a27ff74529be745408cc37202cf9bd27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/Character Movement Fundamentals/Example Scenes/Showcase/EmptyShowcaseScene/ReflectionProbe-0.exr using Guid(a27ff74529be745408cc37202cf9bd27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4089f2b2ec3d9c3887539a150c07948a') in 0.104383 seconds 
+  Import took 0.109291 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000251 seconds.
+  path: Assets/ExampleAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_Orange.png
+  artifactKey: Guid(64310863976bd0b4b96c829a5f6274ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_Orange.png using Guid(64310863976bd0b4b96c829a5f6274ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0e5f7c992ed7463e98a9dbf6d3438dde') in 0.016078 seconds 
+  Import took 0.020654 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000169 seconds.
+  path: Assets/ExampleAssets/Character Movement Fundamentals/Example Scenes/Special/PlanetWalkerScene/ReflectionProbe-0.exr
+  artifactKey: Guid(ddaf81d70a2ad5b46875d5f57c831860) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/Character Movement Fundamentals/Example Scenes/Special/PlanetWalkerScene/ReflectionProbe-0.exr using Guid(ddaf81d70a2ad5b46875d5f57c831860) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '640578c6c78e9e814bcbededf153f7ca') in 0.020146 seconds 
+  Import took 0.024326 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000148 seconds.
+  path: Assets/ExampleAssets/Character Movement Fundamentals/Source/Capguy/Model/Textures/Tex_Cap.png
+  artifactKey: Guid(01850d720f10ea448b0f077161735996) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/Character Movement Fundamentals/Source/Capguy/Model/Textures/Tex_Cap.png using Guid(01850d720f10ea448b0f077161735996) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ebd21c2adbdfb75bcb007cfa163f8987') in 0.035584 seconds 
+  Import took 0.040791 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000176 seconds.
+  path: Assets/ExampleAssets/TutorialInfo/Icons/UniversalIcon.png
+  artifactKey: Guid(7801804018a7dcf42abb827444e18660) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/TutorialInfo/Icons/UniversalIcon.png using Guid(7801804018a7dcf42abb827444e18660) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '002e8a447be962e8ecb70720bb2c9e42') in 0.012599 seconds 
+  Import took 0.017275 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000162 seconds.
+  path: Assets/ExampleAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_DarkBlue.png
+  artifactKey: Guid(bcb1a2330b513cc44bcccf64132b45f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_DarkBlue.png using Guid(bcb1a2330b513cc44bcccf64132b45f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f457f49d6ec662f7176c85bd1fffc934') in 0.019695 seconds 
+  Import took 0.024743 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000171 seconds.
+  path: Assets/ExampleAssets/Character Movement Fundamentals/Example Scenes/Special/ExternalCameraScene/ReflectionProbe-0.exr
+  artifactKey: Guid(74eeb33cef352a648a96a84ea23cabb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/Character Movement Fundamentals/Example Scenes/Special/ExternalCameraScene/ReflectionProbe-0.exr using Guid(74eeb33cef352a648a96a84ea23cabb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7ca8be2a6946ec8902ae68870865bb30') in 0.015362 seconds 
+  Import took 0.019595 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000157 seconds.
+  path: Assets/ExampleAssets/Character Movement Fundamentals/Example Scenes/Showcase/TopDownScene/ReflectionProbe-0.exr
+  artifactKey: Guid(042c584ce1a1b7d45b0aadd662e4b5ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/Character Movement Fundamentals/Example Scenes/Showcase/TopDownScene/ReflectionProbe-0.exr using Guid(042c584ce1a1b7d45b0aadd662e4b5ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7568430b7bbdc834088c85722f55b2ce') in 0.017198 seconds 
+  Import took 0.021752 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000153 seconds.
+  path: Assets/ExampleAssets/Character Movement Fundamentals/Source/Capguy/Model/Textures/Tex_Capguy.png
+  artifactKey: Guid(cc84019a64d0e9f4eb9bfe747b7afe8a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/Character Movement Fundamentals/Source/Capguy/Model/Textures/Tex_Capguy.png using Guid(cc84019a64d0e9f4eb9bfe747b7afe8a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '01cd319b435ccea89d3f53a156eb5a3e') in 0.017101 seconds 
+  Import took 0.021840 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000208 seconds.
+  path: Assets/ExampleAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_Red.png
+  artifactKey: Guid(e3ef8e41703c4c84daace066d0e35689) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_Red.png using Guid(e3ef8e41703c4c84daace066d0e35689) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf3ae78b02d274e16b50b237d2ac6835') in 0.014475 seconds 
+  Import took 0.019584 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000165 seconds.
+  path: Assets/ExampleAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_Yellow.png
+  artifactKey: Guid(42bdc049024bb2a43842782a4fef0159) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_Yellow.png using Guid(42bdc049024bb2a43842782a4fef0159) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fb9f83e8c1931de09b3d5e65a93b8303') in 0.014418 seconds 
+  Import took 0.019454 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000175 seconds.
+  path: Assets/ExampleAssets/Character Movement Fundamentals/Example Scenes/Special/ClickToMoveScene/ReflectionProbe-0.exr
+  artifactKey: Guid(8e13cb4af292b094984e4f4e517817db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/Character Movement Fundamentals/Example Scenes/Special/ClickToMoveScene/ReflectionProbe-0.exr using Guid(8e13cb4af292b094984e4f4e517817db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f7318edf33ff652cb491d6a95ea9703f') in 0.013971 seconds 
+  Import took 0.019472 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000162 seconds.
+  path: Assets/ExampleAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_Blue.png
+  artifactKey: Guid(59738f4f2ac82b442b513558796c7bde) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_Blue.png using Guid(59738f4f2ac82b442b513558796c7bde) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c9e2be966e144d0db27306ae7e684024') in 0.014590 seconds 
+  Import took 0.019844 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000161 seconds.
+  path: Assets/ExampleAssets/Textures/Props/HardHat/SafetyHat_Normal.tif
+  artifactKey: Guid(d608c45da8580c9408ee50eb9a8c40f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/Textures/Props/HardHat/SafetyHat_Normal.tif using Guid(d608c45da8580c9408ee50eb9a8c40f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ff6505298ffbfcdd1ffe17671f18dbd6') in 0.024249 seconds 
+  Import took 0.030735 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000163 seconds.
+  path: Assets/ExampleAssets/Character Movement Fundamentals/Example Scenes/Showcase/ShowcaseScene/ReflectionProbe-0.exr
+  artifactKey: Guid(930eb9def08419f4f85931022c3199ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/Character Movement Fundamentals/Example Scenes/Showcase/ShowcaseScene/ReflectionProbe-0.exr using Guid(930eb9def08419f4f85931022c3199ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '087d72e079248713eb89a4505135a2d5') in 0.014748 seconds 
+  Import took 0.019785 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000209 seconds.
+  path: Assets/Scenes/Strange Cargo Adoption Center/ReflectionProbe-0.exr
+  artifactKey: Guid(5c54ecd15f477eb4e9408fc18be61bc3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Strange Cargo Adoption Center/ReflectionProbe-0.exr using Guid(5c54ecd15f477eb4e9408fc18be61bc3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '422aee70fe3fab30cc25b31ec437d6fa') in 0.015758 seconds 
+  Import took 0.020687 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000164 seconds.
+  path: Assets/ExampleAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_Grey.png
+  artifactKey: Guid(1f4c65c606069044b88cdaf363a7a2ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExampleAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_Grey.png using Guid(1f4c65c606069044b88cdaf363a7a2ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '76188a66787acaa65cbfe5f11bce022b') in 0.018777 seconds 
+  Import took 0.024988 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 24.992500 seconds.
+  path: Assets/Materials/grass.jfif
+  artifactKey: Guid(072d39a42da165e40b02447a590536b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grass.jfif using Guid(072d39a42da165e40b02447a590536b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a5b55dd557555e4454be881974e5c3e9') in 0.012258 seconds 
+  Import took 0.017073 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 156.605030 seconds.
+  path: Assets/Materials/grass.png
+  artifactKey: Guid(564d23fc6172f404ea9d2c3b22073708) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grass.png using Guid(564d23fc6172f404ea9d2c3b22073708) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ca45d74630f4b498b803f821df2b9f17') in 0.014974 seconds 
+  Import took 0.020698 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 39.900800 seconds.
+  path: Assets/Materials/Grass1.mat
+  artifactKey: Guid(b11e0a1194c6f5144976f283be5b8330) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Grass1.mat using Guid(b11e0a1194c6f5144976f283be5b8330) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '904672c42c7e54b4e458b02cf483ac06') in 0.017662 seconds 
+  Import took 0.023492 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1475.043578 seconds.
+  path: Assets/Materials/grasspng.png
+  artifactKey: Guid(f9bf4455daa60824fa41e86a3a3348ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grasspng.png using Guid(f9bf4455daa60824fa41e86a3a3348ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cb53950bb2ba281187facadf6201f563') in 0.023884 seconds 
+  Import took 0.031224 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.006744 seconds.
+  path: Assets/Materials/grasspng.png
+  artifactKey: Guid(f9bf4455daa60824fa41e86a3a3348ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grasspng.png using Guid(f9bf4455daa60824fa41e86a3a3348ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cb53950bb2ba281187facadf6201f563') in 0.013352 seconds 
+  Import took 0.019331 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.043126 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000774 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005190 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.026754 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000873 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006606 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016536 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000716 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005112 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.018275 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000730 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005140 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014646 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000814 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004929 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014001 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000826 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005335 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.013876 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000804 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005029 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016542 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000912 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006422 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015942 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.001049 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.007036 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015107 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000899 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006920 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015813 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000724 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005044 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014024 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000777 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004975 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014918 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000852 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005324 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014763 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000755 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005173 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014490 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000753 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004936 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015035 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000720 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005148 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015509 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000894 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006672 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.017362 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000715 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005701 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014837 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000903 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006647 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014863 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000742 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004897 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014281 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000757 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005228 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.019198 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000758 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005150 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016696 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000725 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005268 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.020323 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000828 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005227 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.017058 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.001027 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006282 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014646 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000749 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005474 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015316 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000822 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005114 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015906 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000712 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004703 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.013567 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000883 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006740 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014734 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000776 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004939 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014304 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000910 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005321 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.013344 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000922 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006606 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014217 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000761 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004992 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015269 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000785 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006952 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016427 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000775 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005063 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015059 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000789 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005037 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016927 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000695 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004761 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015236 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000701 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005040 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015539 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.001180 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006104 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015042 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000799 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005038 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016420 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000753 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005023 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.013509 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000686 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005921 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015798 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.001011 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005188 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015289 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000960 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006983 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.013664 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.001109 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.008017 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.026882 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000992 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.008576 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.020340 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000882 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.007518 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016251 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000725 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005559 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015561 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000907 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006791 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015112 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000743 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004896 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015312 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000719 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005060 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015976 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000712 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004838 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.013065 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000821 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005486 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016311 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000858 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005240 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015198 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000737 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005060 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016290 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000757 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004924 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014153 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000941 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006918 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015342 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000923 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006765 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016477 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000688 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005244 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.017311 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000834 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004968 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014418 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000803 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005923 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015226 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000707 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005049 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014275 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000706 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004930 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.017927 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000831 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005116 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014949 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000810 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005184 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.465464 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000742 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004793 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.024187 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000769 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005374 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.018674 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000708 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005190 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015596 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000727 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004829 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016393 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000754 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005385 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016543 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000751 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005180 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016159 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000736 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004979 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014693 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000731 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005324 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015062 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000922 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005741 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014835 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000888 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006494 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015462 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000691 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004763 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015141 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000739 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004981 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016855 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000887 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005765 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015474 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000835 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004975 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014556 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000708 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005010 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014868 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000716 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005058 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016075 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000813 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005048 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014928 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000706 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004898 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015964 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000923 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006733 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014364 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000814 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005670 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015010 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000794 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006034 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.019611 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000707 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005358 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015527 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000719 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006209 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.017198 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000891 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.007260 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016179 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000711 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005193 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014821 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000784 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005359 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016667 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000914 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005147 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.013260 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000829 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.007063 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015888 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000843 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005682 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.013976 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000964 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.007388 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016484 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000789 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005245 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014581 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000721 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005163 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.019928 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000999 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006428 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.013337 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.001058 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005818 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014139 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000736 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004725 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.013888 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000759 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005246 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014856 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000700 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004874 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014701 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000752 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005054 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016900 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000819 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005405 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015979 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000835 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005308 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016837 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000767 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005103 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014049 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000935 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006759 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016656 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000881 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006590 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014390 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000898 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.007306 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.017579 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000696 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.004685 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.013050 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000954 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006712 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.013951 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000816 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.006891 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014519 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.001006 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005554 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016158 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000724 seconds  code(4) message(Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z')
+  ERROR: Build asset version error: assets/materials/grassnormal.png in SourceAssetDB has modification time of '2021-10-15T16:34:01.3128101Z' while content on disk has modification time of '2021-10-15T16:34:03.2284013Z'
+  Import took 0.005316 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 23.001341 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a44907e823ec8b4e157cef1a6cc7acef') in 0.023926 seconds 
+  Import took 0.029410 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 14.472047 seconds.
+  path: Assets/Materials/grassnormal.png
+  artifactKey: Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/grassnormal.png using Guid(07542367a506eb146b5ee34e89d65cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f07cb2bdf0cb3b4ce1f098281672826d') in 0.023831 seconds 
+  Import took 0.030468 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 85.837647 seconds.
+  path: Assets/Materials/Grass1.mat
+  artifactKey: Guid(b11e0a1194c6f5144976f283be5b8330) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Grass1.mat using Guid(b11e0a1194c6f5144976f283be5b8330) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '72cbb3757899a5be82fc402cb4102add') in 0.119282 seconds 
+  Import took 0.124105 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
