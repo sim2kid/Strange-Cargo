@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d22888574f9e9fa4fa361e996cfea431, type: 3}
-  m_Name: New Dialogue
+  m_Name: Demo
   m_EditorClassIdentifier: 
-  DialogueName: New Dialogue
+  DialogueName: Demo
   EntryPointGUID: 98e59bda-1c75-49a7-99ac-ed7b25ce2e31
   NodeLinks:
   - BaseNodeGuid: 98e59bda-1c75-49a7-99ac-ed7b25ce2e31
     PortName: Next
-    PortGUID: 7524f56d-84b4-415b-b6b5-abc2b998933d
+    PortGUID: a55fb642-391d-49c7-8f4d-228c3ce30b2e
     Condition: 
     TargetNodeGuid: 1105168d-7cf2-4844-bf02-5efcc454013f
   - BaseNodeGuid: 1105168d-7cf2-4844-bf02-5efcc454013f
@@ -52,34 +52,39 @@ MonoBehaviour:
     TargetNodeGuid: 4641f89a-dac6-4420-9536-4f001b38de20
   - BaseNodeGuid: 4641f89a-dac6-4420-9536-4f001b38de20
     PortName: Next
-    PortGUID: 24ecbb57-5af2-4675-8d5c-b90253b966d9
+    PortGUID: 51bd6166-2428-4414-b5a8-f873380a2d80
     Condition: 
     TargetNodeGuid: fd248e7f-bb8b-43a0-bce1-aab11f7ae84f
   - BaseNodeGuid: fd248e7f-bb8b-43a0-bce1-aab11f7ae84f
     PortName: Fail
-    PortGUID: 1c6253bf-76e2-4dd4-bc16-261b7573b630
+    PortGUID: fcaf80fe-ca8f-4382-9bbf-6a0990d44877
     Condition: 
     TargetNodeGuid: 184b0ec2-db49-4469-874d-5c974faac76a
   - BaseNodeGuid: fd248e7f-bb8b-43a0-bce1-aab11f7ae84f
     PortName: Pass
-    PortGUID: a0292c71-6a2b-45aa-9feb-fd2336257328
+    PortGUID: 01b427c3-675a-42f7-988b-180137ce955b
     Condition: 
     TargetNodeGuid: 82b5907f-6e34-41e9-b439-9e7c444e9095
   - BaseNodeGuid: 184b0ec2-db49-4469-874d-5c974faac76a
     PortName: Next
-    PortGUID: 514d4642-6684-48bc-86a4-045b7391c7f3
+    PortGUID: c1b40cd5-860d-4a52-a377-a20e3a035f69
     Condition: 
     TargetNodeGuid: 27776fa8-4a16-44d1-8680-558c02f485c3
   - BaseNodeGuid: 82b5907f-6e34-41e9-b439-9e7c444e9095
     PortName: Next
-    PortGUID: eb5ee28e-34ae-4ebe-9d30-1d9a688396a2
+    PortGUID: d336ba54-6100-4d6f-b414-96afe2eef4ad
     Condition: 
     TargetNodeGuid: 7b28363f-37d4-4e84-a6b3-7b83252ff565
   - BaseNodeGuid: 82b5907f-6e34-41e9-b439-9e7c444e9095
     PortName: Next
-    PortGUID: 5f78aa31-0815-4d0a-8280-73659a4353dc
+    PortGUID: b4c7209c-c72b-4f77-bf08-2556f088e6c9
     Condition: 
     TargetNodeGuid: 27776fa8-4a16-44d1-8680-558c02f485c3
+  - BaseNodeGuid: c206f753-a078-453e-a7f6-f5bc92cbd79a
+    PortName: Next
+    PortGUID: 0e8200cb-0b9c-4018-90fc-c4ee998b1249
+    Condition: 
+    TargetNodeGuid: fd248e7f-bb8b-43a0-bce1-aab11f7ae84f
   - BaseNodeGuid: 27776fa8-4a16-44d1-8680-558c02f485c3
     PortName: YES GIVE ME ALL THE CATS
     PortGUID: 8c5a554f-8fb7-4b0c-88ef-a338653a0a9a
@@ -90,11 +95,6 @@ MonoBehaviour:
     PortGUID: 342e6c87-80eb-44cb-9016-8651300a2253
     Condition: cats <= 1
     TargetNodeGuid: 2dcdf1de-c763-4a10-9f81-ea57602a7956
-  - BaseNodeGuid: c206f753-a078-453e-a7f6-f5bc92cbd79a
-    PortName: Next
-    PortGUID: 562d3792-13cc-41dc-9077-6bd35bf85fb4
-    Condition: 
-    TargetNodeGuid: fd248e7f-bb8b-43a0-bce1-aab11f7ae84f
   - BaseNodeGuid: 27776fa8-4a16-44d1-8680-558c02f485c3
     PortName: YES GIVE ME ALL THE CATS
     PortGUID: 8c5a554f-8fb7-4b0c-88ef-a338653a0a9a
