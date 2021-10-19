@@ -12,16 +12,16 @@ Brooklyn DiPietrantonio ([Website]())
 Owen Ravelo ([Website](https://simmgames.com))
 
 **Programmer**<br>
-Max ([Website]())
+Max Garay ([Website]())
 
 **Artist**<br>
-Harrison ([Website]())
+Harrison Maine ([Website]())
 
 **Modeler/Animator**<br>
-Sarah ([Website]())
+Sarah Mitrache ([Website]())
 
 **Audio Designer**<br>
-Ashlyn ([Website]())
+Ashlyn Parsons ([Website]())
 
 # Other Contributors
 ### Code Contributions
