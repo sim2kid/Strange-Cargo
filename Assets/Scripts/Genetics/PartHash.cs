@@ -1,13 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 namespace Genetics
 {
     [Serializable]
-    public struct DNA
+    public struct PartHash
     {
-        public List<PartHash> BodyPartHashs;
+        public string BodyPart;
+        public string Pattern;
     }
 }

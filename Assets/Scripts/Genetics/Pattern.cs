@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Genetics
 {
-    public struct Pattern
+    public class Pattern
     {
         public string Hash;
         public string Name;

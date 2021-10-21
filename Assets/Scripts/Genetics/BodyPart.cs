@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace Genetics
 {
-    public struct BodyPart
+    public class BodyPart
     {
         public string Hash;
         public string Name;
         public string FileLocation;
         public ShaderEnum Shader;
-        public List<Pattern> Patterns;
+        public List<string> Patterns;
     }
 }
