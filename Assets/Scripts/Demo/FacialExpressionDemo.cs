@@ -4,41 +4,45 @@ using UnityEngine;
 
 public class FacialExpressionDemo : MonoBehaviour
 {
-    //[SerializeField] Material happyFaceMaterial;
-    //[SerializeField] Material sadFaceMaterial;
-    [SerializeField] Material[] facialExpressions;
-    private MeshRenderer meshRenderer;
-    private Material face;
-
+    [SerializeField] GameObject eyes;
+    [SerializeField] GameObject mouth;
+    [SerializeField] Texture[] eyesExpressionTextures;
+    [SerializeField] Texture[] mouthExpressionTextures;
+    private MeshRenderer eyesMesh;
+    private MeshRenderer mouthMesh;
+    private Material eyesMaterial;
+    private Material mouthMaterial;
     private void Start()
     {
-        GetFace();
-        SetFacialExpressionToDefault();
+        GetFaceMeshes();
+        GetFaceMaterials();
     }
 
-    public void GetFace()
+    private void GetFaceMeshes()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
-        face = meshRenderer.materials[meshRenderer.materials.GetUpperBound(0)];
+        eyesMesh = eyes.GetComponent<MeshRenderer>();
+        mouthMesh = mouth.GetComponent<MeshRenderer>();
     }
 
-    public void SetFacialExpressionToDefault()
+    private void GetFaceMaterials()
     {
-        face.mainTexture = facialExpressions[0].mainTexture;
+        eyesMaterial = eyesMesh.materials[eyesMesh.materials.GetUpperBound(0)];
+        mouthMaterial = mouthMesh.materials[mouthMesh.materials.GetUpperBound(0)];
     }
 
-    public void SetFacialExpressionTo(int facialExpressionIndex)
+    public void SetExpressionToDefault()
     {
-        face.mainTexture = facialExpressions[facialExpressionIndex].mainTexture;
+        eyesMaterial.mainTexture = eyesExpressionTextures[0];
+        mouthMaterial.mainTexture = mouthExpressionTextures[0];
     }
 
-    /*public void MakeHappy()
+    public void SetEyesExpressionTo(int expressionIndex)
     {
-        face.mainTexture = happyFaceMaterial.mainTexture;
+        eyesMaterial.mainTexture = eyesExpressionTextures[expressionIndex];
     }
 
-    public void MakeSad()
+    public void SetMouthExpressionTo(int expressionIndex)
     {
-        face.mainTexture = sadFaceMaterial.mainTexture;
-    }*/
+        mouthMaterial.mainTexture = mouthExpressionTextures[expressionIndex];
+    }
 }

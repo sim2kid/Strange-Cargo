@@ -19,18 +19,23 @@ public class FacialExpressionTriggerDemo : MonoBehaviour
     {
         facialExpressionScript = player.GetComponentInChildren<FacialExpressionDemo>();
     }
+    private void MakePlayerSad()
+    {
+        facialExpressionScript.SetEyesExpressionTo(1);
+        facialExpressionScript.SetMouthExpressionTo(1);
+    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            facialExpressionScript.SetFacialExpressionTo(1);
+            MakePlayerSad();
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            facialExpressionScript.SetFacialExpressionToDefault();
+            facialExpressionScript.SetExpressionToDefault();
         }
     }
 }
