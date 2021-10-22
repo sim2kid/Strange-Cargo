@@ -8,6 +8,7 @@ namespace Genetics
     [Serializable]
     public struct PartHash
     {
+        public string Category;
         public string BodyPart;
         public string Pattern;
     }

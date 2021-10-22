@@ -9,5 +9,6 @@ namespace Genetics
     public struct DNA
     {
         public List<PartHash> BodyPartHashs;
+        public Color[] Colors;
     }
 }
