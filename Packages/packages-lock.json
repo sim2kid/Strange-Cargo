@@ -2,6 +2,17 @@
   "dependencies": {
     "com.unity.adaptiveperformance": {
       "version": "2.2.1",
+    "com.siccity.gltfutility": {
+      "version": "https://github.com/siccity/gltfutility.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "2.0.0"
+      },
+      "hash": "0e9f41aa67fada1c4f9110b3e3efbd37b0251f9f"
+    },
+    "com.simmgames.dialoguesystem": {
+      "version": "https://github.com/SimmGames/com.simmgames.dialoguesystem.git",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -94,6 +105,13 @@
       "dependencies": {
         "com.unity.settings-manager": "1.0.2"
       },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "2.0.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.render-pipelines.core": {
