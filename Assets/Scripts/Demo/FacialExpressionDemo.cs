@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class FacialExpressionDemo : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] Material happyFaceMaterial;
+    [SerializeField] Material sadFaceMaterial;
+    private MeshRenderer meshRenderer;
+    private Material face;
+
+    private void Start()
     {
-        
+        GetFace();
+        MakeHappy();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GetFace()
     {
-        
+        meshRenderer = GetComponent<MeshRenderer>();
+        face = meshRenderer.materials[meshRenderer.materials.GetUpperBound(0)];
+    }
+
+    public void MakeHappy()
+    {
+        face.mainTexture = happyFaceMaterial.mainTexture;
+    }
+
+    public void MakeSad()
+    {
+        face.mainTexture = sadFaceMaterial.mainTexture;
     }
 }
