@@ -8,26 +8,17 @@ public class FacialExpressionDemo : MonoBehaviour
     [SerializeField] GameObject mouth;
     [SerializeField] Texture2D[] eyesExpressionTextures;
     [SerializeField] Texture2D[] mouthExpressionTextures;
-    private MeshRenderer eyesMesh;
-    private MeshRenderer mouthMesh;
     private Material eyesMaterial;
     private Material mouthMaterial;
     private void Start()
     {
-        GetFaceMeshes();
         GetFaceMaterials();
-    }
-
-    private void GetFaceMeshes()
-    {
-        eyesMesh = eyes.GetComponent<MeshRenderer>();
-        mouthMesh = mouth.GetComponent<MeshRenderer>();
     }
 
     private void GetFaceMaterials()
     {
-        eyesMaterial = eyesMesh.materials[eyesMesh.materials.GetUpperBound(0)];
-        mouthMaterial = mouthMesh.materials[mouthMesh.materials.GetUpperBound(0)];
+        eyesMaterial = eyes.GetComponent<MeshRenderer>().material;
+        mouthMaterial = mouth.GetComponent<MeshRenderer>().material;
     }
 
     public void SetExpressionToDefault()
