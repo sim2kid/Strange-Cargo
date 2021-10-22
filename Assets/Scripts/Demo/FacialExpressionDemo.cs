@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class FacialExpressionDemo : MonoBehaviour
 {
-    [SerializeField] Material happyFaceMaterial;
-    [SerializeField] Material sadFaceMaterial;
+    //[SerializeField] Material happyFaceMaterial;
+    //[SerializeField] Material sadFaceMaterial;
+    [SerializeField] Material[] facialExpressions;
     private MeshRenderer meshRenderer;
     private Material face;
 
     private void Start()
     {
         GetFace();
-        MakeHappy();
+        SetFacialExpressionToDefault();
     }
 
     public void GetFace()
@@ -21,7 +22,17 @@ public class FacialExpressionDemo : MonoBehaviour
         face = meshRenderer.materials[meshRenderer.materials.GetUpperBound(0)];
     }
 
-    public void MakeHappy()
+    public void SetFacialExpressionToDefault()
+    {
+        face.mainTexture = facialExpressions[0].mainTexture;
+    }
+
+    public void SetFacialExpressionTo(int facialExpressionIndex)
+    {
+        face.mainTexture = facialExpressions[facialExpressionIndex].mainTexture;
+    }
+
+    /*public void MakeHappy()
     {
         face.mainTexture = happyFaceMaterial.mainTexture;
     }
@@ -29,5 +40,5 @@ public class FacialExpressionDemo : MonoBehaviour
     public void MakeSad()
     {
         face.mainTexture = sadFaceMaterial.mainTexture;
-    }
+    }*/
 }

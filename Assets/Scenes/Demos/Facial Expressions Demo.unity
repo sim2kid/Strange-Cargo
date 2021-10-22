@@ -460,7 +460,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-6922
+  m_Name: pb_Mesh21880
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1320,8 +1320,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a3da6bea4c5d14780dcbe61cb26a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  happyFaceMaterial: {fileID: 2100000, guid: 1f25c582fafceb945b203f269e95e96e, type: 2}
-  sadFaceMaterial: {fileID: 2100000, guid: 96f837fe378eebb458ca3b72d6f65f20, type: 2}
+  facialExpressions:
+  - {fileID: 2100000, guid: 1f25c582fafceb945b203f269e95e96e, type: 2}
+  - {fileID: 2100000, guid: 96f837fe378eebb458ca3b72d6f65f20, type: 2}
 --- !u!1 &1567289522
 GameObject:
   m_ObjectHideFlags: 0

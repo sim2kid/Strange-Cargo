@@ -23,14 +23,14 @@ public class FacialExpressionTriggerDemo : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            facialExpressionScript.MakeSad();
+            facialExpressionScript.SetFacialExpressionTo(1);
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            facialExpressionScript.MakeHappy();
+            facialExpressionScript.SetFacialExpressionToDefault();
         }
     }
 }
