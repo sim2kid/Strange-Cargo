@@ -4,15 +4,33 @@ using UnityEngine;
 
 public class FacialExpressionTriggerDemo : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private FacialExpressionDemo facialExpressionScript;
+    private GameObject player;
+    private void Start()
     {
-        
+        GetPlayer();
+        GetFacialExpressionScript();
     }
-
-    // Update is called once per frame
-    void Update()
+    private void GetPlayer()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+    private void GetFacialExpressionScript()
+    {
+        facialExpressionScript = player.GetComponentInChildren<FacialExpressionDemo>();
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Player"))
+        {
+            facialExpressionScript.MakeSad();
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.CompareTag("Player"))
+        {
+            facialExpressionScript.MakeHappy();
+        }
     }
 }
