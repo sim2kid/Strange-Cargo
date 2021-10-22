@@ -17,6 +17,15 @@ namespace Genetics
         }
 
         /// <summary>
+        /// Adds pattern <paramref name="p"/> to the repository
+        /// </summary>
+        /// <param name="p"></param>
+        public void AddPattern(Pattern p) 
+        {
+            Patterns.Add(p);
+        }
+
+        /// <summary>
         /// Returns a random body part in the folder <paramref name="bodyPartType"/>
         /// </summary>
         /// <param name="bodyPartType"></param>
