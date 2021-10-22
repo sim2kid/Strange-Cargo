@@ -16,22 +16,29 @@ namespace Genetics
     {
         private const string BODYPART_FOLDER = "Models";
         private const string TEXTURE_FOLDER = "Texture";
+
+        /// <summary>
+        /// Populate the GenePool with Bodyparts and Patterns
+        /// </summary>
         public static void Import() 
         {
+            // Grab the genepool from the Toolbox singleton
             GeneticRepository genePool = Toolbox.Instance.GenePool;
+
+            // Find all the body parts
             string partPath = Path.Combine(Application.streamingAssetsPath, BODYPART_FOLDER);
             string[] paths = Directory.GetFiles(partPath, "*.gltf");
-
             foreach (string part in paths) 
                 AddPart(genePool, part);
 
+            // Find all the patterns
             string texturePath = Path.Combine(Application.streamingAssetsPath, TEXTURE_FOLDER);
             string[] textPaths = Directory.GetFiles(partPath);
             foreach (string texture in textPaths) 
                 AddTexture(genePool, texture);
         }
 
-        static void AddTexture(GeneticRepository genePool, string filePath) 
+        private static void AddTexture(GeneticRepository genePool, string filePath) 
         {
             // Check if extension is for a image file
             string extension = Path.GetExtension(filePath).ToLower();
@@ -53,7 +60,7 @@ namespace Genetics
             genePool.AddPattern(p);
         }
 
-        static void AddPart(GeneticRepository genePool, string filePath) 
+        private static void AddPart(GeneticRepository genePool, string filePath) 
         {
             string partName = Path.GetFileNameWithoutExtension(filePath);
 
@@ -92,12 +99,22 @@ namespace Genetics
         // Copied from this:
         // https://stackoverflow.com/questions/3984138/hash-string-in-c-sharp
 
+        /// <summary>
+        /// Creates a HashByte from the <paramref name="inputString"/>
+        /// </summary>
+        /// <param name="inputString"></param>
+        /// <returns></returns>
         public static byte[] GetHash(string inputString)
         {
             using (HashAlgorithm algorithm = SHA1.Create())
                 return algorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString));
         }
 
+        /// <summary>
+        /// Creates a hash string from the <paramref name="inputString"/>
+        /// </summary>
+        /// <param name="inputString"></param>
+        /// <returns></returns>
         public static string GetHashString(string inputString)
         {
             StringBuilder sb = new StringBuilder();
