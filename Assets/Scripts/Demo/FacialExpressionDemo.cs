@@ -6,8 +6,8 @@ public class FacialExpressionDemo : MonoBehaviour
 {
     [SerializeField] GameObject eyes;
     [SerializeField] GameObject mouth;
-    [SerializeField] Texture[] eyesExpressionTextures;
-    [SerializeField] Texture[] mouthExpressionTextures;
+    [SerializeField] Texture2D[] eyesExpressionTextures;
+    [SerializeField] Texture2D[] mouthExpressionTextures;
     private MeshRenderer eyesMesh;
     private MeshRenderer mouthMesh;
     private Material eyesMaterial;
