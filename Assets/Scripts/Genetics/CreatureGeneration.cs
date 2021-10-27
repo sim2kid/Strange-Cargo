@@ -122,6 +122,7 @@ namespace Genetics
 
             GameObject partObject = Siccity.GLTFUtility.Importer.LoadFromFile(bodyPart.FileLocation);
             partObject.name = "TempObj";
+            partObject.transform.localScale = Vector3.one * bodyPart.Scale;
 
             Texture2D texture2D = new Texture2D(1,1);
             byte[] textureBytes = System.IO.File.ReadAllBytes(pattern.FileLocation);

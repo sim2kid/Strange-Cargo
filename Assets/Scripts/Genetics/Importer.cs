@@ -94,12 +94,23 @@ namespace Genetics
             // Read the json and populate the BodyPart class
             string jsonText = File.ReadAllText(jsonLocation);
             JObject jsonObj = (JObject)JToken.Parse(jsonText);
+
+            float Scale;
+            try {
+                Scale = (float)jsonObj["Scale"];
+            } 
+            catch 
+            {
+                Scale = 0.1f;
+            }
+
             // Add the Bodypart to the partList
             BodyPart part = new BodyPart()
             {
                 Hash = GetHashString(partName),
                 Name = partName,
                 FileLocation = filePath,
+                Scale = Scale,
                 Shader = (ShaderEnum)(int)jsonObj["Shader"],
                 Patterns = jsonObj["Patterns"].Select(x => (string)x).ToList()
             };

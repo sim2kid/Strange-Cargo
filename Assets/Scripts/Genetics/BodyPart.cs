@@ -11,6 +11,7 @@ namespace Genetics
         public string Hash;
         public string Name;
         public string FileLocation;
+        public float Scale;
         public ShaderEnum Shader;
         public List<string> Patterns;
     }
