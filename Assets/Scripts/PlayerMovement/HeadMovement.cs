@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace PlayerController {
-
+namespace PlayerController 
+{
     [RequireComponent(typeof(PlayerInput))]
     [DisallowMultipleComponent]
     public class HeadMovement : MonoBehaviour
