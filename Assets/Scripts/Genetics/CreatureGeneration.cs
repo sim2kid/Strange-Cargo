@@ -97,6 +97,9 @@ namespace Genetics
             TextureController texCon = creature.AddComponent<TextureController>();
             texCon.colors = dna.Colors;
 
+            Creature c = creature.AddComponent<Creature>();
+            c.dna = dna;
+
             return creature;
         }
 

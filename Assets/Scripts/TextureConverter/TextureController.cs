@@ -27,10 +27,6 @@ namespace TextureConverter
         [SerializeField]
         public Shader shader;
 
-
-        [SerializeField]
-        float LoadingProgress;
-
         /// <summary>
         /// Displays true after the conversion has finished
         /// </summary>
@@ -94,10 +90,6 @@ namespace TextureConverter
                 Convert();
         }
 
-        private void Update()
-        {
-            LoadingProgress = Report();
-        }
 
         /// <summary>
         /// Run a conversion on the model.
