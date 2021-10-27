@@ -45,8 +45,10 @@ namespace Genetics
         /// <returns></returns>
         public Pattern GetRandomPattern(BodyPart bodyPart)
         {
-            string patternName = bodyPart.Patterns[Random.Range(0, bodyPart.Patterns.Count)];
-            return Patterns.First(p => p.Name == patternName);
+            int ranNum = Random.Range(0, bodyPart.Patterns.Count);
+            string patternName = bodyPart.Patterns[ranNum];
+            var toReturn = Patterns.First(p => p.Name.ToLower() == patternName.ToLower());
+            return toReturn;
         }
 
         /// <summary>

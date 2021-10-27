@@ -45,7 +45,7 @@ namespace Genetics
 
             // Find all the patterns
             string texturePath = SanitizePath(Path.Combine(Application.streamingAssetsPath, TEXTURE_FOLDER));
-            string[] textPaths = Directory.GetFiles(partPath);
+            string[] textPaths = Directory.GetFiles(texturePath);
             foreach (string texture in textPaths)
                 AddTexture(genePool, texture);
         }
@@ -60,7 +60,7 @@ namespace Genetics
                 return;
 
 
-            string patternName = Path.GetFileNameWithoutExtension(filePath);
+            string patternName = Path.GetFileName(filePath);
 
             Pattern p = new Pattern()
             {

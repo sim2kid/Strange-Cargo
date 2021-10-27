@@ -6,9 +6,9 @@ using System;
 namespace Genetics
 {
     [Serializable]
-    public struct DNA
+    public class DNA
     {
-        public List<PartHash> BodyPartHashs;
-        public Color[] Colors;
+        public List<PartHash> BodyPartHashs = new List<PartHash>();
+        public Color[] Colors = new Color[3];
     }
 }

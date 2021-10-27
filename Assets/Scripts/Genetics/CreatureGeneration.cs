@@ -43,9 +43,8 @@ namespace Genetics
                     };
                     dna.BodyPartHashs.Add(part);
                 }
-                catch (Exception e)
+                catch
                 {
-                    Debug.LogError(e);
                     continue;
                 }
             }
@@ -65,9 +64,8 @@ namespace Genetics
                     };
                     dna.BodyPartHashs.Add(part);
                 }
-                catch (Exception e)
+                catch 
                 {
-                    Debug.LogError(e);
                     continue;
                 }
         }
@@ -123,16 +121,22 @@ namespace Genetics
             Pattern pattern = genePool.GetPattern(partBits.Pattern);
 
             GameObject partObject = Siccity.GLTFUtility.Importer.LoadFromFile(bodyPart.FileLocation);
-            partObject.name = bodyPart.Name;
+            partObject.name = "TempObj";
 
-            Texture2D texture2D = null;
+            Texture2D texture2D = new Texture2D(1,1);
             byte[] textureBytes = System.IO.File.ReadAllBytes(pattern.FileLocation);
-            if (ImageConversion.LoadImage(texture2D, textureBytes, false)) 
-            {
-                partObject.GetComponent<Renderer>().material.mainTexture = texture2D;
-            }
+            Renderer[] models = partObject.transform.GetComponentsInChildren<Renderer>();
 
-            partObject.GetComponent<Renderer>().sharedMaterial.shader = genePool.GetShader(bodyPart.Shader);
+            bool useTexture = ImageConversion.LoadImage(texture2D, textureBytes, false);
+            
+            foreach (Renderer renderer in models) 
+            {
+                if (useTexture)
+                {
+                    renderer.material.mainTexture = texture2D;
+                }
+                renderer.sharedMaterial.shader = genePool.GetShader(bodyPart.Shader);
+            }
 
             return partObject;
         }
