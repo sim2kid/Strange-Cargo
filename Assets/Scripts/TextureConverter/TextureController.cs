@@ -20,15 +20,12 @@ namespace TextureConverter
         [Tooltip("The colors (3) to convert the Red, Green, and Blue channels to respectivly.")]
         [SerializeField]
         public Color[] colors;
-        [Tooltip("This is the default shader to use on every material.")]
-        [SerializeField]
-        public Shader shader;
         [Tooltip("Wheather or not the script will convert textures on start")]
         [SerializeField]
         private bool convert = true;
-
+        [Tooltip("DEPRECIATED: This is the default shader to use on every material.")]
         [SerializeField]
-        float LoadingProgress;
+        public Shader shader;
 
         /// <summary>
         /// Displays true after the conversion has finished
@@ -60,6 +57,14 @@ namespace TextureConverter
             Finished = true;
             OnFinished = new UnityEvent();
             myChildren = new List<MaterialConversion>();
+
+            // Random Color Picker for testing. Won't be in the build
+            /*
+            Array.Resize(ref colors, MAX_COLORS);
+            colors[0] = RandomColorPicker.RetriveRandomColor();
+            colors[1] = RandomColorPicker.RetriveRandomColor();
+            colors[2] = RandomColorPicker.RetriveRandomColor();
+            */
         }
 
         private void Start()
@@ -85,10 +90,6 @@ namespace TextureConverter
                 Convert();
         }
 
-        private void Update()
-        {
-            LoadingProgress = Report();
-        }
 
         /// <summary>
         /// Run a conversion on the model.
