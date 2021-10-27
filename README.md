@@ -6,7 +6,7 @@ Here are pur Team Members as well as where you can find our other works!<br>
 This project was made as a Capstone at [Columbia College Chicago](https://www.colum.edu/)
 
 **Team Leader/Designer**<br>
-Brooklyn DiPietrantonio ([Website]())
+Brooklyn DiPietrantonio ([Website](www.brooklyndipi.com))
 
 **Scrum Master/Lead Programmer**<br>
 Owen Ravelo ([Website](https://simmgames.com))
