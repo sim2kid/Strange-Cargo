@@ -22,6 +22,7 @@ namespace Utility
         private Toolbox()
         {
             GenePool = new GeneticRepository();
+            Importer.Import(GenePool);
         }
     }
 }

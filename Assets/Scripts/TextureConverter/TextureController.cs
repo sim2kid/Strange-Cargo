@@ -61,13 +61,14 @@ namespace TextureConverter
             Finished = true;
             OnFinished = new UnityEvent();
             myChildren = new List<MaterialConversion>();
+
             // Random Color Picker for testing. Won't be in the build
-            
+            /*
             Array.Resize(ref colors, MAX_COLORS);
             colors[0] = RandomColorPicker.RetriveRandomColor();
             colors[1] = RandomColorPicker.RetriveRandomColor();
             colors[2] = RandomColorPicker.RetriveRandomColor();
-            
+            */
         }
 
         private void Start()

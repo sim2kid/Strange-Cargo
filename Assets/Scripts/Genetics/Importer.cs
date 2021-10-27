@@ -25,16 +25,28 @@ namespace Genetics
             // Grab the genepool from the Toolbox singleton
             GeneticRepository genePool = Toolbox.Instance.GenePool;
 
+            Import(genePool);
+        }
+
+        /// <summary>
+        /// Populate the GenePool with Bodyparts and Patterns
+        /// </summary>
+        public static void Import(GeneticRepository genePool)
+        {
             // Find all the body parts
-            string partPath = Path.Combine(Application.streamingAssetsPath, BODYPART_FOLDER);
-            string[] paths = Directory.GetFiles(partPath, "*.gltf");
-            foreach (string part in paths) 
-                AddPart(genePool, part);
+            string partPath = SanitizePath(Path.Combine(Application.streamingAssetsPath, BODYPART_FOLDER));
+            string[] pathsDirectories = Directory.GetDirectories(partPath);
+            foreach (string directory in pathsDirectories)
+            {
+                string[] paths = Directory.GetFiles(directory, "*.gltf");
+                foreach (string part in paths)
+                    AddPart(genePool, part);
+            }
 
             // Find all the patterns
-            string texturePath = Path.Combine(Application.streamingAssetsPath, TEXTURE_FOLDER);
+            string texturePath = SanitizePath(Path.Combine(Application.streamingAssetsPath, TEXTURE_FOLDER));
             string[] textPaths = Directory.GetFiles(partPath);
-            foreach (string texture in textPaths) 
+            foreach (string texture in textPaths)
                 AddTexture(genePool, texture);
         }
 
@@ -73,9 +85,10 @@ namespace Genetics
             // Get the details json by changing the extension to a json
             // Be sure to check if the json exists and throw an error if not.
             string jsonLocation = Path.ChangeExtension(filePath, ".json");
-            if (!Directory.Exists(jsonLocation)) 
+            if (!File.Exists(jsonLocation))
             {
                 Debug.LogWarning($"The asset {parent}/{partName} does not have an associated JSON file and will not be added to the Gene Pool.");
+                return;
             }
 
             // Read the json and populate the BodyPart class
@@ -94,6 +107,10 @@ namespace Genetics
             partList.Add(part.Hash, part);
         }
 
+        private static string SanitizePath(string s) 
+        {
+            return s.Replace('/','\\');
+        }
 
 
         // Copied from this:

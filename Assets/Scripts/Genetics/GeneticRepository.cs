@@ -29,10 +29,13 @@ namespace Genetics
         /// Returns a random body part in the folder <paramref name="bodyPartType"/>
         /// </summary>
         /// <param name="bodyPartType"></param>
-        /// <returns></returns>
+        /// <returns>KeyValuePair<Hash,PartData></Hash></returns>
         public KeyValuePair<string, BodyPart> GetRandomPart (string bodyPartType) 
         {
-            return Repository[bodyPartType].ElementAt(Random.Range(0, Repository[bodyPartType].Count));
+            int randomNum = Random.Range(0, Repository[bodyPartType].Count);
+            Dictionary<string, BodyPart> partList = Repository[bodyPartType];
+            var toReturn = partList.ElementAt(randomNum);
+            return toReturn;
         }
 
         /// <summary>
@@ -93,6 +96,22 @@ namespace Genetics
         {
             return Patterns.First(p => p.Hash == hash);
         }
-        
+
+        /// <summary>
+        /// Returns the shader to get based on the <paramref name="shaderEnum"/>
+        /// </summary>
+        /// <param name="shader"></param>
+        /// <returns></returns>
+        public Shader GetShader(ShaderEnum shaderEnum) 
+        {
+            switch (shaderEnum) 
+            {
+                default:
+                case ShaderEnum.Default:
+                    return Shader.Find("Universal Render Pipeline/Lit");
+                case ShaderEnum.Fur:
+                    return Shader.Find("Shader Graphs/Creature");
+            }
+        }
     }
 }
