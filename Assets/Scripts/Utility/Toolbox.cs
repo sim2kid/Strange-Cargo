@@ -18,6 +18,10 @@ namespace Utility
         /// The genetic repository for the application
         /// </summary>
         public GeneticRepository GenePool { get; private set; }
+        /// <summary>
+        /// The time contoller component
+        /// </summary>
+        public TimeController TimeController { get; set; }
 
         private Toolbox()
         {
