@@ -17,6 +17,7 @@ public class TimeController : MonoBehaviour
 
     private void OnEnable()
     {
+        // Sets the time controller in the toolbox
         Utility.Toolbox.Instance.TimeController = this;
     }
 
@@ -35,8 +36,6 @@ public class TimeController : MonoBehaviour
         {
             _time -= MinutesInADay * 60;
         }
-
-        Debug.Log(GetTime());
 
         CurrentTime = GetTime();
     }
