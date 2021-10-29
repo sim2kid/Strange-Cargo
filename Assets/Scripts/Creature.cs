@@ -11,6 +11,9 @@ public class Creature : MonoBehaviour, IProgress
     public DNA dna;
     private IProgress textureController;
 
+    [SerializeField]
+    private float LoadingProgress;
+
     public bool Finished => textureController.Finished;
 
     public float Report()
@@ -23,5 +26,10 @@ public class Creature : MonoBehaviour, IProgress
     void Start()
     {
         textureController = GetComponent<TextureConverter.TextureController>();
+    }
+
+    private void Update()
+    {
+        LoadingProgress = Report();
     }
 }
