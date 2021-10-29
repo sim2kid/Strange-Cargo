@@ -6,6 +6,7 @@ using Siccity.GLTFUtility;
 using UnityEditor;
 using Utility;
 using TextureConverter;
+using Creature;
 
 namespace Genetics
 {
@@ -97,7 +98,7 @@ namespace Genetics
             TextureController texCon = creature.AddComponent<TextureController>();
             texCon.colors = dna.Colors;
 
-            Creature c = creature.AddComponent<Creature>();
+            CreatureController c = creature.AddComponent<CreatureController>();
             c.dna = dna;
 
             return creature;
