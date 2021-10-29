@@ -31,10 +31,6 @@ namespace Sound
         /// True when an audio will play but is waiting for a delay first (Read Only)
         /// </summary>
         public bool IsDelayed { get; }
-        /// <summary>
-        /// The sound that will be played next. (Read Only)
-        /// </summary>
-        public ISound Sound { get; }
 
         /// <summary>
         /// Plays the sound
