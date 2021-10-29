@@ -137,7 +137,8 @@ namespace Genetics
             {
                 if (useTexture)
                 {
-                    renderer.material.mainTexture = texture2D;
+                    renderer.gameObject.AddComponent<MaterialConversion>()
+                        .SetMainTexture(texture2D, partBits.Pattern);
                 }
                 renderer.sharedMaterial.shader = genePool.GetShader(bodyPart.Shader);
             }

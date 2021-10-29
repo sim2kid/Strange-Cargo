@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 namespace Utility
@@ -57,6 +58,27 @@ namespace Utility
             newRenderer.bones = myBones;
             newRenderer.sharedMesh = renderer.sharedMesh;
             newRenderer.materials = renderer.materials;
+
+            //Copy other components besides the renderers
+            Component[] components = renderer.GetComponents<Component>();
+            foreach (Component c in components) 
+            {
+                if (c.GetType() != typeof(SkinnedMeshRenderer) && c.GetType() != typeof(Transform)) 
+                {
+                    MethodInfo method = typeof(ArmatureStitching).GetMethod(nameof(ArmatureStitching.CopyValues));
+                    MethodInfo generic = method.MakeGenericMethod(c.GetType());
+
+                    Component newC = newObj.AddComponent(c.GetType());
+
+                    generic.Invoke(null, new object[] { c, newC });
+                }
+            }
+        }
+
+        public static void CopyValues<T>(T from, T to)
+        {
+            var json = JsonUtility.ToJson(from);
+            JsonUtility.FromJsonOverwrite(json, to);
         }
 
         /// <summary>
