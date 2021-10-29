@@ -28,6 +28,13 @@ namespace TextureConverter
         public Color[] colors;
 
         /// <summary>
+        /// If the conversion texture is recorded, the hash for that texture will be stored here.
+        /// If null, the hash is known
+        /// </summary>
+        [SerializeField]
+        public string TextureHash;
+
+        /// <summary>
         /// [0,1] range representing how far along the conversion is.
         /// </summary>
         private float progress;
@@ -73,7 +80,7 @@ namespace TextureConverter
         private void Start()
         {
             // Get the pattern texture from the material
-            OriginalTexture = (Texture2D)this.GetComponent<Renderer>().material.mainTexture;
+            OriginalTexture = GetMainTexture();
         }
 
         /// <summary>
@@ -82,11 +89,32 @@ namespace TextureConverter
         public void Convert()
         {
             if(OriginalTexture == null)
-                OriginalTexture = (Texture2D)this.GetComponent<Renderer>().material.mainTexture;
+                OriginalTexture = GetMainTexture();
 
             Finished = false;
             // Take time to update the texture
             ModifyTexture(OriginalTexture, colors, OverlayTexture);
+        }
+
+        /// <summary>
+        /// Returns the mainTexture of the material.
+        /// Check if the conversion process is complete if you want a converted texture.
+        /// </summary>
+        /// <returns></returns>
+        public Texture2D GetMainTexture() 
+        {
+            return (Texture2D)this.GetComponent<Renderer>().material.mainTexture;
+        }
+
+        /// <summary>
+        /// Sets the main texture to <paramref name="newTexture"/>
+        /// </summary>
+        /// <param name="newTexture"></param>
+        public void SetMainTexture(Texture2D newTexture, string newHash = null) 
+        {
+            this.GetComponent<Renderer>().material.mainTexture = newTexture;
+            if(!string.IsNullOrEmpty(newHash))
+                TextureHash = newHash;
         }
 
         public float Report() 
@@ -96,10 +124,14 @@ namespace TextureConverter
             return progress;
         }
 
+        /// <summary>
+        /// Sets the main texture while updating the conversion events
+        /// </summary>
+        /// <param name="newTexture"></param>
         private void ReapplyTexture(Texture2D newTexture)
         {
             // Set the main texture to our new texture
-            this.GetComponent<Renderer>().material.mainTexture = newTexture;
+            SetMainTexture(newTexture);
             Finished = true;
             OnFinished.Invoke();
         }

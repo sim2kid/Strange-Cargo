@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Linq;
 using Utility;
 
 namespace TextureConverter
@@ -12,6 +13,7 @@ namespace TextureConverter
     {
         private const int MAX_COLORS = 3;
         private List<MaterialConversion> myChildren;
+        private List<MaterialConversion> leaderChildren;
         private int conversionSpeed = 40000;
 
         [Tooltip("If true, it goes RGB -> Colors. Vise Vera on false.")]
@@ -57,6 +59,7 @@ namespace TextureConverter
             Finished = true;
             OnFinished = new UnityEvent();
             myChildren = new List<MaterialConversion>();
+            leaderChildren = new List<MaterialConversion>();
 
             // Random Color Picker for testing. Won't be in the build
             /*
@@ -82,11 +85,11 @@ namespace TextureConverter
                     converter = render.gameObject.AddComponent<MaterialConversion>();
                     converter.ForwardConvert = ForwardConvert;
                 }
-                converter.OnFinished.AddListener(CheckIfFinished);
+                converter.OnFinished.AddListener(AfterConversion);
                 myChildren.Add(converter);
             }
 
-            if(convert)
+            if (convert)
                 Convert();
         }
 
@@ -100,8 +103,24 @@ namespace TextureConverter
             foreach (MaterialConversion converter in myChildren) 
             {
                 converter.colors = colors;
-                converter.CONVERSION_SPEED = CONVERSION_SPEED/myChildren.Count;
 
+                Debug.Log(converter.TextureHash);
+
+                if (converter.TextureHash != null)
+                {
+                    if (leaderChildren.Find(x => x.TextureHash == converter.TextureHash) == null)
+                    {
+                        leaderChildren.Add(converter);
+                    }
+                }
+                else
+                {
+                    leaderChildren.Add(converter);
+                }
+            }
+            foreach (MaterialConversion converter in leaderChildren) 
+            {
+                converter.CONVERSION_SPEED = CONVERSION_SPEED / leaderChildren.Count;
                 converter.Convert();
             }
         }
@@ -111,22 +130,33 @@ namespace TextureConverter
             if (Finished)
                 return 1;
             float temp = 0;
-            foreach (MaterialConversion converter in myChildren)
+            foreach (MaterialConversion converter in leaderChildren)
             {
                 temp += converter.Report();
             }
-            return temp / myChildren.Count;
+            return temp / leaderChildren.Count;
         }
 
-
-        private void CheckIfFinished()
+        private void AfterConversion()
         {
-            foreach (MaterialConversion converter in myChildren)
+            bool allFinished = true;
+            foreach (MaterialConversion converter in leaderChildren)
             {
-                if (!converter.Finished)
-                    return;
+                if (converter.Finished)
+                {
+                    if(converter.TextureHash != null)
+                        myChildren.Where(x => x.TextureHash == converter.TextureHash).ToList().ForEach(child =>
+                        {
+                            child.SetMainTexture(converter.GetMainTexture());
+                        });
+                }
+                else 
+                {
+                    allFinished = false;
+                }
             }
-            OnFinished.Invoke();
+            if(allFinished)
+                OnFinished.Invoke();
         }
     }
 }
