@@ -14,7 +14,16 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "aef9ae1280b3c2407b9a06179c7e6a18d70c411e"
+      "hash": "b0a8941e062ac29cfc69717123b3070c3d61ef55"
+    },
+    "com.unity.adaptiveperformance": {
+      "version": "2.2.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.subsystemregistration": "1.1.0"
+      },
+      "url": "https://packages.unity.com"
     },
     "com.unity.cinemachine": {
       "version": "2.6.10",
@@ -83,6 +92,13 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "2.0.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.probuilder": {
       "version": "4.5.2",
       "depth": 0,
@@ -92,11 +108,13 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.nuget.newtonsoft-json": {
-      "version": "2.0.0",
-      "depth": 1,
+    "com.unity.progrids": {
+      "version": "3.0.3-preview.6",
+      "depth": 0,
       "source": "registry",
-      "dependencies": {},
+      "dependencies": {
+        "com.unity.settings-manager": "1.0.2"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.render-pipelines.core": {
@@ -140,6 +158,15 @@
       "dependencies": {
         "com.unity.render-pipelines.core": "10.6.0",
         "com.unity.searcher": "4.3.2"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.subsystemregistration": {
+      "version": "1.1.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.subsystems": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },

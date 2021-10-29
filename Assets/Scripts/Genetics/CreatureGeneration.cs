@@ -6,6 +6,7 @@ using Siccity.GLTFUtility;
 using UnityEditor;
 using Utility;
 using TextureConverter;
+using Creature;
 
 namespace Genetics
 {
@@ -97,7 +98,7 @@ namespace Genetics
             TextureController texCon = creature.AddComponent<TextureController>();
             texCon.colors = dna.Colors;
 
-            Creature c = creature.AddComponent<Creature>();
+            CreatureController c = creature.AddComponent<CreatureController>();
             c.dna = dna;
 
             return creature;
@@ -137,7 +138,8 @@ namespace Genetics
             {
                 if (useTexture)
                 {
-                    renderer.material.mainTexture = texture2D;
+                    renderer.gameObject.AddComponent<MaterialConversion>()
+                        .SetMainTexture(texture2D, partBits.Pattern);
                 }
                 renderer.sharedMaterial.shader = genePool.GetShader(bodyPart.Shader);
             }
