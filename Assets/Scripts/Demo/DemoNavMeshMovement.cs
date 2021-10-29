@@ -15,7 +15,8 @@ public class DemoNavMeshMovement : MonoBehaviour
     void Start()
     {
         GetNavMeshAgent();
-        MoveToTransform(destinationTransform);
+        //MoveToTransform(destinationTransform);
+        MoveToVector3(destinationVector3);
     }
     /// <summary>
     /// Find and assign the NavMesh Agent component attached to this game object.
