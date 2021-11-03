@@ -175,8 +175,13 @@ namespace TextureConverter
             return output;
         }
 
-        private static Vector4 forwardConvert(Vector4 patternColor, Vector4 detailColor, Color[] newColors) 
+        private static Vector4 forwardConvert(Vector4 patternColor, Vector4 detailColor, Color[] newColors)
         {
+            if (newColors == null) 
+            {
+                Debug.LogError("No colors have been set for conversion");
+                return Vector4.zero;
+            }
             // We multiply each channel with the associated color
             Vector4 r = (newColors.Length >= 1 ? newColors[0] : Color.clear) * patternColor.x;
             Vector4 g = (newColors.Length >= 2 ? newColors[1] : Color.clear) * patternColor.y;
@@ -194,6 +199,11 @@ namespace TextureConverter
 
         private static Vector4 backwardsConvert(Vector4 patternColor, Color[] baseColors) 
         {
+            if (baseColors == null)
+            {
+                Debug.LogError("No colors have been set for conversion");
+                return Vector4.zero;
+            }
             // We multiply each channel with the associated color
             Vector2 r = GetComponentValue(baseColors.Length >= 1 ? baseColors[0] : Color.clear, patternColor);
             Vector2 g = GetComponentValue(baseColors.Length >= 2 ? baseColors[1] : Color.clear, patternColor);
