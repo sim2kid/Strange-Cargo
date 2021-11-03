@@ -15,21 +15,17 @@ public class DemoArmatureStitching : MonoBehaviour
 
     async void Start()
     {
-        Debug.Log(Application.streamingAssetsPath);
         try
         {
-            bodyparts.Add(ImportGLTF(Path.Combine(Application.streamingAssetsPath, "Models/Bodies/BeanBody.gltf")));
-            bodyparts.Add(ImportGLTF(Path.Combine(Application.streamingAssetsPath, "Models/Ears/FluffyEars.gltf")));
-            bodyparts.Add(ImportGLTF(Path.Combine(Application.streamingAssetsPath, "Models/Heads/BobbleHead.gltf")));
-            bodyparts.Add(ImportGLTF(Path.Combine(Application.streamingAssetsPath, "Models/Horns/PointyHorns.gltf")));
-            bodyparts.Add(ImportGLTF(Path.Combine(Application.streamingAssetsPath, "Models/Legs/HoovedLegs.gltf")));
-            bodyparts.Add(ImportGLTF(Path.Combine(Application.streamingAssetsPath, "Models/Tails/PointyTail.gltf")));
-            //bodyparts.Add(ImportGLTF(Path.Combine(Application.streamingAssetsPath, "/Models/Demo/demo.gltf")));
+            GameObject t1 = ImportGLTF("Assets/Models/GLTFs/Demo/Test1.gltf");
+            GameObject t2 = ImportGLTF("Assets/Models/GLTFs/Demo/Test2.gltf");
+            //Transform[] bones = t1.transform.Find("Bottom").GetComponentsInChildren<Transform>();
+            //t2.transform.Find("Suzanne").GetComponent<SkinnedMeshRenderer>().bones = bones;
 
+            bodyparts.Add(t1);
+            bodyparts.Add(t2);
             GameObject singleObj = ArmatureStitching.StitchObjects(bodyparts);
-            singleObj.name = "Strubie";
-            singleObj.transform.localScale = Vector3.one * 0.1f;
-            singleObj.AddComponent<TextureConverter.TextureController>();
+            singleObj.name = "Bobbert";
 
         }
         catch (Exception e)

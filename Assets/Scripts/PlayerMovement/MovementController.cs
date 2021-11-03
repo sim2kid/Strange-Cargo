@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 namespace PlayerController
 {
-    [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(CharacterController))]
     [DisallowMultipleComponent]
     public class MovementController : MonoBehaviour

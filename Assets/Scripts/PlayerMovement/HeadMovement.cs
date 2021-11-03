@@ -69,7 +69,7 @@ namespace PlayerController
 
             // Where we want to go based on player input
             Vector2 targetChange = look.ReadValue<Vector2>() * MouseSensitivity * Time.deltaTime;
-
+            targetChange.y = Mathf.Clamp(targetChange.y, -90, 90); // Clamp the vertical to up and down
             // Invert any axis that need to be inverted
             if(InvertYAxis)
                 targetChange.y = -targetChange.y;
@@ -78,10 +78,6 @@ namespace PlayerController
 
             // Add those onto our current rotation
             rotation += targetChange;
-
-            if (rotation.y > 180)
-                rotation.y -= 360;
-            rotation.y = Mathf.Clamp(rotation.y, -90, 90);
 
             // Update our gameobjects
             transform.localEulerAngles = new Vector3(0, rotation.x, 0);
