@@ -35,11 +35,13 @@ namespace Sound
                 LoadAudio();
                 if (_clipPool == null) 
                 {
-                    if (_clipPool.Count == 0)
-                    {
-                        Debug.LogWarning($"Could not load {_audioPool}.");
-                        return null;
-                    }
+                    Debug.LogWarning($"Could not load {_audioPool}.");
+                    return null;
+                }
+                if (_clipPool.Count == 0)
+                {
+                    Debug.LogWarning($"Could not load {_audioPool}.");
+                    return null;
                 }
             }
             return _clipPool[Random.Range(0, _clipPool.Count)];

@@ -16,7 +16,18 @@ namespace Sound
         TimeController time;
 
         int index = 0;
-        int trackCount { get => ((LoopSound)ap.Sound).Count(); }
+        int trackCount { get => getTrackCount();  }
+
+        private int getTrackCount() 
+        {
+            LoopSound loop = (LoopSound)ap.Sound;
+            if (loop == null)
+            {
+                Debug.LogError("Could not convert the Loop-Sound for the Background Music");
+                return 0;
+            }
+            return loop.Count();
+        }
 
         // Start is called before the first frame update
         void Start()
