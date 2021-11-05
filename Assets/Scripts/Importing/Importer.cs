@@ -25,17 +25,19 @@ namespace Importing
         public static Database Import(string parentFolder, string fileSearchPattern = null, Database db = null, string topLevelLocation = null) 
         {
             if (db == null)
-                db = new Database();
+                db = ScriptableObject.CreateInstance<Database>();
 
             if (string.IsNullOrWhiteSpace(topLevelLocation))
                 topLevelLocation = Application.streamingAssetsPath;
 
             string path = SanitizePath(Path.Combine(topLevelLocation, parentFolder));
             string[] files;
+
             if (string.IsNullOrEmpty(fileSearchPattern))
                 files = Directory.GetFiles(path);
             else
                 files = Directory.GetFiles(path, fileSearchPattern);
+
             string parent = SanitizePath(parentFolder);
             if (files.Length > 0)
                 if (!db.Folders.ContainsKey(parent))
@@ -43,12 +45,13 @@ namespace Importing
                     {
                         FolderName = parent
                     });
+
             foreach (string file in files) 
             {
-                db.Folders[parent].Files.Add(new File() 
+                db.Folders[parent].Files.Add(new File()
                 {
                     ParentFolder = parent,
-                    FileLocation = file
+                    FileLocation = SanitizePath(Path.Combine(parent, Path.GetFileName(file)))
                 });
             }
 

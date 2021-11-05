@@ -2,24 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.Build;
-using UnityEditor.Build.Reporting;
 using Importing;
 
 namespace Utility
 {
-    public class DatabaseBuilder : IPreprocessBuildWithReport
+    [InitializeOnLoad]
+    public class DatabaseBuilder
     {
-        public int callbackOrder { get { return 0; } }
-        public void OnPreprocessBuild(BuildReport report)
+        static DatabaseBuilder()
         {
             UpdateSoundDatabase();
         }
 
-
-        public void UpdateSoundDatabase() 
+        public static void UpdateSoundDatabase() 
         {
-            Database db = Importer.Import("Audio", "*.mp3", null, "Assets/Resources");
+            Database db = Importer.Import("", "*.mp3", null, "Assets/Resources/Audio");
             Importer.SaveDatabase(db, "Assets/Resources/Data/Database", "Audio");
         }
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Importing
 {
     [System.Serializable]
-    public class Folder : ScriptableObject
+    public class Folder
     {
         public string FolderName;
         public List<File> Files = new List<File>();

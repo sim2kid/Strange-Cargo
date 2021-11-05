@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DataType;
 
 namespace Sound
 {
@@ -9,15 +10,15 @@ namespace Sound
         /// <summary>
         /// The relitive pitch of the audio clip
         /// </summary>
-        public float Pitch { get; set; }
+        public ValueRange Pitch { get; set; }
         /// <summary>
         /// The relitive volume of the audio clip
         /// </summary>
-        public float Volume { get; set; }
+        public ValueRange Volume { get; set; }
         /// <summary>
         /// The relitive delay before the start of an audio clip
         /// </summary>
-        public float Delay { get; set; }
+        public ValueRange Delay { get; set; }
         /// <summary>
         /// Whether to loop a clip or not
         /// </summary>
@@ -26,6 +27,6 @@ namespace Sound
         /// <summary>
         /// The audio clip from a given sound
         /// </summary>
-        public AudioClip Clip { get; set; }
+        public AudioClip Clip { get; }
     }
 }

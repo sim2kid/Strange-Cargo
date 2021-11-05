@@ -11,9 +11,12 @@ namespace Sound
         public bool IsDelayed { get; protected set; }
 
         private AudioSource source;
+        private float _delay;
 
         [SerializeField]
         public BasicSound Sound;
+
+        public bool DelayAfter = false;
 
         public void Pause()
         {
@@ -23,21 +26,28 @@ namespace Sound
 
         public void Play()
         {
-            source.pitch = Sound.Pitch;
-            if (Sound.Delay <= 0)
-                source.PlayOneShot(Sound.Clip, Sound.Volume);
-            else
-                PlayDelay();
+            source.pitch = Sound.Pitch.Read();
+            _delay = Sound.Delay.Read();
+            if (_delay <= 0)
+                source.PlayOneShot(Sound.Clip, Sound.Volume.Read());
+            else if(!IsDelayed)
+                StartCoroutine("PlayDelay");
         }
 
-        private IEnumerable PlayDelay() 
+        private IEnumerator PlayDelay() 
         {
             IsDelayed = true;
-            yield return Sound.Delay;
+            if(!DelayAfter)
+                yield return new WaitForSeconds(_delay);
+
             if(IsDelayed)
-                source.PlayOneShot(Sound.Clip, Sound.Volume);
+                source.PlayOneShot(Sound.Clip, Sound.Volume.Read());
+
+            if(DelayAfter)
+                yield return new WaitForSeconds(_delay);
+
             IsDelayed = false;
-            
+            _delay = 0;
         }
 
         public void Stop()
@@ -51,15 +61,20 @@ namespace Sound
             source.UnPause();
         }
 
+        private void Awake()
+        {
+            Sound.LoadAudio();
+        }
 
         private void Start()
         {
             source = GetComponent<AudioSource>();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            
+            if (Sound.Loop && !IsPlaying && !IsDelayed)
+                Play();
         }
     }
 }

@@ -1,0 +1,230 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82d6925b7036e3d4f951d3c53b8c308f, type: 3}
+  m_Name: Audio
+  m_EditorClassIdentifier: 
+  keys:
+  - Animal\Footsteps\Grass
+  - Animal\Footsteps\Wood_Tile
+  - Animal\Vocal\Anger
+  - Animal\Vocal\Bark
+  - Animal\Vocal\Eat
+  - Animal\Vocal\Happy
+  - Animal\Vocal\Neutral
+  - Animal\Vocal\Sad
+  - Animal\Vocal\Shake
+  - Animal\Vocal\Tired
+  - Misc\Pop
+  - Misc\ToyThrow
+  - Music
+  - Player\Footsteps\Grass
+  - Player\Footsteps\Tile
+  - Player\Footsteps\Wood
+  values:
+  - FolderName: Animal\Footsteps\Grass
+    Files:
+    - ParentFolder: Animal\Footsteps\Grass
+      FileLocation: Animal\Footsteps\Grass\SFX_AN_FS_Grass1.mp3
+    - ParentFolder: Animal\Footsteps\Grass
+      FileLocation: Animal\Footsteps\Grass\SFX_AN_FS_Grass10.mp3
+    - ParentFolder: Animal\Footsteps\Grass
+      FileLocation: Animal\Footsteps\Grass\SFX_AN_FS_Grass11.mp3
+    - ParentFolder: Animal\Footsteps\Grass
+      FileLocation: Animal\Footsteps\Grass\SFX_AN_FS_Grass12.mp3
+    - ParentFolder: Animal\Footsteps\Grass
+      FileLocation: Animal\Footsteps\Grass\SFX_AN_FS_Grass2.mp3
+    - ParentFolder: Animal\Footsteps\Grass
+      FileLocation: Animal\Footsteps\Grass\SFX_AN_FS_Grass3.mp3
+    - ParentFolder: Animal\Footsteps\Grass
+      FileLocation: Animal\Footsteps\Grass\SFX_AN_FS_Grass4.mp3
+    - ParentFolder: Animal\Footsteps\Grass
+      FileLocation: Animal\Footsteps\Grass\SFX_AN_FS_Grass5.mp3
+    - ParentFolder: Animal\Footsteps\Grass
+      FileLocation: Animal\Footsteps\Grass\SFX_AN_FS_Grass6.mp3
+    - ParentFolder: Animal\Footsteps\Grass
+      FileLocation: Animal\Footsteps\Grass\SFX_AN_FS_Grass7.mp3
+    - ParentFolder: Animal\Footsteps\Grass
+      FileLocation: Animal\Footsteps\Grass\SFX_AN_FS_Grass8.mp3
+    - ParentFolder: Animal\Footsteps\Grass
+      FileLocation: Animal\Footsteps\Grass\SFX_AN_FS_Grass9.mp3
+  - FolderName: Animal\Footsteps\Wood_Tile
+    Files:
+    - ParentFolder: Animal\Footsteps\Wood_Tile
+      FileLocation: Animal\Footsteps\Wood_Tile\SFX_AN_FS_WoodAndTile1.mp3
+    - ParentFolder: Animal\Footsteps\Wood_Tile
+      FileLocation: Animal\Footsteps\Wood_Tile\SFX_AN_FS_WoodAndTile2.mp3
+  - FolderName: Animal\Vocal\Anger
+    Files:
+    - ParentFolder: Animal\Vocal\Anger
+      FileLocation: Animal\Vocal\Anger\SFX_AN_Anger1.mp3
+    - ParentFolder: Animal\Vocal\Anger
+      FileLocation: Animal\Vocal\Anger\SFX_AN_Anger2.mp3
+    - ParentFolder: Animal\Vocal\Anger
+      FileLocation: Animal\Vocal\Anger\SFX_AN_Anger3.mp3
+    - ParentFolder: Animal\Vocal\Anger
+      FileLocation: Animal\Vocal\Anger\SFX_AN_Anger4.mp3
+    - ParentFolder: Animal\Vocal\Anger
+      FileLocation: Animal\Vocal\Anger\SFX_AN_Anger5.mp3
+    - ParentFolder: Animal\Vocal\Anger
+      FileLocation: Animal\Vocal\Anger\SFX_AN_Anger6.mp3
+    - ParentFolder: Animal\Vocal\Anger
+      FileLocation: Animal\Vocal\Anger\SFX_AN_Anger7.mp3
+  - FolderName: Animal\Vocal\Bark
+    Files:
+    - ParentFolder: Animal\Vocal\Bark
+      FileLocation: Animal\Vocal\Bark\SFX_AN_Bark1.mp3
+    - ParentFolder: Animal\Vocal\Bark
+      FileLocation: Animal\Vocal\Bark\SFX_AN_Bark10.mp3
+    - ParentFolder: Animal\Vocal\Bark
+      FileLocation: Animal\Vocal\Bark\SFX_AN_Bark2.mp3
+    - ParentFolder: Animal\Vocal\Bark
+      FileLocation: Animal\Vocal\Bark\SFX_AN_Bark3.mp3
+    - ParentFolder: Animal\Vocal\Bark
+      FileLocation: Animal\Vocal\Bark\SFX_AN_Bark4.mp3
+    - ParentFolder: Animal\Vocal\Bark
+      FileLocation: Animal\Vocal\Bark\SFX_AN_Bark5.mp3
+    - ParentFolder: Animal\Vocal\Bark
+      FileLocation: Animal\Vocal\Bark\SFX_AN_Bark6.mp3
+    - ParentFolder: Animal\Vocal\Bark
+      FileLocation: Animal\Vocal\Bark\SFX_AN_Bark7.mp3
+    - ParentFolder: Animal\Vocal\Bark
+      FileLocation: Animal\Vocal\Bark\SFX_AN_Bark8.mp3
+    - ParentFolder: Animal\Vocal\Bark
+      FileLocation: Animal\Vocal\Bark\SFX_AN_Bark9.mp3
+  - FolderName: Animal\Vocal\Eat
+    Files:
+    - ParentFolder: Animal\Vocal\Eat
+      FileLocation: Animal\Vocal\Eat\SFX_AN_Eat1.mp3
+    - ParentFolder: Animal\Vocal\Eat
+      FileLocation: Animal\Vocal\Eat\SFX_AN_Eat2.mp3
+    - ParentFolder: Animal\Vocal\Eat
+      FileLocation: Animal\Vocal\Eat\SFX_AN_Eat3.mp3
+    - ParentFolder: Animal\Vocal\Eat
+      FileLocation: Animal\Vocal\Eat\SFX_AN_Eat4.mp3
+  - FolderName: Animal\Vocal\Happy
+    Files:
+    - ParentFolder: Animal\Vocal\Happy
+      FileLocation: Animal\Vocal\Happy\SFX_AN_Happy1.mp3
+  - FolderName: Animal\Vocal\Neutral
+    Files:
+    - ParentFolder: Animal\Vocal\Neutral
+      FileLocation: Animal\Vocal\Neutral\SFX_AN_Neutral1.mp3
+    - ParentFolder: Animal\Vocal\Neutral
+      FileLocation: Animal\Vocal\Neutral\SFX_AN_Neutral2.mp3
+    - ParentFolder: Animal\Vocal\Neutral
+      FileLocation: Animal\Vocal\Neutral\SFX_AN_Neutral3.mp3
+  - FolderName: Animal\Vocal\Sad
+    Files:
+    - ParentFolder: Animal\Vocal\Sad
+      FileLocation: Animal\Vocal\Sad\SFX_AN_Sad1.mp3
+  - FolderName: Animal\Vocal\Shake
+    Files:
+    - ParentFolder: Animal\Vocal\Shake
+      FileLocation: Animal\Vocal\Shake\SFX_AN_Shake1.mp3
+  - FolderName: Animal\Vocal\Tired
+    Files:
+    - ParentFolder: Animal\Vocal\Tired
+      FileLocation: Animal\Vocal\Tired\SFX_AN_Tired1.mp3
+  - FolderName: Misc\Pop
+    Files:
+    - ParentFolder: Misc\Pop
+      FileLocation: Misc\Pop\SFX_Pop1.mp3
+    - ParentFolder: Misc\Pop
+      FileLocation: Misc\Pop\SFX_Pop2.mp3
+    - ParentFolder: Misc\Pop
+      FileLocation: Misc\Pop\SFX_Pop3.mp3
+    - ParentFolder: Misc\Pop
+      FileLocation: Misc\Pop\SFX_Pop4.mp3
+    - ParentFolder: Misc\Pop
+      FileLocation: Misc\Pop\SFX_Pop5.mp3
+    - ParentFolder: Misc\Pop
+      FileLocation: Misc\Pop\SFX_Pop6.mp3
+    - ParentFolder: Misc\Pop
+      FileLocation: Misc\Pop\SFX_Pop7.mp3
+  - FolderName: Misc\ToyThrow
+    Files:
+    - ParentFolder: Misc\ToyThrow
+      FileLocation: Misc\ToyThrow\SFX_ToyThrow.mp3
+  - FolderName: Music
+    Files:
+    - ParentFolder: Music
+      FileLocation: Music\MUS_AfternoonLoop.mp3
+    - ParentFolder: Music
+      FileLocation: Music\MUS_MorningLoop.mp3
+    - ParentFolder: Music
+      FileLocation: Music\MUS_NightLoop.mp3
+  - FolderName: Player\Footsteps\Grass
+    Files:
+    - ParentFolder: Player\Footsteps\Grass
+      FileLocation: Player\Footsteps\Grass\SFX_PL_FS_Grass1.mp3
+    - ParentFolder: Player\Footsteps\Grass
+      FileLocation: Player\Footsteps\Grass\SFX_PL_FS_Grass10.mp3
+    - ParentFolder: Player\Footsteps\Grass
+      FileLocation: Player\Footsteps\Grass\SFX_PL_FS_Grass2.mp3
+    - ParentFolder: Player\Footsteps\Grass
+      FileLocation: Player\Footsteps\Grass\SFX_PL_FS_Grass3.mp3
+    - ParentFolder: Player\Footsteps\Grass
+      FileLocation: Player\Footsteps\Grass\SFX_PL_FS_Grass4.mp3
+    - ParentFolder: Player\Footsteps\Grass
+      FileLocation: Player\Footsteps\Grass\SFX_PL_FS_Grass5.mp3
+    - ParentFolder: Player\Footsteps\Grass
+      FileLocation: Player\Footsteps\Grass\SFX_PL_FS_Grass6.mp3
+    - ParentFolder: Player\Footsteps\Grass
+      FileLocation: Player\Footsteps\Grass\SFX_PL_FS_Grass7.mp3
+    - ParentFolder: Player\Footsteps\Grass
+      FileLocation: Player\Footsteps\Grass\SFX_PL_FS_Grass8.mp3
+    - ParentFolder: Player\Footsteps\Grass
+      FileLocation: Player\Footsteps\Grass\SFX_PL_FS_Grass9.mp3
+  - FolderName: Player\Footsteps\Tile
+    Files:
+    - ParentFolder: Player\Footsteps\Tile
+      FileLocation: Player\Footsteps\Tile\SFX_PL_FS_Tile1.mp3
+    - ParentFolder: Player\Footsteps\Tile
+      FileLocation: Player\Footsteps\Tile\SFX_PL_FS_Tile10.mp3
+    - ParentFolder: Player\Footsteps\Tile
+      FileLocation: Player\Footsteps\Tile\SFX_PL_FS_Tile2.mp3
+    - ParentFolder: Player\Footsteps\Tile
+      FileLocation: Player\Footsteps\Tile\SFX_PL_FS_Tile3.mp3
+    - ParentFolder: Player\Footsteps\Tile
+      FileLocation: Player\Footsteps\Tile\SFX_PL_FS_Tile4.mp3
+    - ParentFolder: Player\Footsteps\Tile
+      FileLocation: Player\Footsteps\Tile\SFX_PL_FS_Tile5.mp3
+    - ParentFolder: Player\Footsteps\Tile
+      FileLocation: Player\Footsteps\Tile\SFX_PL_FS_Tile6.mp3
+    - ParentFolder: Player\Footsteps\Tile
+      FileLocation: Player\Footsteps\Tile\SFX_PL_FS_Tile7.mp3
+    - ParentFolder: Player\Footsteps\Tile
+      FileLocation: Player\Footsteps\Tile\SFX_PL_FS_Tile8.mp3
+    - ParentFolder: Player\Footsteps\Tile
+      FileLocation: Player\Footsteps\Tile\SFX_PL_FS_Tile9.mp3
+  - FolderName: Player\Footsteps\Wood
+    Files:
+    - ParentFolder: Player\Footsteps\Wood
+      FileLocation: Player\Footsteps\Wood\SFX_PL_FS_Wood1.mp3
+    - ParentFolder: Player\Footsteps\Wood
+      FileLocation: Player\Footsteps\Wood\SFX_PL_FS_Wood10.mp3
+    - ParentFolder: Player\Footsteps\Wood
+      FileLocation: Player\Footsteps\Wood\SFX_PL_FS_Wood2.mp3
+    - ParentFolder: Player\Footsteps\Wood
+      FileLocation: Player\Footsteps\Wood\SFX_PL_FS_Wood3.mp3
+    - ParentFolder: Player\Footsteps\Wood
+      FileLocation: Player\Footsteps\Wood\SFX_PL_FS_Wood4.mp3
+    - ParentFolder: Player\Footsteps\Wood
+      FileLocation: Player\Footsteps\Wood\SFX_PL_FS_Wood5.mp3
+    - ParentFolder: Player\Footsteps\Wood
+      FileLocation: Player\Footsteps\Wood\SFX_PL_FS_Wood6.mp3
+    - ParentFolder: Player\Footsteps\Wood
+      FileLocation: Player\Footsteps\Wood\SFX_PL_FS_Wood7.mp3
+    - ParentFolder: Player\Footsteps\Wood
+      FileLocation: Player\Footsteps\Wood\SFX_PL_FS_Wood8.mp3
+    - ParentFolder: Player\Footsteps\Wood
+      FileLocation: Player\Footsteps\Wood\SFX_PL_FS_Wood9.mp3

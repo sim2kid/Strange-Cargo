@@ -1382,12 +1382,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8435313185083453014, guid: ba4c6e1c4a249dc4b802ff725fbdb1ff, type: 3}
-      propertyPath: jumpHeight
+      propertyPath: groundCheckDistance
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8435313185083453014, guid: ba4c6e1c4a249dc4b802ff725fbdb1ff, type: 3}
-      propertyPath: gravityForce
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba4c6e1c4a249dc4b802ff725fbdb1ff, type: 3}
@@ -1437,7 +1433,19 @@ MonoBehaviour:
         m_Calls: []
     OnDown:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1390559900}
+          m_TargetAssemblyTypeName: Sound.AudioPlayer, Assembly-CSharp
+          m_MethodName: Play
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     OnHold:
       m_PersistentCalls:
         m_Calls: []
@@ -1515,7 +1523,7 @@ Transform:
   m_GameObject: {fileID: 1390559894}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.5852761, y: 1.24, z: 5.55}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 8.61, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -1533,11 +1541,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sound:
-    _pitch: 0
-    _volume: 0
-    _deley: 0
+    _pitch:
+      Value: 1
+      Range:
+        Min: -0.2
+        Max: 0.2
+    _volume:
+      Value: 1
+      Range:
+        Min: 0
+        Max: 0
+    _deley:
+      Value: 0
+      Range:
+        Min: 0
+        Max: 0
     _loop: 0
-    _clip: {fileID: 0}
+    _audioPool: Animal/Vocal/Bark
 --- !u!82 &1390559901
 AudioSource:
   m_ObjectHideFlags: 0
