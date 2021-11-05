@@ -13,7 +13,7 @@ namespace Sound
         private AudioSource source;
 
         [SerializeField]
-        public ISound Sound;
+        public BasicSound Sound;
 
         public void Pause()
         {
