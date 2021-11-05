@@ -84,6 +84,9 @@ GameObject:
   - component: {fileID: 8435313185083453015}
   - component: {fileID: 8435313185083453014}
   - component: {fileID: 8435313185083453013}
+  - component: {fileID: 1020215296}
+  - component: {fileID: 1020215285}
+  - component: {fileID: 1020215295}
   m_Layer: 0
   m_Name: DemoPlayer
   m_TagString: Untagged
@@ -169,6 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Eyes: {fileID: 8435313183938911793}
+  InteractionDistance: 3
 --- !u!136 &8435313185083453009
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -244,14 +248,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 10
-  jumpHeight: 2
-  gravityForce: 1
+  jumpHeight: 1
+  gravityForce: 20
   feet: {fileID: 8435313185130930080}
   groundCheckDistance: 2
   groundMask:
     serializedVersion: 2
     m_Bits: 8
   groundCheckVelocityReset: -2
+  isOnGround: 0
 --- !u!114 &8435313185083453013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,6 +273,145 @@ MonoBehaviour:
   InvertXAxis: 0
   MouseSensitivity: 50
   camera: {fileID: 8435313183938911793}
+--- !u!82 &1020215296
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8435313185083453008}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 0
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1020215285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8435313185083453008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2953c0909348e404fbc8bef3f58f3121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StepsRate: 0.4
+--- !u!114 &1020215295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8435313185083453008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7fab3db30850b648bd54f22bc00f267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sound:
+    _pitch:
+      Value: 1
+      Range:
+        Min: 0
+        Max: 0
+    _volume:
+      Value: 1
+      Range:
+        Min: 0
+        Max: 0
+    _deley:
+      Value: 0
+      Range:
+        Min: 0
+        Max: 0
+    _loop: 0
+    _audioPool: 
 --- !u!1 &8435313185130930095
 GameObject:
   m_ObjectHideFlags: 0

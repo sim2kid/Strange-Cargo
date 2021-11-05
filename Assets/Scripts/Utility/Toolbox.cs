@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Genetics;
+using Sound;
 
 namespace Utility
 {
@@ -23,10 +24,13 @@ namespace Utility
         /// </summary>
         public TimeController TimeController { get; set; }
 
+        public SoundRepository SoundPool {  get; private set; }
+
         private Toolbox()
         {
             GenePool = new GeneticRepository();
             Importer.Import(GenePool);
+            SoundPool = new SoundRepository();
         }
     }
 }

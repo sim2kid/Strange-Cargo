@@ -15,7 +15,7 @@ namespace PlayerController
         [Tooltip("The speef of the player.")]
         [Range(1f, 100f)]
         [SerializeField]
-        private float MoveSpeed = 10.0f;
+        public float MoveSpeed = 10.0f;
         [Tooltip("The height of a jump")]
         [Range(0.0f, 5.0f)]
         [SerializeField]
@@ -43,7 +43,7 @@ namespace PlayerController
         //references for handling gravity
         Vector3 velocity;
 
-        bool isOnGround;
+        public bool isOnGround;
         float jumpForceFormula;
 
         //references for handling jumping
