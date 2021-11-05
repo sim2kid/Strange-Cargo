@@ -229,7 +229,7 @@ namespace DevAid
                     runConversion();
                     ReDraw();
                 }
-                catch (Exception e)
+                catch
                 {
                     fileLocation.value = path = string.Empty;
                     working = null;

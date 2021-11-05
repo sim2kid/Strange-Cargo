@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Utility
 {
@@ -11,11 +12,20 @@ namespace Utility
         /// </summary>
         private float _time;
 
-        [SerializeField]
-        private float CurrentTime;
+        [Tooltip("Returns the current time in a 0-24 hour format")]
+        [SerializeField]    
+        public float CurrentTime;
 
-        [Tooltip("The real life minutes per Day/Night cycle")]
-        public float MinutesInADay = 13.25f;
+        [SerializeField]
+        public Text TimeDisplay;
+
+        /// <summary>
+        /// The time in a 0-1 format
+        /// </summary>
+        public float DayProgress { get => CurrentTime/24f; }
+
+        [Tooltip("The real life minutes to hour per Day/Night cycle")]
+        public float MinutesInADay = 15f;
 
         private void OnEnable()
         {
@@ -40,6 +50,8 @@ namespace Utility
             }
 
             CurrentTime = GetTime();
+
+            TimeDisplay.text = CurrentTime.ToString("0.00");
         }
 
         /// <summary>
