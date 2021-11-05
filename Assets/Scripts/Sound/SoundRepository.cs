@@ -22,20 +22,27 @@ namespace Sound
         /// <returns></returns>
         public List<AudioClip> GrabBakedAudio(string location) 
         {
-            location = SanitizePath(location);
-            Folder dir = baked_db.Folders[location];
             List<AudioClip> clips = new List<AudioClip>();
-
-            foreach (File file in dir.Files) 
+            try
             {
-                string clipPath = System.IO.Path.ChangeExtension($"Audio\\{file.FileLocation}", string.Empty);
-                clipPath = clipPath.Substring(0, clipPath.Length - 1);
-                AudioClip c = Resources.Load<AudioClip>(clipPath);
-                if(c != null)
-                    clips.Add(c);
-            }
+                location = SanitizePath(location);
+                Folder dir = baked_db.Folders[location];
 
-            return clips;
+                foreach (File file in dir.Files)
+                {
+                    string clipPath = System.IO.Path.ChangeExtension($"Audio\\{file.FileLocation}", string.Empty);
+                    clipPath = clipPath.Substring(0, clipPath.Length - 1);
+                    AudioClip c = Resources.Load<AudioClip>(clipPath);
+                    if (c != null)
+                        clips.Add(c);
+                }
+
+                return clips;
+            }
+            catch 
+            {
+                return clips;
+            }
         }
 
         /// <summary>
