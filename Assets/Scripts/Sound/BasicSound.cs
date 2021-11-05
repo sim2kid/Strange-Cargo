@@ -9,18 +9,18 @@ namespace Sound
     public class BasicSound : ISound
     {
         [SerializeField]
-        private ValueRange _pitch = new ValueRange(1);
+        protected ValueRange _pitch = new ValueRange(1);
         [SerializeField]
-        private ValueRange _volume = new ValueRange(1);
+        protected ValueRange _volume = new ValueRange(1);
         [SerializeField]
-        private ValueRange _deley = new ValueRange(0);
+        protected ValueRange _deley = new ValueRange(0);
         [SerializeField]
-        private bool _loop;
+        protected bool _loop;
 
         [SerializeField]
         private string _audioPool;
 
-        private List<AudioClip> _clipPool;
+        protected List<AudioClip> _clipPool;
 
         public virtual ValueRange Pitch { get => _pitch; set => _pitch = value; }
         public virtual ValueRange Volume { get => _volume; set => _volume = value; }
