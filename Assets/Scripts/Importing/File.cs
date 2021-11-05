@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Importing
 {
-    public class File
+    [System.Serializable]
+    public class File : ScriptableObject
     {
         public string ParentFolder;
         public string FileLocation;

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Importing 
 {
@@ -56,6 +59,51 @@ namespace Importing
                 Import(newPath, fileSearchPattern, db, topLevelLocation);
             }
 
+            return db;
+        }
+
+        /// <summary>
+        /// Intended to only be run inside of the unity editor.
+        /// Will save the <paramref name="database"/> as an asset at the <paramref name="location"/> provided.
+        /// </summary>
+        /// <param name="location"></param>
+        /// <param name="database"></param>
+        /// <param name="name"
+        public static void SaveDatabase(Database database, string location, string name) 
+        {
+        #if UNITY_EDITOR
+
+            database.Serialize();
+
+            if (AssetDatabase.IsValidFolder(location))
+            {
+                AssetDatabase.CreateAsset(database, $"{SanitizePath(Path.Combine(location, name))}.asset");
+                AssetDatabase.SaveAssets();
+                Debug.Log($"Database \"{name}.asset\" has been saved at \"{location}\".");
+            }
+            else 
+            {
+                Debug.LogError($"Could not save Database {name} because \"{location}\" does not exist.");
+            }
+
+        #endif
+        }
+
+        /// <summary>
+        /// Loads a Database from resources at the <paramref name="resourcePath"/> with the file name of <paramref name="fileName"/>
+        /// </summary>
+        /// <param name="resourcePath"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public static Database LoadDatabase(string resourcePath, string fileName) 
+        {
+            Database db = Resources.Load<Database>(SanitizePath(Path.Combine(resourcePath, fileName)));
+            if (db == null) 
+            {
+                Debug.LogError($"Could not find the Database \"{fileName}\" at \"{resourcePath}\". Is every");
+                return null;
+            }
+            db.DeSerialize();
             return db;
         }
 
