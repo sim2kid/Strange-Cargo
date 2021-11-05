@@ -104,8 +104,6 @@ namespace TextureConverter
             {
                 converter.colors = colors;
 
-                Debug.Log(converter.TextureHash);
-
                 if (converter.TextureHash != null)
                 {
                     if (leaderChildren.Find(x => x.TextureHash == converter.TextureHash) == null)
