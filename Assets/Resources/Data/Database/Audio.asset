@@ -23,6 +23,7 @@ MonoBehaviour:
   - Animal\Vocal\Sad
   - Animal\Vocal\Shake
   - Animal\Vocal\Tired
+  - Misc\ComeHere
   - Misc\Pop
   - Misc\ToyThrow
   - Music
@@ -134,6 +135,16 @@ MonoBehaviour:
     Files:
     - ParentFolder: Animal\Vocal\Tired
       FileLocation: Animal\Vocal\Tired\SFX_AN_Tired1.mp3
+  - FolderName: Misc\ComeHere
+    Files:
+    - ParentFolder: Misc\ComeHere
+      FileLocation: Misc\ComeHere\comehere1.mp3
+    - ParentFolder: Misc\ComeHere
+      FileLocation: Misc\ComeHere\comehere2.mp3
+    - ParentFolder: Misc\ComeHere
+      FileLocation: Misc\ComeHere\comehere3.mp3
+    - ParentFolder: Misc\ComeHere
+      FileLocation: Misc\ComeHere\pspsps.mp3
   - FolderName: Misc\Pop
     Files:
     - ParentFolder: Misc\Pop
@@ -157,11 +168,11 @@ MonoBehaviour:
   - FolderName: Music
     Files:
     - ParentFolder: Music
-      FileLocation: Music\MUS_AfternoonLoop.mp3
+      FileLocation: Music\0_MUS_MorningLoop.mp3
     - ParentFolder: Music
-      FileLocation: Music\MUS_MorningLoop.mp3
+      FileLocation: Music\1_MUS_AfternoonLoop.mp3
     - ParentFolder: Music
-      FileLocation: Music\MUS_NightLoop.mp3
+      FileLocation: Music\2_MUS_NightLoop.mp3
   - FolderName: Player\Footsteps\Grass
     Files:
     - ParentFolder: Player\Footsteps\Grass

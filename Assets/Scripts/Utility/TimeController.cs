@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Utility
 {
@@ -15,9 +14,6 @@ namespace Utility
         [Tooltip("Returns the current time in a 0-24 hour format")]
         [SerializeField]    
         public float CurrentTime;
-
-        [SerializeField]
-        public Text TimeDisplay;
 
         /// <summary>
         /// The time in a 0-1 format
@@ -50,8 +46,6 @@ namespace Utility
             }
 
             CurrentTime = GetTime();
-
-            TimeDisplay.text = CurrentTime.ToString("0.00");
         }
 
         /// <summary>
@@ -61,6 +55,20 @@ namespace Utility
         public float GetTime()
         {
             return (_time / (MinutesInADay * 60)) * 24;
+        }
+
+        public override string ToString() 
+        {
+            int hour = Mathf.FloorToInt(CurrentTime);
+            int minute = Mathf.RoundToInt((CurrentTime * 60) % 60);
+            bool morning = hour < 12;
+            if (!morning)
+                hour -= 12;
+            if (hour == 0) 
+            {
+                hour = 12;
+            }
+            return $"{hour}:{minute.ToString("00")} {(morning?"AM":"PM")}";
         }
     }
 }

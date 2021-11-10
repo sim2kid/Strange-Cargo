@@ -14,7 +14,7 @@ public class NavMeshDemo : MonoBehaviour
     void Start()
     {
         nav = GetComponent<Creature.NavMeshMovement>();
-        MoveAgent();
+        //MoveAgent();
     }
 
     public void MoveAgent() 
