@@ -12,6 +12,7 @@ namespace Creature
     {
         [SerializeField]
         public DNA dna;
+        public Needs needs;
         private IProgress textureController;
 
         [SerializeField]
