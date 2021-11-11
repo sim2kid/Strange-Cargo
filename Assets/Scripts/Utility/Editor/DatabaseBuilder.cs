@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using Importing;
 
-namespace Utility
+namespace Utility.Editor
 {
     [InitializeOnLoad]
     public class DatabaseBuilder
