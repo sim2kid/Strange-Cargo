@@ -8,13 +8,18 @@ public class NavMeshDemo : MonoBehaviour
     [SerializeField]
     Transform destination;
 
+    [SerializeField]
+    bool moveOnStart = true;
+
     Creature.NavMeshMovement nav;
 
     // Start is called before the first frame update
     void Start()
     {
         nav = GetComponent<Creature.NavMeshMovement>();
-        //MoveAgent();
+        
+        if(moveOnStart)
+          MoveAgent();
     }
 
     public void MoveAgent() 

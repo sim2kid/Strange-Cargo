@@ -31,6 +31,11 @@ namespace Importing
                 topLevelLocation = Application.streamingAssetsPath;
 
             string path = SanitizePath(Path.Combine(topLevelLocation, parentFolder));
+
+            // Prevent running files if there is no folder // 
+            if (!Directory.Exists(path))
+                return db;
+
             string[] files;
 
             if (string.IsNullOrEmpty(fileSearchPattern))
