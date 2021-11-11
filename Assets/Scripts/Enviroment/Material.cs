@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Sound
+namespace Enviroment
 {
-    public enum EnviromentSound
+    public enum Material
     {
         None = 0,
         Grass = 1,

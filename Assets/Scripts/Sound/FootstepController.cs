@@ -2,6 +2,7 @@ using PlayerController;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Enviroment;
 
 namespace Sound
 {
@@ -42,8 +43,17 @@ namespace Sound
 
         private void CheckFloorType() 
         {
-            // TO-DO
-            string newAudioMap = SoundRepository.EnviromentSoundBank(EnviromentSound.Wood);
+            RaycastHit hit;
+
+            Enviroment.Material myMaterial = Enviroment.Material.None;
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 2))
+            {
+                IMaterial m = hit.transform.gameObject.GetComponent<IMaterial>();
+                if (m != null)
+                    myMaterial = m.Material;
+            }
+
+            string newAudioMap = SoundRepository.EnviromentSoundBank(myMaterial);
             player.Sound.LoadAudio(newAudioMap);
         }
     }
