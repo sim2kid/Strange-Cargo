@@ -9,10 +9,4 @@ public class DemoCreature : MonoBehaviour
     {
         GameObject creature = Genetics.CreatureGeneration.CreateCreature();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

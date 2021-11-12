@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Genetics;
 using Sound;
+using Creature;
 
 namespace Utility
 {
@@ -26,11 +27,14 @@ namespace Utility
 
         public SoundRepository SoundPool {  get; private set; }
 
+        public List<CreatureController> CreatureList { get; set; }
+
         private Toolbox()
         {
             GenePool = new GeneticRepository();
-            Importer.Import(GenePool);
+            Genetics.Importer.Import(GenePool);
             SoundPool = new SoundRepository();
+            CreatureList = new List<CreatureController>();
         }
     }
 }
