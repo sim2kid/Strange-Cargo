@@ -8,5 +8,6 @@ public class DemoCreature : MonoBehaviour
     void Start()
     {
         GameObject creature = Genetics.CreatureGeneration.CreateCreature();
+        creature.transform.position = transform.position;
     }
 }
