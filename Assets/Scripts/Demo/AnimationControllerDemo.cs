@@ -26,12 +26,10 @@ public class AnimationControllerDemo : MonoBehaviour
     {
         if(navMeshAgent.velocity == Vector3.zero)
         {
-            Debug.Log("NavMeshAgent is stopped");
             animator.SetBool("IsMoving", false);
         }
         else
         {
-            Debug.Log("NavMeshAgent is in motion");
             animator.SetBool("IsMoving", true);
         }
     }
