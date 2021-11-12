@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Creature.Task
 {
@@ -10,27 +11,50 @@ namespace Creature.Task
             {
                 if (_caller == null)
                     return false;
-                return Vector3.Distance(location, _caller.transform.position) < 1 || _caller.Move.Speed == 0f;
+                return Vector3.Distance(location, _caller.transform.position) < dis;
             } 
         }
+        public UnityEvent OnTaskFinished { get; private set; }
+
+        private bool calledFinished;
+        private float dis;
 
         public bool IsStarted { get; private set; }
 
         public Vector3 location;
         CreatureController _caller; 
-        public void RunTask(CreatureController caller)
+        public ITask RunTask(CreatureController caller, UnityEvent update)
         {
             _caller = caller;
             caller.Move.MoveTo(location);
             IsStarted = true;
+            calledFinished = false;
+            update.AddListener(Update);
+            return this;
         }
 
-        public ComeHere(Transform destination) : this(destination.position) { }
+        public void EndTask(UnityEvent update) 
+        {
+            update.RemoveListener(Update);
+        }
 
-        public ComeHere(Vector3 destination)
+        private void Update() 
+        {
+            if (IsDone && !calledFinished) 
+            {
+                OnTaskFinished.Invoke();
+                calledFinished = true;
+            }  
+        }
+
+        public ComeHere(Transform destination, float minDistance = 1) : this(destination.position, minDistance) { }
+
+        public ComeHere(Vector3 destination, float minDistance = 1)
         {
             location = destination;
             IsStarted = false;
+            dis = minDistance;
+            OnTaskFinished = new UnityEvent();
         }
     }
 }

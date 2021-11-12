@@ -367,11 +367,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7fab3db30850b648bd54f22bc00f267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &648897579 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 14775157, guid: ba4c6e1c4a249dc4b802ff725fbdb1ff, type: 3}
-  m_PrefabInstance: {fileID: 92296632}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &713815091 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8435313185083453008, guid: ba4c6e1c4a249dc4b802ff725fbdb1ff, type: 3}
@@ -389,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e67bec1a8af44748b7ceb1cad03149e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  location: {fileID: 648897579}
+  location: {fileID: 2044810232}
 --- !u!1 &808526383
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,6 +659,7 @@ GameObject:
   - component: {fileID: 2044810229}
   - component: {fileID: 2044810228}
   - component: {fileID: 2044810232}
+  - component: {fileID: 2044810233}
   m_Layer: 0
   m_Name: Food Bowl
   m_TagString: Untagged
@@ -765,4 +761,20 @@ MonoBehaviour:
   Energy: 0.3
   Happiness: 0.1
   Hygiene: 0
-  Fullness: 0
+  Fullness: 500
+--- !u!208 &2044810233
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044810227}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

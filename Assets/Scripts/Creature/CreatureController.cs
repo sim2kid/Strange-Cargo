@@ -5,7 +5,7 @@ using UnityEngine;
 using Utility;
 using Creature.Stats;
 using Creature.Task;
-
+using UnityEngine.Events;
 
 namespace Creature
 {
@@ -23,9 +23,13 @@ namespace Creature
 
         Queue<ITask> tasks;
         private int maxTasks = 10;
+        private float maxTimeOnTask = 15f;
+
+        private float timeSpentOnLastTask;
 
         private IProgress textureController;
         
+        private UnityEvent UpdateLoop;
 
         /// <summary>
         /// Decay rate per second.
@@ -79,6 +83,8 @@ namespace Creature
         {
             textureController = GetComponent<TextureConverter.TextureController>();
             Move = GetComponent<NavMeshMovement>();
+            UpdateLoop = new UnityEvent();
+            timeSpentOnLastTask = 0;
 
             Debug.LogWarning("The Creature Controller has hardwritten values!!");
         }
@@ -86,17 +92,26 @@ namespace Creature
         private void Update()
         {
             LoadingProgress = Report();
-
             DecayNeeds();
+            UpdateLoop.Invoke();
+            RunTasks();
+        }
 
-            if (tasks.Count > 0) 
+        private void RunTasks() 
+        {
+            timeSpentOnLastTask += Time.deltaTime;
+            if (tasks.Count > 0)
             {
                 if (!tasks.Peek().IsStarted)
                 {
-                    tasks.Peek().RunTask(this);
+                    Debug.Log($"New Task: {tasks.Peek().GetType()}");
+                    tasks.Peek().RunTask(this, UpdateLoop);
+                    timeSpentOnLastTask = 0;
                 }
-                else if (tasks.Peek().IsDone) 
+                else if (tasks.Peek().IsDone || timeSpentOnLastTask > maxTimeOnTask)
                 {
+                    Debug.Log($"End of Task: {tasks.Peek().GetType()}");
+                    tasks.Peek().EndTask(UpdateLoop);
                     tasks.Dequeue();
                 }
             }

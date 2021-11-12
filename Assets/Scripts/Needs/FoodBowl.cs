@@ -31,6 +31,7 @@ namespace Creature.Stats
         {
             float temp = Mathf.Clamp(Fullness - amount, 0, float.MaxValue);
             multiplier = Fullness - temp;
+            Fullness = Mathf.Clamp(Fullness - multiplier, 0 , float.MaxValue);
         }
     }
 }
