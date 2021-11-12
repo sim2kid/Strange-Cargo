@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DemoCreature : MonoBehaviour
 {
@@ -8,6 +9,6 @@ public class DemoCreature : MonoBehaviour
     void Start()
     {
         GameObject creature = Genetics.CreatureGeneration.CreateCreature();
-        creature.transform.position = transform.position;
+        creature.GetComponent<NavMeshAgent>().Warp(transform.position);
     }
 }
