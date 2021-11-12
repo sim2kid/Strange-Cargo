@@ -70,6 +70,11 @@ namespace Creature
             return false;
         }
 
+        public void RequestMoreTaskTime(float requestedTime) 
+        {
+            timeSpentOnLastTask -= requestedTime;
+        }
+
 
 
         private void OnEnable()

@@ -9,12 +9,12 @@ using Creature.Stats;
 public class HardCodedComehere : MonoBehaviour
 {
     [SerializeField]
-    FoodBowl location;
+    Transform location;
 
     public void ComeHere() 
     {
         if (location == null)
             return;
-        Utility.Toolbox.Instance.CreatureList.First().AddTask(new Eat(location));
+        Utility.Toolbox.Instance.CreatureList.First().AddTask(new GoHere(location, 20));
     }
 }

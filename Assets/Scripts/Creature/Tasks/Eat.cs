@@ -27,7 +27,7 @@ namespace Creature.Task
             _caller = caller;
             _update = update;
 
-            come = new ComeHere(_bowl.transform, 1f).RunTask(caller, update);
+            come = new GoHere(_bowl.transform, 1f).RunTask(caller, update);
             come.OnTaskFinished.AddListener(EatTheBowl);
 
             calledFinished = false;
@@ -47,6 +47,7 @@ namespace Creature.Task
         public void EndTask(UnityEvent update)
         {
             update.RemoveListener(Update);
+            come.EndTask(update);
         }
 
         private void Update()

@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace Creature.Task
 {
-    public class ComeHere : ITask
+    public class GoHere : ITask
     {
         public bool IsDone { get 
             {
@@ -47,9 +47,9 @@ namespace Creature.Task
             }  
         }
 
-        public ComeHere(Transform destination, float minDistance = 1) : this(destination.position, minDistance) { }
+        public GoHere(Transform destination, float minDistance = 1) : this(destination.position, minDistance) { }
 
-        public ComeHere(Vector3 destination, float minDistance = 1)
+        public GoHere(Vector3 destination, float minDistance = 1)
         {
             location = destination;
             IsStarted = false;
