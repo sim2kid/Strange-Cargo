@@ -8,15 +8,15 @@ namespace Sound
     public interface ISound 
     {
         /// <summary>
-        /// The relitive pitch of the audio clip
+        /// The relative pitch of the audio clip
         /// </summary>
         public ValueRange Pitch { get; set; }
         /// <summary>
-        /// The relitive volume of the audio clip
+        /// The relative volume of the audio clip
         /// </summary>
         public ValueRange Volume { get; set; }
         /// <summary>
-        /// The relitive delay before the start of an audio clip
+        /// The relative delay before the start of an audio clip
         /// </summary>
         public ValueRange Delay { get; set; }
         /// <summary>
