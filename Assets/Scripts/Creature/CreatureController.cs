@@ -5,6 +5,7 @@ using UnityEngine;
 using Utility;
 using Creature.Stats;
 using Creature.Task;
+using Creature.Brain;
 using UnityEngine.Events;
 
 namespace Creature
@@ -30,6 +31,9 @@ namespace Creature
         private IProgress textureController;
         
         private UnityEvent UpdateLoop;
+
+        [SerializeField, HideInInspector]
+        private BasicBrain brain;
 
         /// <summary>
         /// Decay rate per second.
