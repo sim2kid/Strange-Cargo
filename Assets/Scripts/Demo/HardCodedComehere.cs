@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Creature;
+using Creature.Task;
 
 public class HardCodedComehere : MonoBehaviour
 {
@@ -13,6 +14,6 @@ public class HardCodedComehere : MonoBehaviour
     {
         if (location == null)
             return;
-        Utility.Toolbox.Instance.CreatureList.First().gameObject.GetComponent<NavMeshMovement>().MoveTo(location);
+        Utility.Toolbox.Instance.CreatureList.First().AddTask(new ComeHere(location));
     }
 }

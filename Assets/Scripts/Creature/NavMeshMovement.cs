@@ -9,20 +9,14 @@ namespace Creature
     [DisallowMultipleComponent]
     public class NavMeshMovement : MonoBehaviour
     {
-        [Tooltip("Internal destination for predefined movement")]
-        [SerializeField]
-        Transform destination;
-        [Tooltip("True if the agent will move to the destination on start")]
-        [SerializeField]
-        bool moveOnStart = true;
-
         private NavMeshAgent navMeshAgent;
+
+        public float Speed => navMeshAgent.velocity.magnitude;
+
         // Start is called before the first frame update
         void Start()
         {
             GetNavMeshAgent();
-            if (moveOnStart)
-                MoveAgent();
         }
 
         /// <summary>
@@ -53,15 +47,6 @@ namespace Creature
         public void MoveTo(Transform _destination)
         {
             MoveTo(_destination.position);
-        }
-
-        /// <summary>
-        /// Moves agent to internal transform location
-        /// </summary>
-        public void MoveAgent()
-        {
-            if (destination != null)
-                MoveTo(destination);
         }
     }
 }

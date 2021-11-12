@@ -4,20 +4,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utility;
 using Creature.Stats;
+using Creature.Task;
 
 
 namespace Creature
 {
     [DisallowMultipleComponent]
     [RequireComponent(typeof(TextureConverter.TextureController))]
+    [RequireComponent(typeof(NavMeshMovement))]
     public class CreatureController : MonoBehaviour, IProgress
     {
         [SerializeField]
         public DNA dna;
         [SerializeField]
         public Needs needs;
+
+        public NavMeshMovement Move { get; private set; }
+
+        Queue<ITask> tasks;
+        private int maxTasks = 10;
+
         private IProgress textureController;
         
+
         /// <summary>
         /// Decay rate per second.
         /// </summary>
@@ -42,16 +51,34 @@ namespace Creature
                 return 1;
             return textureController.Report();
         }
+        public void ProcessINeed(INeedChange needChanges)
+        {
+            needs.AddNeeds(needChanges.NeedChange);
+        }
+
+        public bool AddTask(ITask task) 
+        {
+            if (tasks.Count < maxTasks) 
+            {
+                tasks.Enqueue(task);
+                return true;
+            }
+            return false;
+        }
+
+
 
         private void OnEnable()
         {
+            tasks = new Queue<ITask>();
             needs = new Needs();
             Utility.Toolbox.Instance.CreatureList.Add(this);
         }
 
-        void Start()
+        private void Start()
         {
             textureController = GetComponent<TextureConverter.TextureController>();
+            Move = GetComponent<NavMeshMovement>();
 
             Debug.LogWarning("The Creature Controller has hardwritten values!!");
         }
@@ -61,6 +88,18 @@ namespace Creature
             LoadingProgress = Report();
 
             DecayNeeds();
+
+            if (tasks.Count > 0) 
+            {
+                if (!tasks.Peek().IsStarted)
+                {
+                    tasks.Peek().RunTask(this);
+                }
+                else if (tasks.Peek().IsDone) 
+                {
+                    tasks.Dequeue();
+                }
+            }
         }
 
         private void DecayNeeds() 
