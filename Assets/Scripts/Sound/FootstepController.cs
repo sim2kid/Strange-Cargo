@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Enviroment;
+using Environment;
 
 namespace Sound
 {
     [RequireComponent(typeof(AudioPlayer))]
     public class FootstepController : MonoBehaviour
     {
+        [Tooltip("The speed at which steps are played")]
         [SerializeField]
         public float StepsRate = 1;
-        [Tooltip("Adjust so that 'IsGrounded' is false durring a jump")]
+        [Tooltip("Adjust so that 'IsGrounded' is false during a jump")]
         [SerializeField]
         private float GroundCheckDistance = 1.5f;
         [SerializeField]
@@ -63,7 +64,7 @@ namespace Sound
         {
             RaycastHit hit;
 
-            Enviroment.Material myMaterial = Enviroment.Material.None;
+            Environment.Material myMaterial = Environment.Material.None;
             if (Physics.Raycast(transform.position, Vector3.down, out hit, GroundCheckDistance))
             {
                 IMaterial m = hit.transform.gameObject.GetComponent<IMaterial>();

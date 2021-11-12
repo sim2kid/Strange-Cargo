@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Enviroment
+namespace Environment
 {
     public interface IMaterial
     {
