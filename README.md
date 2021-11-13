@@ -2,7 +2,7 @@
 **Strange Cargo** is a pet simulator where you work at an adoption center and take care of a variety of different creatures.
  
 # Team Members
-Here are pur Team Members as well as where you can find our other works!<br>
+Here are our Team Members as well as where you can find our other works!<br>
 This project was made as a Capstone at [Columbia College Chicago](https://www.colum.edu/)
 
 **Team Leader/Designer**<br>
