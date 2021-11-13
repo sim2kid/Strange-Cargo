@@ -13,6 +13,15 @@ namespace Creature.Stats
         [SerializeField]
         float[] _myNeeds = new float[6];
 
+        public float Appetite => _myNeeds[0];
+        public float Bladder => _myNeeds[1];
+        public float Social => _myNeeds[2];
+        public float Energy => _myNeeds[3];
+        public float Happiness => _myNeeds[4];
+        public float Hygiene => _myNeeds[5];
+
+        public float[] RawNeeds => GetNeeds();
+
         public Needs() 
         {
             SetNeeds(((max-min)/2)+min);
