@@ -1,5 +1,5 @@
 # Strange Cargo
-**Strange Cargo** is a pet simulator where you work at an adoption center and take care a variety of different creatures.
+**Strange Cargo** is a pet simulator where you work at an adoption center and take care of a variety of different creatures.
  
 # Team Members
 Here are pur Team Members as well as where you can find our other works!<br>
