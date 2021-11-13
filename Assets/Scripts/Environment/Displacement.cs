@@ -23,7 +23,7 @@ namespace Environment
         {
             if (ObjToDisplace != null && Value != null)
             {
-                if (unitValue == 0 && HideOnZero)
+                if (unitValue <= 0 && HideOnZero)
                 {
                     ObjToDisplace.SetActive(false);
                 }
