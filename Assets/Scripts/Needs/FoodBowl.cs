@@ -1,15 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DataType;
 
 namespace Creature.Stats
 {
-    public class FoodBowl : NeedSource
+    public class FoodBowl : NeedSource, IValue
     {
         [Tooltip("Represents how full the bowl is in Appatite Points")]
         public float Fullness = 0;
 
+        [Tooltip("Represents the max Appatite Points the bowl can hold")]
+        public float MaxFullness = float.MaxValue;
+
         private float multiplier = 0;
+
+        public float MaxValue => MaxFullness;
+        public float MinValue => 0;
 
         public override float[] NeedChange
         {
@@ -25,6 +32,11 @@ namespace Creature.Stats
                     Hygiene * multiplier
                 };
             }
+        }
+
+        public float Read() 
+        {
+            return Fullness;
         }
 
         public void Eat(float amount) 
