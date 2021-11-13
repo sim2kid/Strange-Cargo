@@ -21,6 +21,8 @@ namespace Creature
         public Needs needs;
 
         public NavMeshMovement Move { get; private set; }
+        public int TaskCount => tasks.Count;
+        public ITask TopTask => tasks.Peek();
 
         Queue<ITask> tasks;
         private int maxTasks = 10;
@@ -76,15 +78,14 @@ namespace Creature
 
         public void RequestMoreTaskTime(float requestedTime) 
         {
-            timeSpentOnLastTask -= requestedTime;
+            timeSpentOnLastTask -= Mathf.Clamp(requestedTime, 0, float.MaxValue);
         }
-
-
 
         private void OnEnable()
         {
             tasks = new Queue<ITask>();
             needs = new Needs();
+            brain = new BasicBrain(this);
             Utility.Toolbox.Instance.CreatureList.Add(this);
         }
 
@@ -104,6 +105,7 @@ namespace Creature
             DecayNeeds();
             UpdateLoop.Invoke();
             RunTasks();
+            brain.Think();
         }
 
         private void RunTasks() 
@@ -119,11 +121,16 @@ namespace Creature
                 }
                 else if (tasks.Peek().IsDone || timeSpentOnLastTask > maxTimeOnTask)
                 {
-                    Debug.Log($"End of Task: {tasks.Peek().GetType()}");
-                    tasks.Peek().EndTask(UpdateLoop);
-                    tasks.Dequeue();
+                    VoidTask();
                 }
             }
+        }
+
+        public void VoidTask() 
+        {
+            Debug.Log($"End of Task: {tasks.Peek().GetType()}");
+            tasks.Peek().EndTask(UpdateLoop);
+            tasks.Dequeue();
         }
 
         private void DecayNeeds() 

@@ -50,6 +50,11 @@ namespace Creature.Stats
             Fullness = Mathf.Clamp(Fullness - multiplier, 0 , float.MaxValue);
         }
 
+        public void Fill(float amount) 
+        {
+            Fullness = Mathf.Clamp(amount, MinValue, MaxValue);
+        }
+
         private void Start()
         {
             displacement = GetComponent<Displacement>();
