@@ -23,7 +23,7 @@ namespace Genetics
         public static GameObject CreateCreature() 
         {
             string[] importantPartTypes =
-                { "Bodies", "Ears", "Heads", "Legs" };
+                { "Bodies", "Ears", "Heads", "BackLegs", "FrontLegs" };
             string[] lesserPartTypes =
                 { "Accessories", "Hats", "Horns", "Masks", "Tails" };
 
