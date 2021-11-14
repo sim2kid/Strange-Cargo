@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Creature.Stats;
 using Creature.Task;
+using System.Linq;
 
 namespace Creature.Brain
 {
@@ -10,114 +11,104 @@ namespace Creature.Brain
     public class BasicBrain
     {
         private CreatureController _controller;
+        [SerializeField]
+        private List<Preferred> Preferences;
+
+        private Queue<System.Type> lastTasks;
+        private int maxTrackSize;
         public BasicBrain(CreatureController controller) 
         {
+            maxTrackSize = 50;
             _controller = controller;
-            coolDown = 0;
-            Preferences = new List<float>[1];
-            for(int i = 0; i< Preferences.Length; i++)
-                Preferences[i] = new List<float>();
+            Preferences = new List<Preferred>();
+            lastTasks = new Queue<System.Type>();
         }
-
-        private float coolDown;
-
-        [SerializeField]
-        private List<float>[] Preferences;
 
         public void Think() 
         {
-            if (coolDown > 0) 
+            if (lastTasks.Count >= maxTrackSize) 
             {
-                coolDown -= Time.deltaTime;
+                lastTasks.Dequeue();
             }
-            if (_controller.TaskCount == 0)
+
+            List<IUtility> potentialTasks = Utility.Toolbox.Instance.AvalibleTasks;
+            List<Option> options = new List<Option>();
+
+            float[] realitiveNeeds = getRealitiveNeeds();
+
+            // Figure out Utility Per Task
+            foreach (IUtility task in potentialTasks) 
             {
-                float r = Random.Range(0f, 1f);
-                if (r < 20f)
+                // Add preference
+                float preference = 0;
+                Preferred p = null;
+                if (task.RelatedObject != null)
                 {
-                    _controller.AddTask(new Wander(5f));
+                    p = Preferences.Find(x => x.Obj == task.RelatedObject);
+                    if (p != null)
+                    {
+                        preference = p.Preference;
+                    }
+                    else 
+                    {
+                        Preferences.Add(new Preferred(task.RelatedObject, 0f));
+                    }
+                }
+                float CurrentUtility = Mathf.Clamp(preference, float.MinValue, 15f);
+
+                // Add expected result
+                if (task.StatsEffect != null)
+                {
+                    for (int i = 0; i < task.StatsEffect.Length; i++)
+                    {
+                        float expectedUtility = realitiveNeeds[i] * task.StatsEffect[i] * task.BaseUtility;
+                        CurrentUtility += expectedUtility;
+                    }
                 }
                 else 
                 {
-                    _controller.AddTask(new Wait(Random.Range(7f,10f)));
+                    CurrentUtility += task.BaseUtility * 6;
                 }
-            }
-            else if (_controller.TaskCount > 1 && _controller.TopTask.GetType() == typeof(Wander)) 
-            {
-                _controller.VoidTask();
-            }
 
-            if (coolDown > 0)
-                return;
-
-            if (_controller.needs.Appetite > 50) 
-            {
-                float wantFood = ((_controller.needs.Appetite / 200f) - (50/200))/10;
-                float r = Random.Range(0f, 1f);
-                if (r < wantFood) 
+                // Add Diminishing Returns
+                System.Type taskType = task.RelatedTask.GetType();
+                int count = 0;
+                foreach (System.Type type in lastTasks) 
                 {
-                    coolDown += 50;
-                    // HARDCODED FETCH OF FOODBOWLS
-                    FoodBowl[] bowls = GameObject.FindObjectsOfType<FoodBowl>();
-                    int toPick = pickFromPreferences(bowls.Length,(int)Biases.FoodBowl);
-                    Eat eatTask = new Eat(bowls[toPick]);
-                    _controller.AddTask(eatTask);
+                    if (type == taskType)
+                        count++;
                 }
+                CurrentUtility /= (count * 0.3f * count) + 1;
+
+                // Add new option to list for sorting later
+                options.Add(new Option(CurrentUtility, task.RelatedTask, p));
+            }
+            
+
+            // Look at task with most utility
+            Option pickMe = options.Max();
+            // Run that task
+            _controller.AddTask(pickMe.Task);
+            // Update preferrence
+            if (pickMe.Preferrence != null)
+                pickMe.Preferrence.Preference += 0.01f;
+            // Track Task
+            lastTasks.Enqueue(pickMe.Task.GetType());
+            foreach (Option o in options) 
+            {
+                Debug.Log($"{o.Task.GetType().ToString()} | {o.Utility}");
             }
         }
 
-        private int pickFromPreferences(int length, int bias) 
+        private float[] getRealitiveNeeds() 
         {
-            if (Preferences[bias].Count < length)
+            float[] f = _controller.needs.RawNeeds;
+            for (int i = 0; i < f.Length; i++) 
             {
-                int diff = length - Preferences[bias].Count;
-                for (int i = 0; i < diff; i++)
-                    Preferences[bias].Add(1f);
+                f[i] = (f[i] - _controller.needs.Min) / (_controller.needs.Max - _controller.needs.Min);
+                f[i] = 1 - f[i];
             }
-            else if (Preferences[bias].Count > length)
-            {
-                int diff = Preferences[bias].Count - 1;
-                for (int i = diff; i >= length; i--)
-                    Preferences[bias].RemoveAt(i);
-            }
-
-            List<int> list = generateRandomList(Preferences[bias]);
-
-            int r = Random.Range(0, 100);
-            int choice = list[r];
-
-            Preferences[bias][choice] += 0.1f;
-
-            return choice;
+            return f;
         }
-
-        private List<int> generateRandomList(List<float> weights) 
-        {
-            List<int> list = new List<int>();
-            float totalWeight = 0f;
-            foreach (float w in weights)
-                totalWeight += w;
-
-            for (int w = 0; w < weights.Count; w++) 
-            {
-                int percent;
-
-                if (totalWeight == 0)
-                    percent = (1/weights.Count) * 100;
-                else
-                    percent = (int)Mathf.Round((weights[w] / totalWeight) * 100);
-
-                for (int i = 0; i < percent; i++) 
-                {
-                    list.Add(w);
-                }
-            }
-            return list;
-        }
-    }
-
-    enum Biases 
-    {
-        FoodBowl = 0
     }
 }

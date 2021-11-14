@@ -39,6 +39,7 @@ namespace Creature.Task
         public void EndTask(UnityEvent update) 
         {
             update.RemoveListener(Update);
+            IsStarted = false;
         }
 
         private void Update() 

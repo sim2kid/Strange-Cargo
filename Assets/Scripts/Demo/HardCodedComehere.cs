@@ -18,8 +18,8 @@ public class HardCodedComehere : MonoBehaviour
         if (location == null)
             return;
 
-        Utility.Toolbox.Instance.CreatureList.First().AddTask(new GoHere(location, 5));
-        Utility.Toolbox.Instance.CreatureList.First().AddTask(new Wait(5));
+        Utility.Toolbox.Instance.CreatureList.First().AddHotTask(new GoHere(location, 5));
+        Utility.Toolbox.Instance.CreatureList.First().AddHotTask(new Wait(5));
     }
     public void Eat()
     {

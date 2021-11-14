@@ -24,7 +24,7 @@ namespace Creature.Task
 
         public void EndTask(UnityEvent update)
         {
-            
+            IsStarted = false;
         }
 
         public ITask RunTask(CreatureController caller, UnityEvent update)
