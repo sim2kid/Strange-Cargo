@@ -16,21 +16,23 @@ namespace Genetics
         /// The chance of a mutation between 0-1 percent
         /// </summary>
         private const float MUTATION_CHANCE = 0.15f;
+        private const string AnimationControllerLocation = "Animation/DemoController";
+
+        private static string[] ImportantPartTypes =
+            { "Bodies", "Ears", "Heads", "BackLegs", "FrontLegs" };
+        private static string[] LesserPartTypes =
+            { "Accessories", "Hats", "Horns", "Masks", "Tails" };
+
         /// <summary>
         /// Returns a randomly generated creature
         /// </summary>
         /// <returns></returns>
         public static GameObject CreateCreature() 
         {
-            string[] importantPartTypes =
-                { "Bodies", "Ears", "Heads", "BackLegs", "FrontLegs" };
-            string[] lesserPartTypes =
-                { "Accessories", "Hats", "Horns", "Masks", "Tails" };
-
             GeneticRepository genePool = Utility.Toolbox.Instance.GenePool;
 
             DNA dna = new DNA();
-            foreach (string s in importantPartTypes) 
+            foreach (string s in ImportantPartTypes) 
             {
                 try
                 {
@@ -50,7 +52,7 @@ namespace Genetics
                 }
             }
 
-            foreach (string s in lesserPartTypes)
+            foreach (string s in LesserPartTypes)
             {
                 try
                 {
@@ -97,13 +99,19 @@ namespace Genetics
             GameObject mesh = ArmatureStitching.StitchObjects(bodyParts);
             mesh.name = "CreatureMesh";
             mesh.transform.parent = creature.transform;
+            mesh.transform.rotation = Quaternion.Euler(Vector3.zero);
 
             creature.name = "Unnamed Creature";
             TextureController texCon = creature.AddComponent<TextureController>();
             texCon.colors = dna.Colors;
 
+            Animator a = mesh.AddComponent<Animator>();
+            RuntimeAnimatorController rac = Resources.Load(AnimationControllerLocation) as RuntimeAnimatorController;
+            a.runtimeAnimatorController = rac;
+
             CreatureController c = creature.AddComponent<CreatureController>();
-            c.dna = dna;
+            c.SetUp(dna, a);
+
 
             creature.AddComponent<NavMeshMovement>();
 

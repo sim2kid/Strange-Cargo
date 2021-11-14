@@ -24,6 +24,8 @@ namespace Creature
         public int TaskCount => tasks.Count;
         public ITask TopTask => tasks.Peek();
 
+        public Animator Animator { get; private set; }
+
         Queue<ITask> tasks;
         Queue<ITask> hotTasks;
 
@@ -96,6 +98,12 @@ namespace Creature
         public void RequestMoreTaskTime(float requestedTime) 
         {
             timeSpentOnLastTask -= Mathf.Clamp(requestedTime, 0, float.MaxValue);
+        }
+
+        public void SetUp(DNA dna, Animator animator) 
+        {
+            this.dna = dna;
+            this.Animator = animator;
         }
 
         private void OnEnable()
