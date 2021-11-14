@@ -93,13 +93,19 @@ namespace Genetics
                 bodyParts.Add(CreateBodyPart(part));
             }
 
-            GameObject creature = ArmatureStitching.StitchObjects(bodyParts);
+            GameObject creature = new GameObject(); 
+            GameObject mesh = ArmatureStitching.StitchObjects(bodyParts);
+            mesh.name = "CreatureMesh";
+            mesh.transform.parent = creature.transform;
+
             creature.name = "Unnamed Creature";
             TextureController texCon = creature.AddComponent<TextureController>();
             texCon.colors = dna.Colors;
 
             CreatureController c = creature.AddComponent<CreatureController>();
             c.dna = dna;
+
+            creature.AddComponent<NavMeshMovement>();
 
             return creature;
         }
