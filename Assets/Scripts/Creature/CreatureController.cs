@@ -166,7 +166,8 @@ namespace Creature
 
         private void StopNormalTask() 
         {
-            tasks.Peek().EndTask(UpdateLoop);
+            if(tasks.Count > 0)
+                tasks.Peek().EndTask(UpdateLoop);
         }
 
         public void VoidTask() 

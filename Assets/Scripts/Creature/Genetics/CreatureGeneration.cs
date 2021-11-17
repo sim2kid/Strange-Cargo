@@ -99,7 +99,7 @@ namespace Genetics
             GameObject mesh = ArmatureStitching.StitchObjects(bodyParts);
             mesh.name = "CreatureMesh";
             mesh.transform.parent = creature.transform;
-            mesh.transform.rotation = Quaternion.Euler(Vector3.zero);
+            mesh.transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
 
             creature.name = "Unnamed Creature";
             TextureController texCon = creature.AddComponent<TextureController>();
