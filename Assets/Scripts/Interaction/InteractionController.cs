@@ -19,7 +19,7 @@ namespace Interaction
         private PlayerInput playerInput;
         private InputAction interact;
 
-        IInteractable prevoius;
+        IInteractable previous;
 
         private void Start()
         {
@@ -54,11 +54,11 @@ namespace Interaction
 
                 bool buttonDown = interact.ReadValue<float>() == 1;
 
-                if (prevoius != closest)
+                if (previous != closest)
                 {
-                    if (prevoius != null)
-                        prevoius.Exit();
-                    prevoius = closest;
+                    if (previous != null)
+                        previous.Exit();
+                    previous = closest;
                     closest.Enter();
                 }
                 else
@@ -88,10 +88,10 @@ namespace Interaction
             }
             else 
             {
-                if (prevoius != null)
+                if (previous != null)
                 {
-                    prevoius.Exit();
-                    prevoius = null;
+                    previous.Exit();
+                    previous = null;
                 }
             }
             
@@ -100,9 +100,9 @@ namespace Interaction
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.blue;
-            if (prevoius != null)
+            if (previous != null)
             {
-                if (prevoius.ClickState != ClickState.Exit && prevoius.ClickState != ClickState.None)
+                if (previous.ClickState != ClickState.Exit && previous.ClickState != ClickState.None)
                 {
                     Gizmos.color = Color.red;
                 }
