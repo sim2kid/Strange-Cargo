@@ -30,16 +30,12 @@ namespace Creature.Task
             IsStarted = true;
             calledFinished = false;
             update.AddListener(Update);
-
-            caller.RequestMoreTaskTime((((caller.transform.position - location).magnitude - dis) * 0.5f) - 15);
-
             return this;
         }
 
         public void EndTask(UnityEvent update) 
         {
             update.RemoveListener(Update);
-            IsStarted = false;
         }
 
         private void Update() 
