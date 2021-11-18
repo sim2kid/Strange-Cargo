@@ -22,6 +22,8 @@ namespace Creature
 
         public NavMeshMovement Move { get; private set; }
 
+        public Animator Animator { get; private set; }
+
         Queue<ITask> tasks;
         private int maxTasks = 10;
         private float maxTimeOnTask = 15f;
@@ -79,7 +81,11 @@ namespace Creature
             timeSpentOnLastTask -= requestedTime;
         }
 
-
+        public void SetUp(DNA dna, Animator animator) 
+        {
+            this.dna = dna;
+            this.Animator = animator;
+        }
 
         private void OnEnable()
         {
@@ -124,6 +130,29 @@ namespace Creature
                     tasks.Dequeue();
                 }
             }
+        }
+
+        private void StopNormalTask() 
+        {
+            if(tasks.Count > 0)
+                tasks.Peek().EndTask(UpdateLoop);
+        }
+
+        public void VoidTask() 
+        {
+            ITask task;
+            if (hotTasks.Count > 0)
+                task = hotTasks.Peek();
+            else 
+                task = tasks.Peek();
+
+
+            Debug.Log($"End of Task: {task.GetType()}");
+            task.EndTask(UpdateLoop);
+            if (hotTasks.Count > 0)
+                hotTasks.Dequeue();
+            else
+                tasks.Dequeue();
         }
 
         private void DecayNeeds() 
