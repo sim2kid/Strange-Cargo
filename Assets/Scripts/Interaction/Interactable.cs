@@ -21,42 +21,42 @@ namespace Interaction
 
         public ClickState ClickState { get; protected set; }
 
-        public virtual void Start()
+        public void Start()
         {
             ClickState = ClickState.None;
         }
 
-        public virtual void Down()
+        public void Down()
         {
             ClickState = ClickState.Down;
             OnDown.Invoke();
         }
 
-        public virtual void Enter()
+        public void Enter()
         {
             ClickState = ClickState.Enter;
             OnEnter.Invoke();
         }
 
-        public virtual void Exit()
+        public void Exit()
         {
             ClickState = ClickState.Exit;
             OnExit.Invoke();
         }
 
-        public virtual void Hold()
+        public void Hold()
         {
             ClickState = ClickState.Hold;
             OnHold.Invoke();
         }
 
-        public virtual void Hover()
+        public void Hover()
         {
             ClickState = ClickState.Hover;
             OnHover.Invoke();
         }
 
-        public virtual void Up()
+        public void Up()
         {
             ClickState = ClickState.Up;
             OnUp.Invoke();

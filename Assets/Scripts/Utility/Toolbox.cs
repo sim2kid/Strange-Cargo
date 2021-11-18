@@ -5,7 +5,6 @@ using UnityEngine;
 using Genetics;
 using Sound;
 using Creature;
-using Creature.Brain;
 
 namespace Utility
 {
@@ -25,18 +24,10 @@ namespace Utility
         /// The time contoller component
         /// </summary>
         public TimeController TimeController { get; set; }
-        /// <summary>
-        /// The repository for all the sound in the game.
-        /// </summary>
+
         public SoundRepository SoundPool {  get; private set; }
-        /// <summary>
-        /// A list of all the creatures in the game.
-        /// </summary>
+
         public List<CreatureController> CreatureList { get; set; }
-        /// <summary>
-        /// An active list of all potential tasks in the game
-        /// </summary>
-        public List<IUtility> AvalibleTasks { get; set; }
 
         private Toolbox()
         {
@@ -44,9 +35,6 @@ namespace Utility
             Genetics.Importer.Import(GenePool);
             SoundPool = new SoundRepository();
             CreatureList = new List<CreatureController>();
-            AvalibleTasks = new List<IUtility>();
-            AvalibleTasks.Add(new BasicUtility(UnityEngine.Random.Range(0f, 5f), new Creature.Task.Wait(UnityEngine.Random.Range(1f, 8f))));
-            AvalibleTasks.Add(new BasicUtility(UnityEngine.Random.Range(-3f, 10f), new Creature.Task.Wander(3f)));
         }
     }
 }

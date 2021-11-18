@@ -4,11 +4,8 @@ using System.Collections.Generic;
 namespace DataType
 {
     [System.Serializable]
-    public class Range : IValue
+    public class Range
     {
-        public float MaxValue => Max;
-        public float MinValue => Min;
-
         public float Min;
         public float Max;
 

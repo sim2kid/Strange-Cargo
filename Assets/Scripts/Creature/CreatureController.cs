@@ -21,12 +21,8 @@ namespace Creature
         public Needs needs;
 
         public NavMeshMovement Move { get; private set; }
-        public int TaskCount => tasks.Count;
-        public ITask TopTask => tasks.Peek();
 
         Queue<ITask> tasks;
-        Queue<ITask> hotTasks;
-
         private int maxTasks = 10;
         private float maxTimeOnTask = 15f;
 
@@ -36,10 +32,6 @@ namespace Creature
         
         private UnityEvent UpdateLoop;
 
-        private float thinkTimer;
-        [SerializeField]
-        private float thinkRate = 2f;
-
         [SerializeField, HideInInspector]
         private BasicBrain brain;
 
@@ -48,8 +40,8 @@ namespace Creature
         /// </summary>
         private float[] needsDecayRate = 
         {
-            -0.5f, // Appetite
-            0,//-0.1f, // Bladder
+            0.5f, // Appetite
+            0,//0.1f, // Bladder
             0,//-0.1f, // Social
             0,//-0.1f, // Energy
             0, // Happiness
@@ -82,30 +74,18 @@ namespace Creature
             return false;
         }
 
-        public bool AddHotTask(ITask task)
-        {
-            if (hotTasks.Count < maxTasks)
-            {
-                StopNormalTask();
-                hotTasks.Enqueue(task);
-                return true;
-            }
-            return false;
-        }
-
         public void RequestMoreTaskTime(float requestedTime) 
         {
-            timeSpentOnLastTask -= Mathf.Clamp(requestedTime, 0, float.MaxValue);
+            timeSpentOnLastTask -= requestedTime;
         }
+
+
 
         private void OnEnable()
         {
             tasks = new Queue<ITask>();
-            hotTasks = new Queue<ITask>();
             needs = new Needs();
-            brain = new BasicBrain(this);
             Utility.Toolbox.Instance.CreatureList.Add(this);
-            thinkTimer = 0;
         }
 
         private void Start()
@@ -120,62 +100,30 @@ namespace Creature
 
         private void Update()
         {
-            thinkTimer += Time.deltaTime;
             LoadingProgress = Report();
             DecayNeeds();
             UpdateLoop.Invoke();
             RunTasks();
-            if (thinkTimer > thinkRate && tasks.Count + hotTasks.Count == 0)
-            {
-                thinkTimer = 0;
-                brain.Think();
-            }
         }
 
         private void RunTasks() 
         {
             timeSpentOnLastTask += Time.deltaTime;
-            if (tasks.Count + hotTasks.Count > 0)
+            if (tasks.Count > 0)
             {
-                ITask task;
-                if (hotTasks.Count > 0)
-                    task = hotTasks.Peek();
-                else
-                    task = tasks.Peek();
-
-                if (!task.IsStarted)
+                if (!tasks.Peek().IsStarted)
                 {
-                    Debug.Log($"New Task: {task.GetType()}");
-                    task.RunTask(this, UpdateLoop);
+                    Debug.Log($"New Task: {tasks.Peek().GetType()}");
+                    tasks.Peek().RunTask(this, UpdateLoop);
                     timeSpentOnLastTask = 0;
                 }
-                else if (task.IsDone || timeSpentOnLastTask > maxTimeOnTask)
+                else if (tasks.Peek().IsDone || timeSpentOnLastTask > maxTimeOnTask)
                 {
-                    VoidTask();
+                    Debug.Log($"End of Task: {tasks.Peek().GetType()}");
+                    tasks.Peek().EndTask(UpdateLoop);
+                    tasks.Dequeue();
                 }
             }
-        }
-
-        private void StopNormalTask() 
-        {
-            tasks.Peek().EndTask(UpdateLoop);
-        }
-
-        public void VoidTask() 
-        {
-            ITask task;
-            if (hotTasks.Count > 0)
-                task = hotTasks.Peek();
-            else 
-                task = tasks.Peek();
-
-
-            Debug.Log($"End of Task: {task.GetType()}");
-            task.EndTask(UpdateLoop);
-            if (hotTasks.Count > 0)
-                hotTasks.Dequeue();
-            else
-                tasks.Dequeue();
         }
 
         private void DecayNeeds() 

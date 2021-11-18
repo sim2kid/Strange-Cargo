@@ -48,7 +48,6 @@ namespace Creature.Task
         {
             update.RemoveListener(Update);
             come.EndTask(update);
-            IsStarted = false;
         }
 
         private void Update()
