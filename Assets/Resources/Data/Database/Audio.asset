@@ -24,6 +24,9 @@ MonoBehaviour:
   - Animal\Vocal\Shake
   - Animal\Vocal\Tired
   - Misc\ComeHere
+  - Misc\FoodBag\Grab
+  - Misc\FoodBag\Handling
+  - Misc\FoodBag\Pour
   - Misc\Pop
   - Misc\ToyThrow
   - Music
@@ -145,6 +148,22 @@ MonoBehaviour:
       FileLocation: Misc\ComeHere\comehere3.mp3
     - ParentFolder: Misc\ComeHere
       FileLocation: Misc\ComeHere\pspsps.mp3
+  - FolderName: Misc\FoodBag\Grab
+    Files:
+    - ParentFolder: Misc\FoodBag\Grab
+      FileLocation: Misc\FoodBag\Grab\SFX_MISC_FoodBagGrab.mp3
+  - FolderName: Misc\FoodBag\Handling
+    Files:
+    - ParentFolder: Misc\FoodBag\Handling
+      FileLocation: Misc\FoodBag\Handling\SFX_MISC_FoodBagHandling1.mp3
+    - ParentFolder: Misc\FoodBag\Handling
+      FileLocation: Misc\FoodBag\Handling\SFX_MISC_FoodBagHandling2.mp3
+    - ParentFolder: Misc\FoodBag\Handling
+      FileLocation: Misc\FoodBag\Handling\SFX_MISC_FoodBagHandling3.mp3
+  - FolderName: Misc\FoodBag\Pour
+    Files:
+    - ParentFolder: Misc\FoodBag\Pour
+      FileLocation: Misc\FoodBag\Pour\SFX_MISC_PourFoodInBowl.mp3
   - FolderName: Misc\Pop
     Files:
     - ParentFolder: Misc\Pop
