@@ -26,7 +26,7 @@ namespace Creature
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
             navMeshAgent.height = 0.8f;
-            navMeshAgent.speed = 1.8f;
+            navMeshAgent.speed = 1f;
             navMeshAgent.angularSpeed = 200;
         }
 

@@ -1,0 +1,1127 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v1.6.16",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                44
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "name" : "joint_ear_03_l_end",
+            "rotation" : [
+                -5.820766646458253e-10,
+                -3.193237341214683e-11,
+                -8.185150335293656e-08,
+                1
+            ],
+            "scale" : [
+                0.9999999403953552,
+                0.9999999403953552,
+                1
+            ],
+            "translation" : [
+                -2.296313539318362e-07,
+                1.4100277423858643,
+                1.8766149878501892e-07
+            ]
+        },
+        {
+            "children" : [
+                0
+            ],
+            "name" : "joint_ear_03_l",
+            "rotation" : [
+                -0.0029299252200871706,
+                0.0003406246250960976,
+                -0.11548545211553574,
+                0.9933047890663147
+            ],
+            "scale" : [
+                1.0000001192092896,
+                1.000000238418579,
+                1.0000001192092896
+            ],
+            "translation" : [
+                1.4055978059768677,
+                -0.11168842762708664,
+                5.586063593909785e-07
+            ]
+        },
+        {
+            "children" : [
+                1
+            ],
+            "name" : "joint_ear02_l",
+            "rotation" : [
+                3.134878578947564e-09,
+                5.2949143736213955e-08,
+                0.5469352006912231,
+                0.8371749520301819
+            ],
+            "scale" : [
+                0.9999996423721313,
+                0.9999999403953552,
+                1
+            ],
+            "translation" : [
+                1.2358139753341675,
+                -0.023542627692222595,
+                -2.5783950263758015e-07
+            ]
+        },
+        {
+            "children" : [
+                2
+            ],
+            "name" : "joint_ear01_l",
+            "rotation" : [
+                -7.827030579221628e-09,
+                -7.14818355618263e-08,
+                -0.19059260189533234,
+                0.9816692471504211
+            ],
+            "scale" : [
+                0.9999998807907104,
+                1,
+                1
+            ],
+            "translation" : [
+                1.1574914455413818,
+                0.05195477977395058,
+                -0.2157561182975769
+            ]
+        },
+        {
+            "name" : "joint_ear_03_r_end",
+            "rotation" : [
+                -2.3283067140944524e-10,
+                -3.0338043188749e-10,
+                -2.9642052368217264e-08,
+                1
+            ],
+            "scale" : [
+                1,
+                0.9999998807907104,
+                1
+            ],
+            "translation" : [
+                5.676396881426626e-07,
+                1.4100316762924194,
+                -2.0954757928848267e-07
+            ]
+        },
+        {
+            "children" : [
+                4
+            ],
+            "name" : "joint_ear_03_r",
+            "rotation" : [
+                -0.002929911483079195,
+                0.0003408385382499546,
+                -0.11548572778701782,
+                0.9933047890663147
+            ],
+            "scale" : [
+                1.0000001192092896,
+                1,
+                1.0000001192092896
+            ],
+            "translation" : [
+                -1.4056015014648438,
+                0.1116800382733345,
+                2.396911327195994e-07
+            ]
+        },
+        {
+            "children" : [
+                5
+            ],
+            "name" : "joint_ear02_r",
+            "rotation" : [
+                2.6454431534261857e-08,
+                -4.058683344965175e-08,
+                0.5469353199005127,
+                0.8371748924255371
+            ],
+            "scale" : [
+                0.9999998211860657,
+                0.9999999403953552,
+                1
+            ],
+            "translation" : [
+                -1.230164885520935,
+                0.03795129433274269,
+                -1.4639566003893378e-08
+            ]
+        },
+        {
+            "children" : [
+                6
+            ],
+            "name" : "joint_ear01_r",
+            "rotation" : [
+                0.9510979652404785,
+                0.308889776468277,
+                5.3517105413902755e-08,
+                8.07349636033905e-08
+            ],
+            "scale" : [
+                1.0000001192092896,
+                0.9999998807907104,
+                1.000000238418579
+            ],
+            "translation" : [
+                -1.1729426383972168,
+                -0.1652304232120514,
+                -0.21575987339019775
+            ]
+        },
+        {
+            "children" : [
+                3,
+                7
+            ],
+            "name" : "joint_head",
+            "rotation" : [
+                0.3339132070541382,
+                0.6232993602752686,
+                -0.3907800018787384,
+                0.5893139243125916
+            ],
+            "scale" : [
+                0.9999998211860657,
+                0.9999998807907104,
+                0.9999998807907104
+            ],
+            "translation" : [
+                0.7862603664398193,
+                -0.04072586074471474,
+                -8.16117839974595e-09
+            ]
+        },
+        {
+            "children" : [
+                8
+            ],
+            "name" : "joint_neck",
+            "rotation" : [
+                -1.1261952481689264e-09,
+                1.2654822967306245e-08,
+                -0.03475761413574219,
+                0.9993957877159119
+            ],
+            "scale" : [
+                1.0000001192092896,
+                1.0000001192092896,
+                1
+            ],
+            "translation" : [
+                0.6827878952026367,
+                -0.1217026561498642,
+                -3.076915078281672e-08
+            ]
+        },
+        {
+            "name" : "joint_paw_l_end",
+            "rotation" : [
+                3.7252896323280993e-09,
+                -5.428162364040645e-10,
+                1.3120980690839446e-10,
+                1
+            ],
+            "scale" : [
+                1,
+                1.000000238418579,
+                1.000000238418579
+            ],
+            "translation" : [
+                1.4551186211519962e-07,
+                0.427627831697464,
+                1.3037363544299296e-07
+            ]
+        },
+        {
+            "children" : [
+                10
+            ],
+            "name" : "joint_paw_l",
+            "rotation" : [
+                -0.013993875123560429,
+                0.7069683074951172,
+                0.013993876054883003,
+                0.7069684267044067
+            ],
+            "scale" : [
+                0.9999998807907104,
+                0.9999999403953552,
+                1
+            ],
+            "translation" : [
+                0.4258717894554138,
+                -0.038714516907930374,
+                8.687980823651742e-08
+            ]
+        },
+        {
+            "children" : [
+                11
+            ],
+            "name" : "joint_wrist_l",
+            "rotation" : [
+                -0.706439733505249,
+                0.7077732086181641,
+                4.07539744173846e-08,
+                6.597105084438226e-08
+            ],
+            "translation" : [
+                0.9605396389961243,
+                -0.018969077616930008,
+                -1.2796718351637537e-07
+            ]
+        },
+        {
+            "children" : [
+                12
+            ],
+            "name" : "joint_elbow_l",
+            "rotation" : [
+                3.945525506310332e-08,
+                -1.2254154135860063e-08,
+                -0.5169488787651062,
+                0.8560162782669067
+            ],
+            "scale" : [
+                1.0000001192092896,
+                1.000000238418579,
+                1
+            ],
+            "translation" : [
+                0.9177970886230469,
+                -0.23213844001293182,
+                1.7858219791833108e-07
+            ]
+        },
+        {
+            "children" : [
+                13
+            ],
+            "name" : "joint_shoulder_l",
+            "rotation" : [
+                0.8021195530891418,
+                -0.5971634984016418,
+                -3.9962668729742745e-09,
+                9.11478608145444e-08
+            ],
+            "scale" : [
+                0.9999996423721313,
+                0.999999463558197,
+                1
+            ],
+            "translation" : [
+                0.7412499189376831,
+                -0.3231624364852905,
+                -0.5608524680137634
+            ]
+        },
+        {
+            "children" : [
+                14
+            ],
+            "name" : "joint_clavicle_l",
+            "rotation" : [
+                -4.8174584321714065e-08,
+                -3.4611002952544823e-10,
+                -0.9470387101173401,
+                0.3211194574832916
+            ],
+            "scale" : [
+                1.0000005960464478,
+                1.000000238418579,
+                1
+            ],
+            "translation" : [
+                -0.015694528818130493,
+                -0.22517694532871246,
+                -0.19623245298862457
+            ]
+        },
+        {
+            "name" : "joint_paw_r_end",
+            "rotation" : [
+                -6.3277107997805615e-09,
+                -1.851926256790648e-08,
+                -6.22144336048791e-10,
+                1
+            ],
+            "translation" : [
+                5.772709954499078e-08,
+                0.4240338206291199,
+                2.18018698205924e-07
+            ]
+        },
+        {
+            "children" : [
+                16
+            ],
+            "name" : "joint_paw_r",
+            "rotation" : [
+                0.014067674055695534,
+                -0.7069680690765381,
+                0.014067715965211391,
+                0.7069656252861023
+            ],
+            "scale" : [
+                1.0000001192092896,
+                1,
+                1.0000001192092896
+            ],
+            "translation" : [
+                -0.4234563112258911,
+                -0.022108517587184906,
+                -1.3880385267839301e-06
+            ]
+        },
+        {
+            "children" : [
+                17
+            ],
+            "name" : "joint_wrist_r",
+            "rotation" : [
+                -0.7184012532234192,
+                0.6947177052497864,
+                0.009053707122802734,
+                0.03442554920911789
+            ],
+            "scale" : [
+                0.9999998807907104,
+                0.9999997615814209,
+                1.000000238418579
+            ],
+            "translation" : [
+                -0.9430341124534607,
+                0.09503816813230515,
+                -2.0760258223617711e-07
+            ]
+        },
+        {
+            "children" : [
+                18
+            ],
+            "name" : "joint_elbow_r",
+            "rotation" : [
+                -3.090804767680311e-08,
+                2.255375761706091e-07,
+                -0.47514209151268005,
+                0.879909098148346
+            ],
+            "scale" : [
+                0.9999998807907104,
+                0.9999999403953552,
+                0.9999999403953552
+            ],
+            "translation" : [
+                -0.9703885316848755,
+                0.17626042664051056,
+                2.533197118737007e-07
+            ]
+        },
+        {
+            "children" : [
+                19
+            ],
+            "name" : "joint_shoulder_r",
+            "rotation" : [
+                0.8173432350158691,
+                -0.5750502943992615,
+                0.0276299137622118,
+                0.022444654256105423
+            ],
+            "scale" : [
+                0.9999997615814209,
+                0.9999997615814209,
+                1.0000001192092896
+            ],
+            "translation" : [
+                -0.7412490248680115,
+                0.3231675326824188,
+                0.5608530044555664
+            ]
+        },
+        {
+            "children" : [
+                20
+            ],
+            "name" : "joint_clavicle_r",
+            "rotation" : [
+                8.270431450796423e-09,
+                -8.140851326388088e-10,
+                0.3211194574832916,
+                0.9470387101173401
+            ],
+            "scale" : [
+                1.0000004768371582,
+                1.000000238418579,
+                1
+            ],
+            "translation" : [
+                -0.015690788626670837,
+                -0.2251780927181244,
+                0.19623199105262756
+            ]
+        },
+        {
+            "children" : [
+                9,
+                15,
+                21
+            ],
+            "name" : "joint_spine03",
+            "rotation" : [
+                2.2770871410671134e-08,
+                -1.3742045279485637e-09,
+                0.5240659713745117,
+                0.8516777157783508
+            ],
+            "scale" : [
+                0.9999998211860657,
+                1,
+                1
+            ],
+            "translation" : [
+                0.8356459140777588,
+                0.0031697957310825586,
+                -3.496080935860846e-08
+            ]
+        },
+        {
+            "children" : [
+                22
+            ],
+            "name" : "joint_spine02",
+            "rotation" : [
+                1.1540788324992945e-09,
+                2.2846720348912442e-10,
+                0.027435259893536568,
+                0.9996235966682434
+            ],
+            "scale" : [
+                0.9999999403953552,
+                1,
+                1
+            ],
+            "translation" : [
+                0.994144082069397,
+                -0.08751340210437775,
+                -4.2046313097898746e-08
+            ]
+        },
+        {
+            "children" : [
+                23
+            ],
+            "name" : "joint_spine01",
+            "rotation" : [
+                3.008726157105457e-09,
+                7.069755891819796e-10,
+                0.06996602565050125,
+                0.9975494146347046
+            ],
+            "scale" : [
+                0.9999999403953552,
+                1,
+                1
+            ],
+            "translation" : [
+                0.8014000654220581,
+                -5.293025537866924e-07,
+                -3.5030300438165796e-08
+            ]
+        },
+        {
+            "name" : "joint_tail04_end",
+            "rotation" : [
+                1.2234362625090402e-14,
+                -2.5059890162992815e-08,
+                7.031485438346863e-08,
+                1
+            ],
+            "translation" : [
+                1.8998980522155762e-07,
+                0.5121825337409973,
+                -7.614439948792212e-15
+            ]
+        },
+        {
+            "children" : [
+                25
+            ],
+            "name" : "joint_tail04",
+            "rotation" : [
+                0.20946916937828064,
+                0.9778152704238892,
+                -5.0592976919006105e-08,
+                6.637269223119802e-08
+            ],
+            "scale" : [
+                0.9999998807907104,
+                1.0000001192092896,
+                1
+            ],
+            "translation" : [
+                0.5107600092887878,
+                -0.03815756365656853,
+                2.0308098314103518e-08
+            ]
+        },
+        {
+            "children" : [
+                26
+            ],
+            "name" : "joint_tail03",
+            "rotation" : [
+                -9.529467881463916e-09,
+                -2.8148097186431187e-09,
+                0.22344288229942322,
+                0.9747171401977539
+            ],
+            "scale" : [
+                0.9999998211860657,
+                1.0000001192092896,
+                1
+            ],
+            "translation" : [
+                0.5592653751373291,
+                -0.02324383333325386,
+                2.54667718024848e-08
+            ]
+        },
+        {
+            "children" : [
+                27
+            ],
+            "name" : "joint_tail02",
+            "rotation" : [
+                -1.4146185556285218e-08,
+                -3.0340416401486436e-08,
+                0.1851348578929901,
+                0.9827131628990173
+            ],
+            "scale" : [
+                1.000000238418579,
+                1,
+                1
+            ],
+            "translation" : [
+                0.6183664798736572,
+                -0.08637791872024536,
+                6.634110860659348e-08
+            ]
+        },
+        {
+            "children" : [
+                28
+            ],
+            "name" : "joint_tail01",
+            "rotation" : [
+                0.2788603603839874,
+                -0.9603316783905029,
+                1.986188813418721e-08,
+                7.284900505055703e-08
+            ],
+            "scale" : [
+                0.9999998211860657,
+                1.0000001192092896,
+                1
+            ],
+            "translation" : [
+                -0.4697391986846924,
+                -0.12587854266166687,
+                2.053295489190532e-08
+            ]
+        },
+        {
+            "name" : "joint_toes_l_end",
+            "rotation" : [
+                -2.9802318834981634e-08,
+                -6.910009631155845e-08,
+                -3.220677502469016e-09,
+                1
+            ],
+            "scale" : [
+                1,
+                1,
+                1.0000001192092896
+            ],
+            "translation" : [
+                5.816597337116036e-08,
+                0.335152804851532,
+                -9.435667891466437e-08
+            ]
+        },
+        {
+            "children" : [
+                30
+            ],
+            "name" : "joint_toes_l",
+            "rotation" : [
+                -0.07121283560991287,
+                0.703511655330658,
+                0.07121279835700989,
+                0.7035118341445923
+            ],
+            "scale" : [
+                0.9999995231628418,
+                0.9999998211860657,
+                0.9999999403953552
+            ],
+            "translation" : [
+                0.3300427496433258,
+                0.05830153077840805,
+                2.411353818843054e-07
+            ]
+        },
+        {
+            "children" : [
+                31
+            ],
+            "name" : "joint_foot_l",
+            "rotation" : [
+                -7.71864943089895e-05,
+                0.0013954242458567023,
+                0.049743980169296265,
+                0.9987610578536987
+            ],
+            "scale" : [
+                1.0000001192092896,
+                0.9999999403953552,
+                1
+            ],
+            "translation" : [
+                0.6975573897361755,
+                0.03478769212961197,
+                -0.0019490157719701529
+            ]
+        },
+        {
+            "children" : [
+                32
+            ],
+            "name" : "joint_heel_l",
+            "rotation" : [
+                0.715086042881012,
+                -0.6560447812080383,
+                -0.0062324474565684795,
+                0.24128495156764984
+            ],
+            "scale" : [
+                1,
+                0.9999995231628418,
+                1.0000001192092896
+            ],
+            "translation" : [
+                1.092389702796936,
+                -0.38851475715637207,
+                -0.05473567545413971
+            ]
+        },
+        {
+            "children" : [
+                33
+            ],
+            "name" : "joint_knee_l",
+            "rotation" : [
+                0.8537934422492981,
+                -0.5201276540756226,
+                0.022224629297852516,
+                0.003172248834744096
+            ],
+            "scale" : [
+                0.9999997019767761,
+                0.9999995827674866,
+                0.9999997615814209
+            ],
+            "translation" : [
+                0.8623179197311401,
+                0.09315849840641022,
+                -0.43044206500053406
+            ]
+        },
+        {
+            "children" : [
+                34
+            ],
+            "name" : "joint_hip_l",
+            "rotation" : [
+                0.15403807163238525,
+                -0.19789241254329681,
+                -0.5899645090103149,
+                0.7674977779388428
+            ],
+            "scale" : [
+                1.0000001192092896,
+                1,
+                1.0000001192092896
+            ],
+            "translation" : [
+                0.011781437322497368,
+                -0.2302633374929428,
+                -0.3464547395706177
+            ]
+        },
+        {
+            "name" : "joint_toes_r_end",
+            "rotation" : [
+                9.824179869610816e-08,
+                -4.190951585769653e-08,
+                -3.2887326195663036e-09,
+                1
+            ],
+            "scale" : [
+                1.0000001192092896,
+                1.0000001192092896,
+                1
+            ],
+            "translation" : [
+                -2.0489101970611046e-08,
+                0.33542224764823914,
+                8.195637946073475e-08
+            ]
+        },
+        {
+            "children" : [
+                36
+            ],
+            "name" : "joint_toes_r",
+            "rotation" : [
+                -0.07121274620294571,
+                0.7035117745399475,
+                0.0712127760052681,
+                0.7035117149353027
+            ],
+            "scale" : [
+                0.9999999403953552,
+                0.9999999403953552,
+                0.9999998807907104
+            ],
+            "translation" : [
+                -0.3300424814224243,
+                -0.05830194428563118,
+                0.01345232967287302
+            ]
+        },
+        {
+            "children" : [
+                37
+            ],
+            "name" : "joint_foot_r",
+            "rotation" : [
+                0.013188371434807777,
+                -0.007176836486905813,
+                0.03518839552998543,
+                0.9992679357528687
+            ],
+            "scale" : [
+                0.9999998807907104,
+                0.9999998807907104,
+                0.9999999403953552
+            ],
+            "translation" : [
+                -0.8120990991592407,
+                3.460678144051599e-08,
+                -1.4946441240226704e-07
+            ]
+        },
+        {
+            "children" : [
+                38
+            ],
+            "name" : "joint_heel_r",
+            "rotation" : [
+                0.6723046898841858,
+                -0.6835998296737671,
+                -0.032232511788606644,
+                0.2822389602661133
+            ],
+            "scale" : [
+                0.9999999403953552,
+                1.0000003576278687,
+                1.000000238418579
+            ],
+            "translation" : [
+                -1.0923906564712524,
+                0.38851723074913025,
+                0.05571655184030533
+            ]
+        },
+        {
+            "children" : [
+                39
+            ],
+            "name" : "joint_knee_r",
+            "rotation" : [
+                0.8577718138694763,
+                -0.5137205123901367,
+                0.017687613144516945,
+                0.0024340322706848383
+            ],
+            "scale" : [
+                1.000000238418579,
+                1.000000238418579,
+                1
+            ],
+            "translation" : [
+                -0.8623090386390686,
+                -0.09315726161003113,
+                0.45808902382850647
+            ]
+        },
+        {
+            "children" : [
+                40
+            ],
+            "name" : "joint_hip_r",
+            "rotation" : [
+                0.243981271982193,
+                0.19189980626106262,
+                0.7383174896240234,
+                0.5987779498100281
+            ],
+            "scale" : [
+                1.0000001192092896,
+                1,
+                1
+            ],
+            "translation" : [
+                0.01178659126162529,
+                -0.23026815056800842,
+                0.34645503759384155
+            ]
+        },
+        {
+            "children" : [
+                24,
+                29,
+                35,
+                41
+            ],
+            "name" : "joint_pelvis",
+            "rotation" : [
+                0.05343524366617203,
+                -0.7050849199295044,
+                -0.053435247391462326,
+                0.7050848603248596
+            ],
+            "translation" : [
+                1.894623814660632e-15,
+                2.9129996299743652,
+                -0.9759999513626099
+            ]
+        },
+        {
+            "mesh" : 0,
+            "name" : "ramy-tail",
+            "skin" : 0
+        },
+        {
+            "children" : [
+                43,
+                42
+            ],
+            "name" : "ramy",
+            "rotation" : [
+                0.7071068286895752,
+                0,
+                0,
+                0.7071067094802856
+            ],
+            "scale" : [
+                0.009999999776482582,
+                0.009999999776482582,
+                0.009999999776482582
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "name" : "Ram_color_1",
+            "pbrMetallicRoughness" : {
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.5527864098548889
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Mesh.015",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TEXCOORD_0" : 2,
+                        "JOINTS_0" : 3,
+                        "WEIGHTS_0" : 4
+                    },
+                    "indices" : 5,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "skins" : [
+        {
+            "inverseBindMatrices" : 6,
+            "joints" : [
+                42,
+                24,
+                23,
+                22,
+                9,
+                8,
+                3,
+                2,
+                1,
+                0,
+                7,
+                6,
+                5,
+                4,
+                15,
+                14,
+                13,
+                12,
+                11,
+                10,
+                21,
+                20,
+                19,
+                18,
+                17,
+                16,
+                29,
+                28,
+                27,
+                26,
+                25,
+                35,
+                34,
+                33,
+                32,
+                31,
+                30,
+                41,
+                40,
+                39,
+                38,
+                37,
+                36
+            ],
+            "name" : "ramy"
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 190,
+            "max" : [
+                0.0029138901736587286,
+                0.04043619707226753,
+                0.03240309655666351
+            ],
+            "min" : [
+                -0.0030023364815860987,
+                0.012877952307462692,
+                0.02229505218565464
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 190,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 190,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5121,
+            "count" : 190,
+            "type" : "VEC4"
+        },
+        {
+            "bufferView" : 4,
+            "componentType" : 5126,
+            "count" : 190,
+            "type" : "VEC4"
+        },
+        {
+            "bufferView" : 5,
+            "componentType" : 5123,
+            "count" : 780,
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 6,
+            "componentType" : 5126,
+            "count" : 43,
+            "type" : "MAT4"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 2280,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 2280,
+            "byteOffset" : 2280
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 1520,
+            "byteOffset" : 4560
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 760,
+            "byteOffset" : 6080
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 3040,
+            "byteOffset" : 6840
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 1560,
+            "byteOffset" : 9880
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 2752,
+            "byteOffset" : 11440
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 14192,
+            "uri" : "data:application/octet-stream;base64,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HB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAGhsAABobAAAaGwAAGhsAABobAAAaGwAAGhsAABobAAAaGwAAGhsAABobAAAaGwAAGhsAABobAAAaGwAAGhsAABobAAAaGwAAGhsAABobAAAaGwAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAHB0AABwdAAAcHQAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAQD8AAIA+AAAAAAAAAAAAAEA/AACAPgAAAAAAAAAAAABAPwAAgD4AAAAAAAAAAAAAQD8AAIA+AAAAAAAAAAAAAEA/AACAPgAAAAAAAAAAAABAPwAAgD4AAAAAAAAAAAAAQD8AAIA+AAAAAAAAAAAAAEA/AACAPgAAAAAAAAAAAABAPwAAgD4AAAAAAAAAAAAAQD8AAIA+AAAAAAAAAAAAAEA/AACAPgAAAAAAAAAAAABAPwAAgD4AAAAAAAAAAAAAQD8AAIA+AAAAAAAAAAAAAEA/AACAPgAAAAAAAAAAAABAPwAAgD4AAAAAAAAAAAAAQD8AAIA+AAAAAAAAAAAAAEA/AACAPgAAAAAAAAAAAABAPwAAgD4AAAAAAAAAAAAAQD8AAIA+AAAAAAAAAAAAAEA/AACAPgAAAAAAAAAAAABAPwAAgD4AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAD8AAAA/AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAAAAAPwAAAD8AAAAAAAAAAAAAAgC4AAAAuAC6AAIABAC2AAIAtgC4AAQABgC0AAQAtAC2AAYACACwAAYAsAC0AAkADQCuAAkArgCxAA0ADwCsAA0ArACuAA8AEQCqAA8AqgCsABEAEwCoABEAqACqABMAFQCmABMApgCoABUAFwCkABUApACmABcAGQCiABcAogCkABkAGwCgABkAoACiABsAHQCeABsAngCgAB0AHwCcAB0AnACeAB8AIACaAB8AmgCcACAAIgCYACAAmACaACIAJACWACIAlgCYACQAJgCUACQAlACWACYAKAC8ACYAvACUACgAAAC6ACgAugC8ACsALAAqACwALQAqAC0ALgAqAC4AMAAqAC8AMQAqADEAMgAqADIAMwAqADMANAAqADQANQAqADUANgAqADYANwAqADcAOAAqADgAOQAqADkAOgAqADoAOwAqADsAPAAqADwAPQAqAD0APgAqAD4APwAqAD8AKwAqAEEAQAA9AEEAPQA8AEIAQQA8AEIAPAA7AEMAQgA7AEMAOwA6AEQAQwA6AEQAOgA5AEUARAA5AEUAOQA4AEYARQA4AEYAOAA3AEcARgA3AEcANwA2AEgARwA2AEgANgA1AEkASAA1AEkANQA0AEoASQA0AEoANAAzAEsASgAzAEsAMwAyAEwASwAyAEwAMgAxAE0ATAAxAE0AMQAvAE8ATgAwAE8AMAAuAFAATwAuAFAALgAtAFEAUAAtAFEALQAsAFIAUQAsAFIALAArAFMAUgArAFMAKwA/AFQAUwA/AFQAPwA+AEAAVAA+AEAAPgA9AFUAVgBrAFUAawBqAFYAVwBsAFYAbABrAFcAWABtAFcAbQBsAFgAWQBuAFgAbgBtAFkAWgBvAFkAbwBuAFoAWwBwAFoAcABvAFsAXABxAFsAcQBwAFwAXQByAFwAcgBxAF0AXgBzAF0AcwByAF8AYAB1AF8AdQB0AGAAYQB2AGAAdgB1AGEAYgB3AGEAdwB2AGIAYwB4AGIAeAB3AGMAZAB5AGMAeQB4AGQAZQB6AGQAegB5AGUAZgB7AGUAewB6AGYAZwB8AGYAfAB7AGcAaAB9AGcAfQB8AGgAaQB+AGgAfgB9AGkAVQBqAGkAagB+AGoAawCAAGoAgAB/AGsAbACBAGsAgQCAAGwAbQCCAGwAggCBAG0AbgCDAG0AgwCCAG4AbwCEAG4AhACDAG8AcACFAG8AhQCEAHAAcQCGAHAA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"
+        }
+    ]
+}
