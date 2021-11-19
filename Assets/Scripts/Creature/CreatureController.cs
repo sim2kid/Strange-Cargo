@@ -32,6 +32,7 @@ namespace Creature
         private int maxTasks = 10;
         private float maxTimeOnTask = 15f;
 
+        [SerializeField]
         private float timeSpentOnLastTask;
 
         private IProgress textureController;
@@ -154,12 +155,14 @@ namespace Creature
 
                 if (!task.IsStarted)
                 {
-                    //Debug.Log($"New Task: {task.GetType()}");
+                    Debug.Log($"New Task: {task.GetType()}");
                     task.RunTask(this, UpdateLoop);
                     timeSpentOnLastTask = 0;
                 }
                 else if (task.IsDone || timeSpentOnLastTask > maxTimeOnTask)
                 {
+                    if (timeSpentOnLastTask > maxTimeOnTask)
+                        Debug.Log($"Task Timedout: {task.GetType()}");
                     VoidTask();
                 }
             }
@@ -180,7 +183,7 @@ namespace Creature
                 task = tasks.Peek();
 
 
-            //Debug.Log($"End of Task: {task.GetType()}");
+            Debug.Log($"End of Task: {task.GetType()}");
             task.EndTask(UpdateLoop);
             if (hotTasks.Count > 0)
                 hotTasks.Dequeue();

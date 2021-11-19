@@ -38,18 +38,20 @@ namespace Creature.Task
 
         private void EatTheBowl() 
         {
-            //Debug.Log("Eaten!");
+            Debug.Log("At Bowl");
             come.EndTask(_update);
 
             wait = new Wait(5);
             wait.OnTaskFinished.AddListener(Finish);
+            wait.RunTask(_caller, _update);
         }
 
         private void Finish() 
         {
+            Debug.Log("Eaten!");
             wait.EndTask(_update);
 
-            _bowl.Eat(_caller.needs.GetNeed(Need.Appetite));
+            _bowl.Eat(200 - _caller.needs.GetNeed(Need.Appetite));
             _caller.ProcessINeed(_bowl);
 
             IsDone = true;
