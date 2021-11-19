@@ -42,6 +42,8 @@ namespace Utility
         /// </summary>
         public Player.PlayerController Player { get; set; }
 
+        public ToolTip ToolTip { get; set; }
+
         private Toolbox()
         {
             GenePool = new GeneticRepository();

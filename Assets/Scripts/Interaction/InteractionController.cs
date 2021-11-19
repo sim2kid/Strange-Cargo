@@ -18,6 +18,7 @@ namespace Interaction
 
         private PlayerInput playerInput;
         private InputAction interact;
+        private Utility.ToolTip tt; 
 
         List<IInteractable> UpClickQueue;
         public IInteractable Previous { get; private set; }
@@ -26,6 +27,7 @@ namespace Interaction
 
         private void Start()
         {
+            tt = Utility.Toolbox.Instance.ToolTip;
             lastButton = false;
             playerInput = GetComponent<PlayerInput>();
             interact = playerInput.actions["Use"];
@@ -66,9 +68,11 @@ namespace Interaction
                         if (Previous.ClickState == ClickState.Down || Previous.ClickState == ClickState.Hold)
                             UpClickQueue.Add(Previous);
                         Previous.Exit();
+                        tt.HoverText = string.Empty;
                     }
                     Previous = closest;
                     closest.Enter();
+                    tt.HoverText = closest.InteractText;
                 }
                 else
                 {
@@ -102,6 +106,7 @@ namespace Interaction
                     if (Previous.ClickState == ClickState.Down || Previous.ClickState == ClickState.Hold)
                         UpClickQueue.Add(Previous);
                     Previous.Exit();
+                    tt.HoverText = string.Empty;
                     Previous = null;
                 }
             }
