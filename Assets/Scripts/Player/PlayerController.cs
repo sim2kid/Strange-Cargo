@@ -28,7 +28,7 @@ namespace Player
         public GameObject Feet;
         public GameObject Hand;
 
-        private void OnEnable()
+        private void Awake()
         {
             Utility.Toolbox.Instance.Player = this;
         }

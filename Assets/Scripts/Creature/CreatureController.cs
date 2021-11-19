@@ -107,7 +107,7 @@ namespace Creature
             timeSpentOnLastTask -= Mathf.Clamp(requestedTime, 0, float.MaxValue);
         }
 
-        private void OnEnable()
+        private void Awake()
         {
             tasks = new Queue<ITask>();
             hotTasks = new Queue<ITask>();

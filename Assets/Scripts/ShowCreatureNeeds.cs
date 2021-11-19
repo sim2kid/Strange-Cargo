@@ -12,7 +12,14 @@ public class ShowCreatureNeeds : MonoBehaviour
 
     void Start()
     {
-        creature = Utility.Toolbox.Instance.CreatureList[0];
+        try
+        {
+            creature = Utility.Toolbox.Instance.CreatureList[0];
+        }
+        catch 
+        {
+        
+        }
     }
 
     // Update is called once per frame
