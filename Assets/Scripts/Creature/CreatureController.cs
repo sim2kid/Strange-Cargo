@@ -32,6 +32,7 @@ namespace Creature
         private int maxTasks = 10;
         private float maxTimeOnTask = 15f;
 
+        [SerializeField]
         private float timeSpentOnLastTask;
 
         private IProgress textureController;
@@ -107,7 +108,7 @@ namespace Creature
             timeSpentOnLastTask -= Mathf.Clamp(requestedTime, 0, float.MaxValue);
         }
 
-        private void OnEnable()
+        private void Awake()
         {
             tasks = new Queue<ITask>();
             hotTasks = new Queue<ITask>();
@@ -160,6 +161,8 @@ namespace Creature
                 }
                 else if (task.IsDone || timeSpentOnLastTask > maxTimeOnTask)
                 {
+                    if (timeSpentOnLastTask > maxTimeOnTask)
+                        Debug.Log($"Task Timedout: {task.GetType()}");
                     VoidTask();
                 }
             }

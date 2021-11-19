@@ -28,6 +28,7 @@ namespace Creature.Task
             IsDone = false;
             IsStarted = true;
             update.AddListener(Update);
+            caller.RequestMoreTaskTime(waitAmount);
             return this;
         }
 

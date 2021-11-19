@@ -11,40 +11,62 @@ namespace Interaction
     public class GlobalController : MonoBehaviour
     {
         [SerializeField]
+        public UnityEvent UseEvent;
         public UnityEvent PrimaryEvent;
         public UnityEvent SecondaryEvent;
 
         private PlayerInput playerInput;
-        private InputAction interact;
+        private InputAction use;
+        private InputAction primary;
         private InputAction second;
 
-        private bool calledInteract;
+        private bool calledUse;
+        private bool calledPrimary;
         private bool calledSecond;
+
+
+        private void Awake()
+        {
+            if(UseEvent == null)
+                UseEvent = new UnityEvent();
+            if(PrimaryEvent == null)
+                PrimaryEvent = new UnityEvent();
+            if(SecondaryEvent == null)
+                SecondaryEvent = new UnityEvent();
+        }
 
         void Start()
         {
             playerInput = GetComponent<PlayerInput>();
-            interact = playerInput.actions["Interact"];
+            use = playerInput.actions["Use"];
+            primary = playerInput.actions["Primary"];
             second = playerInput.actions["Secondary"];
-            calledInteract = false;
+            calledUse = false;
             calledSecond = false;
+            calledPrimary = false;
         }
 
         // Update is called once per frame
         void Update()
         {
-            bool pDown = interact.ReadValue<float>() == 1;
+            bool uDown = use.ReadValue<float>() == 1;
+            bool pDown = primary.ReadValue<float>() == 1;
             bool sDown = second.ReadValue<float>() == 1;
 
-            if (pDown && pDown != calledInteract)
+            if (uDown && uDown != calledUse)
             {
-                PrimaryEvent.Invoke();
+                UseEvent.Invoke();
             }
             if (sDown && sDown != calledSecond)
             {
                 SecondaryEvent.Invoke();
             }
-            calledInteract = pDown;
+            if (pDown && pDown != calledPrimary)
+            {
+                PrimaryEvent.Invoke();
+            }
+            calledPrimary = pDown;
+            calledUse = uDown;
             calledSecond = sDown;
         }
     }

@@ -12,7 +12,10 @@ namespace Sound
         {
             get 
             {
-                return _clipPool[index]; 
+                if (index > 0)
+                    return _clipPool[index];
+                else
+                    return null;
             }  
         }
         public void NextIndex() 

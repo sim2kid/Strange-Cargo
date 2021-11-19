@@ -31,7 +31,7 @@ namespace Creature.Task
             calledFinished = false;
             update.AddListener(Update);
 
-            caller.RequestMoreTaskTime((((caller.transform.position - location).magnitude - dis) * 0.5f) - 15);
+            caller.RequestMoreTaskTime((((caller.transform.position - location).magnitude - dis) * 1f) - 15);
 
             return this;
         }

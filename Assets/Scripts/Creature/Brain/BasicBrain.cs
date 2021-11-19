@@ -96,7 +96,7 @@ namespace Creature.Brain
             lastTasks.Enqueue(pickMe.Task.GetType());
             foreach (Option o in options) 
             {
-                Debug.Log($"{o.Task.GetType().ToString()} | {o.Utility}");
+                //Debug.Log($"{o.Task.GetType().ToString()} | {o.Utility}");
             }
         }
 
