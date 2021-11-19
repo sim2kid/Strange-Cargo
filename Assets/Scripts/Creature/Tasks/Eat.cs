@@ -17,6 +17,7 @@ namespace Creature.Task
 
         CreatureController _caller;
         ITask come;
+        ITask wait;
         UnityEvent _update;
 
         private FoodBowl _bowl;
@@ -37,16 +38,27 @@ namespace Creature.Task
 
         private void EatTheBowl() 
         {
-            Debug.Log("Eaten!");
+            //Debug.Log("Eaten!");
             come.EndTask(_update);
+
+            wait = new Wait(5);
+            wait.OnTaskFinished.AddListener(Finish);
+        }
+
+        private void Finish() 
+        {
+            wait.EndTask(_update);
+
             _bowl.Eat(_caller.needs.GetNeed(Need.Appetite));
             _caller.ProcessINeed(_bowl);
+
             IsDone = true;
         }
 
         public void EndTask(UnityEvent update)
         {
             update.RemoveListener(Update);
+            wait.EndTask(update);
             come.EndTask(update);
             IsStarted = false;
         }
