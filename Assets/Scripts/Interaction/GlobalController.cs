@@ -24,6 +24,17 @@ namespace Interaction
         private bool calledPrimary;
         private bool calledSecond;
 
+
+        private void Awake()
+        {
+            if(UseEvent == null)
+                UseEvent = new UnityEvent();
+            if(PrimaryEvent == null)
+                PrimaryEvent = new UnityEvent();
+            if(SecondaryEvent == null)
+                SecondaryEvent = new UnityEvent();
+        }
+
         void Start()
         {
             playerInput = GetComponent<PlayerInput>();
@@ -32,6 +43,7 @@ namespace Interaction
             second = playerInput.actions["Secondary"];
             calledUse = false;
             calledSecond = false;
+            calledPrimary = false;
         }
 
         // Update is called once per frame

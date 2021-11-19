@@ -19,6 +19,12 @@ namespace Player
 
         void Start()
         {
+            StartCoroutine(LateStart(1));
+        }
+
+        IEnumerator LateStart(float waitTime) 
+        {
+            yield return new WaitForSeconds(waitTime);
             player = Utility.Toolbox.Instance.Player;
             player.GlobalInteraction.PrimaryEvent.AddListener(LetGo);
             player.GlobalInteraction.UseEvent.AddListener(Use);
@@ -44,8 +50,9 @@ namespace Player
         }
         public void LetGo() 
         {
+            if(Holding != null)
+                Holding.PutDown();
             Holding = null;
-            Holding.PutDown();
         }
     }
 }

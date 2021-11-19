@@ -34,6 +34,12 @@ namespace Sound
                 StartCoroutine("PlayDelay");
         }
 
+        public void PlayFrom(string repository) 
+        {
+            Sound.LoadAudio(repository);
+            Play();
+        }
+
         private IEnumerator PlayDelay() 
         {
             IsDelayed = true;

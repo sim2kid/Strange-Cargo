@@ -154,7 +154,7 @@ namespace Creature
 
                 if (!task.IsStarted)
                 {
-                    Debug.Log($"New Task: {task.GetType()}");
+                    //Debug.Log($"New Task: {task.GetType()}");
                     task.RunTask(this, UpdateLoop);
                     timeSpentOnLastTask = 0;
                 }
@@ -180,7 +180,7 @@ namespace Creature
                 task = tasks.Peek();
 
 
-            Debug.Log($"End of Task: {task.GetType()}");
+            //Debug.Log($"End of Task: {task.GetType()}");
             task.EndTask(UpdateLoop);
             if (hotTasks.Count > 0)
                 hotTasks.Dequeue();

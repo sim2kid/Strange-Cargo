@@ -4,11 +4,12 @@ using UnityEngine;
 using Interaction;
 using Player;
 using Creature.Stats;
+using UnityEngine.Events;
 
 namespace Environment {
     public class FoodBag : Pickupable, IUseable
     {
-        
+        public UnityEvent OnUse;
         public string UseText => useString;
 
         private PlayerController Player;
@@ -20,9 +21,10 @@ namespace Environment {
         {
             if (Bowl != null)
             {
+                OnUse.Invoke();
                 Player.HandController.LetGo();
                 Bowl.Fill(200);
-                Destroy(this);
+                Destroy(this.gameObject);
             }
         }
 
@@ -36,7 +38,11 @@ namespace Environment {
         public void HoldUpdate()
         {
             IInteractable lastObj = Player.Interaction.Previous;
-            Bowl = lastObj.GameObject.GetComponent<FoodBowl>();
+            if (lastObj != null)
+                Bowl = lastObj.GameObject.GetComponent<FoodBowl>();
+            else 
+                Bowl = null;
+
             if (Bowl != null)
             {
                 useString = "{use} to Refill";
