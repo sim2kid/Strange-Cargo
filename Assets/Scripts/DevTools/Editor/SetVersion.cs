@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using System.IO;
+using System;
 
 namespace DevTools
 {
@@ -28,18 +29,25 @@ namespace DevTools
                 // Get Git Version Number
                 string newVersion = GitTagVersion(gitRepository);
 
-                Debug.Log(newVersion);  
-
                 // Get Project Version File
                 string filePath = GetProjectFileName();
 
                 // Replace project version without messing up the rest of the file
-                Debug.Log($"New Build Version: v{Application.version}");
+                ReplaceVersionInEditor(filePath, newVersion);
+
+                Debug.Log($"New Build Version: v{newVersion}");
             }
             catch (System.Exception e)
             {
-                Debug.LogError($"Could not get new version. Version will not be updated.\n" + e);
+                Debug.LogError($"Could not get new version. Version will not be updated.", e);
             }
+        }
+
+        private static void ReplaceVersionInEditor(string filePath, string newVersion)
+        {
+            string yaml = File.ReadAllText(filePath);
+            yaml = yaml.Replace($"bundleVersion: {Application.version}", $"bundleVersion: {newVersion}");
+            File.WriteAllText(filePath, yaml);
         }
 
         private static string GitTagVersion(string repository) 
