@@ -17,6 +17,7 @@ namespace Creature.Task
 
         CreatureController _caller;
         ITask come;
+        ITask wait;
         UnityEvent _update;
 
         private FoodBowl _bowl;
@@ -37,17 +38,33 @@ namespace Creature.Task
 
         private void EatTheBowl() 
         {
-            Debug.Log("Eaten!");
+            Console.LogDebug($"Creature [{_caller.Guid}]: Eating - At Bowl");
             come.EndTask(_update);
-            _bowl.Eat(_caller.needs.GetNeed(Need.Appetite));
+
+            wait = new Wait(5);
+            wait.OnTaskFinished.AddListener(Finish);
+            wait.RunTask(_caller, _update);
+        }
+
+        private void Finish() 
+        {
+            wait.EndTask(_update);
+
+            _bowl.Eat(200 - _caller.needs.GetNeed(Need.Appetite));
             _caller.ProcessINeed(_bowl);
+
+            Console.LogDebug($"Creature [{_caller.Guid}]: Eating - Finished eating! New Appetite: {_caller.needs.Appetite}");
+
             IsDone = true;
         }
 
         public void EndTask(UnityEvent update)
         {
             update.RemoveListener(Update);
-            come.EndTask(update);
+            if(wait != null)
+                wait.EndTask(update);
+            if(come != null)
+                come.EndTask(update);
             IsStarted = false;
         }
 
@@ -62,6 +79,7 @@ namespace Creature.Task
 
         public Eat(FoodBowl bowl) 
         {
+            Console.HideInDebugConsole();
             IsStarted = false;
             _bowl = bowl;
             OnTaskFinished = new UnityEvent();

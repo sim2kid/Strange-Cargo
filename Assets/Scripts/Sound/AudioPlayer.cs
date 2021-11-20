@@ -28,10 +28,22 @@ namespace Sound
         {
             source.pitch = Sound.Pitch.Read();
             _delay = Sound.Delay.Read();
+            AudioClip clip = Sound.Clip;
             if (_delay <= 0)
-                source.PlayOneShot(Sound.Clip, Sound.Volume.Read());
-            else if(!IsDelayed)
+            {
+                if (clip != null)
+                    source.PlayOneShot(clip, Sound.Volume.Read());
+            }
+            else if (!IsDelayed)
+            {
                 StartCoroutine("PlayDelay");
+            }
+        }
+
+        public void PlayFrom(string repository) 
+        {
+            Sound.LoadAudio(repository);
+            Play();
         }
 
         private IEnumerator PlayDelay() 
@@ -40,8 +52,10 @@ namespace Sound
             if(!DelayAfter)
                 yield return new WaitForSeconds(_delay);
 
+            AudioClip clip = Sound.Clip;
             if(IsDelayed)
-                source.PlayOneShot(Sound.Clip, Sound.Volume.Read());
+                if(clip != null)
+                    source.PlayOneShot(clip, Sound.Volume.Read());
 
             if(DelayAfter)
                 yield return new WaitForSeconds(_delay);

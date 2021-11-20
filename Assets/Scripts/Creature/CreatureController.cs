@@ -19,6 +19,12 @@ namespace Creature
         public DNA dna;
         [SerializeField]
         public Needs needs;
+        [SerializeField]
+        public string Guid;
+        [SerializeField]
+        public string frontFeetSound;
+        [SerializeField]
+        public string backFeetSound;
 
         public NavMeshMovement Move { get; private set; }
         public int TaskCount => tasks.Count;
@@ -32,6 +38,7 @@ namespace Creature
         private int maxTasks = 10;
         private float maxTimeOnTask = 15f;
 
+        [SerializeField]
         private float timeSpentOnLastTask;
 
         private IProgress textureController;
@@ -95,11 +102,13 @@ namespace Creature
             return false;
         }
 
-        public void SetUp(DNA dna, Animator animator) 
+        public void SetUp(DNA dna, Animator animator, string guid, string frontFeetSound, string backFeetSound) 
         {
             this.dna = dna;
             this.Animator = animator;
-
+            this.Guid = guid;
+            this.frontFeetSound = frontFeetSound;
+            this.backFeetSound = backFeetSound;
         }
         
         public void RequestMoreTaskTime(float requestedTime) 
@@ -107,8 +116,9 @@ namespace Creature
             timeSpentOnLastTask -= Mathf.Clamp(requestedTime, 0, float.MaxValue);
         }
 
-        private void OnEnable()
+        private void Awake()
         {
+            Console.HideInDebugConsole();
             tasks = new Queue<ITask>();
             hotTasks = new Queue<ITask>();
             needs = new Needs();
@@ -124,7 +134,8 @@ namespace Creature
             UpdateLoop = new UnityEvent();
             timeSpentOnLastTask = 0;
 
-            Debug.LogWarning("The Creature Controller has hardwritten values!!");
+            Console.LogWarning("The Creature Controller has hardwritten values!!");
+            Console.Log($"Creature [{Guid}] has been loaded into the scene at {transform.position.ToString()}.");
         }
 
         private void Update()
@@ -154,12 +165,14 @@ namespace Creature
 
                 if (!task.IsStarted)
                 {
-                    Debug.Log($"New Task: {task.GetType()}");
+                    Console.LogDebug($"Creature [{Guid}]: New Task: {task.GetType()}");
                     task.RunTask(this, UpdateLoop);
                     timeSpentOnLastTask = 0;
                 }
                 else if (task.IsDone || timeSpentOnLastTask > maxTimeOnTask)
                 {
+                    if (timeSpentOnLastTask > maxTimeOnTask)
+                        Console.LogDebug($"Creature [{Guid}]: Task Timedout: {task.GetType()}");
                     VoidTask();
                 }
             }
@@ -180,7 +193,7 @@ namespace Creature
                 task = tasks.Peek();
 
 
-            Debug.Log($"End of Task: {task.GetType()}");
+            Console.LogDebug($"Creature [{Guid}]: End of Task: {task.GetType()} TimeLeft: {maxTimeOnTask - timeSpentOnLastTask}");
             task.EndTask(UpdateLoop);
             if (hotTasks.Count > 0)
                 hotTasks.Dequeue();

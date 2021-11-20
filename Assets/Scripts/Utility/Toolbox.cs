@@ -37,6 +37,12 @@ namespace Utility
         /// An active list of all potential tasks in the game
         /// </summary>
         public List<IUtility> AvalibleTasks { get; set; }
+        /// <summary>
+        /// The Player's main interface
+        /// </summary>
+        public Player.PlayerController Player { get; set; }
+
+        public ToolTip ToolTip { get; set; }
 
         private Toolbox()
         {
@@ -44,6 +50,7 @@ namespace Utility
             Genetics.Importer.Import(GenePool);
             SoundPool = new SoundRepository();
             CreatureList = new List<CreatureController>();
+
             AvalibleTasks = new List<IUtility>();
             AvalibleTasks.Add(new BasicUtility(UnityEngine.Random.Range(0f, 5f), new Creature.Task.Wait(UnityEngine.Random.Range(1f, 8f))));
             AvalibleTasks.Add(new BasicUtility(UnityEngine.Random.Range(-3f, 10f), new Creature.Task.Wander(3f)));

@@ -18,7 +18,7 @@ namespace Sound
         protected bool _loop;
 
         [SerializeField]
-        private string _audioPool;
+        string _audioPool;
 
         protected List<AudioClip> _clipPool;
 
@@ -35,16 +35,19 @@ namespace Sound
                 LoadAudio();
                 if (_clipPool == null) 
                 {
-                    Debug.LogWarning($"Could not load {_audioPool}.");
+                    Console.LogWarning($"Could not load {_audioPool}.");
                     return null;
                 }
-                if (_clipPool.Count == 0)
+                if (_clipPool.Count <= 0)
                 {
-                    Debug.LogWarning($"Could not load {_audioPool}.");
+                    Console.LogWarning($"Could not load {_audioPool}.");
                     return null;
                 }
             }
-            return _clipPool[Random.Range(0, _clipPool.Count)];
+            if (_clipPool.Count > 0)
+                return _clipPool[Random.Range(0, _clipPool.Count)];
+            else
+                return null;
         }
 
         public void LoadAudio(string newAudio = null) 

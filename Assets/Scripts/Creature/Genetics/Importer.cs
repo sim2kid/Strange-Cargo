@@ -38,9 +38,16 @@ namespace Genetics
             string[] pathsDirectories = Directory.GetDirectories(partPath);
             foreach (string directory in pathsDirectories)
             {
-                string[] paths = Directory.GetFiles(directory, "*.gltf");
-                foreach (string part in paths)
+                string[] pafs = Directory.GetFiles(directory, "*.gltf");
+                foreach (string part in pafs)
                     AddPart(genePool, part);
+                pafs = Directory.GetFiles(directory, "*.ref");
+                foreach (string refFile in pafs)
+                {
+                    string refPath = ResolveRef(refFile);
+                    if(refPath.EndsWith(".gltf"))
+                        AddPart(genePool, refPath);
+                }
             }
 
             // Find all the patterns
@@ -48,6 +55,13 @@ namespace Genetics
             string[] textPaths = Directory.GetFiles(texturePath);
             foreach (string texture in textPaths)
                 AddTexture(genePool, texture);
+            string[] paths = Directory.GetFiles(texturePath, "*.ref");
+            foreach (string refFile in paths)
+            {
+                string refPath = ResolveRef(refFile);
+                if(!string.IsNullOrWhiteSpace(refPath))
+                    AddTexture(genePool, refPath);
+            }
         }
 
         private static void AddTexture(GeneticRepository genePool, string filePath) 
@@ -72,6 +86,17 @@ namespace Genetics
             genePool.AddPattern(p);
         }
 
+        private static string ResolveRef(string refPath) 
+        {
+            if(!File.Exists(refPath))
+                return string.Empty;
+            string jsonText = File.ReadAllText(refPath);
+            JObject jsonObj = (JObject)JToken.Parse(jsonText);
+            if(jsonObj.ContainsKey("Path")) 
+                return (string)jsonObj["Path"];
+            return string.Empty;
+        }
+
         private static void AddPart(GeneticRepository genePool, string filePath) 
         {
             string partName = Path.GetFileNameWithoutExtension(filePath);
@@ -87,7 +112,7 @@ namespace Genetics
             string jsonLocation = Path.ChangeExtension(filePath, ".json");
             if (!File.Exists(jsonLocation))
             {
-                Debug.LogWarning($"The asset {parent}/{partName} does not have an associated JSON file and will not be added to the Gene Pool.");
+                Console.LogWarning($"The asset {parent}/{partName} does not have an associated JSON file and will not be added to the Gene Pool.");
                 return;
             }
 
@@ -103,13 +128,32 @@ namespace Genetics
             {
                 Scale = 0.1f;
             }
+            string Sound = string.Empty;
+            if (jsonObj.ContainsKey("Sound")) 
+            {
+                Sound = (string)jsonObj["Sound"];
+            }
+            string OffsetBone = string.Empty;
+            if (jsonObj.ContainsKey("OffsetBone"))
+            {
+                OffsetBone = (string)jsonObj["OffsetBone"];
+            }
+            Vector3 Offset = Vector3.zero;
+            if (jsonObj.ContainsKey("Offset"))
+            {
+                Offset = new Vector3((float)jsonObj["Offset"][0], (float)jsonObj["Offset"][1], (float)jsonObj["Offset"][2]);
+            }
 
             // Add the Bodypart to the partList
             BodyPart part = new BodyPart()
             {
                 Hash = GetHashString(partName),
+                Type = parent,
                 Name = partName,
                 FileLocation = filePath,
+                Sound = Sound,
+                OffsetBone = OffsetBone,
+                Offset = Offset,
                 Scale = Scale,
                 Shader = (ShaderEnum)(int)jsonObj["Shader"],
                 Patterns = jsonObj["Patterns"].Select(x => (string)x).ToList()

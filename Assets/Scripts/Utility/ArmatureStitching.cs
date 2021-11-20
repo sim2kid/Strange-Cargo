@@ -87,7 +87,7 @@ namespace Utility
         /// <param name="name"></param>
         /// <param name="obj"></param>
         /// <returns></returns>
-        private static Transform FindChildByName(string name, Transform obj) 
+        public static Transform FindChildByName(string name, Transform obj) 
         {
             Transform returnObj;
             if (obj.name == name) 

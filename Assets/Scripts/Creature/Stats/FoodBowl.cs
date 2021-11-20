@@ -5,6 +5,7 @@ using DataType;
 using Environment;
 using Creature.Brain;
 using System;
+using UnityEngine.Events;
 
 namespace Creature.Stats
 {
@@ -19,6 +20,12 @@ namespace Creature.Stats
         [SerializeField]
         [Tooltip("Represents the max Appatite Points the bowl can hold")]
         public float MaxFullness = float.MaxValue;
+
+        [SerializeField]
+        public UnityEvent OnFill;
+
+        [SerializeField]
+        public UnityEvent OnEat;
 
         [SerializeField][HideInInspector]
         private Guid _guid;
@@ -72,11 +79,13 @@ namespace Creature.Stats
             float temp = Mathf.Clamp(Fullness - amount, 0, float.MaxValue);
             multiplier = Fullness - temp;
             Fullness = Mathf.Clamp(Fullness - multiplier, 0 , float.MaxValue);
+            OnEat.Invoke();
         }
 
         public void Fill(float amount) 
         {
             Fullness = Mathf.Clamp(amount, MinValue, MaxValue);
+            OnFill.Invoke();
         }
 
         private void OnEnable()

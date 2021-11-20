@@ -109,8 +109,37 @@ namespace Genetics
             RuntimeAnimatorController rac = Resources.Load(AnimationControllerLocation) as RuntimeAnimatorController;
             a.runtimeAnimatorController = rac;
 
+            FeetSound[] feet = creature.GetComponentsInChildren<FeetSound>();
+            string frontFeetSound = string.Empty, backFeetSound = string.Empty;
+            foreach (FeetSound foot in feet)
+            {
+                if (!string.IsNullOrWhiteSpace(foot.Sound)) 
+                {
+                    if (foot.IsFrontFeet)
+                    {
+                        frontFeetSound = foot.Sound;
+                    }
+                    else
+                    {
+                        backFeetSound = foot.Sound;
+                    }
+                }
+                FeetSound.Destroy(foot);
+            }
+
+            BoneToPick[] boneModi = creature.GetComponentsInChildren<BoneToPick>();
+            foreach (BoneToPick bone in boneModi) 
+            {
+                if (!string.IsNullOrWhiteSpace(bone.BoneOffset))
+                {
+                    Transform pick = ArmatureStitching.FindChildByName(bone.BoneOffset, creature.transform);
+                    pick.position += bone.Offset;
+                }
+                BoneToPick.Destroy(bone);
+            }
+
             CreatureController c = creature.AddComponent<CreatureController>();
-            c.SetUp(dna, a);
+            c.SetUp(dna, a, Guid.NewGuid().ToString(), frontFeetSound, backFeetSound);
 
 
             creature.AddComponent<NavMeshMovement>();
@@ -147,9 +176,18 @@ namespace Genetics
             Renderer[] models = partObject.transform.GetComponentsInChildren<Renderer>();
 
             bool useTexture = ImageConversion.LoadImage(texture2D, textureBytes, false);
-            
+
+            int i = 0;
             foreach (Renderer renderer in models) 
             {
+                if (i == 0) 
+                {
+                    if (!string.IsNullOrWhiteSpace(bodyPart.OffsetBone) && bodyPart.Offset != null) 
+                        renderer.gameObject.AddComponent<BoneToPick>().Populate(bodyPart.OffsetBone, bodyPart.Offset);
+                    if (bodyPart.Type == "FrontLegs" || bodyPart.Type == "BackLegs")
+                        renderer.gameObject.AddComponent<FeetSound>().Populate(bodyPart.Sound, bodyPart.Type == "FrontLegs");
+                }
+                i++;
                 if (useTexture)
                 {
                     renderer.gameObject.AddComponent<MaterialConversion>()
