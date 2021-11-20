@@ -1,38 +1,48 @@
-using PlayerController;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Environment;
 
 namespace Sound
 {
-    [RequireComponent(typeof(MovementController))]
     [RequireComponent(typeof(AudioPlayer))]
     public class FootstepController : MonoBehaviour
     {
-        private Vector3 lastPosition;
+        [Tooltip("The speed at which steps are played")]
         [SerializeField]
-        private float StepsRate = 1;
+        public float StepsRate = 1;
+        [Tooltip("Adjust so that 'IsGrounded' is false during a jump")]
+        [SerializeField]
+        private float GroundCheckDistance = 1.5f;
+        [SerializeField]
+        private bool isPlayer = false;
+
+        private Vector3 lastPosition;
+        [Header("View Only")]
+        [SerializeField]
         private float speed;
-        private MovementController pc;
+        [SerializeField]
+        bool isGrounded;
         private AudioPlayer player;
 
         // Start is called before the first frame update
         void Start()
         {
             lastPosition = transform.position;
-            pc = GetComponent<MovementController>();
             player = GetComponent<AudioPlayer>();
             player.enabled = true;
             player.DelayAfter = true;
         }
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
-            speed = Vector3.Distance(transform.position, lastPosition) * (50 / pc.MoveSpeed);
+            speed = (transform.position - lastPosition).magnitude;
             lastPosition = transform.position;
 
-            if (pc.isOnGround && speed > 0.1f)
+            isGrounded = GoundCheck();
+
+            if (isGrounded && speed > 0.001f)
             {
                 CheckFloorType();
                 player.Sound.Delay.Value = StepsRate;
@@ -40,10 +50,29 @@ namespace Sound
             }
         }
 
+        private bool GoundCheck() 
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, GroundCheckDistance)) 
+            {
+                return !hit.collider.isTrigger;
+            }
+            return false;
+        }
+
         private void CheckFloorType() 
         {
-            // TO-DO
-            string newAudioMap = SoundRepository.EnviromentSoundBank(EnviromentSound.Wood);
+            RaycastHit hit;
+
+            Environment.Material myMaterial = Environment.Material.None;
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, GroundCheckDistance))
+            {
+                IMaterial m = hit.transform.gameObject.GetComponent<IMaterial>();
+                if (m != null)
+                    myMaterial = m.Material;
+            }
+
+            string newAudioMap = SoundRepository.EnviromentSoundBank(myMaterial, !isPlayer);
             player.Sound.LoadAudio(newAudioMap);
         }
     }

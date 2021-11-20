@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Importing;
+using UnityEngine.Networking;
+using UnityEngine.Events;
+using System;
 
 namespace Sound
 {
@@ -12,7 +15,7 @@ namespace Sound
         public SoundRepository() 
         {
             baked_db = Importer.LoadDatabase("Data/Database", "Audio");
-            live_db = Importer.Import("Audio", "*.mp3", null, Application.streamingAssetsPath);
+            live_db = Importer.Import("", null, System.IO.Path.Combine(Application.streamingAssetsPath, "Audio"), ".mp3", ".wav", ".ogg", ".aiff", ".aif");
         }
 
         /// <summary>
@@ -22,52 +25,88 @@ namespace Sound
         /// <returns></returns>
         public List<AudioClip> GrabBakedAudio(string location) 
         {
-            location = SanitizePath(location);
-            Folder dir = baked_db.Folders[location];
             List<AudioClip> clips = new List<AudioClip>();
-
-            foreach (File file in dir.Files) 
+            try
             {
-                string clipPath = System.IO.Path.ChangeExtension($"Audio\\{file.FileLocation}", string.Empty);
-                clipPath = clipPath.Substring(0, clipPath.Length - 1);
-                AudioClip c = Resources.Load<AudioClip>(clipPath);
-                if(c != null)
-                    clips.Add(c);
-            }
+                location = SanitizePath(location);
+                Folder dir = baked_db.Folders[location];
 
-            return clips;
+                foreach (File file in dir.Files)
+                {
+                    string clipPath = System.IO.Path.ChangeExtension($"Audio\\{file.FileLocation}", string.Empty);
+                    clipPath = clipPath.Substring(0, clipPath.Length - 1);
+                    AudioClip c = Resources.Load<AudioClip>(clipPath);
+                    if (c != null)
+                        clips.Add(c);
+                }
+
+                return clips;
+            }
+            catch 
+            {
+                return clips;
+            }
         }
 
         /// <summary>
-        /// Returns a list of audio clips from the folder <paramref name="location"/> provided. They should be in "StreamingAssets/Audio"
+        /// Returns a list of audio clips from the folder <paramref name="location"/> provided. They should be in "StreamingAssets/Audio".
         /// </summary>
         /// <param name="location"></param>
         /// <returns></returns>
-        public List<AudioClip> GrabLiveAudio(string location)
+        public IEnumerator GrabLiveAudio(string location, Action<List<AudioClip>> callback) 
         {
-            location = SanitizePath(location);
-            Folder dir = baked_db.Folders[location];
-            List<AudioClip> clips = new List<AudioClip>();
-
-            throw new System.NotImplementedException();
-
-            return clips;
+            List<AudioClip> audioList = new List<AudioClip>();
+            if (!live_db.Folders.ContainsKey(location))
+            {
+                callback(audioList);
+                yield return null;
+            }
+            else
+            {
+                location = SanitizePath(location);
+                Folder dir = live_db.Folders[location];
+                foreach (File file in dir.Files)
+                {
+                    string fileLocation = System.IO.Path.Combine(System.IO.Path.Combine("file:///", Application.streamingAssetsPath), "Audio");
+                    fileLocation = SanitizePath(System.IO.Path.Combine(fileLocation, file.FileLocation));
+                    UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip(fileLocation, AudioType.UNKNOWN);
+                    yield return request.SendWebRequest();
+                    if (request.result == UnityWebRequest.Result.ConnectionError)
+                    {
+                        Console.LogError($"Failed to find audio at {fileLocation}.\n" + request.error);
+                    }
+                    else if (request.result == UnityWebRequest.Result.ProtocolError)
+                    {
+                        Console.LogError($"Failed to find audio at {fileLocation}.\n" + request.error);
+                    }
+                    else if (request.result == UnityWebRequest.Result.DataProcessingError)
+                    {
+                        Console.LogError($"Failed to process audio at {fileLocation}.\n" + request.error);
+                    }
+                    else
+                    {
+                        AudioClip clip = DownloadHandlerAudioClip.GetContent(request);
+                        audioList.Add(clip);
+                    }
+                }
+                callback(audioList);
+            }
         }
 
-        public static string EnviromentSoundBank(EnviromentSound enumm, bool isAnimal = false) 
+        public static string EnviromentSoundBank(Environment.Material enumm, bool isAnimal = false) 
         {
             string profile = isAnimal ? "Animal" : "Player";
             switch (enumm) 
             {
                 default:
-                case EnviromentSound.None:
+                case Environment.Material.None:
                     return string.Empty;
-                case EnviromentSound.Grass:
+                case Environment.Material.Grass:
                     return $"{profile}/Footsteps/Grass";
-                case EnviromentSound.Tile:
+                case Environment.Material.Tile:
                     if (isAnimal) return $"{profile}/Footsteps/Wood_Tile";
                     return $"{profile}/Footsteps/Tile";
-                case EnviromentSound.Wood:
+                case Environment.Material.Wood:
                     if (isAnimal) return $"{profile}/Footsteps/Wood_Tile";
                     return $"{profile}/Footsteps/Wood";
 

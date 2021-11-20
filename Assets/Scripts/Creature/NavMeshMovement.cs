@@ -10,6 +10,9 @@ namespace Creature
     public class NavMeshMovement : MonoBehaviour
     {
         private NavMeshAgent navMeshAgent;
+
+        public float Speed => navMeshAgent.velocity.magnitude;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -22,6 +25,9 @@ namespace Creature
         void GetNavMeshAgent()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
+            navMeshAgent.height = 0.8f;
+            navMeshAgent.speed = 1f;
+            navMeshAgent.angularSpeed = 200;
         }
 
         /// <summary>

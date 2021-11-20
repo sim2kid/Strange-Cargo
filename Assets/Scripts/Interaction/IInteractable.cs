@@ -6,6 +6,8 @@ namespace Interaction
 {
     public interface IInteractable
     {
+        public GameObject GameObject { get; }
+        public string InteractText { get; }
         public ClickState ClickState { get; }
 
         public void Enter();
@@ -15,5 +17,6 @@ namespace Interaction
         public void Down();
         public void Hold();
         public void Up();
+        public void LateUp();
     }
 }

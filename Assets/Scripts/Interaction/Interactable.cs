@@ -6,7 +6,7 @@ using System;
 
 namespace Interaction
 {
-    public class Interactable : MonoBehaviour, IInteractable
+    public class Interactable : BasicInteractable, IInteractable
     {
         [Tooltip("Interaction Events")]
         [SerializeField]
@@ -19,47 +19,40 @@ namespace Interaction
         public UnityEvent OnHover { get => events.OnHover; }
         public UnityEvent OnUp { get => events.OnUp; }
 
-        public ClickState ClickState { get; protected set; }
-
-        public void Start()
+        public override void Down()
         {
-            ClickState = ClickState.None;
-        }
-
-        public void Down()
-        {
-            ClickState = ClickState.Down;
             OnDown.Invoke();
+            base.Down();
         }
 
-        public void Enter()
+        public override void Enter()
         {
-            ClickState = ClickState.Enter;
             OnEnter.Invoke();
+            base.Enter();
         }
 
-        public void Exit()
+        public override void Exit()
         {
-            ClickState = ClickState.Exit;
             OnExit.Invoke();
+            base.Exit();
         }
 
-        public void Hold()
+        public override void Hold()
         {
-            ClickState = ClickState.Hold;
             OnHold.Invoke();
+            base.Hold();
         }
 
-        public void Hover()
+        public override void Hover()
         {
-            ClickState = ClickState.Hover;
             OnHover.Invoke();
+            base.Hover();
         }
 
-        public void Up()
+        public override void Up()
         {
-            ClickState = ClickState.Up;
             OnUp.Invoke();
+            base.Up();
         }
     }
 

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using Newtonsoft.Json.Linq;
+using System.Linq;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -22,7 +24,7 @@ namespace Importing
         /// <param name="db"></param>
         /// <param name="topLevelLocation"></param>
         /// <returns></returns>
-        public static Database Import(string parentFolder, string fileSearchPattern = null, Database db = null, string topLevelLocation = null) 
+        public static Database Import(string parentFolder, Database db = null, string topLevelLocation = null, params string[] fileExtensions) 
         {
             if (db == null)
                 db = ScriptableObject.CreateInstance<Database>();
@@ -31,15 +33,31 @@ namespace Importing
                 topLevelLocation = Application.streamingAssetsPath;
 
             string path = SanitizePath(Path.Combine(topLevelLocation, parentFolder));
-            string[] files;
 
-            if (string.IsNullOrEmpty(fileSearchPattern))
-                files = Directory.GetFiles(path);
-            else
-                files = Directory.GetFiles(path, fileSearchPattern);
+            // Prevent running files if there is no folder // 
+            if (!Directory.Exists(path))
+                return db;
+
+            string[] preFiles = Directory.GetFiles(path);
+            List<string> files = new List<string>();
+            foreach (string file in preFiles)
+                if (fileExtensions.Any(x => file.EndsWith(x)))
+                    files.Add(file);
+            string[] refrences = Directory.GetFiles(path, "*.ref");
+            foreach (string reff in refrences)
+            {
+                
+                string newFile = ResolveRef(reff);
+                if (string.IsNullOrWhiteSpace(newFile))
+                    continue;
+                if (fileExtensions.Any(x => newFile.EndsWith(x)))
+                {
+                    files.Add(newFile);
+                }
+            }
 
             string parent = SanitizePath(parentFolder);
-            if (files.Length > 0)
+            if (files.Count > 0)
                 if (!db.Folders.ContainsKey(parent))
                     db.Folders.Add(parent, new Folder() 
                     {
@@ -59,7 +77,7 @@ namespace Importing
             foreach (string dir in directories) 
             {
                 string newPath = SanitizePath(Path.Combine(parent, Path.GetFileName(dir)));
-                Import(newPath, fileSearchPattern, db, topLevelLocation);
+                Import(newPath, db, topLevelLocation, fileExtensions);
             }
 
             return db;
@@ -108,6 +126,17 @@ namespace Importing
             }
             db.DeSerialize();
             return db;
+        }
+
+        private static string ResolveRef(string refPath)
+        {
+            if (!System.IO.File.Exists(refPath))
+                return string.Empty;
+            string jsonText = System.IO.File.ReadAllText(refPath);
+            JObject jsonObj = (JObject)JToken.Parse(jsonText);
+            if (jsonObj.ContainsKey("Path"))
+                return (string)jsonObj["Path"];
+            return string.Empty;
         }
 
         private static string SanitizePath(string s)

@@ -11,20 +11,27 @@ namespace Interaction
     {
         [Tooltip("The object to cast a Raycast from")]
         [SerializeField]
-        GameObject Eyes;
+        public GameObject Eyes;
         [Tooltip("The distance from the Eyes that the player can interact with")]
         [SerializeField]
         float InteractionDistance = 3f;
 
         private PlayerInput playerInput;
         private InputAction interact;
+        private Utility.ToolTip tt; 
 
-        IInteractable prevoius;
+        List<IInteractable> UpClickQueue;
+        public IInteractable Previous { get; private set; }
+
+        bool lastButton;
 
         private void Start()
         {
+            tt = Utility.Toolbox.Instance.ToolTip;
+            lastButton = false;
             playerInput = GetComponent<PlayerInput>();
-            interact = playerInput.actions["Interact"];
+            interact = playerInput.actions["Use"];
+            UpClickQueue = new List<IInteractable>();
         }
 
         void Update()
@@ -48,18 +55,24 @@ namespace Interaction
             if (hits.Length > 0)
                 hitObj = GetClosest(objects);
 
+            bool buttonDown = interact.ReadValue<float>() == 1;
+
             if (hitObj != null)
             {
                 IInteractable closest = hitObj.GetComponent<IInteractable>();
 
-                bool buttonDown = interact.ReadValue<float>() == 1;
-
-                if (prevoius != closest)
+                if (Previous != closest)
                 {
-                    if (prevoius != null)
-                        prevoius.Exit();
-                    prevoius = closest;
+                    if (Previous != null)
+                    {
+                        if (Previous.ClickState == ClickState.Down || Previous.ClickState == ClickState.Hold)
+                            UpClickQueue.Add(Previous);
+                        Previous.Exit();
+                        tt.HoverText = string.Empty;
+                    }
+                    Previous = closest;
                     closest.Enter();
+                    tt.HoverText = closest.InteractText;
                 }
                 else
                 {
@@ -88,21 +101,33 @@ namespace Interaction
             }
             else 
             {
-                if (prevoius != null)
+                if (Previous != null)
                 {
-                    prevoius.Exit();
-                    prevoius = null;
+                    if (Previous.ClickState == ClickState.Down || Previous.ClickState == ClickState.Hold)
+                        UpClickQueue.Add(Previous);
+                    Previous.Exit();
+                    tt.HoverText = string.Empty;
+                    Previous = null;
                 }
             }
-            
+
+            if (buttonDown == false && lastButton == true)
+            {
+                while (UpClickQueue.Count > 0) 
+                {
+                    UpClickQueue[0].Up();
+                    UpClickQueue.RemoveAt(0);
+                }
+            }
+            lastButton = buttonDown;
         }
 
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.blue;
-            if (prevoius != null)
+            if (Previous != null)
             {
-                if (prevoius.ClickState != ClickState.Exit && prevoius.ClickState != ClickState.None)
+                if (Previous.ClickState != ClickState.Exit && Previous.ClickState != ClickState.None)
                 {
                     Gizmos.color = Color.red;
                 }

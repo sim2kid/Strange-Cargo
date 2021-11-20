@@ -30,8 +30,6 @@ public class DialogueController : MonoBehaviour
         manager = GetComponent<DialogueManager>();
         // In theory, this manager will be swapped out a lot.
         dialogueParent.SetActive(false);
-
-        StartConversation();
     }
 
     public void RenderCurrentNode() 
