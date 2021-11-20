@@ -8,9 +8,16 @@ namespace DevTools
 {
     // Will run the script whenever the editor loads
     [InitializeOnLoad]
-    public class SetVersion
+    public class SetVersion: IPreprocessBuildWithReport
     {
-        public SetVersion() 
+        public int callbackOrder => -5000;
+
+        public void OnPreprocessBuild(BuildReport report)
+        {
+            Version();
+        }
+
+        static SetVersion() 
         {
             Version();
         }
@@ -31,7 +38,10 @@ namespace DevTools
                 string newVersion = GitTagVersion(gitRepository);
 
                 if (Application.version == newVersion)
+                {
+                    Debug.Log($"Version: {Application.version}");
                     return;
+                }
 
                 // Get Project Version File
                 string filePath = GetProjectFileName();
@@ -39,7 +49,7 @@ namespace DevTools
                 // Replace project version without messing up the rest of the file
                 ReplaceVersionInEditor(filePath, newVersion);
 
-                Debug.Log($"New Build Version: v{newVersion}");
+                Debug.Log($"New Version: v{newVersion}");
             }
             catch (System.Exception e)
             {

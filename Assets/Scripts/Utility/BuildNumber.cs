@@ -10,7 +10,6 @@ namespace Utility
         {
             tmp = GetComponent<TMPro.TextMeshProUGUI>();
             tmp.text = tmp.text.Replace("#.#.#", Application.version);
-            Console.Debug(tmp.text);
         }
     }
 }
