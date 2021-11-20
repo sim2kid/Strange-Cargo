@@ -20,7 +20,7 @@ public static class Console
 
     public static void ShowInDebugConsole() 
     {
-        string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name;
+        string source = NameOfCallingClass();
         if(!EnabledClasses.TryGetValue(source, out bool value))
             EnabledClasses.Add(source, true);
         else
@@ -28,7 +28,7 @@ public static class Console
     }
     public static void HideInDebugConsole() 
     {
-        string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetType().Name;
+        string source = NameOfCallingClass();
         if (!EnabledClasses.TryGetValue(source, out bool value))
             EnabledClasses.Add(source, false);
         else
@@ -66,39 +66,33 @@ public static class Console
         string source = NameOfCallingClass();
         Log(LogLevel.Debug, source, message, context, LookUpClass(source), false);
     }
-    /// <summary>
-    /// Logs a messege to the debug console
-    /// </summary>
-    /// <param name="message"></param>
-    public static void LogDebug(object message)
-    {
-        Log(LogLevel.Debug, NameOfCallingClass(), message, null, true);
-    }
-    /// <summary>
-    /// Logs a messege to the debug console
-    /// </summary>
-    /// <param name="message"></param>
-    public static void LogDebug(object message, UnityEngine.Object context)
+
+    public static void Debug(object message, UnityEngine.Object context = null)
     {
         Log(LogLevel.Debug, NameOfCallingClass(), message, context, true);
     }
 
-    public static void Log(LogLevel logLevel, object message)
+    public static void LogDebug(object message, UnityEngine.Object context = null)
     {
-        Log(logLevel, NameOfCallingClass(), message, null);
+        Log(LogLevel.Debug, NameOfCallingClass(), message, context);
     }
 
-    public static void Log(LogLevel logLevel, object message, UnityEngine.Object context)
+    public static void LogConsole(object message, UnityEngine.Object context = null)
+    {
+        Log(LogLevel.Console, NameOfCallingClass(), message, context);
+    }
+
+    public static void LogFatal(object message, UnityEngine.Object context = null)
+    {
+        Log(LogLevel.Fatal, NameOfCallingClass(), message, context);
+    }
+
+    public static void Log(LogLevel logLevel, object message, UnityEngine.Object context = null)
     {
         Log(logLevel, NameOfCallingClass(), message, context);
     }
 
-    public static void Log(LogLevel logLevel, string tag, object message)
-    {
-        Log(logLevel, tag, message, null);
-    }
-
-    public static void Log(LogLevel logLevel, string tag, object message, UnityEngine.Object context)
+    public static void Log(LogLevel logLevel, string tag, object message, UnityEngine.Object context = null)
     {
         Log(logLevel, tag, message, context, LookUpClass(tag)) ;
     }
@@ -113,12 +107,7 @@ public static class Console
         Log(LogLevel.Information, NameOfCallingClass(), message, null);
     }
 
-    public static void Log(string tag, object message)
-    {
-        Log(LogLevel.Information, tag, message, null);
-    }
-
-    public static void Log(string tag, object message, UnityEngine.Object context)
+    public static void Log(string tag, object message, UnityEngine.Object context = null)
     {
         Log(LogLevel.Information, tag, message, context);
     }
@@ -128,22 +117,12 @@ public static class Console
         Log(LogLevel.Error, NameOfCallingClass(), message, null);
     }
 
-    public static void LogError(string tag, object message)
-    {
-        Log(LogLevel.Error, tag, message, null);
-    }
-
-    public static void LogError(string tag, object message, UnityEngine.Object context)
+    public static void LogError(string tag, object message, UnityEngine.Object context = null)
     {
         Log(LogLevel.Error, tag, message, context);
     }
 
-    public static void LogException(Exception exception)
-    {
-        Log(LogLevel.Exception, NameOfCallingClass(), exception, null);
-    }
-
-    public static void LogException(Exception exception, UnityEngine.Object context)
+    public static void LogException(Exception exception, UnityEngine.Object context = null)
     {
         Log(LogLevel.Exception, NameOfCallingClass(), exception, context);
     }
@@ -165,12 +144,7 @@ public static class Console
         Log(LogLevel.Warning, NameOfCallingClass(), message, null);
     }
 
-    public static void LogWarning(string tag, object message)
-    {
-        Log(LogLevel.Warning, tag, message, null);
-    }
-
-    public static void LogWarning(string tag, object message, UnityEngine.Object context)
+    public static void LogWarning(string tag, object message, UnityEngine.Object context = null)
     {
         Log(LogLevel.Warning, tag, message, context);
     }

@@ -12,6 +12,9 @@ public class ConsoleLogHandler : ILogHandler
     private StreamWriter lateSW;
     private ILogHandler defaultLogHandler = Debug.unityLogger.logHandler;
     public static LogLevel filterLogLevel = LogLevel.Console;
+    public static LogLevel filterFileLogLevel = LogLevel.Information;
+
+    static object locker = new object();
 
     private bool sentFirstMessege;
 
@@ -52,8 +55,10 @@ public class ConsoleLogHandler : ILogHandler
         if (!sentFirstMessege)
         {
             sentFirstMessege = true;
+            Console.ShowInDebugConsole();
             Console.Log(LogLevel.Console, $"{Application.productName} v{Application.version} by {Application.companyName} is now running!");
-            Console.Log(LogLevel.Debug, $"{{ \"version\": \"v{Application.version}\", \"buildGuid\": \"{Application.buildGUID}\"," +
+            Console.HideInDebugConsole();
+            Console.Log(LogLevel.Information, $"{{ \"version\": \"v{Application.version}\", \"buildGuid\": \"{Application.buildGUID}\"," +
                 $" \"genuine\": \"{Application.genuine}\", \"genuineCheckAvailable\": \"{Application.genuineCheckAvailable}\"," +
                 $"\"installerName\": \"{Application.installerName}\", \"isEditor\": \"{Application.isEditor}\", \"platform\": \"{Application.platform}\", \"unityVersion\": \"{Application.unityVersion}\" }}");
         }
@@ -68,9 +73,14 @@ public class ConsoleLogHandler : ILogHandler
         mainFS.Close();
     }
 
-    public static bool IsLogTypeAllowed(LogLevel logLevel)
+    public static bool IsLogAllowedOnConsole(LogLevel logLevel)
     {
         return (int)filterLogLevel >= (int)logLevel;
+    }
+
+    public static bool IsLogAllowedOnFile(LogLevel logLevel)
+    {
+        return (int)filterFileLogLevel >= (int)logLevel;
     }
 
     public void LogException(Exception exception, UnityEngine.Object context)
@@ -90,8 +100,9 @@ public class ConsoleLogHandler : ILogHandler
             format = CleanFormat(format);
         string postformat = String.Format(format, args);
 
-        LogToFile(LogLevelToType(logType), postformat);
-        defaultLogHandler.LogFormat(logType, context, format, args);
+        LogToFile(LogChange(logType), postformat);
+        if(IsLogAllowedOnConsole(LogChange(logType)))
+            defaultLogHandler.LogFormat(logType, context, format, args);
     }
 
     public void Log(LogLevel logLevel, bool allowInDebugConsole, string Source, UnityEngine.Object context, string format, bool logToFile = true, params object[] args) 
@@ -105,22 +116,28 @@ public class ConsoleLogHandler : ILogHandler
 
         LogToFile(logLevel, postformat, Source);
 
-        if(allowInDebugConsole)
-            defaultLogHandler.LogFormat(LogLevelToType(logLevel), context, format, args);
+        if(allowInDebugConsole || IsLogAllowedOnConsole(logLevel))
+            defaultLogHandler.LogFormat(LogChange(logLevel), context, format, args);
     }
 
     private void LogToFile(LogLevel logLevel, string str, string source = "UnityEngine.Debug") 
     {
         BeforeFirst();
         string toWrite = $"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}] [{LogLevelToString(logLevel)}] [{source}]: {str}";
-        if (IsLogTypeAllowed(logLevel))
+        lock (locker)
         {
-            UpdateLogs(toWrite);
+            if (IsLogAllowedOnConsole(logLevel))
+            {
+                UpdateLogs(toWrite);
+            }
+            if (IsLogAllowedOnFile(logLevel))
+            {
+                mainSW.WriteLine(toWrite);
+                mainSW.Flush();
+                lateSW.WriteLine(toWrite);
+                lateSW.Flush();
+            }
         }
-        mainSW.WriteLine(toWrite);
-        mainSW.Flush();
-        lateSW.WriteLine(toWrite);
-        lateSW.Flush();
     }
 
     private void UpdateLogs(string log) 
@@ -130,7 +147,7 @@ public class ConsoleLogHandler : ILogHandler
         _logs.Enqueue(log);
     }
 
-    private LogLevel LogLevelToType(LogType type) 
+    private LogLevel LogChange(LogType type) 
     {
         switch (type) 
         {
@@ -149,7 +166,7 @@ public class ConsoleLogHandler : ILogHandler
         }
     }
 
-    private LogType LogLevelToType(LogLevel logLevel)
+    private LogType LogChange(LogLevel logLevel)
     {
         int level = (int)logLevel;
         if (level <= (int)LogLevel.Exception)

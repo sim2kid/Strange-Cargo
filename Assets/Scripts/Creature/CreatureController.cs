@@ -19,6 +19,8 @@ namespace Creature
         public DNA dna;
         [SerializeField]
         public Needs needs;
+        [SerializeField]
+        public string Guid;
 
         public NavMeshMovement Move { get; private set; }
         public int TaskCount => tasks.Count;
@@ -96,11 +98,11 @@ namespace Creature
             return false;
         }
 
-        public void SetUp(DNA dna, Animator animator) 
+        public void SetUp(DNA dna, Animator animator, string guid) 
         {
             this.dna = dna;
             this.Animator = animator;
-
+            this.Guid = guid;
         }
         
         public void RequestMoreTaskTime(float requestedTime) 
@@ -110,6 +112,7 @@ namespace Creature
 
         private void Awake()
         {
+            Console.HideInDebugConsole();
             tasks = new Queue<ITask>();
             hotTasks = new Queue<ITask>();
             needs = new Needs();
@@ -125,7 +128,8 @@ namespace Creature
             UpdateLoop = new UnityEvent();
             timeSpentOnLastTask = 0;
 
-            Debug.LogWarning("The Creature Controller has hardwritten values!!");
+            Console.LogWarning("The Creature Controller has hardwritten values!!");
+            Console.Log($"Creature [{Guid}] has been loaded into the scene at {transform.position.ToString()}.");
         }
 
         private void Update()
@@ -155,14 +159,14 @@ namespace Creature
 
                 if (!task.IsStarted)
                 {
-                    Console.Log($"New Task: {task.GetType()}");
+                    Console.LogDebug($"Creature [{Guid}]: New Task: {task.GetType()}");
                     task.RunTask(this, UpdateLoop);
                     timeSpentOnLastTask = 0;
                 }
                 else if (task.IsDone || timeSpentOnLastTask > maxTimeOnTask)
                 {
                     if (timeSpentOnLastTask > maxTimeOnTask)
-                        Console.Log($"Task Timedout: {task.GetType()}");
+                        Console.LogDebug($"Creature [{Guid}]: Task Timedout: {task.GetType()}");
                     VoidTask();
                 }
             }
@@ -183,7 +187,7 @@ namespace Creature
                 task = tasks.Peek();
 
 
-            Console.Log($"End of Task: {task.GetType()}");
+            Console.LogDebug($"Creature [{Guid}]: End of Task: {task.GetType()} TimeLeft: {maxTimeOnTask - timeSpentOnLastTask}");
             task.EndTask(UpdateLoop);
             if (hotTasks.Count > 0)
                 hotTasks.Dequeue();

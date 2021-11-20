@@ -110,7 +110,7 @@ namespace Genetics
             a.runtimeAnimatorController = rac;
 
             CreatureController c = creature.AddComponent<CreatureController>();
-            c.SetUp(dna, a);
+            c.SetUp(dna, a, Guid.NewGuid().ToString());
 
 
             creature.AddComponent<NavMeshMovement>();

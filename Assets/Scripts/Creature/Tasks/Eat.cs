@@ -38,7 +38,7 @@ namespace Creature.Task
 
         private void EatTheBowl() 
         {
-            Console.Log("At Bowl");
+            Console.LogDebug($"Creature [{_caller.Guid}]: Eating - At Bowl");
             come.EndTask(_update);
 
             wait = new Wait(5);
@@ -48,11 +48,12 @@ namespace Creature.Task
 
         private void Finish() 
         {
-            Console.Log("Eaten!");
             wait.EndTask(_update);
 
             _bowl.Eat(200 - _caller.needs.GetNeed(Need.Appetite));
             _caller.ProcessINeed(_bowl);
+
+            Console.LogDebug($"Creature [{_caller.Guid}]: Eating - Finished eating! New Appetite: {_caller.needs.Appetite}");
 
             IsDone = true;
         }
@@ -76,6 +77,7 @@ namespace Creature.Task
 
         public Eat(FoodBowl bowl) 
         {
+            Console.HideInDebugConsole();
             IsStarted = false;
             _bowl = bowl;
             OnTaskFinished = new UnityEvent();
