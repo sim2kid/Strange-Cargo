@@ -30,10 +30,14 @@ namespace Sound
             _delay = Sound.Delay.Read();
             AudioClip clip = Sound.Clip;
             if (_delay <= 0)
-                if(clip != null)
+            {
+                if (clip != null)
                     source.PlayOneShot(clip, Sound.Volume.Read());
-            else if(!IsDelayed)
+            }
+            else if (!IsDelayed)
+            {
                 StartCoroutine("PlayDelay");
+            }
         }
 
         public void PlayFrom(string repository) 

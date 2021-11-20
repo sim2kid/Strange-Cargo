@@ -35,9 +35,12 @@ namespace Utility
 
         void Update()
         {
-            Hover.text = HoverText;
-            Use.text = UseText;
-            Hold.text = HoldText;
+            if(Hover != null)
+                Hover.text = HoverText;
+            if (Use != null)
+                Use.text = UseText;
+            if (Hold != null)
+                Hold.text = HoldText;
         }
     }
 }
