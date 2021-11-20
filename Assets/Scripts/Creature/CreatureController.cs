@@ -21,6 +21,10 @@ namespace Creature
         public Needs needs;
         [SerializeField]
         public string Guid;
+        [SerializeField]
+        public string frontFeetSound;
+        [SerializeField]
+        public string backFeetSound;
 
         public NavMeshMovement Move { get; private set; }
         public int TaskCount => tasks.Count;
@@ -98,11 +102,13 @@ namespace Creature
             return false;
         }
 
-        public void SetUp(DNA dna, Animator animator, string guid) 
+        public void SetUp(DNA dna, Animator animator, string guid, string frontFeetSound, string backFeetSound) 
         {
             this.dna = dna;
             this.Animator = animator;
             this.Guid = guid;
+            this.frontFeetSound = frontFeetSound;
+            this.backFeetSound = backFeetSound;
         }
         
         public void RequestMoreTaskTime(float requestedTime) 

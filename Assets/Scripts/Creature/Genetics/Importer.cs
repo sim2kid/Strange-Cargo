@@ -108,8 +108,12 @@ namespace Genetics
             BodyPart part = new BodyPart()
             {
                 Hash = GetHashString(partName),
+                Type = parent,
                 Name = partName,
                 FileLocation = filePath,
+                Sound = jsonObj["Sound"].ToString(),
+                OffsetBone = jsonObj["OffsetBone"].ToString(),
+                Offset = new Vector3((int)jsonObj["Offset"][0], (int)jsonObj["Offset"][1], (int)jsonObj["Offset"][2]),
                 Scale = Scale,
                 Shader = (ShaderEnum)(int)jsonObj["Shader"],
                 Patterns = jsonObj["Patterns"].Select(x => (string)x).ToList()

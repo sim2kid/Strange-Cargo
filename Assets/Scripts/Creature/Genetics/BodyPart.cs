@@ -9,8 +9,12 @@ namespace Genetics
     public class BodyPart
     {
         public string Hash;
+        public string Type;
         public string Name;
         public string FileLocation;
+        public string Sound;
+        public string OffsetBone;
+        public Vector3 Offset;
         public float Scale;
         public ShaderEnum Shader;
         public List<string> Patterns;
