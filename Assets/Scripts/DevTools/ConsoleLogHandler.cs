@@ -13,6 +13,8 @@ public class ConsoleLogHandler : ILogHandler
     private ILogHandler defaultLogHandler = Debug.unityLogger.logHandler;
     public static LogLevel filterLogLevel = LogLevel.Console;
 
+    private bool sentFirstMessege;
+
     public int MaxLogSize = 50;
     private Queue<string> _logs;
     public string[] Logs => _logs.ToArray();
@@ -23,9 +25,9 @@ public class ConsoleLogHandler : ILogHandler
         if (!Directory.Exists(filePath)) 
             Directory.CreateDirectory(filePath);
         string mainPath = SanitizePath(Path.Combine(filePath, $"{DateTime.Now.ToString("yyyy-MM-dd")}.log"));
-        int i = 1;
+        int i = 0;
         while (File.Exists(mainPath))
-            mainPath = SanitizePath(Path.Combine(filePath, $"{DateTime.Now.ToString("yyyy-MM-dd")}-{i}.log"));
+            mainPath = SanitizePath(Path.Combine(filePath, $"{DateTime.Now.ToString("yyyy-MM-dd")}-{++i}.log"));
 
         string latestPath = SanitizePath(Path.Combine(filePath, $"latest.log"));
 
@@ -33,7 +35,7 @@ public class ConsoleLogHandler : ILogHandler
         mainSW = new StreamWriter(mainFS);
 
         if(File.Exists(latestPath))
-            File.WriteAllText(filePath, String.Empty);
+            File.WriteAllText(latestPath, String.Empty);
         lateFS = new FileStream(latestPath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
         lateSW = new StreamWriter(lateFS);
 
@@ -41,11 +43,22 @@ public class ConsoleLogHandler : ILogHandler
 
         Debug.Log($"Console has been changed to the Console Class. Log files can be found at:\n{filePath}");
         Debug.unityLogger.logHandler = this;
-        Console.Log(LogLevel.All, $"{Application.productName} v{Application.version} by {Application.companyName} is now running!");
-        Console.Log(LogLevel.Debug, $"{{ \"version\": \"v{Application.version}\", \"buildGuid\": \"{Application.buildGUID}\"," +
-            $" \"genuine\": \"{Application.genuine}\", \"genuineCheckAvailable\": \"{Application.genuineCheckAvailable}\"," +
-            $"\"installerName\": \"{Application.installerName}\", \"isEditor\": \"{Application.isEditor}\", \"platform\": \"{Application.platform}\", \"unityVersion\": \"{Application.unityVersion}\" }}");
+
+        sentFirstMessege = false;
     }
+
+    private void BeforeFirst()
+    {
+        if (!sentFirstMessege)
+        {
+            sentFirstMessege = true;
+            Console.Log(LogLevel.Console, $"{Application.productName} v{Application.version} by {Application.companyName} is now running!");
+            Console.Log(LogLevel.Debug, $"{{ \"version\": \"v{Application.version}\", \"buildGuid\": \"{Application.buildGUID}\"," +
+                $" \"genuine\": \"{Application.genuine}\", \"genuineCheckAvailable\": \"{Application.genuineCheckAvailable}\"," +
+                $"\"installerName\": \"{Application.installerName}\", \"isEditor\": \"{Application.isEditor}\", \"platform\": \"{Application.platform}\", \"unityVersion\": \"{Application.unityVersion}\" }}");
+        }
+    }
+
     ~ConsoleLogHandler() 
     {
         Console.Log(LogLevel.All, $"Console has been Unloaded. End of Log.");
@@ -62,25 +75,35 @@ public class ConsoleLogHandler : ILogHandler
 
     public void LogException(Exception exception, UnityEngine.Object context)
     {
+        BeforeFirst();
         LogToFile(LogLevel.Error, exception.ToString());
         defaultLogHandler.LogException(exception, context);
     }
 
     public void LogFormat(LogType logType, UnityEngine.Object context, string format, params object[] args)
     {
+        BeforeFirst();
         if (args == null)
             args = new object[0];
-        string formattedStr = String.Format(format, args);
-        LogToFile(LogLevelToType(logType), formattedStr);
+
+        if (args.Length == 0)
+            format = CleanFormat(format);
+        string postformat = String.Format(format, args);
+
+        LogToFile(LogLevelToType(logType), postformat);
         defaultLogHandler.LogFormat(logType, context, format, args);
     }
 
     public void Log(LogLevel logLevel, bool allowInDebugConsole, string Source, UnityEngine.Object context, string format, bool logToFile = true, params object[] args) 
     {
-        if(args == null)
+        BeforeFirst();
+        if (args == null)
             args = new object[0];
-        string formattedStr = String.Format(format, args);
-        LogToFile(logLevel, formattedStr, Source);
+        if (args.Length == 0)
+            format = CleanFormat(format);
+        string postformat = String.Format(format, args);
+
+        LogToFile(logLevel, postformat, Source);
 
         if(allowInDebugConsole)
             defaultLogHandler.LogFormat(LogLevelToType(logLevel), context, format, args);
@@ -88,6 +111,7 @@ public class ConsoleLogHandler : ILogHandler
 
     private void LogToFile(LogLevel logLevel, string str, string source = "UnityEngine.Debug") 
     {
+        BeforeFirst();
         string toWrite = $"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}] [{LogLevelToString(logLevel)}] [{source}]: {str}";
         if (IsLogTypeAllowed(logLevel))
         {
@@ -125,7 +149,7 @@ public class ConsoleLogHandler : ILogHandler
         }
     }
 
-    public LogType LogLevelToType(LogLevel logLevel)
+    private LogType LogLevelToType(LogLevel logLevel)
     {
         int level = (int)logLevel;
         if (level <= (int)LogLevel.Exception)
@@ -137,7 +161,7 @@ public class ConsoleLogHandler : ILogHandler
         if (level <= (int)LogLevel.Information)
             return LogType.Log;
         if (level <= (int)LogLevel.Debug)
-            return LogType.Assert;
+            return LogType.Log;
         return LogType.Log;
     }
 
@@ -152,11 +176,16 @@ public class ConsoleLogHandler : ILogHandler
             return "EROR";
         if (level <= (int)LogLevel.Warning)
             return "WARN";
-        if (level <= (int)LogLevel.Console)
-            return "CONS";
         if (level <= (int)LogLevel.Information)
             return "INFO";
         return "DEBG";
+    }
+
+    private static string CleanFormat(string s) 
+    {
+        s = s.Replace("{", "{{");
+        s = s.Replace("}", "}}");
+        return s;
     }
 
     private static string SanitizePath(string s)

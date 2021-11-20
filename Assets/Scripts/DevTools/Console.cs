@@ -6,37 +6,44 @@ using UnityEngine;
 
 public static class Console
 {
-    public static ConsoleLogHandler logHandler = new ConsoleLogHandler();
-    public static bool DefaultEnable = true;
+    public static ConsoleLogHandler logHandler;
+    public static bool DefaultEnable;
 
-    public static Dictionary<string, bool> enabledClasses = new Dictionary<string, bool>();
+    public static Dictionary<string, bool> EnabledClasses;
+
+    static Console() 
+    {
+        EnabledClasses = new Dictionary<string, bool>();
+        DefaultEnable = true;
+        logHandler = new ConsoleLogHandler();
+    }
 
     public static void ShowInDebugConsole() 
     {
-        string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetType().Name;
-        if(!enabledClasses.TryGetValue(source, out bool value))
-            enabledClasses.Add(source, true);
+        string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name;
+        if(!EnabledClasses.TryGetValue(source, out bool value))
+            EnabledClasses.Add(source, true);
         else
-            enabledClasses[source] = true;
+            EnabledClasses[source] = true;
     }
     public static void HideInDebugConsole() 
     {
         string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetType().Name;
-        if (!enabledClasses.TryGetValue(source, out bool value))
-            enabledClasses.Add(source, false);
+        if (!EnabledClasses.TryGetValue(source, out bool value))
+            EnabledClasses.Add(source, false);
         else
-            enabledClasses[source] = false;
+            EnabledClasses[source] = false;
     }
 
     private static bool LookUpClass(string source) 
     {
-        if (enabledClasses.TryGetValue(source, out bool value))
+        if (EnabledClasses.TryGetValue(source, out bool value))
         {
             return value;
         }
         else
         {
-            enabledClasses.Add(source, DefaultEnable);
+            EnabledClasses.Add(source, DefaultEnable);
             return DefaultEnable;
         }
     }
@@ -47,7 +54,7 @@ public static class Console
     /// <param name="message"></param>
     public static void DebugOnly(object message) 
     {
-        string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetType().Name;
+        string source = NameOfCallingClass();
         Log(LogLevel.Debug, source, message, null, LookUpClass(source), false);
     }
     /// <summary>
@@ -56,7 +63,7 @@ public static class Console
     /// <param name="message"></param>
     public static void DebugOnly(object message, UnityEngine.Object context)
     {
-        string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetType().Name;
+        string source = NameOfCallingClass();
         Log(LogLevel.Debug, source, message, context, LookUpClass(source), false);
     }
     /// <summary>
@@ -65,8 +72,7 @@ public static class Console
     /// <param name="message"></param>
     public static void LogDebug(object message)
     {
-        string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetType().Name;
-        Log(LogLevel.Debug, source, message, null, true);
+        Log(LogLevel.Debug, NameOfCallingClass(), message, null, true);
     }
     /// <summary>
     /// Logs a messege to the debug console
@@ -74,20 +80,17 @@ public static class Console
     /// <param name="message"></param>
     public static void LogDebug(object message, UnityEngine.Object context)
     {
-        string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetType().Name;
-        Log(LogLevel.Debug, source, message, context, true);
+        Log(LogLevel.Debug, NameOfCallingClass(), message, context, true);
     }
 
     public static void Log(LogLevel logLevel, object message)
     {
-        string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetType().Name;
-        Log(logLevel, source, message, null);
+        Log(logLevel, NameOfCallingClass(), message, null);
     }
 
     public static void Log(LogLevel logLevel, object message, UnityEngine.Object context)
     {
-        string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetType().Name;
-        Log(logLevel, source, message, context);
+        Log(logLevel, NameOfCallingClass(), message, context);
     }
 
     public static void Log(LogLevel logLevel, string tag, object message)
@@ -107,8 +110,7 @@ public static class Console
 
     public static void Log(object message)
     {
-        string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetType().Name;
-        Log(LogLevel.Information, source, message, null);
+        Log(LogLevel.Information, NameOfCallingClass(), message, null);
     }
 
     public static void Log(string tag, object message)
@@ -123,8 +125,7 @@ public static class Console
 
     public static void LogError(object message)
     {
-        string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetType().Name;
-        Log(LogLevel.Error, source, message, null);
+        Log(LogLevel.Error, NameOfCallingClass(), message, null);
     }
 
     public static void LogError(string tag, object message)
@@ -139,34 +140,29 @@ public static class Console
 
     public static void LogException(Exception exception)
     {
-        string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetType().Name;
-        Log(LogLevel.Exception, source, exception, null);
+        Log(LogLevel.Exception, NameOfCallingClass(), exception, null);
     }
 
     public static void LogException(Exception exception, UnityEngine.Object context)
     {
-        string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetType().Name;
-        Log(LogLevel.Exception, source, exception, context);
+        Log(LogLevel.Exception, NameOfCallingClass(), exception, context);
     }
 
     public static void LogFormat(LogLevel logLevel, string format, params object[] args)
     {
-        string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetType().Name;
         string f = String.Format(format, args);
-        Log(logLevel, source, f, null);
+        Log(logLevel, NameOfCallingClass(), f, null);
     }
 
     public static void LogFormat(LogLevel logLevel, UnityEngine.Object context, string format, params object[] args)
     {
-        string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetType().Name;
         string f = String.Format(format, args);
-        Log(logLevel, source, f, context);
+        Log(logLevel, NameOfCallingClass(), f, context);
     }
 
     public static void LogWarning(object message)
     {
-        string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetType().Name;
-        Log(LogLevel.Warning, source, message, null);
+        Log(LogLevel.Warning, NameOfCallingClass(), message, null);
     }
 
     public static void LogWarning(string tag, object message)
@@ -177,5 +173,26 @@ public static class Console
     public static void LogWarning(string tag, object message, UnityEngine.Object context)
     {
         Log(LogLevel.Warning, tag, message, context);
+    }
+
+    public static string NameOfCallingClass()
+    {
+        string fullName;
+        Type declaringType;
+        int skipFrames = 2;
+        do
+        {
+            System.Reflection.MethodBase method = new System.Diagnostics.StackFrame(skipFrames, false).GetMethod();
+            declaringType = method.DeclaringType;
+            if (declaringType == null)
+            {
+                return method.Name;
+            }
+            skipFrames++;
+            fullName = declaringType.FullName;
+        }
+        while (declaringType.Module.Name.Equals("mscorlib.dll", StringComparison.OrdinalIgnoreCase));
+
+        return fullName;
     }
 }
