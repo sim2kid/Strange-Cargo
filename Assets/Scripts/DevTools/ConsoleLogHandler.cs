@@ -6,8 +6,10 @@ using UnityEngine;
 
 public class ConsoleLogHandler : ILogHandler
 {
-    private FileStream fs;
-    private StreamWriter sw;
+    private FileStream mainFS;
+    private StreamWriter mainSW;
+    private FileStream lateFS;
+    private StreamWriter lateSW;
     private ILogHandler defaultLogHandler = Debug.unityLogger.logHandler;
     public static LogLevel filterLogLevel = LogLevel.Console;
 
@@ -20,14 +22,39 @@ public class ConsoleLogHandler : ILogHandler
         string filePath = SanitizePath(Application.persistentDataPath + "/Logs");
         if (!Directory.Exists(filePath)) 
             Directory.CreateDirectory(filePath);
-        filePath = SanitizePath(Path.Combine(filePath, $"{DateTime.Now.ToString("yyyy-MM-dd")}.log"));
-        fs = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-        sw = new StreamWriter(fs);
+        string mainPath = SanitizePath(Path.Combine(filePath, $"{DateTime.Now.ToString("yyyy-MM-dd")}.log"));
+        int i = 1;
+        while (File.Exists(mainPath))
+            mainPath = SanitizePath(Path.Combine(filePath, $"{DateTime.Now.ToString("yyyy-MM-dd")}-{i}.log"));
+
+        string latestPath = SanitizePath(Path.Combine(filePath, $"latest.log"));
+
+        mainFS = new FileStream(mainPath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+        mainSW = new StreamWriter(mainFS);
+
+        if(File.Exists(latestPath))
+            File.WriteAllText(filePath, String.Empty);
+        lateFS = new FileStream(latestPath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+        lateSW = new StreamWriter(lateFS);
 
         _logs = new Queue<string>();
 
+        Debug.Log($"Console has been changed to the Console Class. Log files can be found at:\n{filePath}");
         Debug.unityLogger.logHandler = this;
+        Console.Log(LogLevel.All, $"{Application.productName} v{Application.version} by {Application.companyName} is now running!");
+        Console.Log(LogLevel.Debug, $"{{ \"version\": \"v{Application.version}\", \"buildGuid\": \"{Application.buildGUID}\"," +
+            $" \"genuine\": \"{Application.genuine}\", \"genuineCheckAvailable\": \"{Application.genuineCheckAvailable}\"," +
+            $"\"installerName\": \"{Application.installerName}\", \"isEditor\": \"{Application.isEditor}\", \"platform\": \"{Application.platform}\", \"unityVersion\": \"{Application.unityVersion}\" }}");
     }
+    ~ConsoleLogHandler() 
+    {
+        Console.Log(LogLevel.All, $"Console has been Unloaded. End of Log.");
+        lateSW.Close();
+        lateFS.Close();
+        mainSW.Close();
+        mainFS.Close();
+    }
+
     public static bool IsLogTypeAllowed(LogLevel logLevel)
     {
         return (int)filterLogLevel >= (int)logLevel;
@@ -41,13 +68,17 @@ public class ConsoleLogHandler : ILogHandler
 
     public void LogFormat(LogType logType, UnityEngine.Object context, string format, params object[] args)
     {
+        if (args == null)
+            args = new object[0];
         string formattedStr = String.Format(format, args);
         LogToFile(LogLevelToType(logType), formattedStr);
         defaultLogHandler.LogFormat(logType, context, format, args);
     }
 
-    public void Log(LogLevel logLevel, bool allowInDebugConsole, string Source, UnityEngine.Object context, string format, params object[] args) 
+    public void Log(LogLevel logLevel, bool allowInDebugConsole, string Source, UnityEngine.Object context, string format, bool logToFile = true, params object[] args) 
     {
+        if(args == null)
+            args = new object[0];
         string formattedStr = String.Format(format, args);
         LogToFile(logLevel, formattedStr, Source);
 
@@ -62,8 +93,10 @@ public class ConsoleLogHandler : ILogHandler
         {
             UpdateLogs(toWrite);
         }
-        sw.WriteLine(toWrite);
-        sw.Flush();
+        mainSW.WriteLine(toWrite);
+        mainSW.Flush();
+        lateSW.WriteLine(toWrite);
+        lateSW.Flush();
     }
 
     private void UpdateLogs(string log) 

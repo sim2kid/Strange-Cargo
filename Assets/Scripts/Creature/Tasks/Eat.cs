@@ -38,7 +38,7 @@ namespace Creature.Task
 
         private void EatTheBowl() 
         {
-            Debug.Log("At Bowl");
+            Console.Log("At Bowl");
             come.EndTask(_update);
 
             wait = new Wait(5);
@@ -48,7 +48,7 @@ namespace Creature.Task
 
         private void Finish() 
         {
-            Debug.Log("Eaten!");
+            Console.Log("Eaten!");
             wait.EndTask(_update);
 
             _bowl.Eat(200 - _caller.needs.GetNeed(Need.Appetite));

@@ -7,6 +7,7 @@ using UnityEngine;
 public static class Console
 {
     public static ConsoleLogHandler logHandler = new ConsoleLogHandler();
+    public static bool DefaultEnable = true;
 
     public static Dictionary<string, bool> enabledClasses = new Dictionary<string, bool>();
 
@@ -35,17 +36,42 @@ public static class Console
         }
         else
         {
-            enabledClasses.Add(source, false);
-            return false;
+            enabledClasses.Add(source, DefaultEnable);
+            return DefaultEnable;
         }
     }
 
-
-    public static void LogDebug(object message) 
+    /// <summary>
+    /// Will log to debug if class allows it. Will ignore logging to file
+    /// </summary>
+    /// <param name="message"></param>
+    public static void DebugOnly(object message) 
+    {
+        string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetType().Name;
+        Log(LogLevel.Debug, source, message, null, LookUpClass(source), false);
+    }
+    /// <summary>
+    /// Will log to debug if class allows it. Will ignore logging to file
+    /// </summary>
+    /// <param name="message"></param>
+    public static void DebugOnly(object message, UnityEngine.Object context)
+    {
+        string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetType().Name;
+        Log(LogLevel.Debug, source, message, context, LookUpClass(source), false);
+    }
+    /// <summary>
+    /// Logs a messege to the debug console
+    /// </summary>
+    /// <param name="message"></param>
+    public static void LogDebug(object message)
     {
         string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetType().Name;
         Log(LogLevel.Debug, source, message, null, true);
     }
+    /// <summary>
+    /// Logs a messege to the debug console
+    /// </summary>
+    /// <param name="message"></param>
     public static void LogDebug(object message, UnityEngine.Object context)
     {
         string source = (new System.Diagnostics.StackTrace()).GetFrame(1).GetType().Name;
@@ -74,9 +100,9 @@ public static class Console
         Log(logLevel, tag, message, context, LookUpClass(tag)) ;
     }
 
-    public static void Log(LogLevel logLevel, string tag, object message, UnityEngine.Object context, bool ShowInDebugConsole)
+    public static void Log(LogLevel logLevel, string tag, object message, UnityEngine.Object context, bool ShowInDebugConsole, bool logToFile = true)
     {
-        logHandler.Log(logLevel, ShowInDebugConsole, tag, context, message.ToString(), null);
+        logHandler.Log(logLevel, ShowInDebugConsole, tag, context, message.ToString(), logToFile, null);
     }
 
     public static void Log(object message)

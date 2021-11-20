@@ -39,7 +39,7 @@ namespace DevTools
             }
             catch (System.Exception e)
             {
-                Debug.LogError($"Could not get new version. Version will not be updated.", e);
+                Debug.LogError($"Could not get new version. Version will not be updated. \n" + e);
             }
         }
 

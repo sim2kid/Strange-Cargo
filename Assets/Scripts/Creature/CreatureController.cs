@@ -155,14 +155,14 @@ namespace Creature
 
                 if (!task.IsStarted)
                 {
-                    Debug.Log($"New Task: {task.GetType()}");
+                    Console.Log($"New Task: {task.GetType()}");
                     task.RunTask(this, UpdateLoop);
                     timeSpentOnLastTask = 0;
                 }
                 else if (task.IsDone || timeSpentOnLastTask > maxTimeOnTask)
                 {
                     if (timeSpentOnLastTask > maxTimeOnTask)
-                        Debug.Log($"Task Timedout: {task.GetType()}");
+                        Console.Log($"Task Timedout: {task.GetType()}");
                     VoidTask();
                 }
             }
@@ -183,7 +183,7 @@ namespace Creature
                 task = tasks.Peek();
 
 
-            Debug.Log($"End of Task: {task.GetType()}");
+            Console.Log($"End of Task: {task.GetType()}");
             task.EndTask(UpdateLoop);
             if (hotTasks.Count > 0)
                 hotTasks.Dequeue();
