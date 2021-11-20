@@ -5,10 +5,6 @@ namespace DevTools
 {
     public static class ProcessExtensions
     {
-        /* Properties ============================================================================================================= */
-
-        /* Methods ================================================================================================================ */
-
         /// <summary>
         /// Runs the specified process and waits for it to exit. Its output and errors are
         /// returned as well as the exit code from the process.
