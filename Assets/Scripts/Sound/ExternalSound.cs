@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Sound
 {
+    [System.Serializable]
     public class ExternalSound : MonoBehaviour, ISound
     {
         [SerializeField]

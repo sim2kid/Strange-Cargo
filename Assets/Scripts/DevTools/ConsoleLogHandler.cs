@@ -30,7 +30,7 @@ public class ConsoleLogHandler : ILogHandler
         string mainPath = SanitizePath(Path.Combine(filePath, $"{DateTime.Now.ToString("yyyy-MM-dd")}.log"));
         int i = 0;
         while (File.Exists(mainPath))
-            mainPath = SanitizePath(Path.Combine(filePath, $"{DateTime.Now.ToString("yyyy-MM-dd")}-{++i}.log"));
+            mainPath = SanitizePath(Path.Combine(filePath, $"{DateTime.Now.ToString("yyyy-MM-dd")}_{++i}.log"));
 
         string latestPath = SanitizePath(Path.Combine(filePath, $"latest.log"));
 

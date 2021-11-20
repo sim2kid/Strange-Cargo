@@ -61,8 +61,10 @@ namespace Creature.Task
         public void EndTask(UnityEvent update)
         {
             update.RemoveListener(Update);
-            wait.EndTask(update);
-            come.EndTask(update);
+            if(wait != null)
+                wait.EndTask(update);
+            if(come != null)
+                come.EndTask(update);
             IsStarted = false;
         }
 

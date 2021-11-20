@@ -16,7 +16,6 @@ namespace Creature.Task
         private float distance;
         private GoHere movementSubtask;
         private Wait waitTask;
-        private float timer;
         private float maxTime;
 
         private CreatureController _caller;
@@ -32,7 +31,6 @@ namespace Creature.Task
             IsStarted = true;
             IsDone = false;
             movementSubtask = new GoHere(caller.transform.position + (Random.insideUnitSphere * distance), 1);
-            waitTask = new Wait(maxTime);
             movementSubtask.RunTask(caller, update).OnTaskFinished.AddListener(AfterTask);
             _caller = caller;
             _update = update;
@@ -41,20 +39,22 @@ namespace Creature.Task
 
         void AfterTask() 
         {
-            movementSubtask.EndTask(_update);
+            if(movementSubtask != null)
+                movementSubtask.EndTask(_update);
+            waitTask = new Wait(maxTime);
             waitTask.RunTask(_caller, _update).OnTaskFinished.AddListener(Finished);
         }
 
         void Finished() 
         {
-            waitTask.EndTask(_update);
+            if(waitTask != null)
+                waitTask.EndTask(_update);
             IsDone = true;
             OnTaskFinished.Invoke();
         }
 
         public Wander(float maxDistance, float maxTimeWait = 7, float minTimeWait = 0) 
         {
-            timer = -1;
             distance = maxDistance;
             maxTime = Random.Range(minTimeWait, maxTimeWait);
             IsDone = false;

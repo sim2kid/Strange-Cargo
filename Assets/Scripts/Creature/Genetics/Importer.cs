@@ -38,11 +38,11 @@ namespace Genetics
             string[] pathsDirectories = Directory.GetDirectories(partPath);
             foreach (string directory in pathsDirectories)
             {
-                string[] paths = Directory.GetFiles(directory, "*.gltf");
-                foreach (string part in paths)
+                string[] pafs = Directory.GetFiles(directory, "*.gltf");
+                foreach (string part in pafs)
                     AddPart(genePool, part);
-                paths = Directory.GetFiles(directory, "*.ref");
-                foreach (string refFile in paths)
+                pafs = Directory.GetFiles(directory, "*.ref");
+                foreach (string refFile in pafs)
                 {
                     string refPath = ResolveRef(refFile);
                     if(refPath.EndsWith(".gltf"))
