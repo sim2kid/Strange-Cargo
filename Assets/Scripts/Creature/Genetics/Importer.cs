@@ -41,6 +41,13 @@ namespace Genetics
                 string[] paths = Directory.GetFiles(directory, "*.gltf");
                 foreach (string part in paths)
                     AddPart(genePool, part);
+                paths = Directory.GetFiles(directory, "*.ref");
+                foreach (string refFile in paths)
+                {
+                    string refPath = ResolveRef(refFile);
+                    if(refPath.EndsWith(".gltf"))
+                        AddPart(genePool, refPath);
+                }
             }
 
             // Find all the patterns
@@ -48,6 +55,13 @@ namespace Genetics
             string[] textPaths = Directory.GetFiles(texturePath);
             foreach (string texture in textPaths)
                 AddTexture(genePool, texture);
+            string[] paths = Directory.GetFiles(texturePath, "*.ref");
+            foreach (string refFile in paths)
+            {
+                string refPath = ResolveRef(refFile);
+                if(!string.IsNullOrWhiteSpace(refPath))
+                    AddTexture(genePool, refPath);
+            }
         }
 
         private static void AddTexture(GeneticRepository genePool, string filePath) 
@@ -72,6 +86,17 @@ namespace Genetics
             genePool.AddPattern(p);
         }
 
+        private static string ResolveRef(string refPath) 
+        {
+            if(!File.Exists(refPath))
+                return string.Empty;
+            string jsonText = File.ReadAllText(refPath);
+            JObject jsonObj = (JObject)JToken.Parse(jsonText);
+            if(jsonObj.ContainsKey("Path")) 
+                return (string)jsonObj["Path"];
+            return string.Empty;
+        }
+
         private static void AddPart(GeneticRepository genePool, string filePath) 
         {
             string partName = Path.GetFileNameWithoutExtension(filePath);
@@ -87,7 +112,7 @@ namespace Genetics
             string jsonLocation = Path.ChangeExtension(filePath, ".json");
             if (!File.Exists(jsonLocation))
             {
-                Debug.LogWarning($"The asset {parent}/{partName} does not have an associated JSON file and will not be added to the Gene Pool.");
+                Console.LogWarning($"The asset {parent}/{partName} does not have an associated JSON file and will not be added to the Gene Pool.");
                 return;
             }
 

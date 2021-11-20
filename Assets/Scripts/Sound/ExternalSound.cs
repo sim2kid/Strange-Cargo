@@ -1,12 +1,10 @@
-using System.Collections;
+﻿using DataType;
 using System.Collections.Generic;
 using UnityEngine;
-using DataType;
 
 namespace Sound
 {
-    [System.Serializable]
-    public class BasicSound : ISound
+    public class ExternalSound : MonoBehaviour, ISound
     {
         [SerializeField]
         protected ValueRange _pitch = new ValueRange(1);
@@ -28,12 +26,12 @@ namespace Sound
         public virtual bool Loop { get => _loop; set => _loop = value; }
         public virtual AudioClip Clip { get => GetClip(); }
 
-        private AudioClip GetClip() 
+        private AudioClip GetClip()
         {
-            if (_clipPool == null) 
+            if (_clipPool == null)
             {
                 LoadAudio();
-                if (_clipPool == null) 
+                if (_clipPool == null)
                 {
                     Console.LogWarning($"Could not load {_audioPool}.");
                     return null;
@@ -50,14 +48,17 @@ namespace Sound
                 return null;
         }
 
-        public void LoadAudio(string newAudio = null) 
+        public void LoadAudio(string newAudio = null)
         {
             if (newAudio == _audioPool && _clipPool == null)
                 return;
             if (!string.IsNullOrWhiteSpace(newAudio))
                 _audioPool = newAudio;
-            
-            _clipPool = Utility.Toolbox.Instance.SoundPool.GrabBakedAudio(_audioPool);
+
+            StartCoroutine(Utility.Toolbox.Instance.SoundPool.GrabLiveAudio(_audioPool, (List<AudioClip> clips) =>
+            {
+                _clipPool = clips;
+            }));
         }
     }
 }

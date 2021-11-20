@@ -11,7 +11,7 @@ public class DemoImporter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Database db = Importer.Import(FileLocation, SearchPattern);
+        Database db = Importer.Import(FileLocation, null, null, SearchPattern);
         List<Folder> folders = db.Folders.Values.ToList<Folder>();
         foreach (Folder folder in folders) 
         {
