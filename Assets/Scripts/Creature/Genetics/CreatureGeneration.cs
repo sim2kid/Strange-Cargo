@@ -133,7 +133,7 @@ namespace Genetics
                 if (!string.IsNullOrWhiteSpace(bone.BoneOffset))
                 {
                     Transform pick = ArmatureStitching.FindChildByName(bone.BoneOffset, creature.transform);
-                    pick.localPosition += bone.Offset;
+                    pick.position += bone.Offset;
                 }
                 BoneToPick.Destroy(bone);
             }

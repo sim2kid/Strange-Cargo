@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Genetics
 {
+    [System.Serializable]
     public class FeetSound : MonoBehaviour
     {
         public string Sound;

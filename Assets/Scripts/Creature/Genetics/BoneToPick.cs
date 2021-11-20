@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Genetics {
+    [System.Serializable]
     public class BoneToPick : MonoBehaviour
     {
         public string BoneOffset;

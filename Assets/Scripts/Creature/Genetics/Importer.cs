@@ -103,6 +103,21 @@ namespace Genetics
             {
                 Scale = 0.1f;
             }
+            string Sound = string.Empty;
+            if (jsonObj.ContainsKey("Sound")) 
+            {
+                Sound = (string)jsonObj["Sound"];
+            }
+            string OffsetBone = string.Empty;
+            if (jsonObj.ContainsKey("OffsetBone"))
+            {
+                OffsetBone = (string)jsonObj["OffsetBone"];
+            }
+            Vector3 Offset = Vector3.zero;
+            if (jsonObj.ContainsKey("Offset"))
+            {
+                Offset = new Vector3((float)jsonObj["Offset"][0], (float)jsonObj["Offset"][1], (float)jsonObj["Offset"][2]);
+            }
 
             // Add the Bodypart to the partList
             BodyPart part = new BodyPart()
@@ -111,9 +126,9 @@ namespace Genetics
                 Type = parent,
                 Name = partName,
                 FileLocation = filePath,
-                Sound = jsonObj["Sound"].ToString(),
-                OffsetBone = jsonObj["OffsetBone"].ToString(),
-                Offset = new Vector3((int)jsonObj["Offset"][0], (int)jsonObj["Offset"][1], (int)jsonObj["Offset"][2]),
+                Sound = Sound,
+                OffsetBone = OffsetBone,
+                Offset = Offset,
                 Scale = Scale,
                 Shader = (ShaderEnum)(int)jsonObj["Shader"],
                 Patterns = jsonObj["Patterns"].Select(x => (string)x).ToList()
