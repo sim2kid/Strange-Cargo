@@ -1,3 +1,4 @@
+using Creature.Stats;
 using Creature.Task;
 using Environment;
 using System.Collections;
@@ -10,7 +11,7 @@ namespace Creature.Brain
     {
         public float BaseUtility { get; private set; }
 
-        public float[] StatsEffect => null;
+        public Needs StatsEffect => Needs.Zero;
 
         public ITask RelatedTask { get; private set; }
 

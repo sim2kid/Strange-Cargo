@@ -11,7 +11,13 @@ public class ConsoleLogHandler : ILogHandler
     private FileStream lateFS;
     private StreamWriter lateSW;
     private ILogHandler defaultLogHandler = Debug.unityLogger.logHandler;
+    /// <summary>
+    /// Min level to put the log in the ingame console log / the min for the Debug Console (exclsuding Warnings -> Fatal)
+    /// </summary>
     public static LogLevel filterLogLevel = LogLevel.Console;
+    /// <summary>
+    /// The min log level to log to file.
+    /// </summary>
     public static LogLevel filterFileLogLevel = LogLevel.Information;
 
     static object locker = new object();

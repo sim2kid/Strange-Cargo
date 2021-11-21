@@ -202,8 +202,8 @@ namespace Creature
 
         private void DecayNeeds() 
         {
-            float[] needDecay = (float[])needsDecayRate.Clone();
-            for (int i = 0; i < needDecay.Length; i++)
+            Needs needDecay = needsDecayRate.Clone();
+            for (int i = 0; i < needDecay.Count; i++)
                 needDecay[i] *= Time.deltaTime;
             needs += needDecay;
         }

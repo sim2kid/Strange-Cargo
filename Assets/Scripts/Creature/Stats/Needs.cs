@@ -6,7 +6,7 @@ using System;
 namespace Creature.Stats
 {
     [Serializable]
-    public struct Needs : ICloneable
+    public struct Needs
     {
         public float Min => 0;
         public float Max => 200;
@@ -14,41 +14,74 @@ namespace Creature.Stats
         [SerializeField]
         float[] _myNeeds;
 
-        public float Appetite { get => _myNeeds[0]; set => _myNeeds[0] = value; }
-        public float Bladder { get => _myNeeds[1]; set => _myNeeds[1] = value; }
-        public float Social { get => _myNeeds[2]; set => _myNeeds[2] = value; }
-        public float Energy { get => _myNeeds[3]; set => _myNeeds[3] = value; }
-        public float Hygiene { get => _myNeeds[4]; set => _myNeeds[4] = value; }
-        public float Happiness { get => _myNeeds[5]; set => _myNeeds[5] = value; }
+        public float Appetite { get => this[0]; set => this[0] = value; }
+        public float Bladder { get => this[1]; set => this[1] = value; }
+        public float Social { get => this[2]; set => this[2] = value; }
+        public float Energy { get => this[3]; set => this[3] = value; }
+        public float Hygiene { get => this[4]; set => this[4] = value; }
+        public float Happiness { get => this[5]; set => this[5] = value; }
 
         public float this[int index]
         {
             get
             {
+                if (_myNeeds == null)
+                    initilize(this.Max);
+                if (_myNeeds.Length == 0)
+                    initilize();
                 return _myNeeds[index];
             }
             set
             {
+                if (_myNeeds == null)
+                    initilize(this.Max);
+                if (_myNeeds.Length == 0)
+                    initilize();
                 _myNeeds[index] = value;
             }
         }
-        public int Count => _myNeeds.Length;
+        public int Count 
+        {  
+            get 
+            {
+                if(_myNeeds == null) 
+                    initilize(this.Max);
+                else if (_myNeeds.Length == 0)
+                    initilize();
+                return _myNeeds.Length;
+            } 
+        }
+
+        private void initilize(float defaultValue) 
+        {
+            initilize();
+            for (int i = 0; i < _myNeeds.Length; i++)
+                _myNeeds[i] = defaultValue;
+        }
+
+        private void initilize()
+        {
+            _myNeeds = new float[6];
+        }
+
+        public static Needs Zero => new Needs(0);
 
         public Needs(float baseAbount) 
         {
-            _myNeeds = new float[6];
-            for(int i = 0; i < _myNeeds.Length; i++)
-                _myNeeds[i] = baseAbount;
+            _myNeeds = new float[0];
+            initilize(baseAbount);
         }
         public Needs(float[] newNeeds) 
         {
-            _myNeeds = new float[6];
+            _myNeeds = new float[0];
+            initilize();
             for (int i = 0; i < _myNeeds.Length && i < newNeeds.Length; i++)
                 _myNeeds[i] = newNeeds[i];
         }
         public Needs(float appetite, float bladder, float social, float energy, float hygiene, float happiness) 
         {
-            _myNeeds = new float[] {
+            _myNeeds = new float[0];
+            float[] f = new float[] {
                 appetite,
                 bladder,
                 social,
@@ -56,9 +89,10 @@ namespace Creature.Stats
                 hygiene,
                 happiness
             };
+            _myNeeds = f;
         }
 
-        public object Clone()
+        public Needs Clone()
         {
             return new Needs((float[])_myNeeds.Clone());
         }
@@ -185,6 +219,24 @@ namespace Creature.Stats
             return x != new Needs(y);
         }
 
+        public static explicit operator Needs(float[] other) 
+        {
+            return new Needs(other);
+        }
+
+        public static implicit operator float[](Needs other)
+        {
+            return other._myNeeds;
+        }
+
+        public override string ToString()
+        {
+            string s = string.Empty;
+            foreach (float f in _myNeeds)
+                s += $" {f},";
+            return $"Range: [ {this.Min}, {this.Max} ], Value: [{s.Substring(0, s.Length - 2)} ]";
+        }
+
         public override bool Equals(object other) 
         {
             if(typeof(object) == typeof(Needs))
@@ -194,6 +246,7 @@ namespace Creature.Stats
 
             return false;
         }
+
 
         public override int GetHashCode()
         {

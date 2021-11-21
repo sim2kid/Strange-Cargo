@@ -57,9 +57,9 @@ namespace Creature.Brain
                 float CurrentUtility = Mathf.Clamp(preference, float.MinValue, 15f);
 
                 // Add expected result
-                if (task.StatsEffect != null)
+                if (task.StatsEffect != Needs.Zero)
                 {
-                    for (int i = 0; i < task.StatsEffect.Length; i++)
+                    for (int i = 0; i < task.StatsEffect.Count; i++)
                     {
                         float expectedUtility = realitiveNeeds[i] * task.StatsEffect[i] * task.BaseUtility;
                         CurrentUtility += expectedUtility;
@@ -98,7 +98,7 @@ namespace Creature.Brain
 
         private Needs getRealitiveNeeds() 
         {
-            Needs f = _controller.needs;
+            Needs f = _controller.needs.Clone();
             for (int i = 0; i < f.Count; i++) 
             {
                 f[i] = (f[i] - f.Min) / (f.Max - f.Min);

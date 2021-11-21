@@ -6,6 +6,6 @@ namespace Creature.Stats
 {
     public interface INeedChange
     {
-        public float[] NeedChange { get; }
+        public Needs NeedChange { get; }
     }
 }

@@ -18,7 +18,7 @@ public class ShowCreatureNeeds : MonoBehaviour
         }
         catch 
         {
-        
+            Console.LogWarning($"There are no creatures in the current instance of the game and can not be displayed.");
         }
     }
 
