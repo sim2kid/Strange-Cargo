@@ -18,7 +18,7 @@ public class ShowCreatureNeeds : MonoBehaviour
         }
         catch 
         {
-            Console.LogWarning($"There are no creatures in the current instance of the game and can not be displayed.");
+            
         }
     }
 
@@ -27,7 +27,14 @@ public class ShowCreatureNeeds : MonoBehaviour
     {
         if (creature == null)
         {
-            creature = Utility.Toolbox.Instance.CreatureList[0];
+            try
+            {
+                creature = Utility.Toolbox.Instance.CreatureList[0];
+            }
+            catch
+            {
+
+            }
             return;
         }
         for (int i = 0; i < sliders.Length && i < creature.needs.Count; i++) 
