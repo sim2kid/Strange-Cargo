@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace DataType
 {
     [System.Serializable]
-    public class Range : IValue
+    public struct Range : IValue
     {
         public float MaxValue => Max;
         public float MinValue => Min;
@@ -22,12 +22,6 @@ namespace DataType
         {
             Min = 0;
             Max = max;
-        }
-
-        public Range() 
-        {
-            Min = 0;
-            Max = 0;
         }
 
         public float Read() 

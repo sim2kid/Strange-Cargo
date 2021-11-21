@@ -45,7 +45,7 @@ namespace Sound
             if (isGrounded && speed > 0.001f)
             {
                 CheckFloorType();
-                player.Sound.Delay.Value = StepsRate;
+                player.Sound.Delay = StepsRate;
                 player.Play();
             }
         }

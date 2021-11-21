@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Creature.Brain;
+using DataType;
 
 namespace Creature.Stats
 {
@@ -37,7 +38,7 @@ namespace Creature.Stats
             }
         }
 
-        public virtual float BaseUtility => UtilityRate;
+        public virtual ValueRange BaseUtility => UtilityRate;
         public virtual Creature.Task.ITask RelatedTask => null;
     }
 }

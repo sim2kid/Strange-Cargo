@@ -13,6 +13,7 @@ namespace Creature.Task
 
         public UnityEvent OnTaskFinished { get; private set; }
 
+        private DataType.ValueRange waitInit;
         private float waitAmount;
         private float timer;
 
@@ -24,6 +25,7 @@ namespace Creature.Task
 
         public ITask RunTask(CreatureController caller, UnityEvent update)
         {
+            waitInit = waitAmount;
             timer = 0;
             IsDone = false;
             IsStarted = true;
@@ -49,6 +51,16 @@ namespace Creature.Task
             IsStarted = false;
             OnTaskFinished = new UnityEvent();
             waitAmount = amount;
+            waitInit = amount;
+        }
+
+        public Wait(DataType.ValueRange amount)
+        {
+            IsDone = false;
+            IsStarted = false;
+            OnTaskFinished = new UnityEvent();
+            waitAmount = (float)amount;
+            waitInit = amount;
         }
     }
 }

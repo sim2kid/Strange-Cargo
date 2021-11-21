@@ -1,5 +1,6 @@
 using Creature.Stats;
 using Creature.Task;
+using DataType;
 using Environment;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace Creature.Brain
 {
     public class BasicUtility : IUtility
     {
-        public float BaseUtility { get; private set; }
+        public ValueRange BaseUtility { get; private set; }
 
         public Needs StatsEffect => Needs.Zero;
 
@@ -18,6 +19,11 @@ namespace Creature.Brain
         public IObject RelatedObject => null;
 
         public BasicUtility(float utility, ITask task) 
+        {
+            BaseUtility = utility;
+            RelatedTask = task;
+        }
+        public BasicUtility(ValueRange utility, ITask task)
         {
             BaseUtility = utility;
             RelatedTask = task;

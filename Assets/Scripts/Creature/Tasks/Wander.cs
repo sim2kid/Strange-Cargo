@@ -16,7 +16,7 @@ namespace Creature.Task
         private float distance;
         private GoHere movementSubtask;
         private Wait waitTask;
-        private float maxTime;
+        private DataType.ValueRange maxTime;
 
         private CreatureController _caller;
         private UnityEvent _update;
@@ -56,7 +56,16 @@ namespace Creature.Task
         public Wander(float maxDistance, float maxTimeWait = 7, float minTimeWait = 0) 
         {
             distance = maxDistance;
-            maxTime = Random.Range(minTimeWait, maxTimeWait);
+            maxTime = new DataType.ValueRange(minTimeWait, maxTimeWait);
+            IsDone = false;
+            IsStarted = false;
+            OnTaskFinished = new UnityEvent();
+        }
+
+        public Wander(float maxDistance, DataType.ValueRange range)
+        {
+            distance = maxDistance;
+            maxTime = range;
             IsDone = false;
             IsStarted = false;
             OnTaskFinished = new UnityEvent();

@@ -61,13 +61,13 @@ namespace Creature.Brain
                 {
                     for (int i = 0; i < task.StatsEffect.Count; i++)
                     {
-                        float expectedUtility = realitiveNeeds[i] * task.StatsEffect[i] * task.BaseUtility;
+                        float expectedUtility = realitiveNeeds[i] * task.StatsEffect[i] * (float)task.BaseUtility;
                         CurrentUtility += expectedUtility;
                     }
                 }
                 else 
                 {
-                    CurrentUtility += task.BaseUtility * 6;
+                    CurrentUtility += (float)task.BaseUtility * 6;
                 }
 
                 // Add Diminishing Returns
