@@ -122,7 +122,7 @@ namespace Genetics
             {
                 default:
                 case ShaderEnum.Default:
-                    return Shader.Find("Universal Render Pipeline/Lit");
+                    return Shader.Find("Shader Graphs/Creature");
                 case ShaderEnum.Fur:
                     return Shader.Find("Shader Graphs/Fur");
             }
