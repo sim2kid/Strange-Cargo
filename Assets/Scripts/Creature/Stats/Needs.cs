@@ -6,83 +6,198 @@ using System;
 namespace Creature.Stats
 {
     [Serializable]
-    public class Needs
+    public struct Needs : ICloneable
     {
-        public float Min { get; private set; }
-        public float Max { get; private set; }
+        public float Min => 0;
+        public float Max => 200;
+
         [SerializeField]
-        float[] _myNeeds = new float[6];
+        float[] _myNeeds;
 
-        public float Appetite => _myNeeds[0];
-        public float Bladder => _myNeeds[1];
-        public float Social => _myNeeds[2];
-        public float Energy => _myNeeds[3];
-        public float Hygiene => _myNeeds[4];
-        public float Happiness => _myNeeds[5];
+        public float Appetite { get => _myNeeds[0]; set => _myNeeds[0] = value; }
+        public float Bladder { get => _myNeeds[1]; set => _myNeeds[1] = value; }
+        public float Social { get => _myNeeds[2]; set => _myNeeds[2] = value; }
+        public float Energy { get => _myNeeds[3]; set => _myNeeds[3] = value; }
+        public float Hygiene { get => _myNeeds[4]; set => _myNeeds[4] = value; }
+        public float Happiness { get => _myNeeds[5]; set => _myNeeds[5] = value; }
 
-        public float[] RawNeeds => GetNeeds();
-
-        public Needs() 
+        public float this[int index]
         {
-            Min = 0;
-            Max = 200;
-            SetNeeds(Max);
-    }
-
-        public float GetNeed(Need need)
-        {
-            return GetNeed((int)need);
+            get
+            {
+                return _myNeeds[index];
+            }
+            set
+            {
+                _myNeeds[index] = value;
+            }
         }
-        public float GetNeed(int need)
-        {
-            return _myNeeds[need];
-        }
-        public float[] GetNeeds()
-        {
-            return (float[])_myNeeds.Clone();
-        }
+        public int Count => _myNeeds.Length;
 
-
-
-        public float AddNeed(Need need, float amount) 
+        public Needs(float baseAbount) 
         {
-            return _myNeeds[(int)need] = Mathf.Clamp(_myNeeds[(int)need] + amount, Min, Max);
+            _myNeeds = new float[6];
+            for(int i = 0; i < _myNeeds.Length; i++)
+                _myNeeds[i] = baseAbount;
         }
-        public float[] AddNeeds(float[] amounts)
+        public Needs(float[] newNeeds) 
         {
-            for (int i = 0; i < _myNeeds.Length; i++)
-               _myNeeds[i] = Mathf.Clamp(_myNeeds[i] + amounts[i], Min, Max);
-            return GetNeeds();
+            _myNeeds = new float[6];
+            for (int i = 0; i < _myNeeds.Length && i < newNeeds.Length; i++)
+                _myNeeds[i] = newNeeds[i];
         }
-        public float[] AddNeeds(float appetite, float bladder, float social, float energy, float hygiene, float happiness)
+        public Needs(float appetite, float bladder, float social, float energy, float hygiene, float happiness) 
         {
-            return AddNeeds(new float[] { appetite, bladder, social, energy, hygiene, happiness });
-        }
-        public float[] AddNeeds(float amount)
-        {
-            return AddNeeds(amount, amount, amount, amount, amount, amount);
+            _myNeeds = new float[] {
+                appetite,
+                bladder,
+                social,
+                energy,
+                hygiene,
+                happiness
+            };
         }
 
-
-
-        public float SetNeed(Need need, float amount)
+        public object Clone()
         {
-            return _myNeeds[(int)need] = Mathf.Clamp(amount, Min, Max);
+            return new Needs((float[])_myNeeds.Clone());
         }
 
-        public float[] SetNeeds(float[] amounts)
+        public static Needs operator +(Needs x, Needs y) 
         {
-            for (int i = 0; i < _myNeeds.Length; i++)
-                _myNeeds[i] = Mathf.Clamp(amounts[i], Min, Max);
-            return GetNeeds();
+            float[] r = new float[Mathf.Min(x.Count, y.Count)];
+            for (int i = 0; i < r.Length; i++)
+                r[i] = x[i] + y[i];
+            return new Needs(r);
         }
-        public float[] SetNeeds(float appetite, float bladder, float social, float energy, float hygiene, float happiness)
+        public static Needs operator +(Needs x, float[] y)
         {
-            return SetNeeds(new float[] { appetite, bladder, social, energy, hygiene, happiness });
+            return x + new Needs(y);
         }
-        public float[] SetNeeds(float amount)
+        public static Needs operator +(Needs x, float y)
         {
-            return SetNeeds(amount, amount, amount, amount, amount, amount);
+            return x + new Needs(y);
+        }
+        public static Needs operator ++(Needs x)
+        {
+            return x + 1;
+        }
+
+        public static Needs operator -(Needs x, Needs y)
+        {
+            float[] r = new float[Mathf.Min(x.Count, y.Count)];
+            for (int i = 0; i < r.Length; i++)
+                r[i] = x[i] - y[i];
+            return new Needs(r);
+        }
+        public static Needs operator -(Needs x, float[] y)
+        {
+            return x - new Needs(y);
+        }
+        public static Needs operator -(Needs x, float y)
+        {
+            return x - new Needs(y);
+        }
+        public static Needs operator -(Needs x)
+        {
+            return x * -1;
+        }
+        public static Needs operator --(Needs x)
+        {
+            return x - 1;
+        }
+
+
+        public static Needs operator *(Needs x, Needs y)
+        {
+            float[] r = new float[Mathf.Min(x.Count, y.Count)];
+            for (int i = 0; i < r.Length; i++)
+                r[i] = x[i] * y[i];
+            return new Needs(r);
+        }
+        public static Needs operator *(Needs x, float[] y)
+        {
+            return x * new Needs(y);
+        }
+        public static Needs operator *(Needs x, float y)
+        {
+            return x * new Needs(y);
+        }
+
+
+        public static Needs operator /(Needs x, Needs y)
+        {
+            float[] r = new float[Mathf.Min(x.Count, y.Count)];
+            for (int i = 0; i < r.Length; i++)
+                r[i] = x[i] / y[i];
+            return new Needs(r);
+        }
+        public static Needs operator /(Needs x, float[] y)
+        {
+            return x / new Needs(y);
+        }
+        public static Needs operator /(Needs x, float y)
+        {
+            return x / new Needs(y);
+        }
+
+
+        public static Needs operator %(Needs x, Needs y)
+        {
+            float[] r = new float[Mathf.Min(x.Count, y.Count)];
+            for (int i = 0; i < r.Length; i++)
+                r[i] = x[i] % y[i];
+            return new Needs(r);
+        }
+        public static Needs operator %(Needs x, float[] y)
+        {
+            return x % new Needs(y);
+        }
+        public static Needs operator %(Needs x, float y)
+        {
+            return x % new Needs(y);
+        }
+
+
+        public static bool operator ==(Needs x, Needs y)
+        {
+            bool matching = true;
+            for (int i = 0; i < Mathf.Min(x.Count, y.Count); i++)
+                if (x[i] != y[i])
+                    matching = false;
+            return matching;
+        }
+        public static bool operator ==(Needs x, float[] y)
+        {
+            return x == new Needs(y);
+        }
+
+        public static bool operator !=(Needs x, Needs y)
+        {
+            bool matching = true;
+            for (int i = 0; i < Mathf.Min(x.Count, y.Count); i++)
+                if (x[i] != y[i])
+                    matching = false;
+            return !matching;
+        }
+        public static bool operator !=(Needs x, float[] y)
+        {
+            return x != new Needs(y);
+        }
+
+        public override bool Equals(object other) 
+        {
+            if(typeof(object) == typeof(Needs))
+                return this == (Needs)other;
+            if(typeof(object) == typeof(float[]))
+                return this == (float[])other;
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Tuple.Create(_myNeeds).GetHashCode();
         }
     }
 }
