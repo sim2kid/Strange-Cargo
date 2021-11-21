@@ -55,15 +55,14 @@ namespace Creature
         /// <summary>
         /// Decay rate per second.
         /// </summary>
-        private float[] needsDecayRate = 
-        {
+        private Needs needsDecayRate = new Needs(
             -0.5f, // Appetite
             0,//-0.1f, // Bladder
             0,//-0.1f, // Social
             0,//-0.1f, // Energy
-            0, // Happiness
             0,//-0.1f // Hygiene
-        };
+            0 // Happiness
+        );
 
         [SerializeField]
         private float LoadingProgress;
@@ -78,7 +77,7 @@ namespace Creature
         }
         public void ProcessINeed(INeedChange needChanges)
         {
-            needs.AddNeeds(needChanges.NeedChange);
+            needs += needChanges.NeedChange;
         }
 
         public bool AddTask(ITask task) 
@@ -206,8 +205,7 @@ namespace Creature
             float[] needDecay = (float[])needsDecayRate.Clone();
             for (int i = 0; i < needDecay.Length; i++)
                 needDecay[i] *= Time.deltaTime;
-            if (needs != null)
-                needs.AddNeeds(needDecay);
+            needs += needDecay;
         }
     }
 }

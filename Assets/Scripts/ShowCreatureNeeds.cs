@@ -30,9 +30,9 @@ public class ShowCreatureNeeds : MonoBehaviour
             creature = Utility.Toolbox.Instance.CreatureList[0];
             return;
         }
-        for (int i = 0; i < sliders.Length && i < creature.needs.RawNeeds.Length; i++) 
+        for (int i = 0; i < sliders.Length && i < creature.needs.Count; i++) 
         {
-            sliders[i].value = creature.needs.RawNeeds[i];
+            sliders[i].value = creature.needs[i];
         }
     }
 }

@@ -50,7 +50,7 @@ namespace Creature.Task
         {
             wait.EndTask(_update);
 
-            _bowl.Eat(200 - _caller.needs.GetNeed(Need.Appetite));
+            _bowl.Eat(200 - _caller.needs.Appetite);
             _caller.ProcessINeed(_bowl);
 
             Console.LogDebug($"Creature [{_caller.Guid}]: Eating - Finished eating! New Appetite: {_caller.needs.Appetite}");
