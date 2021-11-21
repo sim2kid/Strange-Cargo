@@ -29,7 +29,7 @@ namespace TextureConverter
 
         /// <summary>
         /// If the conversion texture is recorded, the hash for that texture will be stored here.
-        /// If null, the hash is known
+        /// If null, the hash is unknown
         /// </summary>
         [SerializeField]
         public string TextureHash;
@@ -91,9 +91,16 @@ namespace TextureConverter
             if(OriginalTexture == null)
                 OriginalTexture = GetMainTexture();
 
-            Finished = false;
-            // Take time to update the texture
-            ModifyTexture(OriginalTexture, colors, OverlayTexture);
+            if (OriginalTexture == null)
+            {
+                Console.LogError($"Texture was never loaded in for {name}. This is likely an error related to the shader, \"{GetComponent<Renderer>().material.shader.name}\".");
+            }
+            else 
+            {
+                Finished = false;
+                // Take time to update the texture
+                ModifyTexture(OriginalTexture, colors, OverlayTexture);
+            }
         }
 
         /// <summary>
@@ -103,7 +110,7 @@ namespace TextureConverter
         /// <returns></returns>
         public Texture2D GetMainTexture() 
         {
-            return (Texture2D)this.GetComponent<Renderer>().material.mainTexture;
+            return (Texture2D)this.GetComponent<Renderer>().material.GetTexture("_MainTex");
         }
 
         /// <summary>
@@ -112,7 +119,7 @@ namespace TextureConverter
         /// <param name="newTexture"></param>
         public void SetMainTexture(Texture2D newTexture, string newHash = null) 
         {
-            this.GetComponent<Renderer>().material.mainTexture = newTexture;
+            this.GetComponent<Renderer>().material.SetTexture("_MainTex", newTexture);
             if(!string.IsNullOrEmpty(newHash))
                 TextureHash = newHash;
         }

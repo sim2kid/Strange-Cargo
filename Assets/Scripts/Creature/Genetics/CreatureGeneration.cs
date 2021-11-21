@@ -34,9 +34,15 @@ namespace Genetics
             DNA dna = new DNA();
             foreach (string s in ImportantPartTypes) 
             {
+                BodyPart bodypart = new BodyPart();
+                if (!genePool.HasParts(s)) 
+                {
+                    Console.LogError($"No parts have been found in the {s} part folder! This is a required body part and creatures will look bad without it. Make sure you have parts in your parts folder.");
+                    continue;
+                }
                 try
                 {
-                    BodyPart bodypart = genePool.GetRandomPart(s).Value;
+                    bodypart = genePool.GetRandomPart(s).Value;
                     Pattern pattern = genePool.GetRandomPattern(bodypart);
                     PartHash part = new PartHash()
                     {
@@ -46,17 +52,24 @@ namespace Genetics
                     };
                     dna.BodyPartHashs.Add(part);
                 }
-                catch
+                catch (Exception e)
                 {
+                    Console.LogError($"Body Part {bodypart.Name} in {s} could not be initialized. This errored with this exception:\n{e}");
                     continue;
                 }
             }
 
             foreach (string s in LesserPartTypes)
             {
+                BodyPart bodypart = new BodyPart();
+                if (!genePool.HasParts(s))
+                {
+                    Console.Log($"Body Part Repository, {s}, does not exist with parts in the StreamingAssets folder. Skipping...");
+                    continue;
+                }
                 try
                 {
-                    BodyPart bodypart = genePool.GetRandomPart(s).Value;
+                    bodypart = genePool.GetRandomPart(s).Value;
                     if (bodypart == null || UnityEngine.Random.Range(0f, 1f) < MUTATION_CHANCE)
                         continue;
                     PartHash part = new PartHash()
@@ -67,11 +80,12 @@ namespace Genetics
                     };
                     dna.BodyPartHashs.Add(part);
                 }
-                catch 
+                catch (Exception e)
                 {
+                    Console.LogError($"Body Part {bodypart.Name} in {s} could not be initialized. This errored with this exception:\n{e}");
                     continue;
                 }
-        }
+            }
 
             Color[] colors = new Color[3];
             for (int i = 0; i < 3; i++)
@@ -141,9 +155,6 @@ namespace Genetics
             CreatureController c = creature.AddComponent<CreatureController>();
             c.SetUp(dna, a, Guid.NewGuid().ToString(), frontFeetSound, backFeetSound);
 
-
-            creature.AddComponent<NavMeshMovement>();
-
             return creature;
         }
 
@@ -174,6 +185,8 @@ namespace Genetics
             Texture2D texture2D = new Texture2D(1,1);
             byte[] textureBytes = System.IO.File.ReadAllBytes(pattern.FileLocation);
             Renderer[] models = partObject.transform.GetComponentsInChildren<Renderer>();
+            if (models.Length == 0)
+                Console.LogError($"Body part {bodyPart.Name} in {bodyPart.Type} had no skinned meshes. This body part will not render correctly. Please make sure your model is correct.");
 
             bool useTexture = ImageConversion.LoadImage(texture2D, textureBytes, false);
 
@@ -188,10 +201,14 @@ namespace Genetics
                         renderer.gameObject.AddComponent<FeetSound>().Populate(bodyPart.Sound, bodyPart.Type == "FrontLegs");
                 }
                 i++;
-                if (useTexture)
+                if (useTexture && texture2D.width != 1)
                 {
                     renderer.gameObject.AddComponent<MaterialConversion>()
                         .SetMainTexture(texture2D, partBits.Pattern);
+                } 
+                else 
+                {
+                    Console.LogWarning($"Pattern Texture {pattern.Name} could not be loaded into the material. The load result is {useTexture}, and the 2D Texture size is ({texture2D.width}, {texture2D.height}).");
                 }
                 renderer.sharedMaterial.shader = genePool.GetShader(bodyPart.Shader);
             }

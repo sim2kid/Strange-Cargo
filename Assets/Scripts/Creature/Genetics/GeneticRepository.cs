@@ -39,6 +39,18 @@ namespace Genetics
         }
 
         /// <summary>
+        /// Returns true if a parttype exists in the repository with parts in it.
+        /// </summary>
+        /// <param name="partType"></param>
+        /// <returns></returns>
+        public bool HasParts(string partType) 
+        {
+            if(Repository.ContainsKey(partType))
+                return Repository[partType].Count > 0;
+            return false;
+        }
+
+        /// <summary>
         /// Returns a random pattern avaliable in <paramref name="bodyPart"/>
         /// </summary>
         /// <param name="bodyPart"></param>
@@ -112,7 +124,7 @@ namespace Genetics
                 case ShaderEnum.Default:
                     return Shader.Find("Universal Render Pipeline/Lit");
                 case ShaderEnum.Fur:
-                    return Shader.Find("Shader Graphs/Creature");
+                    return Shader.Find("Shader Graphs/Fur");
             }
         }
     }
