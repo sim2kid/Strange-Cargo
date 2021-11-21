@@ -6,7 +6,7 @@ using System;
 
 namespace Interaction
 {
-    public class Interactable : BasicInteractable, IInteractable
+    public class Interactable : BasicInteractable
     {
         [Tooltip("Interaction Events")]
         [SerializeField]
