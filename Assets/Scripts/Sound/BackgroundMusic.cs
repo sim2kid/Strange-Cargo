@@ -39,6 +39,18 @@ namespace Sound
             ap.Sound.LoadAudio();
 
             time = Toolbox.Instance.TimeController;
+            Utility.Toolbox.Instance.Pause.OnPause.AddListener(OnPause);
+            Utility.Toolbox.Instance.Pause.OnUnPause.AddListener(OnUnPause);
+        }
+
+        void OnPause() 
+        {
+            ap.Volume *= 0.50f;
+        }
+
+        void OnUnPause() 
+        {
+            ap.Volume /= 0.50f;
         }
 
         // Update is called once per frame

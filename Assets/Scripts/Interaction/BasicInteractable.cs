@@ -15,21 +15,25 @@ namespace Interaction {
         protected virtual void Start()
         {
             ClickState = ClickState.None;
+            Console.HideInDebugConsole();
         }
 
         public virtual void Down()
         {
             ClickState = ClickState.Down;
+            Console.LogDebug($"{name} has recived a DownClick event.");
         }
 
         public virtual void Enter()
         {
             ClickState = ClickState.Enter;
+            Console.LogDebug($"{name} has recived an Enter event.");
         }
 
         public virtual void Exit()
         {
             ClickState = ClickState.Exit;
+            Console.LogDebug($"{name} has recived an Exit event.");
         }
 
         public virtual void Hold()
@@ -45,6 +49,7 @@ namespace Interaction {
         public virtual void Up()
         {
             ClickState = ClickState.Up;
+            Console.LogDebug($"{name} has recived an UpClick event.");
         }
 
         public virtual void LateUp()

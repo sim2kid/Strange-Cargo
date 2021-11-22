@@ -27,6 +27,9 @@ namespace Creature.Stats
         [SerializeField]
         public UnityEvent OnEat;
 
+        [SerializeField]
+        public UnityEvent OnEmpty;
+
         [SerializeField][HideInInspector]
         private Guid _guid;
 
@@ -37,30 +40,11 @@ namespace Creature.Stats
 
         private Displacement displacement;
 
-        public override float[] NeedChange
-        {
-            get
-            {
-                return getNeeds(multiplier);
-            }
-        }
+        public override Needs NeedChange => base.NeedChange * multiplier;
 
-        private float[] getNeeds(float m) 
-        {
-            return new float[]
-            {
-                Appetite * m,
-                Bladder * m,
-                Social * m,
-                Energy * m,
-                Hygiene * m,
-                Happiness * m
-            };
-        }
-
-        public override float BaseUtility => (base.BaseUtility * 0.5f) + ((Fullness / MaxValue) * 0.5f);
+        public override ValueRange BaseUtility => (base.BaseUtility * 0.5f) + ((Fullness / MaxValue) * 0.5f);
         public override Creature.Task.ITask RelatedTask => new Creature.Task.Eat(this);
-        public override float[] StatsEffect => getNeeds(1);
+        public override Needs StatsEffect => base.NeedChange;
         public override IObject RelatedObject => this;
 
         
@@ -80,24 +64,50 @@ namespace Creature.Stats
             multiplier = Fullness - temp;
             Fullness = Mathf.Clamp(Fullness - multiplier, 0 , float.MaxValue);
             OnEat.Invoke();
+            Console.LogDebug($"Bowl {name} with the guid of [{Guid}] has been eaten out of for {amount} and now only has {Fullness}/{MaxValue} left.");
+            if (Fullness <= 0)
+                Empty();
+        }
+
+        private void Empty() 
+        {
+            Console.LogDebug($"Bowl {name} with the guid of [{Guid}] is now Empty.");
+            if (Utility.Toolbox.Instance.AvalibleTasks.Contains(this))
+                Utility.Toolbox.Instance.AvalibleTasks.Remove(this);
+            OnEmpty.Invoke();
         }
 
         public void Fill(float amount) 
         {
             Fullness = Mathf.Clamp(amount, MinValue, MaxValue);
+            if (Fullness > 0 && !Utility.Toolbox.Instance.AvalibleTasks.Contains(this))
+                Utility.Toolbox.Instance.AvalibleTasks.Add(this);
+            Console.LogDebug($"Bowl {name} with the guid of [{Guid}] has been filled up by {amount} and now only has {Fullness}/{MaxValue} food.");
             OnFill.Invoke();
         }
 
         private void OnEnable()
         {
             _guid = new Guid();
+            if(!Utility.Toolbox.Instance.AvalibleTasks.Contains(this))
+                Utility.Toolbox.Instance.AvalibleTasks.Add(this);
+        }
+
+        private void OnDisable()
+        {
+            if(Utility.Toolbox.Instance.AvalibleTasks.Contains(this))
+                Utility.Toolbox.Instance.AvalibleTasks.Remove(this);
+        }
+
+        private void Awake()
+        {
+            Console.HideInDebugConsole();
         }
 
         private void Start()
         {
             displacement = GetComponent<Displacement>();
             displacement.Value = this;
-            Utility.Toolbox.Instance.AvalibleTasks.Add(this);
         }
 
         public bool Equals(IObject other)

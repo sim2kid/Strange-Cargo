@@ -143,23 +143,35 @@ namespace Genetics
             {
                 Offset = new Vector3((float)jsonObj["Offset"][0], (float)jsonObj["Offset"][1], (float)jsonObj["Offset"][2]);
             }
-
-            // Add the Bodypart to the partList
-            BodyPart part = new BodyPart()
+            int shader = 0;
+            if (jsonObj.ContainsKey("Shader")) 
             {
-                Hash = GetHashString(partName),
-                Type = parent,
-                Name = partName,
-                FileLocation = filePath,
-                Sound = Sound,
-                OffsetBone = OffsetBone,
-                Offset = Offset,
-                Scale = Scale,
-                Shader = (ShaderEnum)(int)jsonObj["Shader"],
-                Patterns = jsonObj["Patterns"].Select(x => (string)x).ToList()
-            };
+                shader = (int)jsonObj["Shader"];
+            }
 
-            partList.Add(part.Hash, part);
+            try
+            {
+                // Add the Bodypart to the partList
+                BodyPart part = new BodyPart()
+                {
+                    Hash = GetHashString(partName),
+                    Type = parent,
+                    Name = partName,
+                    FileLocation = filePath,
+                    Sound = Sound,
+                    OffsetBone = OffsetBone,
+                    Offset = Offset,
+                    Scale = Scale,
+                    Shader = (ShaderEnum)shader,
+                    Patterns = jsonObj["Patterns"].Select(x => (string)x).ToList()
+                };
+
+                partList.Add(part.Hash, part);
+            }
+            catch 
+            {
+                Console.LogError($"The body part {partName} in {parent} could not be configured and will not be loaded. Check the Json of the same name as the part. There may be errors.");
+            }
         }
 
         private static string SanitizePath(string s) 

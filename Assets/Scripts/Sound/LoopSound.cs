@@ -12,7 +12,7 @@ namespace Sound
         {
             get 
             {
-                if (index > 0)
+                if (index >= 0 && index < _clipPool.Count)
                     return _clipPool[index];
                 else
                     return null;

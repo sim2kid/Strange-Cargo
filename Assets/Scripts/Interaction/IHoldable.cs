@@ -9,5 +9,6 @@ namespace Interaction
         public string HoldText { get; }
         public void PickUp();
         public void PutDown();
+        public void Shake();
     }
 }

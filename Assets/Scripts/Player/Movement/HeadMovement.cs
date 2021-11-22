@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace Player.Movement
@@ -23,6 +24,12 @@ namespace Player.Movement
         [Tooltip("The thing that will turn virtically (The game camera)")]
         [SerializeField] 
         public new GameObject camera;
+
+        
+        public UnityEvent OnJolt;
+
+        private Vector2 lastInput;
+        private Vector2 lastVector;
 
         private PlayerInput playerInput;
         private InputAction look;
@@ -66,12 +73,26 @@ namespace Player.Movement
             // The rotation of the current gameobjects we're manipulating
             Vector2 rotation = new Vector2(transform.localEulerAngles.y, camera.transform.localEulerAngles.x);
 
+            Vector2 mouseInput = look.ReadValue<Vector2>();
+
+            if (mouseInput != lastInput && mouseInput.magnitude > 40 && mouseInput.magnitude < 200)
+            {
+                Vector2 thisVector = mouseInput - lastInput;
+
+                float f = Vector2.Angle(thisVector.normalized, lastVector.normalized);
+
+                if (f < 20 && f != 0)
+                    OnJolt.Invoke();
+                lastInput = mouseInput;
+                lastVector = thisVector;
+            }
+
 
             // Where we want to go based on player input
             Vector2 targetChange = look.ReadValue<Vector2>() * MouseSensitivity * Time.deltaTime;
 
             // Invert any axis that need to be inverted
-            if(InvertYAxis)
+            if (InvertYAxis)
                 targetChange.y = -targetChange.y;
             if (InvertXAxis)
                 targetChange.x = -targetChange.x;

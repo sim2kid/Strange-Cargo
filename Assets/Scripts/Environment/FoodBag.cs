@@ -7,6 +7,8 @@ using Creature.Stats;
 using UnityEngine.Events;
 
 namespace Environment {
+
+    [RequireComponent(typeof(Sound.AudioPlayer))]
     public class FoodBag : Pickupable, IUseable
     {
         public UnityEvent OnUse;

@@ -55,15 +55,14 @@ namespace Creature
         /// <summary>
         /// Decay rate per second.
         /// </summary>
-        private float[] needsDecayRate = 
-        {
+        private Needs needsDecayRate = new Needs(
             -0.5f, // Appetite
             0,//-0.1f, // Bladder
             0,//-0.1f, // Social
             0,//-0.1f, // Energy
-            0, // Happiness
             0,//-0.1f // Hygiene
-        };
+            0 // Happiness
+        );
 
         [SerializeField]
         private float LoadingProgress;
@@ -78,11 +77,13 @@ namespace Creature
         }
         public void ProcessINeed(INeedChange needChanges)
         {
-            needs.AddNeeds(needChanges.NeedChange);
+            needs += needChanges.NeedChange;
         }
 
         public bool AddTask(ITask task) 
         {
+            if (Toolbox.Instance.Pause.Paused)
+                return false;
             if (tasks.Count < maxTasks) 
             {
                 tasks.Enqueue(task);
@@ -93,6 +94,8 @@ namespace Creature
 
         public bool AddHotTask(ITask task)
         {
+            if (Toolbox.Instance.Pause.Paused)
+                return false;
             if (hotTasks.Count < maxTasks)
             {
                 StopNormalTask();
@@ -134,12 +137,27 @@ namespace Creature
             UpdateLoop = new UnityEvent();
             timeSpentOnLastTask = 0;
 
+            Toolbox.Instance.Pause.OnPause.AddListener(OnPause);
+            Toolbox.Instance.Pause.OnUnPause.AddListener(OnUnPause);
+
             Console.LogWarning("The Creature Controller has hardwritten values!!");
             Console.Log($"Creature [{Guid}] has been loaded into the scene at {transform.position.ToString()}.");
         }
 
+        private void OnPause() 
+        {
+            Animator.enabled = false;
+        }
+
+        private void OnUnPause() 
+        {
+            Animator.enabled = true;
+        }
+
         private void Update()
         {
+            if (Toolbox.Instance.Pause.Paused)
+                return;
             thinkTimer += Time.deltaTime;
             LoadingProgress = Report();
             DecayNeeds();
@@ -203,11 +221,10 @@ namespace Creature
 
         private void DecayNeeds() 
         {
-            float[] needDecay = (float[])needsDecayRate.Clone();
-            for (int i = 0; i < needDecay.Length; i++)
+            Needs needDecay = needsDecayRate.Clone();
+            for (int i = 0; i < needDecay.Count; i++)
                 needDecay[i] *= Time.deltaTime;
-            if (needs != null)
-                needs.AddNeeds(needDecay);
+            needs += needDecay;
         }
     }
 }

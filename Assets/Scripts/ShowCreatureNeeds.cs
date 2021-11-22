@@ -18,7 +18,7 @@ public class ShowCreatureNeeds : MonoBehaviour
         }
         catch 
         {
-        
+            
         }
     }
 
@@ -27,12 +27,19 @@ public class ShowCreatureNeeds : MonoBehaviour
     {
         if (creature == null)
         {
-            creature = Utility.Toolbox.Instance.CreatureList[0];
+            try
+            {
+                creature = Utility.Toolbox.Instance.CreatureList[0];
+            }
+            catch
+            {
+
+            }
             return;
         }
-        for (int i = 0; i < sliders.Length && i < creature.needs.RawNeeds.Length; i++) 
+        for (int i = 0; i < sliders.Length && i < creature.needs.Count; i++) 
         {
-            sliders[i].value = creature.needs.RawNeeds[i];
+            sliders[i].value = creature.needs[i];
         }
     }
 }

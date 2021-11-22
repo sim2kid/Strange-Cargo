@@ -17,6 +17,7 @@ namespace Interaction
 
         public UnityEvent OnPickup;
         public UnityEvent OnPutDown;
+        public UnityEvent OnShake;
 
         public virtual string HoldText { get => _textOnHold; }
 
@@ -60,6 +61,10 @@ namespace Interaction
             OnPutDown.Invoke();
         }
 
+        public virtual void Shake() 
+        {
+            OnShake.Invoke();
+        }
 
         public override void Up()
         {

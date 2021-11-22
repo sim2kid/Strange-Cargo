@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Sound
 {
@@ -19,6 +20,20 @@ namespace Sound
 
         public bool DelayAfter = false;
 
+        public UnityEvent OnPlay;
+
+        private float _volume = 1;
+        private float _clipVolume = 1;
+        public float Volume
+        {
+            get => _volume;
+            set
+            {
+                _volume = value;
+                source.volume = _clipVolume * _volume;
+            }
+        }
+
         public void Pause()
         {
             IsDelayed = false;
@@ -29,10 +44,14 @@ namespace Sound
         {
             source.pitch = Sound.Pitch.Read();
             _delay = Sound.Delay.Read();
+            _clipVolume = Sound.Volume.Read();
             AudioClip clip = Sound.Clip;
             if (_delay <= 0)
                 if (clip != null)
-                    source.PlayOneShot(clip, Sound.Volume.Read());
+                {
+                    source.PlayOneShot(clip, _clipVolume * Volume);
+                    OnPlay.Invoke();
+                }
                 else if (!IsDelayed)
                     StartCoroutine("PlayDelay");
         }
@@ -52,7 +71,10 @@ namespace Sound
             AudioClip clip = Sound.Clip;
             if (IsDelayed)
                 if (clip != null)
+                {
                     source.PlayOneShot(clip, Sound.Volume.Read());
+                    OnPlay.Invoke();
+                }
 
             if (DelayAfter)
                 yield return new WaitForSeconds(_delay);
