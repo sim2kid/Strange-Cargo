@@ -26,7 +26,9 @@ namespace Sound
         bool isGrounded;
 
         [SerializeField]
-        UnityEvent OnStep;
+        public UnityEvent OnStep;
+        [SerializeField]
+        float timeOffset = 0.01f;
 
         private AudioPlayer player;
 
@@ -37,6 +39,10 @@ namespace Sound
             player = GetComponent<AudioPlayer>();
             player.enabled = true;
             player.DelayAfter = true;
+            player.OnPlay.AddListener(() => 
+            {
+                Invoke("RunOnStep", timeOffset);
+            });
         }
 
         // Update is called once per frame
@@ -53,6 +59,11 @@ namespace Sound
                 player.Sound.Delay = StepsRate;
                 player.Play();
             }
+        }
+
+        void RunOnStep() 
+        {
+            OnStep.Invoke();
         }
 
         private bool GoundCheck() 

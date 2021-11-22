@@ -50,14 +50,22 @@ namespace Player
         public void PickUp(IHoldable obj) 
         {
             if (Holding != null)
+            {
                 LetGo();
+            }
             Holding = obj;
             tt.HoldText = Holding.HoldText;
+            player.Footsteps.OnStep.AddListener(Holding.Shake);
+            player.HeadMovement.OnJolt.AddListener(Holding.Shake);
         }
         public void LetGo() 
         {
-            if(Holding != null)
+            if (Holding != null)
+            {
+                player.Footsteps.OnStep.RemoveListener(Holding.Shake);
+                player.HeadMovement.OnJolt.RemoveListener(Holding.Shake);
                 Holding.PutDown();
+            }
             Holding = null;
             tt.HoldText = string.Empty;
             tt.UseText = string.Empty;

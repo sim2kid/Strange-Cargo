@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 5e5a5103b54f23342971508ddeb89ab7, type: 2}
     - target: {fileID: 919132149155446097, guid: 9beae5bf5f13b3f4aaf99f120864c02e, type: 3}
       propertyPath: m_Name
-      value: FoodBag
+      value: FoodBag Variant
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9beae5bf5f13b3f4aaf99f120864c02e, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -250,6 +250,21 @@ MonoBehaviour:
           m_StringArgument: Misc\FoodBag\Handling
           m_BoolArgument: 0
         m_CallState: 2
+  OnShake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 887220212}
+        m_TargetAssemblyTypeName: Sound.AudioPlayer, Assembly-CSharp
+        m_MethodName: PlayFrom
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Misc\FoodBag\Handling
+          m_BoolArgument: 0
+        m_CallState: 2
   OnUse:
     m_PersistentCalls:
       m_Calls:
@@ -296,3 +311,6 @@ MonoBehaviour:
     _loop: 0
     _audioPool: 
   DelayAfter: 0
+  OnPlay:
+    m_PersistentCalls:
+      m_Calls: []

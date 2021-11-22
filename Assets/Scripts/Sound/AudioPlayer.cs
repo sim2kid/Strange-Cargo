@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Sound
 {
@@ -17,6 +18,7 @@ namespace Sound
         public BasicSound Sound;
 
         public bool DelayAfter = false;
+        public UnityEvent OnPlay;
 
         private float _volume = 1;
         private float _clipVolume = 1;
@@ -45,7 +47,10 @@ namespace Sound
             if (_delay <= 0)
             {
                 if (clip != null)
+                {
                     source.PlayOneShot(clip, _clipVolume * Volume);
+                    OnPlay.Invoke();
+                }
             }
             else if (!IsDelayed)
             {
@@ -67,9 +72,12 @@ namespace Sound
                 yield return new WaitForSeconds(_delay);
 
             AudioClip clip = Sound.Clip;
-            if(IsDelayed)
-                if(clip != null)
+            if (IsDelayed)
+                if (clip != null)
+                {
                     source.PlayOneShot(clip, Sound.Volume.Read());
+                    OnPlay.Invoke();
+                }
 
             if(DelayAfter)
                 yield return new WaitForSeconds(_delay);
