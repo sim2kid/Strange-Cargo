@@ -8,7 +8,7 @@ namespace Utility
     public class Pause : MonoBehaviour
     {
         [SerializeField]
-        bool _pause;
+        bool _pause = false;
 
         [SerializeField]
         public UnityEvent OnPause;
@@ -19,7 +19,6 @@ namespace Utility
 
         private void Awake()
         {
-            _pause = false;
             Utility.Toolbox.Instance.Pause = this;
         }
 

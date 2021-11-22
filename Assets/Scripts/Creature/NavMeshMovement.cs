@@ -58,6 +58,15 @@ namespace Creature
             lastDestination = Vector3.zero;
         }
 
+        /// <summary>
+        /// Teleports to world position
+        /// </summary>
+        /// <param name="position"></param>
+        public void Warp(Vector3 position) 
+        {
+            navMeshAgent.Warp(position);
+        }
+
 
         /// <summary>
         /// Attempt to move the NavMesh agent to a specified point in 3D space.
