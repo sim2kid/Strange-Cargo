@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Environment;
+using UnityEngine.Events;
 
 namespace Sound
 {
@@ -23,6 +24,10 @@ namespace Sound
         private float speed;
         [SerializeField]
         bool isGrounded;
+
+        [SerializeField]
+        UnityEvent OnStep;
+
         private AudioPlayer player;
 
         // Start is called before the first frame update

@@ -1,0 +1,298 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2173303871848688054
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 9beae5bf5f13b3f4aaf99f120864c02e, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9beae5bf5f13b3f4aaf99f120864c02e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 517.46423
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9beae5bf5f13b3f4aaf99f120864c02e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.431
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9beae5bf5f13b3f4aaf99f120864c02e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 506.50372
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9beae5bf5f13b3f4aaf99f120864c02e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.4705522
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9beae5bf5f13b3f4aaf99f120864c02e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 2.5216699e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9beae5bf5f13b3f4aaf99f120864c02e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.88237214
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9beae5bf5f13b3f4aaf99f120864c02e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -2.5216699e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9beae5bf5f13b3f4aaf99f120864c02e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9beae5bf5f13b3f4aaf99f120864c02e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9beae5bf5f13b3f4aaf99f120864c02e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 9beae5bf5f13b3f4aaf99f120864c02e, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 9beae5bf5f13b3f4aaf99f120864c02e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5e5a5103b54f23342971508ddeb89ab7, type: 2}
+    - target: {fileID: 919132149155446097, guid: 9beae5bf5f13b3f4aaf99f120864c02e, type: 3}
+      propertyPath: m_Name
+      value: FoodBag
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9beae5bf5f13b3f4aaf99f120864c02e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451118302482216456, guid: 9beae5bf5f13b3f4aaf99f120864c02e, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3451118302482216456, guid: 9beae5bf5f13b3f4aaf99f120864c02e, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 9beae5bf5f13b3f4aaf99f120864c02e, type: 3}
+--- !u!1 &1362419747329184999 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9beae5bf5f13b3f4aaf99f120864c02e, type: 3}
+  m_PrefabInstance: {fileID: 2173303871848688054}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &887220215
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362419747329184999}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &887220210
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362419747329184999}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0107873585, y: 0.01637084, z: 0.011645471}
+  m_Center: {x: -5.422329e-13, y: 0.0011934224, z: -0.000018194318}
+--- !u!82 &887220213
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362419747329184999}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &887220211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362419747329184999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 236c36b38f4f81f49bec5c8b73c192f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverText: '{use} to pick up'
+  positionOffset: {x: 0, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 0, z: 0}
+  _textOnHold: '{primary} to drop'
+  OnPickup:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 887220212}
+        m_TargetAssemblyTypeName: Sound.AudioPlayer, Assembly-CSharp
+        m_MethodName: PlayFrom
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Misc\FoodBag\Grab
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPutDown:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 887220212}
+        m_TargetAssemblyTypeName: Sound.AudioPlayer, Assembly-CSharp
+        m_MethodName: PlayFrom
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Misc\FoodBag\Handling
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnUse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 887220212}
+        m_TargetAssemblyTypeName: Sound.AudioPlayer, Assembly-CSharp
+        m_MethodName: PlayFrom
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Misc\FoodBag\Grab
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &887220212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362419747329184999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7fab3db30850b648bd54f22bc00f267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sound:
+    _pitch:
+      Value: 1
+      Range:
+        Min: 0
+        Max: 0
+    _volume:
+      Value: 1
+      Range:
+        Min: 0
+        Max: 0
+    _deley:
+      Value: 0
+      Range:
+        Min: 0
+        Max: 0
+    _loop: 0
+    _audioPool: 
+  DelayAfter: 0
