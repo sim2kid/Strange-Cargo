@@ -43,6 +43,7 @@ namespace Utility
         public Player.PlayerController Player { get; set; }
 
         public ToolTip ToolTip { get; set; }
+        public Pause Pause { get; set; }
 
         private Toolbox()
         {
