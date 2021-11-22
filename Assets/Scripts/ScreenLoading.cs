@@ -18,6 +18,7 @@ public class ScreenLoading : MonoBehaviour, IProgress
 
     Cinemachine.CinemachineBlendDefinition saveCameraStyle;
     float time = 0;
+    float baseTime = 23;
 
     public UnityEvent StartEvent;
     public UnityEvent End;
@@ -58,6 +59,8 @@ public class ScreenLoading : MonoBehaviour, IProgress
         foreach (CreatureController c in creatures)
             count += c.Report();
         count /= creatures.Count;
+        count += Mathf.Clamp01(time/baseTime);
+        count /= 2;
         return count;
     }
 
@@ -67,6 +70,7 @@ public class ScreenLoading : MonoBehaviour, IProgress
         LoadingScreen.SetActive(true);
         NormalOverlay.SetActive(false);
         Toolbox.Instance.Pause.SetPause(true);
+        Cursor.visible = false;
         bgm.Volume = 1;
         ProgrssBar.value = 0;
         camera.Priority = 1000;
