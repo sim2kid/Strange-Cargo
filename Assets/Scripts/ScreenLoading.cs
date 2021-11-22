@@ -16,6 +16,9 @@ public class ScreenLoading : MonoBehaviour, IProgress
     public GameObject LoadingScene;
     public AudioPlayer bgm;
 
+    Cinemachine.CinemachineBlendDefinition saveCameraStyle;
+    float time = 0;
+
     public UnityEvent StartEvent;
     public UnityEvent End;
 
@@ -60,28 +63,38 @@ public class ScreenLoading : MonoBehaviour, IProgress
 
     private void OnStart() 
     {
+        Console.Log($"The scene and it's creatures are currently being loaded...");
         LoadingScreen.SetActive(true);
         NormalOverlay.SetActive(false);
         Toolbox.Instance.Pause.SetPause(true);
         bgm.Volume = 1;
         ProgrssBar.value = 0;
         camera.Priority = 1000;
+        saveCameraStyle = Camera.main.gameObject.GetComponent<Cinemachine.CinemachineBrain>().m_DefaultBlend;
+        Camera.main.gameObject.GetComponent<Cinemachine.CinemachineBrain>().m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
         StartEvent.Invoke();
     }
 
     private void OnFinished() 
     {
-        LoadingScreen.SetActive(false);
+        Console.Log($"Finished loading in with a time of {time.ToString("0.00")} seconds!");
         NormalOverlay.SetActive(true);
         Toolbox.Instance.Pause.SetPause(false);
-        bgm.Volume = 1;
-
+        
         camera.Priority = -1000;
         End.Invoke();
 
-        LoadingScene.SetActive(false);
+        Destroy(LoadingScene);
+        bgm.Volume = 1;
+        Camera.main.gameObject.GetComponent<Cinemachine.CinemachineBrain>().m_DefaultBlend = saveCameraStyle;
 
-        this.enabled = false;
+        LoadingScreen.SetActive(false);
+        Invoke("SelfDestruct", 1);
+    }
+
+    private void SelfDestruct() 
+    {
+        Destroy(this.gameObject);
     }
 
     // Update is called once per frame
@@ -95,6 +108,8 @@ public class ScreenLoading : MonoBehaviour, IProgress
             }
             if (!Finished && Report() < 1)
             {
+                time += Time.deltaTime;
+                bgm.Volume = 1;
                 ProgrssBar.value = Report();
             }
             if (Report() == 1 && !Finished)

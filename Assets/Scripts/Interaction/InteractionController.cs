@@ -36,6 +36,9 @@ namespace Interaction
 
         void Update()
         {
+            if(tt == null)
+                tt = Utility.Toolbox.Instance.ToolTip;
+
             // Sets the direction of a ray
             Ray ray = new Ray(Eyes.transform.position, Eyes.transform.forward);
 

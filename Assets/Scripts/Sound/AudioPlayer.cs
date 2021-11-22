@@ -20,15 +20,15 @@ namespace Sound
         public bool DelayAfter = false;
         public UnityEvent OnPlay;
 
-        private float _volume = 1;
+        private float _playerVolume = 1;
         private float _clipVolume = 1;
         public float Volume
         {
-            get => _volume;
+            get => _playerVolume;
             set
             { 
-                _volume = value;
-                source.volume = _clipVolume * _volume;
+                _playerVolume = Mathf.Clamp(value, 0, 1);
+                source.volume = Mathf.Clamp(_clipVolume * _playerVolume, 0, 1);
             }
         }
 
@@ -48,7 +48,7 @@ namespace Sound
             {
                 if (clip != null)
                 {
-                    source.PlayOneShot(clip, _clipVolume * Volume);
+                    source.PlayOneShot(clip, Mathf.Clamp(_clipVolume * Volume, 0, 1));
                     OnPlay.Invoke();
                 }
             }
