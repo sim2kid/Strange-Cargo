@@ -31,7 +31,7 @@ namespace Creature.Task
             calledFinished = false;
             update.AddListener(Update);
 
-            caller.RequestMoreTaskTime((((caller.transform.position - location).magnitude - dis) * 1f) - 15);
+            caller.RequestMoreTaskTime((caller.Move.Distance * 1f) - 15);
 
             return this;
         }
@@ -46,6 +46,7 @@ namespace Creature.Task
         {
             if (IsDone && !calledFinished) 
             {
+                _caller.Move.ClearDestination();
                 OnTaskFinished.Invoke();
                 calledFinished = true;
             }  

@@ -33,6 +33,23 @@ namespace Player
             Utility.Toolbox.Instance.Player = this;
         }
 
+        private void OnPause() 
+        {
+            GlobalInteraction.enabled = false;
+            HandController.enabled = false;
+            HeadMovement.enabled = false;
+            Interaction.enabled = false;
+            Movement.enabled = false;
+        }
+        private void OnUnPause()
+        {
+            GlobalInteraction.enabled = true;
+            HandController.enabled = true;
+            HeadMovement.enabled = true;
+            Interaction.enabled = true;
+            Movement.enabled = true;
+        }
+
         private void Start()
         {
             Interaction = GetComponent<InteractionController>();
@@ -47,6 +64,8 @@ namespace Player
             GlobalInteraction = GetComponent<GlobalController>();
             if (Hand != null)
                 HandController = Hand.GetComponent<Hand>();
+            Utility.Toolbox.Instance.Pause.OnPause.AddListener(OnPause);
+            Utility.Toolbox.Instance.Pause.OnUnPause.AddListener(OnUnPause);
         }
     }
 }

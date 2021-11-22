@@ -82,6 +82,8 @@ namespace Creature
 
         public bool AddTask(ITask task) 
         {
+            if (Toolbox.Instance.Pause.Paused)
+                return false;
             if (tasks.Count < maxTasks) 
             {
                 tasks.Enqueue(task);
@@ -92,6 +94,8 @@ namespace Creature
 
         public bool AddHotTask(ITask task)
         {
+            if (Toolbox.Instance.Pause.Paused)
+                return false;
             if (hotTasks.Count < maxTasks)
             {
                 StopNormalTask();
@@ -133,12 +137,27 @@ namespace Creature
             UpdateLoop = new UnityEvent();
             timeSpentOnLastTask = 0;
 
+            Toolbox.Instance.Pause.OnPause.AddListener(OnPause);
+            Toolbox.Instance.Pause.OnUnPause.AddListener(OnUnPause);
+
             Console.LogWarning("The Creature Controller has hardwritten values!!");
             Console.Log($"Creature [{Guid}] has been loaded into the scene at {transform.position.ToString()}.");
         }
 
+        private void OnPause() 
+        {
+            Animator.enabled = false;
+        }
+
+        private void OnUnPause() 
+        {
+            Animator.enabled = true;
+        }
+
         private void Update()
         {
+            if (Toolbox.Instance.Pause.Paused)
+                return;
             thinkTimer += Time.deltaTime;
             LoadingProgress = Report();
             DecayNeeds();
