@@ -34,7 +34,7 @@ namespace Creature.Brain
             List<IUtility> potentialTasks = Utility.Toolbox.Instance.AvalibleTasks;
             List<Option> options = new List<Option>();
 
-            float[] realitiveNeeds = getRealitiveNeeds();
+            Needs realitiveNeeds = getRealitiveNeeds();
 
             // Figure out Utility Per Task
             foreach (IUtility task in potentialTasks) 
@@ -57,17 +57,17 @@ namespace Creature.Brain
                 float CurrentUtility = Mathf.Clamp(preference, float.MinValue, 15f);
 
                 // Add expected result
-                if (task.StatsEffect != null)
+                if (task.StatsEffect != Needs.Zero)
                 {
-                    for (int i = 0; i < task.StatsEffect.Length; i++)
+                    for (int i = 0; i < task.StatsEffect.Count; i++)
                     {
-                        float expectedUtility = realitiveNeeds[i] * task.StatsEffect[i] * task.BaseUtility;
+                        float expectedUtility = realitiveNeeds[i] * task.StatsEffect[i] * (float)task.BaseUtility;
                         CurrentUtility += expectedUtility;
                     }
                 }
                 else 
                 {
-                    CurrentUtility += task.BaseUtility * 6;
+                    CurrentUtility += (float)task.BaseUtility * 6;
                 }
 
                 // Add Diminishing Returns
@@ -94,18 +94,14 @@ namespace Creature.Brain
                 pickMe.Preferrence.Preference += 0.01f;
             // Track Task
             lastTasks.Enqueue(pickMe.Task.GetType());
-            foreach (Option o in options) 
-            {
-                //Debug.Log($"{o.Task.GetType().ToString()} | {o.Utility}");
-            }
         }
 
-        private float[] getRealitiveNeeds() 
+        private Needs getRealitiveNeeds() 
         {
-            float[] f = _controller.needs.RawNeeds;
-            for (int i = 0; i < f.Length; i++) 
+            Needs f = _controller.needs.Clone();
+            for (int i = 0; i < f.Count; i++) 
             {
-                f[i] = (f[i] - _controller.needs.Min) / (_controller.needs.Max - _controller.needs.Min);
+                f[i] = (f[i] - f.Min) / (f.Max - f.Min);
                 f[i] = 1 - f[i];
             }
             return f;

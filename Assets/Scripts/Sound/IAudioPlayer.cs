@@ -16,6 +16,11 @@ namespace Sound
         public bool IsDelayed { get; }
 
         /// <summary>
+        /// The current volume of the clip being played
+        /// </summary>
+        public float Volume { get; set; }
+
+        /// <summary>
         /// Plays the sound
         /// </summary>
         public void Play();

@@ -10,6 +10,7 @@ namespace Player
     [RequireComponent(typeof(HeadMovement))]
     [RequireComponent(typeof(InteractionController))]
     [RequireComponent(typeof(GlobalController))]
+    [RequireComponent(typeof(Sound.FootstepController))]
     [DisallowMultipleComponent]
     public class PlayerController : MonoBehaviour
     {
@@ -23,6 +24,8 @@ namespace Player
         public GlobalController GlobalInteraction;
         [HideInInspector]
         public Hand HandController;
+        [HideInInspector]
+        public Sound.FootstepController Footsteps;
 
         public GameObject Eyes;
         public GameObject Feet;
@@ -31,6 +34,23 @@ namespace Player
         private void Awake()
         {
             Utility.Toolbox.Instance.Player = this;
+        }
+
+        private void OnPause() 
+        {
+            GlobalInteraction.enabled = false;
+            HandController.enabled = false;
+            HeadMovement.enabled = false;
+            Interaction.enabled = false;
+            Movement.enabled = false;
+        }
+        private void OnUnPause()
+        {
+            GlobalInteraction.enabled = true;
+            HandController.enabled = true;
+            HeadMovement.enabled = true;
+            Interaction.enabled = true;
+            Movement.enabled = true;
         }
 
         private void Start()
@@ -47,6 +67,10 @@ namespace Player
             GlobalInteraction = GetComponent<GlobalController>();
             if (Hand != null)
                 HandController = Hand.GetComponent<Hand>();
+            Footsteps = GetComponent<Sound.FootstepController>();
+
+            Utility.Toolbox.Instance.Pause.OnPause.AddListener(OnPause);
+            Utility.Toolbox.Instance.Pause.OnUnPause.AddListener(OnUnPause);
         }
     }
 }

@@ -10,13 +10,32 @@ namespace Creature
     public class NavMeshMovement : MonoBehaviour
     {
         private NavMeshAgent navMeshAgent;
+        private Vector3 lastDestination;
 
         public float Speed => navMeshAgent.velocity.magnitude;
+        public float Distance => navMeshAgent.remainingDistance;
 
         // Start is called before the first frame update
         void Start()
         {
+            lastDestination = transform.position;
             GetNavMeshAgent();
+            Utility.Toolbox.Instance.Pause.OnPause.AddListener(OnPause);
+            Utility.Toolbox.Instance.Pause.OnUnPause.AddListener(OnUnPause);
+        }
+
+        private void OnPause() 
+        {
+            navMeshAgent.enabled = false;
+        }
+
+        private void OnUnPause() 
+        {
+            navMeshAgent.enabled = true;
+            if (lastDestination != Vector3.zero) 
+            {
+                MoveTo(lastDestination);
+            }
         }
 
         /// <summary>
@@ -31,6 +50,25 @@ namespace Creature
         }
 
         /// <summary>
+        /// Stops the agent from trying to move to another location.
+        /// </summary>
+        public void ClearDestination() 
+        {
+            navMeshAgent.ResetPath();
+            lastDestination = Vector3.zero;
+        }
+
+        /// <summary>
+        /// Teleports to world position
+        /// </summary>
+        /// <param name="position"></param>
+        public void Warp(Vector3 position) 
+        {
+            navMeshAgent.Warp(position);
+        }
+
+
+        /// <summary>
         /// Attempt to move the NavMesh agent to a specified point in 3D space.
         /// </summary>
         /// <param name="_destination">Point in 3D space the NavMesh agent will attempt to move to.</param>
@@ -39,6 +77,7 @@ namespace Creature
             if (navMeshAgent == null)
                 GetNavMeshAgent();
             navMeshAgent.destination = _destination;
+            lastDestination= _destination;
         }
         /// <summary>
         /// Attempt to move the NavMesh agent to a specified game object in the scene.

@@ -20,7 +20,6 @@ namespace Player
 
         void Start()
         {
-            tt = Utility.Toolbox.Instance.ToolTip;
             StartCoroutine(LateStart(1));
         }
 
@@ -30,6 +29,7 @@ namespace Player
             player = Utility.Toolbox.Instance.Player;
             player.GlobalInteraction.PrimaryEvent.AddListener(LetGo);
             player.GlobalInteraction.UseEvent.AddListener(Use);
+            tt = Utility.Toolbox.Instance.ToolTip;
         }
 
         private void Update()
@@ -50,17 +50,32 @@ namespace Player
         public void PickUp(IHoldable obj) 
         {
             if (Holding != null)
+            {
                 LetGo();
+            }
             Holding = obj;
             tt.HoldText = Holding.HoldText;
+            player.Footsteps.OnStep.AddListener(Holding.Shake);
+            player.HeadMovement.OnJolt.AddListener(Holding.Shake);
         }
         public void LetGo() 
         {
-            if(Holding != null)
+            if (Holding != null)
+            {
+                player.Footsteps.OnStep.RemoveListener(Holding.Shake);
+                player.HeadMovement.OnJolt.RemoveListener(Holding.Shake);
                 Holding.PutDown();
+            }
             Holding = null;
-            tt.HoldText = string.Empty;
-            tt.UseText = string.Empty;
+            if (tt != null)
+            {
+                tt.HoldText = string.Empty;
+                tt.UseText = string.Empty;
+            }
+            else 
+            {
+                tt = Utility.Toolbox.Instance.ToolTip;
+            }
         }
     }
 }

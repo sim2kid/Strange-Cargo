@@ -43,6 +43,7 @@ namespace Utility
         public Player.PlayerController Player { get; set; }
 
         public ToolTip ToolTip { get; set; }
+        public Pause Pause { get; set; }
 
         private Toolbox()
         {
@@ -52,8 +53,8 @@ namespace Utility
             CreatureList = new List<CreatureController>();
 
             AvalibleTasks = new List<IUtility>();
-            AvalibleTasks.Add(new BasicUtility(UnityEngine.Random.Range(0f, 5f), new Creature.Task.Wait(UnityEngine.Random.Range(1f, 8f))));
-            AvalibleTasks.Add(new BasicUtility(UnityEngine.Random.Range(-3f, 10f), new Creature.Task.Wander(3f)));
+            AvalibleTasks.Add(new BasicUtility(new DataType.Range(0f, 5f), new Creature.Task.Wait(new DataType.Range(1f, 8f))));
+            AvalibleTasks.Add(new BasicUtility(new DataType.Range(-3f, 10f), new Creature.Task.Wander(3f)));
         }
     }
 }

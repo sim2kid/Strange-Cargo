@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace DataType
 {
     [System.Serializable]
-    public class ValueRange : IValue
+    public struct ValueRange : IValue
     {
         public float MaxValue => Value + Range.MaxValue;
         public float MinValue => Value - Range.MinValue;
@@ -36,15 +36,94 @@ namespace DataType
             Range = new Range();
         }
 
-        public ValueRange() 
-        {
-            Value = 0;
-            Range = new Range();
-        }
-
         public float Read() 
         {
             return Value + Range.Read();
+        }
+
+
+
+        public static explicit operator float(ValueRange x) 
+        {
+            return x.Read();
+        }
+        public static implicit operator ValueRange(float x)
+        {
+            return new ValueRange(x);
+        }
+        public static implicit operator ValueRange(Range x)
+        {
+            return new ValueRange(0, x);
+        }
+
+        public static ValueRange operator *(ValueRange x, float y)
+        {
+            return new ValueRange(x.Read() * y);
+        }
+        public static ValueRange operator *(float x, ValueRange y)
+        {
+            return new ValueRange(x * y.Read());
+        }
+
+        public static ValueRange operator +(ValueRange x, float y)
+        {
+            return new ValueRange(x.Read() + y);
+        }
+        public static ValueRange operator +(float x, ValueRange y)
+        {
+            return new ValueRange(x + y.Read());
+        }
+
+        public static ValueRange operator -(ValueRange x, float y)
+        {
+            return new ValueRange(x.Read() - y);
+        }
+        public static ValueRange operator -(float x, ValueRange y)
+        {
+            return new ValueRange(x - y.Read());
+        }
+
+        public static ValueRange operator /(ValueRange x, float y)
+        {
+            return new ValueRange(x.Read() / y);
+        }
+        public static ValueRange operator /(float x, ValueRange y)
+        {
+            return new ValueRange(x / y.Read());
+        }
+
+        public static ValueRange operator %(ValueRange x, float y)
+        {
+            return new ValueRange(x.Read() % y);
+        }
+        public static ValueRange operator %(float x, ValueRange y)
+        {
+            return new ValueRange(x % y.Read());
+        }
+
+        public static bool operator ==(ValueRange x, ValueRange y)
+        {
+            return x.Equals(y);
+        }
+        public static bool operator !=(ValueRange x, ValueRange y)
+        {
+            return !x.Equals(y);
+        }
+
+        public override bool Equals(object other)
+        {
+            if (typeof(object) == typeof(ValueRange))
+                return this.MaxValue == ((ValueRange)other).MaxValue &&
+                    this.MinValue == ((ValueRange)other).MinValue &&
+                    this.Value == ((ValueRange)other).Value;
+            if (typeof(object) == typeof(float))
+                return this.MaxValue == 0 && this.MaxValue == 0 && this.Value == (float)other;
+
+            return false;
+        }
+        public override int GetHashCode()
+        {
+            return System.Tuple.Create(MaxValue,MinValue,Value).GetHashCode();
         }
     }
 }

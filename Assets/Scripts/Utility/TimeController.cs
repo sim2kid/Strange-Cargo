@@ -37,6 +37,9 @@ namespace Utility
         // Update is called once per frame
         void FixedUpdate()
         {
+            if (Utility.Toolbox.Instance.Pause.Paused)
+                return;
+
             // Gives seconds elapsed
             _time += Time.fixedDeltaTime;
 
