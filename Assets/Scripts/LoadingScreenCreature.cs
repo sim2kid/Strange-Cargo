@@ -26,17 +26,6 @@ public class LoadingScreenCreature : MonoBehaviour
     {
         lastPosition = transform.position;
         index = 0;
-        loadingScreen.StartEvent.AddListener(Begin);
-        loadingScreen.End.AddListener(End);
-    }
-
-    void Begin() 
-    {
-        
-    }
-    void End() 
-    {
-    
     }
 
     void Update()

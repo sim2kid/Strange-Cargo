@@ -1,4 +1,5 @@
 using Creature;
+using Sound;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class ScreenLoading : MonoBehaviour, IProgress
     public GameObject NormalOverlay;
     public Slider ProgrssBar;
     public Cinemachine.CinemachineVirtualCamera camera;
+    public GameObject LoadingScene;
+    public AudioPlayer bgm;
 
     public UnityEvent StartEvent;
     public UnityEvent End;
@@ -60,6 +63,7 @@ public class ScreenLoading : MonoBehaviour, IProgress
         LoadingScreen.SetActive(true);
         NormalOverlay.SetActive(false);
         Toolbox.Instance.Pause.SetPause(true);
+        bgm.Volume = 1;
         ProgrssBar.value = 0;
         camera.Priority = 1000;
         StartEvent.Invoke();
@@ -70,9 +74,12 @@ public class ScreenLoading : MonoBehaviour, IProgress
         LoadingScreen.SetActive(false);
         NormalOverlay.SetActive(true);
         Toolbox.Instance.Pause.SetPause(false);
-        
+        bgm.Volume = 1;
+
         camera.Priority = -1000;
         End.Invoke();
+
+        LoadingScene.SetActive(false);
 
         this.enabled = false;
     }

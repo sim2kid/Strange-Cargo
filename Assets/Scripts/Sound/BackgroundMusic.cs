@@ -45,12 +45,12 @@ namespace Sound
 
         void OnPause() 
         {
-            ap.Volume *= 0.25f;
+            ap.Volume *= 0.50f;
         }
 
         void OnUnPause() 
         {
-            ap.Volume /= 0.25f;
+            ap.Volume /= 0.50f;
         }
 
         // Update is called once per frame
