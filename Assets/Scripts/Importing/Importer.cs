@@ -98,7 +98,7 @@ namespace Importing
 
             if (AssetDatabase.IsValidFolder(location))
             {
-                AssetDatabase.CreateAsset(database, $"{SanitizePath(Path.Combine(location, name))}.asset");
+                AssetDatabase.CreateAsset(database, $"{ForwardSlashPath(Path.Combine(location, name))}.asset");
                 AssetDatabase.SaveAssets();
                 Debug.Log($"Database \"{name}.asset\" has been saved at \"{location}\".");
             }
@@ -142,6 +142,11 @@ namespace Importing
         private static string SanitizePath(string s)
         {
             return s.Replace('/', '\\');
+        }
+
+        private static string ForwardSlashPath(string s) 
+        {
+            return s.Replace('\\', '/');
         }
     }
 }
