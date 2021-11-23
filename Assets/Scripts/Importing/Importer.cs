@@ -121,7 +121,7 @@ namespace Importing
             Database db = Resources.Load<Database>(SanitizePath(Path.Combine(resourcePath, fileName)));
             if (db == null) 
             {
-                Debug.LogError($"Could not find the Database \"{fileName}\" at \"{resourcePath}\". Is every");
+                Debug.LogError($"Could not find the Database \"{fileName}\" at \"{resourcePath}\". Is everything spelled correctly?");
                 return null;
             }
             db.DeSerialize();
