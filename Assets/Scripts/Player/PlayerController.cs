@@ -69,6 +69,9 @@ namespace Player
                 HandController = Hand.GetComponent<Hand>();
             Footsteps = GetComponent<Sound.FootstepController>();
 
+            if (Utility.Toolbox.Instance.Pause == null)
+                Console.LogError("Missing Pause Component in Scene");
+
             Utility.Toolbox.Instance.Pause.OnPause.AddListener(OnPause);
             Utility.Toolbox.Instance.Pause.OnUnPause.AddListener(OnUnPause);
         }

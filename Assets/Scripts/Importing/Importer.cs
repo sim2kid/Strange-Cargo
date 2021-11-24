@@ -98,7 +98,7 @@ namespace Importing
 
             if (AssetDatabase.IsValidFolder(location))
             {
-                AssetDatabase.CreateAsset(database, $"{SanitizePath(Path.Combine(location, name))}.asset");
+                AssetDatabase.CreateAsset(database, $"{ForwardSlashPath(Path.Combine(location, name))}.asset");
                 AssetDatabase.SaveAssets();
                 Debug.Log($"Database \"{name}.asset\" has been saved at \"{location}\".");
             }
@@ -121,7 +121,7 @@ namespace Importing
             Database db = Resources.Load<Database>(SanitizePath(Path.Combine(resourcePath, fileName)));
             if (db == null) 
             {
-                Debug.LogError($"Could not find the Database \"{fileName}\" at \"{resourcePath}\". Is every");
+                Debug.LogError($"Could not find the Database \"{fileName}\" at \"{resourcePath}\". Is everything spelled correctly?");
                 return null;
             }
             db.DeSerialize();
@@ -142,6 +142,11 @@ namespace Importing
         private static string SanitizePath(string s)
         {
             return s.Replace('/', '\\');
+        }
+
+        private static string ForwardSlashPath(string s) 
+        {
+            return s.Replace('\\', '/');
         }
     }
 }

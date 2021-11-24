@@ -39,10 +39,16 @@ namespace Utility
         public List<IUtility> AvalibleTasks { get; set; }
         /// <summary>
         /// The Player's main interface
+        /// The gameobject must be present in the scene!
         /// </summary>
         public Player.PlayerController Player { get; set; }
-
+        /// <summary>
+        /// The UI for tooltips. The gameobject must be present in the scene!
+        /// </summary>
         public ToolTip ToolTip { get; set; }
+        /// <summary>
+        /// The pausing interface. The gameobject must be present in the scene!
+        /// </summary>
         public Pause Pause { get; set; }
 
         private Toolbox()
