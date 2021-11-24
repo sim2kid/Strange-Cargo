@@ -123,6 +123,8 @@ namespace Genetics
             RuntimeAnimatorController rac = Resources.Load(AnimationControllerLocation) as RuntimeAnimatorController;
             a.runtimeAnimatorController = rac;
 
+            CreatureAnimationControllerDemo cACD = creature.AddComponent<CreatureAnimationControllerDemo>();
+
             FeetSound[] feet = creature.GetComponentsInChildren<FeetSound>();
             string frontFeetSound = string.Empty, backFeetSound = string.Empty;
             foreach (FeetSound foot in feet)

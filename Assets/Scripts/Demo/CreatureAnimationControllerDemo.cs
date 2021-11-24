@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(NavMeshAgent))]
 public class CreatureAnimationControllerDemo : MonoBehaviour
 {
@@ -12,7 +11,7 @@ public class CreatureAnimationControllerDemo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
@@ -24,6 +23,6 @@ public class CreatureAnimationControllerDemo : MonoBehaviour
 
     void SetAnimatorVelocity()
     {
-        animator.SetFloat("Velocity", navMeshAgent.velocity.magnitude);
+        animator.SetFloat("Speed", navMeshAgent.velocity.magnitude);
     }
 }
