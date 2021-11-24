@@ -41,6 +41,8 @@ namespace Creature.Task
             Console.LogDebug($"Creature [{_caller.Guid}]: Eating - At Bowl");
             come.EndTask(_update);
 
+            _caller.AnimationTrigger("Eat");
+
             wait = new Wait(5);
             wait.OnTaskFinished.AddListener(Finish);
             wait.RunTask(_caller, _update);
@@ -73,6 +75,7 @@ namespace Creature.Task
             if (IsDone && !calledFinished)
             {
                 OnTaskFinished.Invoke();
+                _caller.AnimationTrigger("Stop");
                 calledFinished = true;
             }
         }

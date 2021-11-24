@@ -226,5 +226,10 @@ namespace Creature
                 needDecay[i] *= Time.deltaTime;
             needs += needDecay;
         }
+
+        public void AnimationTrigger(string _triggerName)
+        {
+            Animator.SetTrigger(_triggerName);
+        }
     }
 }
