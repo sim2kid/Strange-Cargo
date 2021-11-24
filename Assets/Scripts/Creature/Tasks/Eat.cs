@@ -75,7 +75,6 @@ namespace Creature.Task
             if (IsDone && !calledFinished)
             {
                 OnTaskFinished.Invoke();
-                _caller.AnimationTrigger("Stop");
                 calledFinished = true;
             }
         }

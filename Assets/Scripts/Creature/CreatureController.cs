@@ -217,6 +217,7 @@ namespace Creature
                 hotTasks.Dequeue();
             else
                 tasks.Dequeue();
+            AnimationTrigger("Stop");
         }
 
         private void DecayNeeds() 
