@@ -217,7 +217,7 @@ namespace Creature
                 hotTasks.Dequeue();
             else
                 tasks.Dequeue();
-            AnimationTrigger("Stop");
+            AnimationBool("Stop", true);
         }
 
         private void DecayNeeds() 
@@ -228,8 +228,13 @@ namespace Creature
             needs += needDecay;
         }
 
+        public void AnimationBool(string _boolName, bool _boolValue)
+        {
+            Animator.SetBool(_boolName, _boolValue);
+        }
         public void AnimationTrigger(string _triggerName)
         {
+            AnimationBool("Stop", false);
             Animator.SetTrigger(_triggerName);
         }
     }
