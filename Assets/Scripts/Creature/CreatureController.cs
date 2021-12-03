@@ -217,6 +217,7 @@ namespace Creature
                 hotTasks.Dequeue();
             else
                 tasks.Dequeue();
+            AnimationBool("Stop", true);
         }
 
         private void DecayNeeds() 
@@ -225,6 +226,16 @@ namespace Creature
             for (int i = 0; i < needDecay.Count; i++)
                 needDecay[i] *= Time.deltaTime;
             needs += needDecay;
+        }
+
+        public void AnimationBool(string _boolName, bool _boolValue)
+        {
+            Animator.SetBool(_boolName, _boolValue);
+        }
+        public void AnimationTrigger(string _triggerName)
+        {
+            AnimationBool("Stop", false);
+            Animator.SetTrigger(_triggerName);
         }
     }
 }
