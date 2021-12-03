@@ -140,6 +140,7 @@ namespace Genetics
                     {
                         face.Eyes = f.gameObject;
                     }
+                    GameObject.Destroy(f);
                 }
             }
 
@@ -211,22 +212,6 @@ namespace Genetics
 
             bool useTexture = ImageConversion.LoadImage(texture2D, textureBytes, false);
 
-            if (!string.IsNullOrWhiteSpace(bodyPart.Eyes)) 
-            {
-                BodyPart eyes = genePool.GetBodyPartByName(bodyPart.Eyes);
-                GameObject eyesObject = Siccity.GLTFUtility.Importer.LoadFromFile(eyes.FileLocation);
-                g.Add(eyesObject);
-                eyesObject.AddComponent<Face>().IsEyes = true;
-            }
-
-            if (!string.IsNullOrWhiteSpace(bodyPart.Mouth))
-            {
-                BodyPart mouth = genePool.GetBodyPartByName(bodyPart.Mouth);
-                GameObject mouthObject = Siccity.GLTFUtility.Importer.LoadFromFile(mouth.FileLocation);
-                g.Add(mouthObject);
-                mouthObject.AddComponent<Face>().IsMouth = true;
-            }
-
             int i = 0;
             foreach (Renderer renderer in models) 
             {
@@ -247,7 +232,34 @@ namespace Genetics
                 {
                     Console.LogWarning($"Pattern Texture {pattern.Name} could not be loaded into the material. The load result is {useTexture}, and the 2D Texture size is ({texture2D.width}, {texture2D.height}).");
                 }
-                renderer.sharedMaterial.shader = genePool.GetShader(bodyPart.Shader);
+                foreach (Material m in renderer.materials)
+                    m.shader = genePool.GetShader(bodyPart.Shader);
+            }
+
+            if (!string.IsNullOrWhiteSpace(bodyPart.Eyes))
+            {
+                BodyPart eyes = genePool.GetBodyPartByName(bodyPart.Eyes);
+                if (eyes != null)
+                {
+                    GameObject eyesObject = Siccity.GLTFUtility.Importer.LoadFromFile(eyes.FileLocation);
+                    g.Add(eyesObject);
+                    Renderer[] renderers = eyesObject.GetComponentsInChildren<Renderer>();
+                    if(renderers.Length > 0)
+                        renderers[0].gameObject.AddComponent<Face>().Populate(true, false);
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(bodyPart.Mouth))
+            {
+                BodyPart mouth = genePool.GetBodyPartByName(bodyPart.Mouth);
+                if (mouth != null)
+                {
+                    GameObject mouthObject = Siccity.GLTFUtility.Importer.LoadFromFile(mouth.FileLocation);
+                    g.Add(mouthObject);
+                    Renderer[] renderers = mouthObject.GetComponentsInChildren<Renderer>();
+                    if (renderers.Length > 0)
+                        renderers[0].gameObject.AddComponent<Face>().Populate(false, true);
+                }
             }
 
             g.Add(partObject);

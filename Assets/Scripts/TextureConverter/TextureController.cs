@@ -72,21 +72,11 @@ namespace TextureConverter
 
         private void Start()
         {
-            Renderer[] Renderers = GetComponentsInChildren<Renderer>();
-            foreach (Renderer render in Renderers) 
+            MaterialConversion[] Converters = GetComponentsInChildren<MaterialConversion>();
+            foreach (MaterialConversion cons in Converters) 
             {
-                if (shader != null) 
-                {
-                    render.material.shader = this.shader;
-                }
-                MaterialConversion converter = render.GetComponent<MaterialConversion>();
-                if (converter == null)
-                {
-                    converter = render.gameObject.AddComponent<MaterialConversion>();
-                    converter.ForwardConvert = ForwardConvert;
-                }
-                converter.OnFinished.AddListener(AfterConversion);
-                myChildren.Add(converter);
+                cons.OnFinished.AddListener(AfterConversion);
+                myChildren.Add(cons);
             }
 
             if (convert)

@@ -108,7 +108,8 @@ namespace Genetics
         /// <returns></returns>
         public BodyPart GetBodyPartByName(string name)
         {
-            return GetBodyPart(Importer.GetHashString(name));
+            string partName = System.IO.Path.GetFileNameWithoutExtension(name);
+            return GetBodyPart(Importer.GetHashString(partName));
         }
 
         /// <summary>
