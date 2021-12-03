@@ -6,8 +6,8 @@ namespace Creature
 {
     public class FaceTexture : MonoBehaviour
     {
-        public Material Eyes;
-        public Material Mouth;
+        public GameObject Eyes;
+        public GameObject Mouth;
 
 
         /// <summary>
@@ -18,9 +18,9 @@ namespace Creature
         public void SetExpression(Texture2D eyeTex = null, Texture2D mouthTex = null)
         {
             if (eyeTex != null)
-                Eyes.mainTexture = eyeTex;
+                Eyes.GetComponent<Renderer>().material.mainTexture = eyeTex;
             if (mouthTex != null)
-                Mouth.mainTexture = mouthTex;
+                Mouth.GetComponent<Renderer>().material.mainTexture = mouthTex;
         }
     }
 }

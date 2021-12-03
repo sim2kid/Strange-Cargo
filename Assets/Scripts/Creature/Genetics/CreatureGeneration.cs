@@ -106,7 +106,8 @@ namespace Genetics
             
             foreach(PartHash part in dna.BodyPartHashs)
             {
-                bodyParts.Add(CreateBodyPart(part));
+                foreach(GameObject g in CreateBodyPart(part))
+                    bodyParts.Add(g);
             }
 
             GameObject creature = new GameObject(); 
@@ -124,6 +125,23 @@ namespace Genetics
             a.runtimeAnimatorController = rac;
 
             CreatureAnimationControllerDemo cACD = creature.AddComponent<CreatureAnimationControllerDemo>();
+
+            Face[] faceParts = creature.GetComponentsInChildren<Face>();
+            if (faceParts.Length != 0) 
+            {
+                FaceTexture face = creature.AddComponent<FaceTexture>();
+                foreach (Face f in faceParts) 
+                {
+                    if (f.IsMouth)
+                    {
+                        face.Mouth = f.gameObject;
+                    }
+                    else if (f.IsEyes) 
+                    {
+                        face.Eyes = f.gameObject;
+                    }
+                }
+            }
 
             FeetSound[] feet = creature.GetComponentsInChildren<FeetSound>();
             string frontFeetSound = string.Empty, backFeetSound = string.Empty;
@@ -174,8 +192,9 @@ namespace Genetics
             throw new NotImplementedException();
         }
 
-        private static GameObject CreateBodyPart(PartHash partBits) 
+        private static List<GameObject> CreateBodyPart(PartHash partBits) 
         {
+            List<GameObject> g = new List<GameObject>();
             GeneticRepository genePool = Utility.Toolbox.Instance.GenePool;
             BodyPart bodyPart = genePool.GetBodyPart(partBits.BodyPart);
             Pattern pattern = genePool.GetPattern(partBits.Pattern);
@@ -191,6 +210,22 @@ namespace Genetics
                 Console.LogError($"Body part {bodyPart.Name} in {bodyPart.Type} had no skinned meshes. This body part will not render correctly. Please make sure your model is correct.");
 
             bool useTexture = ImageConversion.LoadImage(texture2D, textureBytes, false);
+
+            if (!string.IsNullOrWhiteSpace(bodyPart.Eyes)) 
+            {
+                BodyPart eyes = genePool.GetBodyPartByName(bodyPart.Eyes);
+                GameObject eyesObject = Siccity.GLTFUtility.Importer.LoadFromFile(eyes.FileLocation);
+                g.Add(eyesObject);
+                eyesObject.AddComponent<Face>().IsEyes = true;
+            }
+
+            if (!string.IsNullOrWhiteSpace(bodyPart.Mouth))
+            {
+                BodyPart mouth = genePool.GetBodyPartByName(bodyPart.Mouth);
+                GameObject mouthObject = Siccity.GLTFUtility.Importer.LoadFromFile(mouth.FileLocation);
+                g.Add(mouthObject);
+                mouthObject.AddComponent<Face>().IsMouth = true;
+            }
 
             int i = 0;
             foreach (Renderer renderer in models) 
@@ -215,7 +250,8 @@ namespace Genetics
                 renderer.sharedMaterial.shader = genePool.GetShader(bodyPart.Shader);
             }
 
-            return partObject;
+            g.Add(partObject);
+            return g;
         }
     }
 }
