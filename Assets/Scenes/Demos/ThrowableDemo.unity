@@ -327,6 +327,7 @@ GameObject:
   - component: {fileID: 885320602}
   - component: {fileID: 885320601}
   - component: {fileID: 885320603}
+  - component: {fileID: 885320604}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -484,6 +485,20 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &885320604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885320597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c0b46522615efc4eae925eaa023cce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentTime: 0
+  MinutesInADay: 15
 --- !u!1001 &1823908002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -701,7 +716,7 @@ GameObject:
   - component: {fileID: 2075408640}
   - component: {fileID: 2075408639}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Test Throwable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -716,29 +731,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 2075408638}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26917d7f130b3ea4b9612448f77e21b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 984bf3bc147a02e43ba2ceddb1393c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hoverText: Here is some hover text
-  events:
-    OnEnter:
-      m_PersistentCalls:
-        m_Calls: []
-    OnHover:
-      m_PersistentCalls:
-        m_Calls: []
-    OnExit:
-      m_PersistentCalls:
-        m_Calls: []
-    OnDown:
-      m_PersistentCalls:
-        m_Calls: []
-    OnHold:
-      m_PersistentCalls:
-        m_Calls: []
-    OnUp:
-      m_PersistentCalls:
-        m_Calls: []
+  _hoverText: 
+  positionOffset: {x: 0, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 0, z: 0}
+  _textOnHold: 
+  OnPickup:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPutDown:
+    m_PersistentCalls:
+      m_Calls: []
+  OnShake:
+    m_PersistentCalls:
+      m_Calls: []
+  throwHeight: 5
+  throwForce: 5
+  OnUse:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &2075408640
 Rigidbody:
   m_ObjectHideFlags: 0
