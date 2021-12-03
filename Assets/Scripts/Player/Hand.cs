@@ -29,6 +29,7 @@ namespace Player
             player = Utility.Toolbox.Instance.Player;
             player.GlobalInteraction.PrimaryEvent.AddListener(LetGo);
             player.GlobalInteraction.UseEvent.AddListener(Use);
+            player.GlobalInteraction.ThrowEvent.AddListener(Throw);
             tt = Utility.Toolbox.Instance.ToolTip;
         }
 
@@ -45,6 +46,12 @@ namespace Player
         {
             if (Holding is IUseable)
                 ((IUseable)Holding).Use();
+        }
+
+        public void Throw()
+        {
+            if (Holding is IThrowable)
+                ((IThrowable)Holding).Throw();
         }
 
         public void PickUp(IHoldable obj) 

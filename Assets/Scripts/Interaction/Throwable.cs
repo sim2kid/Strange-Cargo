@@ -8,23 +8,23 @@ using UnityEngine.Events;
 namespace Interaction
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class Throwable : Pickupable, IUseable
+    public class Throwable : Pickupable, IThrowable
     {
         [SerializeField]
-        private float throwHeight;
+        private float throwHeight = 5;
 
         [SerializeField]
-        private float throwForce;
+        private float throwForce = 5;
 
-        public UnityEvent OnUse;
-        public string UseText => useString;
+        public UnityEvent OnThrow;
+        public string ThrowText => throwString;
 
-        private string useString;
+        private string throwString;
         private new Rigidbody rigidbody;
 
         protected override void Start()
         {
-            useString = string.Empty;
+            throwString = string.Empty;
             player = Utility.Toolbox.Instance.Player;
             rigidbody = this.GetComponent<Rigidbody>();
             base.Start();
@@ -34,15 +34,10 @@ namespace Interaction
         {
         }
 
-        public void Use()
-        {
-            OnUse.Invoke();
-            player.HandController.LetGo();
-            this.Throw();
-        }
-
         public void Throw()
         {
+            OnThrow.Invoke();
+            player.HandController.LetGo();
             Vector3 handDirection = player.Hand.transform.forward * throwForce;
             Vector3 throwDirection = new Vector3(handDirection.x, handDirection.y + throwHeight, handDirection.z);
             rigidbody.AddForce(throwDirection, ForceMode.Impulse);

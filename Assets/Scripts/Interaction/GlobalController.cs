@@ -12,15 +12,18 @@ namespace Interaction
     {
         [SerializeField]
         public UnityEvent UseEvent;
+        public UnityEvent ThrowEvent;
         public UnityEvent PrimaryEvent;
         public UnityEvent SecondaryEvent;
 
         private PlayerInput playerInput;
+        private InputAction Throw;
         private InputAction use;
         private InputAction primary;
         private InputAction second;
 
         private bool calledUse;
+        private bool calledThrow;
         private bool calledPrimary;
         private bool calledSecond;
 
@@ -39,9 +42,11 @@ namespace Interaction
         {
             playerInput = GetComponent<PlayerInput>();
             use = playerInput.actions["Use"];
+            Throw = playerInput.actions["Throw"];
             primary = playerInput.actions["Primary"];
             second = playerInput.actions["Secondary"];
             calledUse = false;
+            calledThrow = false;
             calledSecond = false;
             calledPrimary = false;
         }
@@ -50,12 +55,17 @@ namespace Interaction
         void Update()
         {
             bool uDown = use.ReadValue<float>() == 1;
+            bool tDown = Throw.ReadValue<float>() == 1;
             bool pDown = primary.ReadValue<float>() == 1;
             bool sDown = second.ReadValue<float>() == 1;
 
             if (uDown && uDown != calledUse)
             {
                 UseEvent.Invoke();
+            }
+            if(tDown && tDown != calledThrow)
+            {
+                ThrowEvent.Invoke();
             }
             if (sDown && sDown != calledSecond)
             {
