@@ -118,7 +118,7 @@ namespace Importing
         /// <returns></returns>
         public static Database LoadDatabase(string resourcePath, string fileName) 
         {
-            Database db = Resources.Load<Database>(SanitizePath(Path.Combine(resourcePath, fileName)));
+            Database db = Resources.Load<Database>(ForwardSlashPath(Path.Combine(resourcePath, fileName)));
             if (db == null) 
             {
                 Debug.LogError($"Could not find the Database \"{fileName}\" at \"{resourcePath}\". Is everything spelled correctly?");
