@@ -15,7 +15,6 @@ namespace Creature
             Mouth.GetComponent<Renderer>().material.shader = Shader.Find("Shader Graphs/Face");
 
             Texture2D empty = Resources.Load<Texture2D>("Face/Empty");
-            empty.alphaIsTransparency = true;
             SetExpression(empty, empty);
 
         }
