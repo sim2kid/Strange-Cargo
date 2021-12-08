@@ -18,7 +18,6 @@ public class DeadSimpleDoor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isOpen = false;
         currentPosition = transform.localPosition;
         currentRotation = transform.localRotation.eulerAngles;
     }

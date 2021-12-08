@@ -18,5 +18,7 @@ namespace Genetics
         public float Scale;
         public ShaderEnum Shader;
         public List<string> Patterns;
+        public string Eyes;
+        public string Mouth;
     }
 }

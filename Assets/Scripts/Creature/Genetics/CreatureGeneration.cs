@@ -106,7 +106,8 @@ namespace Genetics
             
             foreach(PartHash part in dna.BodyPartHashs)
             {
-                bodyParts.Add(CreateBodyPart(part));
+                foreach(GameObject g in CreateBodyPart(part))
+                    bodyParts.Add(g);
             }
 
             GameObject creature = new GameObject(); 
@@ -124,6 +125,24 @@ namespace Genetics
             a.runtimeAnimatorController = rac;
 
             CreatureAnimationControllerDemo cACD = creature.AddComponent<CreatureAnimationControllerDemo>();
+
+            Face[] faceParts = creature.GetComponentsInChildren<Face>();
+            if (faceParts.Length != 0) 
+            {
+                FaceTexture face = creature.AddComponent<FaceTexture>();
+                foreach (Face f in faceParts) 
+                {
+                    if (f.IsMouth)
+                    {
+                        face.Mouth = f.gameObject;
+                    }
+                    else if (f.IsEyes) 
+                    {
+                        face.Eyes = f.gameObject;
+                    }
+                    GameObject.Destroy(f);
+                }
+            }
 
             FeetSound[] feet = creature.GetComponentsInChildren<FeetSound>();
             string frontFeetSound = string.Empty, backFeetSound = string.Empty;
@@ -174,8 +193,9 @@ namespace Genetics
             throw new NotImplementedException();
         }
 
-        private static GameObject CreateBodyPart(PartHash partBits) 
+        private static List<GameObject> CreateBodyPart(PartHash partBits) 
         {
+            List<GameObject> g = new List<GameObject>();
             GeneticRepository genePool = Utility.Toolbox.Instance.GenePool;
             BodyPart bodyPart = genePool.GetBodyPart(partBits.BodyPart);
             Pattern pattern = genePool.GetPattern(partBits.Pattern);
@@ -212,10 +232,38 @@ namespace Genetics
                 {
                     Console.LogWarning($"Pattern Texture {pattern.Name} could not be loaded into the material. The load result is {useTexture}, and the 2D Texture size is ({texture2D.width}, {texture2D.height}).");
                 }
-                renderer.sharedMaterial.shader = genePool.GetShader(bodyPart.Shader);
+                foreach (Material m in renderer.materials)
+                    m.shader = genePool.GetShader(bodyPart.Shader);
             }
 
-            return partObject;
+            if (!string.IsNullOrWhiteSpace(bodyPart.Eyes))
+            {
+                BodyPart eyes = genePool.GetBodyPartByName(bodyPart.Eyes);
+                if (eyes != null)
+                {
+                    GameObject eyesObject = Siccity.GLTFUtility.Importer.LoadFromFile(eyes.FileLocation);
+                    g.Add(eyesObject);
+                    Renderer[] renderers = eyesObject.GetComponentsInChildren<Renderer>();
+                    if(renderers.Length > 0)
+                        renderers[0].gameObject.AddComponent<Face>().Populate(true, false);
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(bodyPart.Mouth))
+            {
+                BodyPart mouth = genePool.GetBodyPartByName(bodyPart.Mouth);
+                if (mouth != null)
+                {
+                    GameObject mouthObject = Siccity.GLTFUtility.Importer.LoadFromFile(mouth.FileLocation);
+                    g.Add(mouthObject);
+                    Renderer[] renderers = mouthObject.GetComponentsInChildren<Renderer>();
+                    if (renderers.Length > 0)
+                        renderers[0].gameObject.AddComponent<Face>().Populate(false, true);
+                }
+            }
+
+            g.Add(partObject);
+            return g;
         }
     }
 }
