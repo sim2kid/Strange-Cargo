@@ -33,6 +33,8 @@ namespace Environment
             float dayPercent = time.DayProgress;
             skybox.SetFloat("_Key", dayPercent);
 
+            dayPercent = -Mathf.Cos(dayPercent * 2 * Mathf.PI) + 0.5f;
+
             skybox.SetColor("_CloudColor", CloudColor.Evaluate(dayPercent));
             skybox.SetColor("_SkyColor", SkyColor.Evaluate(dayPercent));
             skybox.SetColor("_HorizonColor", HorizonColor.Evaluate(dayPercent));
