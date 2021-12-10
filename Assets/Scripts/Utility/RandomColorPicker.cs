@@ -40,13 +40,21 @@ namespace Utility
             }
 
             string returnHex = Hex[Random.Range(0, Hex.Count)].Trim();
-            return hexToColor(returnHex);
+
+            return HexToColor(returnHex);
         }
 
-        private static Color hexToColor(string hex) 
+        public static Color HexToColor(string hex) 
         {
             // clean the hex string
             hex = hex.Replace("#", string.Empty);
+            hex = hex.Trim();
+
+            if (hex.Length < 6)
+            {
+                Console.LogError($"Could not get a color for {hex} because it was too short.");
+                return Color.white;
+            }
 
             string r = hex.Substring(0, 2);
             string g = hex.Substring(2, 2);
@@ -64,12 +72,24 @@ namespace Utility
             catch 
             {
                 #if UNITY_EDITOR
-                Debug.LogWarning("Could not convert hex color to rgb. Make sure your color palette file is formated in hex! This will throw an exception on a build!!");
+                Console.LogWarning("Could not convert hex color to rgb. Make sure your color palette file is formated in hex! This will throw an exception on a build!!");
                 return new Color(255, 0, 255);
                 #endif
                 throw new System.Exception("Hex Could Not Be Converted to RGB. Make sure the Color Palette File is formatted correctly.");
             }
 
+        }
+
+        public static string ColorToHex(Color color) 
+        {
+            string s = string.Empty;
+            int r = (int)(color.r * 255);
+            int g = (int)(color.g * 255);
+            int b = (int)(color.b * 255);
+
+            s = r.ToString("x2") + g.ToString("x2") + b.ToString("x2");
+
+            return s;
         }
 
         private static string[] grabColorsFromFile(string resourceFileLocation, char seperationChar) 
