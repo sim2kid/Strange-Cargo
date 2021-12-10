@@ -20,6 +20,13 @@ namespace Environment
         [SerializeField]
         float StarMultiplier = 1;
 
+        [SerializeField]
+        Gradient FogColor;
+        [SerializeField]
+        AnimationCurve FogDensity;
+        [SerializeField]
+        float FogIntensity = 0.03f;
+
         TimeController time;
         UnityEngine.Material skybox;
         void Start()
@@ -33,6 +40,8 @@ namespace Environment
             float dayPercent = time.DayProgress;
             skybox.SetFloat("_Key", dayPercent);
 
+            RenderSettings.fogDensity = Mathf.Clamp01(FogDensity.Evaluate(dayPercent)) * FogIntensity;
+
             dayPercent = -Mathf.Cos(dayPercent * 2 * Mathf.PI) + 0.5f;
 
             skybox.SetColor("_CloudColor", CloudColor.Evaluate(dayPercent));
@@ -41,6 +50,8 @@ namespace Environment
             skybox.SetColor("_UnderskyColor", UnderskyColor.Evaluate(dayPercent));
 
             skybox.SetFloat("_StarIntensity", Mathf.Clamp01(StarIntensity.Evaluate(dayPercent)) * StarMultiplier);
+            RenderSettings.fogColor = FogColor.Evaluate(dayPercent);
+            
         }
     }
 }
