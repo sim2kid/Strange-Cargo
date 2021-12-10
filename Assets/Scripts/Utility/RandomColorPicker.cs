@@ -9,7 +9,7 @@ namespace Utility
         /// <summary>
         /// The location of the color palette file inside of the Resources folder
         /// </summary>
-        public static string DefaultColorPalette = "Data/ColorPallet/default";
+        public static string DefaultColorPalette = "Data/ColorPalette/default";
         /// <summary>
         /// The default seperation character for the default color palette file
         /// </summary>

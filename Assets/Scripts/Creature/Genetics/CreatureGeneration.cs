@@ -87,12 +87,73 @@ namespace Genetics
                 }
             }
 
-            Color[] colors = new Color[3];
-            for (int i = 0; i < 3; i++)
-                colors[i] = RandomColorPicker.RetriveRandomColor();
-            dna.Colors = colors;
+            dna.Colors = RandomColors();
 
             return CreateCreature(dna);
+        }
+
+        /// <summary>
+        /// Generates a random color and adds other potential pallets if "tis the season"
+        /// </summary>
+        /// <returns></returns>
+        private static Color[] RandomColors() 
+        {
+            DateTime today = DateTime.Now;
+            float ran = UnityEngine.Random.Range(0f, 1f);
+
+            string colorPalette = RandomColorPicker.DefaultColorPalette;
+            string usualLocation = "Data/ColorPalette/";
+
+            System.Globalization.HebrewCalendar hc = new System.Globalization.HebrewCalendar();
+
+            if (UnityEngine.Random.Range(0f, 1f) < MUTATION_CHANCE) 
+            {
+                List<string> potentialPalettes = new List<string>();
+
+                if (hc.GetMonth(today) == 9 || hc.GetMonth(today) == 10)
+                {
+                    int day = 0;
+                    if (hc.GetMonth(today) == 9)
+                        day += hc.GetDayOfMonth(today);
+                    if (hc.GetMonth(today) == 10)
+                    {
+                        day += hc.GetDaysInMonth(hc.GetYear(today), 9);
+                        day += hc.GetDayOfMonth(today);
+                    }
+
+                    if (day >= 25-7 && day <= 33+2)
+                        potentialPalettes.Add($"{usualLocation}hanukkah");
+                }
+                if (today.Month == 12)
+                {
+                    potentialPalettes.Add($"{usualLocation}xmas");
+                    
+                }
+                if (today.Month == 10)
+                {
+                    potentialPalettes.Add($"{usualLocation}halloween");
+
+                }
+                if (today.Month == 12 || today.Month == 1) 
+                {
+                    int day = 0;
+                    if (today.Month == 12)
+                        day = today.Day;
+                    if(today.Month == 1)
+                        day = today.Day + DateTime.DaysInMonth(today.Year-1, 12);
+
+                    if (day >= 26 - 7 && day <= 32 + 2)
+                        potentialPalettes.Add($"{usualLocation}kwanzaa");
+                }
+
+                colorPalette = potentialPalettes[UnityEngine.Random.Range(0, potentialPalettes.Count)];
+            }
+
+            Color[] colors = new Color[3];
+            for (int i = 0; i < 3; i++)
+                colors[i] = RandomColorPicker.RetriveRandomColor(RandomColorPicker.DefaultSeperationChar, colorPalette);
+
+            return colors;
         }
 
         /// <summary>
