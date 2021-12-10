@@ -21,7 +21,7 @@ namespace Utility
         /// <returns></returns>
         public static Color RetriveRandomColor() 
         {
-            return RetriveRandomColor(DefaultColorPalette, DefaultSeperationChar);
+            return RetriveRandomColor(DefaultSeperationChar, DefaultColorPalette);
         }
 
         /// <summary>
@@ -30,10 +30,16 @@ namespace Utility
         /// <param name="resourceFileLocation"></param>
         /// <param name="seperationChar"></param>
         /// <returns></returns>
-        public static Color RetriveRandomColor(string resourceFileLocation, char seperationChar)
+        public static Color RetriveRandomColor(char seperationChar, params string[] resourceFileLocations)
         {
-            string[] colorHex = grabColorsFromFile(resourceFileLocation, seperationChar);
-            string returnHex = colorHex[Random.Range(0, colorHex.Length)].Trim();
+            List<string> Hex = new List<string>();
+            foreach (string fileLocation in resourceFileLocations)
+            {
+                string[] colorHex = grabColorsFromFile(fileLocation, seperationChar);
+                Hex.AddRange(colorHex);
+            }
+
+            string returnHex = Hex[Random.Range(0, Hex.Count)].Trim();
             return hexToColor(returnHex);
         }
 
