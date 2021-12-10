@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using Utility;
@@ -8,9 +9,13 @@ using Utility;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject Menu;
+    public GameObject OptionsMenu;
 
     public PlayerInput playerInput;
     private InputAction Pause;
+
+    public GameObject pauseDefault;
+    public GameObject optionsDefault;
 
     private bool lastPause = false;
     private void OnEnable()
@@ -51,13 +56,13 @@ public class PauseMenu : MonoBehaviour
     public void ExitToMainMenu()
     {
         Toolbox.Instance.OnClosing.Invoke();
-        Invoke("SceneChange", 1f);
+        Invoke("SceneChange", 0.2f);
     }
 
     public void ExitToDesktop()
     {
         Toolbox.Instance.OnClosing.Invoke();
-        Invoke("Terminate", 1f);
+        Invoke("Terminate", 0.2f);
     }
 
     private void SceneChange() 
@@ -78,12 +83,23 @@ public class PauseMenu : MonoBehaviour
     public void Options()
     {
         Console.Log("Options Menu has not been implemented yet.");
+        //Menu.SetActive(false);
+        //OptionsMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(optionsDefault);
+    }
+
+    public void BackToPauseMenu()
+    {
+        Menu.SetActive(true);
+        OptionsMenu.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(pauseDefault);
     }
 
     private void OnPause() 
     {
         Menu.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
+        EventSystem.current.SetSelectedGameObject(pauseDefault);
     }
 
     private void OnUnPause() 
