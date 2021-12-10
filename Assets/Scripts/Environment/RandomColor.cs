@@ -6,23 +6,25 @@ using Utility;
 namespace Environment
 {
     [System.Serializable]
+    [RequireComponent(typeof(Renderer))]
     public class RandomColor : MonoBehaviour
     {
-        public string color;
+        public string Color;
+        public string ColorPalette = "Data/ColorPalette/default";
 
         public void Awake()
         {
-            if (string.IsNullOrWhiteSpace(color)) 
+            if (string.IsNullOrWhiteSpace(Color))
             {
-                color = RandomColorPicker.ColorToHex(
+                Color = RandomColorPicker.ColorToHex(
                     RandomColorPicker.RetriveRandomColor(
-                        RandomColorPicker.DefaultSeperationChar, "Data/ColorPalette/default"));
+                        RandomColorPicker.DefaultSeperationChar, ColorPalette));
             }
         }
 
-        private void OnEnable()
+        private void Start()
         {
-            this.GetComponent<Renderer>().material.color = RandomColorPicker.HexToColor(color);
+            this.GetComponent<Renderer>().material.color = RandomColorPicker.HexToColor(Color);
         }
     }
 }
