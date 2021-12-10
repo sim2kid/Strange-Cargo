@@ -15,6 +15,7 @@ public class ScreenLoading : MonoBehaviour, IProgress
     public Cinemachine.CinemachineVirtualCamera camera;
     public GameObject LoadingScene;
     public AudioPlayer bgm;
+    public GameObject PauseMenu;
 
     Cinemachine.CinemachineBlendDefinition saveCameraStyle;
     float time = 0;
@@ -67,6 +68,7 @@ public class ScreenLoading : MonoBehaviour, IProgress
     private void OnStart() 
     {
         Console.Log($"The scene and it's creatures are currently being loaded...");
+        PauseMenu.SetActive(false);
         LoadingScreen.SetActive(true);
         NormalOverlay.SetActive(false);
         Toolbox.Instance.Pause.SetPause(true);
@@ -84,7 +86,8 @@ public class ScreenLoading : MonoBehaviour, IProgress
         Console.Log($"Finished loading in with a time of {time.ToString("0.00")} seconds!");
         NormalOverlay.SetActive(true);
         Toolbox.Instance.Pause.SetPause(false);
-        
+        PauseMenu.SetActive(true);
+
         camera.Priority = -1000;
         End.Invoke();
 
