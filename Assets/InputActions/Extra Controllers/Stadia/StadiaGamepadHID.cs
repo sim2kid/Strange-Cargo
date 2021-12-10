@@ -18,14 +18,6 @@ public class StadiaGamepadHID : Gamepad
                 .WithInterface("HID")
                 .WithManufacturer("Google Inc.")
                 .WithProduct("Stadia Controller"));
-
-        // Alternatively, you can also match by PID and VID, which is generally
-        // more reliable for HIDs.
-        InputSystem.RegisterLayout<StadiaGamepadHID>(
-            matches: new InputDeviceMatcher()
-                .WithInterface("HID")
-                .WithCapability("vendorId", 0x54C) // Sony Entertainment.
-                .WithCapability("productId", 0x9CC)); // Wireless controller.
     }
 
     // In the Player, to trigger the calling of the static constructor,
