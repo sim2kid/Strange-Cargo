@@ -123,7 +123,6 @@ namespace Importing
         public static Database LoadDatabase(string resourcePath, string fileName) 
         {
             string dbLoc = ForwardSlashPath(Path.Combine(resourcePath, fileName));
-
             Database db = Resources.Load<Database>(dbLoc);
             if (db == null) 
             {
