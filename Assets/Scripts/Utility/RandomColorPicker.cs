@@ -45,6 +45,9 @@ namespace Utility
 
         private static Color hexToColor(string hex) 
         {
+            // clean the hex string
+            hex = hex.Replace("#", string.Empty);
+
             string r = hex.Substring(0, 2);
             string g = hex.Substring(2, 2);
             string b = hex.Substring(4, 2);
