@@ -47,23 +47,31 @@ namespace Interaction
             RaycastHit[] hits = Physics.RaycastAll(ray, InteractionDistance);
             List<GameObject> objects = new List<GameObject>();
 
+
+            // Add proper objects to list
             foreach (RaycastHit hit in hits) 
             {
                 IInteractable interact = hit.transform.gameObject.GetComponent<IInteractable>();
-                if(interact != null)
+                Collider collider = hit.transform.gameObject.GetComponent<Collider>();
+
+                if (interact != null || (!collider.isTrigger && collider.gameObject.layer != 7))
                     objects.Add(hit.transform.gameObject);
             }
 
-            GameObject hitObj = null;
-            if (hits.Length > 0)
-                hitObj = GetClosest(objects);
+            // Sort list from closest to farthest
+            Queue<GameObject> hitQueue = SortByClosest(objects);
+
+            // set hit object
+            IInteractable closest = null;
+            if (hitQueue.Count > 0)
+            {
+                closest = hitQueue.Peek().GetComponent<IInteractable>();
+            }
 
             bool buttonDown = interact.ReadValue<float>() == 1;
 
-            if (hitObj != null)
+            if (closest != null)
             {
-                IInteractable closest = hitObj.GetComponent<IInteractable>();
-
                 if (Previous != closest)
                 {
                     if (Previous != null)
@@ -137,6 +145,18 @@ namespace Interaction
             }
 
             Gizmos.DrawLine(Eyes.transform.position, Eyes.transform.position + (Eyes.transform.forward * InteractionDistance));
+        }
+
+        public Queue<GameObject> SortByClosest(List<GameObject> objs) 
+        {
+            Queue<GameObject> queue = new Queue<GameObject>();
+            while (objs.Count > 0) 
+            {
+                GameObject obj = GetClosest(objs);
+                queue.Enqueue(obj);
+                objs.Remove(obj);
+            }
+            return queue;
         }
 
         public GameObject GetClosest(List<GameObject> objs) 

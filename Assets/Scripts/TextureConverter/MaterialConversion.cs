@@ -119,7 +119,8 @@ namespace TextureConverter
         /// <param name="newTexture"></param>
         public void SetMainTexture(Texture2D newTexture, string newHash = null) 
         {
-            this.GetComponent<Renderer>().material.SetTexture("_MainTex", newTexture);
+            foreach(Material m in this.GetComponent<Renderer>().materials)
+                m.SetTexture("_MainTex", newTexture);
             if(!string.IsNullOrEmpty(newHash))
                 TextureHash = newHash;
         }

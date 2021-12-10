@@ -148,9 +148,25 @@ namespace Genetics
             {
                 shader = (int)jsonObj["Shader"];
             }
+            string Eyes = string.Empty;
+            if (jsonObj.ContainsKey("Eyes")) 
+            {
+                Eyes = (string)jsonObj["Eyes"];
+            }
+            string Mouth = string.Empty;
+            if (jsonObj.ContainsKey("Mouth"))
+            {
+                Mouth = (string)jsonObj["Mouth"];
+            }
 
             try
             {
+                List<string> Patterns = new List<string>();
+                if (jsonObj.ContainsKey("Patterns"))
+                {
+                    Patterns = jsonObj["Patterns"].Select(x => (string)x).ToList();
+                }
+
                 // Add the Bodypart to the partList
                 BodyPart part = new BodyPart()
                 {
@@ -163,7 +179,9 @@ namespace Genetics
                     Offset = Offset,
                     Scale = Scale,
                     Shader = (ShaderEnum)shader,
-                    Patterns = jsonObj["Patterns"].Select(x => (string)x).ToList()
+                    Patterns = Patterns,
+                    Eyes = Eyes,
+                    Mouth = Mouth
                 };
 
                 partList.Add(part.Hash, part);

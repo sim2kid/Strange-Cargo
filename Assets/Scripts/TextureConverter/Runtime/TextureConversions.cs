@@ -85,7 +85,7 @@ namespace TextureConverter
                     {
                         // Report progress
                         if (ProgressReport != null)
-                            ProgressReport.Invoke((width * output.height + height) / (output.width * output.height));
+                            ProgressReport.Invoke((float)(width * output.height + height) / (output.width * output.height));
                         // Pause our conversion until next frame
                         yield return null;
                     }
@@ -183,18 +183,107 @@ namespace TextureConverter
                 return Vector4.zero;
             }
             // We multiply each channel with the associated color
-            Vector4 r = (newColors.Length >= 1 ? newColors[0] : Color.clear) * patternColor.x;
-            Vector4 g = (newColors.Length >= 2 ? newColors[1] : Color.clear) * patternColor.y;
-            Vector4 b = (newColors.Length >= 3 ? newColors[2] : Color.clear) * patternColor.z;
-            Vector4 a = (newColors.Length >= 4 ? newColors[3] : Color.clear) * patternColor.w;
+            Vector4 r = (newColors.Length >= 1 ? newColors[0] : Color.clear);
+            Vector4 g = (newColors.Length >= 2 ? newColors[1] : Color.clear);
+            Vector4 b = (newColors.Length >= 3 ? newColors[2] : Color.clear);
 
             // We add those colors together, then we apply the coat texture over that.
-            Vector4 outColor = (r + g + b + a) * (1 - (((detailColor.x + detailColor.y + detailColor.z) / 3) * detailColor.w));
+            Vector4 outColor = multiplyMatrix(patternColor, r, g, b) * (1 - (((detailColor.x + detailColor.y + detailColor.z) / 3) * detailColor.w));
             
             // We're just passing alpha for now
             outColor.w = patternColor.w;
 
             return outColor;
+        }
+
+        private static Vector3 multiplyMatrix(Vector3 v, Vector3 xS, Vector3 yS, Vector3 zS) 
+        {
+            Vector3 returnVector = new Vector3(
+                xS.x * v.x + yS.x * v.y + zS.x * v.z,
+                xS.y * v.x + yS.y * v.y + zS.y * v.z,
+                xS.z * v.x + yS.z * v.y + zS.z * v.z
+                );
+
+            return returnVector;
+        }
+
+        private static float[] gaussianElimination(float[,] M) 
+        {
+            // Source:
+            // https://www.codeproject.com/Tips/388179/Linear-Equation-Solver-Gaussian-Elimination-Csharp
+
+            int rowCount = M.GetUpperBound(0) + 1;
+
+            if (M.Length != rowCount * (rowCount + 1) || M == null) 
+            {
+                throw new ArgumentException("The algorithm must be provided with a (n x n+1) matrix.");
+            }
+            if (rowCount < 1) 
+            {
+                throw new ArgumentException("The matrix must at least have one row.");
+            }
+
+            float[] result = new float[rowCount];
+            for (int i = 0; i < rowCount; i++)
+                result[i] = 0;
+
+
+            // Pivoting
+            for (int col = 0; col + 1 < rowCount; col++) 
+                if (M[col, col] == 0) // check for 0 coeffients
+                {
+                    // find non-0 coeffients
+                    int swapRow = col + 1;
+                    for (; swapRow < rowCount; swapRow++) if (M[swapRow, col] != 0) break;
+
+                    if (M[swapRow, col] != 0) // non-0 found?
+                    {
+                        // Swap with above then
+                        float[] tmp = new float[rowCount + 1];
+                        for (int i = 0; i < rowCount + 1; i++)
+                        {
+                            tmp[i] = M[swapRow, i];
+                            M[swapRow, i] = M[col, i];
+                            M[col, i] = tmp[i];
+                        }
+                    }
+                    else 
+                        return result;
+                           
+                }
+
+            // Elimination
+            for (int sourceRow = 0; sourceRow + 1 < rowCount; sourceRow++)
+            {
+                for (int destRow = sourceRow + 1; destRow < rowCount; destRow++)
+                {
+                    float df = M[sourceRow, sourceRow];
+                    float sf = M[destRow, sourceRow];
+                    for (int i = 0; i < rowCount + 1; i++)
+                        M[destRow, i] = M[destRow, i] * df - M[sourceRow, i] * sf;
+                }
+            }
+
+            // back-insertion
+            for (int row = rowCount - 1; row >= 0; row--)
+            {
+                float f = M[row, row];
+                if (f == 0) return result;
+
+                for (int i = 0; i < rowCount + 1; i++) M[row, i] /= f;
+                for (int destRow = 0; destRow < row; destRow++)
+                { M[destRow, rowCount] -= M[destRow, row] * M[row, rowCount]; M[destRow, row] = 0; }
+            }
+
+            for (int i = 0; i < rowCount; i++)
+                result[i] = M[i, rowCount];
+
+            return result;
+        }
+
+        private static Vector4 overOne(Vector4 input) 
+        {
+            return new Vector4(1/input.x, 1/input.y, 1/input.z, 1/input.w);
         }
 
         private static Vector4 backwardsConvert(Vector4 patternColor, Color[] baseColors) 
@@ -204,65 +293,33 @@ namespace TextureConverter
                 Debug.LogError("No colors have been set for conversion");
                 return Vector4.zero;
             }
-            // We multiply each channel with the associated color
-            Vector2 r = GetComponentValue(baseColors.Length >= 1 ? baseColors[0] : Color.clear, patternColor);
-            Vector2 g = GetComponentValue(baseColors.Length >= 2 ? baseColors[1] : Color.clear, patternColor);
-            Vector2 b = GetComponentValue(baseColors.Length >= 3 ? baseColors[2] : Color.clear, patternColor);
-            Vector2 a = GetComponentValue(baseColors.Length >= 4 ? baseColors[3] : Color.clear, patternColor);
 
-            float r1 = ApproximateColor(float.IsNaN(r.y) ? 1 : (r.y));
-            float g1 = ApproximateColor(float.IsNaN(g.y) ? 1 : (g.y));
-            float b1 = ApproximateColor(float.IsNaN(b.y) ? 1 : (b.y));
-            float a1 = ApproximateColor(float.IsNaN(a.y) ? 1 : (a.y));
+            Vector3 r = (Vector4)baseColors[0];
+            Vector3 g = (Vector4)baseColors[1];
+            Vector3 b = (Vector4)baseColors[2];
 
-            Vector4 n = new Vector4(r1, g1, b1, a1);
-            n.Normalize();
+            Vector3 w = patternColor;
 
-            float t = n.x + n.y + n.z + n.w;
-            // We add those colors together, then we apply the coat texture over that.
-            Vector4 outColor = new Vector4((float.IsInfinity(r.x) ? 1 : r.x) * (n.x / t),
-                (float.IsInfinity(g.x) ? 1 : g.x) * (n.y / t),
-                (float.IsInfinity(b.x) ? 1 : b.x) * (n.z / t),
-                (float.IsInfinity(a.x) ? 1 : a.x) * (n.w / t));
+            float[,] matrix = new float[,] { { r.x, g.x, b.x, w.x }, { r.y, g.y, b.y, w.y }, { r.z, g.z, b.z, w.z } };
 
-            //TECHNICAL DEBT - Set transparency to 1;
-            outColor.w = 1;
+            float[] n = new float[] { 0, 0, 0 };
 
-            return outColor;
+            try
+            {
+                n = gaussianElimination(matrix);
+            }
+            catch {}
+
+            Vector4 colorOut = new Vector4(n[0], n[1], n[2], patternColor.w);
+            
+            return colorOut;
         }
 
-        private static float ApproximateColor(float x) 
+        private static float[] VectorToFloat(Vector3 v) 
         {
-            return -Mathf.Log(x + 0.002f,500) + 0f;
+            return new float[]{ v.x, v.y, v.z };
         }
 
-        private static Vector2 GetComponentValue(Vector4 baseColor, Vector4 actualColor) 
-        {
-            float distanceToBlack = Vector4.Distance(baseColor, Vector4.zero);
-            float distanceToActual = Vector4.Distance(baseColor, actualColor);
-            float actualAltered = distanceToBlack - distanceToActual;
-            float distanceRatio = distanceToActual / distanceToBlack;
-
-            Vector4 pointOnLine = LinePoint(distanceRatio, baseColor);
-            float distanceToPoint = Vector4.Distance(pointOnLine, actualColor);
-
-            return new Vector2((actualAltered / distanceToBlack), distanceToPoint);
-        }
-
-        private static Vector4 LinePoint(float ratio, Vector4 endpoint) 
-        {
-            float x = PointFinder(ratio, endpoint.x, 0);
-            float y = PointFinder(ratio, endpoint.y, 0);
-            float z = PointFinder(ratio, endpoint.z, 0);
-            float w = PointFinder(ratio, endpoint.w, 0);
-
-            return new Vector4(x, y, z, w);
-        }
-
-        private static float PointFinder(float ratio, float start, float end) 
-        {
-            return ((1 - ratio) * start + (ratio * end));
-        } 
 
         // Redundant Code Breakdown
 

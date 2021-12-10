@@ -13,6 +13,7 @@ namespace Creature
     [DisallowMultipleComponent]
     [RequireComponent(typeof(TextureConverter.TextureController))]
     [RequireComponent(typeof(NavMeshMovement))]
+    [RequireComponent(typeof(FaceTexture))]
     public class CreatureController : MonoBehaviour, IProgress
     {
         [SerializeField]
@@ -26,6 +27,7 @@ namespace Creature
         [SerializeField]
         public string backFeetSound;
 
+        public FaceTexture Face { get; private set; }
         public NavMeshMovement Move { get; private set; }
         public int TaskCount => tasks.Count;
         public ITask TopTask => tasks.Peek();
@@ -134,6 +136,7 @@ namespace Creature
         {
             textureController = GetComponent<TextureConverter.TextureController>();
             Move = GetComponent<NavMeshMovement>();
+            Face = GetComponent<FaceTexture>();
             UpdateLoop = new UnityEvent();
             timeSpentOnLastTask = 0;
 

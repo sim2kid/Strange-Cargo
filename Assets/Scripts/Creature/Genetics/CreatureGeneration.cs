@@ -87,12 +87,73 @@ namespace Genetics
                 }
             }
 
-            Color[] colors = new Color[3];
-            for (int i = 0; i < 3; i++)
-                colors[i] = RandomColorPicker.RetriveRandomColor();
-            dna.Colors = colors;
+            dna.Colors = RandomColors();
 
             return CreateCreature(dna);
+        }
+
+        /// <summary>
+        /// Generates a random color and adds other potential pallets if "tis the season"
+        /// </summary>
+        /// <returns></returns>
+        private static Color[] RandomColors() 
+        {
+            DateTime today = DateTime.Now;
+            float ran = UnityEngine.Random.Range(0f, 1f);
+
+            string colorPalette = RandomColorPicker.DefaultColorPalette;
+            string usualLocation = "Data/ColorPalette/";
+
+            System.Globalization.HebrewCalendar hc = new System.Globalization.HebrewCalendar();
+
+            if (UnityEngine.Random.Range(0f, 1f) < MUTATION_CHANCE) 
+            {
+                List<string> potentialPalettes = new List<string>();
+
+                if (hc.GetMonth(today) == 9 || hc.GetMonth(today) == 10)
+                {
+                    int day = 0;
+                    if (hc.GetMonth(today) == 9)
+                        day += hc.GetDayOfMonth(today);
+                    if (hc.GetMonth(today) == 10)
+                    {
+                        day += hc.GetDaysInMonth(hc.GetYear(today), 9);
+                        day += hc.GetDayOfMonth(today);
+                    }
+
+                    if (day >= 25-7 && day <= 33+2)
+                        potentialPalettes.Add($"{usualLocation}hanukkah");
+                }
+                if (today.Month == 12)
+                {
+                    potentialPalettes.Add($"{usualLocation}xmas");
+                    
+                }
+                if (today.Month == 10)
+                {
+                    potentialPalettes.Add($"{usualLocation}halloween");
+
+                }
+                if (today.Month == 12 || today.Month == 1) 
+                {
+                    int day = 0;
+                    if (today.Month == 12)
+                        day = today.Day;
+                    if(today.Month == 1)
+                        day = today.Day + DateTime.DaysInMonth(today.Year-1, 12);
+
+                    if (day >= 26 - 7 && day <= 32 + 2)
+                        potentialPalettes.Add($"{usualLocation}kwanzaa");
+                }
+
+                colorPalette = potentialPalettes[UnityEngine.Random.Range(0, potentialPalettes.Count)];
+            }
+
+            Color[] colors = new Color[3];
+            for (int i = 0; i < 3; i++)
+                colors[i] = RandomColorPicker.RetriveRandomColor(RandomColorPicker.DefaultSeperationChar, colorPalette);
+
+            return colors;
         }
 
         /// <summary>
@@ -106,7 +167,8 @@ namespace Genetics
             
             foreach(PartHash part in dna.BodyPartHashs)
             {
-                bodyParts.Add(CreateBodyPart(part));
+                foreach(GameObject g in CreateBodyPart(part))
+                    bodyParts.Add(g);
             }
 
             GameObject creature = new GameObject(); 
@@ -124,6 +186,24 @@ namespace Genetics
             a.runtimeAnimatorController = rac;
 
             CreatureAnimationControllerDemo cACD = creature.AddComponent<CreatureAnimationControllerDemo>();
+
+            Face[] faceParts = creature.GetComponentsInChildren<Face>();
+            if (faceParts.Length != 0) 
+            {
+                FaceTexture face = creature.AddComponent<FaceTexture>();
+                foreach (Face f in faceParts) 
+                {
+                    if (f.IsMouth)
+                    {
+                        face.Mouth = f.gameObject;
+                    }
+                    else if (f.IsEyes) 
+                    {
+                        face.Eyes = f.gameObject;
+                    }
+                    GameObject.Destroy(f);
+                }
+            }
 
             FeetSound[] feet = creature.GetComponentsInChildren<FeetSound>();
             string frontFeetSound = string.Empty, backFeetSound = string.Empty;
@@ -174,8 +254,9 @@ namespace Genetics
             throw new NotImplementedException();
         }
 
-        private static GameObject CreateBodyPart(PartHash partBits) 
+        private static List<GameObject> CreateBodyPart(PartHash partBits) 
         {
+            List<GameObject> g = new List<GameObject>();
             GeneticRepository genePool = Utility.Toolbox.Instance.GenePool;
             BodyPart bodyPart = genePool.GetBodyPart(partBits.BodyPart);
             Pattern pattern = genePool.GetPattern(partBits.Pattern);
@@ -212,10 +293,38 @@ namespace Genetics
                 {
                     Console.LogWarning($"Pattern Texture {pattern.Name} could not be loaded into the material. The load result is {useTexture}, and the 2D Texture size is ({texture2D.width}, {texture2D.height}).");
                 }
-                renderer.sharedMaterial.shader = genePool.GetShader(bodyPart.Shader);
+                foreach (Material m in renderer.materials)
+                    m.shader = genePool.GetShader(bodyPart.Shader);
             }
 
-            return partObject;
+            if (!string.IsNullOrWhiteSpace(bodyPart.Eyes))
+            {
+                BodyPart eyes = genePool.GetBodyPartByName(bodyPart.Eyes);
+                if (eyes != null)
+                {
+                    GameObject eyesObject = Siccity.GLTFUtility.Importer.LoadFromFile(eyes.FileLocation);
+                    g.Add(eyesObject);
+                    Renderer[] renderers = eyesObject.GetComponentsInChildren<Renderer>();
+                    if(renderers.Length > 0)
+                        renderers[0].gameObject.AddComponent<Face>().Populate(true, false);
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(bodyPart.Mouth))
+            {
+                BodyPart mouth = genePool.GetBodyPartByName(bodyPart.Mouth);
+                if (mouth != null)
+                {
+                    GameObject mouthObject = Siccity.GLTFUtility.Importer.LoadFromFile(mouth.FileLocation);
+                    g.Add(mouthObject);
+                    Renderer[] renderers = mouthObject.GetComponentsInChildren<Renderer>();
+                    if (renderers.Length > 0)
+                        renderers[0].gameObject.AddComponent<Face>().Populate(false, true);
+                }
+            }
+
+            g.Add(partObject);
+            return g;
         }
     }
 }
