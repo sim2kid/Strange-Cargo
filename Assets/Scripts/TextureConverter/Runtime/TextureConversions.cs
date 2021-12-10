@@ -183,9 +183,9 @@ namespace TextureConverter
                 return Vector4.zero;
             }
             // We multiply each channel with the associated color
-            Vector4 r = (newColors.Length >= 1 ? newColors[0] : Color.clear) * patternColor.x;
-            Vector4 g = (newColors.Length >= 2 ? newColors[1] : Color.clear) * patternColor.y;
-            Vector4 b = (newColors.Length >= 3 ? newColors[2] : Color.clear) * patternColor.z;
+            Vector4 r = (newColors.Length >= 1 ? newColors[0] : Color.clear);
+            Vector4 g = (newColors.Length >= 2 ? newColors[1] : Color.clear);
+            Vector4 b = (newColors.Length >= 3 ? newColors[2] : Color.clear);
 
             // We add those colors together, then we apply the coat texture over that.
             Vector4 outColor = multiplyMatrix(patternColor, r, g, b) * (1 - (((detailColor.x + detailColor.y + detailColor.z) / 3) * detailColor.w));
