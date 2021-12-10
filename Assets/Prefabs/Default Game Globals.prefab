@@ -275,6 +275,7 @@ GameObject:
   - component: {fileID: 7375483987606595370}
   - component: {fileID: 7375483987606595371}
   - component: {fileID: 7375483987606595414}
+  - component: {fileID: 2246826630590940975}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -331,6 +332,195 @@ MonoBehaviour:
   OnUnPause:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2246826630590940975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7375483987606595368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89bcbf86bd87e2b4ba322e7905e4e49e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CloudColor:
+    serializedVersion: 2
+    key0: {r: 0, g: 0.067503765, b: 0.31132078, a: 1}
+    key1: {r: 0.5471698, g: 0.3019758, b: 0.31581417, a: 1}
+    key2: {r: 1, g: 1, b: 1, a: 0}
+    key3: {r: 0.54901963, g: 0.3019608, b: 0.31764707, a: 0}
+    key4: {r: 0, g: 0.07058824, b: 0.3137255, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 16384
+    ctime2: 32768
+    ctime3: 49151
+    ctime4: 65535
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 5
+    m_NumAlphaKeys: 2
+  SkyColor:
+    serializedVersion: 2
+    key0: {r: 0.0141314585, g: 0, b: 0.16037738, a: 1}
+    key1: {r: 0.18431373, g: 0.2509804, b: 0.44705883, a: 1}
+    key2: {r: 0.39782843, g: 0.43988076, b: 0.5660378, a: 0}
+    key3: {r: 0.24056602, g: 0.43325832, b: 1, a: 0}
+    key4: {r: 0.39607844, g: 0.4392157, b: 0.5647059, a: 0}
+    key5: {r: 0.18195978, g: 0.24731888, b: 0.4433962, a: 0}
+    key6: {r: 0.015686275, g: 0, b: 0.16078432, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 13107
+    ctime2: 16384
+    ctime3: 32768
+    ctime4: 49151
+    ctime5: 52428
+    ctime6: 65535
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 7
+    m_NumAlphaKeys: 2
+  HorizonColor:
+    serializedVersion: 2
+    key0: {r: 0.008529176, g: 0, b: 0.09433961, a: 1}
+    key1: {r: 0.5019608, g: 0.054901965, b: 0.10773913, a: 1}
+    key2: {r: 0.2776969, g: 0.13300997, b: 0.5754717, a: 1}
+    key3: {r: 0.4862745, g: 0.58890873, b: 0.72156864, a: 1}
+    key4: {r: 0.63879496, g: 0.83875966, b: 0.9339623, a: 1}
+    key5: {r: 0.4862745, g: 0.5921569, b: 0.72156864, a: 0}
+    key6: {r: 0.2703957, g: 0, b: 0.2830189, a: 0}
+    key7: {r: 0.007843138, g: 0, b: 0.09411765, a: 0}
+    ctime0: 0
+    ctime1: 15073
+    ctime2: 17694
+    ctime3: 19661
+    ctime4: 32768
+    ctime5: 45875
+    ctime6: 49151
+    ctime7: 65535
+    atime0: 0
+    atime1: 65535
+    atime2: 65535
+    atime3: 65535
+    atime4: 65535
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 8
+    m_NumAlphaKeys: 2
+  UnderskyColor:
+    serializedVersion: 2
+    key0: {r: 0.32395872, g: 0.35104358, b: 0.754717, a: 1}
+    key1: {r: 0, g: 0.12941177, b: 0.44313726, a: 1}
+    key2: {r: 0, g: 0.022040386, b: 0.0754717, a: 0}
+    key3: {r: 0, g: 0.13070571, b: 0.4433962, a: 0}
+    key4: {r: 0.3254902, g: 0.3529412, b: 0.7529412, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 19661
+    ctime2: 32768
+    ctime3: 45875
+    ctime4: 65535
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 5
+    m_NumAlphaKeys: 2
+  StarIntensity:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.22811674
+    - serializedVersion: 3
+      time: 0.24954097
+      value: 0.5068915
+      inSlope: -5.927995
+      outSlope: -5.927995
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.08056148
+    - serializedVersion: 3
+      time: 0.30443186
+      value: 0.00660602
+      inSlope: -0.08404921
+      outSlope: -0.08404921
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.22522546
+    - serializedVersion: 3
+      time: 0.6993499
+      value: 0.007080078
+      inSlope: 0.13608673
+      outSlope: 0.13608673
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.10365233
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.75129503
+      value: 0.5020269
+      inSlope: 6.386999
+      outSlope: 6.386999
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.064279586
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.041410744
+      outSlope: 0.041410744
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.11375677
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  StarMultiplier: 5
 --- !u!1 &7375483988556080796
 GameObject:
   m_ObjectHideFlags: 0

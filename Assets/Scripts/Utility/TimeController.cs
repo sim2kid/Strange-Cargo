@@ -31,7 +31,7 @@ namespace Utility
 
         void Start()
         {
-            _time = 0;
+            SetTime(CurrentTime);
         }
 
         // Update is called once per frame
@@ -58,6 +58,15 @@ namespace Utility
         public float GetTime()
         {
             return (_time / (MinutesInADay * 60)) * 24;
+        }
+
+        /// <summary>
+        /// Sets the time based on the hour of the day.
+        /// </summary>
+        /// <param name="hour"></param>
+        public void SetTime(float hour) 
+        {
+            _time = MinutesInADay * (hour/24f) * 60;
         }
 
         public override string ToString() 

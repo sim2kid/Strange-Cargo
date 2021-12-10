@@ -37,7 +37,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_471f1ea761ec480cbd81929a27328dd1:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 5d32ba57ccc804847b87d3f32f7cf8bb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -46,6 +46,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Clouds:
+        m_Texture: {fileID: 2800000, guid: 2aa69a2e1b2329e4eb8569f3dd41b18b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -92,6 +96,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SunMoonTex:
+        m_Texture: {fileID: 2800000, guid: 5d32ba57ccc804847b87d3f32f7cf8bb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -109,21 +117,25 @@ Material:
     - Vector1_15ad6655bc014eb9b8c550dd889ac80b: 30
     - Vector1_1ffcad9d864f4fbeae17968ffde08511: 0
     - Vector1_84f58a771f6e468398632c36c7cd00f5: 54.67
+    - Vector1_c22bbf7101d345b7aeed06f1a04ff4f7: 0
     - Vector1_d8136be8d6054fc4b8d529adf07cc14c: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
+    - _CloudSpeed: 20
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
+    - _FilimentDensity: 10
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _Key: 0.09
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -133,6 +145,8 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _StarDensity: 30
+    - _StarIntensity: 0
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
@@ -142,10 +156,14 @@ Material:
     - Color_66fcde7e6b08498e896bf272697d9e2c: {r: 0, g: 0, b: 0, a: 1}
     - Color_6b7ada69bf7a42d5b80e2d041c8cb2fc: {r: 0.06167674, g: 0.0873299, b: 0.39622638, a: 1}
     - Color_b12bcd8e326f4b839c44f8a89fe80ce6: {r: 0, g: 0.6766281, b: 1, a: 1}
-    - Vector3_25b9b3eb458a4107bcf4b24e368591b1: {r: 0, g: 0.5, b: 0, a: 0}
+    - Vector3_25b9b3eb458a4107bcf4b24e368591b1: {r: 1.99, g: 0, b: 0, a: 0}
     - Vector3_4ebe6dd02e9045119e5683238efb2c1a: {r: 0, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _CloudColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HorizonColor: {r: 0.51690996, g: 0.7610092, b: 0.9056604, a: 1}
+    - _SkyColor: {r: 0.24056596, g: 0.46825218, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _UnderskyColor: {r: 0.06167674, g: 0.0873299, b: 0.39622638, a: 1}
   m_BuildTextureStacks: []
