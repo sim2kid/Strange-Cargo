@@ -107,7 +107,11 @@ namespace Importing
                 Debug.LogError($"Could not save Database {name} because \"{location}\" does not exist.");
             }
 
-        #endif
+            #endif
+            if (!Application.isEditor) 
+            {
+                Debug.LogError($"Can't save a database durring gameplay!! DB: {location}/{name}");
+            }
         }
 
         /// <summary>
@@ -118,7 +122,9 @@ namespace Importing
         /// <returns></returns>
         public static Database LoadDatabase(string resourcePath, string fileName) 
         {
-            Database db = Resources.Load<Database>(ForwardSlashPath(Path.Combine(resourcePath, fileName)));
+            string dbLoc = ForwardSlashPath(Path.Combine(resourcePath, fileName));
+
+            Database db = Resources.Load<Database>(dbLoc);
             if (db == null) 
             {
                 Debug.LogError($"Could not find the Database \"{fileName}\" at \"{resourcePath}\". Is everything spelled correctly?");
