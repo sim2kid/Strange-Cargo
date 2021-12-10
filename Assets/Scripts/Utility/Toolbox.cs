@@ -6,6 +6,7 @@ using Genetics;
 using Sound;
 using Creature;
 using Creature.Brain;
+using UnityEngine.Events;
 
 namespace Utility
 {
@@ -50,6 +51,10 @@ namespace Utility
         /// The pausing interface. The gameobject must be present in the scene!
         /// </summary>
         public Pause Pause { get; set; }
+        /// <summary>
+        /// This unity event will be called when the application is being closed.
+        /// </summary>
+        public UnityEvent OnClosing { get; private set; }
 
         private Toolbox()
         {
@@ -57,6 +62,7 @@ namespace Utility
             Genetics.Importer.Import(GenePool);
             SoundPool = new SoundRepository();
             CreatureList = new List<CreatureController>();
+            OnClosing = new UnityEvent();
 
             AvalibleTasks = new List<IUtility>();
             AvalibleTasks.Add(new BasicUtility(new DataType.Range(0f, 5f), new Creature.Task.Wait(new DataType.Range(1f, 8f))));

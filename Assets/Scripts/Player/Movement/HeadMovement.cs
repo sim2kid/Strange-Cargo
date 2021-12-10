@@ -87,7 +87,6 @@ namespace Player.Movement
                 lastVector = thisVector;
             }
 
-
             // Where we want to go based on player input
             Vector2 targetChange = look.ReadValue<Vector2>() * MouseSensitivity * Time.deltaTime;
 

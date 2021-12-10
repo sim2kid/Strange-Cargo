@@ -28,6 +28,9 @@ namespace Creature.Stats
         public UnityEvent OnEat;
 
         [SerializeField]
+        public UnityEvent OnBeforeEat;
+
+        [SerializeField]
         public UnityEvent OnEmpty;
 
         [SerializeField][HideInInspector]
@@ -56,6 +59,11 @@ namespace Creature.Stats
         public float Read() 
         {
             return Fullness;
+        }
+
+        public void BeforeEat() 
+        {
+            OnBeforeEat.Invoke();
         }
 
         public void Eat(float amount) 

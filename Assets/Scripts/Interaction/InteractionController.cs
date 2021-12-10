@@ -45,7 +45,7 @@ namespace Interaction
 
             // The results of all the hits
             RaycastHit[] hits = Physics.RaycastAll(ray, InteractionDistance);
-            List<GameObject> objects = new List<GameObject>();
+            List<RaycastHit> objects = new List<RaycastHit>();
 
 
             // Add proper objects to list
@@ -55,7 +55,7 @@ namespace Interaction
                 Collider collider = hit.transform.gameObject.GetComponent<Collider>();
 
                 if (interact != null || (!collider.isTrigger && collider.gameObject.layer != 7))
-                    objects.Add(hit.transform.gameObject);
+                    objects.Add(hit);
             }
 
             // Sort list from closest to farthest
@@ -147,27 +147,25 @@ namespace Interaction
             Gizmos.DrawLine(Eyes.transform.position, Eyes.transform.position + (Eyes.transform.forward * InteractionDistance));
         }
 
-        public Queue<GameObject> SortByClosest(List<GameObject> objs) 
+        public Queue<GameObject> SortByClosest(List<RaycastHit> objs) 
         {
             Queue<GameObject> queue = new Queue<GameObject>();
             while (objs.Count > 0) 
             {
-                GameObject obj = GetClosest(objs);
-                queue.Enqueue(obj);
+                RaycastHit obj = GetClosest(objs);
+                queue.Enqueue(obj.transform.gameObject);
                 objs.Remove(obj);
             }
             return queue;
         }
 
-        public GameObject GetClosest(List<GameObject> objs) 
+        public RaycastHit GetClosest(List<RaycastHit> objs) 
         {
-            Vector3 me = Eyes.transform.position;
-            GameObject toReturn = null;
+            RaycastHit toReturn = objs[0];
             float shortest = int.MaxValue;
-            foreach (GameObject i in objs) 
+            foreach (RaycastHit i in objs) 
             {
-                Vector3 them = i.transform.position;
-                float distance = Vector3.Distance(me, them);
+                float distance = i.distance;
                 if (distance < shortest)
                 {
                     shortest = distance;
