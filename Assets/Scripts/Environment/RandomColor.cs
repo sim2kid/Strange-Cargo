@@ -22,6 +22,14 @@ namespace Environment
             }
         }
 
+        public void NewColor() 
+        {
+            Color = RandomColorPicker.ColorToHex(
+                       RandomColorPicker.RetriveRandomColor(
+                           RandomColorPicker.DefaultSeperationChar, ColorPalette));
+            this.GetComponent<Renderer>().material.color = RandomColorPicker.HexToColor(Color);
+        }
+
         private void Start()
         {
             this.GetComponent<Renderer>().material.color = RandomColorPicker.HexToColor(Color);

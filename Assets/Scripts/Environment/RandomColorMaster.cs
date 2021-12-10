@@ -25,5 +25,13 @@ namespace Environment
             foreach (RandomColor c in list)
                 c.Color = Color;
         }
+
+        public void NewColor()
+        {
+            Color = RandomColorPicker.ColorToHex(
+                       RandomColorPicker.RetriveRandomColor(
+                           RandomColorPicker.DefaultSeperationChar, ColorPalette));
+            this.GetComponent<Renderer>().material.color = RandomColorPicker.HexToColor(Color);
+        }
     }
 }
