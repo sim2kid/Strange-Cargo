@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Utility
 {
+    [ExecuteAlways]
     public class TimeController : MonoBehaviour
     {
         /// <summary>
@@ -11,10 +12,18 @@ namespace Utility
         /// </summary>
         private float _time;
 
+        [Tooltip("What time should the game start at?")]
+        [SerializeField]
+        [Range(0f, 24f)]
+        private float StartTime;
+
+
         [Tooltip("Returns the current time in a 0-24 hour format")]
-        [SerializeField]    
+        [SerializeField]
+        [Range(0f,24f)]
         public float CurrentTime;
 
+        
         /// <summary>
         /// The time in a 0-1 format
         /// </summary>
@@ -25,18 +34,27 @@ namespace Utility
 
         private void OnEnable()
         {
+            if (!Application.IsPlaying(gameObject))
+                return;
             // Sets the time controller in the toolbox
             Toolbox.Instance.TimeController = this;
         }
 
         void Start()
         {
-            _time = 0;
+            SetTime(StartTime);
+            CurrentTime = GetTime();
         }
 
         // Update is called once per frame
         void FixedUpdate()
         {
+            if (!Application.IsPlaying(gameObject)) 
+            {
+                SetTime(CurrentTime);
+                return;
+            }
+
             if (Utility.Toolbox.Instance.Pause.Paused)
                 return;
 
@@ -58,6 +76,15 @@ namespace Utility
         public float GetTime()
         {
             return (_time / (MinutesInADay * 60)) * 24;
+        }
+
+        /// <summary>
+        /// Sets the time based on the hour of the day.
+        /// </summary>
+        /// <param name="hour"></param>
+        public void SetTime(float hour) 
+        {
+            _time = MinutesInADay * (hour/24f) * 60;
         }
 
         public override string ToString() 
