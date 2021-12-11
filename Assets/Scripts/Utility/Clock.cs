@@ -18,7 +18,7 @@ namespace Utility
 
         void Update()
         {
-            text.text = tc.ToString();
+            text.text = tc.ToString().Replace(' ', '\n');
         }
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 namespace UI
 {
     [RequireComponent(typeof(Slider))]
+    [ExecuteAlways]
     public class NeedsGradient : MonoBehaviour
     {
         public Gradient color;

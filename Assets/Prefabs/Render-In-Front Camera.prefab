@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3990148177991339388}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 3990148178014853829}
   - component: {fileID: 3990148178014853830}
   - component: {fileID: 3990148178014853831}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Clipboard Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,7 +386,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3990148178028604545}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -423,7 +423,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3990148178040364855}
   - component: {fileID: 3990148178040364854}
-  m_Layer: 7
+  - component: {fileID: 340722026962885094}
+  m_Layer: 8
   m_Name: Social
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,10 +501,52 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 200
   m_WholeNumbers: 1
-  m_Value: 200
+  m_Value: 67
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &340722026962885094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3990148178040364848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a8b7f0150b3e6846bfc5dd4e1878b17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 0.97807074, g: 1, b: 0, a: 1}
+    key2: {r: 0.5137255, g: 0.9921569, b: 0.6117647, a: 0}
+    key3: {r: 0.52156866, g: 0.9960785, b: 0.6156863, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 19661
+    ctime2: 45875
+    ctime3: 65535
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 2
+  image: {fileID: 3990148179484284479}
 --- !u!1 &3990148178055998203
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,7 +611,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 256
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -622,7 +665,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3990148178219961474}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -659,7 +702,7 @@ GameObject:
   - component: {fileID: 3990148178323024602}
   - component: {fileID: 3990148178323024600}
   - component: {fileID: 3990148178323024601}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Appetite Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -736,7 +779,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3990148178418459292}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -773,7 +816,7 @@ GameObject:
   - component: {fileID: 3990148178452560393}
   - component: {fileID: 3990148178452560399}
   - component: {fileID: 3990148178452560392}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -848,7 +891,7 @@ GameObject:
   - component: {fileID: 3990148178515053186}
   - component: {fileID: 3990148178515053184}
   - component: {fileID: 3990148178515053185}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -923,7 +966,7 @@ GameObject:
   - component: {fileID: 3990148178568256936}
   - component: {fileID: 3990148178568256942}
   - component: {fileID: 3990148178568256943}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Hygiene Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1000,7 +1043,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3990148178682557912}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1038,7 +1081,7 @@ GameObject:
   - component: {fileID: 3990148178707955924}
   - component: {fileID: 3990148178707955930}
   - component: {fileID: 3990148178707955931}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Social Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1117,7 +1160,7 @@ GameObject:
   - component: {fileID: 3990148178712254547}
   - component: {fileID: 3990148178712254545}
   - component: {fileID: 3990148178712254546}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1191,7 +1234,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3990148178782711419}
   - component: {fileID: 3990148178782711418}
-  m_Layer: 7
+  - component: {fileID: 8033769391880197548}
+  m_Layer: 8
   m_Name: Bladder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1268,10 +1312,52 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 200
   m_WholeNumbers: 1
-  m_Value: 200
+  m_Value: 36
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8033769391880197548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3990148178782711412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a8b7f0150b3e6846bfc5dd4e1878b17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 0.97807074, g: 1, b: 0, a: 1}
+    key2: {r: 0.5137255, g: 0.9921569, b: 0.6117647, a: 0}
+    key3: {r: 0.52156866, g: 0.9960785, b: 0.6156863, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 19661
+    ctime2: 45875
+    ctime3: 65535
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 2
+  image: {fileID: 3990148179274480882}
 --- !u!1 &3990148178824741633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1283,7 +1369,7 @@ GameObject:
   - component: {fileID: 3990148178824741632}
   - component: {fileID: 3990148178824741638}
   - component: {fileID: 3990148178824741639}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Bladder Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1360,7 +1446,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3990148178878409458}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1396,7 +1482,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3990148178931190533}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1432,7 +1518,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3990148178979523424}
   - component: {fileID: 3990148178979523431}
-  m_Layer: 7
+  - component: {fileID: 5775167050703190182}
+  m_Layer: 8
   m_Name: Hygiene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1509,10 +1596,52 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 200
   m_WholeNumbers: 1
-  m_Value: 200
+  m_Value: 154
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5775167050703190182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3990148178979523425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a8b7f0150b3e6846bfc5dd4e1878b17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 0.97807074, g: 1, b: 0, a: 1}
+    key2: {r: 0.5137255, g: 0.9921569, b: 0.6117647, a: 0}
+    key3: {r: 0.52156866, g: 0.9960785, b: 0.6156863, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 19661
+    ctime2: 45875
+    ctime3: 65535
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 2
+  image: {fileID: 3990148179356468511}
 --- !u!1 &3990148179191668193
 GameObject:
   m_ObjectHideFlags: 0
@@ -1522,7 +1651,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3990148179191668192}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Clipboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1553,7 +1682,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3990148179205401420}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1591,7 +1720,7 @@ GameObject:
   - component: {fileID: 3990148179274480883}
   - component: {fileID: 3990148179274480881}
   - component: {fileID: 3990148179274480882}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1638,7 +1767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5058824, g: 1, b: 0.5803922, a: 1}
+  m_Color: {r: 0.98684275, g: 0.59998477, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1666,7 +1795,7 @@ GameObject:
   - component: {fileID: 3990148179286610633}
   - component: {fileID: 3990148179286610639}
   - component: {fileID: 3990148179286610632}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Energy Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1746,7 +1875,7 @@ GameObject:
   - component: {fileID: 3990148179330900994}
   - component: {fileID: 3990148179330900995}
   - component: {fileID: 3990148179330901052}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Pet Needs Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1847,7 +1976,7 @@ GameObject:
   - component: {fileID: 3990148179348516775}
   - component: {fileID: 3990148179348516773}
   - component: {fileID: 3990148179348516774}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1894,7 +2023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5058824, g: 1, b: 0.5803922, a: 1}
+  m_Color: {r: 0.52156866, g: 0.9960785, b: 0.6156863, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1922,7 +2051,7 @@ GameObject:
   - component: {fileID: 3990148179356468504}
   - component: {fileID: 3990148179356468510}
   - component: {fileID: 3990148179356468511}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1969,7 +2098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5058824, g: 1, b: 0.5803922, a: 1}
+  m_Color: {r: 0.51555544, g: 0.99307185, b: 0.61267966, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1997,7 +2126,7 @@ GameObject:
   - component: {fileID: 3990148179370418608}
   - component: {fileID: 3990148179370418614}
   - component: {fileID: 3990148179370418615}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2020,7 +2149,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.0022010803, y: -0.00030183792}
+  m_AnchoredPosition: {x: -0.0021972656, y: -0.00030183792}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3990148179370418614
@@ -2044,7 +2173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5058824, g: 1, b: 0.5803922, a: 1}
+  m_Color: {r: 0.99926907, g: 0.033332486, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2071,7 +2200,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3990148179389058244}
   - component: {fileID: 3990148179389058251}
-  m_Layer: 7
+  - component: {fileID: 5614887261975042551}
+  m_Layer: 8
   m_Name: Energy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2148,10 +2278,52 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 200
   m_WholeNumbers: 1
-  m_Value: 200
+  m_Value: 110
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5614887261975042551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3990148179389058245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a8b7f0150b3e6846bfc5dd4e1878b17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 0.97807074, g: 1, b: 0, a: 1}
+    key2: {r: 0.5137255, g: 0.9921569, b: 0.6117647, a: 0}
+    key3: {r: 0.52156866, g: 0.9960785, b: 0.6156863, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 19661
+    ctime2: 45875
+    ctime3: 65535
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 2
+  image: {fileID: 3990148179541737264}
 --- !u!1 &3990148179407025363
 GameObject:
   m_ObjectHideFlags: 0
@@ -2162,7 +2334,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3990148179407025362}
   - component: {fileID: 3990148179407025361}
-  m_Layer: 7
+  - component: {fileID: 8908101835794482157}
+  m_Layer: 8
   m_Name: Happiness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2243,6 +2416,48 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8908101835794482157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3990148179407025363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a8b7f0150b3e6846bfc5dd4e1878b17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 0.97807074, g: 1, b: 0, a: 1}
+    key2: {r: 0.5137255, g: 0.9921569, b: 0.6117647, a: 0}
+    key3: {r: 0.52156866, g: 0.9960785, b: 0.6156863, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 19661
+    ctime2: 45875
+    ctime3: 65535
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 2
+  image: {fileID: 3990148179348516774}
 --- !u!1 &3990148179423370346
 GameObject:
   m_ObjectHideFlags: 0
@@ -2254,7 +2469,7 @@ GameObject:
   - component: {fileID: 3990148179423370345}
   - component: {fileID: 3990148179423370351}
   - component: {fileID: 3990148179423370344}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2327,7 +2542,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3990148179448934023}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2365,7 +2580,7 @@ GameObject:
   - component: {fileID: 3990148179475013213}
   - component: {fileID: 3990148179475013214}
   - component: {fileID: 3990148179475013215}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Worldspace Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2464,7 +2679,7 @@ GameObject:
   - component: {fileID: 3990148179484284472}
   - component: {fileID: 3990148179484284478}
   - component: {fileID: 3990148179484284479}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2487,7 +2702,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.0022010803, y: -0.00030183792}
+  m_AnchoredPosition: {x: -0.0021972656, y: -0.00030183792}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3990148179484284478
@@ -2511,7 +2726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5058824, g: 1, b: 0.5803922, a: 1}
+  m_Color: {r: 0.9374494, g: 0.9993139, b: 0.053517736, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2539,7 +2754,7 @@ GameObject:
   - component: {fileID: 3990148179541737265}
   - component: {fileID: 3990148179541737271}
   - component: {fileID: 3990148179541737264}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2586,7 +2801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5058824, g: 1, b: 0.5803922, a: 1}
+  m_Color: {r: 0.6878638, g: 0.99509823, b: 0.3823413, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2614,7 +2829,7 @@ GameObject:
   - component: {fileID: 3990148179565510100}
   - component: {fileID: 3990148179565510106}
   - component: {fileID: 3990148179565510107}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Happiness Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2691,7 +2906,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3990148179592503404}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2727,7 +2942,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3990148179601865382}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2764,7 +2979,7 @@ GameObject:
   - component: {fileID: 3990148179653942541}
   - component: {fileID: 3990148179653942547}
   - component: {fileID: 3990148179653942540}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2838,7 +3053,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3990148179795021760}
   - component: {fileID: 3990148179795021767}
-  m_Layer: 7
+  - component: {fileID: 615330558441752093}
+  m_Layer: 8
   m_Name: Appetite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2915,10 +3131,52 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 200
   m_WholeNumbers: 1
-  m_Value: 200
+  m_Value: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &615330558441752093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3990148179795021761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a8b7f0150b3e6846bfc5dd4e1878b17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 0.97807074, g: 1, b: 0, a: 1}
+    key2: {r: 0.5137255, g: 0.9921569, b: 0.6117647, a: 0}
+    key3: {r: 0.52156866, g: 0.9960785, b: 0.6156863, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 19661
+    ctime2: 45875
+    ctime3: 65535
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 2
+  image: {fileID: 3990148179370418615}
 --- !u!1 &3990148179808277349
 GameObject:
   m_ObjectHideFlags: 0
@@ -2930,7 +3188,7 @@ GameObject:
   - component: {fileID: 3990148179808277348}
   - component: {fileID: 3990148179808277354}
   - component: {fileID: 3990148179808277355}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3003,7 +3261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3990148179876464462}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
