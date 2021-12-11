@@ -42,6 +42,7 @@ namespace Creature.Task
             come.EndTask(_update);
 
             _caller.AnimationTrigger("Eat");
+            _bowl.BeforeEat();
 
             wait = new Wait(5);
             wait.OnTaskFinished.AddListener(Finish);

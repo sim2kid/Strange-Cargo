@@ -159,6 +159,9 @@ MonoBehaviour:
     _loop: 0
     _audioPool: Misc/ComeHere
   DelayAfter: 0
+  OnPlay:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2083385952426194971
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,7 +230,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8435313183938911793}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalPosition: {x: 0, y: 0.751, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8435313185657725756}
@@ -309,7 +312,7 @@ Transform:
   m_GameObject: {fileID: 8435313185083453008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.7645, z: 0.75}
   m_Children:
   - {fileID: 8435313185130930080}
   - {fileID: 8435313183938911795}
@@ -382,6 +385,8 @@ MonoBehaviour:
   HeadMovement: {fileID: 0}
   Movement: {fileID: 0}
   GlobalInteraction: {fileID: 0}
+  HandController: {fileID: 0}
+  Footsteps: {fileID: 0}
   Eyes: {fileID: 8435313183938911793}
   Feet: {fileID: 8435313185130930095}
   Hand: {fileID: 2083385952426194971}
@@ -499,6 +504,9 @@ MonoBehaviour:
   InvertXAxis: 0
   MouseSensitivity: 50
   camera: {fileID: 8435313183938911793}
+  OnJolt:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!82 &1020215296
 AudioSource:
   m_ObjectHideFlags: 0
@@ -612,6 +620,10 @@ MonoBehaviour:
   isPlayer: 1
   speed: 0
   isGrounded: 0
+  OnStep:
+    m_PersistentCalls:
+      m_Calls: []
+  timeOffset: 0.01
 --- !u!114 &1020215295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,6 +655,9 @@ MonoBehaviour:
     _loop: 0
     _audioPool: Animal\Footsteps\Wood_Tile
   DelayAfter: 0
+  OnPlay:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1909496315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,6 +670,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 422fdba0f9a270a4284511481a9c4d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  ThrowEvent:
+    m_PersistentCalls:
+      m_Calls: []
   PrimaryEvent:
     m_PersistentCalls:
       m_Calls: []

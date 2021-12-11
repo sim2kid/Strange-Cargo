@@ -45,25 +45,33 @@ namespace Interaction
 
             // The results of all the hits
             RaycastHit[] hits = Physics.RaycastAll(ray, InteractionDistance);
-            List<GameObject> objects = new List<GameObject>();
+            List<RaycastHit> objects = new List<RaycastHit>();
 
+
+            // Add proper objects to list
             foreach (RaycastHit hit in hits) 
             {
                 IInteractable interact = hit.transform.gameObject.GetComponent<IInteractable>();
-                if(interact != null)
-                    objects.Add(hit.transform.gameObject);
+                Collider collider = hit.transform.gameObject.GetComponent<Collider>();
+
+                if (interact != null || (!collider.isTrigger && collider.gameObject.layer != 7))
+                    objects.Add(hit);
             }
 
-            GameObject hitObj = null;
-            if (hits.Length > 0)
-                hitObj = GetClosest(objects);
+            // Sort list from closest to farthest
+            Queue<GameObject> hitQueue = SortByClosest(objects);
+
+            // set hit object
+            IInteractable closest = null;
+            if (hitQueue.Count > 0)
+            {
+                closest = hitQueue.Peek().GetComponent<IInteractable>();
+            }
 
             bool buttonDown = interact.ReadValue<float>() == 1;
 
-            if (hitObj != null)
+            if (closest != null)
             {
-                IInteractable closest = hitObj.GetComponent<IInteractable>();
-
                 if (Previous != closest)
                 {
                     if (Previous != null)
@@ -139,15 +147,25 @@ namespace Interaction
             Gizmos.DrawLine(Eyes.transform.position, Eyes.transform.position + (Eyes.transform.forward * InteractionDistance));
         }
 
-        public GameObject GetClosest(List<GameObject> objs) 
+        public Queue<GameObject> SortByClosest(List<RaycastHit> objs) 
         {
-            Vector3 me = Eyes.transform.position;
-            GameObject toReturn = null;
-            float shortest = int.MaxValue;
-            foreach (GameObject i in objs) 
+            Queue<GameObject> queue = new Queue<GameObject>();
+            while (objs.Count > 0) 
             {
-                Vector3 them = i.transform.position;
-                float distance = Vector3.Distance(me, them);
+                RaycastHit obj = GetClosest(objs);
+                queue.Enqueue(obj.transform.gameObject);
+                objs.Remove(obj);
+            }
+            return queue;
+        }
+
+        public RaycastHit GetClosest(List<RaycastHit> objs) 
+        {
+            RaycastHit toReturn = objs[0];
+            float shortest = int.MaxValue;
+            foreach (RaycastHit i in objs) 
+            {
+                float distance = i.distance;
                 if (distance < shortest)
                 {
                     shortest = distance;

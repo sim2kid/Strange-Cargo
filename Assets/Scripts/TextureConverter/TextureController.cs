@@ -60,33 +60,15 @@ namespace TextureConverter
             OnFinished = new UnityEvent();
             myChildren = new List<MaterialConversion>();
             leaderChildren = new List<MaterialConversion>();
-
-            // Random Color Picker for testing. Won't be in the build
-            /*
-            Array.Resize(ref colors, MAX_COLORS);
-            colors[0] = RandomColorPicker.RetriveRandomColor();
-            colors[1] = RandomColorPicker.RetriveRandomColor();
-            colors[2] = RandomColorPicker.RetriveRandomColor();
-            */
         }
 
         private void Start()
         {
-            Renderer[] Renderers = GetComponentsInChildren<Renderer>();
-            foreach (Renderer render in Renderers) 
+            MaterialConversion[] Converters = GetComponentsInChildren<MaterialConversion>();
+            foreach (MaterialConversion cons in Converters) 
             {
-                if (shader != null) 
-                {
-                    render.material.shader = this.shader;
-                }
-                MaterialConversion converter = render.GetComponent<MaterialConversion>();
-                if (converter == null)
-                {
-                    converter = render.gameObject.AddComponent<MaterialConversion>();
-                    converter.ForwardConvert = ForwardConvert;
-                }
-                converter.OnFinished.AddListener(AfterConversion);
-                myChildren.Add(converter);
+                cons.OnFinished.AddListener(AfterConversion);
+                myChildren.Add(cons);
             }
 
             if (convert)

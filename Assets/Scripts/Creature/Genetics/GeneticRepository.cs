@@ -102,6 +102,17 @@ namespace Genetics
         }
 
         /// <summary>
+        /// Returns a body part based on its <paramref name="name"/>
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public BodyPart GetBodyPartByName(string name)
+        {
+            string partName = System.IO.Path.GetFileNameWithoutExtension(name);
+            return GetBodyPart(Importer.GetHashString(partName));
+        }
+
+        /// <summary>
         /// Returns a pattern based on its <paramref name="hash"/> code
         /// </summary>
         /// <param name="hash"></param>
