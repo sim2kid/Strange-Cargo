@@ -5,6 +5,7 @@ using Utility;
 
 namespace Environment
 {
+    [ExecuteAlways]
     public class SkyboxController : MonoBehaviour
     {
         [SerializeField]
@@ -31,12 +32,17 @@ namespace Environment
         UnityEngine.Material skybox;
         void Start()
         {
-            time = Toolbox.Instance.TimeController;
+            time = GetComponent<TimeController>();
+            if(time == null && Application.IsPlaying(gameObject))
+                time = GetComponent<TimeController>();
             skybox = RenderSettings.skybox;
         }
 
         void Update()
         {
+            if (time == null)
+                return;
+
             float dayPercent = time.DayProgress;
             skybox.SetFloat("_Key", dayPercent);
 
