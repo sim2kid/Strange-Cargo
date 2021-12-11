@@ -43,6 +43,9 @@ namespace Environment
             if (time == null)
                 return;
 
+            if(RenderSettings.fogMode != FogMode.ExponentialSquared)
+                RenderSettings.fogMode = FogMode.ExponentialSquared;
+
             float dayPercent = time.DayProgress;
             skybox.SetFloat("_Key", dayPercent);
 
