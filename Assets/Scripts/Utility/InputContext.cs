@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.DualShock;
 using UnityEngine.InputSystem.iOS;
@@ -14,7 +15,10 @@ namespace Utility.Input {
 
         [Tooltip("The default specific device. Good for UIs")]
         [SerializeField]
-        public DeviceType DefaultDeviceType = DeviceType.Xbox;
+        public Device DefaultDeviceType = Device.Xbox;
+
+        [SerializeField]
+        public UnityEvent OnDeviceChange;
 
         [Header("Read Only Fields")]
 
@@ -23,17 +27,17 @@ namespace Utility.Input {
         private string _recentScheme;
         [Tooltip("(ReadOnly) The current specific device plugged in.")]
         [SerializeField]
-        private DeviceType _lastDevice;
+        private Device _lastDevice;
 
         /// <summary>
         /// The current broad device scheme
         /// </summary>
-        public Scheme Scheme { get => ResolveScheme(_recentScheme); }
+        public Scheme CurrentScheme { get => ResolveScheme(_recentScheme); }
 
         /// <summary>
         /// The current specific device. Good for button types in UI.
         /// </summary>
-        public DeviceType Device { get => ResolveDeviceType(Scheme); }
+        public Device CurrentDevice { get => ResolveDeviceType(CurrentScheme); }
 
         // Start is called before the first frame update
         void Start()
@@ -47,7 +51,7 @@ namespace Utility.Input {
             _recentScheme = playerInput.currentControlScheme;
             _lastDevice = DefaultDeviceType;
 
-            Console.DebugOnly($"Current Input: {_recentScheme}");
+            Console.Log($"Current Input: {_recentScheme}");
         }
 
 
@@ -60,22 +64,23 @@ namespace Utility.Input {
             if (playerInput.currentControlScheme != _recentScheme)
                 OnNewInput();
 
-            if(Application.isEditor && Device != DeviceType.Unknown)
-                _lastDevice = Device;
+            if(Application.isEditor && CurrentDevice != Device.Unknown)
+                _lastDevice = CurrentDevice;
         }
 
         private void OnNewInput()
         {
             _recentScheme = playerInput.currentControlScheme;
-            Console.DebugOnly($"New Input: {_recentScheme}");
+            Console.Log($"New Input: {_recentScheme}");
+            OnDeviceChange.Invoke();
         }
 
-        private DeviceType ResolveDeviceType(Scheme scheme) 
+        public Device ResolveDeviceType(Scheme scheme) 
         {
             switch (scheme) 
             {
                 case Scheme.KeyboardMouse:
-                    _lastDevice = DeviceType.Keyboard;
+                    _lastDevice = Device.Keyboard;
                     break;
 
                 case Scheme.Gamepad:
@@ -83,11 +88,11 @@ namespace Utility.Input {
                     if (device == null) 
                     {
                         Console.LogWarning($"Could not resolve the current gamepad. Is one plugged in?");
-                        return DeviceType.Unknown;
+                        return Device.Unknown;
                     }
                     else if (IsOrSub(device.GetType(), typeof(DualShockGamepad)))
                     {
-                        _lastDevice = DeviceType.PlayStation;
+                        _lastDevice = Device.PlayStation;
                         break;
                     } 
                     else if (IsOrSub(device.GetType(), typeof(iOSGameController)))
@@ -97,17 +102,17 @@ namespace Utility.Input {
                     } 
                     else if (IsOrSub(device.GetType(), typeof(SwitchProControllerHID)))
                     {
-                        _lastDevice = DeviceType.Nintendo;
+                        _lastDevice = Device.Nintendo;
                         break;
                     } 
                     else if (IsOrSub(device.GetType(), typeof(XInputController)))
                     {
-                        _lastDevice= DeviceType.Xbox;
+                        _lastDevice= Device.Xbox;
                         break; 
                     } 
                     else if (IsOrSub(device.GetType(), typeof(StadiaController)))
                     {
-                        _lastDevice = DeviceType.Stadia;
+                        _lastDevice = Device.Stadia;
                         break;
                     }
                     Console.LogWarning($"Could not resolve gamepad of type {device.GetType()}. Will use the defaults, {DefaultDeviceType}.");
@@ -122,7 +127,7 @@ namespace Utility.Input {
                 case Scheme.XR:
                 default:
                     Console.LogWarning($"Scheme {scheme.ToString()} is unsupported.");
-                    return DeviceType.Unknown;
+                    return Device.Unknown;
             }
 
             return _lastDevice;
@@ -138,7 +143,7 @@ namespace Utility.Input {
         /// </summary>
         /// <param name="scheme"></param>
         /// <returns></returns>
-        private static Scheme ResolveScheme(string scheme) 
+        public static Scheme ResolveScheme(string scheme) 
         {
             switch (scheme.ToLower())
             {
@@ -167,7 +172,7 @@ namespace Utility.Input {
 
     }
 
-    public enum DeviceType 
+    public enum Device 
     {
         Keyboard,
         Stadia,
