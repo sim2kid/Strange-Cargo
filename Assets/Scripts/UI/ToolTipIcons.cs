@@ -2,20 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Utility.Input;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class ToolTipIcons : MonoBehaviour
 {
     TextMeshProUGUI text;
+    InputContext context;
 
     void Start()
     {
-        text = GetComponent<TextMeshProUGUI>();
+        context = FindObjectOfType<InputContext>();
+        if (context == null)
+        {
+            Console.LogError("Missing InputContext component in scene. Will delete ToolTipIcon script to prevent errors");
+            Destroy(this);
+        }
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
     }
 }

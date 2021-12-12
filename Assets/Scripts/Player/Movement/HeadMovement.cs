@@ -21,7 +21,7 @@ namespace Player.Movement
         [Range(1, 150)]
         [SerializeField] 
         public float MouseSensitivity = 50;
-        [Tooltip("The thing that will turn virtically (The game camera)")]
+        [Tooltip("The thing that will turn vertically (The game camera)")]
         [SerializeField] 
         public new GameObject camera;
 

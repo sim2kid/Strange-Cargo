@@ -13,7 +13,7 @@ public class StadiaController : Gamepad
     {
         // Match device via Name and Manufacturer
         InputSystem.RegisterLayout<StadiaController>(
-            "Google Stadia Controller",
+            "Stadia Controller",
             new InputDeviceMatcher()
                 .WithInterface("HID")
                 .WithManufacturer("Google Inc.")
@@ -21,7 +21,8 @@ public class StadiaController : Gamepad
 
         // OR match device via VendorID and Product ID
         InputSystem.RegisterLayout<StadiaController>(
-            matches: new InputDeviceMatcher()
+            "Stadia Controller",
+            new InputDeviceMatcher()
                 .WithInterface("HID")
                 .WithCapability("vendorId", 0x18D1) // Google Inc.
                 .WithCapability("productId", 0x9400)); // Stadia Controller *
