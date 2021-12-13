@@ -113,10 +113,9 @@ public class ToolTipIcons : MonoBehaviour
         // find the related button
         // GetButtonForAction**
 
-        // Find the button in the atlas!!
-        // If we know the unicode, we can use a lookup instead with .spriteCharacterLookupTable
-        // Might want to implement that too since the keyboard is all unicode characters!!
-        var allSprites = text.spriteAsset.spriteCharacterTable;
+        // Can't find the sprite in spritesheet because not
+        // all symbols will have unicode to reference. 
+        // Instead we'll have to derive the name based on the input!
 
         // Grab the ID and replace the action in string with it
         // eg: "press <sprite=69> to eat"
