@@ -13,6 +13,10 @@ namespace Sound
         [SerializeField]
         LoopSound Sound;
 
+        [SerializeField]
+        List<float> TimesToSwitchTracks;
+        int listIndex = 0;
+
         TimeController time;
 
         int index = 0;
@@ -53,18 +57,44 @@ namespace Sound
             ap.Volume /= 0.50f;
         }
 
+
+        float lastTime = 0;
+
         // Update is called once per frame
         void Update()
         {
-            LoopSound loop = (LoopSound)ap.Sound;
-            float timeChange = 24f / trackCount;
-            int expectedIndex = (int)Mathf.Floor(time.CurrentTime / timeChange);
-            if (expectedIndex != index) 
+            if (lastTime > time.CurrentTime) 
             {
-                loop.SetIndex(expectedIndex);
-                index = expectedIndex;
-                ap.Stop();
+                if (TimesToSwitchTracks[listIndex] > 24) 
+                {
+                    TimesToSwitchTracks[listIndex] -= 24;
+                }
             }
+
+            if (time.CurrentTime >= TimesToSwitchTracks[listIndex]) 
+            {
+                NextTrack();
+
+                listIndex++;
+                if (time.CurrentTime >= TimesToSwitchTracks[listIndex]) 
+                {
+                    TimesToSwitchTracks[listIndex] += 24;
+                }
+            }
+
+            lastTime = time.CurrentTime;
+        }
+
+        void NextTrack()
+        {
+            LoopSound loop = (LoopSound)ap.Sound;
+
+            index++;
+            if (index >= trackCount)
+                index = 0;
+
+            loop.SetIndex(index);
+            ap.Stop();
         }
     }
 }
