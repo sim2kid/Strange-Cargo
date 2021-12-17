@@ -171,10 +171,16 @@ namespace Genetics
                     bodyParts.Add(g);
             }
 
-            GameObject creature = new GameObject(); 
+            GameObject creature = new GameObject();
+            GameObject offset = new GameObject();
+            offset.name = "Offset";
+            offset.transform.parent = creature.transform;
+            offset.transform.position = new Vector3(0.97f, 0, -1.42f);
+            offset.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
+
             GameObject mesh = ArmatureStitching.StitchObjects(bodyParts);
-            mesh.name = "CreatureMesh";
-            mesh.transform.parent = creature.transform;
+            mesh.name = "Mesh";
+            mesh.transform.parent = offset.transform;
             mesh.transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
 
             creature.name = "Unnamed Creature";
@@ -236,6 +242,10 @@ namespace Genetics
 
             CreatureController c = creature.AddComponent<CreatureController>();
             c.SetUp(dna, a, Guid.NewGuid().ToString(), frontFeetSound, backFeetSound);
+
+            SphereCollider sphere = creature.AddComponent<SphereCollider>();
+            sphere.center = new Vector3(0, 0.3f, 0);
+            sphere.radius = 0.3f;
 
             return creature;
         }
