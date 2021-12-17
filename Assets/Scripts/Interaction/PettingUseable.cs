@@ -11,6 +11,7 @@ namespace Player
     {
         public string UseText => useString;
 
+        [SerializeField]
         private string useString;
 
         public float pettingRange = 3;
