@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 namespace Player
 {
-    public class PettingUseable : Pickupable, IUseable
+    public class PettingUseable : Pickupable, IUseable, IHoldable
     {
         public string UseText => useString;
 
@@ -27,9 +27,17 @@ namespace Player
             base.Start();
         }
 
+        void Update()
+        {
+            if(hand.Holding == null)
+            {
+                hand.PickUp(this.gameObject.GetComponent<PettingUseable>());
+            }
+        }
+
         public void HoldUpdate()
         {
-            if (CanSeeCreature() && hand.Holding == null)
+            if (CanSeeCreature() && (hand.Holding == null || hand.Holding == this.gameObject.GetComponent<PettingUseable>()))
             {
                 useString = "{use} to pet creature";
             }
@@ -41,7 +49,7 @@ namespace Player
 
         public void Use()
         {
-            if(CanSeeCreature() && hand.Holding == null)
+            if(CanSeeCreature() && (hand.Holding == null || hand.Holding == this.gameObject.GetComponent<PettingUseable>()))
             {
                 OnUse.Invoke();
                 NearestCreature().needs.Social += socialBoostAmount;
