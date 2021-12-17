@@ -110,6 +110,7 @@ namespace Environment
             {
                 OnUse.Invoke();
                 NearestCreature().needs.Hygiene += hygieneBoostAmount;
+                Player.HandController.LetGo();
             }
         }
 
