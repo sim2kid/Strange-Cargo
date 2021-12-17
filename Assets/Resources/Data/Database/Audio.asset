@@ -15,6 +15,11 @@ MonoBehaviour:
   keys:
   - Animal\Footsteps\Grass
   - Animal\Footsteps\Wood_Tile
+  - Animal\Functions\Bed
+  - Animal\Functions\Peeing\Long
+  - Animal\Functions\Peeing\Short
+  - Animal\Functions\Poop
+  - Animal\Functions\Poop\Dings
   - Animal\Vocal\Anger
   - Animal\Vocal\Bark
   - Animal\Vocal\Eat
@@ -22,13 +27,32 @@ MonoBehaviour:
   - Animal\Vocal\Neutral
   - Animal\Vocal\Sad
   - Animal\Vocal\Shake
+  - Animal\Vocal\Snore
   - Animal\Vocal\Tired
+  - Animal\Vocal\TreatMunch
+  - Misc\CeramicBowl\PickUp\FromCounter
+  - Misc\CeramicBowl\PickUp\FromHolder
+  - Misc\CeramicBowl\PlaceInHolder
+  - Misc\CeramicPlate\PickUpCounter\Empty
+  - Misc\CeramicPlate\PickUpCounter\Full
+  - Misc\CeramicPlate\PickUpWood
+  - Misc\CeramicPlate\PlaceCounter\Empty
+  - Misc\CeramicPlate\PlaceCounter\Full
+  - Misc\CeramicPlate\PlaceWood
+  - Misc\CeramicPlate\TreatFill
   - Misc\ComeHere
   - Misc\FoodBag\Grab
   - Misc\FoodBag\Handling
+  - Misc\FoodBag\Place
   - Misc\FoodBag\Pour
+  - Misc\FoodBag\Spawn
+  - Misc\PetBrush\Fur
+  - Misc\PetBrush\PickUp
+  - Misc\PetBrush\Place
+  - Misc\PetBrush\Scales
   - Misc\Pop
   - Misc\Toy\Throw
+  - Misc\Treat\PickUp
   - Music
   - Player\Footsteps\Grass
   - Player\Footsteps\Tile
@@ -66,6 +90,40 @@ MonoBehaviour:
       FileLocation: Animal\Footsteps\Wood_Tile\SFX_AN_FS_WoodAndTile1.mp3
     - ParentFolder: Animal\Footsteps\Wood_Tile
       FileLocation: Animal\Footsteps\Wood_Tile\SFX_AN_FS_WoodAndTile2.mp3
+  - FolderName: Animal\Functions\Bed
+    Files:
+    - ParentFolder: Animal\Functions\Bed
+      FileLocation: Animal\Functions\Bed\SFX_AN_Functions_GettingIntoBed.wav
+  - FolderName: Animal\Functions\Peeing\Long
+    Files:
+    - ParentFolder: Animal\Functions\Peeing\Long
+      FileLocation: Animal\Functions\Peeing\Long\SFX_AN_Functions_PeeingLong1.wav
+    - ParentFolder: Animal\Functions\Peeing\Long
+      FileLocation: Animal\Functions\Peeing\Long\SFX_AN_Functions_PeeingLong2.wav
+  - FolderName: Animal\Functions\Peeing\Short
+    Files:
+    - ParentFolder: Animal\Functions\Peeing\Short
+      FileLocation: Animal\Functions\Peeing\Short\SFX_AN_Functions_PeeingShort1.wav
+    - ParentFolder: Animal\Functions\Peeing\Short
+      FileLocation: Animal\Functions\Peeing\Short\SFX_AN_Functions_PeeingShort2.wav
+  - FolderName: Animal\Functions\Poop
+    Files:
+    - ParentFolder: Animal\Functions\Poop
+      FileLocation: Animal\Functions\Poop\SFX_AN_Functions_SlideWhistle.wav
+  - FolderName: Animal\Functions\Poop\Dings
+    Files:
+    - ParentFolder: Animal\Functions\Poop\Dings
+      FileLocation: Animal\Functions\Poop\Dings\SFX_AN_Functions_Poop_Ding1.wav
+    - ParentFolder: Animal\Functions\Poop\Dings
+      FileLocation: Animal\Functions\Poop\Dings\SFX_AN_Functions_Poop_Ding2.wav
+    - ParentFolder: Animal\Functions\Poop\Dings
+      FileLocation: Animal\Functions\Poop\Dings\SFX_AN_Functions_Poop_Ding3.wav
+    - ParentFolder: Animal\Functions\Poop\Dings
+      FileLocation: Animal\Functions\Poop\Dings\SFX_AN_Functions_Poop_Ding4.wav
+    - ParentFolder: Animal\Functions\Poop\Dings
+      FileLocation: Animal\Functions\Poop\Dings\SFX_AN_Functions_Poop_Ding5.wav
+    - ParentFolder: Animal\Functions\Poop\Dings
+      FileLocation: Animal\Functions\Poop\Dings\SFX_AN_Functions_Poop_Ding6.wav
   - FolderName: Animal\Vocal\Anger
     Files:
     - ParentFolder: Animal\Vocal\Anger
@@ -134,10 +192,192 @@ MonoBehaviour:
     Files:
     - ParentFolder: Animal\Vocal\Shake
       FileLocation: Animal\Vocal\Shake\SFX_AN_Shake1.mp3
+  - FolderName: Animal\Vocal\Snore
+    Files:
+    - ParentFolder: Animal\Vocal\Snore
+      FileLocation: Animal\Vocal\Snore\SFX_AN_Vocal_Snore1.wav
+    - ParentFolder: Animal\Vocal\Snore
+      FileLocation: Animal\Vocal\Snore\SFX_AN_Vocal_Snore2.wav
+    - ParentFolder: Animal\Vocal\Snore
+      FileLocation: Animal\Vocal\Snore\SFX_AN_Vocal_Snore3.wav
+    - ParentFolder: Animal\Vocal\Snore
+      FileLocation: Animal\Vocal\Snore\SFX_AN_Vocal_Snore4.wav
+    - ParentFolder: Animal\Vocal\Snore
+      FileLocation: Animal\Vocal\Snore\SFX_AN_Vocal_Snore5.wav
+    - ParentFolder: Animal\Vocal\Snore
+      FileLocation: Animal\Vocal\Snore\SFX_AN_Vocal_Snore6.wav
   - FolderName: Animal\Vocal\Tired
     Files:
     - ParentFolder: Animal\Vocal\Tired
       FileLocation: Animal\Vocal\Tired\SFX_AN_Tired1.mp3
+  - FolderName: Animal\Vocal\TreatMunch
+    Files:
+    - ParentFolder: Animal\Vocal\TreatMunch
+      FileLocation: Animal\Vocal\TreatMunch\SFX_Pet_TreatMunch1.wav
+    - ParentFolder: Animal\Vocal\TreatMunch
+      FileLocation: Animal\Vocal\TreatMunch\SFX_Pet_TreatMunch2.wav
+    - ParentFolder: Animal\Vocal\TreatMunch
+      FileLocation: Animal\Vocal\TreatMunch\SFX_Pet_TreatMunch3.wav
+    - ParentFolder: Animal\Vocal\TreatMunch
+      FileLocation: Animal\Vocal\TreatMunch\SFX_Pet_TreatMunch4.wav
+    - ParentFolder: Animal\Vocal\TreatMunch
+      FileLocation: Animal\Vocal\TreatMunch\SFX_Pet_TreatMunch5.wav
+    - ParentFolder: Animal\Vocal\TreatMunch
+      FileLocation: Animal\Vocal\TreatMunch\SFX_Pet_TreatMunch6.wav
+    - ParentFolder: Animal\Vocal\TreatMunch
+      FileLocation: Animal\Vocal\TreatMunch\SFX_Pet_TreatMunch7.wav
+    - ParentFolder: Animal\Vocal\TreatMunch
+      FileLocation: Animal\Vocal\TreatMunch\SFX_Pet_TreatMunch8.wav
+    - ParentFolder: Animal\Vocal\TreatMunch
+      FileLocation: Animal\Vocal\TreatMunch\SFX_Pet_TreatMunch9.wav
+  - FolderName: Misc\CeramicBowl\PickUp\FromCounter
+    Files:
+    - ParentFolder: Misc\CeramicBowl\PickUp\FromCounter
+      FileLocation: Misc\CeramicBowl\PickUp\FromCounter\SFX_MISC_CeramicBowl_PickUpFromCounter1.wav
+    - ParentFolder: Misc\CeramicBowl\PickUp\FromCounter
+      FileLocation: Misc\CeramicBowl\PickUp\FromCounter\SFX_MISC_CeramicBowl_PickUpFromCounter2.wav
+    - ParentFolder: Misc\CeramicBowl\PickUp\FromCounter
+      FileLocation: Misc\CeramicBowl\PickUp\FromCounter\SFX_MISC_CeramicBowl_PickUpFromCounter3.wav
+    - ParentFolder: Misc\CeramicBowl\PickUp\FromCounter
+      FileLocation: Misc\CeramicBowl\PickUp\FromCounter\SFX_MISC_CeramicBowl_PickUpFromCounter4.wav
+  - FolderName: Misc\CeramicBowl\PickUp\FromHolder
+    Files:
+    - ParentFolder: Misc\CeramicBowl\PickUp\FromHolder
+      FileLocation: Misc\CeramicBowl\PickUp\FromHolder\SFX_MISC_CeramicBowl_PickUpFromHolder1.wav
+    - ParentFolder: Misc\CeramicBowl\PickUp\FromHolder
+      FileLocation: Misc\CeramicBowl\PickUp\FromHolder\SFX_MISC_CeramicBowl_PickUpFromHolder2.wav
+    - ParentFolder: Misc\CeramicBowl\PickUp\FromHolder
+      FileLocation: Misc\CeramicBowl\PickUp\FromHolder\SFX_MISC_CeramicBowl_PickUpFromHolder3.wav
+    - ParentFolder: Misc\CeramicBowl\PickUp\FromHolder
+      FileLocation: Misc\CeramicBowl\PickUp\FromHolder\SFX_MISC_CeramicBowl_PickUpFromHolder4.wav
+    - ParentFolder: Misc\CeramicBowl\PickUp\FromHolder
+      FileLocation: Misc\CeramicBowl\PickUp\FromHolder\SFX_MISC_CeramicBowl_PickUpFromHolder5.wav
+    - ParentFolder: Misc\CeramicBowl\PickUp\FromHolder
+      FileLocation: Misc\CeramicBowl\PickUp\FromHolder\SFX_MISC_CeramicBowl_PickUpFromHolder6.wav
+    - ParentFolder: Misc\CeramicBowl\PickUp\FromHolder
+      FileLocation: Misc\CeramicBowl\PickUp\FromHolder\SFX_MISC_CeramicBowl_PickUpFromHolder7.wav
+    - ParentFolder: Misc\CeramicBowl\PickUp\FromHolder
+      FileLocation: Misc\CeramicBowl\PickUp\FromHolder\SFX_MISC_CeramicBowl_PickUpFromHolder8.wav
+  - FolderName: Misc\CeramicBowl\PlaceInHolder
+    Files:
+    - ParentFolder: Misc\CeramicBowl\PlaceInHolder
+      FileLocation: Misc\CeramicBowl\PlaceInHolder\SFX_MISC_CeramicBowl_PlaceInHolder1.wav
+    - ParentFolder: Misc\CeramicBowl\PlaceInHolder
+      FileLocation: Misc\CeramicBowl\PlaceInHolder\SFX_MISC_CeramicBowl_PlaceInHolder10.wav
+    - ParentFolder: Misc\CeramicBowl\PlaceInHolder
+      FileLocation: Misc\CeramicBowl\PlaceInHolder\SFX_MISC_CeramicBowl_PlaceInHolder11.wav
+    - ParentFolder: Misc\CeramicBowl\PlaceInHolder
+      FileLocation: Misc\CeramicBowl\PlaceInHolder\SFX_MISC_CeramicBowl_PlaceInHolder2.wav
+    - ParentFolder: Misc\CeramicBowl\PlaceInHolder
+      FileLocation: Misc\CeramicBowl\PlaceInHolder\SFX_MISC_CeramicBowl_PlaceInHolder3.wav
+    - ParentFolder: Misc\CeramicBowl\PlaceInHolder
+      FileLocation: Misc\CeramicBowl\PlaceInHolder\SFX_MISC_CeramicBowl_PlaceInHolder4.wav
+    - ParentFolder: Misc\CeramicBowl\PlaceInHolder
+      FileLocation: Misc\CeramicBowl\PlaceInHolder\SFX_MISC_CeramicBowl_PlaceInHolder5.wav
+    - ParentFolder: Misc\CeramicBowl\PlaceInHolder
+      FileLocation: Misc\CeramicBowl\PlaceInHolder\SFX_MISC_CeramicBowl_PlaceInHolder6.wav
+    - ParentFolder: Misc\CeramicBowl\PlaceInHolder
+      FileLocation: Misc\CeramicBowl\PlaceInHolder\SFX_MISC_CeramicBowl_PlaceInHolder7.wav
+    - ParentFolder: Misc\CeramicBowl\PlaceInHolder
+      FileLocation: Misc\CeramicBowl\PlaceInHolder\SFX_MISC_CeramicBowl_PlaceInHolder8.wav
+    - ParentFolder: Misc\CeramicBowl\PlaceInHolder
+      FileLocation: Misc\CeramicBowl\PlaceInHolder\SFX_MISC_CeramicBowl_PlaceInHolder9.wav
+  - FolderName: Misc\CeramicPlate\PickUpCounter\Empty
+    Files:
+    - ParentFolder: Misc\CeramicPlate\PickUpCounter\Empty
+      FileLocation: Misc\CeramicPlate\PickUpCounter\Empty\SFX_MISC_CeramicPlate_PickUpCounter(Empty)1.wav
+    - ParentFolder: Misc\CeramicPlate\PickUpCounter\Empty
+      FileLocation: Misc\CeramicPlate\PickUpCounter\Empty\SFX_MISC_CeramicPlate_PickUpCounter(Empty)2.wav
+    - ParentFolder: Misc\CeramicPlate\PickUpCounter\Empty
+      FileLocation: Misc\CeramicPlate\PickUpCounter\Empty\SFX_MISC_CeramicPlate_PickUpCounter(Empty)3.wav
+    - ParentFolder: Misc\CeramicPlate\PickUpCounter\Empty
+      FileLocation: Misc\CeramicPlate\PickUpCounter\Empty\SFX_MISC_CeramicPlate_PickUpCounter(Empty)4.wav
+    - ParentFolder: Misc\CeramicPlate\PickUpCounter\Empty
+      FileLocation: Misc\CeramicPlate\PickUpCounter\Empty\SFX_MISC_CeramicPlate_PickUpCounter(Empty)5.wav
+    - ParentFolder: Misc\CeramicPlate\PickUpCounter\Empty
+      FileLocation: Misc\CeramicPlate\PickUpCounter\Empty\SFX_MISC_CeramicPlate_PickUpCounter(Empty)6.wav
+  - FolderName: Misc\CeramicPlate\PickUpCounter\Full
+    Files:
+    - ParentFolder: Misc\CeramicPlate\PickUpCounter\Full
+      FileLocation: Misc\CeramicPlate\PickUpCounter\Full\SFX_MISC_CeramicPlate_PickUpCounter(Full)1.wav
+    - ParentFolder: Misc\CeramicPlate\PickUpCounter\Full
+      FileLocation: Misc\CeramicPlate\PickUpCounter\Full\SFX_MISC_CeramicPlate_PickUpCounter(Full)2.wav
+    - ParentFolder: Misc\CeramicPlate\PickUpCounter\Full
+      FileLocation: Misc\CeramicPlate\PickUpCounter\Full\SFX_MISC_CeramicPlate_PickUpCounter(Full)3.wav
+  - FolderName: Misc\CeramicPlate\PickUpWood
+    Files:
+    - ParentFolder: Misc\CeramicPlate\PickUpWood
+      FileLocation: Misc\CeramicPlate\PickUpWood\SFX_MISC_CeramicPlate_PickUpWood1.wav
+    - ParentFolder: Misc\CeramicPlate\PickUpWood
+      FileLocation: Misc\CeramicPlate\PickUpWood\SFX_MISC_CeramicPlate_PickUpWood2.wav
+    - ParentFolder: Misc\CeramicPlate\PickUpWood
+      FileLocation: Misc\CeramicPlate\PickUpWood\SFX_MISC_CeramicPlate_PickUpWood3.wav
+    - ParentFolder: Misc\CeramicPlate\PickUpWood
+      FileLocation: Misc\CeramicPlate\PickUpWood\SFX_MISC_CeramicPlate_PickUpWood4.wav
+    - ParentFolder: Misc\CeramicPlate\PickUpWood
+      FileLocation: Misc\CeramicPlate\PickUpWood\SFX_MISC_CeramicPlate_PickUpWood5.wav
+  - FolderName: Misc\CeramicPlate\PlaceCounter\Empty
+    Files:
+    - ParentFolder: Misc\CeramicPlate\PlaceCounter\Empty
+      FileLocation: Misc\CeramicPlate\PlaceCounter\Empty\SFX_MISC_CeramicPlate_PlaceCounter(Empty)1.wav
+    - ParentFolder: Misc\CeramicPlate\PlaceCounter\Empty
+      FileLocation: Misc\CeramicPlate\PlaceCounter\Empty\SFX_MISC_CeramicPlate_PlaceCounter(Empty)2.wav
+    - ParentFolder: Misc\CeramicPlate\PlaceCounter\Empty
+      FileLocation: Misc\CeramicPlate\PlaceCounter\Empty\SFX_MISC_CeramicPlate_PlaceCounter(Empty)3.wav
+    - ParentFolder: Misc\CeramicPlate\PlaceCounter\Empty
+      FileLocation: Misc\CeramicPlate\PlaceCounter\Empty\SFX_MISC_CeramicPlate_PlaceCounter(Empty)4.wav
+    - ParentFolder: Misc\CeramicPlate\PlaceCounter\Empty
+      FileLocation: Misc\CeramicPlate\PlaceCounter\Empty\SFX_MISC_CeramicPlate_PlaceCounter(Empty)5.wav
+  - FolderName: Misc\CeramicPlate\PlaceCounter\Full
+    Files:
+    - ParentFolder: Misc\CeramicPlate\PlaceCounter\Full
+      FileLocation: Misc\CeramicPlate\PlaceCounter\Full\SFX_MISC_CeramicPlate_PlaceCounter(Full)1.wav
+    - ParentFolder: Misc\CeramicPlate\PlaceCounter\Full
+      FileLocation: Misc\CeramicPlate\PlaceCounter\Full\SFX_MISC_CeramicPlate_PlaceCounter(Full)2.wav
+    - ParentFolder: Misc\CeramicPlate\PlaceCounter\Full
+      FileLocation: Misc\CeramicPlate\PlaceCounter\Full\SFX_MISC_CeramicPlate_PlaceCounter(Full)3.wav
+    - ParentFolder: Misc\CeramicPlate\PlaceCounter\Full
+      FileLocation: Misc\CeramicPlate\PlaceCounter\Full\SFX_MISC_CeramicPlate_PlaceCounter(Full)4.wav
+  - FolderName: Misc\CeramicPlate\PlaceWood
+    Files:
+    - ParentFolder: Misc\CeramicPlate\PlaceWood
+      FileLocation: Misc\CeramicPlate\PlaceWood\SFX_MISC_CeramicPlate_PlaceWood1.wav
+    - ParentFolder: Misc\CeramicPlate\PlaceWood
+      FileLocation: Misc\CeramicPlate\PlaceWood\SFX_MISC_CeramicPlate_PlaceWood10.wav
+    - ParentFolder: Misc\CeramicPlate\PlaceWood
+      FileLocation: Misc\CeramicPlate\PlaceWood\SFX_MISC_CeramicPlate_PlaceWood11.wav
+    - ParentFolder: Misc\CeramicPlate\PlaceWood
+      FileLocation: Misc\CeramicPlate\PlaceWood\SFX_MISC_CeramicPlate_PlaceWood2.wav
+    - ParentFolder: Misc\CeramicPlate\PlaceWood
+      FileLocation: Misc\CeramicPlate\PlaceWood\SFX_MISC_CeramicPlate_PlaceWood3.wav
+    - ParentFolder: Misc\CeramicPlate\PlaceWood
+      FileLocation: Misc\CeramicPlate\PlaceWood\SFX_MISC_CeramicPlate_PlaceWood4.wav
+    - ParentFolder: Misc\CeramicPlate\PlaceWood
+      FileLocation: Misc\CeramicPlate\PlaceWood\SFX_MISC_CeramicPlate_PlaceWood5.wav
+    - ParentFolder: Misc\CeramicPlate\PlaceWood
+      FileLocation: Misc\CeramicPlate\PlaceWood\SFX_MISC_CeramicPlate_PlaceWood6.wav
+    - ParentFolder: Misc\CeramicPlate\PlaceWood
+      FileLocation: Misc\CeramicPlate\PlaceWood\SFX_MISC_CeramicPlate_PlaceWood7.wav
+    - ParentFolder: Misc\CeramicPlate\PlaceWood
+      FileLocation: Misc\CeramicPlate\PlaceWood\SFX_MISC_CeramicPlate_PlaceWood8.wav
+    - ParentFolder: Misc\CeramicPlate\PlaceWood
+      FileLocation: Misc\CeramicPlate\PlaceWood\SFX_MISC_CeramicPlate_PlaceWood9.wav
+  - FolderName: Misc\CeramicPlate\TreatFill
+    Files:
+    - ParentFolder: Misc\CeramicPlate\TreatFill
+      FileLocation: Misc\CeramicPlate\TreatFill\SFX_MISC_CeramicPlate_TreatFill1.wav
+    - ParentFolder: Misc\CeramicPlate\TreatFill
+      FileLocation: Misc\CeramicPlate\TreatFill\SFX_MISC_CeramicPlate_TreatFill2.wav
+    - ParentFolder: Misc\CeramicPlate\TreatFill
+      FileLocation: Misc\CeramicPlate\TreatFill\SFX_MISC_CeramicPlate_TreatFill3.wav
+    - ParentFolder: Misc\CeramicPlate\TreatFill
+      FileLocation: Misc\CeramicPlate\TreatFill\SFX_MISC_CeramicPlate_TreatFill4.wav
+    - ParentFolder: Misc\CeramicPlate\TreatFill
+      FileLocation: Misc\CeramicPlate\TreatFill\SFX_MISC_CeramicPlate_TreatFill5.wav
+    - ParentFolder: Misc\CeramicPlate\TreatFill
+      FileLocation: Misc\CeramicPlate\TreatFill\SFX_MISC_CeramicPlate_TreatFill6.wav
+    - ParentFolder: Misc\CeramicPlate\TreatFill
+      FileLocation: Misc\CeramicPlate\TreatFill\SFX_MISC_CeramicPlate_TreatFill7.wav
   - FolderName: Misc\ComeHere
     Files:
     - ParentFolder: Misc\ComeHere
@@ -152,6 +392,26 @@ MonoBehaviour:
     Files:
     - ParentFolder: Misc\FoodBag\Grab
       FileLocation: Misc\FoodBag\Grab\SFX_MISC_FoodBagGrab.mp3
+    - ParentFolder: Misc\FoodBag\Grab
+      FileLocation: Misc\FoodBag\Grab\SFX_MISC_FoodBag_PickUp1.wav
+    - ParentFolder: Misc\FoodBag\Grab
+      FileLocation: Misc\FoodBag\Grab\SFX_MISC_FoodBag_PickUp10.wav
+    - ParentFolder: Misc\FoodBag\Grab
+      FileLocation: Misc\FoodBag\Grab\SFX_MISC_FoodBag_PickUp2.wav
+    - ParentFolder: Misc\FoodBag\Grab
+      FileLocation: Misc\FoodBag\Grab\SFX_MISC_FoodBag_PickUp3.wav
+    - ParentFolder: Misc\FoodBag\Grab
+      FileLocation: Misc\FoodBag\Grab\SFX_MISC_FoodBag_PickUp4.wav
+    - ParentFolder: Misc\FoodBag\Grab
+      FileLocation: Misc\FoodBag\Grab\SFX_MISC_FoodBag_PickUp5.wav
+    - ParentFolder: Misc\FoodBag\Grab
+      FileLocation: Misc\FoodBag\Grab\SFX_MISC_FoodBag_PickUp6.wav
+    - ParentFolder: Misc\FoodBag\Grab
+      FileLocation: Misc\FoodBag\Grab\SFX_MISC_FoodBag_PickUp7.wav
+    - ParentFolder: Misc\FoodBag\Grab
+      FileLocation: Misc\FoodBag\Grab\SFX_MISC_FoodBag_PickUp8.wav
+    - ParentFolder: Misc\FoodBag\Grab
+      FileLocation: Misc\FoodBag\Grab\SFX_MISC_FoodBag_PickUp9.wav
   - FolderName: Misc\FoodBag\Handling
     Files:
     - ParentFolder: Misc\FoodBag\Handling
@@ -160,10 +420,98 @@ MonoBehaviour:
       FileLocation: Misc\FoodBag\Handling\SFX_MISC_FoodBagHandling2.mp3
     - ParentFolder: Misc\FoodBag\Handling
       FileLocation: Misc\FoodBag\Handling\SFX_MISC_FoodBagHandling3.mp3
+    - ParentFolder: Misc\FoodBag\Handling
+      FileLocation: Misc\FoodBag\Handling\SFX_MISC_FoodBag_Handling1.wav
+    - ParentFolder: Misc\FoodBag\Handling
+      FileLocation: Misc\FoodBag\Handling\SFX_MISC_FoodBag_Handling2.wav
+    - ParentFolder: Misc\FoodBag\Handling
+      FileLocation: Misc\FoodBag\Handling\SFX_MISC_FoodBag_Handling3.wav
+    - ParentFolder: Misc\FoodBag\Handling
+      FileLocation: Misc\FoodBag\Handling\SFX_MISC_FoodBag_Handling4.wav
+    - ParentFolder: Misc\FoodBag\Handling
+      FileLocation: Misc\FoodBag\Handling\SFX_MISC_FoodBag_Handling5.wav
+    - ParentFolder: Misc\FoodBag\Handling
+      FileLocation: Misc\FoodBag\Handling\SFX_MISC_FoodBag_Handling6.wav
+  - FolderName: Misc\FoodBag\Place
+    Files:
+    - ParentFolder: Misc\FoodBag\Place
+      FileLocation: Misc\FoodBag\Place\SFX_MISC_FoodBag_Place1.wav
+    - ParentFolder: Misc\FoodBag\Place
+      FileLocation: Misc\FoodBag\Place\SFX_MISC_FoodBag_Place2.wav
+    - ParentFolder: Misc\FoodBag\Place
+      FileLocation: Misc\FoodBag\Place\SFX_MISC_FoodBag_Place3.wav
+    - ParentFolder: Misc\FoodBag\Place
+      FileLocation: Misc\FoodBag\Place\SFX_MISC_FoodBag_Place4.wav
+    - ParentFolder: Misc\FoodBag\Place
+      FileLocation: Misc\FoodBag\Place\SFX_MISC_FoodBag_Place5.wav
+    - ParentFolder: Misc\FoodBag\Place
+      FileLocation: Misc\FoodBag\Place\SFX_MISC_FoodBag_Place6.wav
+    - ParentFolder: Misc\FoodBag\Place
+      FileLocation: Misc\FoodBag\Place\SFX_MISC_FoodBag_Place7.wav
+    - ParentFolder: Misc\FoodBag\Place
+      FileLocation: Misc\FoodBag\Place\SFX_MISC_FoodBag_Place8.wav
+    - ParentFolder: Misc\FoodBag\Place
+      FileLocation: Misc\FoodBag\Place\SFX_MISC_FoodBag_Place9.wav
   - FolderName: Misc\FoodBag\Pour
     Files:
     - ParentFolder: Misc\FoodBag\Pour
+      FileLocation: Misc\FoodBag\Pour\SFX_MISC_FoodBag_PourIntoBowl1.wav
+    - ParentFolder: Misc\FoodBag\Pour
+      FileLocation: Misc\FoodBag\Pour\SFX_MISC_FoodBag_PourIntoBowl2.wav
+    - ParentFolder: Misc\FoodBag\Pour
+      FileLocation: Misc\FoodBag\Pour\SFX_MISC_FoodBag_PourIntoBowl3.wav
+    - ParentFolder: Misc\FoodBag\Pour
+      FileLocation: Misc\FoodBag\Pour\SFX_MISC_FoodBag_PourIntoBowl4.wav
+    - ParentFolder: Misc\FoodBag\Pour
+      FileLocation: Misc\FoodBag\Pour\SFX_MISC_FoodBag_PourIntoBowl5.wav
+    - ParentFolder: Misc\FoodBag\Pour
       FileLocation: Misc\FoodBag\Pour\SFX_MISC_PourFoodInBowl.mp3
+  - FolderName: Misc\FoodBag\Spawn
+    Files:
+    - ParentFolder: Misc\FoodBag\Spawn
+      FileLocation: Misc\FoodBag\Spawn\SFX_MISC_FoodBag_Spawn.wav
+  - FolderName: Misc\PetBrush\Fur
+    Files:
+    - ParentFolder: Misc\PetBrush\Fur
+      FileLocation: Misc\PetBrush\Fur\SFX_MISC_PetBrush_Fur_Brush1.wav
+    - ParentFolder: Misc\PetBrush\Fur
+      FileLocation: Misc\PetBrush\Fur\SFX_MISC_PetBrush_Fur_Brush2.wav
+    - ParentFolder: Misc\PetBrush\Fur
+      FileLocation: Misc\PetBrush\Fur\SFX_MISC_PetBrush_Fur_Brush3.wav
+    - ParentFolder: Misc\PetBrush\Fur
+      FileLocation: Misc\PetBrush\Fur\SFX_MISC_PetBrush_Fur_Brush4.wav
+  - FolderName: Misc\PetBrush\PickUp
+    Files:
+    - ParentFolder: Misc\PetBrush\PickUp
+      FileLocation: Misc\PetBrush\PickUp\SFX_MISC_PetBrush_PickUp1.wav
+    - ParentFolder: Misc\PetBrush\PickUp
+      FileLocation: Misc\PetBrush\PickUp\SFX_MISC_PetBrush_PickUp2.wav
+    - ParentFolder: Misc\PetBrush\PickUp
+      FileLocation: Misc\PetBrush\PickUp\SFX_MISC_PetBrush_PickUp3.wav
+    - ParentFolder: Misc\PetBrush\PickUp
+      FileLocation: Misc\PetBrush\PickUp\SFX_MISC_PetBrush_PickUp4.wav
+  - FolderName: Misc\PetBrush\Place
+    Files:
+    - ParentFolder: Misc\PetBrush\Place
+      FileLocation: Misc\PetBrush\Place\SFX_MISC_PetBrush_Place1.wav
+    - ParentFolder: Misc\PetBrush\Place
+      FileLocation: Misc\PetBrush\Place\SFX_MISC_PetBrush_Place2.wav
+    - ParentFolder: Misc\PetBrush\Place
+      FileLocation: Misc\PetBrush\Place\SFX_MISC_PetBrush_Place3.wav
+    - ParentFolder: Misc\PetBrush\Place
+      FileLocation: Misc\PetBrush\Place\SFX_MISC_PetBrush_Place4.wav
+    - ParentFolder: Misc\PetBrush\Place
+      FileLocation: Misc\PetBrush\Place\SFX_MISC_PetBrush_Place5.wav
+    - ParentFolder: Misc\PetBrush\Place
+      FileLocation: Misc\PetBrush\Place\SFX_MISC_PetBrush_Place6.wav
+  - FolderName: Misc\PetBrush\Scales
+    Files:
+    - ParentFolder: Misc\PetBrush\Scales
+      FileLocation: Misc\PetBrush\Scales\SFX_MISC_PetBrush_Scales_Brush1.wav
+    - ParentFolder: Misc\PetBrush\Scales
+      FileLocation: Misc\PetBrush\Scales\SFX_MISC_PetBrush_Scales_Brush2.wav
+    - ParentFolder: Misc\PetBrush\Scales
+      FileLocation: Misc\PetBrush\Scales\SFX_MISC_PetBrush_Scales_Brush3.wav
   - FolderName: Misc\Pop
     Files:
     - ParentFolder: Misc\Pop
@@ -184,6 +532,22 @@ MonoBehaviour:
     Files:
     - ParentFolder: Misc\Toy\Throw
       FileLocation: Misc\Toy\Throw\SFX_ToyThrow.mp3
+  - FolderName: Misc\Treat\PickUp
+    Files:
+    - ParentFolder: Misc\Treat\PickUp
+      FileLocation: Misc\Treat\PickUp\SFX_MISC_Treat_PickUp1.wav
+    - ParentFolder: Misc\Treat\PickUp
+      FileLocation: Misc\Treat\PickUp\SFX_MISC_Treat_PickUp2.wav
+    - ParentFolder: Misc\Treat\PickUp
+      FileLocation: Misc\Treat\PickUp\SFX_MISC_Treat_PickUp3.wav
+    - ParentFolder: Misc\Treat\PickUp
+      FileLocation: Misc\Treat\PickUp\SFX_MISC_Treat_PickUp4.wav
+    - ParentFolder: Misc\Treat\PickUp
+      FileLocation: Misc\Treat\PickUp\SFX_MISC_Treat_PickUp5.wav
+    - ParentFolder: Misc\Treat\PickUp
+      FileLocation: Misc\Treat\PickUp\SFX_MISC_Treat_PickUp6.wav
+    - ParentFolder: Misc\Treat\PickUp
+      FileLocation: Misc\Treat\PickUp\SFX_MISC_Treat_PickUp7.wav
   - FolderName: Music
     Files:
     - ParentFolder: Music
