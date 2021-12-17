@@ -59,10 +59,10 @@ namespace Creature
         /// </summary>
         private Needs needsDecayRate = new Needs(
             -0.5f, // Appetite
-            0,//-0.1f, // Bladder
-            0,//-0.1f, // Social
+            -0.1f, // Bladder
+            -0.1f, // Social
             0,//-0.1f, // Energy
-            0,//-0.1f // Hygiene
+            -0.1f, // Hygiene
             0 // Happiness
         );
 
