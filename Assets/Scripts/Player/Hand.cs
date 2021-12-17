@@ -13,13 +13,14 @@ namespace Player
         private PlayerController player;
         private Utility.ToolTip tt;
 
-        private void OnEnable()
+        private void Awake()
         {
             Holding = null;
         }
 
         void Start()
         {
+
             StartCoroutine(LateStart(1));
         }
 
