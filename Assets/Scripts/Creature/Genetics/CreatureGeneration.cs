@@ -175,7 +175,7 @@ namespace Genetics
             GameObject offset = new GameObject();
             offset.name = "Offset";
             offset.transform.parent = creature.transform;
-            offset.transform.position = new Vector3(0.97f, 0, -1.42f);
+            offset.transform.position = new Vector3(0.097f, 0, -0.142f);
             offset.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
 
             GameObject mesh = ArmatureStitching.StitchObjects(bodyParts);
