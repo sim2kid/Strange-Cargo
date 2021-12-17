@@ -12,6 +12,8 @@ namespace Interaction
         public Vector3 positionOffset;
         public Vector3 rotationOffset;
 
+        private RigidbodyConstraints rbConstraints;
+
         [SerializeField]
         private string _textOnHold;
 
@@ -31,8 +33,23 @@ namespace Interaction
             rb = GetComponent<Rigidbody>();
             collider = GetComponent<Collider>();
             player = Utility.Toolbox.Instance.Player;
+
+            Utility.Toolbox.Instance.Pause.OnPause.AddListener(OnPause);
+            Utility.Toolbox.Instance.Pause.OnUnPause.AddListener(OnUnPause);
+
             holding = false;
             base.Start();
+        }
+
+        protected virtual void OnPause()
+        {
+            rbConstraints = rb.constraints;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+        }
+
+        protected virtual void OnUnPause()
+        {
+            rb.constraints = rbConstraints;
         }
 
         private void Update()
