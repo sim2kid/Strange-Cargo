@@ -31,6 +31,7 @@ namespace Interaction
         protected override void Start()
         {
             rb = GetComponent<Rigidbody>();
+            rbConstraints = rb.constraints;
             collider = GetComponent<Collider>();
             player = Utility.Toolbox.Instance.Player;
 
@@ -43,7 +44,6 @@ namespace Interaction
 
         protected virtual void OnPause()
         {
-            rbConstraints = rb.constraints;
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }
 
