@@ -31,13 +31,13 @@ namespace Player
         {
             if(hand.Holding == null)
             {
-                hand.PickUp(this.gameObject.GetComponent<PettingUseable>());
+                hand.PickUp(this);
             }
         }
 
         public void HoldUpdate()
         {
-            if (CanSeeCreature() && (hand.Holding == null || hand.Holding == this.gameObject.GetComponent<PettingUseable>()))
+            if (CanSeeCreature() && (hand.Holding == null || hand.Holding == this))
             {
                 useString = "{use} to pet creature";
             }
@@ -49,7 +49,7 @@ namespace Player
 
         public void Use()
         {
-            if(CanSeeCreature() && (hand.Holding == null || hand.Holding == this.gameObject.GetComponent<PettingUseable>()))
+            if(CanSeeCreature() && (hand.Holding == null || hand.Holding == this))
             {
                 OnUse.Invoke();
                 NearestCreature().needs.Social += socialBoostAmount;
