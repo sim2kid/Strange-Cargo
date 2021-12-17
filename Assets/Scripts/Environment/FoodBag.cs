@@ -41,9 +41,18 @@ namespace Environment {
         {
             IInteractable lastObj = Player.Interaction.Previous;
             if (lastObj != null)
+            {
                 Bowl = lastObj.GameObject.GetComponent<FoodBowl>();
-            else 
+                if(Bowl != null)
+                    if (Bowl.GetType() != typeof(FoodBowl))
+                        Bowl = null;
+            }
+            else
+            {
                 Bowl = null;
+            }
+
+            
 
             if (Bowl != null)
             {
