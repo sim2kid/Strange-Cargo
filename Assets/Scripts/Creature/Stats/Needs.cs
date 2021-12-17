@@ -52,6 +52,17 @@ namespace Creature.Stats
             } 
         }
 
+        public void Clamp() 
+        {
+            Clamp(Min, Max);
+        }
+
+        public void Clamp(float min, float max)
+        {
+            for(int i = 0; i < this.Count; i++)
+                this[i] = Mathf.Clamp(this[i], min, max);
+        }
+
         private void initilize(float defaultValue) 
         {
             initilize();
