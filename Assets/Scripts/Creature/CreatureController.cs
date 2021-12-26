@@ -60,9 +60,9 @@ namespace Creature
         private Needs needsDecayRate = new Needs(
             -0.5f, // Appetite
             0,//-0.1f, // Bladder
-            0,//-0.1f, // Social
+            -0.2f, // Social
             0,//-0.1f, // Energy
-            0,//-0.1f // Hygiene
+            -0.1f, // Hygiene
             0 // Happiness
         );
 
@@ -229,6 +229,7 @@ namespace Creature
             for (int i = 0; i < needDecay.Count; i++)
                 needDecay[i] *= Time.deltaTime;
             needs += needDecay;
+            needs.Clamp();
         }
 
         public void AnimationBool(string _boolName, bool _boolValue)
