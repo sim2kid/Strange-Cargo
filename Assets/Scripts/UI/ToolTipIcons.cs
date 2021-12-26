@@ -110,26 +110,42 @@ public class ToolTipIcons : MonoBehaviour
     {
         string newString = originalText;
 
+        // look at input actions in text
+        // eg: "press {use} to eat"
+
         MatchCollection matches = Regex.Matches(newString, @"(?<=\{).*?(?=\})");
         List<string> matchList = matches.Cast<Match>().Select(match => match.Value).ToList();
+        List<string> originalNames = new List<string>();
         List<string> actions = new List<string>();
+
+        string device = context.CurrentDevice.ToString();
         foreach (string vari in matchList)
         {
+            originalNames.Add($"{{{vari}}}");
             actions.Add(context.GetAction(vari).ToString());
         }
 
         for (int i = 0; i < actions.Count; i++) 
         {
-            string actionName = actions[i].ToString();
-            actionName = actionName.Substring(actionName.IndexOf('[') + 1);
-            actionName = actionName.Substring(1, actionName.Length-2);
-            actionName = actionName.Substring(actionName.IndexOf('/') + 1);
-            actions[i] = actionName;
-        }
-        // "Player/Use[/Keyboard/e]"
+            string output = string.Empty;
+            if (actions[i] == null)
+            {
+                output = originalNames[i];
+            }
+            else
+            {
+                string actionName = actions[i].ToString();
+                actionName = actionName.Substring(actionName.IndexOf('[') + 1);
+                actionName = actionName.Substring(1, actionName.Length - 2);
+                actionName = actionName.Substring(actionName.IndexOf('/') + 1);
 
-        // look at input actions in text
-        // eg: "press {use} to eat"
+                output = $"<sprite=\"{device}\" name=\"{actionName}\">";
+            }
+
+            newString = newString.Replace(originalNames[i], output);
+        }
+
+        text.text = newString;
 
         // find the related button
         // GetButtonForAction**
@@ -139,7 +155,7 @@ public class ToolTipIcons : MonoBehaviour
         // Instead we'll have to derive the name based on the input!
 
         // Grab the ID and replace the action in string with it
-        // eg: "press <sprite=69> to eat"
+        // eg: "press <sprite="keyboard" name="e"> to eat"
 
         oldText = newString;
     }
