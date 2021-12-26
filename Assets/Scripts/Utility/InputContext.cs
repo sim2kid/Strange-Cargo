@@ -71,7 +71,7 @@ namespace Utility.Input {
         private void OnNewInput()
         {
             _recentScheme = playerInput.currentControlScheme;
-            Console.Log($"New Input: {_recentScheme}");
+            Console.Log($"New Input: {_recentScheme} : {CurrentDevice}");
             OnDeviceChange.Invoke();
         }
 
@@ -169,7 +169,27 @@ namespace Utility.Input {
             }    
         }
 
+        public InputAction GetAction(string actionName) 
+        {
+            string name = actionName;
+            InputAction a = playerInput.actions[name];
+            if (a == null)
+            {
+                name = char.ToLower(name[0]) + name.Substring(1);
+                a = playerInput.actions[name];
+            }
+            else
+                return a;
 
+            if (a == null)
+                a = playerInput.actions[name.ToLower()];
+            else
+                return a;
+
+            if (a == null)
+                Console.LogWarning($"Action \"{actionName}\" was not found in the selected PlayerInput modual.");
+            return a;
+        }
     }
 
     public enum Device 

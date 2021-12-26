@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using Utility.Input;
 using UnityEngine.InputSystem;
+using System.Text.RegularExpressions;
+using System.Linq;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class ToolTipIcons : MonoBehaviour
@@ -22,6 +24,7 @@ public class ToolTipIcons : MonoBehaviour
             Console.LogError("Missing InputContext component in scene. Will delete ToolTipIcon script to prevent errors");
             Destroy(this);
         }
+        text = GetComponent<TextMeshProUGUI>();
         context.OnDeviceChange.AddListener(onNewDevice);
         onNewDevice();
         originalText = oldText = text.text;
@@ -106,6 +109,24 @@ public class ToolTipIcons : MonoBehaviour
     private void RewriteSprites() 
     {
         string newString = originalText;
+
+        MatchCollection matches = Regex.Matches(newString, @"(?<=\{).*?(?=\})");
+        List<string> matchList = matches.Cast<Match>().Select(match => match.Value).ToList();
+        List<string> actions = new List<string>();
+        foreach (string vari in matchList)
+        {
+            actions.Add(context.GetAction(vari).ToString());
+        }
+
+        for (int i = 0; i < actions.Count; i++) 
+        {
+            string actionName = actions[i].ToString();
+            actionName = actionName.Substring(actionName.IndexOf('[') + 1);
+            actionName = actionName.Substring(1, actionName.Length-2);
+            actionName = actionName.Substring(actionName.IndexOf('/') + 1);
+            actions[i] = actionName;
+        }
+        // "Player/Use[/Keyboard/e]"
 
         // look at input actions in text
         // eg: "press {use} to eat"
