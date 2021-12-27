@@ -163,6 +163,7 @@ public class ToolTipIcons : MonoBehaviour
                 List<string> actionNames = InputContext.InputsForAction(action);
                 int startIndex = 0;
                 int endIndex = actionNames.Count;
+                float tint = 1f;
 
                 if (options.TryGetValue("start", out string start))
                     if (int.TryParse(start, out int s))
@@ -185,6 +186,10 @@ public class ToolTipIcons : MonoBehaviour
                         endIndex = Mathf.Max(actionNames.Count, Mathf.Min(id + 1, 0));
                     }
 
+                if(options.TryGetValue("tint", out string tintstr))
+                    if(float.TryParse(tintstr, out float t))
+                        tint = Mathf.Clamp(t, 0f, 1f);
+
                 // Can't find the sprite in spritesheet because not
                 // all symbols will have unicode to reference. 
                 // Instead we'll have to derive the name based on the input!
@@ -194,7 +199,7 @@ public class ToolTipIcons : MonoBehaviour
 
                 for (int i = startIndex; i < endIndex; i++)
                 {
-                    output += $"<sprite=\"{device}\" name=\"{actionNames[i]}\">";
+                    output += $"<sprite=\"{device}\" name=\"{actionNames[i]}\" tint={tint}>";
                 }
 
                 // check if this should be kept
