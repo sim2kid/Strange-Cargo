@@ -62,7 +62,7 @@ public class ToolTipIcons : MonoBehaviour
             string output = string.Empty;
             if (action == null)
             {
-                output = $"{{{options["name"]} unknown}}";
+                output = originalName;
             }
             else
             {
