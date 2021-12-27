@@ -24,7 +24,7 @@ namespace Utility
 
 #if UNITY_EDITOR
         bool lastPause = false;
-        public void Update()
+        public void FixedUpdate()
         {
             if (_pause != lastPause)
             {
