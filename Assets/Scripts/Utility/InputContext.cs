@@ -53,7 +53,7 @@ namespace Utility.Input {
             _recentScheme = playerInput.currentControlScheme;
             _lastDevice = DefaultDeviceType;
 
-            Console.Log($"Current Input: {_recentScheme}");
+            Console.Log($"Current Input: {CurrentScheme}");
         }
 
 

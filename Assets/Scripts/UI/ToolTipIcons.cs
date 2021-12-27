@@ -26,8 +26,9 @@ public class ToolTipIcons : MonoBehaviour
         }
         text = GetComponent<TextMeshProUGUI>();
         context.OnDeviceChange.AddListener(onNewDevice);
-        onNewDevice();
         originalText = oldText = text.text;
+
+        onNewDevice();
     }
 
     private string GetButtonForAction(string actionName) 
@@ -96,8 +97,6 @@ public class ToolTipIcons : MonoBehaviour
 
     private void onNewDevice() 
     {
-        Console.DebugOnly(GetButtonForAction("Pause"));
-
         var asset = GetAsset(context.CurrentDevice);
         if (asset != null)
             text.spriteAsset = asset;
@@ -106,56 +105,137 @@ public class ToolTipIcons : MonoBehaviour
         RewriteSprites();
     }
 
+    private Dictionary<string, string> GetActionOptions(string vari) 
+    {
+        string[] str = vari.Split(' ');
+        Dictionary<string, string> options = new Dictionary<string, string>();
+
+        for (int i = 0; i < str.Length; i++) 
+        {
+            if (i == 0)
+            {
+                options.Add("name", str[0]);
+                continue;
+            }
+            string[] keyvalue = str[i].Split('=');
+            if (keyvalue.Length != 2)
+                continue;
+            if (options.ContainsKey(keyvalue[0]))
+            {
+                Console.LogWarning($"The option \"{keyvalue[0]}\" has been included twice in an action for {options["name"]}. All subsuquent options will be ignored. ");
+                continue;
+            }
+            options.Add(keyvalue[0].ToLower(), keyvalue[1]);
+        }
+        return options;
+    }
+
     private void RewriteSprites() 
     {
         string newString = originalText;
-
+        if (string.IsNullOrEmpty(newString))
+            return;
         // look at input actions in text
         // eg: "press {use} to eat"
 
         MatchCollection matches = Regex.Matches(newString, @"(?<=\{).*?(?=\})");
         List<string> matchList = matches.Cast<Match>().Select(match => match.Value).ToList();
-        List<string> originalNames = new List<string>();
-        List<InputAction> actions = new List<InputAction>();
 
         string device = context.CurrentDevice.ToString();
+        string scheme = context.CurrentScheme.ToString();
         foreach (string vari in matchList)
         {
-            originalNames.Add($"{{{vari}}}");
-            actions.Add(context.GetAction(vari));
-        }
+            var options = GetActionOptions(vari);
+            string originalName = $"{{{vari}}}";
 
-        for (int i = 0; i < actions.Count; i++) 
-        {
+            // find the related button(s)
+            // GetButtonForAction**
+            var action = context.GetAction(options["name"]);
+
+
             string output = string.Empty;
-            if (actions[i] == null)
+            if (action == null)
             {
-                output = originalNames[i];
+                output = $"{{{options[name]} unknown}}";
             }
-            else
+            else 
             {
-                List<string> actionNames = InputContext.InputsForAction(actions[i]);
-                foreach (string actionName in actionNames)
+                List<string> actionNames = InputContext.InputsForAction(action);
+                int startIndex = 0;
+                int endIndex = actionNames.Count;
+
+                if (options.TryGetValue("start", out string start))
+                    if (int.TryParse(start, out int s))
+                        startIndex = Mathf.Max(startIndex, Mathf.Min(s, endIndex));
+                if (options.TryGetValue("end", out string end))
                 {
-                    output += $"<sprite=\"{device}\" name=\"{actionName}\">";
+                    if (int.TryParse(end, out int e))
+                        endIndex = Mathf.Min(endIndex, Mathf.Max(e, startIndex));
+                }
+                else if (options.TryGetValue("length", out string length))
+                {
+                    if (int.TryParse(length, out int l))
+                        endIndex = Mathf.Min(endIndex, Mathf.Max(startIndex + l, startIndex));
+                }
+
+                // Can't find the sprite in spritesheet because not
+                // all symbols will have unicode to reference. 
+                // Instead we'll have to derive the name based on the input!
+
+                // Grab the name and replace the action in string with it
+                // eg: "press <sprite="keyboard" name="e"> to eat"
+
+                for (int i = startIndex; i < endIndex; i++)
+                {
+                    output += $"<sprite=\"{device}\" name=\"{actionNames[i]}\">";
+                }
+
+                // check if this should be kept
+
+                string targetDevice = string.Empty;
+                string targetScheme = string.Empty;
+
+                if (options.TryGetValue("device", out string d))
+                    targetDevice = d;
+                if (options.TryGetValue("scheme", out string sch))
+                {
+                    if (sch.StartsWith("!"))
+                    {
+                        sch = sch.Substring(1);
+                        targetScheme = "!" + InputContext.ResolveScheme(sch).ToString();
+
+                    }
+                    else
+                    {
+                        targetScheme = InputContext.ResolveScheme(sch).ToString();
+                    }
+                }
+
+                if (!string.IsNullOrWhiteSpace(targetDevice)) 
+                {
+                    if (targetDevice.StartsWith("!"))
+                    {
+                        if (targetDevice.ToLower().Substring(1) == device.ToLower()) // Exclude decives
+                            output = string.Empty;
+                    }
+                    else if (targetDevice.ToLower() != device.ToLower()) // inclue devices
+                        output = string.Empty;
+                }
+
+                if (!string.IsNullOrWhiteSpace(targetScheme)) {
+                    if (targetScheme.StartsWith("!")) {
+                        if (targetScheme.ToLower().Substring(1) == scheme.ToLower()) // exclude schemes
+                            output = string.Empty;
+                    }
+                    else if (targetScheme.ToLower() != scheme.ToLower()) // Include schemes
+                        output = string.Empty;
                 }
             }
-
-            newString = newString.Replace(originalNames[i], output);
+            newString = newString.Replace(originalName, output);
         }
 
+        // update both our textstring and the TMP string so we don't run an update
         text.text = newString;
-
-        // find the related button
-        // GetButtonForAction**
-
-        // Can't find the sprite in spritesheet because not
-        // all symbols will have unicode to reference. 
-        // Instead we'll have to derive the name based on the input!
-
-        // Grab the ID and replace the action in string with it
-        // eg: "press <sprite="keyboard" name="e"> to eat"
-
         oldText = newString;
     }
 
