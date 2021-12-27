@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -167,6 +169,27 @@ namespace Utility.Input {
                         $"If you're using a custom device you wish to be supported, please ask the devs.");
                     return Scheme.Unknown;
             }    
+        }
+
+        public static List<string> InputsForAction(InputAction action)
+        {
+            // Create Array String seperated by ','
+            string actionName = action.ToString();
+            actionName = actionName.Substring(actionName.IndexOf('[') + 1);
+            actionName = actionName.Substring(0, actionName.Length - 1);
+
+            string[] inputNames = actionName.Split(',');
+            List<string> outputNames = new List<string>();
+
+            for (int i = 0; i < inputNames.Length; i++)
+            {
+                // skip the device name.
+                string output = string.Empty;
+                inputNames[i] = inputNames[i].Substring(1);
+                outputNames.Add(inputNames[i].Substring(inputNames[i].IndexOf('/') + 1));
+            }
+
+            return outputNames;
         }
 
         public InputAction GetAction(string actionName) 

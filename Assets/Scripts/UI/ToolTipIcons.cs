@@ -116,13 +116,13 @@ public class ToolTipIcons : MonoBehaviour
         MatchCollection matches = Regex.Matches(newString, @"(?<=\{).*?(?=\})");
         List<string> matchList = matches.Cast<Match>().Select(match => match.Value).ToList();
         List<string> originalNames = new List<string>();
-        List<string> actions = new List<string>();
+        List<InputAction> actions = new List<InputAction>();
 
         string device = context.CurrentDevice.ToString();
         foreach (string vari in matchList)
         {
             originalNames.Add($"{{{vari}}}");
-            actions.Add(context.GetAction(vari).ToString());
+            actions.Add(context.GetAction(vari));
         }
 
         for (int i = 0; i < actions.Count; i++) 
@@ -134,12 +134,11 @@ public class ToolTipIcons : MonoBehaviour
             }
             else
             {
-                string actionName = actions[i].ToString();
-                actionName = actionName.Substring(actionName.IndexOf('[') + 1);
-                actionName = actionName.Substring(1, actionName.Length - 2);
-                actionName = actionName.Substring(actionName.IndexOf('/') + 1);
-
-                output = $"<sprite=\"{device}\" name=\"{actionName}\">";
+                List<string> actionNames = InputContext.InputsForAction(actions[i]);
+                foreach (string actionName in actionNames)
+                {
+                    output += $"<sprite=\"{device}\" name=\"{actionName}\">";
+                }
             }
 
             newString = newString.Replace(originalNames[i], output);
