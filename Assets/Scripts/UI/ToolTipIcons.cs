@@ -178,6 +178,13 @@ public class ToolTipIcons : MonoBehaviour
                         endIndex = Mathf.Min(endIndex, Mathf.Max(startIndex + l, startIndex));
                 }
 
+                if (options.TryGetValue("index", out string index))
+                    if (int.TryParse(index, out int id))
+                    {
+                        startIndex = Mathf.Min(0, Mathf.Max(id, actionNames.Count));
+                        endIndex = Mathf.Max(actionNames.Count, Mathf.Min(id + 1, 0));
+                    }
+
                 // Can't find the sprite in spritesheet because not
                 // all symbols will have unicode to reference. 
                 // Instead we'll have to derive the name based on the input!
