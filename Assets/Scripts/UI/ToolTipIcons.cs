@@ -31,110 +31,16 @@ public class ToolTipIcons : MonoBehaviour
         onNewDevice();
     }
 
-    private string GetButtonForAction(string actionName) 
+    public static string ResolveString(string str, InputContext context = null) 
     {
-        if(!TryGetBinding(actionName, out InputBinding result))
-            return string.Empty;
-        string[] schemeButton = result.path.Split('/');
-        string scheme = schemeButton[0];
-        string button = schemeButton[1];
-        for (int i = 2; i < schemeButton.Length; i++)
-            button += $"-{schemeButton[i]}";
+        if(context == null)
+            context = FindObjectOfType<InputContext>();
+        if(context == null)
+            return str;
 
-        return button;
-    }
-
-    private bool TryGetBinding(string actionName, out InputBinding result) 
-    {
-        result = new InputBinding();
-        InputAction action = null;
-        try
-        {
-            PlayerInput p = FindObjectOfType<PlayerInput>();
-            if (p == null)
-            {
-                Console.LogError("There is no active player input in the scene!!");
-                return false;
-            }
-            action = p.actions[actionName];
-        }
-        catch 
-        {
-            Console.LogWarning($"{actionName} is not a valid action.");
-            return false;
-        }
-        if (action == null) 
-        {
-            Console.LogWarning($"{actionName} is not a valid action.");
-            return false;
-        }
-
-        foreach (InputBinding binding in action.bindings.ToArray()) 
-        {
-            string[] schemeButton = binding.path.Split('/');
-            string scheme = schemeButton[0];
-
-            if(InputContext.ResolveScheme(scheme) == context.CurrentScheme) 
-            {
-                result = binding;
-                return true;
-            }
-        }
-
-        return false;
-    } 
-
-    private void OnEnable()
-    {
-        if(context != null)
-            context.OnDeviceChange.AddListener(onNewDevice);
-    }
-
-    private void OnDisable()
-    {
-        context.OnDeviceChange.RemoveListener(onNewDevice);
-    }
-
-    private void onNewDevice() 
-    {
-        var asset = GetAsset(context.CurrentDevice);
-        if (asset != null)
-            text.spriteAsset = asset;
-
-        // rewrite current sprites for newly bound assets
-        RewriteSprites();
-    }
-
-    private Dictionary<string, string> GetActionOptions(string vari) 
-    {
-        string[] str = vari.Split(' ');
-        Dictionary<string, string> options = new Dictionary<string, string>();
-
-        for (int i = 0; i < str.Length; i++) 
-        {
-            if (i == 0)
-            {
-                options.Add("name", str[0]);
-                continue;
-            }
-            string[] keyvalue = str[i].Split('=');
-            if (keyvalue.Length != 2)
-                continue;
-            if (options.ContainsKey(keyvalue[0]))
-            {
-                Console.LogWarning($"The option \"{keyvalue[0]}\" has been included twice in an action for {options["name"]}. All subsuquent options will be ignored. ");
-                continue;
-            }
-            options.Add(keyvalue[0].ToLower(), keyvalue[1]);
-        }
-        return options;
-    }
-
-    private void RewriteSprites() 
-    {
-        string newString = originalText;
+        string newString = str;
         if (string.IsNullOrEmpty(newString))
-            return;
+            return str;
         // look at input actions in text
         // eg: "press {use} to eat"
 
@@ -156,9 +62,9 @@ public class ToolTipIcons : MonoBehaviour
             string output = string.Empty;
             if (action == null)
             {
-                output = $"{{{options[name]} unknown}}";
+                output = $"{{{options["name"]} unknown}}";
             }
-            else 
+            else
             {
                 List<string> actionNames = InputContext.InputsForAction(action);
                 int startIndex = 0;
@@ -186,8 +92,8 @@ public class ToolTipIcons : MonoBehaviour
                         endIndex = Mathf.Max(actionNames.Count, Mathf.Min(id + 1, 0));
                     }
 
-                if(options.TryGetValue("tint", out string tintstr))
-                    if(float.TryParse(tintstr, out float t))
+                if (options.TryGetValue("tint", out string tintstr))
+                    if (float.TryParse(tintstr, out float t))
                         tint = Mathf.Clamp(t, 0f, 1f);
 
                 // Can't find the sprite in spritesheet because not
@@ -223,7 +129,7 @@ public class ToolTipIcons : MonoBehaviour
                     }
                 }
 
-                if (!string.IsNullOrWhiteSpace(targetDevice)) 
+                if (!string.IsNullOrWhiteSpace(targetDevice))
                 {
                     if (targetDevice.StartsWith("!"))
                     {
@@ -234,8 +140,10 @@ public class ToolTipIcons : MonoBehaviour
                         output = string.Empty;
                 }
 
-                if (!string.IsNullOrWhiteSpace(targetScheme)) {
-                    if (targetScheme.StartsWith("!")) {
+                if (!string.IsNullOrWhiteSpace(targetScheme))
+                {
+                    if (targetScheme.StartsWith("!"))
+                    {
                         if (targetScheme.ToLower().Substring(1) == scheme.ToLower()) // exclude schemes
                             output = string.Empty;
                     }
@@ -245,6 +153,63 @@ public class ToolTipIcons : MonoBehaviour
             }
             newString = newString.Replace(originalName, output);
         }
+
+        return newString;
+    }
+
+    private void OnEnable()
+    {
+        if(context != null)
+            context.OnDeviceChange.AddListener(onNewDevice);
+    }
+
+    private void OnDisable()
+    {
+        context.OnDeviceChange.RemoveListener(onNewDevice);
+    }
+
+    private void onNewDevice() 
+    {
+        var asset = GetAsset(context.CurrentDevice);
+        if (asset != null)
+            text.spriteAsset = asset;
+
+        // rewrite current sprites for newly bound assets
+        RewriteSprites();
+    }
+
+    private static Dictionary<string, string> GetActionOptions(string vari) 
+    {
+        string[] str = vari.Split(' ');
+        Dictionary<string, string> options = new Dictionary<string, string>();
+
+        for (int i = 0; i < str.Length; i++) 
+        {
+            if (i == 0)
+            {
+                options.Add("name", str[0]);
+                continue;
+            }
+            string[] keyvalue = str[i].Split('=');
+            if (keyvalue.Length != 2)
+                continue;
+            if (options.ContainsKey(keyvalue[0]))
+            {
+                Console.LogWarning($"The option \"{keyvalue[0]}\" has been included twice in an action for {options["name"]}. All subsuquent options will be ignored. ");
+                continue;
+            }
+            options.Add(keyvalue[0].ToLower(), keyvalue[1]);
+        }
+        return options;
+    }
+
+    private void RewriteSprites() 
+    {
+        string newString = originalText;
+        if (string.IsNullOrEmpty(newString))
+            return;
+
+        newString = ResolveString(newString, context);
 
         // update both our textstring and the TMP string so we don't run an update
         text.text = newString;
