@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84a92b25f83d49b9bc132d206b370281, type: 3}
-  m_Name: PlayStation
+  m_Name: Nintendo
   m_EditorClassIdentifier: 
   hashCode: 802230150
   material: {fileID: 8418146551741302414}
@@ -37,7 +37,7 @@ MonoBehaviour:
     m_StrikethroughOffset: 0
     m_StrikethroughThickness: 0
     m_TabWidth: 0
-  spriteSheet: {fileID: 2800000, guid: 2210137d615797743ad3823c0d946d61, type: 3}
+  spriteSheet: {fileID: 2800000, guid: 52c28cad449c3ff4ead4f40694d63407, type: 3}
   m_SpriteCharacterTable:
   - m_ElementType: 2
     m_Unicode: 65534
@@ -243,6 +243,12 @@ MonoBehaviour:
     m_Scale: 1
     m_Name: rightTrigger
     m_HashCode: 342981208
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 34
+    m_Scale: 1
+    m_Name: share
+    m_HashCode: 135622317
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 32
@@ -818,7 +824,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 2210137d615797743ad3823c0d946d61, type: 3}
+        m_Texture: {fileID: 2800000, guid: 52c28cad449c3ff4ead4f40694d63407, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
