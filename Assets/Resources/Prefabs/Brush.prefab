@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6279976858420598515}
   - component: {fileID: 276228823837951602}
   - component: {fileID: 910734612175490087}
+  - component: {fileID: 7543035020934673279}
   m_Layer: 0
   m_Name: Brush
   m_TagString: Untagged
@@ -249,6 +250,19 @@ MonoBehaviour:
   OnPlay:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7543035020934673279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6279976858420598512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d29424f35180b0b49a0b4eb3114005d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PrefabResourceLocation: Prefabs/Brush
 --- !u!1001 &6279976859528713520
 PrefabInstance:
   m_ObjectHideFlags: 0

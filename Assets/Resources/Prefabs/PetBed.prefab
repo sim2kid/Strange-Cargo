@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 405737573842479746}
   - component: {fileID: 4432729789811867662}
   - component: {fileID: 7295038172779600133}
+  - component: {fileID: -1794534999162646608}
   m_Layer: 0
   m_Name: PetBed
   m_TagString: Untagged
@@ -112,3 +113,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Color: 
   ColorPalette: Data/ColorPalette/default
+--- !u!114 &-1794534999162646608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2207190824373406551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d29424f35180b0b49a0b4eb3114005d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PrefabResourceLocation: Prefabs/PetBed

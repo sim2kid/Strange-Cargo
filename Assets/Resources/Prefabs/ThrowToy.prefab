@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 177183382803668150}
   - component: {fileID: 7621914262448607772}
   - component: {fileID: 4962209853802271630}
+  - component: {fileID: 6136754355306509144}
   m_Layer: 0
   m_Name: ThrowToy
   m_TagString: Untagged
@@ -303,3 +304,16 @@ MonoBehaviour:
   OnPlay:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6136754355306509144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177183382803668143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d29424f35180b0b49a0b4eb3114005d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PrefabResourceLocation: Prefabs/ThrowToy
