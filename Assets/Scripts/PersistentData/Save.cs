@@ -5,11 +5,12 @@ using PersistentData.Saving;
 
 namespace PersistentData
 {
+    [System.Serializable]
     public struct Save
     {
         public string GameVersion;
         public string SaveName;
         public string SaveTime;
-        List<ISaveable> SavedObjects;
+        public List<ISaveable> SavedObjects;
     }
 }
