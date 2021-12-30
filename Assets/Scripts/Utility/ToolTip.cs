@@ -5,6 +5,7 @@ using TMPro;
 
 namespace Utility
 {
+    
     public class ToolTip : MonoBehaviour
     {
         [SerializeField]
@@ -36,11 +37,11 @@ namespace Utility
         void Update()
         {
             if(Hover != null)
-                Hover.text = HoverText;
+                Hover.text = ToolTipIcons.ResolveString(HoverText);
             if (Use != null)
-                Use.text = UseText;
+                Use.text = ToolTipIcons.ResolveString(UseText);
             if (Hold != null)
-                Hold.text = HoldText;
+                Hold.text = ToolTipIcons.ResolveString(HoldText);
         }
     }
 }

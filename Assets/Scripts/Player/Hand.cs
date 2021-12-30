@@ -36,7 +36,7 @@ namespace Player
 
         private void Update()
         {
-            if (Holding is IUseable)
+            if (Holding is IUseable && tt != null)
             {
                 ((IUseable)Holding).HoldUpdate();
                 tt.UseText = ((IUseable)Holding).UseText;
@@ -62,9 +62,13 @@ namespace Player
                 LetGo();
             }
             Holding = obj;
-            tt.HoldText = Holding.HoldText;
-            player.Footsteps.OnStep.AddListener(Holding.Shake);
-            player.HeadMovement.OnJolt.AddListener(Holding.Shake);
+            if(tt != null)
+                tt.HoldText = Holding.HoldText;
+            if (player != null)
+            {
+                player.Footsteps.OnStep.AddListener(Holding.Shake);
+                player.HeadMovement.OnJolt.AddListener(Holding.Shake);
+            }
         }
         public void LetGo() 
         {
