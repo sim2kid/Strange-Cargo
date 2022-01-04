@@ -14,6 +14,7 @@ namespace Utility.Editor
             UpdateSoundDatabase();
         }
 
+        [MenuItem("PreBuild/Build Databases #b")]
         public static void UpdateSoundDatabase() 
         {
             Database db = Importer.Import("", null, "Assets/Resources/Audio", ".mp3", ".wav", ".ogg", ".aiff", ".aif");
