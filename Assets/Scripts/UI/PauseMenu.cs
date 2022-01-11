@@ -9,13 +9,16 @@ using Utility;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject Menu;
+    public GameObject pauseMenu;
     public GameObject OptionsMenu;
+    public GameObject ExitMenu;
 
     public PlayerInput playerInput;
     private InputAction Pause;
 
     public GameObject pauseDefault;
     public GameObject optionsDefault;
+    public GameObject exitDefault;
 
     private bool lastPause = false;
     private void OnEnable()
@@ -34,6 +37,15 @@ public class PauseMenu : MonoBehaviour
 
     private void Start()
     {
+        if (playerInput == null)
+            playerInput = FindObjectOfType<PlayerInput>();
+
+        if (playerInput == null) {
+            Console.LogError("Could not find player input in scene for the pause menu. Deactivating it.");
+            gameObject.SetActive(false);
+            return;
+        }
+
         Pause = playerInput.actions["Pause"];
         lastPause = Pause.ReadValue<float>() == 1;
     }
@@ -51,6 +63,22 @@ public class PauseMenu : MonoBehaviour
     public void Resume() 
     {
         Toolbox.Instance.Pause.SetPause(false);
+    }
+
+    public void SaveAndExit() 
+    {
+        Save();
+        ExitToMainMenu();
+    }
+
+    public void Save() 
+    {
+        Console.Log("Saving has not been implemnted yet.");
+    }
+
+    public void Load() 
+    {
+        Console.Log("Loading has not been implemnted yet.");
     }
 
     public void ExitToMainMenu()
@@ -80,26 +108,34 @@ public class PauseMenu : MonoBehaviour
         Application.Quit();
     }
 
+    public void Exit() 
+    {
+        pauseMenu.SetActive(false);
+        ExitMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(exitDefault);
+    }
+
     public void Options()
     {
         Console.Log("Options Menu has not been implemented yet.");
-        //Menu.SetActive(false);
+        //PauseMenu.SetActive(false);
         //OptionsMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(optionsDefault);
     }
 
     public void BackToPauseMenu()
     {
-        Menu.SetActive(true);
+        pauseMenu.SetActive(true);
         OptionsMenu.SetActive(false);
+        ExitMenu.SetActive(false);
         EventSystem.current.SetSelectedGameObject(pauseDefault);
     }
 
     private void OnPause() 
     {
         Menu.SetActive(true);
+        BackToPauseMenu();
         Cursor.lockState = CursorLockMode.None;
-        EventSystem.current.SetSelectedGameObject(pauseDefault);
     }
 
     private void OnUnPause() 
