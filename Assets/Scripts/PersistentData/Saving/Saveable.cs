@@ -18,6 +18,7 @@ namespace PersistentData.Saving
             var saveBits = this.GetComponentsInChildren<ISaveable>(true);
             _saveParts.Clear();
             _saveParts.AddRange(saveBits);
+            _saveParts.AddRange(this.GetComponents<ISaveable>());
         }
 
         public void PostDeserialization()

@@ -10,7 +10,7 @@ namespace PersistentData
     {
         public string GameVersion;
         public string SaveName;
-        public string SaveTime;
-        public List<ISaveable> SavedObjects;
+        public long SaveTime;
+        public List<Saveable> SavedObjects;
     }
 }
