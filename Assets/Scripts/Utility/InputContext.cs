@@ -6,9 +6,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.DualShock;
-using UnityEngine.InputSystem.iOS;
+
 using UnityEngine.InputSystem.Switch;
 using UnityEngine.InputSystem.XInput;
+
+#if UNITY_IOS
+using UnityEngine.InputSystem.iOS;
+#endif
 
 namespace Utility.Input {
     public class InputContext : MonoBehaviour
@@ -96,12 +100,14 @@ namespace Utility.Input {
                     {
                         _lastDevice = Device.PlayStation;
                         break;
-                    } 
+                    }
+                    #if UNITY_IOS
                     else if (IsOrSub(device.GetType(), typeof(iOSGameController)))
                     {
                         _lastDevice = DefaultDeviceType;
                         break;
                     } 
+                    #endif
                     else if (IsOrSub(device.GetType(), typeof(SwitchProControllerHID)))
                     {
                         _lastDevice = Device.Nintendo;
