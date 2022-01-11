@@ -11,6 +11,6 @@ namespace PersistentData
         public string GameVersion;
         public string SaveName;
         public long SaveTime;
-        public List<Saveable> SavedObjects;
+        public List<PrefabData> Prefabs;
     }
 }

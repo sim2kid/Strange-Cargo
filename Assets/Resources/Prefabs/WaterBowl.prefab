@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2278323802577321046}
-  - component: {fileID: 5299223849566199342}
+  - component: {fileID: 20795500128147703}
   m_Layer: 0
   m_Name: WaterBowl
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -51.411, z: 0}
---- !u!114 &5299223849566199342
+--- !u!114 &20795500128147703
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,10 +41,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1501365269208000236}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d29424f35180b0b49a0b4eb3114005d6, type: 3}
+  m_Script: {fileID: 11500000, guid: c51eb69f85850b441b1b98c1f1e33b72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrefabResourceLocation: Prefabs/WaterBowl
+  _prefabData:
+    PrefabResourceLocation: Prefabs/Food
 --- !u!1 &1735154761697574772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1001,5 +1002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0be20053db58f3a429d86ef5560206dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Color: 
+  colorData:
+    Color: 
+    _guid: 9dfe7c3a-6e19-4a90-a154-adde78f7d187
   ColorPalette: Data/ColorPalette/brighterColors

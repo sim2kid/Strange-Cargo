@@ -1,26 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PersistentData.Component;
 using PersistentData.Saving;
 
 namespace PersistentData
 {
     public class SaveManager : MonoBehaviour
     {
-
+        string s;
         public Save MakeSave() 
         {
-            Saveable[] objectsToSave = FindObjectsOfType<Saveable>();
-            var saveThis = new List<Saveable>();
-            foreach(var obj in saveThis)
+            PrefabSaveable[] objectsToSave = FindObjectsOfType<PrefabSaveable>();
+            var saveThis = new List<PrefabData>();
+            foreach (var obj in objectsToSave)
+            {
                 obj.PreSerialization();
-            saveThis.AddRange(objectsToSave);
+                saveThis.Add(obj._prefabData);
+            }
             Save save = new Save() 
             {
                 GameVersion = Application.version,
                 SaveName = "Save Name",
                 SaveTime = System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                SavedObjects = saveThis
+                Prefabs = saveThis
             };
             return save;
         }
@@ -28,7 +31,7 @@ namespace PersistentData
         public void SaveToDisk() 
         {
             Save save = MakeSave();
-            string s = Newtonsoft.Json.JsonConvert.SerializeObject(save);
+            s = Newtonsoft.Json.JsonConvert.SerializeObject(save);
             return;
         }
     }

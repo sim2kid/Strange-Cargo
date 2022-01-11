@@ -1,4 +1,5 @@
 using PersistentData.Loading;
+using PersistentData.Saving;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,21 +7,28 @@ using Utility;
 
 namespace Environment
 {
-    [System.Serializable]
     [RequireComponent(typeof(Renderer))]
-    public class RandomColor : MonoBehaviour, PersistentData.Saving.ISaveable
+    public class RandomColor : MonoBehaviour, PersistentData.Component.ISaveable
     {
-        public string Color;
-        [Newtonsoft.Json.JsonIgnore]
+        public ColorData colorData;
+
         public string ColorPalette = "Data/ColorPalette/default";
 
-        public ILoadable Loadable => null;
+        public ISaveData saveData { get => colorData; set { colorData = (ColorData)value; } }
+
+        private void OnValidate()
+        {
+            if (string.IsNullOrWhiteSpace(colorData._guid))
+            {
+                colorData._guid = System.Guid.NewGuid().ToString();
+            }
+        }
 
         public void Awake()
         {
-            if (string.IsNullOrWhiteSpace(Color))
+            if (string.IsNullOrWhiteSpace(colorData.Color))
             {
-                Color = RandomColorPicker.ColorToHex(
+                colorData.Color = RandomColorPicker.ColorToHex(
                     RandomColorPicker.RetriveRandomColor(
                         RandomColorPicker.DefaultSeperationChar, ColorPalette));
             }
@@ -28,10 +36,10 @@ namespace Environment
 
         public void NewColor() 
         {
-            Color = RandomColorPicker.ColorToHex(
+            colorData.Color = RandomColorPicker.ColorToHex(
                        RandomColorPicker.RetriveRandomColor(
                            RandomColorPicker.DefaultSeperationChar, ColorPalette));
-            this.GetComponent<Renderer>().material.color = RandomColorPicker.HexToColor(Color);
+            this.GetComponent<Renderer>().material.color = RandomColorPicker.HexToColor(colorData.Color);
         }
 
         public void PostDeserialization()
@@ -51,7 +59,7 @@ namespace Environment
 
         private void Start()
         {
-            this.GetComponent<Renderer>().material.color = RandomColorPicker.HexToColor(Color);
+            this.GetComponent<Renderer>().material.color = RandomColorPicker.HexToColor(colorData.Color);
         }
     }
 }
