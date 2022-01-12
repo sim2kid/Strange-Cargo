@@ -23,9 +23,9 @@ namespace PersistentData.Component
 
         public void PostDeserialization()
         {
-            transform.localPosition = _location.Position;
-            transform.localRotation = _location.Rotation;
-            transform.localScale = _location.Scale;
+            transform.position = _location.Position;
+            transform.rotation = _location.Rotation;
+            SetGlobalScale(transform, _location.Scale);
         }
 
         public void PreDeserialization()
@@ -35,9 +35,15 @@ namespace PersistentData.Component
 
         public void PreSerialization()
         {
-            _location.Position = transform.localPosition;
-            _location.Rotation = transform.localRotation;
-            _location.Scale = transform.localScale;
+            _location.Position = transform.position;
+            _location.Rotation = transform.rotation;
+            _location.Scale = transform.lossyScale;
+        }
+
+        public static void SetGlobalScale(Transform transform, Vector3 globalScale)
+        {
+            transform.localScale = Vector3.one;
+            transform.localScale = new Vector3(globalScale.x / transform.lossyScale.x, globalScale.y / transform.lossyScale.y, globalScale.z / transform.lossyScale.z);
         }
     }
 }

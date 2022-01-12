@@ -53,14 +53,11 @@ namespace PersistentData.Saving
         
         public string DataType => "Location";
 
-        [SerializeField]
-        [HideInInspector]
+        [Newtonsoft.Json.JsonProperty]
         private float[] _position;
-        [SerializeField]
-        [HideInInspector]
+        [Newtonsoft.Json.JsonProperty]
         private float[] _rotation;
-        [SerializeField]
-        [HideInInspector]
+        [Newtonsoft.Json.JsonProperty]
         private float[] _scale;
 
     }
