@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using PersistentData.Loading;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ namespace PersistentData.Saving
     [System.Serializable]
     public class LocationData : ISaveData
     {
-        [Newtonsoft.Json.JsonIgnore]
+        [JsonIgnore]
         public Vector3 Position 
         {
             get 
@@ -20,7 +21,7 @@ namespace PersistentData.Saving
                 _position = new float[]{ value.x, value.y, value.z };
             }
         }
-        [Newtonsoft.Json.JsonIgnore]
+        [JsonIgnore]
         public Quaternion Rotation
         {
             get
@@ -32,7 +33,7 @@ namespace PersistentData.Saving
                 _rotation = new float[] { value.x, value.y, value.z, value.w };
             }
         }
-        [Newtonsoft.Json.JsonIgnore]
+        [JsonIgnore]
         public Vector3 Scale
         {
             get
@@ -44,15 +45,17 @@ namespace PersistentData.Saving
                 _scale = new float[] { value.x, value.y, value.z };
             }
         }
-        public string GUID { get; set; }
-        
+        [JsonIgnore]
+        public string _guid;
+        public string GUID { get => _guid; set => _guid = value; }
+
         public string DataType => "Location";
 
-        [Newtonsoft.Json.JsonProperty]
+        [JsonProperty]
         private float[] _position;
-        [Newtonsoft.Json.JsonProperty]
+        [JsonProperty]
         private float[] _rotation;
-        [Newtonsoft.Json.JsonProperty]
+        [JsonProperty]
         private float[] _scale;
 
     }

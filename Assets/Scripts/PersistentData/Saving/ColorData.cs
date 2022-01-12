@@ -9,6 +9,8 @@ namespace PersistentData.Saving {
     {
         public string DataType => "RandomColor";
         public string Color;
-        public string GUID { get; set; }
+        [JsonIgnore]
+        public string _guid;
+        public string GUID { get => _guid; set => _guid = value; }
     }
 }

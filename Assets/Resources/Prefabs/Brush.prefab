@@ -30,14 +30,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6279976858420598512}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 486.5, y: 1.4, z: 491.30002}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5813105688877773531}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!65 &6279976858420598517
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -277,8 +277,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1963bb8cc697d1f4086008328f70ea15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _location:
-    _guid: 43babbde-e030-4f2d-bd8a-07369309ba5e
 --- !u!1001 &6279976859528713520
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -370,5 +368,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorData:
     Color: 
-    _guid: e7db7982-c8e5-4534-b0fd-4486e51213ce
   ColorPalette: Data/ColorPalette/default
