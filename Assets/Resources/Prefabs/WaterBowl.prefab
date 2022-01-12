@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2278323802577321046}
   - component: {fileID: 20795500128147703}
+  - component: {fileID: 5778481949278450083}
   m_Layer: 0
   m_Name: WaterBowl
   m_TagString: Untagged
@@ -46,6 +47,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefabData:
     PrefabResourceLocation: Prefabs/Food
+--- !u!114 &5778481949278450083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501365269208000236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1963bb8cc697d1f4086008328f70ea15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _location:
+    _guid: abff8a75-f842-41f2-891d-4ce6709162f6
+    _position: []
+    _rotation: []
+    _scale: []
 --- !u!1 &1735154761697574772
 GameObject:
   m_ObjectHideFlags: 0

@@ -1112,6 +1112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1202222548731855698}
   - component: {fileID: 3692643971542940012}
+  - component: {fileID: 4945819016229451184}
   m_Layer: 0
   m_Name: FoodBowl
   m_TagString: Untagged
@@ -1149,3 +1150,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefabData:
     PrefabResourceLocation: Prefabs/FoodBag
+--- !u!114 &4945819016229451184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010003623040309736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1963bb8cc697d1f4086008328f70ea15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _location:
+    _guid: b9f331a8-8104-4e1d-b55a-c320a7cc04ba
+    _position: []
+    _rotation: []
+    _scale: []
