@@ -12,5 +12,7 @@ namespace PersistentData
         public string SaveName;
         public long SaveTime;
         public List<PrefabData> Prefabs;
+        // Player
+        // CreaturesList
     }
 }

@@ -9,15 +9,15 @@ namespace PersistentData.Component
     public class PrefabSaveable : MonoBehaviour
     {
         [SerializeField]
-        public PrefabData _prefabData;
+        public PrefabData prefabData;
 
         List<ISaveable> _saveParts;
 
         private void Awake()
         {
-            if (string.IsNullOrEmpty(_prefabData.GUID)) 
+            if (string.IsNullOrEmpty(prefabData.GUID)) 
             {
-                _prefabData.GUID = System.Guid.NewGuid().ToString();
+                prefabData.GUID = System.Guid.NewGuid().ToString();
             }
         }
 
@@ -30,41 +30,44 @@ namespace PersistentData.Component
 
         public void PreSerialization()
         {
-            _prefabData.ExtraData = new List<ISaveData>();
+            prefabData.ExtraData = new List<ISaveData>();
             foreach (var part in _saveParts)
             {
                 part.PreSerialization();
-                _prefabData.ExtraData.Add(part.saveData);
+                prefabData.ExtraData.Add(part.saveData);
             }
         }
 
         public void PreDeserialization()
         {
+            if (_saveParts == null)
+                Start();
             foreach (var part in _saveParts)
                 part.PreDeserialization();
         }
 
         public void PostDeserialization()
         {
-            if (_saveParts.Count != _prefabData.ExtraData.Count) 
+            if (_saveParts.Count != prefabData.ExtraData.Count) 
             {
                 Console.LogWarning("There are more save parts than componenets in object " + gameObject.name);
             }
 
-            foreach (var part in _prefabData.ExtraData)
+            foreach (var part in prefabData.ExtraData)
             {
                 ISaveable match = _saveParts.Find(x => x.saveData.GUID.Equals(part.GUID));
                 if (match == null) 
                 {
-                    Console.LogError("Could not load part with GUID of '" + part.GUID + "' and type of '" + part.DataType + "'.");
+                    Console.LogError($"Could not load part with GUID of '{part.GUID}' and type of '{part.DataType}' " +
+                        $"from prefab '{prefabData.PrefabResourceLocation}' and GUID of '{prefabData.GUID}'.");
                     continue;
                 }
                 match.saveData = part;
                 match.PreDeserialization();
             }
-            for (int i = 0; i < _saveParts.Count && i < _prefabData.ExtraData.Count; i++)
+            for (int i = 0; i < _saveParts.Count && i < prefabData.ExtraData.Count; i++)
             {
-                _saveParts[i].saveData = _prefabData.ExtraData[i];
+                _saveParts[i].saveData = prefabData.ExtraData[i];
                 _saveParts[i].PostDeserialization();
             }
         }

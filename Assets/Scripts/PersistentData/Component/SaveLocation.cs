@@ -12,9 +12,9 @@ namespace PersistentData.Component
 
         private void OnValidate()
         {
-            if (string.IsNullOrWhiteSpace(_location._guid)) 
+            if (string.IsNullOrWhiteSpace(_location.GUID)) 
             {
-                _location._guid = System.Guid.NewGuid().ToString();
+                _location.GUID = System.Guid.NewGuid().ToString();
             }
         }
 

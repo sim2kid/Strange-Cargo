@@ -18,9 +18,9 @@ namespace Environment
 
         private void OnValidate()
         {
-            if (string.IsNullOrWhiteSpace(colorData._guid))
+            if (string.IsNullOrWhiteSpace(colorData.GUID))
             {
-                colorData._guid = System.Guid.NewGuid().ToString();
+                colorData.GUID = System.Guid.NewGuid().ToString();
             }
         }
 

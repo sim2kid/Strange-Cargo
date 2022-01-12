@@ -7,6 +7,6 @@ namespace PersistentData.Saving
     public interface ISaveData
     {
         public string DataType { get; }
-        public string GUID { get; }
+        public string GUID { get; set; }
     }
 }

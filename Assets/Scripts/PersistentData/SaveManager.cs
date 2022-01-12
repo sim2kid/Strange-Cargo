@@ -25,7 +25,7 @@ namespace PersistentData
             foreach (var obj in objectsToSave)
             {
                 obj.PreSerialization();
-                saveThis.Add(obj._prefabData);
+                saveThis.Add(obj.prefabData);
             }
             Save save = new Save() 
             {
@@ -45,8 +45,38 @@ namespace PersistentData
 
         public void DemoLoad() 
         {
-            s = LoadFromDisk("Save Name");
+            Save save = LoadFromDisk("Save Name");
+            LoadPrefabs(save.Prefabs);
+            s = save;
             return;
+        }
+
+        private void LoadPrefabs(List<PrefabData> prefabs) 
+        {
+            // Clean Old Prefabs
+            PrefabSaveable[] currentSaveables = FindObjectsOfType<PrefabSaveable>();
+            if(currentSaveables != null)
+                foreach (PrefabSaveable current in currentSaveables)
+                    Destroy(current.gameObject);
+
+            // Place new prefabs
+            foreach (PrefabData data in prefabs) 
+            {
+                var obj = Resources.Load(data.PrefabResourceLocation) as GameObject;
+                if (obj == null)
+                {
+                    if (string.IsNullOrWhiteSpace(data.PrefabResourceLocation))
+                        Console.LogError($"Prefabed object did not have a resource location.");
+                    else
+                        Console.LogWarning($"Can not load prefab from '{data.PrefabResourceLocation}'.");
+                    continue;
+                }
+                GameObject current = Instantiate(obj);
+                PrefabSaveable saveable = current.GetComponent<PrefabSaveable>();
+                saveable.PreDeserialization();
+                saveable.prefabData = data;
+                saveable.PostDeserialization();
+            }
         }
 
         private Save LoadFromDisk(string saveName) 

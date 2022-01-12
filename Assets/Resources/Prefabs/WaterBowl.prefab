@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51eb69f85850b441b1b98c1f1e33b72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabData:
-    PrefabResourceLocation: Prefabs/Food
+  prefabData:
+    PrefabResourceLocation: Prefabs/WaterBowl
 --- !u!114 &5778481949278450083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,9 +61,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _location:
     _guid: abff8a75-f842-41f2-891d-4ce6709162f6
-    _position: []
-    _rotation: []
-    _scale: []
 --- !u!1 &1735154761697574772
 GameObject:
   m_ObjectHideFlags: 0

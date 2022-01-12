@@ -44,12 +44,7 @@ namespace PersistentData.Saving
                 _scale = new float[] { value.x, value.y, value.z };
             }
         }
-
-        [SerializeField]
-        [Newtonsoft.Json.JsonIgnore]
-        public string _guid;
-        [SerializeField]
-        public string GUID => _guid;
+        public string GUID { get; set; }
         
         public string DataType => "Location";
 

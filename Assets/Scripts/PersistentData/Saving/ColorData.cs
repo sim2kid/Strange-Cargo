@@ -7,14 +7,8 @@ namespace PersistentData.Saving {
     [System.Serializable]
     public class ColorData : ISaveData
     {
-        [SerializeField]
         public string DataType => "RandomColor";
-        [SerializeField]
         public string Color;
-        [SerializeField]
-        [JsonIgnore]
-        public string _guid;
-        [SerializeField]
-        public string GUID => _guid;
+        public string GUID { get; set; }
     }
 }
