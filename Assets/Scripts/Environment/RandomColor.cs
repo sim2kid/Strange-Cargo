@@ -1,4 +1,4 @@
-using PersistentData.Loading;
+using PersistentData.Component;
 using PersistentData.Saving;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using Utility;
 namespace Environment
 {
     [RequireComponent(typeof(Renderer))]
-    public class RandomColor : MonoBehaviour, PersistentData.Component.ISaveable
+    public class RandomColor : MonoBehaviour, ISaveable
     {
         public ColorData colorData;
 
@@ -28,9 +28,7 @@ namespace Environment
         {
             if (string.IsNullOrWhiteSpace(colorData.Color))
             {
-                colorData.Color = RandomColorPicker.ColorToHex(
-                    RandomColorPicker.RetriveRandomColor(
-                        RandomColorPicker.DefaultSeperationChar, ColorPalette));
+                NewColor();
             }
         }
 
@@ -39,7 +37,10 @@ namespace Environment
             colorData.Color = RandomColorPicker.ColorToHex(
                        RandomColorPicker.RetriveRandomColor(
                            RandomColorPicker.DefaultSeperationChar, ColorPalette));
-            this.GetComponent<Renderer>().material.color = RandomColorPicker.HexToColor(colorData.Color);
+            Renderer renderer = this.GetComponent<Renderer>();
+            if (renderer != null)
+                foreach (UnityEngine.Material material in renderer.materials)
+                    material.color = RandomColorPicker.HexToColor(colorData.Color);
         }
 
         public void PostDeserialization()

@@ -146,7 +146,8 @@ namespace Genetics
                         potentialPalettes.Add($"{usualLocation}kwanzaa");
                 }
 
-                colorPalette = potentialPalettes[UnityEngine.Random.Range(0, potentialPalettes.Count)];
+                if (potentialPalettes.Count > 0)
+                    colorPalette = potentialPalettes[UnityEngine.Random.Range(0, potentialPalettes.Count)];
             }
 
             Color[] colors = new Color[3];

@@ -8,14 +8,13 @@ using Utility;
 
 namespace Environment
 {
-    public class RandomColorMaster : MonoBehaviour, PersistentData.Component.ISaveable
+    public class RandomColorMaster : MonoBehaviour, ISaveable
     {
         public ColorData colorData;
         public string ColorPalette = "Data/ColorPalette/default";
 
         public ISaveData saveData { get => colorData; set { colorData = (ColorData)value; } }
 
-        ISaveData ISaveable.saveData { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
         private void OnValidate()
         {
@@ -48,7 +47,10 @@ namespace Environment
             colorData.Color = RandomColorPicker.ColorToHex(
                        RandomColorPicker.RetriveRandomColor(
                            RandomColorPicker.DefaultSeperationChar, ColorPalette));
-            this.GetComponent<Renderer>().material.color = RandomColorPicker.HexToColor(colorData.Color);
+            Renderer renderer = this.GetComponent<Renderer>();
+            if(renderer != null)
+                foreach(UnityEngine.Material material in renderer.materials)
+                    material.color = RandomColorPicker.HexToColor(colorData.Color);
         }
 
         public void PostDeserialization()
