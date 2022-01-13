@@ -13,6 +13,9 @@ namespace Interaction
         public Vector3 rotationOffset;
 
         private RigidbodyConstraints rbConstraints;
+        private Vector3 rbVelocity;
+        private Vector3 rbAngleVelocity;
+        private bool rbKinematic;
 
         [SerializeField]
         private string _textOnHold;
@@ -31,7 +34,6 @@ namespace Interaction
         protected override void Start()
         {
             rb = GetComponent<Rigidbody>();
-            rbConstraints = rb.constraints;
             collider = GetComponent<Collider>();
             player = Utility.Toolbox.Instance.Player;
 
@@ -44,12 +46,21 @@ namespace Interaction
 
         protected virtual void OnPause()
         {
+            rbKinematic = rb.isKinematic;
+            rb.isKinematic = false;
+            rbVelocity = rb.velocity;
+            rbAngleVelocity = rb.angularVelocity;
+            rbConstraints = rb.constraints;
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }
 
         protected virtual void OnUnPause()
         {
+            rb.isKinematic = rbKinematic;
             rb.constraints = rbConstraints;
+            rb.velocity = rbVelocity;
+            rb.angularVelocity = rbAngleVelocity;
+            rb.WakeUp();
         }
 
         private void Update()
