@@ -134,6 +134,9 @@ MonoBehaviour:
   _hoverText: '{use} to Pickup'
   positionOffset: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 0, y: 0, z: 0}
+  rbData:
+    _guid: ae6f4323-6d20-4aa4-89db-f2016e040eda
+    IsKinematic: 0
   _textOnHold: '{throw} to Throw'
   OnPickup:
     m_PersistentCalls:
@@ -175,6 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorData:
     Color: 
+    _guid: 9a96ce8f-e854-42bd-a0cf-e627deec9cb5
   ColorPalette: Data/ColorPalette/brighterColors
 --- !u!82 &7621914262448607772
 AudioSource:
@@ -332,3 +336,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1963bb8cc697d1f4086008328f70ea15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _location:
+    _guid: 65afb809-e98e-4f14-8dc2-c0f20f02b5e6

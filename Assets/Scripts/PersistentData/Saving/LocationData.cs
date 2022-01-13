@@ -7,7 +7,7 @@ using UnityEngine;
 namespace PersistentData.Saving
 {
     [System.Serializable]
-    public class LocationData : ISaveData
+    public struct LocationData : ISaveData
     {
         [JsonIgnore]
         public Vector3 Position 

@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using PersistentData.Component;
+using PersistentData.Saving;
 
 namespace Interaction
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent (typeof(Collider))]
-    public class Pickupable : BasicInteractable, IHoldable
+    public class Pickupable : BasicInteractable, IHoldable, ISaveable
     {
         public Vector3 positionOffset;
         public Vector3 rotationOffset;
 
-        private RigidbodyConstraints rbConstraints;
-        private Vector3 rbVelocity;
-        private Vector3 rbAngleVelocity;
-        private bool rbKinematic;
+        [SerializeField]
+        RigidbodyData rbData;
 
         [SerializeField]
         private string _textOnHold;
@@ -25,6 +25,17 @@ namespace Interaction
         public UnityEvent OnShake;
 
         public virtual string HoldText { get => _textOnHold; }
+        public ISaveData saveData 
+        { get => rbData; 
+            set { rbData = (RigidbodyData)value; } }
+
+        private void OnValidate()
+        {
+            if (string.IsNullOrWhiteSpace(rbData.GUID))
+            {
+                rbData.GUID = System.Guid.NewGuid().ToString();
+            }
+        }
 
         protected bool holding;
         protected Player.PlayerController player;
@@ -33,7 +44,8 @@ namespace Interaction
 
         protected override void Start()
         {
-            rb = GetComponent<Rigidbody>();
+            if(rb == null)
+                rb = GetComponent<Rigidbody>();
             collider = GetComponent<Collider>();
             player = Utility.Toolbox.Instance.Player;
 
@@ -44,22 +56,38 @@ namespace Interaction
             base.Start();
         }
 
+        private void OnDisable()
+        {
+            Utility.Toolbox.Instance.Pause.OnPause.RemoveListener(OnPause);
+            Utility.Toolbox.Instance.Pause.OnUnPause.RemoveListener(OnUnPause);
+        }
+
         protected virtual void OnPause()
         {
-            rbKinematic = rb.isKinematic;
+            UpdateRbData();
             rb.isKinematic = false;
-            rbVelocity = rb.velocity;
-            rbAngleVelocity = rb.angularVelocity;
-            rbConstraints = rb.constraints;
             rb.constraints = RigidbodyConstraints.FreezeAll;
+        }
+
+        private void UpdateRbData() 
+        {
+            rbData.IsKinematic = rb.isKinematic;
+            rbData.Velocity = rb.velocity;
+            rbData.Rotation = rb.angularVelocity;
+            rbData.Constraints = rb.constraints;
+        }
+
+        private void ApplyRbData() 
+        {
+            rb.isKinematic = rbData.IsKinematic;
+            rb.constraints = rbData.Constraints;
+            rb.velocity = rbData.Velocity;
+            rb.angularVelocity = rbData.Rotation;
         }
 
         protected virtual void OnUnPause()
         {
-            rb.isKinematic = rbKinematic;
-            rb.constraints = rbConstraints;
-            rb.velocity = rbVelocity;
-            rb.angularVelocity = rbAngleVelocity;
+            ApplyRbData();
             rb.WakeUp();
         }
 
@@ -104,6 +132,25 @@ namespace Interaction
         {
             if(holding)
                 Up();
+        }
+
+        public void PreSerialization()
+        {
+            if(!Utility.Toolbox.Instance.Pause.Paused)
+                UpdateRbData();
+        }
+
+        public void PreDeserialization()
+        {
+            rb = GetComponent<Rigidbody>();
+            if (Utility.Toolbox.Instance.Pause.Paused)
+                OnPause();
+        }
+
+        public void PostDeserialization()
+        {
+            if (!Utility.Toolbox.Instance.Pause.Paused)
+                ApplyRbData();
         }
     }
 }

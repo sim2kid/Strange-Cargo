@@ -6,7 +6,7 @@ using UnityEngine;
 namespace PersistentData.Saving
 {
     [System.Serializable]
-    public class PrefabData : ISaveData
+    public struct PrefabData : ISaveData
     {
         [JsonIgnore]
         public string DataType => "Prefab";

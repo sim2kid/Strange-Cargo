@@ -40,6 +40,9 @@ namespace PersistentData.Loading
                 case "Prefab":
                     DataType = new PrefabData();
                     break;
+                case "Rigidbody":
+                    DataType = new RigidbodyData();
+                    break;
             }
             serializer.Populate(jsonObject.CreateReader(), DataType);
             return DataType;

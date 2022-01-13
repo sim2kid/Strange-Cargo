@@ -62,18 +62,10 @@ namespace PersistentData.Component
                         $"from prefab '{prefabData.PrefabResourceLocation}' and GUID of '{prefabData.GUID}'.");
                     continue;
                 }
-                match.saveData = part;
                 match.PreDeserialization();
-            }
-            for (int i = 0; i < _saveParts.Count && i < prefabData.ExtraData.Count; i++)
-            {
-                _saveParts[i].saveData = prefabData.ExtraData[i];
-                _saveParts[i].PostDeserialization();
+                match.saveData = part;
+                match.PostDeserialization();
             }
         }
-
-        
-
-        
     }
 }
