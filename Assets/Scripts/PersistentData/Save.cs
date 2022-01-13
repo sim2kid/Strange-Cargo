@@ -11,8 +11,11 @@ namespace PersistentData
         public string GameVersion;
         public string SaveName;
         public long SaveTime;
+        // Anything that can be recreated from a prefab
         public List<PrefabData> Prefabs;
-        // Player
-        // CreaturesList
+        // Player (And the like)
+        public List<ReusedData> Persistents;
+        // Creatures
+        public List<CreatureData> Creatures;
     }
 }

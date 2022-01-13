@@ -43,6 +43,10 @@ namespace PersistentData.Loading
                 case "Rigidbody":
                     DataType = new RigidbodyData();
                     break;
+                case "Persistent":
+                    DataType = new ReusedData();
+                    break;
+
             }
             serializer.Populate(jsonObject.CreateReader(), DataType);
             return DataType;
