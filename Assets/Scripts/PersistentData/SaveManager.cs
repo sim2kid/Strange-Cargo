@@ -6,13 +6,18 @@ using PersistentData.Saving;
 using System.IO;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using System.Linq;
+using System.Security.Cryptography;
 
 namespace PersistentData
 {
     public class SaveManager : MonoBehaviour
     {
         static string SaveLocation;
+        [SerializeField]
+        bool useEncryption = false;
         Save s;
+        
         private void Awake()
         {
             SaveLocation = System.IO.Path.Combine(Application.persistentDataPath, "Saves");
@@ -111,14 +116,36 @@ namespace PersistentData
             return;
         }
 
-        private static byte[] EncryptString(string str) 
+        private byte[] EncryptString(string str) 
         {
-            return System.Text.Encoding.UTF8.GetBytes(str);
+            if ((Debug.isDebugBuild && !Application.isEditor) || (Application.isEditor && !useEncryption))
+            {
+                // No encrypting
+                return System.Text.Encoding.UTF8.GetBytes(str);
+            }
+            else 
+            {
+                // Yes encrypting
+                byte[] bytes = Encrypt(str);
+                bytes = bytes.Prepend<byte>((byte)82).Prepend<byte>((byte)110).Prepend<byte>((byte)101).Prepend<byte>((byte)119).Prepend<byte>((byte)79).ToArray();
+                return bytes;
+            }
         }
 
         private static string DecryptBytes(byte[] bytes) 
         {
-            return System.Text.Encoding.UTF8.GetString(bytes);
+            if (bytes[0].Equals((byte)79) && bytes[1].Equals((byte)119) && bytes[2].Equals((byte)101) && bytes[3].Equals((byte)110) && bytes[4].Equals((byte)82))
+            {
+                // Actually Encrypted
+                bytes = bytes.Skip(5).ToArray();
+                string str = Decrypt(bytes);
+                return str;
+            }
+            else 
+            {
+                // String Encoded
+                return System.Text.Encoding.UTF8.GetString(bytes);
+            }
         }
 
         private static bool HasIlligalCharacters(string s) 
@@ -136,6 +163,64 @@ namespace PersistentData
         private static string SanitizePath(string s)
         {
             return s.Replace('/', '\\');
+        }
+
+        private static byte[] Encrypt(string input)
+        {
+            PasswordDeriveBytes pdb =
+              new PasswordDeriveBytes("V$P*9aXhDx@*gK!+",
+              new byte[] { 0x13, 0x94, 0x03, 0x22 });
+            byte[] encrypted;
+            using (Aes aes = new AesManaged())
+            {
+                aes.Mode = CipherMode.CBC;
+                aes.BlockSize = 128;
+                aes.FeedbackSize = 128;
+                aes.KeySize = 128;
+                aes.Padding = PaddingMode.Zeros;
+                aes.Key = pdb.GetBytes(aes.KeySize / 8);
+                aes.IV = pdb.GetBytes(aes.BlockSize / 8);
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms,
+                        aes.CreateEncryptor(aes.Key, aes.IV), CryptoStreamMode.Write))
+                    {
+                        using (StreamWriter sw = new StreamWriter(cs))
+                            sw.Write(input);
+                        encrypted = ms.ToArray();
+                    }
+                }
+            }
+            return encrypted;
+        }
+        private static string Decrypt(byte[] input)
+        {
+            PasswordDeriveBytes pdb =
+              new PasswordDeriveBytes("V$P*9aXhDx@*gK!+",
+              new byte[] { 0x13, 0x94, 0x03, 0x22 });
+            string encrypted;
+            using (Aes aes = new AesManaged()) 
+            {
+                aes.Mode = CipherMode.CBC;
+                aes.BlockSize = 128;
+                aes.FeedbackSize = 128;
+                aes.KeySize = 128;
+                aes.Padding = PaddingMode.Zeros;
+                aes.Key = pdb.GetBytes(aes.KeySize / 8);
+                aes.IV = pdb.GetBytes(aes.BlockSize / 8);
+
+                using (MemoryStream ms = new MemoryStream(input)) 
+                {
+                    using (CryptoStream cs = new CryptoStream(ms,
+                        aes.CreateDecryptor(aes.Key, aes.IV), CryptoStreamMode.Read)) 
+                    {
+                        using (StreamReader reader = new StreamReader(cs))
+                            encrypted = reader.ReadToEnd();
+                    }
+                }
+            }
+            return encrypted;
         }
     }
 }
