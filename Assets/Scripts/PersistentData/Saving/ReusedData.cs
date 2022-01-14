@@ -10,7 +10,6 @@ namespace PersistentData.Saving
     {
         public string DataType => "Persistent";
         public string GUID { get; set; }
-        public string PrefabResourceLocation;
         [JsonProperty(ItemConverterType = typeof(Loading.GetDataType))]
         public List<ISaveData> ExtraData;
     }

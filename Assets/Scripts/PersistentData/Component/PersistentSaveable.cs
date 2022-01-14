@@ -57,8 +57,7 @@ namespace PersistentData.Component
                 ISaveable match = _saveParts.Find(x => x.saveData.GUID.Equals(part.GUID));
                 if (match == null)
                 {
-                    Console.LogError($"Could not load part with GUID of '{part.GUID}' and type of '{part.DataType}' " +
-                        $"from prefab '{data.PrefabResourceLocation}' and GUID of '{data.GUID}'.");
+                    Console.LogError($"Could not load part with GUID of '{part.GUID}' and type of '{part.DataType}'.");
                     continue;
                 }
                 match.PreDeserialization();
