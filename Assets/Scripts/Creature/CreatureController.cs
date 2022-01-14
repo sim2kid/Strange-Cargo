@@ -25,7 +25,7 @@ namespace Creature
         public ISaveData saveData { get => data; set { data = (CreatureData)value; } }
 
         public DNA dna { get => data.dna; set => data.dna = value; }
-        public Needs needs { get => data.needs; set => data.needs = value; }
+        public Needs needs;
         public string Guid { get => data.GUID; set => data.GUID = value; }
         public string frontFeetSound { get => data.frontFeetSound; set => data.frontFeetSound = value; }
         public string backFeetSound { get => data.backFeetSound; set => data.backFeetSound = value; }
@@ -181,6 +181,7 @@ namespace Creature
                 thinkTimer = 0;
                 brain.Think();
             }
+            data.needs = needs;
         }
 
         private void RunTasks() 
@@ -254,7 +255,7 @@ namespace Creature
 
         public void PreSerialization()
         {
-            return;
+            data.needs = needs;
         }
 
         public void PreDeserialization()
@@ -264,7 +265,7 @@ namespace Creature
 
         public void PostDeserialization()
         {
-            return;
+            needs = data.needs;
         }
     }
 }
