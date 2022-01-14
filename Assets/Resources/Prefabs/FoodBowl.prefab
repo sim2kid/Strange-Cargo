@@ -928,6 +928,11 @@ MonoBehaviour:
   OnEmpty:
     m_PersistentCalls:
       m_Calls: []
+  data:
+    _guid: 
+    BaseNeeds:
+      _myNeeds: []
+    Fullness: 0
 --- !u!135 &1667913461902867984
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1149,6 +1154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabData:
+    _guid: 
     PrefabResourceLocation: Prefabs/FoodBowl
 --- !u!114 &4945819016229451184
 MonoBehaviour:

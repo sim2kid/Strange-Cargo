@@ -58,6 +58,9 @@ namespace PersistentData.Loading
                 case "Time":
                     DataType = new TimeData();
                     break;
+                case "BasicNeedSource":
+                    DataType = new NeedSourceData();
+                    break;
             }
             serializer.Populate(jsonObject.CreateReader(), DataType);
             return DataType;
