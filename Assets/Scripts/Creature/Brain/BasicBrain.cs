@@ -47,7 +47,7 @@ namespace Creature.Brain
                 Preferred p = null;
                 if (task.RelatedObject != null)
                 {
-                    p = Preferences.Find(x => x.Obj == task.RelatedObject);
+                    p = Preferences.Find(x => x.Obj.Guid.Equals(task.RelatedObject.Guid));
                     if (p != null)
                     {
                         preference = p.Preference;
@@ -108,6 +108,22 @@ namespace Creature.Brain
                 f[i] = 1 - f[i];
             }
             return f;
+        }
+
+        public void PreSerialization()
+        {
+            return;
+        }
+
+        public void PreDeserialization()
+        {
+            return;
+        }
+
+        public void PostDeserialization(CreatureController controller)
+        {
+            _controller = controller;
+            return;
         }
     }
 }

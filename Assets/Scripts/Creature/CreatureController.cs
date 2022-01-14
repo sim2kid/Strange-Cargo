@@ -25,8 +25,9 @@ namespace Creature
         public ISaveData saveData { get => data; set { data = (CreatureData)value; } }
 
         public DNA dna { get => data.dna; set => data.dna = value; }
-        public Needs needs;
-        public string Guid { get => data.GUID; set => data.GUID = value; }
+        public Needs needs { get => data.needs; set => data.needs = value; }
+
+        public string Guid { get => GetComponent<CreatureSaveable>().Data.GUID; set => GetComponent<CreatureSaveable>().Data.GUID = value; }
         public string frontFeetSound { get => data.frontFeetSound; set => data.frontFeetSound = value; }
         public string backFeetSound { get => data.backFeetSound; set => data.backFeetSound = value; }
 
@@ -126,6 +127,7 @@ namespace Creature
 
         private void Awake()
         {
+            data.GUID = "232fd503-5c82-405f-8e6b-f13a11e6dfae";
             Console.HideInDebugConsole();
             tasks = new Queue<ITask>();
             hotTasks = new Queue<ITask>();
@@ -218,12 +220,14 @@ namespace Creature
 
         public void VoidTask() 
         {
-            ITask task;
+            ITask task = null;
             if (hotTasks.Count > 0)
                 task = hotTasks.Peek();
             else 
-                task = tasks.Peek();
-
+                if(tasks.Count > 0)
+                    task = tasks.Peek();
+            if (task == null)
+                return;
 
             Console.LogDebug($"Creature [{Guid}]: End of Task: {task.GetType()} TimeLeft: {maxTimeOnTask - timeSpentOnLastTask}");
             task.EndTask(UpdateLoop);
@@ -255,17 +259,20 @@ namespace Creature
 
         public void PreSerialization()
         {
-            data.needs = needs;
+            brain.PreSerialization();
         }
 
         public void PreDeserialization()
         {
+            brain.PreDeserialization();
             return;
         }
 
         public void PostDeserialization()
         {
-            needs = data.needs;
+            brain.PostDeserialization(this);
+            if(Utility.Toolbox.Instance.Pause.Paused)
+                OnPause();
         }
     }
 }

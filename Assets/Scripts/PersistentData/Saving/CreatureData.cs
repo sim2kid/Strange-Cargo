@@ -6,7 +6,7 @@ using UnityEngine;
 namespace PersistentData.Saving
 {
     [System.Serializable]
-    public class CreatureData : ISaveData
+    public struct CreatureData : ISaveData
     {
         public string DataType => "Creature";
         [JsonIgnore]

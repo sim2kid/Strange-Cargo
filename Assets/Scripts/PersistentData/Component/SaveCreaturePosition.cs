@@ -19,11 +19,11 @@ namespace PersistentData.Component
             nav = GetComponent<NavMeshAgent>();
         }
 
-        private void OnValidate()
+        private void Awake()
         {
             if (string.IsNullOrWhiteSpace(_location.GUID))
             {
-                _location.GUID = System.Guid.NewGuid().ToString();
+                _location.GUID = "72f61c38-97ee-4205-91ea-e272cb31319d";
             }
         }
 
@@ -31,8 +31,10 @@ namespace PersistentData.Component
 
         public void PostDeserialization()
         {
-            if(!nav.Warp(_location.Position))
-                transform.position = _location.Position;
+            nav = GetComponent<NavMeshAgent>();
+            if (nav != null)
+                if(!nav.Warp(_location.Position))
+                    transform.position = _location.Position;
             transform.rotation = _location.Rotation;
             SetGlobalScale(transform, _location.Scale);
         }

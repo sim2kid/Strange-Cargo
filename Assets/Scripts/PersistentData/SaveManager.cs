@@ -116,10 +116,13 @@ namespace PersistentData
                     Destroy(current.gameObject);
                 }
 
+            if (groupData == null)
+                return;
+
             foreach (GroupData data in groupData) 
             {
                 CreatureData creature = (CreatureData)data.ExtraData.Find(x => x is CreatureData);
-                if (creature == null)
+                if (string.IsNullOrWhiteSpace(creature.GUID))
                 {
                     Console.LogError($"Could not find creature data. Creature can not be constructed!");
                     continue;
@@ -139,6 +142,9 @@ namespace PersistentData
 
         private void LoadPersistants(List<ReusedData> persistants) 
         {
+            if (persistants == null)
+                return;
+
             List<PersistentSaveable> persistentSaveables = FindObjectsOfType<PersistentSaveable>().ToList();
             foreach (ReusedData data in persistants) 
             {
@@ -162,6 +168,9 @@ namespace PersistentData
             if(currentSaveables != null)
                 foreach (PrefabSaveable current in currentSaveables)
                     Destroy(current.gameObject);
+
+            if (prefabs == null)
+                return;
 
             // Place new prefabs
             foreach (PrefabData data in prefabs) 
