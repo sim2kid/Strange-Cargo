@@ -1,16 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PersistentData.Saving;
+using PersistentData.Component;
 
 namespace Utility
 {
     [ExecuteAlways]
-    public class TimeController : MonoBehaviour
+    public class TimeController : MonoBehaviour, ISaveable
     {
         /// <summary>
         /// Seconds Elapsed
         /// </summary>
-        private float _time;
+        private float _time { get => data.Time; set => data.Time = value; }
+
+        [SerializeField]
+        TimeData data;
+
+        private void OnValidate()
+        {
+            if (string.IsNullOrWhiteSpace(data._guid))
+            {
+                data._guid = System.Guid.NewGuid().ToString();
+            }
+        }
 
         [Tooltip("What time should the game start at?")]
         [SerializeField]
@@ -23,11 +36,14 @@ namespace Utility
         [Range(0f,24f)]
         public float CurrentTime;
 
+        private float _expectedTime;
+
         
         /// <summary>
         /// The time in a 0-1 format
         /// </summary>
         public float DayProgress { get => CurrentTime/24f; }
+        public ISaveData saveData { get => data; set => data = (TimeData)value; }
 
         [Tooltip("The real life minutes to hour per Day/Night cycle")]
         public float MinutesInADay = 15f;
@@ -44,6 +60,7 @@ namespace Utility
         {
             SetTime(StartTime);
             CurrentTime = GetTime();
+            _expectedTime = CurrentTime;
         }
 
         // Update is called once per frame
@@ -58,6 +75,13 @@ namespace Utility
             if (Utility.Toolbox.Instance.Pause.Paused)
                 return;
 
+            // Check if the editor changed the current time
+            if (CurrentTime != _expectedTime)
+            {
+                // Set the time
+                SetTime(CurrentTime);
+            }
+
             // Gives seconds elapsed
             _time += Time.fixedDeltaTime;
 
@@ -67,6 +91,7 @@ namespace Utility
             }
 
             CurrentTime = GetTime();
+            _expectedTime = CurrentTime;
         }
 
         /// <summary>
@@ -99,6 +124,20 @@ namespace Utility
                 hour = 12;
             }
             return $"{hour}:{minute.ToString("00")} {(morning?"AM":"PM")}";
+        }
+
+        public void PreSerialization()
+        {
+            return;
+        }
+        public void PreDeserialization()
+        {
+            return;
+        }
+        public void PostDeserialization()
+        {
+            CurrentTime = GetTime();
+            _expectedTime = CurrentTime;
         }
     }
 }

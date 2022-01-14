@@ -55,6 +55,9 @@ namespace PersistentData.Loading
                 case "Data":
                     DataType = new GroupData();
                     break;
+                case "Time":
+                    DataType = new TimeData();
+                    break;
             }
             serializer.Populate(jsonObject.CreateReader(), DataType);
             return DataType;
