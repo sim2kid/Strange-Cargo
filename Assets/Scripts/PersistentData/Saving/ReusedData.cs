@@ -9,7 +9,9 @@ namespace PersistentData.Saving
     public struct ReusedData : ISaveData
     {
         public string DataType => "Persistent";
-        public string GUID { get; set; }
+        [JsonIgnore]
+        public string _guid;
+        public string GUID { get => _guid; set => _guid = value; }
         [JsonProperty(ItemConverterType = typeof(Loading.GetDataType))]
         public List<ISaveData> ExtraData;
     }

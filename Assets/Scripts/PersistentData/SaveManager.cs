@@ -25,19 +25,33 @@ namespace PersistentData
 
         public Save MakeSave() 
         {
+            // Record Prefabbed objects
             PrefabSaveable[] objectsToSave = FindObjectsOfType<PrefabSaveable>();
-            var saveThis = new List<PrefabData>();
+            var prefabData = new List<PrefabData>();
             foreach (var obj in objectsToSave)
             {
                 obj.PreSerialization();
-                saveThis.Add(obj.prefabData);
+                prefabData.Add(obj.prefabData);
             }
-            Save save = new Save() 
+            // Record persistant objects
+            PersistentSaveable[] persistentSaveables = FindObjectsOfType<PersistentSaveable>();
+            var persisData = new List<ReusedData>();
+            foreach (var obj in persistentSaveables)
+            {
+                obj.PreSerialization();
+                persisData.Add(obj.data);
+            }
+
+            // Record creatures
+
+            // Make the save
+            Save save = new Save()
             {
                 GameVersion = Application.version,
                 SaveName = "Save Name",
                 SaveTime = System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                Prefabs = saveThis
+                Prefabs = prefabData,
+                Persistents = persisData
             };
             return save;
         }
@@ -52,8 +66,27 @@ namespace PersistentData
         {
             Save save = LoadFromDisk("Save Name");
             LoadPrefabs(save.Prefabs);
+            LoadPersistants(save.Persistents);
             s = save;
             return;
+        }
+
+        private void LoadPersistants(List<ReusedData> persistants) 
+        {
+            List<PersistentSaveable> persistentSaveables = FindObjectsOfType<PersistentSaveable>().ToList();
+            foreach (ReusedData data in persistants) 
+            {
+                PersistentSaveable obj = persistentSaveables.Find(x => x.data.GUID.Equals(data.GUID));
+                if (obj == null)
+                {
+                    Console.LogError($"Could not find persistant of {data.DataType} in the current scene.");
+                    Console.LogWarning("We would create it at this time, but that is currently not set up. This is not a forward compatable system.");
+                    continue;
+                }
+                obj.PreDeserialization();
+                obj.data = data;
+                obj.PostDeserialization();
+            }
         }
 
         private void LoadPrefabs(List<PrefabData> prefabs) 

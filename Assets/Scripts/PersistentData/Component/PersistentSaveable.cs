@@ -12,11 +12,11 @@ namespace PersistentData.Component
 
         List<ISaveable> _saveParts;
 
-        private void Awake()
+        private void OnValidate()
         {
-            if (string.IsNullOrEmpty(data.GUID))
+            if (string.IsNullOrEmpty(data._guid))
             {
-                data.GUID = System.Guid.NewGuid().ToString();
+                data._guid = System.Guid.NewGuid().ToString();
             }
         }
 
