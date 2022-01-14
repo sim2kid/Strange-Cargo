@@ -8,11 +8,16 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Security.Cryptography;
+using UnityEngine.Events;
 
 namespace PersistentData
 {
     public class SaveManager : MonoBehaviour
     {
+        public UnityEvent OnPreSerialization;
+        public UnityEvent OnPreDeserialization;
+        public UnityEvent OnPostDeserialization;
+
         static string SaveLocation;
         [SerializeField]
         bool useEncryption = false;
@@ -21,17 +26,28 @@ namespace PersistentData
         private void Awake()
         {
             SaveLocation = System.IO.Path.Combine(Application.persistentDataPath, "Saves");
+            var others = FindObjectsOfType<SaveManager>();
+            if (others != null)
+                if (others.Length > 1)
+                {
+                    Console.LogWarning($"There is already a Save Manager in this scene. Deleting extras.");
+                    Destroy(this);
+                }
         }
 
         public Save MakeSave() 
         {
+            // Run listeners
+            OnPreSerialization.Invoke();
+
             // Record Prefabbed objects
             PrefabSaveable[] objectsToSave = FindObjectsOfType<PrefabSaveable>();
             var prefabData = new List<PrefabData>();
             foreach (var obj in objectsToSave)
             {
                 obj.PreSerialization();
-                prefabData.Add(obj.prefabData);
+                if(obj.prefabData != null)
+                    prefabData.Add(obj.prefabData);
             }
             // Record persistant objects
             PersistentSaveable[] persistentSaveables = FindObjectsOfType<PersistentSaveable>();
@@ -39,7 +55,8 @@ namespace PersistentData
             foreach (var obj in persistentSaveables)
             {
                 obj.PreSerialization();
-                persisData.Add(obj.data);
+                if(obj != null)
+                    persisData.Add(obj.data);
             }
 
             // Record creatures
@@ -65,10 +82,17 @@ namespace PersistentData
         public void DemoLoad() 
         {
             Save save = LoadFromDisk("Save Name");
-            LoadPrefabs(save.Prefabs);
-            LoadPersistants(save.Persistents);
+            Load(save);
             s = save;
             return;
+        }
+
+        private void Load(Save save) 
+        {
+            OnPreDeserialization.Invoke();
+            LoadPrefabs(save.Prefabs);
+            LoadPersistants(save.Persistents);
+            OnPostDeserialization.Invoke();
         }
 
         private void LoadPersistants(List<ReusedData> persistants) 

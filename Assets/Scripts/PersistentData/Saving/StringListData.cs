@@ -5,7 +5,8 @@ using UnityEngine;
 
 namespace PersistentData.Saving
 {
-    public class StringListData : ISaveData
+    [System.Serializable]
+    public struct StringListData : ISaveData
     {
         public string DataType => "StringList";
         [JsonIgnore]

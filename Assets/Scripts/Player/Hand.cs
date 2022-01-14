@@ -12,7 +12,7 @@ namespace Player
     {
 
         public IHoldable Holding { get; private set; }
-        StringListData data;
+        public StringListData data;
         public ISaveData saveData { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
         private PlayerController player;
