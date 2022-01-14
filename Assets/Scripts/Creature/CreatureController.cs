@@ -154,6 +154,7 @@ namespace Creature
 
         private void OnDestroy()
         {
+            Utility.Toolbox.Instance.CreatureList.Remove(this);
             VoidTask();
             Toolbox.Instance.Pause.OnPause.RemoveListener(OnPause);
             Toolbox.Instance.Pause.OnUnPause.RemoveListener(OnUnPause);
