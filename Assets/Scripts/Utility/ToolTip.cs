@@ -29,6 +29,11 @@ namespace Utility
 
         private void Start()
         {
+            Clear();
+        }
+
+        public void Clear() 
+        {
             HoverText = string.Empty;
             UseText = string.Empty;
             HoldText = string.Empty;

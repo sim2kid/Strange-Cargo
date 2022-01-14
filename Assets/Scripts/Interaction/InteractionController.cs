@@ -204,6 +204,8 @@ namespace Interaction
         public void PreDeserialization()
         {
             UpClickQueue.Clear();
+            Previous = null;
+            tt.Clear();
             return;
         }
 

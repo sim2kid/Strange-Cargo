@@ -19,7 +19,7 @@ namespace PersistentData.Component
 
             Saveable[] saveableChildren = GetComponentsInChildren<Saveable>(true);
             if (saveableChildren != null)
-                if (saveableChildren.Length > 0)
+                if (saveableChildren.Length > 1)
                 {
                     Console.LogError($"You should not keep children that can be save under other saveables. " +
                         $"One or more was found under {gameObject.name}. This saveable will be destoryed to prevent more errors.");

@@ -13,10 +13,12 @@ namespace Player
 
         public IHoldable Holding { get; private set; }
         public StringListData data;
-        public ISaveData saveData { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public ISaveData saveData { get => data; set => data = (StringListData)value; }
 
         private PlayerController player;
         private Utility.ToolTip tt;
+
+        private bool enableGravityOnDrop;
 
         private void Awake()
         {
@@ -34,6 +36,7 @@ namespace Player
         void Start()
         {
             StartCoroutine(LateStart(1));
+            enableGravityOnDrop = false;
         }
 
         IEnumerator LateStart(float waitTime) 
@@ -48,6 +51,12 @@ namespace Player
 
         private void Update()
         {
+            if (Holding is MonoBehaviour) 
+            {
+                GameObject obj = ((MonoBehaviour)Holding).gameObject;
+                obj.transform.position = transform.position + Holding.PositionOffset;
+                obj.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + Holding.RotationOffset);
+            }
             if (Holding is IUseable && tt != null)
             {
                 ((IUseable)Holding).HoldUpdate();
@@ -74,6 +83,16 @@ namespace Player
                 LetGo();
             }
             Holding = obj;
+            if (Holding is MonoBehaviour) 
+            {
+                GameObject gameObject = ((MonoBehaviour)Holding).gameObject;
+                Rigidbody rb = gameObject.GetComponent<Rigidbody>();
+                if (rb != null) 
+                {
+                    enableGravityOnDrop = rb.useGravity;
+                    rb.useGravity = false;
+                }
+            }
             if(tt != null)
                 tt.HoldText = Holding.HoldText;
             if (player != null)
@@ -88,8 +107,18 @@ namespace Player
             {
                 player.Footsteps.OnStep.RemoveListener(Holding.Shake);
                 player.HeadMovement.OnJolt.RemoveListener(Holding.Shake);
+                if (Holding is MonoBehaviour)
+                {
+                    GameObject gameObject = ((MonoBehaviour)Holding).gameObject;
+                    Rigidbody rb = gameObject.GetComponent<Rigidbody>();
+                    if (rb != null)
+                    {
+                        rb.useGravity = enableGravityOnDrop;
+                    }
+                }
                 Holding.PutDown();
             }
+            enableGravityOnDrop = false;
             Holding = null;
             if (tt != null)
             {

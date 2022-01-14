@@ -11,8 +11,11 @@ namespace Interaction
     [RequireComponent (typeof(Collider))]
     public class Pickupable : BasicInteractable, IHoldable, ISaveable
     {
-        public Vector3 positionOffset;
-        public Vector3 rotationOffset;
+        public Vector3 positionOffset = Vector3.zero;
+        public Vector3 rotationOffset = Vector3.zero;
+
+        public virtual Vector3 PositionOffset => positionOffset;
+        public virtual Vector3 RotationOffset => rotationOffset;
 
         [SerializeField]
         RigidbodyData rbData;
@@ -53,6 +56,10 @@ namespace Interaction
             Utility.Toolbox.Instance.Pause.OnUnPause.AddListener(OnUnPause);
 
             holding = false;
+            if (player.Hand.GetComponent<Player.Hand>().Holding == (IHoldable)this)
+            {
+                holding = true;
+            }
             base.Start();
         }
 
@@ -91,15 +98,6 @@ namespace Interaction
             rb.WakeUp();
         }
 
-        private void Update()
-        {
-            if (holding) 
-            {
-                transform.position = player.Hand.transform.position + positionOffset;
-                transform.rotation = Quaternion.Euler(player.Hand.transform.rotation.eulerAngles + rotationOffset);
-            }
-        }
-
         public virtual void PickUp() 
         {
             player.HandController.PickUp(this);
@@ -114,6 +112,8 @@ namespace Interaction
             holding = false;
             collider.enabled = true;
             rb.useGravity = true;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
             OnPutDown.Invoke();
         }
 
