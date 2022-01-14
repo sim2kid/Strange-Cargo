@@ -7,6 +7,8 @@ using Creature.Stats;
 using Creature.Task;
 using Creature.Brain;
 using UnityEngine.Events;
+using PersistentData.Saving;
+using PersistentData.Component;
 
 namespace Creature
 {
@@ -14,18 +16,19 @@ namespace Creature
     [RequireComponent(typeof(TextureConverter.TextureController))]
     [RequireComponent(typeof(NavMeshMovement))]
     [RequireComponent(typeof(FaceTexture))]
-    public class CreatureController : MonoBehaviour, IProgress
+    [RequireComponent(typeof(CreatureSaveable))]
+    public class CreatureController : MonoBehaviour, IProgress, ISaveable
     {
         [SerializeField]
-        public DNA dna;
-        [SerializeField]
-        public Needs needs;
-        [SerializeField]
-        public string Guid;
-        [SerializeField]
-        public string frontFeetSound;
-        [SerializeField]
-        public string backFeetSound;
+        private CreatureData data;
+
+        public ISaveData saveData { get => data; set { data = (CreatureData)value; } }
+
+        public DNA dna { get => data.dna; set => data.dna = value; }
+        public Needs needs { get => data.needs; set => data.needs = value; }
+        public string Guid { get => data.GUID; set => data.GUID = value; }
+        public string frontFeetSound { get => data.frontFeetSound; set => data.frontFeetSound = value; }
+        public string backFeetSound { get => data.backFeetSound; set => data.backFeetSound = value; }
 
         public FaceTexture Face { get; private set; }
         public NavMeshMovement Move { get; private set; }
@@ -51,8 +54,8 @@ namespace Creature
         [SerializeField]
         private float thinkRate = 2f;
 
-        [SerializeField, HideInInspector]
-        private BasicBrain brain;
+        [HideInInspector]
+        private BasicBrain brain { get => data.brain; set => data.brain = value; }
 
         /// <summary>
         /// Decay rate per second.
@@ -145,6 +148,13 @@ namespace Creature
 
             Console.LogWarning("The Creature Controller has hardwritten values!!");
             Console.Log($"Creature [{Guid}] has been loaded into the scene at {transform.position.ToString()}.");
+        }
+
+        private void OnDestroy()
+        {
+            VoidTask();
+            Toolbox.Instance.Pause.OnPause.RemoveListener(OnPause);
+            Toolbox.Instance.Pause.OnUnPause.RemoveListener(OnUnPause);
         }
 
         private void OnPause() 
@@ -240,6 +250,21 @@ namespace Creature
         {
             AnimationBool("Stop", false);
             Animator.SetTrigger(_triggerName);
+        }
+
+        public void PreSerialization()
+        {
+            return;
+        }
+
+        public void PreDeserialization()
+        {
+            return;
+        }
+
+        public void PostDeserialization()
+        {
+            return;
         }
     }
 }

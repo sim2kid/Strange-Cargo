@@ -2,23 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Newtonsoft.Json;
 
 namespace Creature.Stats
 {
     [Serializable]
     public struct Needs
     {
+        [JsonIgnore]
         public float Min => 0;
+        [JsonIgnore]
         public float Max => 200;
 
         [SerializeField]
         float[] _myNeeds;
 
+        [JsonIgnore]
         public float Appetite { get => this[0]; set => this[0] = value; }
+        [JsonIgnore]
         public float Bladder { get => this[1]; set => this[1] = value; }
+        [JsonIgnore]
         public float Social { get => this[2]; set => this[2] = value; }
+        [JsonIgnore]
         public float Energy { get => this[3]; set => this[3] = value; }
+        [JsonIgnore]
         public float Hygiene { get => this[4]; set => this[4] = value; }
+        [JsonIgnore]
         public float Happiness { get => this[5]; set => this[5] = value; }
 
         public float this[int index]

@@ -60,6 +60,14 @@ namespace PersistentData
             }
 
             // Record creatures
+            CreatureSaveable[] creatureSaveables = FindObjectsOfType<CreatureSaveable>();
+            var creatureData = new List<GroupData>();
+            foreach (var obj in creatureSaveables)
+            {
+                obj.PreSerialization();
+                if (obj != null)
+                    creatureData.Add(obj.Data);
+            }
 
             // Make the save
             Save save = new Save()
@@ -68,7 +76,8 @@ namespace PersistentData
                 SaveName = "Save Name",
                 SaveTime = System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
                 Prefabs = prefabData,
-                Persistents = persisData
+                Persistents = persisData,
+                Creatures = creatureData
             };
             return save;
         }
@@ -92,7 +101,40 @@ namespace PersistentData
             OnPreDeserialization.Invoke();
             LoadPrefabs(save.Prefabs);
             LoadPersistants(save.Persistents);
+            LoadCreatures(save.Creatures);
             OnPostDeserialization.Invoke();
+        }
+
+        private void LoadCreatures(List<GroupData> groupData) 
+        {
+            // Clean Old Creatures
+            CreatureSaveable[] currentSaveables = FindObjectsOfType<CreatureSaveable>();
+            if (currentSaveables != null)
+                foreach (CreatureSaveable current in currentSaveables)
+                {
+                    // Potentially save data on textures???
+                    Destroy(current.gameObject);
+                }
+
+            foreach (GroupData data in groupData) 
+            {
+                CreatureData creature = (CreatureData)data.ExtraData.Find(x => x is CreatureData);
+                if (creature == null)
+                {
+                    Console.LogError($"Could not find creature data. Creature can not be constructed!");
+                    continue;
+                }
+                GameObject creatureObj = Genetics.CreatureGeneration.CreateCreature(creature.dna);
+                CreatureSaveable obj = creatureObj.GetComponent<CreatureSaveable>();
+                if (obj == null)
+                {
+                    Console.LogError($"Could not grab the creature saveable for newly generated creature.");
+                    continue;
+                }
+                obj.PreDeserialization();
+                obj.Data = data;
+                obj.PostDeserialization();
+            }
         }
 
         private void LoadPersistants(List<ReusedData> persistants) 

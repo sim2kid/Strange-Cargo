@@ -5,11 +5,18 @@ using UnityEngine;
 
 namespace PersistentData.Saving
 {
-    public struct CreatureData : ISaveData
+    [System.Serializable]
+    public class CreatureData : ISaveData
     {
         public string DataType => "Creature";
         [JsonIgnore]
         public string _guid;
         public string GUID { get => _guid; set => _guid = value; }
+        public Genetics.DNA dna;
+        public Creature.Stats.Needs needs;
+        public string frontFeetSound;
+        public string backFeetSound;
+        [HideInInspector]
+        public Creature.Brain.BasicBrain brain;
     }
 }

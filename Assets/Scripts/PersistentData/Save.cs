@@ -16,6 +16,6 @@ namespace PersistentData
         // Player (And the like)
         public List<ReusedData> Persistents;
         // Creatures
-        public List<CreatureData> Creatures;
+        public List<GroupData> Creatures;
     }
 }
