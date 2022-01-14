@@ -46,7 +46,15 @@ namespace PersistentData.Loading
                 case "Persistent":
                     DataType = new ReusedData();
                     break;
-
+                case "IsActive":
+                    DataType = new IsActiveData();
+                    break;
+                case "StringList":
+                    DataType = new StringListData();
+                    break;
+                case "Data":
+                    DataType = new GroupData();
+                    break;
             }
             serializer.Populate(jsonObject.CreateReader(), DataType);
             return DataType;

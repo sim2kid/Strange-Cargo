@@ -6,13 +6,10 @@ using UnityEngine;
 namespace PersistentData.Saving
 {
     [System.Serializable]
-    public struct PrefabData : ISaveData
+    public class PrefabData : GroupData, ISaveData
     {
         [JsonIgnore]
-        public string DataType => "Prefab";
-        public string GUID { get; set; }
+        public override string DataType => "Prefab";
         public string PrefabResourceLocation;
-        [JsonProperty(ItemConverterType = typeof(Loading.GetDataType))]
-        public List<ISaveData> ExtraData;
     }
 }

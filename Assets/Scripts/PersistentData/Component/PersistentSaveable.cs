@@ -5,64 +5,18 @@ using UnityEngine;
 
 namespace PersistentData.Component
 {
-    public class PersistentSaveable : MonoBehaviour
+    public class PersistentSaveable : Saveable
     {
         [SerializeField]
         public ReusedData data;
 
-        List<ISaveable> _saveParts;
+        public override GroupData Data { get => data; set => data = (ReusedData)value; }
 
         private void OnValidate()
         {
             if (string.IsNullOrEmpty(data._guid))
             {
                 data._guid = System.Guid.NewGuid().ToString();
-            }
-        }
-
-        private void Start()
-        {
-            _saveParts = new List<ISaveable>();
-            _saveParts.Clear();
-            _saveParts.AddRange(this.GetComponentsInChildren<ISaveable>(true));
-        }
-
-        public void PreSerialization()
-        {
-            data.ExtraData = new List<ISaveData>();
-            foreach (var part in _saveParts)
-            {
-                part.PreSerialization();
-                data.ExtraData.Add(part.saveData);
-            }
-        }
-
-        public void PreDeserialization()
-        {
-            if (_saveParts == null)
-                Start();
-            foreach (var part in _saveParts)
-                part.PreDeserialization();
-        }
-
-        public void PostDeserialization()
-        {
-            if (_saveParts.Count != data.ExtraData.Count)
-            {
-                Console.LogWarning("There are more save parts than componenets in object " + gameObject.name);
-            }
-
-            foreach (var part in data.ExtraData)
-            {
-                ISaveable match = _saveParts.Find(x => x.saveData.GUID.Equals(part.GUID));
-                if (match == null)
-                {
-                    Console.LogError($"Could not load part with GUID of '{part.GUID}' and type of '{part.DataType}'.");
-                    continue;
-                }
-                match.PreDeserialization();
-                match.saveData = part;
-                match.PostDeserialization();
             }
         }
     }

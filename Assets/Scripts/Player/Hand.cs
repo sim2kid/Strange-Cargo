@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Interaction;
+using PersistentData.Component;
+using PersistentData.Saving;
+using System.Linq;
 
 namespace Player
 {
-    public class Hand : MonoBehaviour
+    public class Hand : MonoBehaviour, ISaveable
     {
 
         public IHoldable Holding { get; private set; }
+        StringListData data;
+        public ISaveData saveData { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
         private PlayerController player;
         private Utility.ToolTip tt;
@@ -18,9 +23,16 @@ namespace Player
             Holding = null;
         }
 
+        private void OnValidate()
+        {
+            if (string.IsNullOrWhiteSpace(data.GUID))
+            {
+                data.GUID = System.Guid.NewGuid().ToString();
+            }
+        }
+
         void Start()
         {
-
             StartCoroutine(LateStart(1));
         }
 
@@ -87,6 +99,50 @@ namespace Player
             else 
             {
                 tt = Utility.Toolbox.Instance.ToolTip;
+            }
+        }
+
+        public void PreSerialization()
+        {
+            if(data.StrList == null)
+                data.StrList = new List<string>();
+            data.StrList.Clear();
+            // If the hand has a Saveable
+            MonoBehaviour mb = (MonoBehaviour)Holding;
+            if (mb != null) 
+            {
+                GameObject obj = mb.gameObject;
+                Saveable savMaster = obj.GetComponentInParent<Saveable>();
+                if (savMaster != null)
+                {
+                    // Save the guid to the data.StrList
+                    data.StrList.Add(savMaster.Data.GUID);
+                }
+            }
+            return;
+        }
+
+        public void PreDeserialization()
+        {
+            LetGo();
+        }
+
+        public void PostDeserialization()
+        {
+            if (data.StrList.Count > 0) 
+            {
+                string objGuid = data.StrList[0];
+                // Put the saved object into the hand
+                List<Saveable> saveablesInScene = FindObjectsOfType<Saveable>(true).ToList(); ;
+                Saveable saveable = saveablesInScene.Find(x => x.Data.GUID.Equals(objGuid));
+                if (saveable != null)
+                {
+                    IHoldable h = saveable.GetComponent<IHoldable>();
+                    if (h != null) 
+                    {
+                        PickUp(h);
+                    }
+                }
             }
         }
     }

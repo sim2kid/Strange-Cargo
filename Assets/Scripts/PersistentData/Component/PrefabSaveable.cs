@@ -1,4 +1,3 @@
-using PersistentData.Loading;
 using PersistentData.Saving;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,47 +5,22 @@ using UnityEngine;
 
 namespace PersistentData.Component
 {
-    public class PrefabSaveable : MonoBehaviour
+    public class PrefabSaveable : Saveable
     {
         [SerializeField]
         public PrefabData prefabData;
 
-        List<ISaveable> _saveParts;
+        public override GroupData Data { get => prefabData; set => prefabData = (PrefabData)value; }
 
         private void Awake()
         {
-            if (string.IsNullOrEmpty(prefabData.GUID)) 
+            if (string.IsNullOrEmpty(Data.GUID)) 
             {
-                prefabData.GUID = System.Guid.NewGuid().ToString();
+                Data.GUID = System.Guid.NewGuid().ToString();
             }
         }
 
-        private void Start()
-        {
-            _saveParts = new List<ISaveable>();
-            _saveParts.Clear();
-            _saveParts.AddRange(this.GetComponentsInChildren<ISaveable>(true));
-        }
-
-        public void PreSerialization()
-        {
-            prefabData.ExtraData = new List<ISaveData>();
-            foreach (var part in _saveParts)
-            {
-                part.PreSerialization();
-                prefabData.ExtraData.Add(part.saveData);
-            }
-        }
-
-        public void PreDeserialization()
-        {
-            if (_saveParts == null)
-                Start();
-            foreach (var part in _saveParts)
-                part.PreDeserialization();
-        }
-
-        public void PostDeserialization()
+        public override void PostDeserialization()
         {
             if (_saveParts.Count != prefabData.ExtraData.Count) 
             {

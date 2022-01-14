@@ -6,13 +6,8 @@ using Newtonsoft.Json;
 namespace PersistentData.Saving
 {
     [System.Serializable]
-    public struct ReusedData : ISaveData
+    public class ReusedData : GroupData, ISaveData
     {
-        public string DataType => "Persistent";
-        [JsonIgnore]
-        public string _guid;
-        public string GUID { get => _guid; set => _guid = value; }
-        [JsonProperty(ItemConverterType = typeof(Loading.GetDataType))]
-        public List<ISaveData> ExtraData;
+        public override string DataType => "Persistent";
     }
 }

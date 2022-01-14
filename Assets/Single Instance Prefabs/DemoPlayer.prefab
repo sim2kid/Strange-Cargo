@@ -4427,7 +4427,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_Extents: {x: 0.35, y: 1, z: 0.35}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
@@ -4480,7 +4480,9 @@ MonoBehaviour:
   activeLocation: {fileID: 5000652813891060467}
   inactiveLocation: {fileID: 7123862860731788287}
   sideMenu: {fileID: 684351831206598634}
-  IsActive: 0
+  data:
+    _guid: d69cf20f-2938-4c50-80f0-eaa2dd547011
+    _isActive: 0
 --- !u!114 &4628441539282750614
 MonoBehaviour:
   m_ObjectHideFlags: 0
