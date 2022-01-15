@@ -12,6 +12,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject OptionsMenu;
     public GameObject ExitMenu;
+    public GameObject LoadMenu;
+    public GameObject SaveMenu;
 
     public PlayerInput playerInput;
     private InputAction Pause;
@@ -19,6 +21,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseDefault;
     public GameObject optionsDefault;
     public GameObject exitDefault;
+    public GameObject saveDefault;
+    public GameObject loadDefault;
 
     private bool lastPause = false;
     private void OnEnable()
@@ -73,11 +77,17 @@ public class PauseMenu : MonoBehaviour
 
     public void Save() 
     {
+        TurnOffAllMenus();
+        SaveMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(saveDefault);
         Console.Log("Saving has not been implemnted yet.");
     }
 
     public void Load() 
     {
+        TurnOffAllMenus();
+        LoadMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(loadDefault);
         Console.Log("Loading has not been implemnted yet.");
     }
 
@@ -110,7 +120,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Exit() 
     {
-        pauseMenu.SetActive(false);
+        TurnOffAllMenus();
         ExitMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(exitDefault);
     }
@@ -118,16 +128,15 @@ public class PauseMenu : MonoBehaviour
     public void Options()
     {
         Console.Log("Options Menu has not been implemented yet.");
-        //PauseMenu.SetActive(false);
-        //OptionsMenu.SetActive(true);
+        TurnOffAllMenus();
+        OptionsMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(optionsDefault);
     }
 
     public void BackToPauseMenu()
     {
+        TurnOffAllMenus();
         pauseMenu.SetActive(true);
-        OptionsMenu.SetActive(false);
-        ExitMenu.SetActive(false);
         EventSystem.current.SetSelectedGameObject(pauseDefault);
     }
 
@@ -142,5 +151,14 @@ public class PauseMenu : MonoBehaviour
     {
         Menu.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void TurnOffAllMenus() 
+    {
+        LoadMenu.SetActive(false);
+        SaveMenu.SetActive(false);
+        pauseMenu.SetActive(false);
+        OptionsMenu.SetActive(false);
+        ExitMenu.SetActive(false);
     }
 }
