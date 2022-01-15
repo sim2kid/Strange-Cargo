@@ -64,7 +64,7 @@ namespace Utility
         }
 
         // Update is called once per frame
-        void FixedUpdate()
+        void Update()
         {
             if (!Application.IsPlaying(gameObject)) 
             {
@@ -83,7 +83,7 @@ namespace Utility
             }
 
             // Gives seconds elapsed
-            _time += Time.fixedDeltaTime;
+            _time += Time.deltaTime;
 
             if (_time > MinutesInADay * 60)
             {
@@ -115,7 +115,7 @@ namespace Utility
         public override string ToString() 
         {
             int hour = Mathf.FloorToInt(CurrentTime);
-            int minute = Mathf.RoundToInt((CurrentTime * 60) % 60);
+            int minute = Mathf.FloorToInt((CurrentTime * 60) % 60);
             bool morning = hour < 12;
             if (!morning)
                 hour -= 12;
