@@ -60,8 +60,11 @@ public class ScreenLoading : MonoBehaviour, IProgress
         foreach (CreatureController c in creatures)
             count += c.Report();
         count /= creatures.Count;
-        count += Mathf.Clamp01(time/baseTime);
-        count /= 2;
+        if (baseTime > 0)
+        {
+            count += Mathf.Clamp01(time / baseTime);
+            count /= 2;
+        }
         return count;
     }
 
@@ -91,7 +94,7 @@ public class ScreenLoading : MonoBehaviour, IProgress
         PauseMenu.SetActive(true);
         Cursor.visible = false;
 
-        baseTime = 1; // No more extra waiting after first load
+        baseTime = 0; // No more extra waiting after first load
 
         camera.Priority = -1000;
         End.Invoke();
