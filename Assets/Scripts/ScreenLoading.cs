@@ -91,17 +91,19 @@ public class ScreenLoading : MonoBehaviour, IProgress
         camera.Priority = -1000;
         End.Invoke();
 
-        Destroy(LoadingScene);
+        //Destroy(LoadingScene);
+        LoadingScene.SetActive(false);
         bgm.Volume = 1;
-        Camera.main.gameObject.GetComponent<Cinemachine.CinemachineBrain>().m_DefaultBlend = saveCameraStyle;
+        
 
         LoadingScreen.SetActive(false);
-        Invoke("SelfDestruct", 1);
+        Invoke("SelfDestruct", 0.01f);
     }
 
     private void SelfDestruct() 
     {
-        Destroy(this.gameObject);
+        Camera.main.gameObject.GetComponent<Cinemachine.CinemachineBrain>().m_DefaultBlend = saveCameraStyle;
+        //Destroy(this.gameObject);
     }
 
     // Update is called once per frame

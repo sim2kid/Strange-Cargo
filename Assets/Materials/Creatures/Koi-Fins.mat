@@ -21,14 +21,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Koi-Fins
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 1c472b96d9249f14eb2526abdfe9a631, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -90,6 +89,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Boolean_6372015c5a9b43d78f21c1b82159ad3e: 1
+    - Vector1_3848eefd5a024ba7aa50e59d20a47617: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
