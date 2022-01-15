@@ -1,3 +1,4 @@
+using PersistentData;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -81,10 +82,13 @@ public class PauseMenu : MonoBehaviour
 
     public void Save()
     {
-        //TurnOffAllMenus();
-        //SaveMenu.SetActive(true);
-        //EventSystem.current.SetSelectedGameObject(saveDefault);
-        Console.Log("Saving has not been implemnted yet.");
+        var man = FindObjectOfType<SaveManager>();
+        if (man == null)
+        {
+            Console.LogError("Could not save the game. Save manager is not in scene.");
+            return;
+        }
+        man.Save();
     }
 
     public void Load() 
@@ -96,8 +100,8 @@ public class PauseMenu : MonoBehaviour
 
     public void ExitToMainMenu()
     {
-        Toolbox.Instance.OnClosing.Invoke();
-        Invoke("SceneChange", 0.2f);
+        //Toolbox.Instance.OnClosing.Invoke();
+        //Invoke("SceneChange", 0.2f);
     }
 
     public void ExitToDesktop()

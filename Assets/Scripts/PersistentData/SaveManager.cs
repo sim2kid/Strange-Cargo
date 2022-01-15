@@ -108,18 +108,10 @@ namespace PersistentData
             return save;
         }
 
-        public void DemoSave()
+        public void Save()
         {
             Save save = MakeSave();
             SaveToDisk(save);
-        }
-
-        public void DemoLoad()
-        {
-            Save save = LoadFromDisk(CurrentSave.SaveGuid);
-            Load(save);
-            CurrentSave = save.Metadata;
-            return;
         }
 
         public void LoadSave(string guid) 
