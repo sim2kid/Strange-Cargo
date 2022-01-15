@@ -48,7 +48,7 @@ namespace Creature
         private float timeSpentOnLastTask;
 
         private IProgress textureController;
-        
+
         private UnityEvent UpdateLoop;
 
         private float thinkTimer;
@@ -73,7 +73,16 @@ namespace Creature
         [SerializeField]
         private float LoadingProgress;
 
-        public bool Finished => textureController.Finished;
+        public bool Finished 
+        { 
+            get 
+            {
+                if (textureController != null)
+                    return textureController.Finished;
+                else
+                    return true;
+            } 
+        }
 
         public float Report()
         {
