@@ -91,7 +91,7 @@ public class ScreenLoading : MonoBehaviour, IProgress
         PauseMenu.SetActive(true);
         Cursor.visible = false;
 
-        baseTime = 0; // No more extra waiting after first load
+        baseTime = 1; // No more extra waiting after first load
 
         camera.Priority = -1000;
         End.Invoke();
