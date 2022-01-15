@@ -21,11 +21,11 @@ namespace PersistentData
         static string SaveLocation;
         [SerializeField]
         bool useEncryption = false;
-        Save s;
-        
+        SaveMeta CurrentSave;
+
         private void Awake()
         {
-            SaveLocation = System.IO.Path.Combine(Application.persistentDataPath, "Saves");
+            SaveLocation = System.IO.Path.Combine(Application.persistentDataPath, "saves");
             var others = FindObjectsOfType<SaveManager>();
             if (others != null)
                 if (others.Length > 1)
@@ -33,9 +33,17 @@ namespace PersistentData
                     Console.LogWarning($"There is already a Save Manager in this scene. Deleting extras.");
                     Destroy(this);
                 }
+            string guid = System.Guid.NewGuid().ToString();
+            CurrentSave = new SaveMeta()
+            {
+                GameVersion = Application.version,
+                SaveName = "New Save",
+                SaveGuid = guid,
+                SaveTime = System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
+            };
         }
 
-        public Save MakeSave() 
+        public Save MakeSave()
         {
             // Run listeners
             OnPreSerialization.Invoke();
@@ -46,7 +54,7 @@ namespace PersistentData
             foreach (var obj in objectsToSave)
             {
                 obj.PreSerialization();
-                if(obj.prefabData != null)
+                if (obj.prefabData != null)
                     prefabData.Add(obj.prefabData);
             }
             // Record persistant objects
@@ -55,7 +63,7 @@ namespace PersistentData
             foreach (var obj in persistentSaveables)
             {
                 obj.PreSerialization();
-                if(obj != null)
+                if (obj != null)
                     persisData.Add(obj.data);
             }
 
@@ -69,12 +77,18 @@ namespace PersistentData
                     creatureData.Add(obj.Data);
             }
 
-            // Make the save
-            Save save = new Save()
+            SaveMeta meta = new SaveMeta()
             {
                 GameVersion = Application.version,
                 SaveName = "Save Name",
-                SaveTime = System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
+                SaveGuid = CurrentSave.SaveGuid,
+                SaveTime = System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
+            };
+
+            // Make the save
+            Save save = new Save()
+            {
+                Metadata = meta,
                 Prefabs = prefabData,
                 Persistents = persisData,
                 Creatures = creatureData
@@ -82,21 +96,21 @@ namespace PersistentData
             return save;
         }
 
-        public void DemoSave() 
+        public void DemoSave()
         {
             Save save = MakeSave();
             SaveToDisk(save);
         }
 
-        public void DemoLoad() 
+        public void DemoLoad()
         {
-            Save save = LoadFromDisk("Save Name");
+            Save save = LoadFromDisk(CurrentSave.SaveGuid);
             Load(save);
-            s = save;
+            CurrentSave = save.Metadata;
             return;
         }
 
-        private void Load(Save save) 
+        private void Load(Save save)
         {
             OnPreDeserialization.Invoke();
             LoadPrefabs(save.Prefabs);
@@ -105,7 +119,7 @@ namespace PersistentData
             OnPostDeserialization.Invoke();
         }
 
-        private void LoadCreatures(List<GroupData> groupData) 
+        private void LoadCreatures(List<GroupData> groupData)
         {
             // Clean Old Creatures
             CreatureSaveable[] currentSaveables = FindObjectsOfType<CreatureSaveable>();
@@ -119,7 +133,7 @@ namespace PersistentData
             if (groupData == null)
                 return;
 
-            foreach (GroupData data in groupData) 
+            foreach (GroupData data in groupData)
             {
                 CreatureData creature = (CreatureData)data.ExtraData.Find(x => x is CreatureData);
                 if (string.IsNullOrWhiteSpace(creature.GUID))
@@ -140,13 +154,13 @@ namespace PersistentData
             }
         }
 
-        private void LoadPersistants(List<ReusedData> persistants) 
+        private void LoadPersistants(List<ReusedData> persistants)
         {
             if (persistants == null)
                 return;
 
             List<PersistentSaveable> persistentSaveables = FindObjectsOfType<PersistentSaveable>().ToList();
-            foreach (ReusedData data in persistants) 
+            foreach (ReusedData data in persistants)
             {
                 PersistentSaveable obj = persistentSaveables.Find(x => x.data.GUID.Equals(data.GUID));
                 if (obj == null)
@@ -161,11 +175,11 @@ namespace PersistentData
             }
         }
 
-        private void LoadPrefabs(List<PrefabData> prefabs) 
+        private void LoadPrefabs(List<PrefabData> prefabs)
         {
             // Clean Old Prefabs
             PrefabSaveable[] currentSaveables = FindObjectsOfType<PrefabSaveable>();
-            if(currentSaveables != null)
+            if (currentSaveables != null)
                 foreach (PrefabSaveable current in currentSaveables)
                     Destroy(current.gameObject);
 
@@ -173,7 +187,7 @@ namespace PersistentData
                 return;
 
             // Place new prefabs
-            foreach (PrefabData data in prefabs) 
+            foreach (PrefabData data in prefabs)
             {
                 var obj = Resources.Load(data.PrefabResourceLocation) as GameObject;
                 if (obj == null)
@@ -192,60 +206,162 @@ namespace PersistentData
             }
         }
 
-        private Save LoadFromDisk(string saveName) 
+        public List<SaveMeta> GetSaveList() 
         {
-            string loc = SanitizePath(Path.Combine(SaveLocation, RemoveIllegalCharacters(saveName) + ".save"));
+            List<SaveMeta> metas = new List<SaveMeta>();
+            string[] saves = Directory.GetDirectories(SaveLocation);
+            foreach (var save in saves)
+            {
+                string dataLoc = SanitizePath(Path.Combine(save, $"save.dat"));
+                string metaLoc = SanitizePath(Path.Combine(save, $"meta.dat"));
+                if (File.Exists(dataLoc) && File.Exists(metaLoc)) 
+                {
+                    byte[] metaBytes = File.ReadAllBytes(dataLoc);
+                    string metaJson = DecryptBytes(metaBytes);
+                    SaveMeta meta = JsonConvert.DeserializeObject<SaveMeta>(metaJson);
+                    if(!string.IsNullOrEmpty(meta.SaveName))
+                        metas.Add(meta);
+                }
+            }
+            return metas;
+        }
+
+        private Save LoadFromDisk(string saveGuid)
+        {
+            string saveFolder = SanitizePath(Path.Combine(SaveLocation, RemoveIllegalCharacters(saveGuid)));
+            string dataLoc = SanitizePath(Path.Combine(saveFolder, $"save.dat"));
 
             if (!Directory.Exists(SaveLocation))
                 Directory.CreateDirectory(SaveLocation);
-            if (!File.Exists(loc)) 
+            if (!Directory.Exists(saveFolder))
             {
-                Console.LogWarning($"Could not find save '{saveName}'. Is it spelled correctly?");
-                return new Save() { SaveTime = -1 };
+                Console.LogWarning($"Could not find load '{saveGuid}'. Is it spelled correctly?");
+                return new Save() { Metadata = new SaveMeta() { SaveTime = -1 } };
+            }
+            if (!File.Exists(dataLoc))
+            {
+                Console.LogWarning($"Could not find load '{saveGuid}'. Is it spelled correctly?");
+                return new Save() { Metadata = new SaveMeta() { SaveTime = -1 } };
             }
 
-            byte[] saveBytes = File.ReadAllBytes(loc);
+            byte[] saveBytes = File.ReadAllBytes(dataLoc);
             string saveJson = DecryptBytes(saveBytes);
 
             Save save = JsonConvert.DeserializeObject<Save>(saveJson);
             return save;
         }
 
-        private void SaveToDisk(Save save) 
+        private void SaveToDisk(Save save)
         {
-            string loc = SanitizePath(Path.Combine(SaveLocation, RemoveIllegalCharacters(save.SaveName) + ".save"));
-            string saveJson = JsonConvert.SerializeObject(save);
+            string saveFolder = SanitizePath(Path.Combine(SaveLocation, RemoveIllegalCharacters(save.Metadata.SaveGuid)));
 
-            if(!Directory.Exists(SaveLocation))
+            if (!Directory.Exists(SaveLocation))
                 Directory.CreateDirectory(SaveLocation);
 
-            File.WriteAllBytes(loc, EncryptString(saveJson));
+            if (!Directory.Exists(saveFolder))
+                Directory.CreateDirectory(saveFolder);
+
+            string dataLoc = SanitizePath(Path.Combine(saveFolder, $"save.dat"));
+            string metaLoc = SanitizePath(Path.Combine(saveFolder, $"meta.dat"));
+            string saveJson = JsonConvert.SerializeObject(save);
+            string metaJson = JsonConvert.SerializeObject(save.Metadata);
+
+            File.WriteAllBytes(dataLoc, EncryptString(saveJson));
+            File.WriteAllBytes(metaLoc, StringToBytes(metaJson));
 
             return;
         }
 
-        private byte[] EncryptString(string str) 
+        private static byte[] StringToBytes(string str)
+        {
+            return System.Text.Encoding.UTF8.GetBytes(str);
+        }
+
+        private byte[] EncryptString(string str)
         {
             if ((Debug.isDebugBuild && !Application.isEditor) || (Application.isEditor && !useEncryption))
             {
                 // No encrypting
-                return System.Text.Encoding.UTF8.GetBytes(str);
+                return StringToBytes(str);
             }
-            else 
+            else
             {
                 // Yes encrypting
                 byte[] bytes = Encrypt(str);
-                bytes = bytes.Prepend<byte>((byte)82).Prepend<byte>((byte)110).Prepend<byte>((byte)101).Prepend<byte>((byte)119).Prepend<byte>((byte)79).ToArray();
+                bytes = PrependArray(bytes, CreatePattern(secrets[Random.Range(0,secrets.Length)]));
                 return bytes;
             }
         }
 
+        private static byte[] PrependArray(byte[] other, params byte[] addons)
+        {
+            for (int i = addons.Length - 1; i >= 0; i--)
+            {
+                other = other.Prepend<byte>(addons[i]).ToArray();
+            }
+            return other;
+        }
+
+        private static byte[] CreatePattern(string s)
+        {
+            return StringToBytes(s);
+        }
+
+        private static bool StartsWithPattern(byte[] other, byte[] pattern)
+        {
+            for (int i = 0; i < pattern.Length; i++)
+            {
+                if (i < other.Length)
+                {
+                    if (pattern[i] != other[i])
+                        return false;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private static byte[] StartsWithAnyPatterns(byte[] other, params string[] patterns)
+        {
+            if (patterns == null)
+                return null;
+            foreach (string pattern in patterns)
+            {
+                byte[] barr = CreatePattern(pattern);
+                if (StartsWithPattern(other, barr))
+                    return barr;
+            }
+            return null;
+        }
+
+        private static string[] secrets = new string[] 
+        {
+            "OwenR",
+            "Granny Is Super Old",
+            "I see you snooping",
+            "up up down down left right left right B A start",
+            "Fishboi is constantly floating between a state of immortality and suffocating due to lack of water",
+            "Just don't check the basement",
+            "Granny is a communist",
+            "Strange-Cargo: Halfway Home",
+            "Strange Cargo 2: Sons of Liberty",
+            "Strange Cargo 4: Gloos of the Patriots",
+            "Granny Doesn't Call 911",
+            "Granny once had a basement before the police found it",
+            "Granny has been kidnapped by ninjas. Are you a bad enough dude to rescue Granny?",
+            "Please hire me, they won't pay me here"
+        };
+
         private static string DecryptBytes(byte[] bytes) 
         {
-            if (bytes[0].Equals((byte)79) && bytes[1].Equals((byte)119) && bytes[2].Equals((byte)101) && bytes[3].Equals((byte)110) && bytes[4].Equals((byte)82))
+            byte[] pattern = StartsWithAnyPatterns(bytes, secrets);
+            if (pattern != null)
             {
                 // Actually Encrypted
-                bytes = bytes.Skip(5).ToArray();
+                bytes = bytes.Skip(pattern.Length).ToArray();
                 string str = Decrypt(bytes);
                 return str;
             }
