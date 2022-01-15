@@ -43,6 +43,18 @@ namespace PersistentData
             };
         }
 
+        public void StartNewSave(string name) 
+        {
+            string guid = System.Guid.NewGuid().ToString();
+            CurrentSave = new SaveMeta()
+            {
+                GameVersion = Application.version,
+                SaveName = name,
+                SaveGuid = guid,
+                SaveTime = System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
+            };
+        }
+
         public Save MakeSave()
         {
             // Run listeners
@@ -80,7 +92,7 @@ namespace PersistentData
             SaveMeta meta = new SaveMeta()
             {
                 GameVersion = Application.version,
-                SaveName = "Save Name",
+                SaveName = CurrentSave.SaveName,
                 SaveGuid = CurrentSave.SaveGuid,
                 SaveTime = System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
             };
@@ -110,6 +122,14 @@ namespace PersistentData
             return;
         }
 
+        public void LoadSave(string guid) 
+        {
+            Save save = LoadFromDisk(guid);
+            Load(save);
+            CurrentSave = save.Metadata;
+            return;
+        }
+
         private void Load(Save save)
         {
             OnPreDeserialization.Invoke();
@@ -117,6 +137,28 @@ namespace PersistentData
             LoadPersistants(save.Persistents);
             LoadCreatures(save.Creatures);
             OnPostDeserialization.Invoke();
+        }
+
+        private void DeleteDirectory(string path) 
+        {
+            foreach (string s in Directory.GetDirectories(path)) 
+            {
+                DeleteDirectory(s);
+            }
+            foreach (string s in Directory.GetFiles(path))
+            {
+                File.Delete(s);
+            }
+            Directory.Delete(path, true);
+        }
+
+        public void DeleteSave(string saveGuid) 
+        {
+            string saveFolder = SanitizePath(Path.Combine(SaveLocation, RemoveIllegalCharacters(saveGuid)));
+            if (Directory.Exists(saveFolder)) 
+            {
+                DeleteDirectory(saveFolder);
+            }
         }
 
         private void LoadCreatures(List<GroupData> groupData)
@@ -209,6 +251,8 @@ namespace PersistentData
         public List<SaveMeta> GetSaveList() 
         {
             List<SaveMeta> metas = new List<SaveMeta>();
+            if (string.IsNullOrEmpty(SaveLocation))
+                return metas;
             string[] saves = Directory.GetDirectories(SaveLocation);
             foreach (var save in saves)
             {
@@ -216,7 +260,7 @@ namespace PersistentData
                 string metaLoc = SanitizePath(Path.Combine(save, $"meta.dat"));
                 if (File.Exists(dataLoc) && File.Exists(metaLoc)) 
                 {
-                    byte[] metaBytes = File.ReadAllBytes(dataLoc);
+                    byte[] metaBytes = File.ReadAllBytes(metaLoc);
                     string metaJson = DecryptBytes(metaBytes);
                     SaveMeta meta = JsonConvert.DeserializeObject<SaveMeta>(metaJson);
                     if(!string.IsNullOrEmpty(meta.SaveName))

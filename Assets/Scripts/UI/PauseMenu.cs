@@ -25,6 +25,9 @@ public class PauseMenu : MonoBehaviour
     private bool lastPause = false;
     private void OnEnable()
     {
+        if (Toolbox.Instance.Pause == null)
+            return;
+
         Toolbox.Instance.Pause.OnPause.AddListener(OnPause);
         Toolbox.Instance.Pause.OnUnPause.AddListener(OnUnPause);
 
@@ -33,6 +36,9 @@ public class PauseMenu : MonoBehaviour
 
     private void OnDisable()
     {
+        if (Toolbox.Instance.Pause == null)
+            return;
+
         Toolbox.Instance.Pause.OnPause.RemoveListener(OnPause);
         Toolbox.Instance.Pause.OnUnPause.RemoveListener(OnUnPause);
     }
@@ -83,10 +89,9 @@ public class PauseMenu : MonoBehaviour
 
     public void Load() 
     {
-        //TurnOffAllMenus();
-        //LoadMenu.SetActive(true);
-        //EventSystem.current.SetSelectedGameObject(loadDefault);
-        Console.Log("Loading has not been implemnted yet.");
+        TurnOffAllMenus();
+        LoadMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(loadDefault);
     }
 
     public void ExitToMainMenu()
