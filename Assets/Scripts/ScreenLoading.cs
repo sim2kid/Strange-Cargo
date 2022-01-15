@@ -68,11 +68,13 @@ public class ScreenLoading : MonoBehaviour, IProgress
     private void OnStart() 
     {
         Console.Log($"The scene and it's creatures are currently being loaded...");
+        time = 0;
         PauseMenu.SetActive(false);
         LoadingScreen.SetActive(true);
         NormalOverlay.SetActive(false);
+        LoadingScene.SetActive(true);
         Toolbox.Instance.Pause.SetPause(true);
-        Cursor.visible = false;
+        Cursor.visible = true;
         bgm.Volume = 1;
         ProgrssBar.value = 0;
         camera.Priority = 1000;
@@ -87,6 +89,7 @@ public class ScreenLoading : MonoBehaviour, IProgress
         NormalOverlay.SetActive(true);
         Toolbox.Instance.Pause.SetPause(false);
         PauseMenu.SetActive(true);
+        Cursor.visible = false;
 
         camera.Priority = -1000;
         End.Invoke();
@@ -97,7 +100,7 @@ public class ScreenLoading : MonoBehaviour, IProgress
         
 
         LoadingScreen.SetActive(false);
-        Invoke("SelfDestruct", 0.01f);
+        Invoke("SelfDestruct", 0.1f);
     }
 
     private void SelfDestruct() 
