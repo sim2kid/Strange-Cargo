@@ -335,6 +335,7 @@ namespace PersistentData
                 Console.LogError("You can not save to resources unless you are in-editor.");
                 return;
             }
+            #if UNITY_EDITOR
 
             string saveLocation = SanitizePath(Path.Combine(Application.dataPath, "Resources/Saves/default.dat"));
 
@@ -343,6 +344,7 @@ namespace PersistentData
 
             File.WriteAllBytes(saveLocation, StringToBytes(saveJson));
             UnityEditor.AssetDatabase.Refresh();
+            #endif
         }
 
         private void SaveToDisk(Save save)
