@@ -136,6 +136,7 @@ namespace UI
             string guid = context.SaveGuid;
             if (string.IsNullOrEmpty(guid))
                 return;
+
             manager.LoadSave(context.SaveGuid);
         }
 

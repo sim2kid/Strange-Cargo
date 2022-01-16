@@ -160,7 +160,7 @@ namespace PersistentData
             }
         }
 
-        private void LoadCreatures(List<GroupData> groupData)
+        public void DestroyAllCreatures() 
         {
             // Clean Old Creatures
             CreatureSaveable[] currentSaveables = FindObjectsOfType<CreatureSaveable>();
@@ -170,6 +170,22 @@ namespace PersistentData
                     // Potentially save data on textures???
                     Destroy(current.gameObject);
                 }
+        }
+
+        public void DestroyAllUnloadedCreatures() 
+        {
+            Creature.CreatureController[] currentSaveables = FindObjectsOfType<Creature.CreatureController>();
+            if (currentSaveables != null)
+                foreach (Creature.CreatureController current in currentSaveables)
+                {
+                    if(current == null || !current.Finished)
+                        Destroy(current.gameObject);
+                }
+        }
+
+        private void LoadCreatures(List<GroupData> groupData)
+        {
+            DestroyAllCreatures();
 
             if (groupData == null)
                 return;

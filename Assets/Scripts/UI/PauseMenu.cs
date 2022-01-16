@@ -14,6 +14,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject OptionsMenu;
     public GameObject ExitMenu;
     public GameObject LoadMenu;
+    public GameObject MainMenu;
 
     public PlayerInput playerInput;
     private InputAction Pause;
@@ -22,17 +23,27 @@ public class PauseMenu : MonoBehaviour
     public GameObject optionsDefault;
     public GameObject exitDefault;
     public GameObject loadDefault;
+    public GameObject mainDefault;
+
+    public Cinemachine.CinemachineVirtualCamera MenuCamera;
+
+    public bool OpenMenuOnPause;
+    public bool UseMainMenu;
 
     private bool lastPause = false;
     private void OnEnable()
     {
+        OpenMenuOnPause = false;
+        UseMainMenu = false;
+
         if (Toolbox.Instance.Pause == null)
             return;
 
         Toolbox.Instance.Pause.OnPause.AddListener(OnPause);
         Toolbox.Instance.Pause.OnUnPause.AddListener(OnUnPause);
 
-        Menu.SetActive(Toolbox.Instance.Pause.Paused);
+        if(Toolbox.Instance.Pause.Paused)
+            OnPause();
     }
 
     private void OnDisable()
@@ -55,18 +66,23 @@ public class PauseMenu : MonoBehaviour
             return;
         }
 
+        Toolbox.Instance.Pause.OnPause.AddListener(OnPause);
+        Toolbox.Instance.Pause.OnUnPause.AddListener(OnUnPause);
+
         Pause = playerInput.actions["Pause"];
         lastPause = Pause.ReadValue<float>() == 1;
     }
 
     private void Update()
     {
+        if (OpenMenuOnPause)
+        {
+            bool currentPause = Pause.ReadValue<float>() == 1;
+            if (currentPause && lastPause != currentPause)
+                Toolbox.Instance.Pause.SetPause(!Toolbox.Instance.Pause.Paused);
 
-        bool currentPause = Pause.ReadValue<float>() == 1;
-        if (currentPause && lastPause != currentPause)
-            Toolbox.Instance.Pause.SetPause(!Toolbox.Instance.Pause.Paused);
-
-        lastPause = currentPause;
+            lastPause = currentPause;
+        }
     }
 
     public void Resume() 
@@ -100,19 +116,13 @@ public class PauseMenu : MonoBehaviour
 
     public void ExitToMainMenu()
     {
-        //Toolbox.Instance.OnClosing.Invoke();
-        //Invoke("SceneChange", 0.2f);
+        FindObjectOfType<UIManager>().OpenMainMenu();
     }
 
     public void ExitToDesktop()
     {
         Toolbox.Instance.OnClosing.Invoke();
         Invoke("Terminate", 0.2f);
-    }
-
-    private void SceneChange() 
-    {
-        SceneManager.LoadScene(0);
     }
 
     private void Terminate() 
@@ -143,27 +153,72 @@ public class PauseMenu : MonoBehaviour
     public void BackToPauseMenu()
     {
         TurnOffAllMenus();
-        pauseMenu.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(pauseDefault);
+        if (UseMainMenu) 
+        {
+            MainMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(mainDefault);
+        }
+        else
+        {
+            pauseMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(pauseDefault);
+        }
     }
 
     private void OnPause() 
     {
-        Menu.SetActive(true);
-        BackToPauseMenu();
-        Cursor.lockState = CursorLockMode.None;
+        if (OpenMenuOnPause)
+        {
+            Menu.SetActive(true);
+            BackToPauseMenu();
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 
     private void OnUnPause() 
     {
+        if (OpenMenuOnPause)
+        {
+            Menu.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
+
+    public void DisablePauseMenu() 
+    {
+        OpenMenuOnPause = false;
         Menu.SetActive(false);
+    }
+
+    public void EnableMainMenu() 
+    {
+        Menu.SetActive(true);
+        if (MenuCamera != null)
+            MenuCamera.Priority = 1000;
+        UseMainMenu = true;
+        BackToPauseMenu();
+        FindObjectOfType<Player.PlayerController>().gameObject.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Resume();
+    }
+    public void DisableMainMenu() 
+    {
+        if (MenuCamera != null)
+            MenuCamera.Priority = -1000;
+        UseMainMenu = false;
+        Menu.SetActive(false);
+        FindObjectOfType<Player.PlayerController>().gameObject.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void TurnOffAllMenus() 
     {
         LoadMenu.SetActive(false);
-        //SaveMenu.SetActive(false);
+        MainMenu.SetActive(false);
         pauseMenu.SetActive(false);
         OptionsMenu.SetActive(false);
         ExitMenu.SetActive(false);

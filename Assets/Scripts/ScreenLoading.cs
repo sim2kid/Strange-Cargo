@@ -11,12 +11,11 @@ using Utility;
 public class ScreenLoading : MonoBehaviour, IProgress
 {
     public GameObject LoadingScreen;
-    public GameObject NormalOverlay;
     public Slider ProgrssBar;
     public Cinemachine.CinemachineVirtualCamera camera;
     public GameObject LoadingScene;
     public AudioPlayer bgm;
-    public GameObject PauseMenu;
+    UIManager UIManager;
 
     Cinemachine.CinemachineBlendDefinition saveCameraStyle;
     float time = 0;
@@ -50,23 +49,31 @@ public class ScreenLoading : MonoBehaviour, IProgress
 
     private void Start()
     {
-        Loading = false;
-        NormalOverlay.SetActive(true);
-        Toolbox.Instance.Pause.SetPause(false);
-        PauseMenu.SetActive(true);
-        Cursor.visible = false;
-        camera.Priority = -1000;
-        End.Invoke();
-        LoadingScene.SetActive(false);
-        LoadingScreen.SetActive(false);
+        CloseLoadingScreen();
 
+        UIManager = FindObjectOfType<UIManager>();
         FindObjectOfType<SaveManager>().OnLoad.AddListener(OnLoad);
         Invoke("LoadIsNeeded", 1f);
     }
 
+    public void CloseLoadingScreen() 
+    {
+        Loading = false;
+        camera.Priority = -1000;
+        LoadingScene.SetActive(false);
+        LoadingScreen.SetActive(false);
+    }
+
+    public void OpenLoadingScreen() 
+    {
+        camera.Priority = 1000;
+        LoadingScene.SetActive(true);
+        LoadingScreen.SetActive(true);
+    }
+
     public void LoadIsNeeded() 
     {
-        if (Report() < 1)
+        if (Report() < 1 && UIManager.currentMenu == Menu.Gameplay)
             OnLoad();
     }
 
@@ -90,7 +97,7 @@ public class ScreenLoading : MonoBehaviour, IProgress
 
     public void OnLoad() 
     {
-        Loading = true;
+        UIManager.OpenLoading();
         OnStart();
     }
 
@@ -100,21 +107,11 @@ public class ScreenLoading : MonoBehaviour, IProgress
         Loading = true;
         Console.Log($"The scene and it's creatures are currently being loaded...");
         time = 0;
-        saveCameraStyle = Camera.main.gameObject.GetComponent<Cinemachine.CinemachineBrain>().m_DefaultBlend;
-        Camera.main.gameObject.GetComponent<Cinemachine.CinemachineBrain>().m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
-        PauseMenu.SetActive(false);
-        LoadingScreen.SetActive(true);
-        NormalOverlay.SetActive(false);
-        LoadingScene.SetActive(true);
+        UIManager.OpenLoading();
         Toolbox.Instance.Pause.SetPause(true);
         Cursor.visible = true;
         bgm.Volume = 1;
         ProgrssBar.value = 0;
-
-        if (Utility.Toolbox.Instance.CreatureList.Count > 0)
-            baseTime = 0;
-
-        camera.Priority = 1000;
 
         StartEvent.Invoke();
     }
@@ -123,29 +120,15 @@ public class ScreenLoading : MonoBehaviour, IProgress
     {
         Loading = false;
         Console.Log($"Finished loading in with a time of {time.ToString("0.00")} seconds!");
-        NormalOverlay.SetActive(true);
+        UIManager.OpenGameplay();
         Toolbox.Instance.Pause.SetPause(false);
-        PauseMenu.SetActive(true);
         Cursor.visible = false;
-
         baseTime = 3; // No more extra waiting after first load
-
-        camera.Priority = -1000;
         End.Invoke();
-
-        //Destroy(LoadingScene);
-        LoadingScene.SetActive(false);
         bgm.Volume = 1;
-        
-
-        LoadingScreen.SetActive(false);
-        Invoke("SetCamToNormal", 1f);
     }
 
-    private void SetCamToNormal() 
-    {
-        Camera.main.gameObject.GetComponent<Cinemachine.CinemachineBrain>().m_DefaultBlend = saveCameraStyle;
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -168,6 +151,9 @@ public class ScreenLoading : MonoBehaviour, IProgress
                 OnFinished();
             }
         }
-
+        else if (UIManager.currentMenu == Menu.Loading)
+        {
+            UIManager.OpenGameplay();
+        }
     }
 }
