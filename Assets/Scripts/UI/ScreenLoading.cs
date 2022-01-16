@@ -64,6 +64,7 @@ namespace UI
             camera.Priority = -1000;
             LoadingScene.SetActive(false);
             LoadingScreen.SetActive(false);
+            Toolbox.Instance.Pause.SetPause(true);
         }
 
         public void OpenLoadingScreen()
@@ -71,6 +72,7 @@ namespace UI
             camera.Priority = 1000;
             LoadingScene.SetActive(true);
             LoadingScreen.SetActive(true);
+            Toolbox.Instance.Pause.SetPause(false);
         }
 
         public void LoadIsNeeded()
@@ -92,7 +94,8 @@ namespace UI
             if (baseTime > 0)
             {
                 count += Mathf.Clamp01(time / baseTime);
-                count /= 2;
+                if (creatures.Count > 0)
+                    count /= 2;
             }
             return count;
         }

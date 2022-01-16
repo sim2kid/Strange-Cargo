@@ -288,16 +288,17 @@ namespace PersistentData
 
         private Save GetCleanSave() 
         {
-            string saveLocation = SanitizePath(Path.Combine(Application.dataPath, "Resources/Saves/default.dat"));
+            string resourceLoc = "Saves/default";
 
-            if (!File.Exists(saveLocation))
+            TextAsset saveAsset = Resources.Load(resourceLoc) as TextAsset;
+
+            if (saveAsset == null)
             {
                 Console.LogWarning($"There is no Default Save set. We will use an completely empty save.");
                 return new Save() { Metadata = new SaveMeta() { SaveTime = -1 } };
             }
 
-            byte[] saveBytes = File.ReadAllBytes(saveLocation);
-            string saveJson = DecryptBytes(saveBytes);
+            string saveJson = DecryptBytes(saveAsset.bytes);
 
             Save save = JsonConvert.DeserializeObject<Save>(saveJson);
             return save;
@@ -337,7 +338,7 @@ namespace PersistentData
             }
             #if UNITY_EDITOR
 
-            string saveLocation = SanitizePath(Path.Combine(Application.dataPath, "Resources/Saves/default.dat"));
+            string saveLocation = SanitizePath(Path.Combine(Application.dataPath, "Resources/Saves/default.json"));
 
             Save save = MakeSave();
             string saveJson = JsonConvert.SerializeObject(save);

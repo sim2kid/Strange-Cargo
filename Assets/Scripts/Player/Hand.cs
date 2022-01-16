@@ -35,13 +35,11 @@ namespace Player
 
         void Start()
         {
-            StartCoroutine(LateStart(1));
             enableGravityOnDrop = false;
         }
 
-        IEnumerator LateStart(float waitTime) 
+        void LateStart() 
         {
-            yield return new WaitForSeconds(waitTime);
             player = Utility.Toolbox.Instance.Player;
             player.GlobalInteraction.PrimaryEvent.AddListener(LetGo);
             player.GlobalInteraction.UseEvent.AddListener(Use);
@@ -51,6 +49,15 @@ namespace Player
 
         private void Update()
         {
+            if(player == null)
+                LateStart();
+            if (Holding == null)
+                return;
+            if (Holding.ToString().Equals("null"))
+            {
+                Holding = null;
+                return;
+            }
             if (Holding is MonoBehaviour) 
             {
                 GameObject obj = ((MonoBehaviour)Holding).gameObject;

@@ -56,6 +56,16 @@ namespace UI
                 Console.LogError("No save prefab to build menu out of.");
                 return;
             }
+            OnOpen();
+            DeselectButton();
+        }
+
+        public void OnOpen() 
+        {
+            if (Content != null)
+                if (Content.transform != null)
+                    foreach (Transform child in Content.transform)
+                        Destroy(child.gameObject);
 
             float height = 100;
             List<SaveMeta> metas = manager.GetSaveList();
@@ -67,7 +77,7 @@ namespace UI
             {
                 SaveMeta meta = metas[i];
                 GameObject entry = Instantiate(SavePrefab);
-                
+
                 entry.transform.SetParent(Content, false);
                 RectTransform entryRect = (RectTransform)entry.transform;
                 entryRect.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, (entryRect.rect.height * 0.15f) + (i * entryRect.rect.height),
@@ -76,9 +86,7 @@ namespace UI
                 btn?.SetUp(meta, OnSaveSelected);
                 SaveButtons.Add(btn);
             }
-            DeselectButton();
         }
-
 
 
         private void OnDisable()
