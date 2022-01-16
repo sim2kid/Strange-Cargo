@@ -30,10 +30,24 @@ namespace Player
         public GameObject Eyes;
         public GameObject Feet;
         public GameObject Hand;
+        public GameObject PlayerModel;
+        public Camera OverlayCamera;
 
         private void Awake()
         {
             Utility.Toolbox.Instance.Player = this;
+        }
+
+        public void Disable() 
+        {
+            OnPause();
+            PlayerModel.SetActive(false);
+        }
+
+        public void Enable() 
+        {
+            OnUnPause();
+            PlayerModel.SetActive(true);    
         }
 
         private void OnPause() 
@@ -43,6 +57,7 @@ namespace Player
             HeadMovement.enabled = false;
             Interaction.enabled = false;
             Movement.enabled = false;
+            OverlayCamera.enabled = false;
         }
         private void OnUnPause()
         {
@@ -51,6 +66,7 @@ namespace Player
             HeadMovement.enabled = true;
             Interaction.enabled = true;
             Movement.enabled = true;
+            OverlayCamera.enabled = true;
         }
 
         private void Start()

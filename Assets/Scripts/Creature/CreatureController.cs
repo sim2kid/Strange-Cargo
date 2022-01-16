@@ -7,6 +7,8 @@ using Creature.Stats;
 using Creature.Task;
 using Creature.Brain;
 using UnityEngine.Events;
+using PersistentData.Saving;
+using PersistentData.Component;
 
 namespace Creature
 {
@@ -14,18 +16,20 @@ namespace Creature
     [RequireComponent(typeof(TextureConverter.TextureController))]
     [RequireComponent(typeof(NavMeshMovement))]
     [RequireComponent(typeof(FaceTexture))]
-    public class CreatureController : MonoBehaviour, IProgress
+    [RequireComponent(typeof(CreatureSaveable))]
+    public class CreatureController : MonoBehaviour, IProgress, ISaveable
     {
         [SerializeField]
-        public DNA dna;
-        [SerializeField]
-        public Needs needs;
-        [SerializeField]
-        public string Guid;
-        [SerializeField]
-        public string frontFeetSound;
-        [SerializeField]
-        public string backFeetSound;
+        private CreatureData data;
+
+        public ISaveData saveData { get => data; set { data = (CreatureData)value; } }
+
+        public DNA dna { get => data.dna; set => data.dna = value; }
+        public Needs needs { get => data.needs; set => data.needs = value; }
+
+        public string Guid { get => GetComponent<CreatureSaveable>().Data.GUID; set => GetComponent<CreatureSaveable>().Data.GUID = value; }
+        public string frontFeetSound { get => data.frontFeetSound; set => data.frontFeetSound = value; }
+        public string backFeetSound { get => data.backFeetSound; set => data.backFeetSound = value; }
 
         public FaceTexture Face { get; private set; }
         public NavMeshMovement Move { get; private set; }
@@ -44,15 +48,15 @@ namespace Creature
         private float timeSpentOnLastTask;
 
         private IProgress textureController;
-        
+
         private UnityEvent UpdateLoop;
 
         private float thinkTimer;
         [SerializeField]
         private float thinkRate = 2f;
 
-        [SerializeField, HideInInspector]
-        private BasicBrain brain;
+        [HideInInspector]
+        private BasicBrain brain { get => data.brain; set => data.brain = value; }
 
         /// <summary>
         /// Decay rate per second.
@@ -69,7 +73,16 @@ namespace Creature
         [SerializeField]
         private float LoadingProgress;
 
-        public bool Finished => textureController.Finished;
+        public bool Finished 
+        { 
+            get 
+            {
+                if (textureController != null)
+                    return textureController.Finished;
+                else
+                    return true;
+            } 
+        }
 
         public float Report()
         {
@@ -123,6 +136,7 @@ namespace Creature
 
         private void Awake()
         {
+            data.GUID = "232fd503-5c82-405f-8e6b-f13a11e6dfae";
             Console.HideInDebugConsole();
             tasks = new Queue<ITask>();
             hotTasks = new Queue<ITask>();
@@ -145,6 +159,14 @@ namespace Creature
 
             Console.LogWarning("The Creature Controller has hardwritten values!!");
             Console.Log($"Creature [{Guid}] has been loaded into the scene at {transform.position.ToString()}.");
+        }
+
+        private void OnDestroy()
+        {
+            Utility.Toolbox.Instance.CreatureList.Remove(this);
+            VoidTask();
+            Toolbox.Instance.Pause.OnPause.RemoveListener(OnPause);
+            Toolbox.Instance.Pause.OnUnPause.RemoveListener(OnUnPause);
         }
 
         private void OnPause() 
@@ -171,6 +193,7 @@ namespace Creature
                 thinkTimer = 0;
                 brain.Think();
             }
+            data.needs = needs;
         }
 
         private void RunTasks() 
@@ -207,12 +230,14 @@ namespace Creature
 
         public void VoidTask() 
         {
-            ITask task;
+            ITask task = null;
             if (hotTasks.Count > 0)
                 task = hotTasks.Peek();
             else 
-                task = tasks.Peek();
-
+                if(tasks.Count > 0)
+                    task = tasks.Peek();
+            if (task == null)
+                return;
 
             Console.LogDebug($"Creature [{Guid}]: End of Task: {task.GetType()} TimeLeft: {maxTimeOnTask - timeSpentOnLastTask}");
             task.EndTask(UpdateLoop);
@@ -240,6 +265,24 @@ namespace Creature
         {
             AnimationBool("Stop", false);
             Animator.SetTrigger(_triggerName);
+        }
+
+        public void PreSerialization()
+        {
+            brain.PreSerialization();
+        }
+
+        public void PreDeserialization()
+        {
+            brain.PreDeserialization();
+            return;
+        }
+
+        public void PostDeserialization()
+        {
+            brain.PostDeserialization(this);
+            if(Utility.Toolbox.Instance.Pause.Paused)
+                OnPause();
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using PersistentData;
 
 namespace Interaction
 {
@@ -24,6 +25,26 @@ namespace Interaction
         public IInteractable Previous { get; private set; }
 
         bool lastButton;
+
+        private void Awake()
+        {
+            SaveManager sm = FindObjectOfType<SaveManager>();
+            if (sm == null)
+                return;
+            sm.OnPreSerialization.AddListener(PreSerialization);
+            sm.OnPreDeserialization.AddListener(PreDeserialization);
+            sm.OnPostDeserialization.AddListener(PostDeserialization);
+        }
+
+        private void OnDestroy()
+        {
+            SaveManager sm = FindObjectOfType<SaveManager>();
+            if (sm == null)
+                return;
+            sm.OnPreSerialization.RemoveListener(PreSerialization);
+            sm.OnPreDeserialization.RemoveListener(PreDeserialization);
+            sm.OnPostDeserialization.RemoveListener(PostDeserialization);
+        }
 
         private void Start()
         {
@@ -173,6 +194,24 @@ namespace Interaction
                 }
             }
             return toReturn;
+        }
+
+        public void PreSerialization()
+        {
+            return;
+        }
+
+        public void PreDeserialization()
+        {
+            UpClickQueue.Clear();
+            Previous = null;
+            tt.Clear();
+            return;
+        }
+
+        public void PostDeserialization()
+        {
+            return;
         }
     }
 }

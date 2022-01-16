@@ -4,6 +4,7 @@ using UnityEngine;
 using Creature.Stats;
 using Creature.Task;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Creature.Brain
 {
@@ -12,8 +13,10 @@ namespace Creature.Brain
     {
         private CreatureController _controller;
         [SerializeField]
+        [JsonProperty]
         private List<Preferred> Preferences;
-
+        [SerializeField]
+        [JsonProperty]
         private Queue<System.Type> lastTasks;
         private int maxTrackSize;
         public BasicBrain(CreatureController controller) 
@@ -44,7 +47,7 @@ namespace Creature.Brain
                 Preferred p = null;
                 if (task.RelatedObject != null)
                 {
-                    p = Preferences.Find(x => x.Obj == task.RelatedObject);
+                    p = Preferences.Find(x => x.Obj.Guid.Equals(task.RelatedObject.Guid));
                     if (p != null)
                     {
                         preference = p.Preference;
@@ -105,6 +108,22 @@ namespace Creature.Brain
                 f[i] = 1 - f[i];
             }
             return f;
+        }
+
+        public void PreSerialization()
+        {
+            return;
+        }
+
+        public void PreDeserialization()
+        {
+            return;
+        }
+
+        public void PostDeserialization(CreatureController controller)
+        {
+            _controller = controller;
+            return;
         }
     }
 }

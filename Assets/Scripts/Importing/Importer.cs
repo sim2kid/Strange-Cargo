@@ -96,6 +96,9 @@ namespace Importing
 
             database.Serialize();
 
+            if (database == null || string.IsNullOrEmpty(location) || string.IsNullOrEmpty(name))
+                return;
+
             if (AssetDatabase.IsValidFolder(location))
             {
                 AssetDatabase.CreateAsset(database, $"{ForwardSlashPath(Path.Combine(location, name))}.asset");

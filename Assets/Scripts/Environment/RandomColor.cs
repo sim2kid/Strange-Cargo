@@ -1,3 +1,5 @@
+using PersistentData.Component;
+using PersistentData.Saving;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,34 +7,60 @@ using Utility;
 
 namespace Environment
 {
-    [System.Serializable]
     [RequireComponent(typeof(Renderer))]
-    public class RandomColor : MonoBehaviour
+    public class RandomColor : MonoBehaviour, ISaveable
     {
-        public string Color;
+        public ColorData colorData;
+
         public string ColorPalette = "Data/ColorPalette/default";
+
+        public ISaveData saveData { get => colorData; set { colorData = (ColorData)value; } }
+
+        private void OnValidate()
+        {
+            if (string.IsNullOrWhiteSpace(colorData.GUID))
+            {
+                colorData.GUID = System.Guid.NewGuid().ToString();
+            }
+        }
 
         public void Awake()
         {
-            if (string.IsNullOrWhiteSpace(Color))
+            if (string.IsNullOrWhiteSpace(colorData.Color))
             {
-                Color = RandomColorPicker.ColorToHex(
-                    RandomColorPicker.RetriveRandomColor(
-                        RandomColorPicker.DefaultSeperationChar, ColorPalette));
+                NewColor();
             }
         }
 
         public void NewColor() 
         {
-            Color = RandomColorPicker.ColorToHex(
+            colorData.Color = RandomColorPicker.ColorToHex(
                        RandomColorPicker.RetriveRandomColor(
                            RandomColorPicker.DefaultSeperationChar, ColorPalette));
-            this.GetComponent<Renderer>().material.color = RandomColorPicker.HexToColor(Color);
+            Renderer renderer = this.GetComponent<Renderer>();
+            if (renderer != null)
+                foreach (UnityEngine.Material material in renderer.materials)
+                    material.color = RandomColorPicker.HexToColor(colorData.Color);
+        }
+
+        public void PostDeserialization()
+        {
+            return;
+        }
+
+        public void PreDeserialization()
+        {
+            return;
+        }
+
+        public void PreSerialization()
+        {
+            return;
         }
 
         private void Start()
         {
-            this.GetComponent<Renderer>().material.color = RandomColorPicker.HexToColor(Color);
+            this.GetComponent<Renderer>().material.color = RandomColorPicker.HexToColor(colorData.Color);
         }
     }
 }
