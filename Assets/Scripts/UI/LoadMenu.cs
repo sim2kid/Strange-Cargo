@@ -22,10 +22,17 @@ namespace UI
         [SerializeField]
         GameObject DefaultDelete;
         [SerializeField]
+        GameObject DefaultNewGameButton;
+        [SerializeField]
         GameObject PickSaveMenu;
         [SerializeField]
         GameObject ConfirmDeleteMenu;
+        [SerializeField]
+        GameObject NewSaveMenu;
 
+
+        [SerializeField]
+        TMPro.TMP_InputField saveName;
 
         List<SaveButton> SaveButtons;
 
@@ -37,6 +44,7 @@ namespace UI
         {
             ConfirmDeleteMenu.SetActive(false);
             PickSaveMenu.SetActive(true);
+            NewSaveMenu.SetActive(false);
             manager = FindObjectOfType<SaveManager>();
             if (manager == null)
             {
@@ -49,8 +57,11 @@ namespace UI
                 return;
             }
 
+            float height = 100;
             List<SaveMeta> metas = manager.GetSaveList();
+            float expandBy = (height * 0.15f) + ((height * 0.15f) + (height) * metas.Count);
             metas.Sort((x, y) => y.SaveTime.CompareTo(x.SaveTime));
+            Content.sizeDelta = new Vector2(Content.sizeDelta.x, expandBy);
             SaveButtons = new List<SaveButton>();
             for (int i = 0; i < metas.Count; i++)
             {
@@ -73,10 +84,12 @@ namespace UI
         private void OnDisable()
         {
             OnSaveSelected.RemoveAllListeners();
-            foreach (Transform child in Content.transform)
-            {
-                Destroy(child.gameObject);
-            }
+            if(Content != null)
+                if(Content.transform != null)
+                    foreach (Transform child in Content.transform)
+                    {
+                        Destroy(child.gameObject);
+                    }
             if(SaveButtons != null)
                 SaveButtons.Clear();
             DeselectButton();
@@ -91,6 +104,8 @@ namespace UI
 
         void Update() 
         {
+            if (SaveButtons == null)
+                return;
             foreach (var btn in SaveButtons)
             {
                 if (btn.Selected)
@@ -126,12 +141,22 @@ namespace UI
 
         public void NewGameMenu() 
         {
-        
+            // Open save menu
+            ConfirmDeleteMenu.SetActive(false);
+            PickSaveMenu.SetActive(false);
+            NewSaveMenu.SetActive(true);
+            if(saveName != null)
+                saveName.text = "Unnamed Game";
+            EventSystem.current.SetSelectedGameObject(DefaultNewGameButton);
         }
 
         public void NewGame() 
         {
-        
+            // Create new save
+            if (saveName != null)
+                if (!string.IsNullOrWhiteSpace(saveName.text))
+                    manager.StartNewSave(saveName.text);
+            BackToLoadMenu();
         }
 
         public void Delete()
@@ -141,6 +166,7 @@ namespace UI
                 return;
             ConfirmDeleteMenu.SetActive(true);
             PickSaveMenu.SetActive(false);
+            NewSaveMenu.SetActive(false);
             EventSystem.current.SetSelectedGameObject(DefaultDelete);
         }
 
@@ -155,6 +181,7 @@ namespace UI
         {
             ConfirmDeleteMenu.SetActive(false);
             PickSaveMenu.SetActive(true);
+            NewSaveMenu.SetActive(false);
             EventSystem.current.SetSelectedGameObject(DefaultButton);
             Rebake();
         }

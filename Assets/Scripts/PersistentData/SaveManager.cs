@@ -18,6 +18,8 @@ namespace PersistentData
         public UnityEvent OnPreDeserialization;
         public UnityEvent OnPostDeserialization;
 
+        public UnityEvent OnLoad;
+
         static string SaveLocation;
         [SerializeField]
         bool useEncryption = false;
@@ -53,6 +55,10 @@ namespace PersistentData
                 SaveGuid = guid,
                 SaveTime = System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
             };
+            Save save = GetCleanSave();
+            save.Metadata = CurrentSave;
+            Load(save);
+            Invoke("Save", 2);
         }
 
         public Save MakeSave()
@@ -124,6 +130,7 @@ namespace PersistentData
 
         private void Load(Save save)
         {
+            OnLoad.Invoke();
             OnPreDeserialization.Invoke();
             LoadPrefabs(save.Prefabs);
             LoadPersistants(save.Persistents);
@@ -260,6 +267,11 @@ namespace PersistentData
                 }
             }
             return metas;
+        }
+
+        private Save GetCleanSave() 
+        {
+            return new Save();
         }
 
         private Save LoadFromDisk(string saveGuid)

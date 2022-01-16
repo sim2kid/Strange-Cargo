@@ -1,4 +1,5 @@
 using Creature;
+using PersistentData;
 using Sound;
 using System.Collections;
 using System.Collections.Generic;
@@ -35,22 +36,38 @@ public class ScreenLoading : MonoBehaviour, IProgress
         {
             if (value != _finished) 
             {
-                if (value)
-                {
-                    OnFinished();
-                }
-                else 
-                {
-                    OnStart();
-                }
             }
             _finished = value;
         }
     }
+    bool Loading;
 
     private void Awake()
     {
         _finished = true;
+        Loading = false;
+    }
+
+    private void Start()
+    {
+        Loading = false;
+        NormalOverlay.SetActive(true);
+        Toolbox.Instance.Pause.SetPause(false);
+        PauseMenu.SetActive(true);
+        Cursor.visible = false;
+        camera.Priority = -1000;
+        End.Invoke();
+        LoadingScene.SetActive(false);
+        LoadingScreen.SetActive(false);
+
+        FindObjectOfType<SaveManager>().OnLoad.AddListener(OnLoad);
+        Invoke("LoadIsNeeded", 1f);
+    }
+
+    public void LoadIsNeeded() 
+    {
+        if (Report() < 1)
+            OnLoad();
     }
 
     public float Report() 
@@ -59,7 +76,10 @@ public class ScreenLoading : MonoBehaviour, IProgress
         float count = 0;
         foreach (CreatureController c in creatures)
             count += c.Report();
-        count /= creatures.Count;
+        if(creatures.Count > 0)
+            count /= creatures.Count;
+        else 
+            count += 1;
         if (baseTime > 0)
         {
             count += Mathf.Clamp01(time / baseTime);
@@ -68,10 +88,20 @@ public class ScreenLoading : MonoBehaviour, IProgress
         return count;
     }
 
+    public void OnLoad() 
+    {
+        Loading = true;
+        OnStart();
+    }
+
     private void OnStart() 
     {
+        Finished = false;
+        Loading = true;
         Console.Log($"The scene and it's creatures are currently being loaded...");
         time = 0;
+        saveCameraStyle = Camera.main.gameObject.GetComponent<Cinemachine.CinemachineBrain>().m_DefaultBlend;
+        Camera.main.gameObject.GetComponent<Cinemachine.CinemachineBrain>().m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
         PauseMenu.SetActive(false);
         LoadingScreen.SetActive(true);
         NormalOverlay.SetActive(false);
@@ -80,21 +110,25 @@ public class ScreenLoading : MonoBehaviour, IProgress
         Cursor.visible = true;
         bgm.Volume = 1;
         ProgrssBar.value = 0;
+
+        if (Utility.Toolbox.Instance.CreatureList.Count > 0)
+            baseTime = 0;
+
         camera.Priority = 1000;
-        saveCameraStyle = Camera.main.gameObject.GetComponent<Cinemachine.CinemachineBrain>().m_DefaultBlend;
-        Camera.main.gameObject.GetComponent<Cinemachine.CinemachineBrain>().m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
+
         StartEvent.Invoke();
     }
 
     private void OnFinished() 
     {
+        Loading = false;
         Console.Log($"Finished loading in with a time of {time.ToString("0.00")} seconds!");
         NormalOverlay.SetActive(true);
         Toolbox.Instance.Pause.SetPause(false);
         PauseMenu.SetActive(true);
         Cursor.visible = false;
 
-        baseTime = 0; // No more extra waiting after first load
+        baseTime = 3; // No more extra waiting after first load
 
         camera.Priority = -1000;
         End.Invoke();
@@ -105,19 +139,18 @@ public class ScreenLoading : MonoBehaviour, IProgress
         
 
         LoadingScreen.SetActive(false);
-        Invoke("SelfDestruct", 0.1f);
+        Invoke("SetCamToNormal", 1f);
     }
 
-    private void SelfDestruct() 
+    private void SetCamToNormal() 
     {
         Camera.main.gameObject.GetComponent<Cinemachine.CinemachineBrain>().m_DefaultBlend = saveCameraStyle;
-        //Destroy(this.gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Utility.Toolbox.Instance.CreatureList.Count > 0)
+        if (Loading)
         {
             if (Report() < 1 && Finished)
             {
@@ -132,6 +165,7 @@ public class ScreenLoading : MonoBehaviour, IProgress
             if (Report() == 1 && !Finished)
             {
                 Finished = true;
+                OnFinished();
             }
         }
 
