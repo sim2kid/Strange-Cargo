@@ -199,10 +199,10 @@ public class PauseMenu : MonoBehaviour
             MenuCamera.Priority = 1000;
         UseMainMenu = true;
         BackToPauseMenu();
-        FindObjectOfType<Player.PlayerController>().gameObject.SetActive(false);
+        Resume();
+        FindObjectOfType<Player.PlayerController>().Disable();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        Resume();
     }
     public void DisableMainMenu() 
     {
@@ -210,7 +210,7 @@ public class PauseMenu : MonoBehaviour
             MenuCamera.Priority = -1000;
         UseMainMenu = false;
         Menu.SetActive(false);
-        FindObjectOfType<Player.PlayerController>().gameObject.SetActive(true);
+        FindObjectOfType<Player.PlayerController>().Enable();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }

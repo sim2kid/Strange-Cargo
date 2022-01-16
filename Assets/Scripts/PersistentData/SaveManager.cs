@@ -174,11 +174,12 @@ namespace PersistentData
 
         public void DestroyAllUnloadedCreatures() 
         {
-            Creature.CreatureController[] currentSaveables = FindObjectsOfType<Creature.CreatureController>();
+            CreatureSaveable[] currentSaveables = FindObjectsOfType<CreatureSaveable>();
             if (currentSaveables != null)
-                foreach (Creature.CreatureController current in currentSaveables)
+                foreach (CreatureSaveable current in currentSaveables)
                 {
-                    if(current == null || !current.Finished)
+                    Creature.CreatureController creature = current.GetComponent<Creature.CreatureController>();
+                    if(creature == null || creature.Report() != 1)
                         Destroy(current.gameObject);
                 }
         }
