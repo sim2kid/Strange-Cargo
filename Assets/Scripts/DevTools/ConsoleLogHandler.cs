@@ -130,25 +130,15 @@ public class ConsoleLogHandler : ILogHandler
         string toWrite = $"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}] [{LogLevelToString(logLevel)}] [{source}]: {str}";
         lock (locker)
         {
-            mainFS = new FileStream(currentPath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            mainSW = new StreamWriter(mainFS);
-            lateFS = new FileStream(latestPath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            lateSW = new StreamWriter(lateFS);
             if (IsLogAllowedOnConsole(logLevel))
             {
                 UpdateLogs(toWrite);
             }
             if (IsLogAllowedOnFile(logLevel))
             {
-                mainSW.WriteLine(toWrite);
-                mainSW.Flush();
-                lateSW.WriteLine(toWrite);
-                lateSW.Flush();
+                File.AppendAllText(currentPath, toWrite + "\n");
+                File.AppendAllText(latestPath, toWrite + "\n");
             }
-            lateSW.Close();
-            lateFS.Close();
-            mainSW.Close();
-            mainFS.Close();
         }
     }
 
