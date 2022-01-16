@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabData:
+    _guid: 
     PrefabResourceLocation: Prefabs/WaterBowl
 --- !u!114 &5778481949278450083
 MonoBehaviour:
@@ -850,6 +851,12 @@ MonoBehaviour:
   OnEmpty:
     m_PersistentCalls:
       m_Calls: []
+  _guid: 
+  data:
+    _guid: 4ebd868c-b72c-4d27-8de1-b14e8fd4e18d
+    BaseNeeds:
+      _myNeeds: []
+    Fullness: 0
 --- !u!114 &1735154763482689101
 MonoBehaviour:
   m_ObjectHideFlags: 0
