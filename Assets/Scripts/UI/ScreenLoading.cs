@@ -64,7 +64,7 @@ namespace UI
             camera.Priority = -1000;
             LoadingScene.SetActive(false);
             LoadingScreen.SetActive(false);
-            Toolbox.Instance.Pause.SetPause(true);
+            
         }
 
         public void OpenLoadingScreen()
@@ -72,7 +72,6 @@ namespace UI
             camera.Priority = 1000;
             LoadingScene.SetActive(true);
             LoadingScreen.SetActive(true);
-            Toolbox.Instance.Pause.SetPause(false);
         }
 
         public void LoadIsNeeded()

@@ -40,13 +40,15 @@ namespace Player
 
         public void Disable() 
         {
-            OnPause();
+            if (!Utility.Toolbox.Instance.Pause.Paused)
+                OnPause();
             PlayerModel.SetActive(false);
         }
 
         public void Enable() 
         {
-            OnUnPause();
+            if(!Utility.Toolbox.Instance.Pause.Paused)
+                OnUnPause();
             PlayerModel.SetActive(true);    
         }
 
