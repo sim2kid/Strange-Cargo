@@ -105,8 +105,12 @@ namespace Player
         {
             if (Holding != null)
             {
-                player.Footsteps.OnStep.RemoveListener(Holding.Shake);
-                player.HeadMovement.OnJolt.RemoveListener(Holding.Shake);
+                if (player == null)
+                    return;
+                if(player.Footsteps != null)
+                    player.Footsteps.OnStep.RemoveListener(Holding.Shake);
+                if (player.HeadMovement != null)
+                    player.HeadMovement.OnJolt.RemoveListener(Holding.Shake);
                 if (Holding is MonoBehaviour)
                 {
                     GameObject gameObject = ((MonoBehaviour)Holding).gameObject;

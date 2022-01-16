@@ -288,7 +288,19 @@ namespace PersistentData
 
         private Save GetCleanSave() 
         {
-            return new Save();
+            string saveLocation = SanitizePath(Path.Combine(Application.dataPath, "Resources/Saves/default.dat"));
+
+            if (!File.Exists(saveLocation))
+            {
+                Console.LogWarning($"There is no Default Save set. We will use an completely empty save.");
+                return new Save() { Metadata = new SaveMeta() { SaveTime = -1 } };
+            }
+
+            byte[] saveBytes = File.ReadAllBytes(saveLocation);
+            string saveJson = DecryptBytes(saveBytes);
+
+            Save save = JsonConvert.DeserializeObject<Save>(saveJson);
+            return save;
         }
 
         private Save LoadFromDisk(string saveGuid)
@@ -314,6 +326,23 @@ namespace PersistentData
 
             Save save = JsonConvert.DeserializeObject<Save>(saveJson);
             return save;
+        }
+
+        public void SaveAsDefault() 
+        {
+            if (!Application.isEditor) 
+            {
+                Console.LogError("You can not save to resources unless you are in-editor.");
+                return;
+            }
+
+            string saveLocation = SanitizePath(Path.Combine(Application.dataPath, "Resources/Saves/default.dat"));
+
+            Save save = MakeSave();
+            string saveJson = JsonConvert.SerializeObject(save);
+
+            File.WriteAllBytes(saveLocation, StringToBytes(saveJson));
+            UnityEditor.AssetDatabase.Refresh();
         }
 
         private void SaveToDisk(Save save)
