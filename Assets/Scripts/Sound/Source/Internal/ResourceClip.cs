@@ -9,7 +9,6 @@ namespace Sound.Source.Internal
     [System.Serializable]
     public class ResourceClip : ISound
     {
-        [Header("Resource Clip")]
         [SerializeField]
         private string _audioFile;
 
@@ -23,6 +22,12 @@ namespace Sound.Source.Internal
         public List<SoundBite> Bites => GetBites();
 
         public List<ISound> Containers { get => null; set { } }
+
+        public ResourceClip(string audioFile = null) 
+        {
+            _audioFile = audioFile;
+            LoadAudio(audioFile);
+        }
 
         public void LoadAudio(string newAudio = null)
         {

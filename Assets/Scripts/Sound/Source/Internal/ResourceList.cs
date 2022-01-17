@@ -7,15 +7,33 @@ using UnityEngine;
 namespace Sound.Source.Internal
 {
     [System.Serializable]
-    public class ResourceList : BasicSound, ISound
+    public class ResourceList : ISound
     {
-        [Header("Resource List")]
+        [SerializeField]
+        protected ValueRange _pitch = new ValueRange(1);
+        [SerializeField]
+        protected ValueRange _volume = new ValueRange(1);
+        [SerializeField]
+        protected ValueRange _deley = new ValueRange(0);
+        public ValueRange Pitch { get => _pitch; set => _pitch = value; }
+        public ValueRange Volume { get => _volume; set => _volume = value; }
+        public ValueRange Delay { get => _deley; set => _deley = value; }
+
+        public List<ISound> Containers { get => GetContainers(); set { } }
+
         [SerializeField]
         private string _audioPool;
 
+
         [SerializeField]
         protected List<SoundBite> _soundBites = new List<SoundBite>();
-        public override List<SoundBite> Bites => GetBites();
+        public List<SoundBite> Bites => null;
+
+        public ResourceList(string pool = "") 
+        {
+            _audioPool = pool;
+            LoadAudio(pool);
+        }
 
         public void LoadAudio(string newAudio = null)
         {
@@ -38,9 +56,9 @@ namespace Sound.Source.Internal
                 });
         }
 
-        private List<SoundBite> GetBites() 
+        private List<ISound> GetContainers() 
         {
-            List<SoundBite> bites = new List<SoundBite>();
+            List<ISound> bites = new List<ISound>();
             if (_soundBites.Count == 0)
             {
                 // try Load audio clips
@@ -53,12 +71,13 @@ namespace Sound.Source.Internal
 
             foreach (var bite in _soundBites)
             {
+                
                 var toReturn = new SoundBite();
                 toReturn.Clip = bite.Clip;
                 toReturn.Pitch = bite.Pitch * this.Pitch;
                 toReturn.Volume = bite.Volume * this.Volume;
                 toReturn.Delay = bite.Delay + this.Delay;
-                bites.Add(toReturn);
+                bites.Add(new SoundClip(toReturn));
             }
             return bites;
         }

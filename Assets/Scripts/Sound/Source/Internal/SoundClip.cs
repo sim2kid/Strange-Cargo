@@ -10,14 +10,23 @@ namespace Sound.Source.Internal
     public class SoundClip : ISound
     {
         [SerializeField]
-        protected SoundBite _bite;
+        protected SoundBite _soundBite;
 
-        public ValueRange Pitch { get => _bite.Pitch; set => _bite.Pitch = value; }
-        public ValueRange Volume { get => _bite.Volume; set => _bite.Volume = value; }
-        public ValueRange Delay { get => _bite.Delay; set => _bite.Delay = value; }
+        public ValueRange Pitch { get => _soundBite.Pitch; set => _soundBite.Pitch = value; }
+        public ValueRange Volume { get => _soundBite.Volume; set => _soundBite.Volume = value; }
+        public ValueRange Delay { get => _soundBite.Delay; set => _soundBite.Delay = value; }
 
-        public List<SoundBite> Bites => new List<SoundBite>() { _bite };
+        public List<SoundBite> Bites => new List<SoundBite>() { _soundBite };
 
         public List<ISound> Containers { get => null; set { } }
+
+        public SoundClip() 
+        {
+        
+        }
+        public SoundClip(SoundBite bite) 
+        {
+            _soundBite = bite;
+        }
     }
 }

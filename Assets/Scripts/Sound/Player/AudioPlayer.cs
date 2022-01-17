@@ -85,7 +85,8 @@ namespace Sound.Player
                 _source.pitch = pitch;
                 _clipVolume = bites[i].Volume.Read();
                 float volume = _clipVolume * Volume;
-                _source.PlayOneShot(bites[i].Clip, volume);
+                if(bites[i].Clip != null)
+                    _source.PlayOneShot(bites[i].Clip, volume);
                 while (_source.isPlaying) 
                 {
                     yield return new WaitForFixedUpdate();

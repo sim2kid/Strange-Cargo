@@ -47,18 +47,14 @@ namespace Sound.Player
                 int count = 0;
                 DisplayContainers(this.serializedObject, "Container", ref player.Container, ref count);
             }
-            else 
-            {
-                // Add container of choice
-                // player.Container;
-            }
-
             this.serializedObject.ApplyModifiedProperties();
-            //DrawDefaultInspector();
+            
         }
 
         List<bool> foldoutList = new List<bool>();
         List<ContainerType> typeList = new List<ContainerType>();
+        List<ContainerType> currentType = new List<ContainerType>();
+        List<int> selectionIndex = new List<int>();
 
         public void DisplayContainers(SerializedObject baseObject, string path, ref ISound parent, ref int count, int level = 0) 
         {
@@ -72,7 +68,11 @@ namespace Sound.Player
             }
             if (count > typeList.Count - 1)
                 typeList.Add(ContainerType.SoundClip);
-            foldoutList[count] = EditorGUILayout.BeginFoldoutHeaderGroup(foldoutList[count], "ISound", EditorStyles.foldout);
+            if(count > currentType.Count -1)
+                currentType.Add(ContainerType.SoundClip);
+            if(count > selectionIndex.Count - 1)
+                selectionIndex.Add(-1);
+            foldoutList[count] = EditorGUILayout.BeginFoldoutHeaderGroup(foldoutList[count], currentType[count].ToString(), EditorStyles.foldout);
             EditorGUILayout.EndFoldoutHeaderGroup();
             if (foldoutList[count++])
             {
@@ -83,6 +83,7 @@ namespace Sound.Player
                 typeList[count-1] = (ContainerType)EditorGUILayout.EnumPopup(typeList[count-1]);
                 if (GUILayout.Button("Set"))
                 {
+                    currentType[count-1] = typeList[count-1];
                     ISound sound = typeList[count-1].Resolve();
                     if (sound != null)
                     {
@@ -105,16 +106,18 @@ namespace Sound.Player
                 SerializedProperty parentProp = baseObject.FindProperty(path);
                 EditorGUILayout.PropertyField(parentProp, true);
 
-
-                if (parent.Containers != null)
+                // Display container
+                if (parent is Container)
                 {
                     // Add Remove Index buttons
                     EditorGUILayout.BeginHorizontal();
-                    int value = Mathf.Clamp(EditorGUILayout.IntField(parent.Containers.Count - 1), 0, parent.Containers.Count - 1);
+                    selectionIndex[count -1] = Mathf.Clamp(EditorGUILayout.IntField(selectionIndex[count - 1]), 0, parent.Containers.Count - 1);
+                    int value = selectionIndex[count - 1];
                     if (GUILayout.Button("Add at Index"))
                     {
                         foldoutList.Insert(count, false);
                         typeList.Insert(count, ContainerType.SoundClip);
+                        currentType.Insert(count, typeList[count - 1]);
                         if (parent.Containers.Count == 0)
                         {
                             parent.Containers.Add(typeList[count - 1].Resolve());
@@ -131,6 +134,7 @@ namespace Sound.Player
                             parent.Containers.RemoveAt(value);
                             foldoutList.RemoveAt(count + value);
                             typeList.RemoveAt(count + value);
+                            currentType.RemoveAt(count + value);
                             return;
                         }
                     }
@@ -147,22 +151,9 @@ namespace Sound.Player
                         {
                             if (prop.isArray)
                                 prop = prop.GetArrayElementAtIndex(i);
-                            if (child is Container)
-                            {
-                                DisplayContainers(baseObject, builder, ref child, ref count, level++);
-                                parent.Containers[i] = child;
-                                
-                            }
-                            else
-                            {
-                                EditorGUILayout.PropertyField(prop, true);
-                            }
+                            DisplayContainers(baseObject, builder, ref child, ref count, level++);
+                            parent.Containers[i] = child;
                         }
-                        //if (children != null)
-                        //{
-                        //    EditorGUILayout.PropertyField(children);
-                        //    // List
-                        //}
                     }
                     EditorGUILayout.EndVertical();
                 }

@@ -19,11 +19,27 @@ namespace Sound.Structure
 
         public virtual List<SoundBite> Bites => GetBites();
 
-        [HideInInspector]
         [SerializeReference]
         [SerializeField]
         protected List<ISound> _containers = new List<ISound>();
-        public virtual List<ISound> Containers { get => _containers; set { _containers = value; } }
+        public virtual List<ISound> Containers { get => ProcessContainers(); set { _containers = value; } }
+
+        protected virtual List<ISound> ProcessContainers() 
+        {
+            List<ISound> sounds = new List<ISound>();
+            foreach (var container in _containers)
+            {
+                if (container.Bites == null && container.Containers != null)
+                {
+                    sounds.AddRange(container.Containers);
+                }
+                else 
+                {
+                    sounds.Add(container);
+                }
+            }
+            return sounds;
+        }
 
         protected abstract List<SoundBite> GetBites();
 
