@@ -29,6 +29,8 @@ namespace Sound.Source.Internal
         protected List<SoundBite> _soundBites = new List<SoundBite>();
         public List<SoundBite> Bites => null;
 
+        public ResourceList() { }
+
         public ResourceList(string pool = "") 
         {
             _audioPool = pool;
@@ -58,6 +60,9 @@ namespace Sound.Source.Internal
 
         private List<ISound> GetContainers() 
         {
+            if (!Application.isPlaying)
+                return new List<ISound>();
+
             List<ISound> bites = new List<ISound>();
             if (_soundBites.Count == 0)
             {

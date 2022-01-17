@@ -73,6 +73,7 @@ namespace Sound.Player
             if(count > selectionIndex.Count - 1)
                 selectionIndex.Add(-1);
             foldoutList[count] = EditorGUILayout.BeginFoldoutHeaderGroup(foldoutList[count], currentType[count].ToString(), EditorStyles.foldout);
+            currentType[count] = parent.Resolve();
             EditorGUILayout.EndFoldoutHeaderGroup();
             if (foldoutList[count++])
             {
@@ -111,7 +112,7 @@ namespace Sound.Player
                 {
                     // Add Remove Index buttons
                     EditorGUILayout.BeginHorizontal();
-                    selectionIndex[count -1] = Mathf.Clamp(EditorGUILayout.IntField(selectionIndex[count - 1]), 0, parent.Containers.Count - 1);
+                    selectionIndex[count - 1] = Mathf.Clamp(EditorGUILayout.IntField(selectionIndex[count - 1]), 0, parent.Containers.Count - 1);
                     int value = selectionIndex[count - 1];
                     if (GUILayout.Button("Add at Index"))
                     {
@@ -146,11 +147,8 @@ namespace Sound.Player
                         ISound child = parent.Containers[i];
                         string builder = path + $"._containers.Array.data[{i}]";
                         SerializedProperty prop = baseObject.FindProperty(builder);
-
                         if (prop != null)
                         {
-                            if (prop.isArray)
-                                prop = prop.GetArrayElementAtIndex(i);
                             DisplayContainers(baseObject, builder, ref child, ref count, level++);
                             parent.Containers[i] = child;
                         }

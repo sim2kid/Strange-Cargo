@@ -8,6 +8,7 @@ namespace Sound
 {
     public enum ContainerType
     {
+        Unknown,
         ResourceClip,
         ResourceList,
         SoundClip,
@@ -30,6 +31,19 @@ namespace Sound
                 default:
                     return null;
             }
+        }
+
+        public static ContainerType Resolve(this ISound type) 
+        {
+            if(type is ResourceClip)
+                return ContainerType.ResourceClip;
+            if (type is SoundClip)
+                return ContainerType.SoundClip;
+            if (type is RandomContainer)
+                return ContainerType.RandomContainer;
+            if (type is ResourceList)
+                return ContainerType.ResourceList;
+            return ContainerType.Unknown;
         }
     }
 }

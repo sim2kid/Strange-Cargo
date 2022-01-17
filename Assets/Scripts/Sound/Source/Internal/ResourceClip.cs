@@ -23,6 +23,7 @@ namespace Sound.Source.Internal
 
         public List<ISound> Containers { get => null; set { } }
 
+        public ResourceClip() { }
         public ResourceClip(string audioFile = null) 
         {
             _audioFile = audioFile;
