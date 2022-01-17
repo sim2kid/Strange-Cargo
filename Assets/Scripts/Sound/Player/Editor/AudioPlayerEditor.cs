@@ -73,7 +73,7 @@ namespace Sound.Player
             if(count > selectionIndex.Count - 1)
                 selectionIndex.Add(-1);
             foldoutList[count] = EditorGUILayout.BeginFoldoutHeaderGroup(foldoutList[count], currentType[count].ToString(), EditorStyles.foldout);
-            currentType[count] = parent.Resolve();
+            currentType[count] = parent.GetTypeEnum();
             EditorGUILayout.EndFoldoutHeaderGroup();
             if (foldoutList[count++])
             {
@@ -88,8 +88,8 @@ namespace Sound.Player
                     ISound sound = typeList[count-1].Resolve();
                     if (sound != null)
                     {
-                        if (sound.Containers != null && parent.Containers != null)
-                            sound.Containers = parent.Containers;
+                        if (sound.VirtualContainers != null && parent.VirtualContainers != null)
+                            sound.VirtualContainers = parent.VirtualContainers;
                         parent = sound;
                     }
                 }
@@ -112,27 +112,27 @@ namespace Sound.Player
                 {
                     // Add Remove Index buttons
                     EditorGUILayout.BeginHorizontal();
-                    selectionIndex[count - 1] = Mathf.Clamp(EditorGUILayout.IntField(selectionIndex[count - 1]), 0, parent.Containers.Count - 1);
+                    selectionIndex[count - 1] = Mathf.Clamp(EditorGUILayout.IntField(selectionIndex[count - 1]), 0, parent.VirtualContainers.Count - 1);
                     int value = selectionIndex[count - 1];
                     if (GUILayout.Button("Add at Index"))
                     {
                         foldoutList.Insert(count, false);
                         typeList.Insert(count, ContainerType.SoundClip);
                         currentType.Insert(count, typeList[count - 1]);
-                        if (parent.Containers.Count == 0)
+                        if (parent.VirtualContainers.Count == 0)
                         {
-                            parent.Containers.Add(typeList[count - 1].Resolve());
+                            parent.VirtualContainers.Add(typeList[count - 1].Resolve());
                         }
                         else
                         {
-                            parent.Containers.Insert(value + 1, typeList[count - 1].Resolve());
+                            parent.VirtualContainers.Insert(value + 1, typeList[count - 1].Resolve());
                         }
                     }
-                    if (parent.Containers.Count > 0)
+                    if (parent.VirtualContainers.Count > 0)
                     {
                         if (GUILayout.Button("Remove at Index"))
                         {
-                            parent.Containers.RemoveAt(value);
+                            parent.VirtualContainers.RemoveAt(value);
                             foldoutList.RemoveAt(count + value);
                             typeList.RemoveAt(count + value);
                             currentType.RemoveAt(count + value);
@@ -142,15 +142,15 @@ namespace Sound.Player
                     EditorGUILayout.EndHorizontal();
 
                     EditorGUILayout.BeginVertical();
-                    for (int i = 0; i < parent.Containers.Count; i++)
+                    for (int i = 0; i < parent.VirtualContainers.Count; i++)
                     {
-                        ISound child = parent.Containers[i];
+                        ISound child = parent.VirtualContainers[i];
                         string builder = path + $"._containers.Array.data[{i}]";
                         SerializedProperty prop = baseObject.FindProperty(builder);
                         if (prop != null)
                         {
                             DisplayContainers(baseObject, builder, ref child, ref count, level++);
-                            parent.Containers[i] = child;
+                            parent.VirtualContainers[i] = child;
                         }
                     }
                     EditorGUILayout.EndVertical();

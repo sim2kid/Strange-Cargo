@@ -33,7 +33,7 @@ namespace Sound
             }
         }
 
-        public static ContainerType Resolve(this ISound type) 
+        public static ContainerType GetTypeEnum(this ISound type) 
         {
             if(type is ResourceClip)
                 return ContainerType.ResourceClip;

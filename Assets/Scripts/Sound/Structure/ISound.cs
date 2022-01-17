@@ -29,6 +29,12 @@ namespace Sound.Structure
         /// The list of containers that make up a sound.
         /// Null if it can't hold containers.
         /// </summary>
-        public List<ISound> Containers { get; set; }
+        public List<ISound> VirtualContainers { get; set; }
+
+        /// <summary>
+        /// The list of containers that effectivly make up a sound.
+        /// Null if it can't hold containers.
+        /// </summary>
+        public List<ISound> Containers { get; }
     }
 }

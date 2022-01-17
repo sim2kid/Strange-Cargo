@@ -11,9 +11,9 @@ namespace Sound.Structure
         protected override List<SoundBite> GetBites()
         {
             List<SoundBite> soundBites = new List<SoundBite>();
-            if (Containers.Count > 0)
+            if (VirtualContainers.Count > 0)
             {
-                ISound sound = Containers[Random.Range(0, Containers.Count)];
+                ISound sound = VirtualContainers[Random.Range(0, VirtualContainers.Count)];
                 foreach (var bite in sound.Bites)
                 {
                     soundBites.Add(CopyBite(bite));

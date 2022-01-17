@@ -19,7 +19,8 @@ namespace Sound.Source.Internal
         public ValueRange Volume { get => _volume; set => _volume = value; }
         public ValueRange Delay { get => _deley; set => _deley = value; }
 
-        public List<ISound> Containers { get => GetContainers(); set { } }
+        public List<ISound> VirtualContainers { get => GetContainers(); set { } }
+        public virtual List<ISound> Containers => GetContainers();
 
         [SerializeField]
         private string _audioPool;

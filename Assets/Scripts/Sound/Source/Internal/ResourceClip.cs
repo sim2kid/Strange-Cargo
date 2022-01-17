@@ -21,7 +21,8 @@ namespace Sound.Source.Internal
 
         public List<SoundBite> Bites => GetBites();
 
-        public List<ISound> Containers { get => null; set { } }
+        public List<ISound> VirtualContainers { get => null; set { } }
+        public List<ISound> Containers => null;
 
         public ResourceClip() { }
         public ResourceClip(string audioFile = null) 
