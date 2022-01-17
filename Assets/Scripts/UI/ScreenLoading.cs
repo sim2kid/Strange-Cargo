@@ -16,7 +16,7 @@ namespace UI
         public Slider ProgrssBar;
         public Cinemachine.CinemachineVirtualCamera camera;
         public GameObject LoadingScene;
-        public OldAudioPlayer bgm;
+        //public OldAudioPlayer bgm;
         UIManager UIManager;
 
         Cinemachine.CinemachineBlendDefinition saveCameraStyle;
@@ -146,7 +146,7 @@ namespace UI
                 if (!Finished && Report() < 1)
                 {
                     time += Time.deltaTime;
-                    bgm.Volume = 1;
+                    //bgm.Volume = 1;
                     ProgrssBar.value = Report();
                 }
                 if (Report() == 1 && !Finished)

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 14775157}
   - component: {fileID: 14775159}
-  - component: {fileID: 14775158}
+  - component: {fileID: 8701088813007937836}
   m_Layer: 0
   m_Name: ComeHere
   m_TagString: Untagged
@@ -128,7 +128,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &14775158
+--- !u!114 &8701088813007937836
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,31 +137,60 @@ MonoBehaviour:
   m_GameObject: {fileID: 14775156}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7fab3db30850b648bd54f22bc00f267, type: 3}
+  m_Script: {fileID: 11500000, guid: dc2441dbb9ca2784d8143a3ba0ed928b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sound:
-    _pitch:
-      Value: 1
-      Range:
-        Min: 0
-        Max: 0
-    _volume:
-      Value: 1
-      Range:
-        Min: 0
-        Max: 0
-    _deley:
-      Value: 0
-      Range:
-        Min: 0
-        Max: 0
-    _loop: 0
-    _audioPool: Misc/ComeHere
-  DelayAfter: 0
+  _sourceVolume: 0
   OnPlay:
     m_PersistentCalls:
       m_Calls: []
+  OnPlayEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  Container:
+    id: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: RandomContainer, ns: Sound.Structure, asm: Assembly-CSharp}
+      data:
+        _pitch:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _volume:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _deley:
+          Value: 0
+          Range:
+            Min: 0
+            Max: 0
+        _containers:
+        - id: 1
+    00000001:
+      type: {class: ResourceList, ns: Sound.Source.Internal, asm: Assembly-CSharp}
+      data:
+        _pitch:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _volume:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _deley:
+          Value: 0
+          Range:
+            Min: 0
+            Max: 0
+        _audioPool: Misc\ComeHere
+        _soundBites: []
 --- !u!1 &175863690321859498
 GameObject:
   m_ObjectHideFlags: 0
@@ -4091,6 +4120,7 @@ GameObject:
   - component: {fileID: 1909496331}
   - component: {fileID: 4628441539282750614}
   - component: {fileID: 138597451206516799}
+  - component: {fileID: 5410301608600365566}
   m_Layer: 0
   m_Name: DemoPlayer
   m_TagString: Untagged
@@ -4356,7 +4386,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8435313185083453008}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2953c0909348e404fbc8bef3f58f3121, type: 3}
   m_Name: 
@@ -4379,31 +4409,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 8435313185083453008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7fab3db30850b648bd54f22bc00f267, type: 3}
+  m_Script: {fileID: 11500000, guid: dc2441dbb9ca2784d8143a3ba0ed928b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sound:
-    _pitch:
-      Value: 1
-      Range:
-        Min: 0
-        Max: 0
-    _volume:
-      Value: 1
-      Range:
-        Min: 0
-        Max: 0
-    _deley:
-      Value: 0
-      Range:
-        Min: 0
-        Max: 0
-    _loop: 0
-    _audioPool: Player\Footsteps\Wood
-  DelayAfter: 0
+  _sourceVolume: 0
   OnPlay:
     m_PersistentCalls:
       m_Calls: []
+  OnPlayEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  Container:
+    id: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: ResourceList, ns: Sound.Source.Internal, asm: Assembly-CSharp}
+      data:
+        _pitch:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _volume:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _deley:
+          Value: 0
+          Range:
+            Min: 0
+            Max: 0
+        _audioPool: 
+        _soundBites: []
 --- !u!114 &1909496315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4440,8 +4479,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 14775158}
-        m_TargetAssemblyTypeName: Sound.AudioPlayer, Assembly-CSharp
+      - m_Target: {fileID: 8701088813007937836}
+        m_TargetAssemblyTypeName: Sound.Player.AudioPlayer, Assembly-CSharp
         m_MethodName: Play
         m_Mode: 1
         m_Arguments:
@@ -4546,6 +4585,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _location:
     _guid: 1dd5e29e-c435-424c-b848-c4ca892e7804
+--- !u!114 &5410301608600365566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8435313185083453008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8a539fa148eef41accfc1239c6b072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sound:
+    _pitch:
+      Value: 1
+      Range:
+        Min: 0
+        Max: 0
+    _volume:
+      Value: 1
+      Range:
+        Min: 0
+        Max: 0
+    _deley:
+      Value: 0
+      Range:
+        Min: 0
+        Max: 0
+    _loop: 0
+    _audioPool: 
+  DelayAfter: 0
+  OnPlay:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8435313185130930095
 GameObject:
   m_ObjectHideFlags: 0

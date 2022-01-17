@@ -43,7 +43,7 @@ namespace Sound.Player
             _source = GetComponent<AudioSource>();
         }
 
-        private List<SoundBite> tempBites;
+        private List<SoundBite> tempBites = new List<SoundBite>();
         private void SetUp() 
         {
             tempBites = Container.Bites;
@@ -111,6 +111,12 @@ namespace Sound.Player
         public void UnPause() 
         {
             _source.UnPause();
+        }
+
+        public void LegacyResourcePlay(string resourceAudioLoc) 
+        {
+            this.Container = new RandomContainer();
+            Container.Containers.Add(new ResourceList(resourceAudioLoc));
         }
     }
 }

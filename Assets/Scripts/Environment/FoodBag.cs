@@ -8,7 +8,7 @@ using UnityEngine.Events;
 
 namespace Environment {
 
-    [RequireComponent(typeof(Sound.OldAudioPlayer))]
+    [RequireComponent(typeof(Sound.Player.AudioPlayer))]
     public class FoodBag : Pickupable, IUseable
     {
         public UnityEvent OnUse;

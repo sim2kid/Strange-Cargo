@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6279976858420598514}
   - component: {fileID: 6279976858420598515}
   - component: {fileID: 276228823837951602}
-  - component: {fileID: 910734612175490087}
   - component: {fileID: 6499636412113659051}
   - component: {fileID: 7402402520576166361}
+  - component: {fileID: 9187831930682199237}
   m_Layer: 0
   m_Name: Brush
   m_TagString: Untagged
@@ -89,9 +89,9 @@ MonoBehaviour:
   OnPickup:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 910734612175490087}
-        m_TargetAssemblyTypeName: Sound.AudioPlayer, Assembly-CSharp
-        m_MethodName: PlayFrom
+      - m_Target: {fileID: 9187831930682199237}
+        m_TargetAssemblyTypeName: Sound.Player.AudioPlayer, Assembly-CSharp
+        m_MethodName: LegacyResourcePlay
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -110,9 +110,9 @@ MonoBehaviour:
   OnUse:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 910734612175490087}
-        m_TargetAssemblyTypeName: Sound.AudioPlayer, Assembly-CSharp
-        m_MethodName: PlayFrom
+      - m_Target: {fileID: 9187831930682199237}
+        m_TargetAssemblyTypeName: Sound.Player.AudioPlayer, Assembly-CSharp
+        m_MethodName: LegacyResourcePlay
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -220,40 +220,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &910734612175490087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6279976858420598512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7fab3db30850b648bd54f22bc00f267, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Sound:
-    _pitch:
-      Value: 1
-      Range:
-        Min: 0
-        Max: 0
-    _volume:
-      Value: 1
-      Range:
-        Min: 0
-        Max: 0
-    _deley:
-      Value: 0
-      Range:
-        Min: 0
-        Max: 0
-    _loop: 0
-    _audioPool: 
-  DelayAfter: 0
-  OnPlay:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &6499636412113659051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,6 +249,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _location:
     _guid: ccf52332-1781-4b1e-a6ef-cbbed2fce7c2
+--- !u!114 &9187831930682199237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6279976858420598512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc2441dbb9ca2784d8143a3ba0ed928b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sourceVolume: 0
+  OnPlay:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  Container:
+    id: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: ResourceList, ns: Sound.Source.Internal, asm: Assembly-CSharp}
+      data:
+        _pitch:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _volume:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _deley:
+          Value: 0
+          Range:
+            Min: 0
+            Max: 0
+        _audioPool: 
+        _soundBites: []
 --- !u!1001 &6279976859528713520
 PrefabInstance:
   m_ObjectHideFlags: 0
