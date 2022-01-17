@@ -5,10 +5,10 @@ using Utility;
 
 namespace Sound
 {
-    [RequireComponent(typeof(AudioPlayer))]
+    [RequireComponent(typeof(OldAudioPlayer))]
     public class BackgroundMusic : MonoBehaviour
     {
-        AudioPlayer ap;
+        OldAudioPlayer ap;
 
         [SerializeField]
         LoopSound Sound;
@@ -36,7 +36,7 @@ namespace Sound
         // Start is called before the first frame update
         void Start()
         {
-            ap = GetComponent<AudioPlayer>();
+            ap = GetComponent<OldAudioPlayer>();
             ap.Sound = Sound;
             ap.Sound.Loop = true;
             ap.enabled = true;

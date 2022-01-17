@@ -56,6 +56,10 @@ namespace DataType
             return new ValueRange(0, x);
         }
 
+        public static ValueRange operator *(ValueRange x, ValueRange y)
+        {
+            return new ValueRange(x.Value * y.Value, x.Range * y.Range);
+        }
         public static ValueRange operator *(ValueRange x, float y)
         {
             return new ValueRange(x.Read() * y);
@@ -65,6 +69,10 @@ namespace DataType
             return new ValueRange(x * y.Read());
         }
 
+        public static ValueRange operator +(ValueRange x, ValueRange y)
+        {
+            return new ValueRange(x.Value + y.Value, x.Range + y.Range);
+        }
         public static ValueRange operator +(ValueRange x, float y)
         {
             return new ValueRange(x.Read() + y);
@@ -74,6 +82,10 @@ namespace DataType
             return new ValueRange(x + y.Read());
         }
 
+        public static ValueRange operator -(ValueRange x, ValueRange y)
+        {
+            return new ValueRange(x.Value - y.Value, x.Range - y.Range);
+        }
         public static ValueRange operator -(ValueRange x, float y)
         {
             return new ValueRange(x.Read() - y);
@@ -83,6 +95,10 @@ namespace DataType
             return new ValueRange(x - y.Read());
         }
 
+        public static ValueRange operator /(ValueRange x, ValueRange y)
+        {
+            return new ValueRange(x.Value / y.Value, x.Range / y.Range);
+        }
         public static ValueRange operator /(ValueRange x, float y)
         {
             return new ValueRange(x.Read() / y);

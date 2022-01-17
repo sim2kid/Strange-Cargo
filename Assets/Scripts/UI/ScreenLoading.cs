@@ -16,7 +16,7 @@ namespace UI
         public Slider ProgrssBar;
         public Cinemachine.CinemachineVirtualCamera camera;
         public GameObject LoadingScene;
-        public AudioPlayer bgm;
+        public OldAudioPlayer bgm;
         UIManager UIManager;
 
         Cinemachine.CinemachineBlendDefinition saveCameraStyle;
@@ -114,7 +114,7 @@ namespace UI
             UIManager.OpenLoading();
             Toolbox.Instance.Pause.SetPause(true);
             Cursor.visible = true;
-            bgm.Volume = 1;
+            //bgm.Volume = 1;
             ProgrssBar.value = 0;
 
             StartEvent.Invoke();
@@ -129,7 +129,7 @@ namespace UI
             Cursor.visible = false;
             baseTime = 3; // No more extra waiting after first load
             End.Invoke();
-            bgm.Volume = 1;
+            //bgm.Volume = 1;
         }
 
 

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace Sound
 {
-    [RequireComponent(typeof(AudioPlayer))]
+    [RequireComponent(typeof(OldAudioPlayer))]
     public class FootstepController : MonoBehaviour
     {
         [Tooltip("The speed at which steps are played")]
@@ -30,13 +30,13 @@ namespace Sound
         [SerializeField]
         float timeOffset = 0.01f;
 
-        private AudioPlayer player;
+        private OldAudioPlayer player;
 
         // Start is called before the first frame update
         void Start()
         {
             lastPosition = transform.position;
-            player = GetComponent<AudioPlayer>();
+            player = GetComponent<OldAudioPlayer>();
             player.enabled = true;
             player.DelayAfter = true;
             player.OnPlay.AddListener(() => 

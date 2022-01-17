@@ -6,7 +6,7 @@ using UnityEngine.Events;
 namespace Sound
 {
     [System.Serializable]
-    public class ExternalSound : MonoBehaviour, ISound
+    public class ExternalSound : MonoBehaviour
     {
         [SerializeField]
         protected ValueRange _pitch = new ValueRange(1);

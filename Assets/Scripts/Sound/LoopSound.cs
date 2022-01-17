@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Sound
 {
     [System.Serializable]
-    public class LoopSound : BasicSound
+    public class LoopSound : OldBasicSound
     {
         private int index = 0;
         public override AudioClip Clip 

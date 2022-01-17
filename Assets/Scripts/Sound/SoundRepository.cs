@@ -49,6 +49,40 @@ namespace Sound
         }
 
         /// <summary>
+        /// Returns an audio clip from the folder <paramref name="location"/> provided. They should be in "Resources/Audio"
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns></returns>
+        public AudioClip GrabSingleBakedAudio(string location)
+        {
+            try
+            {
+                location = SanitizePath(location);
+                var path = location.Split('\\');
+                location = string.Empty;
+                for (int i = 0; i < path.Length - 1; i++)
+                {
+                    location += path[i] + "\\";
+                }
+                location = location.Substring(0, location.Length - 1);
+                string filename = path[path.Length - 1];
+
+                Folder dir = baked_db.Folders[location];
+
+                var file = dir.Files.Find(x => x.FileName == filename);
+
+                string clipPath = System.IO.Path.ChangeExtension($"Audio\\{file.FileLocation}", string.Empty);
+                clipPath = clipPath.Substring(0, clipPath.Length - 1);
+                AudioClip clip = Resources.Load<AudioClip>(clipPath);
+                return clip;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
         /// Returns a list of audio clips from the folder <paramref name="location"/> provided. They should be in "StreamingAssets/Audio".
         /// </summary>
         /// <param name="location"></param>
@@ -91,6 +125,58 @@ namespace Sound
                 }
                 callback(audioList);
             }
+        }
+
+        /// <summary>
+        /// Returns a list of audio clips from the folder <paramref name="location"/> provided. They should be in "StreamingAssets/Audio".
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns></returns>
+        public IEnumerator GrabSingleLiveAudio(string location, Action<AudioClip> callback)
+        {
+            location = SanitizePath(location);
+            var path = location.Split('\\');
+            string folder = string.Empty;
+            for (int i = 0; i < path.Length - 1; i++)
+            {
+                folder += path[i] + "\\";
+            }
+            folder = folder.Substring(0, folder.Length - 1);
+            string filename = path[path.Length - 1];
+
+            if (!live_db.Folders.ContainsKey(folder))
+            {
+                callback(null);
+                yield return null;
+            }
+            else
+            {
+                Folder dir = live_db.Folders[folder];
+
+                File file = dir.Files.Find(x => x.FileName == filename);
+                string fileLocation = System.IO.Path.Combine(System.IO.Path.Combine("file:///", Application.streamingAssetsPath), "Audio");
+                fileLocation = SanitizePath(System.IO.Path.Combine(fileLocation, file.FileLocation));
+                UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip(fileLocation, AudioType.UNKNOWN);
+                yield return request.SendWebRequest();
+                if (request.result == UnityWebRequest.Result.ConnectionError)
+                {
+                    Console.LogError($"Failed to find audio at {fileLocation}.\n" + request.error);
+                }
+                else if (request.result == UnityWebRequest.Result.ProtocolError)
+                {
+                    Console.LogError($"Failed to find audio at {fileLocation}.\n" + request.error);
+                }
+                else if (request.result == UnityWebRequest.Result.DataProcessingError)
+                {
+                    Console.LogError($"Failed to process audio at {fileLocation}.\n" + request.error);
+                }
+                else
+                {
+                    AudioClip clip = DownloadHandlerAudioClip.GetContent(request);
+                    callback(clip);
+                }
+            }
+            callback(null);
         }
 
         public static string EnviromentSoundBank(Environment.Material enumm, bool isAnimal = false) 
