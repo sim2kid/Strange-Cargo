@@ -33,9 +33,12 @@ namespace Sound.Player
         [SerializeReference]
         public ISound Container = new ResourceList();
 
+        private ISound activeContainer;
+
 
         private void Awake()
         {
+            activeContainer = Container;
             SetUp();
         }
         private void Start()
@@ -46,11 +49,13 @@ namespace Sound.Player
         private List<SoundBite> tempBites = new List<SoundBite>();
         private void SetUp() 
         {
-            tempBites = Container.Bites;
+            tempBites = activeContainer.Bites;
         }
 
-        public void Play(bool force) 
+        public void Play(bool force, bool customContainer = false) 
         {
+            if (!customContainer)
+                activeContainer = this.Container;
             if (IsPlaying)
             {
                 if (!IsDelayed && !_source.isPlaying)
@@ -64,9 +69,14 @@ namespace Sound.Player
             }
         }
 
+        public void Play(bool force)
+        {
+            Play(force, false);
+        }
+
         public void Play() 
         {
-            Play(false);
+            Play(false, false);
         }
 
         private void SetVolume(float volume) 
@@ -128,15 +138,15 @@ namespace Sound.Player
 
         public void PlayOneShot(string resourceAudioLoc) 
         {
-            this.Container = new RandomContainer();
-            Container.Containers.Add(new ResourceList(resourceAudioLoc));
-            Play(true);
+            activeContainer = new RandomContainer();
+            activeContainer.Containers.Add(new ResourceList(resourceAudioLoc));
+            Play(true, true);
         }
 
         public void PlayOneShot(ISound container) 
         {
-            this.Container = container;
-            Play(true);
+            this.activeContainer = container;
+            Play(true, true);
         }
 
         [System.Obsolete("This method will be removed in the future. Please use AudioPlayer#PlayOneShot(string) instead.")]
