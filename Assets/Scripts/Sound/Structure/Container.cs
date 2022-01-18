@@ -22,8 +22,8 @@ namespace Sound.Structure
         [SerializeReference]
         [SerializeField]
         protected List<ISound> _containers = new List<ISound>();
-        public virtual List<ISound> VirtualContainers { get => _containers; set { _containers = value; } }
-        public virtual List<ISound> Containers => ProcessContainers();
+        public virtual List<ISound> Containers { get => _containers; set { _containers = value; } }
+        public virtual List<ISound> VirtualContainers => ProcessContainers();
 
         protected virtual List<ISound> ProcessContainers() 
         {
@@ -32,9 +32,9 @@ namespace Sound.Structure
             {
                 if (container == null)
                     continue;
-                if (container.Bites == null && container.Containers != null)
+                if (container.Bites == null && container.VirtualContainers != null)
                 {
-                    sounds.AddRange(container.Containers);
+                    sounds.AddRange(container.VirtualContainers);
                 }
                 else 
                 {

@@ -26,15 +26,16 @@ namespace Sound.Structure
         public List<SoundBite> Bites { get; }
 
         /// <summary>
-        /// The list of containers that make up a sound.
+        /// The list of all real containers that make up a sound.
         /// Null if it can't hold containers.
         /// </summary>
-        public List<ISound> VirtualContainers { get; set; }
+        public List<ISound> Containers { get; set; }
 
         /// <summary>
         /// The list of containers that effectivly make up a sound.
+        /// This list is processed based on the Containers list
         /// Null if it can't hold containers.
         /// </summary>
-        public List<ISound> Containers { get; }
+        public List<ISound> VirtualContainers { get; }
     }
 }

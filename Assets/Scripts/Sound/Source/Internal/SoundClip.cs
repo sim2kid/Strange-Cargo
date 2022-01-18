@@ -18,8 +18,8 @@ namespace Sound.Source.Internal
 
         public List<SoundBite> Bites => new List<SoundBite>() { _soundBite };
 
-        public List<ISound> VirtualContainers { get => null; set { } }
-        public List<ISound> Containers => null;
+        public List<ISound> Containers { get => null; set { } }
+        public List<ISound> VirtualContainers => null;
 
         public SoundClip() 
         {

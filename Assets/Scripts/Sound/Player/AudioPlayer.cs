@@ -51,6 +51,11 @@ namespace Sound.Player
 
         public void Play() 
         {
+            if (IsPlaying) 
+            {
+                if(!IsDelayed && !_source.isPlaying)
+                    IsPlaying = false;
+            }
             if (!IsPlaying) 
             {
                 _stopSignal = false;
@@ -71,9 +76,9 @@ namespace Sound.Player
 
         private IEnumerator PlayList() 
         {
+            SetUp(); // gets the audio ready
             SoundBite[] bites = tempBites.ToArray();
             OnPlay.Invoke();
-            SetUp(); // gets the next audio ready
             for (int i = 0; i < bites.Length; i++) 
             {
                 IsDelayed = true;
@@ -117,6 +122,7 @@ namespace Sound.Player
         {
             this.Container = new RandomContainer();
             Container.Containers.Add(new ResourceList(resourceAudioLoc));
+            Play();
         }
     }
 }
