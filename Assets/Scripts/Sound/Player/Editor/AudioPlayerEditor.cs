@@ -19,7 +19,8 @@ namespace Sound.Player
             EditorGUILayout.LabelField("Is Playing: ", (player.IsPlaying ? "true" : "false"));
             EditorGUILayout.LabelField("Is Delayed: ", (player.IsDelayed ? "true" : "false"));
             GUILayout.Space(20);
-            EditorGUILayout.FloatField("Player Volume", player.Volume);
+            serializedObject.FindProperty("_sourceVolume").floatValue 
+                = EditorGUILayout.FloatField("Player Volume", serializedObject.FindProperty("_sourceVolume").floatValue);
 
 
             foldState = EditorGUILayout.BeginFoldoutHeaderGroup(foldState, "Events", EditorStyles.foldout);
@@ -48,7 +49,6 @@ namespace Sound.Player
                 DisplayContainers(this.serializedObject, "Container", ref player.Container, ref count);
             }
             this.serializedObject.ApplyModifiedProperties();
-            
         }
 
         List<bool> foldoutList = new List<bool>();

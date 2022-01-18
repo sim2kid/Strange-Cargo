@@ -17,9 +17,9 @@ namespace Sound.Player
 
         private AudioSource _source;
 
-        private float _clipVolume;
+        private float _clipVolume = 1f;
         [SerializeField]
-        private float _sourceVolume;
+        private float _sourceVolume = 1f;
 
         public float Volume 
         {
@@ -49,14 +49,14 @@ namespace Sound.Player
             tempBites = Container.Bites;
         }
 
-        public void Play() 
+        public void Play(bool force) 
         {
-            if (IsPlaying) 
+            if (IsPlaying)
             {
-                if(!IsDelayed && !_source.isPlaying)
+                if (!IsDelayed && !_source.isPlaying)
                     IsPlaying = false;
             }
-            if (!IsPlaying) 
+            if (!IsPlaying || force)
             {
                 _stopSignal = false;
                 IsPlaying = true;
@@ -64,14 +64,22 @@ namespace Sound.Player
             }
         }
 
+        public void Play() 
+        {
+            Play(false);
+        }
+
         private void SetVolume(float volume) 
         {
             _sourceVolume = volume;
-            if (_source.isPlaying)
-            { 
-                volume *= _clipVolume;
+            if (_source != null)
+            {
+                if (_source.isPlaying)
+                {
+                    volume *= _clipVolume;
+                }
+                _source.volume = volume;
             }
-            _source.volume = volume;
         }
 
         private IEnumerator PlayList() 
@@ -118,11 +126,23 @@ namespace Sound.Player
             _source.UnPause();
         }
 
-        public void LegacyResourcePlay(string resourceAudioLoc) 
+        public void PlayOneShot(string resourceAudioLoc) 
         {
             this.Container = new RandomContainer();
             Container.Containers.Add(new ResourceList(resourceAudioLoc));
-            Play();
+            Play(true);
+        }
+
+        public void PlayOneShot(ISound container) 
+        {
+            this.Container = container;
+            Play(true);
+        }
+
+        [System.Obsolete("This method will be removed in the future. Please use AudioPlayer#PlayOneShot(string) instead.")]
+        public void LegacyResourcePlay(string resourceAudioLoc) 
+        {
+            PlayOneShot(resourceAudioLoc);
         }
     }
 }
