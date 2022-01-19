@@ -136,6 +136,8 @@ namespace Sound.Player
             _source.UnPause();
         }
 
+        [System.Obsolete("This method will cause lag when loading big audio libraries for the first time. " +
+            "Either use uncompressed audio or preload them with AudioPlayer#PlayOneShot(ISound).")]
         public void PlayOneShot(string resourceAudioLoc) 
         {
             activeContainer = new RandomContainer();
@@ -149,7 +151,7 @@ namespace Sound.Player
             Play(true, true);
         }
 
-        [System.Obsolete("This method will be removed in the future. Please use AudioPlayer#PlayOneShot(string) instead.")]
+        [System.Obsolete("This method will be removed in the future. Please use AudioPlayer#PlayOneShot(ISound) instead.")]
         public void LegacyResourcePlay(string resourceAudioLoc) 
         {
             PlayOneShot(resourceAudioLoc);
