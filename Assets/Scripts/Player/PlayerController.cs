@@ -10,7 +10,6 @@ namespace Player
     [RequireComponent(typeof(HeadMovement))]
     [RequireComponent(typeof(InteractionController))]
     [RequireComponent(typeof(GlobalController))]
-    [RequireComponent(typeof(Sound.FootstepController))]
     [DisallowMultipleComponent]
     public class PlayerController : MonoBehaviour
     {
@@ -24,8 +23,6 @@ namespace Player
         public GlobalController GlobalInteraction;
         [HideInInspector]
         public Hand HandController;
-        [HideInInspector]
-        public Sound.FootstepController Footsteps;
 
         public GameObject Eyes;
         public GameObject Feet;
@@ -85,7 +82,6 @@ namespace Player
             GlobalInteraction = GetComponent<GlobalController>();
             if (Hand != null)
                 HandController = Hand.GetComponent<Hand>();
-            Footsteps = GetComponent<Sound.FootstepController>();
 
             if (Utility.Toolbox.Instance.Pause == null)
                 Console.LogError("Missing Pause Component in Scene");
