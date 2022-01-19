@@ -269,6 +269,8 @@ namespace PersistentData
             List<SaveMeta> metas = new List<SaveMeta>();
             if (string.IsNullOrEmpty(SaveLocation))
                 return metas;
+            if(!Directory.Exists(SaveLocation))
+                Directory.CreateDirectory(SaveLocation);
             string[] saves = Directory.GetDirectories(SaveLocation);
             foreach (var save in saves)
             {
