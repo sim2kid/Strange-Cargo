@@ -13,9 +13,12 @@ namespace Sound.Structure
         protected ValueRange _volume = new ValueRange(1);
         [SerializeField]
         protected ValueRange _deley = new ValueRange(0);
+        [SerializeField]
+        protected ValueRange _loop = new ValueRange(1);
         public virtual ValueRange Pitch { get => _pitch; set => _pitch = value; }
         public virtual ValueRange Volume { get => _volume; set => _volume = value; }
         public virtual ValueRange Delay { get => _deley; set => _deley = value; }
+        public virtual ValueRange Loop { get => _loop; set => _loop = value; }
 
         public virtual List<SoundBite> Bites => GetBites();
 
@@ -53,6 +56,7 @@ namespace Sound.Structure
             toAdd.Pitch = bite.Pitch * this.Pitch;
             toAdd.Volume = bite.Volume * this.Volume;
             toAdd.Delay = bite.Delay + this.Delay;
+            toAdd.Delay = bite.Loop + this.Loop;
             return toAdd;
         }
     }

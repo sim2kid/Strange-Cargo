@@ -19,6 +19,10 @@ namespace Sound.Structure
         /// The relative delay before the start of an audio clip
         /// </summary>
         public ValueRange Delay { get; set; }
+        /// <summary>
+        /// The number of times an audio should play. -1 is indefinite
+        /// </summary>
+        public ValueRange Loop { get; set; }
 
         /// <summary>
         /// The sound bites that compose a single sound to be played

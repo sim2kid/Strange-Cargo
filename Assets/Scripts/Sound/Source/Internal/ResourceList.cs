@@ -15,9 +15,14 @@ namespace Sound.Source.Internal
         protected ValueRange _volume = new ValueRange(1);
         [SerializeField]
         protected ValueRange _deley = new ValueRange(0);
+        [SerializeField]
+        protected ValueRange _loop = new ValueRange(1);
         public ValueRange Pitch { get => _pitch; set => _pitch = value; }
         public ValueRange Volume { get => _volume; set => _volume = value; }
         public ValueRange Delay { get => _deley; set => _deley = value; }
+        public ValueRange Loop { get => _loop; set => _loop = value; }
+
+
 
         public List<ISound> Containers { get => GetContainers(); set { } }
         public virtual List<ISound> VirtualContainers => GetContainers();

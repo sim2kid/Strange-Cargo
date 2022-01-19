@@ -18,6 +18,7 @@ namespace Sound.Source.Internal
         public ValueRange Pitch { get => _soundBite.Pitch; set => _soundBite.Pitch = value; }
         public ValueRange Volume { get => _soundBite.Volume; set => _soundBite.Volume = value; }
         public ValueRange Delay { get => _soundBite.Delay; set => _soundBite.Delay = value; }
+        public ValueRange Loop { get => _soundBite.Loop; set => _soundBite.Loop = value; }
 
         public List<SoundBite> Bites => GetBites();
 

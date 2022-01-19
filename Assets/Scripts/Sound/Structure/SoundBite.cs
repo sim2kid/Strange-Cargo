@@ -12,6 +12,7 @@ namespace Sound.Structure
         public ValueRange Pitch;
         public ValueRange Volume;
         public ValueRange Delay;
+        public ValueRange Loop;
 
         public SoundBite Clone() 
         {
@@ -20,6 +21,7 @@ namespace Sound.Structure
             clone.Pitch = Pitch;
             clone.Volume = Volume;
             clone.Delay = Delay;
+            clone.Loop = Loop;
             return clone;
         }
     }
