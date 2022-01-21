@@ -111,6 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorData:
     Color: 
+    _guid: 48c227a1-2eb6-4cc0-9bf5-ac2b15c03bd4
   ColorPalette: Data/ColorPalette/brighterColors
 --- !u!1 &1667913461185813728
 GameObject:
@@ -927,6 +928,11 @@ MonoBehaviour:
   OnEmpty:
     m_PersistentCalls:
       m_Calls: []
+  data:
+    _guid: 
+    BaseNeeds:
+      _myNeeds: []
+    Fullness: 0
 --- !u!135 &1667913461902867984
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1148,6 +1154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabData:
+    _guid: 
     PrefabResourceLocation: Prefabs/FoodBowl
 --- !u!114 &4945819016229451184
 MonoBehaviour:
@@ -1161,3 +1168,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1963bb8cc697d1f4086008328f70ea15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _location:
+    _guid: 7b2530be-bf0d-440e-90a2-74eb6f9002d2

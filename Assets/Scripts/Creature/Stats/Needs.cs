@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Newtonsoft.Json;
 
 namespace Creature.Stats
 {
     [Serializable]
     public struct Needs
     {
+        [JsonIgnore]
         public float Min => 0;
+        [JsonIgnore]
         public float Max => 200;
 
         [SerializeField]
@@ -40,6 +43,7 @@ namespace Creature.Stats
                 _myNeeds[index] = value;
             }
         }
+        [JsonIgnore]
         public int Count 
         {  
             get 

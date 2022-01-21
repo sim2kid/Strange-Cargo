@@ -57,6 +57,9 @@ namespace Utility
                 Console.Log($"The game has been unpaused.");
             }
             _pause = value;
+#if UNITY_EDITOR
+            lastPause = _pause;
+#endif
         }
     }
 }

@@ -280,6 +280,7 @@ GameObject:
   - component: {fileID: 7375483987606595371}
   - component: {fileID: 7375483987606595414}
   - component: {fileID: 2246826630590940975}
+  - component: {fileID: 8591014375052001941}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -315,6 +316,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c0b46522615efc4eae925eaa023cce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data:
+    _guid: 9efd21b7-e29f-4963-8a94-1f596921c948
+    Time: 360
   StartTime: 6
   CurrentTime: 6
   MinutesInADay: 24
@@ -616,6 +620,20 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   FogIntensity: 0.03
+--- !u!114 &8591014375052001941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7375483987606595368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47b29d8b3f3b84043b9494e83474b298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    _guid: c61b4756-36bc-4a28-97e6-0f0e7b666d5e
 --- !u!1 &7375483988556080796
 GameObject:
   m_ObjectHideFlags: 0
@@ -695,7 +713,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 100
+  far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -738,7 +756,8 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_Cameras: []
+  m_Cameras:
+  - {fileID: 0}
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
@@ -861,3 +880,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5db2e7047c12294a8a00257729bc119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnPreSerialization:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPreDeserialization:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostDeserialization:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLoad:
+    m_PersistentCalls:
+      m_Calls: []
+  useEncryption: 1

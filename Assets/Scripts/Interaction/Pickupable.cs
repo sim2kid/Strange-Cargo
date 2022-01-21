@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using PersistentData.Component;
+using PersistentData.Saving;
 
 namespace Interaction
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent (typeof(Collider))]
-    public class Pickupable : BasicInteractable, IHoldable
+    public class Pickupable : BasicInteractable, IHoldable, ISaveable
     {
-        public Vector3 positionOffset;
-        public Vector3 rotationOffset;
+        public Vector3 positionOffset = Vector3.zero;
+        public Vector3 rotationOffset = Vector3.zero;
 
-        private RigidbodyConstraints rbConstraints;
+        public virtual Vector3 PositionOffset => positionOffset;
+        public virtual Vector3 RotationOffset => rotationOffset;
+
+        [SerializeField]
+        RigidbodyData rbData;
 
         [SerializeField]
         private string _textOnHold;
@@ -22,6 +28,17 @@ namespace Interaction
         public UnityEvent OnShake;
 
         public virtual string HoldText { get => _textOnHold; }
+        public ISaveData saveData 
+        { get => rbData; 
+            set { rbData = (RigidbodyData)value; } }
+
+        private void OnValidate()
+        {
+            if (string.IsNullOrWhiteSpace(rbData.GUID))
+            {
+                rbData.GUID = System.Guid.NewGuid().ToString();
+            }
+        }
 
         protected bool holding;
         protected Player.PlayerController player;
@@ -30,8 +47,8 @@ namespace Interaction
 
         protected override void Start()
         {
-            rb = GetComponent<Rigidbody>();
-            rbConstraints = rb.constraints;
+            if(rb == null)
+                rb = GetComponent<Rigidbody>();
             collider = GetComponent<Collider>();
             player = Utility.Toolbox.Instance.Player;
 
@@ -39,26 +56,46 @@ namespace Interaction
             Utility.Toolbox.Instance.Pause.OnUnPause.AddListener(OnUnPause);
 
             holding = false;
+            if (player.Hand.GetComponent<Player.Hand>().Holding == (IHoldable)this)
+            {
+                holding = true;
+            }
             base.Start();
+        }
+
+        private void OnDisable()
+        {
+            Utility.Toolbox.Instance.Pause.OnPause.RemoveListener(OnPause);
+            Utility.Toolbox.Instance.Pause.OnUnPause.RemoveListener(OnUnPause);
         }
 
         protected virtual void OnPause()
         {
+            UpdateRbData();
+            rb.isKinematic = false;
             rb.constraints = RigidbodyConstraints.FreezeAll;
+        }
+
+        private void UpdateRbData() 
+        {
+            rbData.IsKinematic = rb.isKinematic;
+            rbData.Velocity = rb.velocity;
+            rbData.Rotation = rb.angularVelocity;
+            rbData.Constraints = rb.constraints;
+        }
+
+        private void ApplyRbData() 
+        {
+            rb.isKinematic = rbData.IsKinematic;
+            rb.constraints = rbData.Constraints;
+            rb.velocity = rbData.Velocity;
+            rb.angularVelocity = rbData.Rotation;
         }
 
         protected virtual void OnUnPause()
         {
-            rb.constraints = rbConstraints;
-        }
-
-        private void Update()
-        {
-            if (holding) 
-            {
-                transform.position = player.Hand.transform.position + positionOffset;
-                transform.rotation = Quaternion.Euler(player.Hand.transform.rotation.eulerAngles + rotationOffset);
-            }
+            ApplyRbData();
+            rb.WakeUp();
         }
 
         public virtual void PickUp() 
@@ -75,6 +112,8 @@ namespace Interaction
             holding = false;
             collider.enabled = true;
             rb.useGravity = true;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
             OnPutDown.Invoke();
         }
 
@@ -93,6 +132,25 @@ namespace Interaction
         {
             if(holding)
                 Up();
+        }
+
+        public void PreSerialization()
+        {
+            if(!Utility.Toolbox.Instance.Pause.Paused)
+                UpdateRbData();
+        }
+
+        public void PreDeserialization()
+        {
+            rb = GetComponent<Rigidbody>();
+            if (Utility.Toolbox.Instance.Pause.Paused)
+                OnPause();
+        }
+
+        public void PostDeserialization()
+        {
+            if (!Utility.Toolbox.Instance.Pause.Paused)
+                ApplyRbData();
         }
     }
 }

@@ -26,7 +26,17 @@ namespace Creature.Stats
         [SerializeField]
         protected float UtilityRate = 0;
 
-        public virtual Needs NeedChange => new Needs(Appetite, Bladder, Social, Energy, Hygiene, Happiness);
+        public virtual Needs NeedChange { get => new Needs(Appetite, Bladder, Social, Energy, Hygiene, Happiness);
+            set 
+            {
+                Appetite = value.Appetite;
+                Bladder = value.Bladder;
+                Social = value.Social;
+                Energy = value.Energy;
+                Hygiene = value.Hygiene;
+                Happiness = value.Happiness;
+            }
+        }
         public virtual Needs StatsEffect => NeedChange;
         public virtual Environment.IObject RelatedObject => null;
 

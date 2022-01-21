@@ -165,7 +165,8 @@ public class ToolTipIcons : MonoBehaviour
 
     private void OnDisable()
     {
-        context.OnDeviceChange.RemoveListener(onNewDevice);
+        if(context != null)
+            context.OnDeviceChange.RemoveListener(onNewDevice);
     }
 
     private void onNewDevice() 

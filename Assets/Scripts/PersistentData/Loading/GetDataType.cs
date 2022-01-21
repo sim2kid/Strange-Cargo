@@ -40,6 +40,27 @@ namespace PersistentData.Loading
                 case "Prefab":
                     DataType = new PrefabData();
                     break;
+                case "Rigidbody":
+                    DataType = new RigidbodyData();
+                    break;
+                case "Persistent":
+                    DataType = new ReusedData();
+                    break;
+                case "IsActive":
+                    DataType = new IsActiveData();
+                    break;
+                case "StringList":
+                    DataType = new StringListData();
+                    break;
+                case "Data":
+                    DataType = new GroupData();
+                    break;
+                case "Time":
+                    DataType = new TimeData();
+                    break;
+                case "BasicNeedSource":
+                    DataType = new NeedSourceData();
+                    break;
             }
             serializer.Populate(jsonObject.CreateReader(), DataType);
             return DataType;

@@ -109,7 +109,9 @@ namespace Environment
             if(CanSeeCreature())
             {
                 OnUse.Invoke();
-                NearestCreature().needs.Hygiene += hygieneBoostAmount;
+                Needs n = NearestCreature().needs;
+                n.Hygiene += hygieneBoostAmount;
+                NearestCreature().needs = n;
             }
         }
 

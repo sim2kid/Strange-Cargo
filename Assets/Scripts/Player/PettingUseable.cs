@@ -53,7 +53,9 @@ namespace Player
             if(CanSeeCreature() && (hand.Holding == null || hand.Holding == this))
             {
                 OnUse.Invoke();
-                NearestCreature().needs.Social += socialBoostAmount;
+                Creature.Stats.Needs n = NearestCreature().needs;
+                n.Social += socialBoostAmount;
+                NearestCreature().needs = n;
             }
         }
 

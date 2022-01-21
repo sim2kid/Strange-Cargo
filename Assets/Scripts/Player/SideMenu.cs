@@ -1,3 +1,5 @@
+using PersistentData.Saving;
+using PersistentData.Component;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +10,7 @@ namespace Player
 {
 
     [RequireComponent(typeof(PlayerInput))]
-    public class SideMenu : MonoBehaviour
+    public class SideMenu : MonoBehaviour, ISaveable
     {
         PlayerInput input;
         InputAction sidemenu;
@@ -19,7 +21,16 @@ namespace Player
         [SerializeField]
         GameObject sideMenu;
 
-        public bool IsActive;
+        public IsActiveData data;
+        public bool IsActive { get => data.IsActive; set => data.IsActive = value; }
+        public ISaveData saveData { get => data; set => data = (IsActiveData)value; }
+        private void OnValidate()
+        {
+            if (string.IsNullOrEmpty(data._guid))
+            {
+                data._guid = System.Guid.NewGuid().ToString();
+            }
+        }
 
         void Start()
         {
@@ -60,6 +71,22 @@ namespace Player
         public void ToggleSideMenu() 
         {
             SetSideMenu(!IsActive);
+        }
+
+        public void PreSerialization()
+        {
+            return;
+        }
+
+        public void PreDeserialization()
+        {
+            return;
+        }
+
+        public void PostDeserialization()
+        {
+            SetSideMenu(IsActive);
+            return;
         }
     }
 }

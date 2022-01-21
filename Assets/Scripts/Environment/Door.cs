@@ -3,21 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using Interaction;
 using UnityEngine.Events;
+using PersistentData.Saving;
+using PersistentData.Component;
 
 namespace Environment {
 
-    public class Door : Interactable
+    public class Door : Interactable, ISaveable
     {
+        public IsActiveData data;
+
         [SerializeField]
         List<Animator> animators;
 
         [SerializeField]
-        bool isOpen;
+        bool isOpen { get => data.IsActive; set => data.IsActive = value; }
+
+        private void OnValidate()
+        {
+            if (string.IsNullOrWhiteSpace(data._guid))
+            {
+                data._guid = System.Guid.NewGuid().ToString();
+            }
+        }
 
         [SerializeField]
         public UnityEvent OnClose;
         [SerializeField]
         public UnityEvent OnOpen;
+
+        public ISaveData saveData { get => data; set => data = (IsActiveData)value; }
 
         protected override void Start()
         {
@@ -62,6 +76,21 @@ namespace Environment {
         {
             foreach(Animator animator in animators)
                 animator.SetBool("IsOpen", isOpen);
+        }
+
+        public void PreSerialization()
+        {
+            return;
+        }
+
+        public void PreDeserialization()
+        {
+            return;
+        }
+
+        public void PostDeserialization()
+        {
+            return;
         }
     }
 }

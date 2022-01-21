@@ -8,64 +8,244 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Security.Cryptography;
+using UnityEngine.Events;
 
 namespace PersistentData
 {
     public class SaveManager : MonoBehaviour
     {
+        public UnityEvent OnPreSerialization;
+        public UnityEvent OnPreDeserialization;
+        public UnityEvent OnPostDeserialization;
+
+        public UnityEvent OnLoad;
+
         static string SaveLocation;
         [SerializeField]
         bool useEncryption = false;
-        Save s;
-        
+        SaveMeta CurrentSave;
+
         private void Awake()
         {
-            SaveLocation = System.IO.Path.Combine(Application.persistentDataPath, "Saves");
+            SaveLocation = System.IO.Path.Combine(Application.persistentDataPath, "saves");
+            var others = FindObjectsOfType<SaveManager>();
+            if (others != null)
+                if (others.Length > 1)
+                {
+                    Console.LogWarning($"There is already a Save Manager in this scene. Deleting extras.");
+                    Destroy(this);
+                }
+            string guid = System.Guid.NewGuid().ToString();
+            CurrentSave = new SaveMeta()
+            {
+                GameVersion = Application.version,
+                SaveName = "New Save",
+                SaveGuid = guid,
+                SaveTime = System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
+            };
         }
 
-        public Save MakeSave() 
+        public void StartNewSave(string name) 
         {
+            string guid = System.Guid.NewGuid().ToString();
+            CurrentSave = new SaveMeta()
+            {
+                GameVersion = Application.version,
+                SaveName = name,
+                SaveGuid = guid,
+                SaveTime = System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
+            };
+            Save save = GetCleanSave();
+            save.Metadata = CurrentSave;
+            Load(save);
+            Invoke("Save", 2);
+        }
+
+        public Save MakeSave()
+        {
+            // Run listeners
+            OnPreSerialization.Invoke();
+
+            // Record Prefabbed objects
             PrefabSaveable[] objectsToSave = FindObjectsOfType<PrefabSaveable>();
-            var saveThis = new List<PrefabData>();
+            var prefabData = new List<PrefabData>();
             foreach (var obj in objectsToSave)
             {
                 obj.PreSerialization();
-                saveThis.Add(obj.prefabData);
+                if (obj.prefabData != null)
+                    prefabData.Add(obj.prefabData);
             }
-            Save save = new Save() 
+            // Record persistant objects
+            PersistentSaveable[] persistentSaveables = FindObjectsOfType<PersistentSaveable>();
+            var persisData = new List<ReusedData>();
+            foreach (var obj in persistentSaveables)
+            {
+                obj.PreSerialization();
+                if (obj != null)
+                    persisData.Add(obj.data);
+            }
+
+            // Record creatures
+            CreatureSaveable[] creatureSaveables = FindObjectsOfType<CreatureSaveable>();
+            var creatureData = new List<GroupData>();
+            foreach (var obj in creatureSaveables)
+            {
+                obj.PreSerialization();
+                if (obj != null)
+                    creatureData.Add(obj.Data);
+            }
+
+            SaveMeta meta = new SaveMeta()
             {
                 GameVersion = Application.version,
-                SaveName = "Save Name",
-                SaveTime = System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                Prefabs = saveThis
+                SaveName = CurrentSave.SaveName,
+                SaveGuid = CurrentSave.SaveGuid,
+                SaveTime = System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
+            };
+
+            // Make the save
+            Save save = new Save()
+            {
+                Metadata = meta,
+                Prefabs = prefabData,
+                Persistents = persisData,
+                Creatures = creatureData
             };
             return save;
         }
 
-        public void DemoSave() 
+        public void Save()
         {
             Save save = MakeSave();
             SaveToDisk(save);
         }
 
-        public void DemoLoad() 
+        public void LoadSave(string guid) 
         {
-            Save save = LoadFromDisk("Save Name");
-            LoadPrefabs(save.Prefabs);
-            s = save;
+            Save save = LoadFromDisk(guid);
+            Load(save);
+            CurrentSave = save.Metadata;
             return;
         }
 
-        private void LoadPrefabs(List<PrefabData> prefabs) 
+        private void Load(Save save)
+        {
+            OnLoad.Invoke();
+            OnPreDeserialization.Invoke();
+            LoadPrefabs(save.Prefabs);
+            LoadPersistants(save.Persistents);
+            LoadCreatures(save.Creatures);
+            OnPostDeserialization.Invoke();
+        }
+
+        private void DeleteDirectory(string path) 
+        {
+            foreach (string s in Directory.GetDirectories(path)) 
+            {
+                DeleteDirectory(s);
+            }
+            foreach (string s in Directory.GetFiles(path))
+            {
+                File.Delete(s);
+            }
+            Directory.Delete(path, true);
+        }
+
+        public void DeleteSave(string saveGuid) 
+        {
+            string saveFolder = SanitizePath(Path.Combine(SaveLocation, RemoveIllegalCharacters(saveGuid)));
+            if (Directory.Exists(saveFolder)) 
+            {
+                DeleteDirectory(saveFolder);
+            }
+        }
+
+        public void DestroyAllCreatures() 
+        {
+            // Clean Old Creatures
+            CreatureSaveable[] currentSaveables = FindObjectsOfType<CreatureSaveable>();
+            if (currentSaveables != null)
+                foreach (CreatureSaveable current in currentSaveables)
+                {
+                    // Potentially save data on textures???
+                    Destroy(current.gameObject);
+                }
+        }
+
+        public void DestroyAllUnloadedCreatures() 
+        {
+            CreatureSaveable[] currentSaveables = FindObjectsOfType<CreatureSaveable>();
+            if (currentSaveables != null)
+                foreach (CreatureSaveable current in currentSaveables)
+                {
+                    Creature.CreatureController creature = current.GetComponent<Creature.CreatureController>();
+                    if(creature == null || creature.Report() != 1)
+                        Destroy(current.gameObject);
+                }
+        }
+
+        private void LoadCreatures(List<GroupData> groupData)
+        {
+            DestroyAllCreatures();
+
+            if (groupData == null)
+                return;
+
+            foreach (GroupData data in groupData)
+            {
+                CreatureData creature = (CreatureData)data.ExtraData.Find(x => x is CreatureData);
+                if (string.IsNullOrWhiteSpace(creature.GUID))
+                {
+                    Console.LogError($"Could not find creature data. Creature can not be constructed!");
+                    continue;
+                }
+                GameObject creatureObj = Genetics.CreatureGeneration.CreateCreature(creature.dna);
+                CreatureSaveable obj = creatureObj.GetComponent<CreatureSaveable>();
+                if (obj == null)
+                {
+                    Console.LogError($"Could not grab the creature saveable for newly generated creature.");
+                    continue;
+                }
+                obj.PreDeserialization();
+                obj.Data = data;
+                obj.PostDeserialization();
+            }
+        }
+
+        private void LoadPersistants(List<ReusedData> persistants)
+        {
+            if (persistants == null)
+                return;
+
+            List<PersistentSaveable> persistentSaveables = FindObjectsOfType<PersistentSaveable>().ToList();
+            foreach (ReusedData data in persistants)
+            {
+                PersistentSaveable obj = persistentSaveables.Find(x => x.data.GUID.Equals(data.GUID));
+                if (obj == null)
+                {
+                    Console.LogError($"Could not find persistant of {data.DataType} in the current scene.");
+                    Console.LogWarning("We would create it at this time, but that is currently not set up. This is not a forward compatable system.");
+                    continue;
+                }
+                obj.PreDeserialization();
+                obj.data = data;
+                obj.PostDeserialization();
+            }
+        }
+
+        private void LoadPrefabs(List<PrefabData> prefabs)
         {
             // Clean Old Prefabs
             PrefabSaveable[] currentSaveables = FindObjectsOfType<PrefabSaveable>();
-            if(currentSaveables != null)
+            if (currentSaveables != null)
                 foreach (PrefabSaveable current in currentSaveables)
                     Destroy(current.gameObject);
 
+            if (prefabs == null)
+                return;
+
             // Place new prefabs
-            foreach (PrefabData data in prefabs) 
+            foreach (PrefabData data in prefabs)
             {
                 var obj = Resources.Load(data.PrefabResourceLocation) as GameObject;
                 if (obj == null)
@@ -84,60 +264,198 @@ namespace PersistentData
             }
         }
 
-        private Save LoadFromDisk(string saveName) 
+        public List<SaveMeta> GetSaveList() 
         {
-            string loc = SanitizePath(Path.Combine(SaveLocation, RemoveIllegalCharacters(saveName) + ".save"));
-
-            if (!Directory.Exists(SaveLocation))
-                Directory.CreateDirectory(SaveLocation);
-            if (!File.Exists(loc)) 
+            List<SaveMeta> metas = new List<SaveMeta>();
+            if (string.IsNullOrEmpty(SaveLocation))
+                return metas;
+            string[] saves = Directory.GetDirectories(SaveLocation);
+            foreach (var save in saves)
             {
-                Console.LogWarning($"Could not find save '{saveName}'. Is it spelled correctly?");
-                return new Save() { SaveTime = -1 };
+                string dataLoc = SanitizePath(Path.Combine(save, $"save.dat"));
+                string metaLoc = SanitizePath(Path.Combine(save, $"meta.dat"));
+                if (File.Exists(dataLoc) && File.Exists(metaLoc)) 
+                {
+                    byte[] metaBytes = File.ReadAllBytes(metaLoc);
+                    string metaJson = DecryptBytes(metaBytes);
+                    SaveMeta meta = JsonConvert.DeserializeObject<SaveMeta>(metaJson);
+                    if(!string.IsNullOrEmpty(meta.SaveName))
+                        metas.Add(meta);
+                }
+            }
+            return metas;
+        }
+
+        private Save GetCleanSave() 
+        {
+            string saveLocation = SanitizePath(Path.Combine(Application.dataPath, "Resources/Saves/default.dat"));
+
+            if (!File.Exists(saveLocation))
+            {
+                Console.LogWarning($"There is no Default Save set. We will use an completely empty save.");
+                return new Save() { Metadata = new SaveMeta() { SaveTime = -1 } };
             }
 
-            byte[] saveBytes = File.ReadAllBytes(loc);
+            byte[] saveBytes = File.ReadAllBytes(saveLocation);
             string saveJson = DecryptBytes(saveBytes);
 
             Save save = JsonConvert.DeserializeObject<Save>(saveJson);
             return save;
         }
 
-        private void SaveToDisk(Save save) 
+        private Save LoadFromDisk(string saveGuid)
         {
-            string loc = SanitizePath(Path.Combine(SaveLocation, RemoveIllegalCharacters(save.SaveName) + ".save"));
+            string saveFolder = SanitizePath(Path.Combine(SaveLocation, RemoveIllegalCharacters(saveGuid)));
+            string dataLoc = SanitizePath(Path.Combine(saveFolder, $"save.dat"));
+
+            if (!Directory.Exists(SaveLocation))
+                Directory.CreateDirectory(SaveLocation);
+            if (!Directory.Exists(saveFolder))
+            {
+                Console.LogWarning($"Could not find load '{saveGuid}'. Is it spelled correctly?");
+                return new Save() { Metadata = new SaveMeta() { SaveTime = -1 } };
+            }
+            if (!File.Exists(dataLoc))
+            {
+                Console.LogWarning($"Could not find load '{saveGuid}'. Is it spelled correctly?");
+                return new Save() { Metadata = new SaveMeta() { SaveTime = -1 } };
+            }
+
+            byte[] saveBytes = File.ReadAllBytes(dataLoc);
+            string saveJson = DecryptBytes(saveBytes);
+
+            Save save = JsonConvert.DeserializeObject<Save>(saveJson);
+            return save;
+        }
+
+        public void SaveAsDefault() 
+        {
+            if (!Application.isEditor) 
+            {
+                Console.LogError("You can not save to resources unless you are in-editor.");
+                return;
+            }
+
+            string saveLocation = SanitizePath(Path.Combine(Application.dataPath, "Resources/Saves/default.dat"));
+
+            Save save = MakeSave();
             string saveJson = JsonConvert.SerializeObject(save);
 
-            if(!Directory.Exists(SaveLocation))
+            File.WriteAllBytes(saveLocation, StringToBytes(saveJson));
+            UnityEditor.AssetDatabase.Refresh();
+        }
+
+        private void SaveToDisk(Save save)
+        {
+            string saveFolder = SanitizePath(Path.Combine(SaveLocation, RemoveIllegalCharacters(save.Metadata.SaveGuid)));
+
+            if (!Directory.Exists(SaveLocation))
                 Directory.CreateDirectory(SaveLocation);
 
-            File.WriteAllBytes(loc, EncryptString(saveJson));
+            if (!Directory.Exists(saveFolder))
+                Directory.CreateDirectory(saveFolder);
+
+            string dataLoc = SanitizePath(Path.Combine(saveFolder, $"save.dat"));
+            string metaLoc = SanitizePath(Path.Combine(saveFolder, $"meta.dat"));
+            string saveJson = JsonConvert.SerializeObject(save);
+            string metaJson = JsonConvert.SerializeObject(save.Metadata);
+
+            File.WriteAllBytes(dataLoc, EncryptString(saveJson));
+            File.WriteAllBytes(metaLoc, StringToBytes(metaJson));
 
             return;
         }
 
-        private byte[] EncryptString(string str) 
+        private static byte[] StringToBytes(string str)
+        {
+            return System.Text.Encoding.UTF8.GetBytes(str);
+        }
+
+        private byte[] EncryptString(string str)
         {
             if ((Debug.isDebugBuild && !Application.isEditor) || (Application.isEditor && !useEncryption))
             {
                 // No encrypting
-                return System.Text.Encoding.UTF8.GetBytes(str);
+                return StringToBytes(str);
             }
-            else 
+            else
             {
                 // Yes encrypting
                 byte[] bytes = Encrypt(str);
-                bytes = bytes.Prepend<byte>((byte)82).Prepend<byte>((byte)110).Prepend<byte>((byte)101).Prepend<byte>((byte)119).Prepend<byte>((byte)79).ToArray();
+                bytes = PrependArray(bytes, CreatePattern(secrets[Random.Range(0,secrets.Length)]));
                 return bytes;
             }
         }
 
+        private static byte[] PrependArray(byte[] other, params byte[] addons)
+        {
+            for (int i = addons.Length - 1; i >= 0; i--)
+            {
+                other = other.Prepend<byte>(addons[i]).ToArray();
+            }
+            return other;
+        }
+
+        private static byte[] CreatePattern(string s)
+        {
+            return StringToBytes(s);
+        }
+
+        private static bool StartsWithPattern(byte[] other, byte[] pattern)
+        {
+            for (int i = 0; i < pattern.Length; i++)
+            {
+                if (i < other.Length)
+                {
+                    if (pattern[i] != other[i])
+                        return false;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private static byte[] StartsWithAnyPatterns(byte[] other, params string[] patterns)
+        {
+            if (patterns == null)
+                return null;
+            foreach (string pattern in patterns)
+            {
+                byte[] barr = CreatePattern(pattern);
+                if (StartsWithPattern(other, barr))
+                    return barr;
+            }
+            return null;
+        }
+
+        private static string[] secrets = new string[] 
+        {
+            "OwenR",
+            "Granny Is Super Old",
+            "I see you snooping",
+            "up up down down left right left right B A start",
+            "Fishboi is constantly floating between a state of immortality and suffocating due to lack of water",
+            "Just don't check the basement",
+            "Granny is a communist",
+            "Strange-Cargo: Halfway Home",
+            "Strange Cargo 2: Sons of Liberty",
+            "Strange Cargo 4: Gloos of the Patriots",
+            "Granny Doesn't Call 911",
+            "Granny once had a basement before the police found it",
+            "Granny has been kidnapped by ninjas. Are you a bad enough dude to rescue Granny?",
+            "Please hire me, they won't pay me here"
+        };
+
         private static string DecryptBytes(byte[] bytes) 
         {
-            if (bytes[0].Equals((byte)79) && bytes[1].Equals((byte)119) && bytes[2].Equals((byte)101) && bytes[3].Equals((byte)110) && bytes[4].Equals((byte)82))
+            byte[] pattern = StartsWithAnyPatterns(bytes, secrets);
+            if (pattern != null)
             {
                 // Actually Encrypted
-                bytes = bytes.Skip(5).ToArray();
+                bytes = bytes.Skip(pattern.Length).ToArray();
                 string str = Decrypt(bytes);
                 return str;
             }

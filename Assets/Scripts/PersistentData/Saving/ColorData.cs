@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace PersistentData.Saving {
     [System.Serializable]
-    public class ColorData : ISaveData
+    public struct ColorData : ISaveData
     {
         public string DataType => "RandomColor";
         public string Color;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Newtonsoft.Json;
 
 namespace Genetics
 {
@@ -9,6 +10,27 @@ namespace Genetics
     public class DNA
     {
         public List<PartHash> BodyPartHashs = new List<PartHash>();
-        public Color[] Colors = new Color[3];
+        [JsonIgnore]
+        public Color[] Colors
+        {
+            get
+            {
+                Color[] colors = new Color[HexColors.Length];
+                for (int i = 0; i < HexColors.Length; i++)
+                    colors[i] = Utility.RandomColorPicker.HexToColor(HexColors[i]);
+                return colors;
+            }
+            set
+            {
+                for (int i = 0; i < HexColors.Length; i++)
+                {
+                    if (i < value.Length)
+                        HexColors[i] = Utility.RandomColorPicker.ColorToHex(value[i]);
+                    else
+                        HexColors[i] = Utility.RandomColorPicker.ColorToHex(Color.magenta);
+                }
+            }
+        }
+        public string[] HexColors = new string[3];
     }
 }

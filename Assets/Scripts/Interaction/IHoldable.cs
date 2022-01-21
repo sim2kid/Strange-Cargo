@@ -6,6 +6,8 @@ namespace Interaction
 {
     public interface IHoldable
     {
+        public Vector3 PositionOffset { get; }
+        public Vector3 RotationOffset { get; }
         public string HoldText { get; }
         public void PickUp();
         public void PutDown();

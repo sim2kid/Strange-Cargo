@@ -1,3 +1,4 @@
+using PersistentData;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,141 +7,241 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using Utility;
 
-public class PauseMenu : MonoBehaviour
+namespace UI
 {
-    public GameObject Menu;
-    public GameObject pauseMenu;
-    public GameObject OptionsMenu;
-    public GameObject ExitMenu;
-
-    public PlayerInput playerInput;
-    private InputAction Pause;
-
-    public GameObject pauseDefault;
-    public GameObject optionsDefault;
-    public GameObject exitDefault;
-
-    private bool lastPause = false;
-    private void OnEnable()
+    public class PauseMenu : MonoBehaviour
     {
-        Toolbox.Instance.Pause.OnPause.AddListener(OnPause);
-        Toolbox.Instance.Pause.OnUnPause.AddListener(OnUnPause);
+        public GameObject Menu;
+        public GameObject pauseMenu;
+        public GameObject OptionsMenu;
+        public GameObject ExitMenu;
+        public GameObject LoadMenu;
+        public GameObject MainMenu;
 
-        Menu.SetActive(Toolbox.Instance.Pause.Paused);
-    }
+        public PlayerInput playerInput;
+        private InputAction Pause;
 
-    private void OnDisable()
-    {
-        Toolbox.Instance.Pause.OnPause.RemoveListener(OnPause);
-        Toolbox.Instance.Pause.OnUnPause.RemoveListener(OnUnPause);
-    }
+        public GameObject pauseDefault;
+        public GameObject optionsDefault;
+        public GameObject exitDefault;
+        public GameObject loadDefault;
+        public GameObject mainDefault;
 
-    private void Start()
-    {
-        if (playerInput == null)
-            playerInput = FindObjectOfType<PlayerInput>();
+        public Cinemachine.CinemachineVirtualCamera MenuCamera;
 
-        if (playerInput == null) {
-            Console.LogError("Could not find player input in scene for the pause menu. Deactivating it.");
-            gameObject.SetActive(false);
-            return;
+        public bool OpenMenuOnPause;
+        public bool UseMainMenu;
+
+        private bool lastPause = false;
+        private void OnEnable()
+        {
+            OpenMenuOnPause = false;
+            UseMainMenu = false;
+
+            if (Toolbox.Instance.Pause == null)
+                return;
+
+            Toolbox.Instance.Pause.OnPause.AddListener(OnPause);
+            Toolbox.Instance.Pause.OnUnPause.AddListener(OnUnPause);
+
+            if (Toolbox.Instance.Pause.Paused)
+                OnPause();
         }
 
-        Pause = playerInput.actions["Pause"];
-        lastPause = Pause.ReadValue<float>() == 1;
-    }
+        private void OnDisable()
+        {
+            if (Toolbox.Instance.Pause == null)
+                return;
 
-    private void Update()
-    {
+            Toolbox.Instance.Pause.OnPause.RemoveListener(OnPause);
+            Toolbox.Instance.Pause.OnUnPause.RemoveListener(OnUnPause);
+        }
 
-        bool currentPause = Pause.ReadValue<float>() == 1;
-        if (currentPause && lastPause != currentPause)
-            Toolbox.Instance.Pause.SetPause(!Toolbox.Instance.Pause.Paused);
+        private void Start()
+        {
+            if (playerInput == null)
+                playerInput = FindObjectOfType<PlayerInput>();
 
-        lastPause = currentPause;
-    }
+            if (playerInput == null)
+            {
+                Console.LogError("Could not find player input in scene for the pause menu. Deactivating it.");
+                gameObject.SetActive(false);
+                return;
+            }
 
-    public void Resume() 
-    {
-        Toolbox.Instance.Pause.SetPause(false);
-    }
+            Toolbox.Instance.Pause.OnPause.AddListener(OnPause);
+            Toolbox.Instance.Pause.OnUnPause.AddListener(OnUnPause);
 
-    public void SaveAndExit() 
-    {
-        Save();
-        ExitToMainMenu();
-    }
+            Pause = playerInput.actions["Pause"];
+            lastPause = Pause.ReadValue<float>() == 1;
+        }
 
-    public void Save() 
-    {
-        Console.Log("Saving has not been implemnted yet.");
-    }
+        private void Update()
+        {
+            if (OpenMenuOnPause)
+            {
+                bool currentPause = Pause.ReadValue<float>() == 1;
+                if (currentPause && lastPause != currentPause)
+                    Toolbox.Instance.Pause.SetPause(!Toolbox.Instance.Pause.Paused);
 
-    public void Load() 
-    {
-        Console.Log("Loading has not been implemnted yet.");
-    }
+                lastPause = currentPause;
+            }
+        }
 
-    public void ExitToMainMenu()
-    {
-        Toolbox.Instance.OnClosing.Invoke();
-        Invoke("SceneChange", 0.2f);
-    }
+        public void Resume()
+        {
+            Toolbox.Instance.Pause.SetPause(false);
+        }
 
-    public void ExitToDesktop()
-    {
-        Toolbox.Instance.OnClosing.Invoke();
-        Invoke("Terminate", 0.2f);
-    }
+        public void SaveAndExit()
+        {
+            Save();
+            ExitToMainMenu();
+        }
 
-    private void SceneChange() 
-    {
-        SceneManager.LoadScene(0);
-    }
+        public void Save()
+        {
+            var man = FindObjectOfType<SaveManager>();
+            if (man == null)
+            {
+                Console.LogError("Could not save the game. Save manager is not in scene.");
+                return;
+            }
+            man.Save();
+        }
 
-    private void Terminate() 
-    {
-        #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-        return;
-        #endif
+        public void Load()
+        {
+            TurnOffAllMenus();
+            LoadMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(loadDefault);
+        }
 
-        Application.Quit();
-    }
+        public void ExitToMainMenu()
+        {
+            FindObjectOfType<UIManager>().OpenMainMenu();
+        }
 
-    public void Exit() 
-    {
-        pauseMenu.SetActive(false);
-        ExitMenu.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(exitDefault);
-    }
+        public void ExitToDesktop()
+        {
+            Toolbox.Instance.OnClosing.Invoke();
+            Invoke("Terminate", 0.2f);
+        }
 
-    public void Options()
-    {
-        Console.Log("Options Menu has not been implemented yet.");
-        //PauseMenu.SetActive(false);
-        //OptionsMenu.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(optionsDefault);
-    }
+        private void Terminate()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+            return;
+#endif
 
-    public void BackToPauseMenu()
-    {
-        pauseMenu.SetActive(true);
-        OptionsMenu.SetActive(false);
-        ExitMenu.SetActive(false);
-        EventSystem.current.SetSelectedGameObject(pauseDefault);
-    }
+            Application.Quit();
+        }
 
-    private void OnPause() 
-    {
-        Menu.SetActive(true);
-        BackToPauseMenu();
-        Cursor.lockState = CursorLockMode.None;
-    }
+        public void Exit()
+        {
+            TurnOffAllMenus();
+            ExitMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(exitDefault);
+        }
 
-    private void OnUnPause() 
-    {
-        Menu.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
+        public void Options()
+        {
+            Console.Log("Options Menu has not been implemented yet.");
+            TurnOffAllMenus();
+            OptionsMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(optionsDefault);
+        }
+
+        public void BackToPauseMenu()
+        {
+            TurnOffAllMenus();
+            if (UseMainMenu)
+            {
+                MainMenu.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(mainDefault);
+            }
+            else
+            {
+                pauseMenu.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(pauseDefault);
+            }
+        }
+
+        private void OnPause()
+        {
+            if (OpenMenuOnPause)
+            {
+                Menu.SetActive(true);
+                BackToPauseMenu();
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+        }
+
+        public void SaveToResources()
+        {
+            if (!Application.isEditor)
+            {
+                Console.LogError("You can only set the default level in the editor.");
+                return;
+            }
+            var man = FindObjectOfType<SaveManager>();
+            if (man == null)
+            {
+                Console.LogError("Could not save the game. Save manager is not in scene.");
+                return;
+            }
+            man.SaveAsDefault();
+            Console.Log("New Default Saved!");
+        }
+
+        private void OnUnPause()
+        {
+            if (OpenMenuOnPause)
+            {
+                Menu.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+        }
+
+        public void DisablePauseMenu()
+        {
+            OpenMenuOnPause = false;
+            Menu.SetActive(false);
+        }
+
+        public void EnableMainMenu()
+        {
+            Menu.SetActive(true);
+            if (MenuCamera != null)
+                MenuCamera.Priority = 1000;
+            UseMainMenu = true;
+            BackToPauseMenu();
+            Resume();
+            FindObjectOfType<Player.PlayerController>().Disable();
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        public void DisableMainMenu()
+        {
+            if (MenuCamera != null)
+                MenuCamera.Priority = -1000;
+            UseMainMenu = false;
+            Menu.SetActive(false);
+            FindObjectOfType<Player.PlayerController>().Enable();
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
+        private void TurnOffAllMenus()
+        {
+            LoadMenu.SetActive(false);
+            MainMenu.SetActive(false);
+            pauseMenu.SetActive(false);
+            OptionsMenu.SetActive(false);
+            ExitMenu.SetActive(false);
+        }
     }
 }

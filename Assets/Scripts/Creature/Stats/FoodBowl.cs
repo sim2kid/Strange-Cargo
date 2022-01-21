@@ -6,12 +6,14 @@ using Environment;
 using Creature.Brain;
 using System;
 using UnityEngine.Events;
+using PersistentData.Saving;
+using PersistentData.Component;
 
 namespace Creature.Stats
 {
     [Serializable]
     [RequireComponent(typeof(Displacement))]
-    public class FoodBowl : NeedSource, IValue, IObject
+    public class FoodBowl : NeedSource, IValue, IObject, ISaveable
     {
         [SerializeField]
         [Tooltip("Represents how full the bowl is in Appatite Points")]
@@ -33,8 +35,8 @@ namespace Creature.Stats
         [SerializeField]
         public UnityEvent OnEmpty;
 
-        [SerializeField][HideInInspector]
-        private Guid _guid;
+        [SerializeField]
+        private string _guid;
 
         private float multiplier = 0;
 
@@ -50,11 +52,22 @@ namespace Creature.Stats
         public override Needs StatsEffect => base.NeedChange;
         public override IObject RelatedObject => this;
 
-        
+
 
         public string Name { get => gameObject.name; set { gameObject.name = value; } }
-        public string Guid => _guid.ToString();
+        public string Guid { get => _guid; set => _guid = value; }
+        public ISaveData saveData { get => data; set => data = (NeedSourceData)value; }
 
+        [SerializeField]
+        NeedSourceData data;
+
+        private void OnValidate()
+        {
+            if (string.IsNullOrWhiteSpace(data._guid))
+            {
+                data._guid = System.Guid.NewGuid().ToString();
+            }
+        }
 
         public float Read() 
         {
@@ -96,7 +109,6 @@ namespace Creature.Stats
 
         private void OnEnable()
         {
-            _guid = new Guid();
             if(!Utility.Toolbox.Instance.AvalibleTasks.Contains(this))
                 Utility.Toolbox.Instance.AvalibleTasks.Add(this);
         }
@@ -109,6 +121,8 @@ namespace Creature.Stats
 
         private void Awake()
         {
+            if (string.IsNullOrEmpty(Guid))
+                Guid = System.Guid.NewGuid().ToString();
             Console.HideInDebugConsole();
         }
 
@@ -121,6 +135,23 @@ namespace Creature.Stats
         public bool Equals(IObject other)
         {
             return (string.Equals(this.Name, other.Name) && string.Equals(this.Guid, other.Guid));
+        }
+
+        public void PreSerialization()
+        {
+            data.BaseNeeds = base.NeedChange;
+            data.Fullness = this.Fullness;
+        }
+
+        public void PreDeserialization()
+        {
+            return;
+        }
+
+        public void PostDeserialization()
+        {
+            base.NeedChange = data.BaseNeeds;
+            Fullness = data.Fullness;
         }
     }
 }
