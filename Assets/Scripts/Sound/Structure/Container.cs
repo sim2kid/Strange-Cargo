@@ -56,7 +56,7 @@ namespace Sound.Structure
             toAdd.Pitch = bite.Pitch * this.Pitch;
             toAdd.Volume = bite.Volume * this.Volume;
             toAdd.Delay = bite.Delay + this.Delay;
-            toAdd.Delay = bite.Loop + this.Loop;
+            toAdd.Loop = bite.Loop + this.Loop;
             return toAdd;
         }
     }
