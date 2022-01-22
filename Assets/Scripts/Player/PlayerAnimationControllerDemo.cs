@@ -25,7 +25,7 @@ public class PlayerAnimationControllerDemo : MonoBehaviour
     {
         groundVelocity = new Vector2(characterController.velocity.x, characterController.velocity.z);
         animator.SetFloat("GroundSpeed", groundVelocity.magnitude);
-        if (!movementController.isOnGround)
+        if (!movementController.IsOnGround)
         {
             animator.SetFloat("VerticalSpeed", characterController.velocity.y);
         }

@@ -25,7 +25,6 @@ namespace Player
         public Hand HandController;
 
         public GameObject Eyes;
-        public GameObject Feet;
         public GameObject Hand;
         public GameObject PlayerModel;
         public Camera OverlayCamera;
@@ -77,8 +76,6 @@ namespace Player
             if (Eyes != null)
                 HeadMovement.camera = Eyes;
             Movement = GetComponent<MovementController>();
-            if (Feet != null)
-                Movement.feet = Feet.transform;
             GlobalInteraction = GetComponent<GlobalController>();
             if (Hand != null)
                 HandController = Hand.GetComponent<Hand>();
