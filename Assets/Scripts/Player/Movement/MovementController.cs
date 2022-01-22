@@ -23,6 +23,7 @@ namespace Player.Movement
         [Tooltip("The layer mask the will be counted as ground.")]
         [SerializeField]
         LayerMask interactionMask = 0;
+        public LayerMask LayerMask { get => interactionMask; }
 
         CharacterController characterController;
         Vector2 moveValue;
@@ -40,6 +41,8 @@ namespace Player.Movement
         [SerializeField]
         bool _onGround;
         public bool IsOnGround { get; private set; }
+        private Vector3 _movementSpeed;
+        public Vector3 Velocity { get => new Vector3(_movementSpeed.x, velocity.y, _movementSpeed.z); }
 
         // Start is called before the first frame update
         void Start()
@@ -89,15 +92,16 @@ namespace Player.Movement
         void HandleMovement()
         {
             moveTo = transform.right * moveValue.x + transform.forward * moveValue.y;
-            characterController.Move(moveTo.normalized * Time.fixedDeltaTime * MoveSpeed);
+            _movementSpeed = moveTo.normalized * Time.fixedDeltaTime * MoveSpeed;
+            characterController.Move(_movementSpeed);
         }
 
-        float GetRadius() 
+        public float GetRadius() 
         {
             return characterController.radius * transform.lossyScale.y;
         }
 
-        Vector3 GetHeadOrigin() 
+        public Vector3 GetHeadOrigin() 
         {
             float radius = GetRadius();
             Vector3 headOrigin = transform.position + characterController.center + (new Vector3(0, (characterController.height / 2) + 0.2f, 0) * transform.lossyScale.y);
@@ -105,7 +109,7 @@ namespace Player.Movement
             return headOrigin;
         }
 
-        Vector3 GetFootOrigin() 
+        public Vector3 GetFootOrigin() 
         {
             float radius = GetRadius();
             Vector3 footOrigin = transform.position + characterController.center - (new Vector3(0, characterController.height / 2, 0) * transform.lossyScale.y);
@@ -114,7 +118,7 @@ namespace Player.Movement
             return footOrigin;
         }
 
-        Vector3 PhysicsStepResolution() 
+        public Vector3 PhysicsStepResolution() 
         {
             return Physics.gravity * Time.fixedDeltaTime;
         }
@@ -132,11 +136,14 @@ namespace Player.Movement
                 if (velocity.y > 0) 
                 velocity.y = 0;
             }
-
+            if (JumpIsHit && velocity.y == 0) 
+                HandleJumping();
             if (JumpIsHit && !IsOnGround)
                 JumpIsHit = false;
             if(!IsOnGround)
                 velocity.y += Physics.gravity.y * Time.fixedDeltaTime;
+            if (characterController.isGrounded)
+                velocity.y = 0;
 
             characterController.Move(velocity * Time.fixedDeltaTime);
         }

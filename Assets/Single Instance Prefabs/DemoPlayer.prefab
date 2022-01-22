@@ -3091,7 +3091,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1034
+  m_VersionIndex: 1061
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4155,6 +4155,7 @@ GameObject:
   - component: {fileID: 1909496331}
   - component: {fileID: 4628441539282750614}
   - component: {fileID: 138597451206516799}
+  - component: {fileID: 1716438230727556232}
   m_Layer: 9
   m_Name: DemoPlayer
   m_TagString: Untagged
@@ -4422,7 +4423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2441dbb9ca2784d8143a3ba0ed928b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sourceVolume: 0
+  _sourceVolume: 1
   OnPlay:
     m_PersistentCalls:
       m_Calls: []
@@ -4600,6 +4601,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _location:
     _guid: 1dd5e29e-c435-424c-b848-c4ca892e7804
+--- !u!114 &1716438230727556232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8435313185083453008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eeb05311a98d3b4eb961bcf292221c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StepRate: 0.4
+  StepRepository: Player/Footsteps
+  materialType: 0
 --- !u!1 &8435313185657725755
 GameObject:
   m_ObjectHideFlags: 0
