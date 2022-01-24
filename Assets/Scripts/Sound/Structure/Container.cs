@@ -88,7 +88,7 @@ namespace Sound.Structure
                 _onContainer++;
                 return Next();
             }
-            if (!(container is Container))
+            if (!(container is Container)) // if not Container but Source
             {
                 // will always return a value, so we increment to the next container to prevent a loop
                 _onContainer++;
