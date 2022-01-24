@@ -33,7 +33,7 @@ namespace Sound.Structure
         public virtual List<ISound> Containers { get => _containers; set { _containers = value; } }
         public virtual List<ISound> VirtualContainers => ProcessContainers();
 
-        protected virtual List<ISound> ProcessContainers() 
+        protected virtual List<ISound> ProcessContainers()
         {
             List<ISound> sounds = new List<ISound>();
             foreach (var container in _containers)
@@ -45,7 +45,7 @@ namespace Sound.Structure
                 {
                     sounds.AddRange(container.VirtualContainers);
                 }
-                else 
+                else
                 {
                     sounds.Add(container);
                 }
@@ -55,7 +55,7 @@ namespace Sound.Structure
 
         protected abstract List<ISound> GetContainerInstance();
 
-        public virtual void Start() 
+        public virtual void Start()
         {
             _onLoop = 1;
             _loopDurration = (int)Mathf.Round(Loop.Read());
@@ -65,7 +65,7 @@ namespace Sound.Structure
             _containerListLength = _containerInstance.Count;
         }
 
-        public virtual List<SoundBite> Next() 
+        public virtual List<SoundBite> Next()
         {
             if (_onContainer >= _containerListLength)
             {
@@ -79,12 +79,12 @@ namespace Sound.Structure
                 return null;
             }
             var container = _containerInstance[_onContainer];
-            if (_lastContainer != _onContainer) 
+            if (_lastContainer != _onContainer)
             {
                 container.Start();
                 _lastContainer = _onContainer;
             }
-            if (container == null) 
+            if (container == null)
             {
                 _onContainer++;
                 return Next();
@@ -95,6 +95,12 @@ namespace Sound.Structure
                 _onContainer++;
             }
             return container.Next();
+        }
+
+        public virtual List<SoundBite> Update() 
+        {
+            var container = _containerInstance[_onContainer];
+            return container?.Update();
         }
 
         public abstract ISound Clone();

@@ -54,6 +54,7 @@ namespace Sound.Source.Internal
             LoadAudio();
         }
         public List<SoundBite> Next() => GetBites();
+        public List<SoundBite> Update() => Next();
 
         private List<SoundBite> GetBites()
         {

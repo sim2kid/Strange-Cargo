@@ -50,6 +50,13 @@ namespace Sound.Structure
         public List<SoundBite> Next();
 
         /// <summary>
+        /// Run if the audio needs to be recalculated durring playing.
+        /// Audio should be updated and returned.
+        /// </summary>
+        /// <returns>Returns a SoundBite list on the same step as the last Next()</returns>
+        public List<SoundBite> Update();
+
+        /// <summary>
         /// Make a copy of an ISound with different instances of each object
         /// </summary>
         /// <returns>A copy of the original ISound</returns>

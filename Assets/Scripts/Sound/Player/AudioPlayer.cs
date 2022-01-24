@@ -14,6 +14,7 @@ namespace Sound.Player
         public bool IsPlaying { get; private set; }
         public bool IsDelayed { get; private set; }
         private bool _stopSignal;
+        private bool _updateAudio;
 
         private AudioSource _source;
 
@@ -102,13 +103,22 @@ namespace Sound.Player
             {
                 if (_stopSignal)
                     break;
-                for (int i = 0; i < bites.Length; i++)
+                int max = bites.Length;
+                for (int i = 0; i < max; i++)
                 {
                     IsDelayed = true;
                     yield return new WaitForSeconds(bites[i].Delay.Read());
                     IsDelayed = false;
                     if (_stopSignal)
                         break;
+                    if (_updateAudio)
+                    {
+                        bites = container.Update()?.ToArray();
+                        if (bites != null)
+                            break;
+                        if (bites.Length != max)
+                            break;
+                    }
                     float pitch = bites[i].Pitch.Read();
                     _source.pitch = pitch;
                     _clipVolume = bites[i].Volume.Read();
@@ -120,6 +130,31 @@ namespace Sound.Player
                         yield return new WaitForFixedUpdate();
                         if (_stopSignal)
                             break;
+                        if (_updateAudio)
+                        {
+                            bites = container.Update()?.ToArray();
+                            if (bites != null)
+                                break;
+                            if (bites.Length != max)
+                                break;
+                            float currentPos = _source.time;
+                            _source.Stop();
+
+                            pitch = bites[i].Pitch.Read();
+                            _source.pitch = pitch;
+                            _clipVolume = bites[i].Volume.Read();
+                            volume = _clipVolume * Volume;
+                            if (bites[i].Clip != null)
+                            {
+                                _source.loop = false;
+                                _source.clip = bites[i].Clip;
+                                _source.volume = volume;
+                                _source.Play();
+                                _source.time = currentPos;
+                            }
+                            else
+                                break;
+                        }
                     }
                     if (_stopSignal)
                         break;

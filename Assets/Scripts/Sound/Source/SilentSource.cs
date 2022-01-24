@@ -33,5 +33,6 @@ namespace Sound.Source
             return clone;
         }
         public List<SoundBite> Next() => new List<SoundBite>();
+        public List<SoundBite> Update() => Next();
     }
 }

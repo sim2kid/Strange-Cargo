@@ -84,6 +84,7 @@ namespace Sound.Source.Internal
         }
 
         public List<SoundBite> Next() => null;
+        public List<SoundBite> Update() => Next();
 
         private List<ISound> GetContainers() 
         {
