@@ -33,7 +33,6 @@ namespace Sound.Source.Internal
 
         [SerializeField]
         protected List<SoundBite> _soundBites = new List<SoundBite>();
-        public List<SoundBite> Bites => null;
 
         public ResourceList() { }
 
@@ -60,9 +59,31 @@ namespace Sound.Source.Internal
                     Clip = clip,
                     Pitch = new ValueRange(1),
                     Volume = new ValueRange(1),
-                    Delay = new ValueRange(0)
+                    Delay = new ValueRange(0),
+                    Loop = new ValueRange(1)
                 });
         }
+
+        public void Start() 
+        {
+            LoadAudio();
+        }
+
+        public ISound Clone() 
+        {
+            ResourceList clone = new ResourceList();
+            clone.Pitch = Pitch;
+            clone.Volume = Volume;
+            clone.Delay = Delay;
+            clone.Loop = Loop;
+            clone._audioPool = _audioPool;
+            clone._soundBites = new List<SoundBite>();
+            foreach(SoundBite bite in _soundBites)
+                clone._soundBites.Add(bite.Clone());
+            return clone;
+        }
+
+        public List<SoundBite> Next() => null;
 
         private List<ISound> GetContainers() 
         {
@@ -88,6 +109,7 @@ namespace Sound.Source.Internal
                 toReturn.Pitch = bite.Pitch * this.Pitch;
                 toReturn.Volume = bite.Volume * this.Volume;
                 toReturn.Delay = bite.Delay + this.Delay;
+                toReturn.Loop = this.Loop;
                 bites.Add(new SoundClip(toReturn));
             }
             return bites;

@@ -39,17 +39,10 @@ namespace Sound.Player
         private void Awake()
         {
             activeContainer = Container;
-            SetUp();
         }
         private void Start()
         {
             _source = GetComponent<AudioSource>();
-        }
-
-        private List<SoundBite> tempBites = new List<SoundBite>();
-        private void SetUp() 
-        {
-            tempBites = activeContainer.Bites;
         }
 
         public void Play(bool force, bool customContainer = false) 
@@ -94,30 +87,35 @@ namespace Sound.Player
 
         private IEnumerator PlayList() 
         {
-            SetUp(); // gets the audio ready
-            SoundBite[] bites = tempBites.ToArray();
+            ISound container = activeContainer;
+            container.Start();
+            SoundBite[] bites = container.Next()?.ToArray();
             OnPlay.Invoke();
-            for (int i = 0; i < bites.Length; i++) 
+            while (bites != null)
             {
-                IsDelayed = true;
-                yield return new WaitForSeconds(bites[i].Delay.Read());
-                IsDelayed = false;
-                if (_stopSignal)
-                    break;
-                float pitch = bites[i].Pitch.Read();
-                _source.pitch = pitch;
-                _clipVolume = bites[i].Volume.Read();
-                float volume = _clipVolume * Volume;
-                if(bites[i].Clip != null)
-                    _source.PlayOneShot(bites[i].Clip, volume);
-                while (_source.isPlaying) 
+                for (int i = 0; i < bites.Length; i++)
                 {
-                    yield return new WaitForFixedUpdate();
+                    IsDelayed = true;
+                    yield return new WaitForSeconds(bites[i].Delay.Read());
+                    IsDelayed = false;
+                    if (_stopSignal)
+                        break;
+                    float pitch = bites[i].Pitch.Read();
+                    _source.pitch = pitch;
+                    _clipVolume = bites[i].Volume.Read();
+                    float volume = _clipVolume * Volume;
+                    if (bites[i].Clip != null)
+                        _source.PlayOneShot(bites[i].Clip, volume);
+                    while (_source.isPlaying)
+                    {
+                        yield return new WaitForFixedUpdate();
+                        if (_stopSignal)
+                            break;
+                    }
                     if (_stopSignal)
                         break;
                 }
-                if (_stopSignal)
-                    break;
+                bites = container.Next()?.ToArray();
             }
             IsPlaying = false;
             OnPlayEnd.Invoke();

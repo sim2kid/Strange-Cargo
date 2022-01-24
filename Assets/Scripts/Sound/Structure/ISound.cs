@@ -25,11 +25,6 @@ namespace Sound.Structure
         public ValueRange Loop { get; set; }
 
         /// <summary>
-        /// The sound bites that compose a single sound to be played
-        /// </summary>
-        public List<SoundBite> Bites { get; }
-
-        /// <summary>
         /// The list of all real containers that make up a sound.
         /// Null if it can't hold containers.
         /// </summary>
@@ -41,5 +36,23 @@ namespace Sound.Structure
         /// Null if it can't hold containers.
         /// </summary>
         public List<ISound> VirtualContainers { get; }
+
+        /// <summary>
+        /// Sets up the container to be itterated over using the <seealso cref="Next"/> method.
+        /// </summary>
+        public void Start();
+
+        /// <summary>
+        /// Processes and gets the next sound bites to be played in this container. 
+        /// Please use <see cref="Start"/> to initialize the container.
+        /// </summary>
+        /// <returns>Returns SoundBite to play and Null when finished. Source will never null.</returns>
+        public List<SoundBite> Next();
+
+        /// <summary>
+        /// Make a copy of an ISound with different instances of each object
+        /// </summary>
+        /// <returns>A copy of the original ISound</returns>
+        public ISound Clone();
     }
 }

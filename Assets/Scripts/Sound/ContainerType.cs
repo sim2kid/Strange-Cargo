@@ -12,7 +12,8 @@ namespace Sound
         ResourceClip,
         ResourceList,
         SoundClip,
-        RandomContainer
+        RandomContainer,
+        SwitchContainer
     }
     public static class ContainerTypeExtensions 
     {
@@ -28,6 +29,8 @@ namespace Sound
                     return new SoundClip();
                 case ContainerType.RandomContainer:
                     return new RandomContainer();
+                case ContainerType.SwitchContainer:
+                    return new SwitchContainer();
                 default:
                     return null;
             }
@@ -43,6 +46,8 @@ namespace Sound
                 return ContainerType.RandomContainer;
             if (type is ResourceList)
                 return ContainerType.ResourceList;
+            if (type is SwitchContainer)
+                return ContainerType.SwitchContainer;
             return ContainerType.Unknown;
         }
     }

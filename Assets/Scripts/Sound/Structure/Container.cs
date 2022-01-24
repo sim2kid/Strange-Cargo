@@ -20,7 +20,12 @@ namespace Sound.Structure
         public virtual ValueRange Delay { get => _deley; set => _deley = value; }
         public virtual ValueRange Loop { get => _loop; set => _loop = value; }
 
-        public virtual List<SoundBite> Bites => GetBites();
+        protected int _onLoop = 0;
+        protected int _loopDurration = 0;
+        protected int _onContainer = 0;
+        protected int _lastContainer = 0;
+        protected int _containerListLength = 0;
+        protected List<ISound> _containerInstance = null;
 
         [SerializeReference]
         [SerializeField]
@@ -35,7 +40,8 @@ namespace Sound.Structure
             {
                 if (container == null)
                     continue;
-                if (container.Bites == null && container.VirtualContainers != null)
+                container.Start();
+                if (container.Next() == null && container.VirtualContainers != null)
                 {
                     sounds.AddRange(container.VirtualContainers);
                 }
@@ -47,17 +53,70 @@ namespace Sound.Structure
             return sounds;
         }
 
-        protected abstract List<SoundBite> GetBites();
+        protected abstract List<ISound> GetContainerInstance();
 
-        protected virtual SoundBite CopyBite(SoundBite bite) 
+        public virtual void Start() 
         {
-            SoundBite toAdd = new SoundBite();
-            toAdd.Clip = bite.Clip;
-            toAdd.Pitch = bite.Pitch * this.Pitch;
-            toAdd.Volume = bite.Volume * this.Volume;
-            toAdd.Delay = bite.Delay + this.Delay;
-            toAdd.Loop = bite.Loop + this.Loop;
-            return toAdd;
+            _onLoop = 1;
+            _loopDurration = (int)Mathf.Round(Loop.Read());
+            _onContainer = 0;
+            _lastContainer = -1;
+            _containerInstance = GetContainerInstance();
+            _containerListLength = _containerInstance.Count;
+        }
+
+        public virtual List<SoundBite> Next() 
+        {
+            if (_onContainer >= _containerListLength)
+            {
+                if (_onLoop < _loopDurration)
+                {
+                    _onLoop++;
+                    _onContainer = 0;
+                    return Next();
+                }
+                return null;
+            }
+            var container = _containerInstance[_onContainer];
+            if (_lastContainer != _onContainer) 
+            {
+                container.Start();
+                _lastContainer = _onContainer;
+            }
+            if (container == null) 
+            {
+                _onContainer++;
+                return Next();
+            }
+            if (!(container is Container))
+            {
+                // will always return a value, so we increment to the next container to prevent a loop
+                _onContainer++;
+            }
+            return container.Next();
+        }
+
+        public abstract ISound Clone();
+
+        protected static void CopyFields(ISound original, ref ISound clone) 
+        {
+            clone.Pitch = original.Pitch;
+            clone.Volume = original.Volume;
+            clone.Delay = original.Delay;
+            clone.Loop = original.Loop;
+            clone.Containers = new List<ISound>();
+            foreach (ISound container in original.Containers) 
+            {
+                clone.Containers.Add(container.Clone());
+            }
+        }
+
+        protected ISound ApplyProperties(ISound origninal) 
+        {
+            origninal.Pitch *= this.Pitch;
+            origninal.Volume *= this.Volume;
+            origninal.Delay += this.Delay;
+            return origninal;
         }
     }
 }

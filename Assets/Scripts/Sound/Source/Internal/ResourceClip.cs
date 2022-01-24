@@ -20,8 +20,6 @@ namespace Sound.Source.Internal
         public ValueRange Delay { get => _soundBite.Delay; set => _soundBite.Delay = value; }
         public ValueRange Loop { get => _soundBite.Loop; set => _soundBite.Loop = value; }
 
-        public List<SoundBite> Bites => GetBites();
-
         public List<ISound> Containers { get => null; set { } }
         public List<ISound> VirtualContainers => null;
 
@@ -51,6 +49,12 @@ namespace Sound.Source.Internal
             };
         }
 
+        public void Start() 
+        {
+            LoadAudio();
+        }
+        public List<SoundBite> Next() => GetBites();
+
         private List<SoundBite> GetBites()
         {
             List<SoundBite> bites = new List<SoundBite>();
@@ -63,10 +67,17 @@ namespace Sound.Source.Internal
                     Console.LogWarning($"Could not load {_audioFile}.");
                 }
             }
-
             bites.Add(_soundBite);
 
             return bites;
+        }
+
+        public ISound Clone() 
+        {
+            ResourceClip clone = new ResourceClip();
+            clone._audioFile = _audioFile;
+            clone._soundBite = _soundBite.Clone();
+            return clone;
         }
     }
 }

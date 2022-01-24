@@ -22,8 +22,16 @@ namespace Sound.Source
 
         public List<ISound> Containers { get => null; set { } }
         public virtual List<ISound> VirtualContainers => null;
-        public List<SoundBite> Bites => new List<SoundBite>();
 
         public SilentSource() { }
+        public void Start() { }
+        public ISound Clone() 
+        {
+            SilentSource clone = new SilentSource();
+            clone._deley = _deley;
+            clone._loop = _loop;
+            return clone;
+        }
+        public List<SoundBite> Next() => new List<SoundBite>();
     }
 }

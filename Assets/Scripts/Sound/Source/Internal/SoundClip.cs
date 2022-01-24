@@ -17,9 +17,6 @@ namespace Sound.Source.Internal
         public ValueRange Delay { get => _soundBite.Delay; set => _soundBite.Delay = value; }
         public ValueRange Loop { get => _soundBite.Loop; set => _soundBite.Loop = value; }
 
-
-        public List<SoundBite> Bites => new List<SoundBite>() { _soundBite };
-
         public List<ISound> Containers { get => null; set { } }
         public List<ISound> VirtualContainers => null;
 
@@ -31,5 +28,16 @@ namespace Sound.Source.Internal
         {
             _soundBite = bite;
         }
+        public void Start() 
+        {
+        }
+
+        public ISound Clone() 
+        {
+            SoundClip clone = new SoundClip();
+            clone._soundBite = _soundBite.Clone();
+            return clone;
+        }
+        public List<SoundBite> Next() => new List<SoundBite>() { _soundBite };
     }
 }
