@@ -832,7 +832,7 @@ GameObject:
   - component: {fileID: 1667913461902867984}
   - component: {fileID: 1667913461902867987}
   - component: {fileID: 1667913461902867997}
-  - component: {fileID: 1667913461902867986}
+  - component: {fileID: 1379293591551519486}
   m_Layer: 0
   m_Name: FoodLevel
   m_TagString: Untagged
@@ -896,9 +896,9 @@ MonoBehaviour:
   OnFill:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1667913461902867986}
-        m_TargetAssemblyTypeName: Sound.AudioPlayer, Assembly-CSharp
-        m_MethodName: PlayFrom
+      - m_Target: {fileID: 1379293591551519486}
+        m_TargetAssemblyTypeName: Sound.Player.AudioPlayer, Assembly-CSharp
+        m_MethodName: LegacyResourcePlay
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -914,9 +914,9 @@ MonoBehaviour:
   OnBeforeEat:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1667913461902867986}
-        m_TargetAssemblyTypeName: Sound.AudioPlayer, Assembly-CSharp
-        m_MethodName: PlayFrom
+      - m_Target: {fileID: 1379293591551519486}
+        m_TargetAssemblyTypeName: Sound.Player.AudioPlayer, Assembly-CSharp
+        m_MethodName: LegacyResourcePlay
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1075,7 +1075,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1667913461902867986
+--- !u!114 &1379293591551519486
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1084,31 +1084,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 1667913461902867988}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7fab3db30850b648bd54f22bc00f267, type: 3}
+  m_Script: {fileID: 11500000, guid: dc2441dbb9ca2784d8143a3ba0ed928b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sound:
-    _pitch:
-      Value: 1
-      Range:
-        Min: 0
-        Max: 0
-    _volume:
-      Value: 1
-      Range:
-        Min: 0
-        Max: 0
-    _deley:
-      Value: 0
-      Range:
-        Min: 0
-        Max: 0
-    _loop: 0
-    _audioPool: 
-  DelayAfter: 0
+  _sourceVolume: 1
   OnPlay:
     m_PersistentCalls:
       m_Calls: []
+  OnPlayEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  Container:
+    id: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: ResourceList, ns: Sound.Source.Internal, asm: Assembly-CSharp}
+      data:
+        _pitch:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _volume:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _deley:
+          Value: 0
+          Range:
+            Min: 0
+            Max: 0
+        _audioPool: 
+        _soundBites: []
 --- !u!1 &2010003623040309736
 GameObject:
   m_ObjectHideFlags: 0

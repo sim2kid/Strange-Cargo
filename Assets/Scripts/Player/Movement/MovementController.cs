@@ -20,47 +20,47 @@ namespace Player.Movement
         [Range(0.0f, 5.0f)]
         [SerializeField]
         float jumpHeight = 2.0f;
-        [Tooltip("The force of Gravity (abstracted version)")]
-        [SerializeField]
-        float gravityForce = 1.0f;
-        [Tooltip("The tranform of the bottom of the collision box.")]
-        [SerializeField]
-        public Transform feet;
-        [Tooltip("The distance the player controller will check for ground.")]
-        [SerializeField]
-        float groundCheckDistance;
         [Tooltip("The layer mask the will be counted as ground.")]
         [SerializeField]
-        LayerMask groundMask;
-        [Tooltip("Reset the player's downward velocity to this number when landing from a fall or jump (float).")]
-        [SerializeField]
-        float groundCheckVelocityReset = -2.0f;
+        LayerMask interactionMask = 0;
+        public LayerMask LayerMask { get => interactionMask; }
 
         CharacterController characterController;
         Vector2 moveValue;
         Vector3 moveTo;
 
         //references for handling gravity
+        [SerializeField]
         Vector3 velocity;
 
-        public bool isOnGround;
-        float jumpForceFormula;
+        [SerializeField]
+        private bool JumpIsHit;
+        [SerializeField]
+        private bool IsHeadHit;
 
-        //references for handling jumping
-
+        [SerializeField]
+        bool _onGround;
+        public bool IsOnGround { get; private set; }
+        private Vector3 _movementSpeed;
+        public Vector3 Velocity { get => new Vector3(_movementSpeed.x, velocity.y, _movementSpeed.z); }
 
         // Start is called before the first frame update
         void Start()
         {
-            if (feet == null)
-                throw new ArgumentNullException("The Feet Transform is required for this to work properly.");
-
             characterController = GetComponent<CharacterController>();
 
             if (characterController == null)
                 throw new MissingComponentException("Missing a CharacterController componenet");
 
-            jumpForceFormula = Mathf.Sqrt(jumpHeight * -2.0f * -gravityForce);
+            CapsuleCollider capsuleCollider = GetComponent<CapsuleCollider>();
+            if (capsuleCollider != null) 
+            {
+                Console.DebugOnly(capsuleCollider.direction);
+                characterController.center = capsuleCollider.center;
+                characterController.radius = capsuleCollider.radius;
+                characterController.height = capsuleCollider.height;
+            }
+            JumpIsHit = false;
         }
 
         void OnMove(InputValue value)
@@ -75,9 +75,10 @@ namespace Player.Movement
 
         void HandleJumping()
         {
-            if (isOnGround)
+            if (IsOnGround && !JumpIsHit)
             {
-                velocity.y = jumpForceFormula;
+                velocity.y = jumpHeight * -Physics.gravity.y;//Mathf.Sqrt(jumpHeight * -2.0f * -gravityForce);
+                JumpIsHit = true;
             }
         }
 
@@ -85,23 +86,84 @@ namespace Player.Movement
         {
             HandleGravity();
             HandleMovement();
+            _onGround = IsOnGround;
         }
 
         void HandleMovement()
         {
             moveTo = transform.right * moveValue.x + transform.forward * moveValue.y;
-            characterController.Move(moveTo.normalized * Time.fixedDeltaTime * MoveSpeed);
+            _movementSpeed = moveTo.normalized * Time.fixedDeltaTime * MoveSpeed;
+            characterController.Move(_movementSpeed);
+        }
+
+        public float GetRadius() 
+        {
+            return characterController.radius * transform.lossyScale.y;
+        }
+
+        public Vector3 GetHeadOrigin() 
+        {
+            float radius = GetRadius();
+            Vector3 headOrigin = transform.position + characterController.center + (new Vector3(0, (characterController.height / 2) + 0.2f, 0) * transform.lossyScale.y);
+            headOrigin -= new Vector3(0, radius, 0);
+            return headOrigin;
+        }
+
+        public Vector3 GetFootOrigin() 
+        {
+            float radius = GetRadius();
+            Vector3 footOrigin = transform.position + characterController.center - (new Vector3(0, characterController.height / 2, 0) * transform.lossyScale.y);
+            footOrigin += new Vector3(0, radius, 0);
+            footOrigin += PhysicsStepResolution();
+            return footOrigin;
+        }
+
+        public Vector3 PhysicsStepResolution() 
+        {
+            return Physics.gravity * Time.fixedDeltaTime;
         }
 
         void HandleGravity()
         {
-            isOnGround = Physics.CheckSphere(feet.position, groundCheckDistance, groundMask);
-            if (isOnGround && velocity.y < 0)
+            float radius = GetRadius();
+
+            IsOnGround = Physics.CheckSphere(GetFootOrigin(), radius, interactionMask, QueryTriggerInteraction.Ignore);
+            IsHeadHit = Physics.CheckSphere(GetHeadOrigin(), radius, interactionMask, QueryTriggerInteraction.Ignore);
+
+            if (IsHeadHit)
             {
-                velocity.y = groundCheckVelocityReset;
+                JumpIsHit = false;
+                if (velocity.y > 0) 
+                velocity.y = 0;
             }
-            velocity.y -= gravityForce * Time.fixedDeltaTime;
+            if (JumpIsHit && velocity.y == 0) 
+                HandleJumping();
+            if (JumpIsHit && !IsOnGround)
+                JumpIsHit = false;
+            if(!IsOnGround)
+                velocity.y += Physics.gravity.y * Time.fixedDeltaTime;
+            if (characterController.isGrounded)
+                velocity.y = 0;
+
             characterController.Move(velocity * Time.fixedDeltaTime);
+        }
+
+        void OnDrawGizmosSelected()
+        {
+            if (characterController == null)
+                characterController = GetComponent<CharacterController>();
+            if (characterController == null)
+                return;
+
+            float radius = GetRadius();
+
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(GetHeadOrigin(), radius);
+
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(GetFootOrigin() - PhysicsStepResolution(), radius);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(GetFootOrigin(), radius);
         }
     }
 }

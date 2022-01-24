@@ -30,5 +30,22 @@ namespace DataType
             float n = (float)r.NextDouble();
             return (n * (Max-Min)) + Min;
         }
+
+        public static Range operator *(Range x, Range y)
+        {
+            return new Range(x.Min * y.Min, x.Max * y.Max);
+        }
+        public static Range operator +(Range x, Range y)
+        {
+            return new Range(x.Min + y.Min, x.Max + y.Max);
+        }
+        public static Range operator -(Range x, Range y)
+        {
+            return new Range(x.Min - y.Min, x.Max - y.Max);
+        }
+        public static Range operator /(Range x, Range y)
+        {
+            return new Range(x.Min / y.Min, x.Max / y.Max);
+        }
     }
 }

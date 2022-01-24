@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 14775157}
   - component: {fileID: 14775159}
-  - component: {fileID: 14775158}
-  m_Layer: 0
+  - component: {fileID: 8701088813007937836}
+  m_Layer: 9
   m_Name: ComeHere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 726943565219919373}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &14775159
 AudioSource:
@@ -128,7 +128,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &14775158
+--- !u!114 &8701088813007937836
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,31 +137,97 @@ MonoBehaviour:
   m_GameObject: {fileID: 14775156}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7fab3db30850b648bd54f22bc00f267, type: 3}
+  m_Script: {fileID: 11500000, guid: dc2441dbb9ca2784d8143a3ba0ed928b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sound:
-    _pitch:
-      Value: 1
-      Range:
-        Min: 0
-        Max: 0
-    _volume:
-      Value: 1
-      Range:
-        Min: 0
-        Max: 0
-    _deley:
-      Value: 0
-      Range:
-        Min: 0
-        Max: 0
-    _loop: 0
-    _audioPool: Misc/ComeHere
-  DelayAfter: 0
+  _sourceVolume: 0
   OnPlay:
     m_PersistentCalls:
       m_Calls: []
+  OnPlayEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  Container:
+    id: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: RandomContainer, ns: Sound.Structure, asm: Assembly-CSharp}
+      data:
+        _pitch:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _volume:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _deley:
+          Value: 0
+          Range:
+            Min: 0
+            Max: 0
+        _loop:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _containers:
+        - id: 1
+        - id: 2
+    00000001:
+      type: {class: ResourceList, ns: Sound.Source.Internal, asm: Assembly-CSharp}
+      data:
+        _pitch:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _volume:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _deley:
+          Value: 0
+          Range:
+            Min: 0
+            Max: 0
+        _loop:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _audioPool: Misc\ComeHere
+        _soundBites: []
+    00000002:
+      type: {class: ResourceClip, ns: Sound.Source.Internal, asm: Assembly-CSharp}
+      data:
+        _audioFile: Misc\ComeHere\pspsps.mp3
+        _soundBite:
+          Clip: {fileID: 0}
+          Pitch:
+            Value: 0
+            Range:
+              Min: 0
+              Max: 0
+          Volume:
+            Value: 0
+            Range:
+              Min: 0
+              Max: 0
+          Delay:
+            Value: 0
+            Range:
+              Min: 0
+              Max: 0
+          Loop:
+            Value: 0
+            Range:
+              Min: 0
+              Max: 0
 --- !u!1 &175863690321859498
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +386,7 @@ GameObject:
   - component: {fileID: 8704247862435477671}
   - component: {fileID: 6917145673634390921}
   - component: {fileID: 6192396682543442851}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LeftSide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -489,7 +555,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5263774050991336191}
   - component: {fileID: 3510465903633283862}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -859,7 +925,7 @@ GameObject:
   - component: {fileID: 437034356963729939}
   - component: {fileID: 5355355381848612751}
   - component: {fileID: 1026967618360215610}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Render-In-Front Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -939,15 +1005,15 @@ MonoBehaviour:
   m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
+  m_CameraType: 1
   m_Cameras: []
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 0
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -1044,7 +1110,7 @@ GameObject:
   - component: {fileID: 3339328647703509982}
   - component: {fileID: 3011629492739387947}
   - component: {fileID: 3385319587327354352}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Right Side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1707,7 +1773,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 726943565219919373}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PlayerStuffThatRenders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1726,7 +1792,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6688989716831112987}
-  - {fileID: 8435313185130930080}
   - {fileID: 8435313183938911795}
   - {fileID: 14775157}
   - {fileID: 7123862860731788287}
@@ -1742,7 +1807,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6688989716831112987}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Granny Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2288,7 +2353,7 @@ GameObject:
   - component: {fileID: 9085944023572600257}
   - component: {fileID: 7441159023464546799}
   - component: {fileID: 3896843601802038082}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Petting Useable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2459,7 +2524,7 @@ GameObject:
   - component: {fileID: 554926312409062441}
   - component: {fileID: 506855416026317392}
   - component: {fileID: 6656377300999792082}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2721,7 +2786,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7123862860731788287}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Clipboard Not In Use Location
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2740,7 +2805,7 @@ Transform:
   m_LocalScale: {x: 0.69999987, y: 0.7, z: 0.7}
   m_Children: []
   m_Father: {fileID: 726943565219919373}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -85.58, y: 100.82, z: 0}
 --- !u!1 &6670232156055455136
 GameObject:
@@ -3026,7 +3091,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 953
+  m_VersionIndex: 1061
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -3207,7 +3272,7 @@ GameObject:
   - component: {fileID: 5503969913251866366}
   - component: {fileID: 3420366317825455802}
   - component: {fileID: 1420861467868551716}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4028,7 +4093,7 @@ Transform:
   - {fileID: 5263774050991336191}
   - {fileID: 437034356963729939}
   m_Father: {fileID: 726943565219919373}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8435313183938911794
 MonoBehaviour:
@@ -4082,7 +4147,6 @@ GameObject:
   - component: {fileID: 8435313185083453014}
   - component: {fileID: 8435313185083453013}
   - component: {fileID: 1020215296}
-  - component: {fileID: 1020215285}
   - component: {fileID: 1020215295}
   - component: {fileID: 1909496315}
   - component: {fileID: 5053904445251479029}
@@ -4091,7 +4155,8 @@ GameObject:
   - component: {fileID: 1909496331}
   - component: {fileID: 4628441539282750614}
   - component: {fileID: 138597451206516799}
-  m_Layer: 0
+  - component: {fileID: 1716438230727556232}
+  m_Layer: 9
   m_Name: DemoPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4130,9 +4195,7 @@ MonoBehaviour:
   Movement: {fileID: 0}
   GlobalInteraction: {fileID: 0}
   HandController: {fileID: 0}
-  Footsteps: {fileID: 0}
   Eyes: {fileID: 8435313183938911793}
-  Feet: {fileID: 8435313185130930095}
   Hand: {fileID: 2083385952426194971}
   PlayerModel: {fileID: 4527183090451047488}
   OverlayCamera: {fileID: 5355355381848612751}
@@ -4205,7 +4268,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.8
+  m_Height: 2
   m_Radius: 0.35
   m_SlopeLimit: 55
   m_StepOffset: 0.3
@@ -4225,15 +4288,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 5
-  jumpHeight: 1
-  gravityForce: 20
-  feet: {fileID: 8435313185130930080}
-  groundCheckDistance: 0.5
-  groundMask:
+  jumpHeight: 0.33
+  interactionMask:
     serializedVersion: 2
-    m_Bits: 8
-  groundCheckVelocityReset: -2
-  isOnGround: 0
+    m_Bits: 137
+  velocity: {x: 0, y: 0, z: 0}
+  JumpIsHit: 0
+  IsHeadHit: 0
+  _onGround: 0
 --- !u!114 &8435313185083453013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4349,27 +4411,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1020215285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8435313185083453008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2953c0909348e404fbc8bef3f58f3121, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StepsRate: 0.4
-  GroundCheckDistance: 1.5
-  isPlayer: 1
-  speed: 0
-  isGrounded: 0
-  OnStep:
-    m_PersistentCalls:
-      m_Calls: []
-  timeOffset: 0.01
 --- !u!114 &1020215295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4379,31 +4420,45 @@ MonoBehaviour:
   m_GameObject: {fileID: 8435313185083453008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7fab3db30850b648bd54f22bc00f267, type: 3}
+  m_Script: {fileID: 11500000, guid: dc2441dbb9ca2784d8143a3ba0ed928b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sound:
-    _pitch:
-      Value: 1
-      Range:
-        Min: 0
-        Max: 0
-    _volume:
-      Value: 1
-      Range:
-        Min: 0
-        Max: 0
-    _deley:
-      Value: 0
-      Range:
-        Min: 0
-        Max: 0
-    _loop: 0
-    _audioPool: Player\Footsteps\Wood
-  DelayAfter: 0
+  _sourceVolume: 1
   OnPlay:
     m_PersistentCalls:
       m_Calls: []
+  OnPlayEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  Container:
+    id: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: ResourceList, ns: Sound.Source.Internal, asm: Assembly-CSharp}
+      data:
+        _pitch:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _volume:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _deley:
+          Value: 0
+          Range:
+            Min: 0
+            Max: 0
+        _loop:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _audioPool: 
+        _soundBites: []
 --- !u!114 &1909496315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4440,8 +4495,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 14775158}
-        m_TargetAssemblyTypeName: Sound.AudioPlayer, Assembly-CSharp
+      - m_Target: {fileID: 8701088813007937836}
+        m_TargetAssemblyTypeName: Sound.Player.AudioPlayer, Assembly-CSharp
         m_MethodName: Play
         m_Mode: 1
         m_Arguments:
@@ -4546,36 +4601,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _location:
     _guid: 1dd5e29e-c435-424c-b848-c4ca892e7804
---- !u!1 &8435313185130930095
-GameObject:
+--- !u!114 &1716438230727556232
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8435313185130930080}
-  m_Layer: 0
-  m_Name: Feet
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8435313185130930080
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8435313185130930095}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 726943565219919373}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 8435313185083453008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eeb05311a98d3b4eb961bcf292221c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StepRate: 0.4
+  StepRepository: Player/Footsteps
+  materialType: 0
 --- !u!1 &8435313185657725755
 GameObject:
   m_ObjectHideFlags: 0

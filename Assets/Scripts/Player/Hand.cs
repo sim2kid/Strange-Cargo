@@ -104,7 +104,7 @@ namespace Player
                 tt.HoldText = Holding.HoldText;
             if (player != null)
             {
-                player.Footsteps.OnStep.AddListener(Holding.Shake);
+                //player.Footsteps.OnStep.AddListener(Holding.Shake);
                 player.HeadMovement.OnJolt.AddListener(Holding.Shake);
             }
         }
@@ -114,8 +114,8 @@ namespace Player
             {
                 if (player == null)
                     return;
-                if(player.Footsteps != null)
-                    player.Footsteps.OnStep.RemoveListener(Holding.Shake);
+                //if(player.Footsteps != null)
+                //    player.Footsteps.OnStep.RemoveListener(Holding.Shake);
                 if (player.HeadMovement != null)
                     player.HeadMovement.OnJolt.RemoveListener(Holding.Shake);
                 if (Holding is MonoBehaviour)
