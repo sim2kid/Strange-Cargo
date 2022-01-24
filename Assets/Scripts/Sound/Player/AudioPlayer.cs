@@ -56,7 +56,6 @@ namespace Sound.Player
             }
             if (!IsPlaying || force)
             {
-                _stopSignal = false;
                 IsPlaying = true;
                 StartCoroutine("PlayList");
             }
@@ -90,9 +89,19 @@ namespace Sound.Player
             ISound container = activeContainer;
             container.Start();
             SoundBite[] bites = container.Next()?.ToArray();
+            float timeWaited = 0;
+            while (_stopSignal)// Audio is in queue to start
+            {
+                yield return new WaitForFixedUpdate();
+                timeWaited += Time.fixedDeltaTime;
+                if (timeWaited > 1)
+                    break;
+            }
             OnPlay.Invoke();
             while (bites != null)
             {
+                if (_stopSignal)
+                    break;
                 for (int i = 0; i < bites.Length; i++)
                 {
                     IsDelayed = true;
@@ -115,10 +124,17 @@ namespace Sound.Player
                     if (_stopSignal)
                         break;
                 }
+                if (_stopSignal)
+                    break;
                 bites = container.Next()?.ToArray();
             }
             IsPlaying = false;
             OnPlayEnd.Invoke();
+            if (_stopSignal)
+            {
+                _source.Stop();
+                _stopSignal = false;
+            }
         }
         public void Stop() 
         {

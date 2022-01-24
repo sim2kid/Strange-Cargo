@@ -172,7 +172,7 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: ResourceList, ns: Sound.Source.Internal, asm: Assembly-CSharp}
+      type: {class: SwitchContainer, ns: Sound.Structure, asm: Assembly-CSharp}
       data:
         _pitch:
           Value: 1
@@ -194,8 +194,88 @@ MonoBehaviour:
           Range:
             Min: 0
             Max: 0
-        _audioPool: 
-        _soundBites: []
+        _containers:
+        - id: 1
+        - id: 2
+        - id: 3
+    00000001:
+      type: {class: ResourceClip, ns: Sound.Source.Internal, asm: Assembly-CSharp}
+      data:
+        _audioFile: Music\0_Strange_Cargo_-_Morning_Theme1-PaoloSkyrus.mp3
+        _soundBite:
+          Clip: {fileID: 0}
+          Pitch:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          Volume:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          Delay:
+            Value: 0
+            Range:
+              Min: 0
+              Max: 0
+          Loop:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+    00000002:
+      type: {class: ResourceClip, ns: Sound.Source.Internal, asm: Assembly-CSharp}
+      data:
+        _audioFile: Music\1_Strange_Cargo_-_AfternoonAlt1-PaoloSkyrus.mp3
+        _soundBite:
+          Clip: {fileID: 0}
+          Pitch:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          Volume:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          Delay:
+            Value: 0
+            Range:
+              Min: 0
+              Max: 0
+          Loop:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+    00000003:
+      type: {class: ResourceClip, ns: Sound.Source.Internal, asm: Assembly-CSharp}
+      data:
+        _audioFile: Music\2_Strange_Cargo_-_Night_ThemeAlt1-PaoloSkyrus.mp3
+        _soundBite:
+          Clip: {fileID: 0}
+          Pitch:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          Volume:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          Delay:
+            Value: 0
+            Range:
+              Min: 0
+              Max: 0
+          Loop:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
 --- !u!1 &7375483987463642822
 GameObject:
   m_ObjectHideFlags: 0

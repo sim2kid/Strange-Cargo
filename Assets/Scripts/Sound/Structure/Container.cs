@@ -69,7 +69,8 @@ namespace Sound.Structure
         {
             if (_onContainer >= _containerListLength)
             {
-                if (_onLoop < _loopDurration)
+                // if can loop                or infa loops
+                if (_onLoop < _loopDurration || _loopDurration == -1)
                 {
                     _onLoop++;
                     _onContainer = 0;
