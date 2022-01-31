@@ -3,23 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerController))]
-public class PlacementController : MonoBehaviour
+namespace Placement
 {
-    private PlayerController player;
-    private Transform headTransform;
-    [SerializeField]
-    private Shader hologramShader;
-
-    void Start()
+    [RequireComponent(typeof(PlayerController))]
+    public class PlacementController : MonoBehaviour
     {
-        player = GetComponent<PlayerController>();
-        headTransform = player.Eyes.transform;
-    }
+        private PlayerController player;
+        private Transform headTransform;
+        [SerializeField]
+        private Shader hologramShader;
+
+        void Start()
+        {
+            player = GetComponent<PlayerController>();
+            headTransform = player.Eyes.transform;
+        }
 
 
-    void Update()
-    {
-        
+        void Update()
+        {
+
+        }
     }
 }
