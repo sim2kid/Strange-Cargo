@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Interaction;
 using UnityEngine.Events;
+using PersistentData.Component;
 
 namespace Placement
 {
@@ -35,16 +36,29 @@ namespace Placement
             if (Physics.Raycast(player.position, player.forward, out RaycastHit hitInfo, maxDistance, canPlaceOn)) 
             {
                 Vector3 hitPos = hitInfo.point;
-                if (hologram.scene.IsValid())
+                // Create hologram
+                if (hologram == null)
+                { 
+                    createHolorgram();
+                } 
+                else if (!hologram.scene.IsValid())
                 {
-                    hologram.transform.position = hitPos;
-                    hologram.transform.localScale = objectToPlace.transform.localScale;
+                    createHolorgram();
                 }
-                //Render hologram
+
+                // Make sure hologram is in place
+                hologram.transform.position = hitPos;
+                hologram.transform.localScale = objectToPlace.transform.localScale;
+                var slopeRotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
+                hologram.transform.rotation = slopeRotation;
             } 
-            else 
+            else if (hologram != null) 
             {
-                hologram.transform.localScale = Vector3.zero;
+                if (hologram.scene.IsValid()) 
+                {
+                    hologram.transform.position = Vector3.zero;
+                    hologram.transform.localScale = Vector3.zero;
+                }
             }
 
         }
@@ -56,21 +70,46 @@ namespace Placement
             OnPutDown.AddListener(onDrop);
         }
 
+        private void createHolorgram() 
+        {
+            if (hologram != null)
+            {
+                if (hologram.scene.IsValid())
+                {
+                    Destroy(hologram);
+                }
+            }
+            hologram = Instantiate(objectToPlace);
+
+            foreach(Saveable saveable in hologram.GetComponentsInChildren<Saveable>())
+                Destroy(saveable);
+
+            foreach (Collider collider in hologram.GetComponentsInChildren<Collider>())
+            {
+                collider.gameObject.layer = 10; // Holograms layer
+            }
+
+            foreach(Renderer renderer in hologram.GetComponentsInChildren<Renderer>())
+                foreach (Material m in renderer.materials)
+                    m.shader = hologramShader;
+        }
+
         private void onPickup() 
         {
             if (hologram != null)
                 if (hologram.scene.IsValid())
                     return;
-            hologram = Instantiate(objectToPlace);
-            foreach (Material m in hologram.GetComponent<Renderer>().materials)
-                m.shader = hologramShader;
+            createHolorgram();
         }
 
         private void onDrop()
         {
-            if(hologram != null)
-                if(hologram.scene.IsValid())
+            if (hologram != null)
+            {
+                if (hologram.scene.IsValid())
                     Destroy(hologram);
+                hologram = null;
+            }
         }
 
         public void Use()
