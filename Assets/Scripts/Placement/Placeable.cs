@@ -4,6 +4,7 @@ using UnityEngine;
 using Interaction;
 using UnityEngine.Events;
 using PersistentData.Component;
+using System.Linq;
 
 namespace Placement
 {
@@ -54,7 +55,7 @@ namespace Placement
                 }
 
                 // Make sure hologram is in place
-                hologram.transform.position = hitPos;
+                hologram.transform.position = hitPos + (0.1f * hitInfo.normal);
                 hologram.transform.localScale = objectToPlace.transform.localScale;
                 var slopeRotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
                 hologram.transform.rotation = slopeRotation;
@@ -88,25 +89,48 @@ namespace Placement
         private bool IsValidLocation() 
         {
             float hologramAngle = Vector3.Angle(Vector3.up, hologram.transform.up);
-            foreach (Collider collider in hologram.GetComponentsInChildren<Collider>())
+
+            var AllColliders = hologram.GetComponentsInChildren<Collider>();
+            var Renderers = hologram.GetComponentsInChildren<Renderer>();
+            // No collisions
+            foreach (Renderer render in Renderers)
             {
-                Vector3 size = collider.bounds.size;
-                float maxSize = Mathf.Max(size.x, size.y, size.z);
-                var collisions = Physics.OverlapSphere(collider.bounds.center, maxSize, canPlaceOn);
-                foreach (Collider others in collisions)
+                Collider[] colliders = render.GetComponents<Collider>();
+                if (colliders == null)
+                    continue;
+                foreach (Collider collider in colliders)
                 {
-                    if (Physics.ComputePenetration(collider, collider.transform.position, collider.transform.rotation,
-                        others, others.transform.position, others.transform.rotation, out Vector3 direction, out float distance)) 
+                    if (collider == null)
+                        continue;
+                    if (!collider.enabled)
+                        continue;
+                    if (collider.isTrigger)
+                        continue;
+                    Vector3 size = collider.bounds.size;
+                    float maxSize = Mathf.Max(size.x, size.y, size.z);
+                    var collisions = Physics.OverlapSphere(collider.bounds.center, maxSize, canPlaceOn);
+                    foreach (Collider other in collisions)
                     {
-                        if (Vector3.Angle(direction, hologram.transform.up) > 180 - MaxFloorAngle) 
-                        {
+                        if (AllColliders.Contains(other))
                             continue;
+                        if (other.isTrigger || !other.enabled)
+                            continue;
+                        if (Physics.ComputePenetration(collider, collider.transform.position, collider.transform.rotation,
+                            other, other.transform.position, other.transform.rotation,
+                            out Vector3 direction, out float distance))
+                        {
+                            if (Vector3.Angle(direction, hologram.transform.up) > 180 - MaxFloorAngle)
+                            {
+                                continue;
+                            }
+                            return false;
                         }
-                        return false;
                     }
                 }
             }
 
+
+            // Valid Angle
             if (CanPlaceOnFloor && hologramAngle < MaxFloorAngle) 
             {
                 return true;
@@ -138,8 +162,16 @@ namespace Placement
             }
             hologram = Instantiate(objectToPlace);
 
-            foreach(Saveable saveable in hologram.GetComponentsInChildren<Saveable>())
-                Destroy(saveable);
+            Component[] components = hologram.GetComponentsInChildren<Component>();
+            foreach (Component component in components) 
+            {
+                if (component is Transform || component is Collider || component is Renderer || component is MeshFilter)
+                {
+                    continue;
+                }
+                component.enabled = false;
+                Destroy(component);
+            }
 
             foreach (Collider collider in hologram.GetComponentsInChildren<Collider>())
             {
