@@ -24,6 +24,13 @@ namespace Placement
         [SerializeField]
         private Color invalidColor = Color.red;
 
+        [SerializeField]
+        private bool CanPlaceOnFloor = true;
+        private float MaxFloorAngle = 15.0f;
+        [SerializeField]
+        private bool CanPlaceOnWall = false;
+        private float MaxWallAngle = 15.0f;
+
         private GameObject hologram;
 
         [SerializeField]
@@ -33,14 +40,14 @@ namespace Placement
         public void HoldUpdate()
         {
             Transform player = Utility.Toolbox.Instance.Player.Eyes.transform;
-            if (Physics.Raycast(player.position, player.forward, out RaycastHit hitInfo, maxDistance, canPlaceOn)) 
+            if (Physics.Raycast(player.position, player.forward, out RaycastHit hitInfo, maxDistance, canPlaceOn))
             {
                 Vector3 hitPos = hitInfo.point;
                 // Create hologram
                 if (hologram == null)
-                { 
+                {
                     createHolorgram();
-                } 
+                }
                 else if (!hologram.scene.IsValid())
                 {
                     createHolorgram();
@@ -51,10 +58,25 @@ namespace Placement
                 hologram.transform.localScale = objectToPlace.transform.localScale;
                 var slopeRotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
                 hologram.transform.rotation = slopeRotation;
-            } 
-            else if (hologram != null) 
+
+                foreach (Renderer render in hologram.GetComponentsInChildren<Renderer>()) 
+                {
+                    foreach (Material material in render.materials) 
+                    {
+                        if (IsValidLocation())
+                        {
+                            material.color = validColor;
+                        }
+                        else
+                        {
+                            material.color = invalidColor;
+                        }
+                    }
+                }
+            }
+            else if (hologram != null)
             {
-                if (hologram.scene.IsValid()) 
+                if (hologram.scene.IsValid())
                 {
                     hologram.transform.position = Vector3.zero;
                     hologram.transform.localScale = Vector3.zero;
@@ -63,11 +85,46 @@ namespace Placement
 
         }
 
+        private bool IsValidLocation() 
+        {
+            float hologramAngle = Vector3.Angle(Vector3.up, hologram.transform.up);
+            foreach (Collider collider in hologram.GetComponentsInChildren<Collider>())
+            {
+                Vector3 size = collider.bounds.size;
+                float maxSize = Mathf.Max(size.x, size.y, size.z);
+                var collisions = Physics.OverlapSphere(collider.bounds.center, maxSize, canPlaceOn);
+                foreach (Collider others in collisions)
+                {
+                    if (Physics.ComputePenetration(collider, collider.transform.position, collider.transform.rotation,
+                        others, others.transform.position, others.transform.rotation, out Vector3 direction, out float distance)) 
+                    {
+                        if (Vector3.Angle(direction, hologram.transform.up) > 180 - MaxFloorAngle) 
+                        {
+                            continue;
+                        }
+                        return false;
+                    }
+                }
+            }
+
+            if (CanPlaceOnFloor && hologramAngle < MaxFloorAngle) 
+            {
+                return true;
+            }
+            if (CanPlaceOnWall && Mathf.Abs(hologramAngle - 90) < MaxWallAngle) 
+            {
+                return true;
+            }
+            return false;
+        }
+
         protected override void Start()
         {
             base.Start();
             OnPickup.AddListener(onPickup);
             OnPutDown.AddListener(onDrop);
+
+            Physics.IgnoreLayerCollision(10, canPlaceOn, true);
         }
 
         private void createHolorgram() 
