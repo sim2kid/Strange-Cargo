@@ -90,44 +90,44 @@ namespace Placement
         {
             float hologramAngle = Vector3.Angle(Vector3.up, hologram.transform.up);
 
-            var AllColliders = hologram.GetComponentsInChildren<Collider>();
-            var Renderers = hologram.GetComponentsInChildren<Renderer>();
-            // No collisions
-            foreach (Renderer render in Renderers)
-            {
-                Collider[] colliders = render.GetComponents<Collider>();
-                if (colliders == null)
-                    continue;
-                foreach (Collider collider in colliders)
-                {
-                    if (collider == null)
-                        continue;
-                    if (!collider.enabled)
-                        continue;
-                    if (collider.isTrigger)
-                        continue;
-                    Vector3 size = collider.bounds.size;
-                    float maxSize = Mathf.Max(size.x, size.y, size.z);
-                    var collisions = Physics.OverlapSphere(collider.bounds.center, maxSize, canPlaceOn);
-                    foreach (Collider other in collisions)
-                    {
-                        if (AllColliders.Contains(other))
-                            continue;
-                        if (other.isTrigger || !other.enabled)
-                            continue;
-                        if (Physics.ComputePenetration(collider, collider.transform.position, collider.transform.rotation,
-                            other, other.transform.position, other.transform.rotation,
-                            out Vector3 direction, out float distance))
-                        {
-                            if (Vector3.Angle(direction, hologram.transform.up) > 180 - MaxFloorAngle)
-                            {
-                                continue;
-                            }
-                            return false;
-                        }
-                    }
-                }
-            }
+            //var AllColliders = hologram.GetComponentsInChildren<Collider>();
+            //var Renderers = hologram.GetComponentsInChildren<Renderer>();
+            //// No collisions
+            //foreach (Renderer render in Renderers)
+            //{
+            //    Collider[] colliders = render.GetComponents<Collider>();
+            //    if (colliders == null)
+            //        continue;
+            //    foreach (Collider collider in colliders)
+            //    {
+            //        if (collider == null)
+            //            continue;
+            //        if (!collider.enabled)
+            //            continue;
+            //        if (collider.isTrigger)
+            //            continue;
+            //        Vector3 size = collider.bounds.size;
+            //        float maxSize = Mathf.Max(size.x, size.y, size.z);
+            //        var collisions = Physics.OverlapSphere(collider.bounds.center, maxSize, canPlaceOn);
+            //        foreach (Collider other in collisions)
+            //        {
+            //            if (AllColliders.Contains(other))
+            //                continue;
+            //            if (other.isTrigger || !other.enabled)
+            //                continue;
+            //            if (Physics.ComputePenetration(collider, collider.transform.position, collider.transform.rotation,
+            //                other, other.transform.position, other.transform.rotation,
+            //                out Vector3 direction, out float distance))
+            //            {
+            //                if (Vector3.Angle(direction, hologram.transform.up) > 180 - MaxFloorAngle)
+            //                {
+            //                    continue;
+            //                }
+            //                return false;
+            //            }
+            //        }
+            //    }
+            //}
 
 
             // Valid Angle
@@ -169,7 +169,6 @@ namespace Placement
                 {
                     continue;
                 }
-                component.enabled = false;
                 Destroy(component);
             }
 
