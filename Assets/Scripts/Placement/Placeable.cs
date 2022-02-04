@@ -33,6 +33,7 @@ namespace Placement
         private float MaxWallAngle = 15.0f;
 
         private GameObject hologram;
+        private Hologram gramInfo;
 
         [SerializeField]
         string useString;
@@ -90,45 +91,16 @@ namespace Placement
         {
             float hologramAngle = Vector3.Angle(Vector3.up, hologram.transform.up);
 
-            //var AllColliders = hologram.GetComponentsInChildren<Collider>();
-            //var Renderers = hologram.GetComponentsInChildren<Renderer>();
-            //// No collisions
-            //foreach (Renderer render in Renderers)
-            //{
-            //    Collider[] colliders = render.GetComponents<Collider>();
-            //    if (colliders == null)
-            //        continue;
-            //    foreach (Collider collider in colliders)
-            //    {
-            //        if (collider == null)
-            //            continue;
-            //        if (!collider.enabled)
-            //            continue;
-            //        if (collider.isTrigger)
-            //            continue;
-            //        Vector3 size = collider.bounds.size;
-            //        float maxSize = Mathf.Max(size.x, size.y, size.z);
-            //        var collisions = Physics.OverlapSphere(collider.bounds.center, maxSize, canPlaceOn);
-            //        foreach (Collider other in collisions)
-            //        {
-            //            if (AllColliders.Contains(other))
-            //                continue;
-            //            if (other.isTrigger || !other.enabled)
-            //                continue;
-            //            if (Physics.ComputePenetration(collider, collider.transform.position, collider.transform.rotation,
-            //                other, other.transform.position, other.transform.rotation,
-            //                out Vector3 direction, out float distance))
-            //            {
-            //                if (Vector3.Angle(direction, hologram.transform.up) > 180 - MaxFloorAngle)
-            //                {
-            //                    continue;
-            //                }
-            //                return false;
-            //            }
-            //        }
-            //    }
-            //}
+            // Check to make sure there are no collisions
+            var collisions = Physics.OverlapBox(gramInfo.Center, gramInfo.HalfExtents, Quaternion.identity, canPlaceOn);
 
+            foreach (Collider collider in collisions) 
+            {
+                if (collider.enabled == true && !collider.isTrigger) 
+                {
+                    return false;
+                }
+            }
 
             // Valid Angle
             if (CanPlaceOnFloor && hologramAngle < MaxFloorAngle) 
@@ -162,20 +134,19 @@ namespace Placement
             }
             hologram = Instantiate(objectToPlace);
 
+            // Destroy old components
             Component[] components = hologram.GetComponentsInChildren<Component>();
             foreach (Component component in components) 
             {
-                if (component is Transform || component is Collider || component is Renderer || component is MeshFilter)
+                if (component is Transform || component is Renderer || component is MeshFilter)
                 {
                     continue;
                 }
                 Destroy(component);
             }
 
-            foreach (Collider collider in hologram.GetComponentsInChildren<Collider>())
-            {
-                collider.gameObject.layer = 10; // Holograms layer
-            }
+            // Add hologram components
+            gramInfo = hologram.AddComponent<Hologram>();
 
             foreach(Renderer renderer in hologram.GetComponentsInChildren<Renderer>())
                 foreach (Material m in renderer.materials)
