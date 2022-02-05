@@ -8,21 +8,29 @@ namespace Placement
     {
         private Vector3 _center;
         public Vector3 Center { get => _center + transform.position; private set => _center = value; }
+        public Vector3 LocalCenter => Center - transform.position;
         private Vector3 _extent;
         public Vector3 HalfExtents { get => _extent * 0.5f; private set => _extent = value; }
+        public float Offset { get; private set; }
+        
 
         void Start()
+        {
+            Invoke("LateStart", 0.1f);
+        }
+
+        void LateStart() 
         {
             Vector3 minBound = Vector3.zero;
             Vector3 maxBound = Vector3.zero;
 
             MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
-            foreach (MeshFilter filter in meshFilters) 
+            foreach (MeshFilter filter in meshFilters)
             {
                 Bounds bounds = filter.mesh.bounds;
                 Vector3 localPos = filter.transform.position - transform.position;
                 Vector3 localCenter = bounds.center + localPos;
-                
+
                 minBound = MinVector(
                     localCenter - Multiply(bounds.extents, filter.transform.lossyScale),
                     minBound);
@@ -36,6 +44,8 @@ namespace Placement
                 minBound.y + ((maxBound.y - minBound.y) / 2),
                 minBound.z + ((maxBound.z - minBound.z) / 2));
             HalfExtents = maxBound - minBound;
+
+            Offset = Mathf.Abs(LocalCenter.y - HalfExtents.y) + 0.0001f;
         }
 
         private void OnDrawGizmosSelected()

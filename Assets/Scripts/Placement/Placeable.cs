@@ -33,7 +33,7 @@ namespace Placement
         private float MaxWallAngle = 15.0f;
 
         [SerializeField]
-        private float offsetFromSurface = 0.1f;
+        private float offsetFromSurface = 0f;
 
         private GameObject hologram;
         private Hologram gramInfo;
@@ -59,7 +59,7 @@ namespace Placement
                 }
 
                 // Make sure hologram is in place
-                hologram.transform.position = hitPos + (offsetFromSurface * hitInfo.normal);
+                hologram.transform.position = hitPos + ((offsetFromSurface + gramInfo.Offset) * hitInfo.normal);
                 hologram.transform.localScale = objectToPlace.transform.localScale;
                 var slopeRotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
                 hologram.transform.rotation = slopeRotation;
@@ -85,6 +85,9 @@ namespace Placement
                 {
                     hologram.transform.position = Vector3.zero;
                     hologram.transform.localScale = Vector3.zero;
+                    Destroy(hologram);
+                    hologram = null;
+                    gramInfo = null;
                 }
             }
 
