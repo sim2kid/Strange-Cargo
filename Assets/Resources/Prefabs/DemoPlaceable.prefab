@@ -148,12 +148,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 9
   maxDistance: 10
-  objectToPlace: {fileID: 2010003623040309736, guid: 2c68842b11e12c04ca5286d98347c383, type: 3}
+  objectToPlace: {fileID: 6279976858420598512, guid: 54e45625f01c522449f3a9d1e8a9729e, type: 3}
   hologramShader: {fileID: -6465566751694194690, guid: 478aed76116ec37498e2a33966560874, type: 3}
   validColor: {r: 0, g: 1, b: 0, a: 1}
   invalidColor: {r: 1, g: 0, b: 0, a: 1}
   CanPlaceOnFloor: 1
   CanPlaceOnWall: 0
+  offsetFromSurface: 0.01
   useString: '{use} to poop on the floor'
 --- !u!54 &7918954006348324656
 Rigidbody:

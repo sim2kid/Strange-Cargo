@@ -8,7 +8,8 @@ namespace Placement
     {
         private Vector3 _center;
         public Vector3 Center { get => _center + transform.position; private set => _center = value; }
-        public Vector3 HalfExtents { get; private set; }
+        private Vector3 _extent;
+        public Vector3 HalfExtents { get => _extent * 0.5f; private set => _extent = value; }
 
         void Start()
         {
@@ -19,26 +20,30 @@ namespace Placement
             foreach (MeshFilter filter in meshFilters) 
             {
                 Bounds bounds = filter.mesh.bounds;
-                Vector3 localCenter = bounds.center + filter.transform.position;
+                Vector3 localPos = filter.transform.position - transform.position;
+                Vector3 localCenter = bounds.center + localPos;
+                
                 minBound = MinVector(
-                    Multiply(localCenter - bounds.extents, filter.transform.lossyScale),
+                    localCenter - Multiply(bounds.extents, filter.transform.lossyScale),
                     minBound);
                 maxBound = MaxVector(
-                    Multiply(localCenter + bounds.extents, filter.transform.lossyScale),
+                    localCenter + Multiply(bounds.extents, filter.transform.lossyScale),
                     maxBound);
             }
 
             Center = new Vector3(
                 minBound.x + ((maxBound.x - minBound.x) / 2),
                 minBound.y + ((maxBound.y - minBound.y) / 2),
-                minBound.z + ((maxBound.x - minBound.z) / 2));
+                minBound.z + ((maxBound.z - minBound.z) / 2));
             HalfExtents = maxBound - minBound;
         }
 
         private void OnDrawGizmosSelected()
         {
+            Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
+
             Gizmos.color = Color.magenta;
-            Gizmos.DrawCube(Center, HalfExtents);
+            Gizmos.DrawCube(_center, HalfExtents * 2);
 
 
             Gizmos.color = Color.red;
@@ -46,10 +51,12 @@ namespace Placement
             foreach (MeshFilter filter in meshFilters)
             {
                 Bounds bounds = filter.mesh.bounds;
+                Vector3 localPos = filter.transform.position - transform.position;
                 Vector3 size = Multiply(bounds.size, filter.transform.lossyScale);
-                Gizmos.DrawWireCube(bounds.center + filter.transform.position, size);
+                Gizmos.DrawWireCube(bounds.center + localPos, size);
             }
-            Gizmos.DrawWireCube(Center, HalfExtents);
+
+            Gizmos.matrix = Matrix4x4.identity;
         }
 
         private Vector3 Multiply(Vector3 A, Vector3 B) 

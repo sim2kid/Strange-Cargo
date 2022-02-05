@@ -32,6 +32,9 @@ namespace Placement
         private bool CanPlaceOnWall = false;
         private float MaxWallAngle = 15.0f;
 
+        [SerializeField]
+        private float offsetFromSurface = 0.1f;
+
         private GameObject hologram;
         private Hologram gramInfo;
 
@@ -56,7 +59,7 @@ namespace Placement
                 }
 
                 // Make sure hologram is in place
-                hologram.transform.position = hitPos + (0.1f * hitInfo.normal);
+                hologram.transform.position = hitPos + (offsetFromSurface * hitInfo.normal);
                 hologram.transform.localScale = objectToPlace.transform.localScale;
                 var slopeRotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
                 hologram.transform.rotation = slopeRotation;
@@ -92,7 +95,7 @@ namespace Placement
             float hologramAngle = Vector3.Angle(Vector3.up, hologram.transform.up);
 
             // Check to make sure there are no collisions
-            var collisions = Physics.OverlapBox(gramInfo.Center, gramInfo.HalfExtents, Quaternion.identity, canPlaceOn);
+            var collisions = Physics.OverlapBox(gramInfo.Center, gramInfo.HalfExtents, hologram.transform.rotation, canPlaceOn);
 
             foreach (Collider collider in collisions) 
             {
@@ -135,15 +138,7 @@ namespace Placement
             hologram = Instantiate(objectToPlace);
 
             // Destroy old components
-            Component[] components = hologram.GetComponentsInChildren<Component>();
-            foreach (Component component in components) 
-            {
-                if (component is Transform || component is Renderer || component is MeshFilter)
-                {
-                    continue;
-                }
-                Destroy(component);
-            }
+            cleanComponenets();
 
             // Add hologram components
             gramInfo = hologram.AddComponent<Hologram>();
@@ -151,6 +146,25 @@ namespace Placement
             foreach(Renderer renderer in hologram.GetComponentsInChildren<Renderer>())
                 foreach (Material m in renderer.materials)
                     m.shader = hologramShader;
+        }
+
+        private void cleanComponenets() 
+        {
+            bool clean = false;
+            for(int i = 0; i < 5 && !clean; i++) 
+            {
+                clean = true;
+                Component[] components = hologram.GetComponentsInChildren<Component>();
+                foreach (Component component in components)
+                {
+                    if (component is Transform || component is Renderer || component is MeshFilter)
+                    {
+                        continue;
+                    }
+                    clean = false;
+                    Destroy(component);
+                }
+            }
         }
 
         private void onPickup() 
