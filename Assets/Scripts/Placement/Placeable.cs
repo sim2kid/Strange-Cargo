@@ -42,8 +42,13 @@ namespace Placement
         string useString;
         public string UseText => useString;
 
+        bool beingDestroyed = false;
+
         public void HoldUpdate()
         {
+            if (beingDestroyed)
+                return;
+
             Transform player = Utility.Toolbox.Instance.Player.Eyes.transform;
             if (Physics.Raycast(player.position, player.forward, out RaycastHit hitInfo, maxDistance, canPlaceOn))
             {
@@ -95,6 +100,15 @@ namespace Placement
 
         private bool IsValidLocation() 
         {
+            if (hologram == null)
+            {
+                return false;
+            }
+            if (!hologram.scene.IsValid()) 
+            {
+                return false;
+            }
+
             float hologramAngle = Vector3.Angle(Vector3.up, hologram.transform.up);
 
             // Check to make sure there are no collisions
@@ -131,6 +145,8 @@ namespace Placement
 
         private void createHolorgram() 
         {
+            if (beingDestroyed)
+                return;
             if (hologram != null)
             {
                 if (hologram.scene.IsValid())
@@ -185,12 +201,21 @@ namespace Placement
                 if (hologram.scene.IsValid())
                     Destroy(hologram);
                 hologram = null;
+                gramInfo = null;
             }
         }
 
         public void Use()
         {
-            
+            if (IsValidLocation())
+            {
+                GameObject obj = Instantiate(objectToPlace, hologram.transform.position, hologram.transform.rotation);
+                beingDestroyed = true;
+                Destroy(hologram);
+                hologram = null;
+                gramInfo = null;
+                Destroy(gameObject);
+            }
         }
     }
 }
