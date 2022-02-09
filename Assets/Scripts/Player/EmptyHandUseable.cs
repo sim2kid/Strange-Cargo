@@ -53,10 +53,14 @@ namespace Player
         }
         public void Mod1Use()
         {
-            if (CanPickupFurnature()) 
+            if (CanPickupFurnature())
             {
-                // Itemize Furnature
+                // TODO: Itemize Furnature
                 Console.DebugOnly("Furnature Call!");
+            }
+            else 
+            {
+                Use();
             }
         }
 
@@ -89,7 +93,7 @@ namespace Player
             return false;
         }
         private bool CanPickupFurnature() => CanSeeFurnature() && Utility.Toolbox.Instance.Player.GlobalInteraction.Mod1Active;
-        
+        // TODO: Fetch Furnature
 
         private bool CanSeeCreature()
         {

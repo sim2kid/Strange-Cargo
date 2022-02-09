@@ -2431,12 +2431,23 @@ MonoBehaviour:
   OnShake:
     m_PersistentCalls:
       m_Calls: []
-  useString: 
-  pettingRange: 3
-  OnUse:
+  onCreatureHover: '{use} to pet'
+  onFurnatureHover: '{modifier1}+{use} to pickup'
+  InteractionRange: 3
+  OnPet:
     m_PersistentCalls:
       m_Calls: []
-  socialBoostAmount: 10
+  OnFurnatureRemove:
+    m_PersistentCalls:
+      m_Calls: []
+  creatureNeedChangeOnPet:
+    _myNeeds:
+    - 0
+    - 0
+    - 10
+    - 0
+    - 0
+    - 0
 --- !u!1 &5961686596173613677
 GameObject:
   m_ObjectHideFlags: 0
@@ -4195,6 +4206,7 @@ MonoBehaviour:
   Movement: {fileID: 0}
   GlobalInteraction: {fileID: 0}
   HandController: {fileID: 0}
+  InputState: 0
   Eyes: {fileID: 8435313183938911793}
   Hand: {fileID: 2083385952426194971}
   PlayerModel: {fileID: 4527183090451047488}
@@ -4474,10 +4486,13 @@ MonoBehaviour:
   UseEvent:
     m_PersistentCalls:
       m_Calls: []
+  Mod1UseEvent:
+    m_PersistentCalls:
+      m_Calls: []
   ThrowEvent:
     m_PersistentCalls:
       m_Calls: []
-  PrimaryEvent:
+  DropEvent:
     m_PersistentCalls:
       m_Calls: []
   SecondaryEvent:
