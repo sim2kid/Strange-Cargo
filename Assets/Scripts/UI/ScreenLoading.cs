@@ -70,6 +70,7 @@ namespace UI
         public void OpenLoadingScreen()
         {
             camera.Priority = 1000;
+            Utility.Toolbox.Instance.Player.InputState = InputState.UI;
             LoadingScene.SetActive(true);
             LoadingScreen.SetActive(true);
         }

@@ -49,6 +49,11 @@ namespace Placement
             if (beingDestroyed)
                 return;
 
+            if (Utility.Toolbox.Instance.Player.InputState != InputState.Build) 
+            {
+                Utility.Toolbox.Instance.Player.InputState = InputState.Build;
+            }
+
             Transform player = Utility.Toolbox.Instance.Player.Eyes.transform;
             if (Physics.Raycast(player.position, player.forward, out RaycastHit hitInfo, maxDistance, canPlaceOn))
             {
@@ -192,6 +197,7 @@ namespace Placement
                 if (hologram.scene.IsValid())
                     return;
             createHolorgram();
+            Utility.Toolbox.Instance.Player.InputState = InputState.Build;
         }
 
         private void onDrop()
@@ -203,6 +209,7 @@ namespace Placement
                 hologram = null;
                 gramInfo = null;
             }
+            Utility.Toolbox.Instance.Player.InputState = InputState.Default;
         }
 
         public void Use()
