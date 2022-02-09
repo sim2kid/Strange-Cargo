@@ -76,6 +76,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Spin",
+                    "type": "Value",
+                    "id": "bd9ea084-c447-40c0-ab76-aa159ca36d34",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -439,6 +447,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "SideMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "491803ae-3582-4867-b5c2-a58b1bb8e0a4",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Spin",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ab9b7d5e-c2ce-4931-8e11-9dcae0667503",
+                    "path": "<Gamepad>/dpad/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Spin",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
