@@ -137,7 +137,7 @@ MonoBehaviour:
   rbData:
     _guid: ae6f4323-6d20-4aa4-89db-f2016e040eda
     IsKinematic: 0
-  _textOnHold: '{throw} to Throw'
+  _textOnHold: Hold {throw} to Throw
   OnPickup:
     m_PersistentCalls:
       m_Calls: []
@@ -343,6 +343,11 @@ MonoBehaviour:
             Max: 0
         _deley:
           Value: 0
+          Range:
+            Min: 0
+            Max: 0
+        _loop:
+          Value: 1
           Range:
             Min: 0
             Max: 0

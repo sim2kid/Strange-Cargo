@@ -224,5 +224,9 @@ namespace Placement
                 Destroy(gameObject);
             }
         }
+        public void Mod1Use()
+        {
+            Use();
+        }
     }
 }

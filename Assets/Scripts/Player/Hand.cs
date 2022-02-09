@@ -41,8 +41,9 @@ namespace Player
         void LateStart() 
         {
             player = Utility.Toolbox.Instance.Player;
-            player.GlobalInteraction.PrimaryEvent.AddListener(LetGo);
+            player.GlobalInteraction.DropEvent.AddListener(LetGo);
             player.GlobalInteraction.UseEvent.AddListener(Use);
+            player.GlobalInteraction.Mod1UseEvent.AddListener(Mod1Use);
             player.GlobalInteraction.ThrowEvent.AddListener(Throw);
             tt = Utility.Toolbox.Instance.ToolTip;
         }
@@ -75,6 +76,12 @@ namespace Player
         {
             if (Holding is IUseable)
                 ((IUseable)Holding).Use();
+        }
+
+        public void Mod1Use()
+        {
+            if (Holding is IUseable)
+                ((IUseable)Holding).Mod1Use();
         }
 
         public void Throw()

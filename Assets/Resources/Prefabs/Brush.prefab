@@ -85,7 +85,7 @@ MonoBehaviour:
   rbData:
     _guid: a421085c-f595-4aef-925d-04313e6a9c88
     IsKinematic: 0
-  _textOnHold: '{primary} to drop'
+  _textOnHold: '{drop} to drop'
   OnPickup:
     m_PersistentCalls:
       m_Calls:
@@ -124,6 +124,7 @@ MonoBehaviour:
         m_CallState: 2
   brushRange: 3
   hygieneBoostAmount: 10
+  useOnCreatureString: '{use} to brush'
 --- !u!82 &276228823837951602
 AudioSource:
   m_ObjectHideFlags: 0
@@ -287,6 +288,11 @@ MonoBehaviour:
             Max: 0
         _deley:
           Value: 0
+          Range:
+            Min: 0
+            Max: 0
+        _loop:
+          Value: 1
           Range:
             Min: 0
             Max: 0

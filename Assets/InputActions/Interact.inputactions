@@ -46,20 +46,20 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Drop",
-                    "type": "Button",
-                    "id": "0e031085-5a36-4191-b864-0beaefe78e8b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Throw",
                     "type": "Button",
                     "id": "377d2846-a209-4f31-b8bc-6148cf8e9ae4",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold"
+                    "interactions": "SlowTap(duration=0.3)"
+                },
+                {
+                    "name": "Drop",
+                    "type": "Button",
+                    "id": "0e031085-5a36-4191-b864-0beaefe78e8b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap(duration=0.3)"
                 },
                 {
                     "name": "Pause",
@@ -86,7 +86,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Modify",
+                    "name": "Modifier1",
                     "type": "Button",
                     "id": "329a541f-cd4f-435c-81ee-4ab55cd98678",
                     "expectedControlType": "Button",
@@ -394,28 +394,6 @@
                 },
                 {
                     "name": "",
-                    "id": "d288658a-9b00-4f4b-b719-01ac8d7b4445",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Throw",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "882dc092-b2d7-4050-9656-09bd4819a440",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Throw",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "394cf06d-4444-4048-bf30-d14aab7499a6",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
@@ -487,7 +465,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Modify",
+                    "action": "Modifier1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -498,7 +476,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Modify",
+                    "action": "Modifier1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d288658a-9b00-4f4b-b719-01ac8d7b4445",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Throw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "882dc092-b2d7-4050-9656-09bd4819a440",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Throw",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

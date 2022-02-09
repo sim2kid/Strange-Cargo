@@ -7,20 +7,25 @@ using UnityEngine.Events;
 
 namespace Player
 {
-    public class PettingUseable : Pickupable, IUseable, IHoldable
+    public class EmptyHandUseable : Pickupable, IUseable, IHoldable
     {
         public string UseText => useString;
-
-        [SerializeField]
         private string useString;
 
-        public float pettingRange = 3;
+        [SerializeField]
+        private string onCreatureHover;
+        [SerializeField]
+        private string onFurnatureHover;
 
-        public UnityEvent OnUse;
+        [SerializeField]
+        private float InteractionRange = 3;
+
+        public UnityEvent OnPet;
+        public UnityEvent OnFurnatureRemove;
+
+        public Creature.Stats.Needs creatureNeedChangeOnPet;
 
         private Hand hand;
-
-        public float socialBoostAmount = 10;
 
         protected override void Start()
         {
@@ -30,17 +35,47 @@ namespace Player
 
         void Update()
         {
-            if(hand.Holding == null)
+            if (hand.Holding == null)
             {
                 hand.PickUp(this);
             }
         }
 
-        public void HoldUpdate()
+        public void Use()
         {
             if (CanSeeCreature() && (hand.Holding == null || hand.Holding == this))
             {
-                useString = "{use} to pet creature";
+                OnPet.Invoke();
+                Creature.Stats.Needs n = NearestCreature().needs;
+                n += creatureNeedChangeOnPet;
+                NearestCreature().needs = n;
+            }
+        }
+        public void Mod1Use()
+        {
+            if (CanPickupFurnature()) 
+            {
+                // Itemize Furnature
+                Console.DebugOnly("Furnature Call!");
+            }
+        }
+
+        public void HoldUpdate()
+        {
+            if (!(hand.Holding == null || (Object)hand.Holding == this))
+            {
+                useString = string.Empty;
+                return;
+            }
+
+
+            if (CanSeeCreature())
+            {
+                useString = onCreatureHover;
+            }
+            else if (CanSeeFurnature()) 
+            {
+                useString = onFurnatureHover;
             }
             else
             {
@@ -48,17 +83,13 @@ namespace Player
             }
         }
 
-        public void Use()
-        {
-            if(CanSeeCreature() && (hand.Holding == null || hand.Holding == this))
-            {
-                OnUse.Invoke();
-                Creature.Stats.Needs n = NearestCreature().needs;
-                n.Social += socialBoostAmount;
-                NearestCreature().needs = n;
-            }
-        }
 
+        private bool CanSeeFurnature() 
+        {
+            return false;
+        }
+        private bool CanPickupFurnature() => CanSeeFurnature() && Utility.Toolbox.Instance.Player.GlobalInteraction.Mod1Active;
+        
 
         private bool CanSeeCreature()
         {
@@ -71,12 +102,11 @@ namespace Player
                 return false;
             }
         }
-
         private CreatureController NearestCreature()
         {
             Ray ray = new Ray(player.Eyes.transform.position, player.Eyes.transform.forward);
 
-            RaycastHit[] hits = Physics.RaycastAll(ray, pettingRange);
+            RaycastHit[] hits = Physics.RaycastAll(ray, InteractionRange);
             List<RaycastHit> creatures = new List<RaycastHit>();
 
             foreach (RaycastHit hit in hits)
@@ -103,8 +133,7 @@ namespace Player
                 return null;
             }
         }
-
-        public Queue<GameObject> SortByClosest(List<RaycastHit> objs)
+        private Queue<GameObject> SortByClosest(List<RaycastHit> objs)
         {
             Queue<GameObject> queue = new Queue<GameObject>();
             while (objs.Count > 0)
@@ -115,8 +144,7 @@ namespace Player
             }
             return queue;
         }
-
-        public RaycastHit GetClosest(List<RaycastHit> objs)
+        private RaycastHit GetClosest(List<RaycastHit> objs)
         {
             RaycastHit toReturn = objs[0];
             float shortest = int.MaxValue;
