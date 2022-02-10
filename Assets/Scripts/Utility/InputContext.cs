@@ -6,8 +6,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.DualShock;
-
+#if UNITY_STANDALONE || UNITY_SWITCH
 using UnityEngine.InputSystem.Switch;
+#endif
 using UnityEngine.InputSystem.XInput;
 
 #if UNITY_IOS
@@ -101,18 +102,20 @@ namespace Utility.Input {
                         _lastDevice = Device.PlayStation;
                         break;
                     }
-                    #if UNITY_IOS
+#if UNITY_IOS
                     else if (IsOrSub(device.GetType(), typeof(iOSGameController)))
                     {
                         _lastDevice = DefaultDeviceType;
                         break;
                     } 
-                    #endif
+#endif
+#if UNITY_STANDALONE || UNITY_SWITCH
                     else if (IsOrSub(device.GetType(), typeof(SwitchProControllerHID)))
                     {
                         _lastDevice = Device.Nintendo;
                         break;
                     } 
+#endif
                     else if (IsOrSub(device.GetType(), typeof(XInputController)))
                     {
                         _lastDevice= Device.Xbox;

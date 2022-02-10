@@ -134,6 +134,11 @@ namespace UI
             UnityEditor.EditorApplication.isPlaying = false;
             return;
 #endif
+            if (Application.platform == RuntimePlatform.WebGLPlayer) 
+            {
+                Application.OpenURL("#");
+                return;
+            }
 
             Application.Quit();
         }

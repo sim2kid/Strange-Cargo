@@ -134,7 +134,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 0
-  bundleVersion: 0.2.169
+  bundleVersion: 0.2.170
   preloadedAssets:
   - {fileID: 0}
   - {fileID: 0}
@@ -143,7 +143,11 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: -8426688158082476039, guid: 3a8406893a5cc3041b9b79fc925a14ce, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 3183960705035604026, guid: 3a8406893a5cc3041b9b79fc925a14ce, type: 2}
   - {fileID: 0}
   - {fileID: 11400000, guid: 27b9cf9a559800a428e8391ac686bb98, type: 2}
   metroInputSource: 0
@@ -610,11 +614,11 @@ PlayerSettings:
   webGLTemplate: APPLICATION:Default
   webGLAnalyzeBuildSize: 0
   webGLUseEmbeddedResources: 0
-  webGLCompressionFormat: 1
+  webGLCompressionFormat: 0
   webGLWasmArithmeticExceptions: 0
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
-  webGLDecompressionFallback: 0
+  webGLDecompressionFallback: 1
   scriptingDefineSymbols:
     1: UNITY_POST_PROCESSING_STACK_V2
     7: UNITY_POST_PROCESSING_STACK_V2
