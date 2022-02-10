@@ -1,100 +1,90 @@
+using Sound.Player;
+using Sound.Structure;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Utility;
 
 namespace Sound
 {
     [RequireComponent(typeof(AudioPlayer))]
     public class BackgroundMusic : MonoBehaviour
     {
-        AudioPlayer ap;
-
         [SerializeField]
-        LoopSound Sound;
+        List<TrackTime> _tracks;
+        private AudioPlayer ap;
+        private Utility.TimeController time;
+        private SwitchContainer switchContainer;
+        private int lastTrack;
 
-        [SerializeField]
-        List<float> TimesToSwitchTracks;
-        int listIndex = 0;
-
-        TimeController time;
-
-        int index = 0;
-        int trackCount { get => getTrackCount();  }
-
-        private int getTrackCount() 
-        {
-            LoopSound loop = (LoopSound)ap.Sound;
-            if (loop == null)
-            {
-                Debug.LogError("Could not convert the Loop-Sound for the Background Music");
-                return 0;
-            }
-            return loop.Count();
-        }
-
-        // Start is called before the first frame update
         void Start()
         {
+            lastTrack = -1;
             ap = GetComponent<AudioPlayer>();
-            ap.Sound = Sound;
-            ap.Sound.Loop = true;
-            ap.enabled = true;
-            ap.Sound.LoadAudio();
-
-            time = Toolbox.Instance.TimeController;
-            Utility.Toolbox.Instance.Pause.OnPause.AddListener(OnPause);
-            Utility.Toolbox.Instance.Pause.OnUnPause.AddListener(OnUnPause);
-        }
-
-        void OnPause() 
-        {
-            ap.Volume *= 0.50f;
-        }
-
-        void OnUnPause() 
-        {
-            ap.Volume /= 0.50f;
-        }
-
-
-        float lastTime = 0;
-
-        // Update is called once per frame
-        void Update()
-        {
-            if (lastTime > time.CurrentTime) 
+            time = FindObjectOfType<Utility.TimeController>();
+            ISound container = ap.Container;
+            if (container is SwitchContainer)
             {
-                if (TimesToSwitchTracks[listIndex] > 24) 
-                {
-                    TimesToSwitchTracks[listIndex] -= 24;
-                }
+                switchContainer = (SwitchContainer)container;
+                ap.OnPlayEnd.AddListener(PlayMusic);
+            }
+            else
+            {
+                Console.LogWarning("Background Music is not using a Switch Container. Time of day will be ignored.");
+                ap.Container.Loop = -1;
+                Destroy(this);
             }
 
-            if (time.CurrentTime >= TimesToSwitchTracks[listIndex]) 
+            if (time == null)
             {
-                NextTrack();
-
-                listIndex++;
-                if (time.CurrentTime >= TimesToSwitchTracks[listIndex]) 
-                {
-                    TimesToSwitchTracks[listIndex] += 24;
-                }
+                Console.LogWarning("Cannot find Time Controller. Background music will ignore time of day.");
+                ap.Container.Loop = -1;
+                Destroy(this);
             }
 
-            lastTime = time.CurrentTime;
+            if (_tracks.Count <= 0) 
+            {
+                Console.LogError("No tracks for time of day are set. Background music will ignore time of day.");
+                ap.Container.Loop = -1;
+                Destroy(this);
+            }
+            _tracks.Sort();
+            PlayMusic();
         }
 
-        void NextTrack()
+        private void FixedUpdate()
         {
-            LoopSound loop = (LoopSound)ap.Sound;
+            int expectedTrack = ResolveCurrentTrack();
+            if (lastTrack != expectedTrack)
+            {
+                lastTrack = expectedTrack;
 
-            index++;
-            if (index >= trackCount)
-                index = 0;
+                // Will be replaced with a change signal in the containers themselves
+                ap.Stop();
+                // Stopping happens to autoplay the next track
+            }
+        }
 
-            loop.SetIndex(index);
-            ap.Stop();
+        void PlayMusic() 
+        {
+            switchContainer.Selection = ResolveCurrentTrack();
+            ap.Play();
+        }
+
+        int ResolveCurrentTrack() 
+        {
+            float currentTime = time.GetTime();
+            TrackTime current = _tracks[_tracks.Count-1];
+            foreach (TrackTime tt in _tracks) 
+            {
+                if (tt.Time <= currentTime)
+                {
+                    current = tt;
+                }
+                else 
+                {
+                    break;                }
+            }
+            return current.Track;
         }
     }
 }

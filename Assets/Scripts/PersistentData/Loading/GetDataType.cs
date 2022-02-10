@@ -61,6 +61,9 @@ namespace PersistentData.Loading
                 case "BasicNeedSource":
                     DataType = new NeedSourceData();
                     break;
+                case "Item":
+                    DataType = new ItemData();
+                    break;
             }
             serializer.Populate(jsonObject.CreateReader(), DataType);
             return DataType;

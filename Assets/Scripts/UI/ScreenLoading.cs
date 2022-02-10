@@ -16,7 +16,7 @@ namespace UI
         public Slider ProgrssBar;
         public Cinemachine.CinemachineVirtualCamera camera;
         public GameObject LoadingScene;
-        public AudioPlayer bgm;
+        //public OldAudioPlayer bgm;
         UIManager UIManager;
 
         Cinemachine.CinemachineBlendDefinition saveCameraStyle;
@@ -64,11 +64,13 @@ namespace UI
             camera.Priority = -1000;
             LoadingScene.SetActive(false);
             LoadingScreen.SetActive(false);
+            
         }
 
         public void OpenLoadingScreen()
         {
             camera.Priority = 1000;
+            Utility.Toolbox.Instance.Player.InputState = InputState.UI;
             LoadingScene.SetActive(true);
             LoadingScreen.SetActive(true);
         }
@@ -92,7 +94,8 @@ namespace UI
             if (baseTime > 0)
             {
                 count += Mathf.Clamp01(time / baseTime);
-                count /= 2;
+                if (creatures.Count > 0)
+                    count /= 2;
             }
             return count;
         }
@@ -112,7 +115,7 @@ namespace UI
             UIManager.OpenLoading();
             Toolbox.Instance.Pause.SetPause(true);
             Cursor.visible = true;
-            bgm.Volume = 1;
+            //bgm.Volume = 1;
             ProgrssBar.value = 0;
 
             StartEvent.Invoke();
@@ -127,7 +130,7 @@ namespace UI
             Cursor.visible = false;
             baseTime = 3; // No more extra waiting after first load
             End.Invoke();
-            bgm.Volume = 1;
+            //bgm.Volume = 1;
         }
 
 
@@ -144,7 +147,7 @@ namespace UI
                 if (!Finished && Report() < 1)
                 {
                     time += Time.deltaTime;
-                    bgm.Volume = 1;
+                    //bgm.Volume = 1;
                     ProgrssBar.value = Report();
                 }
                 if (Report() == 1 && !Finished)

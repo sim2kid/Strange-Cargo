@@ -71,6 +71,7 @@ namespace PersistentData
             var prefabData = new List<PrefabData>();
             foreach (var obj in objectsToSave)
             {
+
                 obj.PreSerialization();
                 if (obj.prefabData != null)
                     prefabData.Add(obj.prefabData);
@@ -193,23 +194,29 @@ namespace PersistentData
 
             foreach (GroupData data in groupData)
             {
-                CreatureData creature = (CreatureData)data.ExtraData.Find(x => x is CreatureData);
-                if (string.IsNullOrWhiteSpace(creature.GUID))
-                {
-                    Console.LogError($"Could not find creature data. Creature can not be constructed!");
-                    continue;
-                }
-                GameObject creatureObj = Genetics.CreatureGeneration.CreateCreature(creature.dna);
-                CreatureSaveable obj = creatureObj.GetComponent<CreatureSaveable>();
-                if (obj == null)
-                {
-                    Console.LogError($"Could not grab the creature saveable for newly generated creature.");
-                    continue;
-                }
-                obj.PreDeserialization();
-                obj.Data = data;
-                obj.PostDeserialization();
+                LoadCreature(data);
             }
+        }
+
+        public static GameObject LoadCreature(GroupData data) 
+        {
+            CreatureData creature = (CreatureData)data.ExtraData.Find(x => x is CreatureData);
+            if (string.IsNullOrWhiteSpace(creature.GUID))
+            {
+                Console.LogError($"Could not find creature data. Creature can not be constructed!");
+                return null;
+            }
+            GameObject creatureObj = Genetics.CreatureGeneration.CreateCreature(creature.dna);
+            CreatureSaveable obj = creatureObj.GetComponent<CreatureSaveable>();
+            if (obj == null)
+            {
+                Console.LogError($"Could not grab the creature saveable for newly generated creature.");
+                return null;
+            }
+            obj.PreDeserialization();
+            obj.Data = data;
+            obj.PostDeserialization();
+            return creatureObj;
         }
 
         private void LoadPersistants(List<ReusedData> persistants)
@@ -220,17 +227,28 @@ namespace PersistentData
             List<PersistentSaveable> persistentSaveables = FindObjectsOfType<PersistentSaveable>().ToList();
             foreach (ReusedData data in persistants)
             {
-                PersistentSaveable obj = persistentSaveables.Find(x => x.data.GUID.Equals(data.GUID));
-                if (obj == null)
-                {
-                    Console.LogError($"Could not find persistant of {data.DataType} in the current scene.");
-                    Console.LogWarning("We would create it at this time, but that is currently not set up. This is not a forward compatable system.");
-                    continue;
-                }
-                obj.PreDeserialization();
-                obj.data = data;
-                obj.PostDeserialization();
+                LoadPersistant(data, persistentSaveables);
             }
+        }
+
+        public static GameObject LoadPersistant(ReusedData data, List<PersistentSaveable> persistentSaveables = null) 
+        {
+            if (persistentSaveables == null)
+            {
+               persistentSaveables = FindObjectsOfType<PersistentSaveable>().ToList();
+            }
+
+            PersistentSaveable obj = persistentSaveables.Find(x => x.data.GUID.Equals(data.GUID));
+            if (obj == null)
+            {
+                Console.LogError($"Could not find persistant of {data.DataType} in the current scene.");
+                Console.LogWarning("We would create it at this time, but that is currently not set up. This is not a forward compatable system.");
+                return null;
+            }
+            obj.PreDeserialization();
+            obj.data = data;
+            obj.PostDeserialization();
+            return obj.gameObject;
         }
 
         private void LoadPrefabs(List<PrefabData> prefabs)
@@ -247,21 +265,27 @@ namespace PersistentData
             // Place new prefabs
             foreach (PrefabData data in prefabs)
             {
-                var obj = Resources.Load(data.PrefabResourceLocation) as GameObject;
-                if (obj == null)
-                {
-                    if (string.IsNullOrWhiteSpace(data.PrefabResourceLocation))
-                        Console.LogError($"Prefabed object did not have a resource location.");
-                    else
-                        Console.LogWarning($"Can not load prefab from '{data.PrefabResourceLocation}'.");
-                    continue;
-                }
-                GameObject current = Instantiate(obj);
-                PrefabSaveable saveable = current.GetComponent<PrefabSaveable>();
-                saveable.PreDeserialization();
-                saveable.prefabData = data;
-                saveable.PostDeserialization();
+                LoadPrefab(data);
             }
+        }
+
+        public static GameObject LoadPrefab(PrefabData data) 
+        {
+            var obj = Resources.Load(data.PrefabResourceLocation) as GameObject;
+            if (obj == null)
+            {
+                if (string.IsNullOrWhiteSpace(data.PrefabResourceLocation))
+                    Console.LogError($"Prefabed object did not have a resource location.");
+                else
+                    Console.LogWarning($"Can not load prefab from '{data.PrefabResourceLocation}'.");
+                return null;
+            }
+            GameObject current = Instantiate(obj);
+            PrefabSaveable saveable = current.GetComponent<PrefabSaveable>();
+            saveable.PreDeserialization();
+            saveable.prefabData = data;
+            saveable.PostDeserialization();
+            return current;
         }
 
         public List<SaveMeta> GetSaveList() 
@@ -269,6 +293,8 @@ namespace PersistentData
             List<SaveMeta> metas = new List<SaveMeta>();
             if (string.IsNullOrEmpty(SaveLocation))
                 return metas;
+            if(!Directory.Exists(SaveLocation))
+                Directory.CreateDirectory(SaveLocation);
             string[] saves = Directory.GetDirectories(SaveLocation);
             foreach (var save in saves)
             {
@@ -288,16 +314,17 @@ namespace PersistentData
 
         private Save GetCleanSave() 
         {
-            string saveLocation = SanitizePath(Path.Combine(Application.dataPath, "Resources/Saves/default.dat"));
+            string resourceLoc = "Saves/default";
 
-            if (!File.Exists(saveLocation))
+            TextAsset saveAsset = Resources.Load(resourceLoc) as TextAsset;
+
+            if (saveAsset == null)
             {
                 Console.LogWarning($"There is no Default Save set. We will use an completely empty save.");
                 return new Save() { Metadata = new SaveMeta() { SaveTime = -1 } };
             }
 
-            byte[] saveBytes = File.ReadAllBytes(saveLocation);
-            string saveJson = DecryptBytes(saveBytes);
+            string saveJson = DecryptBytes(saveAsset.bytes);
 
             Save save = JsonConvert.DeserializeObject<Save>(saveJson);
             return save;
@@ -335,14 +362,16 @@ namespace PersistentData
                 Console.LogError("You can not save to resources unless you are in-editor.");
                 return;
             }
+            #if UNITY_EDITOR
 
-            string saveLocation = SanitizePath(Path.Combine(Application.dataPath, "Resources/Saves/default.dat"));
+            string saveLocation = SanitizePath(Path.Combine(Application.dataPath, "Resources/Saves/default.json"));
 
             Save save = MakeSave();
             string saveJson = JsonConvert.SerializeObject(save);
 
             File.WriteAllBytes(saveLocation, StringToBytes(saveJson));
             UnityEditor.AssetDatabase.Refresh();
+            #endif
         }
 
         private void SaveToDisk(Save save)

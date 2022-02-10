@@ -8,7 +8,14 @@ namespace Interaction {
         [SerializeField]
         private string _hoverText;
 
-        public GameObject GameObject { get => this.gameObject; }
+        public GameObject GameObject { 
+            get 
+            {
+                if(this)
+                    return this.gameObject;
+                return null;
+            }  
+        }
         public string InteractText { get => _hoverText; }
         public ClickState ClickState { get; protected set; }
 
@@ -33,7 +40,8 @@ namespace Interaction {
         public virtual void Exit()
         {
             ClickState = ClickState.Exit;
-            Console.LogDebug($"{name} has recived an Exit event.");
+            if(this)
+                Console.LogDebug($"{name} has recived an Exit event.");
         }
 
         public virtual void Hold()

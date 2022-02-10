@@ -34,8 +34,6 @@ namespace Environment
         {
             if (ObjToDisplace != null && Value != null)
             {
-                
-
                 Vector3 desiredPosition = DisplaceTo * unitValue;
                 float smooth = SmoothingRate * Time.deltaTime;
                 Vector3 ChangeInPosition = desiredPosition - ObjToDisplace.transform.localPosition;

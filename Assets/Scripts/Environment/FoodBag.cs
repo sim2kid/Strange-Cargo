@@ -8,7 +8,7 @@ using UnityEngine.Events;
 
 namespace Environment {
 
-    [RequireComponent(typeof(Sound.AudioPlayer))]
+    [RequireComponent(typeof(Sound.Player.AudioPlayer))]
     public class FoodBag : Pickupable, IUseable
     {
         public UnityEvent OnUse;
@@ -18,6 +18,8 @@ namespace Environment {
         private FoodBowl Bowl;
 
         private string useString;
+        [SerializeField]
+        private string useOnBowl;
 
         public void Use()
         {
@@ -28,6 +30,10 @@ namespace Environment {
                 Bowl.Fill(200);
                 Destroy(this.gameObject);
             }
+        }
+        public void Mod1Use() 
+        {
+            Use();
         }
 
         protected override void Start()
@@ -56,7 +62,7 @@ namespace Environment {
 
             if (Bowl != null)
             {
-                useString = "{use} to Refill";
+                useString = useOnBowl;// "{use} to Refill";
             }
             else 
             {

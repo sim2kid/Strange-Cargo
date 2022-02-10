@@ -10,7 +10,6 @@ namespace Player
     [RequireComponent(typeof(HeadMovement))]
     [RequireComponent(typeof(InteractionController))]
     [RequireComponent(typeof(GlobalController))]
-    [RequireComponent(typeof(Sound.FootstepController))]
     [DisallowMultipleComponent]
     public class PlayerController : MonoBehaviour
     {
@@ -24,11 +23,11 @@ namespace Player
         public GlobalController GlobalInteraction;
         [HideInInspector]
         public Hand HandController;
+
         [HideInInspector]
-        public Sound.FootstepController Footsteps;
+        public InputState InputState;
 
         public GameObject Eyes;
-        public GameObject Feet;
         public GameObject Hand;
         public GameObject PlayerModel;
         public Camera OverlayCamera;
@@ -36,17 +35,20 @@ namespace Player
         private void Awake()
         {
             Utility.Toolbox.Instance.Player = this;
+            InputState = InputState.Default;
         }
 
         public void Disable() 
         {
-            OnPause();
+            if (!Utility.Toolbox.Instance.Pause.Paused)
+                OnPause();
             PlayerModel.SetActive(false);
         }
 
         public void Enable() 
         {
-            OnUnPause();
+            if(!Utility.Toolbox.Instance.Pause.Paused)
+                OnUnPause();
             PlayerModel.SetActive(true);    
         }
 
@@ -78,12 +80,9 @@ namespace Player
             if (Eyes != null)
                 HeadMovement.camera = Eyes;
             Movement = GetComponent<MovementController>();
-            if (Feet != null)
-                Movement.feet = Feet.transform;
             GlobalInteraction = GetComponent<GlobalController>();
             if (Hand != null)
                 HandController = Hand.GetComponent<Hand>();
-            Footsteps = GetComponent<Sound.FootstepController>();
 
             if (Utility.Toolbox.Instance.Pause == null)
                 Console.LogError("Missing Pause Component in Scene");

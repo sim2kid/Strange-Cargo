@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabData:
+    _guid: 
     PrefabResourceLocation: Prefabs/WaterBowl
 --- !u!114 &5778481949278450083
 MonoBehaviour:
@@ -778,6 +779,7 @@ GameObject:
   - component: {fileID: 1735154763482689091}
   - component: {fileID: 1735154763482689101}
   - component: {fileID: 1735154763482689102}
+  - component: {fileID: 5443644249125733864}
   m_Layer: 0
   m_Name: WaterLevel
   m_TagString: Untagged
@@ -850,6 +852,12 @@ MonoBehaviour:
   OnEmpty:
     m_PersistentCalls:
       m_Calls: []
+  _guid: 
+  data:
+    _guid: 4ebd868c-b72c-4d27-8de1-b14e8fd4e18d
+    BaseNeeds:
+      _myNeeds: []
+    Fullness: 0
 --- !u!114 &1735154763482689101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -907,6 +915,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.17
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5443644249125733864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735154763482689089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 892b253cf34172c4c835c9afb975ecf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemPrefab: {fileID: 3800630937309533782, guid: 27139836fc0d27145822691f96769131, type: 3}
 --- !u!1 &8006697579099275805
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,7 +956,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8006697579099275805}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.15, z: 0}
+  m_LocalPosition: {x: 0, y: 0.0543, z: 0}
   m_LocalScale: {x: 1, y: 0.36680228, z: 1}
   m_Children:
   - {fileID: 1735154763482689090}

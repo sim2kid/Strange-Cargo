@@ -35,22 +35,30 @@ namespace Player
 
         void Start()
         {
-            StartCoroutine(LateStart(1));
             enableGravityOnDrop = false;
         }
 
-        IEnumerator LateStart(float waitTime) 
+        void LateStart() 
         {
-            yield return new WaitForSeconds(waitTime);
             player = Utility.Toolbox.Instance.Player;
-            player.GlobalInteraction.PrimaryEvent.AddListener(LetGo);
+            player.GlobalInteraction.DropEvent.AddListener(LetGo);
             player.GlobalInteraction.UseEvent.AddListener(Use);
+            player.GlobalInteraction.Mod1UseEvent.AddListener(Mod1Use);
             player.GlobalInteraction.ThrowEvent.AddListener(Throw);
             tt = Utility.Toolbox.Instance.ToolTip;
         }
 
         private void Update()
         {
+            if(player == null)
+                LateStart();
+            if (Holding == null)
+                return;
+            if (Holding.ToString().Equals("null"))
+            {
+                Holding = null;
+                return;
+            }
             if (Holding is MonoBehaviour) 
             {
                 GameObject obj = ((MonoBehaviour)Holding).gameObject;
@@ -68,6 +76,12 @@ namespace Player
         {
             if (Holding is IUseable)
                 ((IUseable)Holding).Use();
+        }
+
+        public void Mod1Use()
+        {
+            if (Holding is IUseable)
+                ((IUseable)Holding).Mod1Use();
         }
 
         public void Throw()
@@ -97,7 +111,7 @@ namespace Player
                 tt.HoldText = Holding.HoldText;
             if (player != null)
             {
-                player.Footsteps.OnStep.AddListener(Holding.Shake);
+                //player.Footsteps.OnStep.AddListener(Holding.Shake);
                 player.HeadMovement.OnJolt.AddListener(Holding.Shake);
             }
         }
@@ -107,8 +121,8 @@ namespace Player
             {
                 if (player == null)
                     return;
-                if(player.Footsteps != null)
-                    player.Footsteps.OnStep.RemoveListener(Holding.Shake);
+                //if(player.Footsteps != null)
+                //    player.Footsteps.OnStep.RemoveListener(Holding.Shake);
                 if (player.HeadMovement != null)
                     player.HeadMovement.OnJolt.RemoveListener(Holding.Shake);
                 if (Holding is MonoBehaviour)

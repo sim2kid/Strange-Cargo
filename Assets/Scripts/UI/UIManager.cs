@@ -31,6 +31,7 @@ namespace UI
 
         public void CloseAllMenus()
         {
+            Utility.Toolbox.Instance.Player.InputState = InputState.Default;
             saveCameraStyle = Camera.main.gameObject.GetComponent<Cinemachine.CinemachineBrain>().m_DefaultBlend;
             Camera.main.gameObject.GetComponent<Cinemachine.CinemachineBrain>().m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
             Invoke("SetCamToNormal", 2f);
@@ -74,6 +75,7 @@ namespace UI
             currentMenu = Menu.Gameplay;
             PauseMenuManager.OpenMenuOnPause = true;
             HUD.SetActive(true);
+            Utility.Toolbox.Instance.Player.InputState = InputState.Default;
         }
 
         private void SetCamToNormal()
