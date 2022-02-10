@@ -44,8 +44,12 @@ namespace Player
         void Update()
         {
             bool thisButton = sidemenu.ReadValue<float>() == 1;
-            if (thisButton && lastButton != thisButton && !Utility.Toolbox.Instance.Pause.Paused)
+            if (thisButton && lastButton != thisButton && // Run if button is pressed and it's a new change
+                !Utility.Toolbox.Instance.Pause.Paused && // Run only if not paused
+                (Utility.Toolbox.Instance.Player.InputState == InputState.Default || IsActive)) // Run only if in gameplay or if the menu is open
+            {
                 ToggleSideMenu();
+            }
             lastButton = thisButton;
         }
 

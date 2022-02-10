@@ -46,20 +46,20 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Primary",
-                    "type": "Button",
-                    "id": "0e031085-5a36-4191-b864-0beaefe78e8b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Throw",
                     "type": "Button",
                     "id": "377d2846-a209-4f31-b8bc-6148cf8e9ae4",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "SlowTap(duration=0.3)"
+                },
+                {
+                    "name": "Drop",
+                    "type": "Button",
+                    "id": "0e031085-5a36-4191-b864-0beaefe78e8b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap(duration=0.3)"
                 },
                 {
                     "name": "Pause",
@@ -73,6 +73,22 @@
                     "name": "SideMenu",
                     "type": "Button",
                     "id": "1cda54d6-8d5d-4839-a1b1-0b245d70de6b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Spin",
+                    "type": "Value",
+                    "id": "bd9ea084-c447-40c0-ab76-aa159ca36d34",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Modifier1",
+                    "type": "Button",
+                    "id": "329a541f-cd4f-435c-81ee-4ab55cd98678",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -357,11 +373,11 @@
                 {
                     "name": "",
                     "id": "b1c25ffc-1d64-4875-9d53-eb5323538475",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Primary",
+                    "action": "Drop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -372,29 +388,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Primary",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d288658a-9b00-4f4b-b719-01ac8d7b4445",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Throw",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "882dc092-b2d7-4050-9656-09bd4819a440",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Throw",
+                    "action": "Drop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -434,11 +428,77 @@
                 {
                     "name": "",
                     "id": "fc712a17-6ce2-4674-99b2-651674b8f593",
-                    "path": "<Gamepad>/dpad/left",
+                    "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "SideMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "491803ae-3582-4867-b5c2-a58b1bb8e0a4",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Spin",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ab9b7d5e-c2ce-4931-8e11-9dcae0667503",
+                    "path": "<Gamepad>/dpad/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Spin",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4ae1b1f3-8083-408e-944c-e556aa6bd49f",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Modifier1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fef0d677-3de0-4db9-90a9-b399552d143c",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Modifier1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d288658a-9b00-4f4b-b719-01ac8d7b4445",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Throw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "882dc092-b2d7-4050-9656-09bd4819a440",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Throw",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

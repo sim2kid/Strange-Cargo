@@ -24,6 +24,9 @@ namespace Player
         [HideInInspector]
         public Hand HandController;
 
+        [HideInInspector]
+        public InputState InputState;
+
         public GameObject Eyes;
         public GameObject Hand;
         public GameObject PlayerModel;
@@ -32,6 +35,7 @@ namespace Player
         private void Awake()
         {
             Utility.Toolbox.Instance.Player = this;
+            InputState = InputState.Default;
         }
 
         public void Disable() 

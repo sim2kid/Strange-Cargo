@@ -10,30 +10,29 @@ namespace Interaction
     [DisallowMultipleComponent]
     public class GlobalController : MonoBehaviour
     {
-        [SerializeField]
         public UnityEvent UseEvent;
+        public UnityEvent Mod1UseEvent;
         public UnityEvent ThrowEvent;
-        public UnityEvent PrimaryEvent;
+        public UnityEvent DropEvent;
+        [System.Obsolete("This is a poorly defined event and will be removed in the future.")]
         public UnityEvent SecondaryEvent;
+
+        public bool Mod1Active => Modifier1.ReadValue<float>() == 1;
 
         private PlayerInput playerInput;
         private InputAction Throw;
-        private InputAction use;
-        private InputAction primary;
+        private InputAction Use;
+        private InputAction Drop;
+        [System.Obsolete("This is a poorly defined action and will be removed in the future.")]
         private InputAction second;
-
-        private bool calledUse;
-        private bool calledThrow;
-        private bool calledPrimary;
-        private bool calledSecond;
-
+        private InputAction Modifier1;
 
         private void Awake()
         {
             if(UseEvent == null)
                 UseEvent = new UnityEvent();
-            if(PrimaryEvent == null)
-                PrimaryEvent = new UnityEvent();
+            if(DropEvent == null)
+                DropEvent = new UnityEvent();
             if(SecondaryEvent == null)
                 SecondaryEvent = new UnityEvent();
         }
@@ -41,43 +40,39 @@ namespace Interaction
         void Start()
         {
             playerInput = GetComponent<PlayerInput>();
-            use = playerInput.actions["Use"];
+            Use = playerInput.actions["Use"];
             Throw = playerInput.actions["Throw"];
-            primary = playerInput.actions["Primary"];
+            Drop = playerInput.actions["Drop"];
             second = playerInput.actions["Secondary"];
-            calledUse = false;
-            calledThrow = false;
-            calledSecond = false;
-            calledPrimary = false;
+            Modifier1 = playerInput.actions["Modifier1"];
         }
 
         // Update is called once per frame
         void Update()
         {
-            bool uDown = use.ReadValue<float>() == 1;
-            bool tDown = Throw.ReadValue<float>() == 1;
-            bool pDown = primary.ReadValue<float>() == 1;
-            bool sDown = second.ReadValue<float>() == 1;
-
-            if (uDown && uDown != calledUse)
+            if (Use.triggered)
             {
-                UseEvent.Invoke();
+                if (Mod1Active)
+                {
+                    Mod1UseEvent.Invoke();
+                }
+                else
+                {
+                    UseEvent.Invoke();
+                }
             }
-            if(tDown && tDown != calledThrow)
+            if(Throw.triggered)
             {
                 ThrowEvent.Invoke();
             }
-            if (sDown && sDown != calledSecond)
+            if (second.triggered)
             {
                 SecondaryEvent.Invoke();
             }
-            if (pDown && pDown != calledPrimary)
+            if (Drop.triggered)
             {
-                PrimaryEvent.Invoke();
+                DropEvent.Invoke();
             }
-            calledPrimary = pDown;
-            calledUse = uDown;
-            calledSecond = sDown;
         }
     }
 }

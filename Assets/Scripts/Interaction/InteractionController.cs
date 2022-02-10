@@ -147,7 +147,13 @@ namespace Interaction
             {
                 while (UpClickQueue.Count > 0) 
                 {
-                    UpClickQueue[0].Up();
+                    if (UpClickQueue[0].GameObject != null) 
+                    {
+                        if (UpClickQueue[0].GameObject.scene.IsValid())
+                        {
+                            UpClickQueue[0].Up();
+                        }
+                    }
                     UpClickQueue.RemoveAt(0);
                 }
             }

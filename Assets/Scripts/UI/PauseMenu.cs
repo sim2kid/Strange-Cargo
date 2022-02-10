@@ -176,6 +176,7 @@ namespace UI
                 BackToPauseMenu();
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+                Utility.Toolbox.Instance.Player.InputState = InputState.UI;
             }
         }
 
@@ -203,6 +204,7 @@ namespace UI
                 Menu.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+                Utility.Toolbox.Instance.Player.InputState = InputState.Default;
             }
         }
 
@@ -215,6 +217,7 @@ namespace UI
         public void EnableMainMenu()
         {
             Menu.SetActive(true);
+            Utility.Toolbox.Instance.Player.InputState = InputState.UI;
             if (MenuCamera != null)
                 MenuCamera.Priority = 1000;
             UseMainMenu = true;

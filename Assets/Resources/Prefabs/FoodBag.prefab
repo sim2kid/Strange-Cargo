@@ -232,7 +232,7 @@ MonoBehaviour:
   rbData:
     _guid: 73012b9a-bd12-444d-8c32-0e3696127bff
     IsKinematic: 0
-  _textOnHold: '{primary} to drop'
+  _textOnHold: '{drop} to drop'
   OnPickup:
     m_PersistentCalls:
       m_Calls:
@@ -293,6 +293,7 @@ MonoBehaviour:
           m_StringArgument: Misc\FoodBag\Grab
           m_BoolArgument: 0
         m_CallState: 2
+  useOnBowl: '{use} to fill the bowl'
 --- !u!114 &887220212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,6 +332,11 @@ MonoBehaviour:
             Max: 0
         _deley:
           Value: 0
+          Range:
+            Min: 0
+            Max: 0
+        _loop:
+          Value: 1
           Range:
             Min: 0
             Max: 0

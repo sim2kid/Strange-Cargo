@@ -21,12 +21,14 @@ namespace Environment
         public float brushRange = 3;
 
         public float hygieneBoostAmount = 10;
+        [SerializeField]
+        private string useOnCreatureString;
 
         public void HoldUpdate()
         {
             if (CanSeeCreature())
             {
-                useString = "{use} to brush";
+                useString = useOnCreatureString;
             }
             else
             {
@@ -113,6 +115,10 @@ namespace Environment
                 n.Hygiene += hygieneBoostAmount;
                 NearestCreature().needs = n;
             }
+        }
+        public void Mod1Use() 
+        {
+            Use();
         }
 
         // Start is called before the first frame update

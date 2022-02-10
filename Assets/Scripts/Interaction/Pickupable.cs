@@ -18,7 +18,7 @@ namespace Interaction
         public virtual Vector3 RotationOffset => rotationOffset;
 
         [SerializeField]
-        RigidbodyData rbData;
+        protected RigidbodyData rbData;
 
         [SerializeField]
         private string _textOnHold;
@@ -28,7 +28,7 @@ namespace Interaction
         public UnityEvent OnShake;
 
         public virtual string HoldText { get => _textOnHold; }
-        public ISaveData saveData 
+        public virtual ISaveData saveData 
         { get => rbData; 
             set { rbData = (RigidbodyData)value; } }
 
@@ -134,20 +134,20 @@ namespace Interaction
                 Up();
         }
 
-        public void PreSerialization()
+        public virtual void PreSerialization()
         {
             if(!Utility.Toolbox.Instance.Pause.Paused)
                 UpdateRbData();
         }
 
-        public void PreDeserialization()
+        public virtual void PreDeserialization()
         {
             rb = GetComponent<Rigidbody>();
             if (Utility.Toolbox.Instance.Pause.Paused)
                 OnPause();
         }
 
-        public void PostDeserialization()
+        public virtual void PostDeserialization()
         {
             if (!Utility.Toolbox.Instance.Pause.Paused)
                 ApplyRbData();

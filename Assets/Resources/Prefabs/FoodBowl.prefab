@@ -833,6 +833,7 @@ GameObject:
   - component: {fileID: 1667913461902867987}
   - component: {fileID: 1667913461902867997}
   - component: {fileID: 1379293591551519486}
+  - component: {fileID: 1372253285270325210}
   m_Layer: 0
   m_Name: FoodLevel
   m_TagString: Untagged
@@ -891,7 +892,7 @@ MonoBehaviour:
   Hygiene: 0
   Happiness: 0.1
   UtilityRate: 15
-  Fullness: 50
+  Fullness: 0
   MaxFullness: 300
   OnFill:
     m_PersistentCalls:
@@ -1116,8 +1117,26 @@ MonoBehaviour:
           Range:
             Min: 0
             Max: 0
+        _loop:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
         _audioPool: 
         _soundBites: []
+--- !u!114 &1372253285270325210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667913461902867988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 892b253cf34172c4c835c9afb975ecf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemPrefab: {fileID: 3800630937309533782, guid: 93db681280dd2ff4894c5c9da60763a1, type: 3}
 --- !u!1 &2010003623040309736
 GameObject:
   m_ObjectHideFlags: 0

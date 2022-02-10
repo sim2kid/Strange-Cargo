@@ -55,7 +55,6 @@ namespace Player.Movement
             CapsuleCollider capsuleCollider = GetComponent<CapsuleCollider>();
             if (capsuleCollider != null) 
             {
-                Console.DebugOnly(capsuleCollider.direction);
                 characterController.center = capsuleCollider.center;
                 characterController.radius = capsuleCollider.radius;
                 characterController.height = capsuleCollider.height;

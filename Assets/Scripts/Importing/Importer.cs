@@ -92,24 +92,31 @@ namespace Importing
         /// <param name="name"
         public static void SaveDatabase(Database database, string location, string name) 
         {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
 
-            database.Serialize();
-
-            if (database == null || string.IsNullOrEmpty(location) || string.IsNullOrEmpty(name))
-                return;
-
-            if (AssetDatabase.IsValidFolder(location))
+            try
             {
-                AssetDatabase.CreateAsset(database, $"{ForwardSlashPath(Path.Combine(location, name))}.asset");
-                AssetDatabase.SaveAssets();
-                Debug.Log($"Database \"{name}.asset\" has been saved at \"{location}\".");
-            }
-            else 
-            {
-                Debug.LogError($"Could not save Database {name} because \"{location}\" does not exist.");
-            }
+                database.Serialize();
 
+                if (database == null || string.IsNullOrEmpty(location) || string.IsNullOrEmpty(name))
+                    return;
+
+                if (AssetDatabase.IsValidFolder(location))
+                {
+                    AssetDatabase.CreateAsset(database, $"{ForwardSlashPath(Path.Combine(location, name))}.asset");
+                    AssetDatabase.SaveAssets();
+                    Debug.Log($"Database \"{name}.asset\" has been saved at \"{location}\".");
+                }
+                else
+                {
+                    Debug.LogError($"Could not save Database {name} because \"{location}\" does not exist.");
+                }
+
+            }
+            catch 
+            {
+                Debug.LogWarning("Could not save the database at this time.");
+            }
             #endif
             if (!Application.isEditor) 
             {
