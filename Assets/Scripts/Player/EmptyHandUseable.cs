@@ -55,9 +55,12 @@ namespace Player
         {
             if (CanPickupFurnature())
             {
-                // TODO: Itemize Furnature
                 Placement.Itemizable item = GrabFurnature();
-                item.GenerateItem();
+                GameObject obj = item.GenerateItem();
+                if (obj.TryGetComponent(out IHoldable holdable))
+                {
+                    player.Hand.GetComponent<Hand>()?.PickUp(holdable);
+                }
             }
             else 
             {

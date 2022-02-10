@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using PersistentData.Component;
 using System.Linq;
 using PersistentData.Saving;
+using UnityEngine.InputSystem;
 
 namespace Placement
 {
@@ -35,6 +36,9 @@ namespace Placement
 
         private LayerMask canPlaceOn;
         private PrefabData prefabData { get => itemData.prefabData; set => itemData.prefabData = value; }
+        private float rotation = 0;
+        InputAction spin;
+        PlayerInput playerInput;
 
         [SerializeField]
         private string useString;
@@ -83,11 +87,21 @@ namespace Placement
                     createHolorgram();
                 }
 
+                // Update rotation data
+                float change = spin.ReadValue<float>() * Time.deltaTime * 10f;
+                rotation += change;
+                if (rotation > 360)
+                    rotation -= 360;
+                if (rotation < 0)
+                    rotation += 360;
+
                 // Make sure hologram is in place
                 hologram.transform.position = hitPos + ((gramInfo.Offset) * hitInfo.normal);
                 hologram.transform.localScale = objectToPlace.transform.localScale;
                 var slopeRotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
-                hologram.transform.rotation = slopeRotation;
+                var floorRotation = Quaternion.AngleAxis(rotation, hitInfo.normal);
+
+                hologram.transform.rotation = floorRotation * slopeRotation;
 
                 foreach (Renderer render in hologram.GetComponentsInChildren<Renderer>()) 
                 {
@@ -161,6 +175,9 @@ namespace Placement
             OnPutDown.AddListener(onDrop);
             HologramShader = Shader.Find("Shader Graphs/Hologram");
             canPlaceOn = LayerMask.GetMask("Default", "Ground");
+
+            playerInput = GameObject.FindObjectOfType<PlayerInput>();
+            spin = playerInput.actions["Spin"];
 
             if (string.IsNullOrWhiteSpace(useString))
             {
@@ -251,6 +268,7 @@ namespace Placement
                 if (hologram.scene.IsValid())
                     return;
             createHolorgram();
+            rotation = 0;
             Utility.Toolbox.Instance.Player.InputState = InputState.Build;
         }
 
