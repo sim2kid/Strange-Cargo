@@ -5,44 +5,59 @@ using Interaction;
 using UnityEngine.Events;
 using PersistentData.Component;
 using System.Linq;
+using PersistentData.Saving;
 
 namespace Placement
 {
-    public class Placeable : Pickupable, IUseable
+    public class Placeable : Pickupable, IUseable, ISaveable
     {
         public UnityEvent OnUse;
-        [SerializeField]
-        private LayerMask canPlaceOn;
-        [SerializeField]
-        private float maxDistance = 10f;
-        [SerializeField]
-        private GameObject objectToPlace;
 
         [SerializeField]
-        private Shader hologramShader;
-        [SerializeField]
-        private Color validColor = Color.green;
-        [SerializeField]
-        private Color invalidColor = Color.red;
+        string newObjResourceLocation;
 
-        [SerializeField]
-        private bool CanPlaceOnFloor = true;
+        private GameObject objectToPlace => Resources.Load(prefabData.PrefabResourceLocation) as GameObject;
+        
+        public Shader HologramShader;
+        public Color ValidColor = Color.green;
+        public Color InvalidColor = Color.red;
+
+        public float MaxPlaceDistance = 10f;
+
+        public bool CanPlaceOnFloor = true;
         private float MaxFloorAngle = 15.0f;
-        [SerializeField]
-        private bool CanPlaceOnWall = false;
-        private float MaxWallAngle = 15.0f;
 
-        [SerializeField]
-        private float offsetFromSurface = 0f;
+        public bool CanPlaceOnWall = false;
+        private float MaxWallAngle = 15.0f;
 
         private GameObject hologram;
         private Hologram gramInfo;
 
+        private LayerMask canPlaceOn;
+        private PrefabData prefabData { get => itemData.prefabData; set => itemData.prefabData = value; }
+
         [SerializeField]
-        string useString;
+        private string useString;
         public string UseText => useString;
 
         bool beingDestroyed = false;
+
+        [SerializeField]
+        ItemData itemData;
+
+        public override ISaveData saveData
+        {
+            get => itemData;
+            set { itemData = (ItemData)value; }
+        }
+
+        private void OnValidate()
+        {
+            if (string.IsNullOrWhiteSpace(itemData.GUID))
+            {
+                itemData.GUID = System.Guid.NewGuid().ToString();
+            }
+        }
 
         public void HoldUpdate()
         {
@@ -55,7 +70,7 @@ namespace Placement
             }
 
             Transform player = Utility.Toolbox.Instance.Player.Eyes.transform;
-            if (Physics.Raycast(player.position, player.forward, out RaycastHit hitInfo, maxDistance, canPlaceOn))
+            if (Physics.Raycast(player.position, player.forward, out RaycastHit hitInfo, MaxPlaceDistance, canPlaceOn))
             {
                 Vector3 hitPos = hitInfo.point;
                 // Create hologram
@@ -69,7 +84,7 @@ namespace Placement
                 }
 
                 // Make sure hologram is in place
-                hologram.transform.position = hitPos + ((offsetFromSurface + gramInfo.Offset) * hitInfo.normal);
+                hologram.transform.position = hitPos + ((gramInfo.Offset) * hitInfo.normal);
                 hologram.transform.localScale = objectToPlace.transform.localScale;
                 var slopeRotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
                 hologram.transform.rotation = slopeRotation;
@@ -80,11 +95,11 @@ namespace Placement
                     {
                         if (IsValidLocation())
                         {
-                            material.color = validColor;
+                            material.color = ValidColor;
                         }
                         else
                         {
-                            material.color = invalidColor;
+                            material.color = InvalidColor;
                         }
                     }
                 }
@@ -144,7 +159,46 @@ namespace Placement
             base.Start();
             OnPickup.AddListener(onPickup);
             OnPutDown.AddListener(onDrop);
+            HologramShader = Shader.Find("Shader Graphs/Hologram");
+            canPlaceOn = LayerMask.GetMask("Default", "Ground");
 
+            if (string.IsNullOrWhiteSpace(useString))
+            {
+                useString = "{spin} to Rotate and {use} to Place";
+            }
+
+            IgnorePhysics();
+        }
+
+        public void Hydrate(PrefabData prefabData) 
+        {
+            this.prefabData = prefabData;
+
+            IgnorePhysics();
+        }
+
+        private static bool IsDataAllowed(PrefabData data) 
+        {
+            if (data == null)
+                return true;
+
+            var dataList = data.ExtraData;
+            if (dataList != null)
+            {
+                foreach (var item in dataList) 
+                {
+                    if (item is ItemData)
+                    {
+                        // We don't want encapsulated Items!!
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        private void IgnorePhysics() 
+        {
             Physics.IgnoreLayerCollision(10, canPlaceOn, true);
         }
 
@@ -169,7 +223,7 @@ namespace Placement
 
             foreach(Renderer renderer in hologram.GetComponentsInChildren<Renderer>())
                 foreach (Material m in renderer.materials)
-                    m.shader = hologramShader;
+                    m.shader = HologramShader;
         }
 
         private void cleanComponenets() 
@@ -216,7 +270,20 @@ namespace Placement
         {
             if (IsValidLocation())
             {
-                GameObject obj = Instantiate(objectToPlace, hologram.transform.position, hologram.transform.rotation);
+                if (string.IsNullOrWhiteSpace(prefabData.GUID)) 
+                {
+                    if (string.IsNullOrWhiteSpace(newObjResourceLocation)) 
+                    {
+                        Console.LogError($"Placeable, {name}, is unuseable due to lack of item to place. The prefab data was not filled out.");
+                        return;
+                    }
+                    prefabData.GUID = System.Guid.NewGuid().ToString();
+                    prefabData.ExtraData = new List<ISaveData>();
+                    prefabData.PrefabResourceLocation = newObjResourceLocation;
+                }
+                GameObject obj = PersistentData.SaveManager.LoadPrefab(prefabData);
+                obj.transform.position = hologram.transform.position;
+                obj.transform.rotation = hologram.transform.rotation;
                 beingDestroyed = true;
                 Destroy(hologram);
                 hologram = null;
@@ -227,6 +294,27 @@ namespace Placement
         public void Mod1Use()
         {
             Use();
+        }
+
+        public override void PreSerialization()
+        {
+            base.PreSerialization();
+            itemData.rigidbodyData = rbData;
+            if (!IsDataAllowed(prefabData)) 
+            {
+                prefabData = null;
+            }
+        }
+
+        public override void PreDeserialization()
+        {
+            base.PreDeserialization();
+        }
+
+        public override void PostDeserialization()
+        {
+            rbData = itemData.rigidbodyData;
+            base.PostDeserialization();
         }
     }
 }

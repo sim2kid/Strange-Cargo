@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7918954006348324656}
   - component: {fileID: 1589868321615093164}
   m_Layer: 0
-  m_Name: DemoPlaceable
+  m_Name: WaterBowlItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
   rbData:
     _guid: 5e9fb607-7a42-4b96-8b48-ab20a63a2111
     IsKinematic: 0
-  _textOnHold: '{primary} to drop'
+  _textOnHold: '{drop} to drop'
   OnPickup:
     m_PersistentCalls:
       m_Calls: []
@@ -144,18 +144,22 @@ MonoBehaviour:
   OnUse:
     m_PersistentCalls:
       m_Calls: []
-  canPlaceOn:
-    serializedVersion: 2
-    m_Bits: 9
-  maxDistance: 10
-  objectToPlace: {fileID: 2010003623040309736, guid: 2c68842b11e12c04ca5286d98347c383, type: 3}
-  hologramShader: {fileID: -6465566751694194690, guid: 478aed76116ec37498e2a33966560874, type: 3}
-  validColor: {r: 0, g: 1, b: 0, a: 1}
-  invalidColor: {r: 1, g: 0, b: 0, a: 1}
+  newObjResourceLocation: Prefabs/WaterBowl
+  HologramShader: {fileID: 0}
+  ValidColor: {r: 0, g: 1, b: 0, a: 1}
+  InvalidColor: {r: 1, g: 0, b: 0, a: 1}
+  MaxPlaceDistance: 10
   CanPlaceOnFloor: 1
   CanPlaceOnWall: 0
-  offsetFromSurface: 0
   useString: '{spin} to Rotate and {use} to Place'
+  itemData:
+    _guid: de4da428-c8eb-41c9-9959-c3c2cc53f17a
+    rigidbodyData:
+      _guid: 
+      IsKinematic: 0
+    prefabData:
+      _guid: 
+      PrefabResourceLocation: Prefabs/WaterBowl
 --- !u!54 &7918954006348324656
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -186,4 +190,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabData:
     _guid: 
-    PrefabResourceLocation: Prefabs/DemoPlaceable
+    PrefabResourceLocation: Prefabs/Items/FoodBowlItem

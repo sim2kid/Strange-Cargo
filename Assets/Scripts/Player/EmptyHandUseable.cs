@@ -56,7 +56,8 @@ namespace Player
             if (CanPickupFurnature())
             {
                 // TODO: Itemize Furnature
-                Console.DebugOnly("Furnature Call!");
+                Placement.Itemizable item = GrabFurnature();
+                item.GenerateItem();
             }
             else 
             {
@@ -90,10 +91,18 @@ namespace Player
 
         private bool CanSeeFurnature() 
         {
+            Placement.Itemizable item = GrabFurnature();
+            if (item != null) 
+            {
+                return true;
+            }
             return false;
         }
         private bool CanPickupFurnature() => CanSeeFurnature() && Utility.Toolbox.Instance.Player.GlobalInteraction.Mod1Active;
-        // TODO: Fetch Furnature
+        private Placement.Itemizable GrabFurnature() 
+        {
+            return FindClosest<Placement.Itemizable>();
+        }
 
         private bool CanSeeCreature()
         {
@@ -108,25 +117,28 @@ namespace Player
         }
         private CreatureController NearestCreature()
         {
+            return FindClosest<CreatureController>();
+        }
+        private T FindClosest<T>() 
+        {
             Ray ray = new Ray(player.Eyes.transform.position, player.Eyes.transform.forward);
 
             RaycastHit[] hits = Physics.RaycastAll(ray, InteractionRange);
-            List<RaycastHit> creatures = new List<RaycastHit>();
+            List<RaycastHit> items = new List<RaycastHit>();
 
             foreach (RaycastHit hit in hits)
             {
-                CreatureController creature = hit.transform.gameObject.GetComponent<CreatureController>();
+                T item = hit.transform.gameObject.GetComponent<T>();
 
-                if (creature != null)
-                    creatures.Add(hit);
+                if (item != null)
+                    items.Add(hit);
             }
 
-            Queue<GameObject> hitQueue = SortByClosest(creatures);
-
-            CreatureController closest = null;
+            Queue<GameObject> hitQueue = SortByClosest(items);
+            T closest = default(T);
             if (hitQueue.Count > 0)
             {
-                closest = hitQueue.Peek().GetComponent<CreatureController>();
+                closest = hitQueue.Peek().GetComponent<T>();
             }
             if (closest != null)
             {
@@ -134,7 +146,7 @@ namespace Player
             }
             else
             {
-                return null;
+                return default(T);
             }
         }
         private Queue<GameObject> SortByClosest(List<RaycastHit> objs)
