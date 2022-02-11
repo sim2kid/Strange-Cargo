@@ -37,6 +37,7 @@ namespace UI
             Invoke("SetCamToNormal", 2f);
 
             currentMenu = Menu.None;
+            Camera.main.cullingMask &= ~(1 << LayerMask.NameToLayer("Player"));
 
             HUD.SetActive(false);
             LoadingScreenManager.CloseLoadingScreen();
@@ -90,6 +91,7 @@ namespace UI
             CloseAllMenus().SetCamToNormal();
             currentMenu = Menu.Focus;
             Utility.Toolbox.Instance.Player.InputState = InputState.UI;
+            Camera.main.cullingMask |= 1 << LayerMask.NameToLayer("Player");
             return this;
         }
 
