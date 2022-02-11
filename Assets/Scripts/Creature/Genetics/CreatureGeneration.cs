@@ -21,13 +21,15 @@ namespace Genetics
         private static string[] ImportantPartTypes =
             { "Bodies", "Ears", "Heads", "BackLegs", "FrontLegs" };
         private static string[] LesserPartTypes =
-            { "Accessories", "Hats", "Horns", "Masks", "Tails" };
+            { "Horns", "Tails" };
+        private static string[] ManMade =
+            { "Accessories", "Hats", "Masks" };
 
         /// <summary>
         /// Returns a randomly generated creature
         /// </summary>
         /// <returns></returns>
-        public static GameObject CreateCreature() 
+        public static GameObject CreateCreature(int? conversionSpeed = null) 
         {
             GeneticRepository genePool = Utility.Toolbox.Instance.GenePool;
 
@@ -87,9 +89,37 @@ namespace Genetics
                 }
             }
 
+            foreach (string s in ManMade)
+            {
+                BodyPart bodypart = new BodyPart();
+                if (!genePool.HasParts(s))
+                {
+                    Console.Log($"Body Part Repository, {s}, does not exist with parts in the StreamingAssets folder. Skipping...");
+                    continue;
+                }
+                try
+                {
+                    bodypart = genePool.GetRandomPart(s).Value;
+                    if (bodypart == null || UnityEngine.Random.Range(0f, 1f) < (1-MUTATION_CHANCE))
+                        continue;
+                    PartHash part = new PartHash()
+                    {
+                        Category = s,
+                        BodyPart = bodypart.Hash,
+                        Pattern = genePool.GetRandomPattern(bodypart).Hash
+                    };
+                    dna.BodyPartHashs.Add(part);
+                }
+                catch (Exception e)
+                {
+                    Console.LogError($"Body Part {bodypart.Name} in {s} could not be initialized. This errored with this exception:\n{e}");
+                    continue;
+                }
+            }
+
             dna.Colors = RandomColors();
 
-            return CreateCreature(dna);
+            return CreateCreature(dna, conversionSpeed);
         }
 
         /// <summary>
@@ -162,7 +192,7 @@ namespace Genetics
         /// </summary>
         /// <param name="dna"></param>
         /// <returns></returns>
-        public static GameObject CreateCreature(DNA dna) 
+        public static GameObject CreateCreature(DNA dna, int? conversionSpeed = null) 
         {
             List<GameObject> bodyParts = new List<GameObject>();
             
@@ -187,6 +217,10 @@ namespace Genetics
             creature.name = "Unnamed Creature";
             TextureController texCon = creature.AddComponent<TextureController>();
             texCon.colors = dna.Colors;
+            if (conversionSpeed != null)
+            { 
+                texCon.CONVERSION_SPEED = conversionSpeed.Value;
+            }
 
             Animator a = mesh.AddComponent<Animator>();
             RuntimeAnimatorController rac = Resources.Load(AnimationControllerLocation) as RuntimeAnimatorController;

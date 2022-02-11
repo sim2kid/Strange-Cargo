@@ -36,7 +36,7 @@ namespace TextureConverter
         /// <summary>
         /// The number of pixels this model will spend on converting per frame
         /// </summary>
-        public int CONVERSION_SPEED { get => conversionSpeed; set { conversionSpeed = Mathf.Max(value, 0); } }
+        public int CONVERSION_SPEED { get => conversionSpeed; set { conversionSpeed = Mathf.Max(value, 1); } }
         /// <summary>
         /// This will run when all conversions are finished
         /// </summary>
