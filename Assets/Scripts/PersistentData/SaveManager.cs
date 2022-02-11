@@ -141,6 +141,8 @@ namespace PersistentData
 
         private void DeleteDirectory(string path) 
         {
+            if (Application.platform == RuntimePlatform.WebGLPlayer) return;
+
             foreach (string s in Directory.GetDirectories(path)) 
             {
                 DeleteDirectory(s);
@@ -154,6 +156,7 @@ namespace PersistentData
 
         public void DeleteSave(string saveGuid) 
         {
+            if (Application.platform == RuntimePlatform.WebGLPlayer) return;
             string saveFolder = SanitizePath(Path.Combine(SaveLocation, RemoveIllegalCharacters(saveGuid)));
             if (Directory.Exists(saveFolder)) 
             {
@@ -290,6 +293,7 @@ namespace PersistentData
 
         public List<SaveMeta> GetSaveList() 
         {
+            if (Application.platform == RuntimePlatform.WebGLPlayer) return new List<SaveMeta>();
             List<SaveMeta> metas = new List<SaveMeta>();
             if (string.IsNullOrEmpty(SaveLocation))
                 return metas;
@@ -332,6 +336,7 @@ namespace PersistentData
 
         private Save LoadFromDisk(string saveGuid)
         {
+            if (Application.platform == RuntimePlatform.WebGLPlayer) return GetCleanSave();
             string saveFolder = SanitizePath(Path.Combine(SaveLocation, RemoveIllegalCharacters(saveGuid)));
             string dataLoc = SanitizePath(Path.Combine(saveFolder, $"save.dat"));
 
@@ -376,6 +381,7 @@ namespace PersistentData
 
         private void SaveToDisk(Save save)
         {
+            if (Application.platform == RuntimePlatform.WebGLPlayer) return;
             string saveFolder = SanitizePath(Path.Combine(SaveLocation, RemoveIllegalCharacters(save.Metadata.SaveGuid)));
 
             if (!Directory.Exists(SaveLocation))
