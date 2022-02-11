@@ -6,14 +6,16 @@ using UnityEngine.Rendering.Universal;
 
 public class ShiftFocus : MonoBehaviour
 {
+    private GameObject eyes;
     [SerializeField]
-    public GameObject eyes;
+    LayerMask layerMask;
     [SerializeField]
     float defaultGaussianStart = 10;
 
     void Start()
     {
         GetDepthOfField(Camera.main).gaussianStart.value = defaultGaussianStart;
+        eyes = Camera.main.gameObject;
     }
 
     // Update is called once per frame
@@ -24,14 +26,14 @@ public class ShiftFocus : MonoBehaviour
 
     void SetFocalLength()
     {
-        if (NearestGameObject() != null)
+        if (NearestPoint() != Vector3.zero)
         {
-            float distanceToNearestGameObject = (NearestGameObject().transform.position - eyes.transform.position).magnitude;
-            GetDepthOfField(Camera.main).gaussianStart.value = distanceToNearestGameObject;
+            float distanceToNearestGameObject = Vector3.Distance(NearestPoint(), eyes.transform.position);
+            GetDepthOfField(Camera.main).gaussianStart.value = distanceToNearestGameObject + defaultGaussianStart;
         }
         else
         {
-            GetDepthOfField(Camera.main).gaussianStart.value = defaultGaussianStart;
+            GetDepthOfField(Camera.main).gaussianStart.value = float.MaxValue;
         }
     }
     DepthOfField GetDepthOfField(Camera _cam)
@@ -43,50 +45,13 @@ public class ShiftFocus : MonoBehaviour
         }
         return depthOfField;
     }
-    GameObject NearestGameObject()
+    Vector3 NearestPoint()
     {
         Ray ray = new Ray(eyes.transform.position, eyes.transform.forward);
-        RaycastHit[] hits = Physics.RaycastAll(ray, defaultGaussianStart);
-        if (hits.Length > 0)
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, float.MaxValue, layerMask, QueryTriggerInteraction.Ignore)) 
         {
-            List<RaycastHit> objects = new List<RaycastHit>();
-            foreach (RaycastHit h in hits)
-            {
-                objects.Add(h);
-            }
-            Queue<GameObject> hitQueue = SortByClosest(objects);
-            GameObject nearest = hitQueue.Peek().gameObject;
-            return nearest;
+            return hitInfo.point;
         }
-        else
-        {
-            return null;
-        }
-    }
-    public Queue<GameObject> SortByClosest(List<RaycastHit> objs)
-    {
-        Queue<GameObject> queue = new Queue<GameObject>();
-        while (objs.Count > 0)
-        {
-            RaycastHit obj = GetClosest(objs);
-            queue.Enqueue(obj.transform.gameObject);
-            objs.Remove(obj);
-        }
-        return queue;
-    }
-    public RaycastHit GetClosest(List<RaycastHit> objs)
-    {
-        RaycastHit toReturn = objs[0];
-        float shortest = int.MaxValue;
-        foreach (RaycastHit i in objs)
-        {
-            float distance = i.distance;
-            if (distance < shortest)
-            {
-                shortest = distance;
-                toReturn = i;
-            }
-        }
-        return toReturn;
+        return Vector3.zero;
     }
 }
