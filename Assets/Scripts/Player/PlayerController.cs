@@ -52,6 +52,15 @@ namespace Player
             PlayerModel.SetActive(true);    
         }
 
+        public void Freeze() 
+        {
+            OnPause();
+        }
+        public void UnFreeze() 
+        {
+            OnUnPause();
+        }
+
         private void OnPause() 
         {
             GlobalInteraction.enabled = false;

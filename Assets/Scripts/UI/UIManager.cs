@@ -29,7 +29,7 @@ namespace UI
             FindObjectOfType<SaveManager>().DestroyAllUnloadedCreatures();
         }
 
-        public void CloseAllMenus()
+        public UIManager CloseAllMenus()
         {
             Utility.Toolbox.Instance.Player.InputState = InputState.Default;
             saveCameraStyle = Camera.main.gameObject.GetComponent<Cinemachine.CinemachineBrain>().m_DefaultBlend;
@@ -42,45 +42,61 @@ namespace UI
             LoadingScreenManager.CloseLoadingScreen();
             PauseMenuManager.DisablePauseMenu();
             PauseMenuManager.DisableMainMenu();
+            return this;
         }
 
-        public void OpenMainMenu()
+        public UIManager OpenMainMenu()
         {
             if (currentMenu == Menu.Main)
-                return;
+                return this;
             Console.Log("Opening Main Menu");
             CloseAllMenus();
             currentMenu = Menu.Main;
             PauseMenuManager.EnableMainMenu();
             // Destroy all creatures that aren't loaded
             FindObjectOfType<SaveManager>().DestroyAllUnloadedCreatures();
+            return this;
         }
 
-        public void OpenLoading()
+        public UIManager OpenLoading()
         {
             if (currentMenu == Menu.Loading)
-                return;
+                return this;
             Console.Log("Opening Loading Menu");
             CloseAllMenus();
             currentMenu = Menu.Loading;
             LoadingScreenManager.OpenLoadingScreen();
+            return this;
         }
 
-        public void OpenGameplay()
+        public UIManager OpenGameplay()
         {
             if (currentMenu == Menu.Gameplay)
-                return;
+                return this;
             Console.Log("Opening Gameplay Menu");
             CloseAllMenus();
             currentMenu = Menu.Gameplay;
             PauseMenuManager.OpenMenuOnPause = true;
             HUD.SetActive(true);
             Utility.Toolbox.Instance.Player.InputState = InputState.Default;
+            return this;
         }
 
-        private void SetCamToNormal()
+        public UIManager OpenFocus() 
+        {
+            if (currentMenu == Menu.Focus)
+                return this;
+            Console.Log("Opening Focus UI");
+            CloseAllMenus().SetCamToNormal();
+            currentMenu = Menu.Focus;
+            Utility.Toolbox.Instance.Player.InputState = InputState.UI;
+            return this;
+        }
+
+        public UIManager SetCamToNormal()
         {
             Camera.main.gameObject.GetComponent<Cinemachine.CinemachineBrain>().m_DefaultBlend = saveCameraStyle;
+            return this;
         }
     }
 
@@ -89,6 +105,7 @@ namespace UI
         Loading,
         Main,
         Gameplay,
+        Focus,
         None
     }
 }

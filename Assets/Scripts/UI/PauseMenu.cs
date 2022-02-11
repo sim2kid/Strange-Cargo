@@ -32,7 +32,8 @@ namespace UI
         public bool OpenMenuOnPause;
         public bool UseMainMenu;
 
-        private bool lastPause = false;
+        private float IgnorePause = 0;
+
         private void OnEnable()
         {
             OpenMenuOnPause = false;
@@ -72,20 +73,26 @@ namespace UI
             Toolbox.Instance.Pause.OnPause.AddListener(OnPause);
             Toolbox.Instance.Pause.OnUnPause.AddListener(OnUnPause);
 
+            IgnorePause = 0;
+
             Pause = playerInput.actions["Pause"];
-            lastPause = Pause.ReadValue<float>() == 1;
         }
 
         private void Update()
         {
-            if (OpenMenuOnPause)
+            if (OpenMenuOnPause && Pause.triggered && IgnorePause <= 0)
             {
-                bool currentPause = Pause.ReadValue<float>() == 1;
-                if (currentPause && lastPause != currentPause)
-                    Toolbox.Instance.Pause.SetPause(!Toolbox.Instance.Pause.Paused);
-
-                lastPause = currentPause;
+                Toolbox.Instance.Pause.SetPause(!Toolbox.Instance.Pause.Paused);
             }
+            if (IgnorePause > 0) 
+            {
+                IgnorePause -= Time.deltaTime;
+            }
+        }
+
+        public void CancelPauseInput()
+        {
+            IgnorePause = 0.1f;
         }
 
         public void Resume()
