@@ -17,13 +17,13 @@ namespace Creature.Face
         /// </summary>
         /// <param name="action">The name/action of the eyes that you're grabbing. Eg: 'blink'</param>
         /// <returns>Loaded Texture of Eyes</returns>
-        public Texture GrabEyes(string action);
+        public Texture2D GrabEyes(string action);
 
         /// <summary>
         /// Grabs the mouth for a creature.
         /// </summary>
         /// <param name="action">The name/action of the mouth that you're grabbing. Eg: 'chewing'</param>
         /// <returns>Loaded Texture of Mouth</returns>
-        public Texture GrabMouth(string action);
+        public Texture2D GrabMouth(string action);
     }
 }
