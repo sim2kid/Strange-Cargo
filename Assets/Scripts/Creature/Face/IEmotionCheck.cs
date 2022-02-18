@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Creature.Face
 {
-    public interface EmotionCheck
+    public interface IEmotionCheck
     {
         public string GrabEmotion();
     }
