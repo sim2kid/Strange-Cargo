@@ -7,10 +7,12 @@ using UnityEngine.Events;
 namespace Creature.Face
 {
     [RequireComponent(typeof(FaceTexture))]
-    public class FaceController : MonoBehaviour, IGrabFace, EmotionCheck
+    public class FaceController : MonoBehaviour
     {
         public Dictionary<string, Texture> faces;
         FaceTexture faceTexture;
+        public IGrabFace grabFace;
+        public IEmotionCheck emotionCheck;
         public UnityEvent OnEmote;
 
         void Awake()
@@ -22,27 +24,7 @@ namespace Creature.Face
         {
             OnEmote.Invoke();
 
-            faceTexture.SetExpression(GrabEyes(GrabEmotion()), GrabMouth(GrabEmotion()));
-        }
-
-        public string GrabEmotion()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Hydrate(DNA creatureDna)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Texture2D GrabEyes(string action)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Texture2D GrabMouth(string action)
-        {
-            throw new System.NotImplementedException();
+            faceTexture.SetExpression(grabFace.GrabEyes(emotionCheck.GrabEmotion()), grabFace.GrabMouth(emotionCheck.GrabEmotion()));
         }
     }
 }
