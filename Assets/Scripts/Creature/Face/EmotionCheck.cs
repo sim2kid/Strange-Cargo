@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmotionCheck : MonoBehaviour
+namespace Creature.Face
 {
-    // Start is called before the first frame update
-    void Start()
+    public interface EmotionCheck
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public string GrabEmotion();
     }
 }
