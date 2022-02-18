@@ -275,6 +275,8 @@ namespace Genetics
                 BoneToPick.Destroy(bone);
             }
 
+            creature.AddComponent<ShaderInteractor>();
+
             CreatureController c = creature.AddComponent<CreatureController>();
             c.SetUp(dna, a, Guid.NewGuid().ToString(), frontFeetSound, backFeetSound);
 
