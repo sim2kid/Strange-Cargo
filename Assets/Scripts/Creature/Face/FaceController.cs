@@ -26,17 +26,26 @@ namespace Creature.Face
         {
             if(string.IsNullOrEmpty(Eyes))
             {
-
+                SetFaceTexture();
             }
             if(string.IsNullOrEmpty(Mouth))
             {
-
+                SetFaceTexture();
+            }
+            if(!(string.IsNullOrEmpty(Eyes) && string.IsNullOrEmpty(Mouth)))
+            {
+                return;
             }
         }
 
         private void SetFaceTexture()
         {
             Queue<FaceAnimation> faceAnimations = SortByPriority(incomingAnimations);
+            int currentFrame = faceAnimations.Peek().GetFrame();
+            Eyes = faceAnimations.Peek().faceClips[currentFrame].eyesString;
+            Mouth = faceAnimations.Peek().faceClips[currentFrame].mouthString;
+            faceTexture.SetExpression(grabFace.GrabEyes(Eyes),grabFace.GrabMouth(Mouth));
+
         }
 
         public Queue<FaceAnimation> SortByPriority(List<FaceAnimation> _animations)
