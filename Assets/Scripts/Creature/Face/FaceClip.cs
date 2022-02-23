@@ -6,6 +6,8 @@ namespace Creature.Face
 {
     public class FaceClip
     {
-
+        public string eyesString;
+        public string mouthString;
+        public float duration;
     }
 }
