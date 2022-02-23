@@ -6,13 +6,16 @@ namespace Creature.Face
 {
     public class FaceAnimation
     {
-        public List<FaceClip> faceClips;
-        public int priority;
-        public int frame;
-        public float timePassedPerFrame;
+        private List<FaceClip> faceClips;
+        private int priority;
+        private int frame;
+        private float timePassedPerFrame;
 
-        public void GetFrame()
+        public FaceClip CurrentFrame => faceClips[frame];
+
+        public void Update()
         {
+
         }
     }
 }

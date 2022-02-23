@@ -14,7 +14,6 @@ namespace Creature.Face
         string Eyes;
         string Mouth;
         public List<FaceAnimation> incomingAnimations;
-        string lastKnownEmotion;
 
         void Awake()
         {
@@ -33,58 +32,45 @@ namespace Creature.Face
             List<FaceAnimation> faceAnimations = SortByPriority(incomingAnimations);
             string eyesAssignment = string.Empty;
             string mouthAssignment = string.Empty;
+            FaceClip frame = new FaceClip();
             foreach(FaceAnimation fA in faceAnimations)
             {
+                fA.Update();
+                frame = fA.CurrentFrame;
                 if (string.IsNullOrEmpty(eyesAssignment))
                 {
-                    if (!string.IsNullOrEmpty(fA.faceClips[fA.frame].eyesString))
+                    if (frame.eyesString != Eyes)
                     {
-                        if (fA.faceClips[fA.frame].eyesString != Eyes)
-                        {
-                            eyesAssignment = fA.faceClips[fA.frame].eyesString;
-                        }
+                        eyesAssignment = frame.eyesString;
                     }
-                }
-                else
-                {
-                    return;
                 }
                 if (string.IsNullOrEmpty(mouthAssignment))
                 {
-                    if (!string.IsNullOrEmpty(fA.faceClips[fA.frame].mouthString))
+                    if (frame.mouthString != Mouth)
                     {
-                        if (fA.faceClips[fA.frame].mouthString != Mouth)
-                        {
-                            mouthAssignment = fA.faceClips[fA.frame].mouthString;
-                        }
+                        mouthAssignment = frame.mouthString;
                     }
                 }
-                else
+                if(!string.IsNullOrEmpty(eyesAssignment) && !string.IsNullOrEmpty(mouthAssignment))
                 {
-                    return;
+                    break;
                 }
             }
             if (string.IsNullOrEmpty(eyesAssignment))
             {
-                if (emotionCheck.GrabEmotion() != lastKnownEmotion)
-                {
-                    eyesAssignment = emotionCheck.GrabEmotion();
-                }
-                else
-                {
-                    eyesAssignment = lastKnownEmotion;
-                }
+                eyesAssignment = emotionCheck.GrabEmotion();
             }
             if(string.IsNullOrEmpty(mouthAssignment))
             {
-                if(emotionCheck.GrabEmotion() != lastKnownEmotion)
-                {
-                    mouthAssignment = emotionCheck.GrabEmotion();
-                }
-                else
-                {
-                    mouthAssignment = lastKnownEmotion;
-                }
+                mouthAssignment = emotionCheck.GrabEmotion();
+            }
+            if(frame.eyesString == Eyes)
+            {
+                eyesAssignment = null;
+            }
+            if(frame.mouthString == Mouth)
+            {
+                mouthAssignment = null;
             }
             faceTexture.SetExpression(grabFace.GrabEyes(eyesAssignment), grabFace.GrabMouth(mouthAssignment));
 
