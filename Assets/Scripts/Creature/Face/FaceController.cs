@@ -39,21 +39,11 @@ namespace Creature.Face
                 frame = fA.CurrentFrame;
                 if (string.IsNullOrEmpty(eyesAssignment))
                 {
-                    if (frame.eyesString != Eyes)
-                    {
-                        eyesAssignment = frame.eyesString;
-                    }
+                    eyesAssignment = frame.eyesString;
                 }
                 if (string.IsNullOrEmpty(mouthAssignment))
                 {
-                    if (frame.mouthString != Mouth)
-                    {
-                        mouthAssignment = frame.mouthString;
-                    }
-                }
-                if(!string.IsNullOrEmpty(eyesAssignment) && !string.IsNullOrEmpty(mouthAssignment))
-                {
-                    break;
+                    mouthAssignment = frame.mouthString;
                 }
             }
             if (string.IsNullOrEmpty(eyesAssignment))
