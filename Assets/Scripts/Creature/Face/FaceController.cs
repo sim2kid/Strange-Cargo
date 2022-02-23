@@ -14,6 +14,7 @@ namespace Creature.Face
         string Eyes;
         string Mouth;
         public List<FaceAnimation> incomingAnimations;
+        string lastKnownEmotion;
 
         void Awake()
         {
@@ -24,18 +25,16 @@ namespace Creature.Face
 
         void Update()
         {
-            if(string.IsNullOrEmpty(Eyes))
+            if(string.IsNullOrEmpty(Eyes) || string.IsNullOrEmpty(Mouth))
             {
                 SetFaceTexture();
             }
-            if(string.IsNullOrEmpty(Mouth))
+            string currentEmotion = emotionCheck.GrabEmotion();
+            if(lastKnownEmotion != currentEmotion)
             {
                 SetFaceTexture();
             }
-            if(!(string.IsNullOrEmpty(Eyes) && string.IsNullOrEmpty(Mouth)))
-            {
-                return;
-            }
+            lastKnownEmotion = currentEmotion;
         }
 
         private void SetFaceTexture()
