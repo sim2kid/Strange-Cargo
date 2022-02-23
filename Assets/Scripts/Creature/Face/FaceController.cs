@@ -44,6 +44,14 @@ namespace Creature.Face
             int currentFrame = faceAnimations.Peek().GetFrame();
             Eyes = faceAnimations.Peek().faceClips[currentFrame].eyesString;
             Mouth = faceAnimations.Peek().faceClips[currentFrame].mouthString;
+            if(string.IsNullOrEmpty(Eyes))
+            {
+                Eyes = emotionCheck.GrabEmotion();
+            }
+            if(string.IsNullOrEmpty(Mouth))
+            {
+                Mouth = emotionCheck.GrabEmotion();
+            }
             faceTexture.SetExpression(grabFace.GrabEyes(Eyes),grabFace.GrabMouth(Mouth));
 
         }
