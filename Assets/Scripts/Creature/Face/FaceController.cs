@@ -32,11 +32,10 @@ namespace Creature.Face
             List<FaceAnimation> faceAnimations = SortByPriority(incomingAnimations);
             string eyesAssignment = string.Empty;
             string mouthAssignment = string.Empty;
-            FaceClip frame = new FaceClip();
             foreach(FaceAnimation fA in faceAnimations)
             {
                 fA.Update();
-                frame = fA.CurrentFrame;
+                FaceClip frame = fA.CurrentFrame;
                 if (string.IsNullOrEmpty(eyesAssignment))
                 {
                     eyesAssignment = frame.eyesString;
@@ -54,11 +53,11 @@ namespace Creature.Face
             {
                 mouthAssignment = emotionCheck.GrabEmotion();
             }
-            if(frame.eyesString == Eyes)
+            if(eyesAssignment == Eyes)
             {
                 eyesAssignment = null;
             }
-            if(frame.mouthString == Mouth)
+            if(mouthAssignment == Mouth)
             {
                 mouthAssignment = null;
             }
