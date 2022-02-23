@@ -10,5 +10,10 @@ namespace Creature.Face
         public int priority;
         public int frame;
         public float timePassedPerFrame;
+
+        public int GetFrame()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
