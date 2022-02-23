@@ -11,9 +11,8 @@ namespace Creature.Face
         public int frame;
         public float timePassedPerFrame;
 
-        public int GetFrame()
+        public void GetFrame()
         {
-            throw new System.NotImplementedException();
         }
     }
 }
