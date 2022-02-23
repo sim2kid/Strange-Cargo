@@ -6,7 +6,9 @@ namespace Creature.Face
 {
     public class FaceAnimation
     {
-        public string name;
-        public float timing;
+        public List<FaceClip> faceClips;
+        public int priority;
+        public int frame;
+        public float timePassedPerFrame;
     }
 }
