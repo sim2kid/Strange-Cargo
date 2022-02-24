@@ -11,11 +11,31 @@ namespace Creature.Face
         private int frame;
         private float timePassedPerFrame;
 
-        public FaceClip CurrentFrame => faceClips[frame];
+        private float timePassed;
+
+        public FaceClip CurrentFrame
+        {
+            get
+            {
+                if (frame >= faceClips.Count)
+                {
+                    return null;
+                }
+                else
+                {
+                    return faceClips[frame];
+                }
+            }
+        }
 
         public void Update()
         {
-
+            timePassed += Time.deltaTime;
+            if(Time.deltaTime < CurrentFrame.duration)
+            {
+                timePassed -= CurrentFrame.duration;
+                frame++;
+            }
         }
     }
 }
