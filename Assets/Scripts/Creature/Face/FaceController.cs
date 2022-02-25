@@ -14,7 +14,7 @@ namespace Creature.Face
         public IEmotionCheck EmotionCheck;
         private string Eyes;
         private string Mouth;
-        private List<FaceAnimation> incomingAnimations;
+        private List<FaceAnimation> incomingAnimations = new List<FaceAnimation>();
 
         void Start()
         {
@@ -25,7 +25,10 @@ namespace Creature.Face
 
         void Update()
         {
-            SetFaceTexture();
+            if (faceTexture != null)
+            {
+                SetFaceTexture();
+            }
         }
 
         public void PlayAnimation(FaceAnimation animation) 

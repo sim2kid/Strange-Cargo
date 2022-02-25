@@ -12,13 +12,14 @@ namespace Creature.Face
 
         public Texture2D GrabEyes(string action) 
         {
+            
             // Return default eyes
-            return null;
+            return Resources.Load<Texture2D>("Face/Generic/Eyes/Happy");
         }
         public Texture2D GrabMouth(string action) 
         {
             // Return default mouth
-            return null;
+            return Resources.Load<Texture2D>("Face/Generic/Mouth/Neutral_Happy");
         }
     }
 }
