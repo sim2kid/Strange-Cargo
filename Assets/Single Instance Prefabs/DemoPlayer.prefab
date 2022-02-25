@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 14775157}
   - component: {fileID: 14775159}
-  - component: {fileID: 8701088813007937836}
+  - component: {fileID: 6493442559978046579}
   m_Layer: 9
   m_Name: ComeHere
   m_TagString: Untagged
@@ -128,7 +128,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8701088813007937836
+--- !u!114 &6493442559978046579
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2441dbb9ca2784d8143a3ba0ed928b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sourceVolume: 0
+  _sourceVolume: 1
   OnPlay:
     m_PersistentCalls:
       m_Calls: []
@@ -176,7 +176,6 @@ MonoBehaviour:
             Max: 0
         _containers:
         - id: 1
-        - id: 2
     00000001:
       type: {class: ResourceList, ns: Sound.Source.Internal, asm: Assembly-CSharp}
       data:
@@ -202,32 +201,6 @@ MonoBehaviour:
             Max: 0
         _audioPool: Misc\ComeHere
         _soundBites: []
-    00000002:
-      type: {class: ResourceClip, ns: Sound.Source.Internal, asm: Assembly-CSharp}
-      data:
-        _audioFile: Misc\ComeHere\pspsps.mp3
-        _soundBite:
-          Clip: {fileID: 0}
-          Pitch:
-            Value: 0
-            Range:
-              Min: 0
-              Max: 0
-          Volume:
-            Value: 0
-            Range:
-              Min: 0
-              Max: 0
-          Delay:
-            Value: 0
-            Range:
-              Min: 0
-              Max: 0
-          Loop:
-            Value: 0
-            Range:
-              Min: 0
-              Max: 0
 --- !u!1 &175863690321859498
 GameObject:
   m_ObjectHideFlags: 0
@@ -4510,7 +4483,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8701088813007937836}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Sound.Player.AudioPlayer, Assembly-CSharp
         m_MethodName: Play
         m_Mode: 1
