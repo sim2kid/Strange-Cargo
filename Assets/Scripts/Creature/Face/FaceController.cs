@@ -1,6 +1,7 @@
 using Genetics;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Creature.Face
@@ -9,13 +10,13 @@ namespace Creature.Face
     public class FaceController : MonoBehaviour
     {
         FaceTexture faceTexture;
-        public IGrabFace grabFace;
-        public IEmotionCheck emotionCheck;
-        string Eyes;
-        string Mouth;
-        public List<FaceAnimation> incomingAnimations;
+        public IGrabFace GrabFace;
+        public IEmotionCheck EmotionCheck;
+        private string Eyes;
+        private string Mouth;
+        private List<FaceAnimation> incomingAnimations;
 
-        void Awake()
+        void Start()
         {
             faceTexture = GetComponent<FaceTexture>();
             Eyes = string.Empty;
@@ -27,15 +28,27 @@ namespace Creature.Face
             SetFaceTexture();
         }
 
+        public void PlayAnimation(FaceAnimation animation) 
+        {
+            incomingAnimations.Add(animation);
+            // Sort from highest to lowest
+            incomingAnimations = incomingAnimations.OrderBy(x => -x.priority).ToList();
+        }
+
         private void SetFaceTexture()
         {
-            List<FaceAnimation> faceAnimations = SortByPriority(incomingAnimations);
             string eyesAssignment = string.Empty;
             string mouthAssignment = string.Empty;
-            foreach(FaceAnimation fA in faceAnimations)
+            List<FaceAnimation> finished = new List<FaceAnimation>();
+            foreach (FaceAnimation fA in incomingAnimations)
             {
                 fA.Update();
                 FaceClip frame = fA.CurrentFrame;
+                if (frame == null)
+                {
+                    finished.Add(fA);
+                    continue;
+                }
                 if (string.IsNullOrEmpty(eyesAssignment))
                 {
                     eyesAssignment = frame.eyesString;
@@ -45,14 +58,20 @@ namespace Creature.Face
                     mouthAssignment = frame.mouthString;
                 }
             }
+            foreach (var f in finished) 
+            {
+                incomingAnimations.Remove(f);
+            }
+
             if (string.IsNullOrEmpty(eyesAssignment))
             {
-                eyesAssignment = emotionCheck.GrabEmotion();
+                eyesAssignment = EmotionCheck.GrabEmotion();
             }
             if(string.IsNullOrEmpty(mouthAssignment))
             {
-                mouthAssignment = emotionCheck.GrabEmotion();
+                mouthAssignment = EmotionCheck.GrabEmotion();
             }
+
             if(eyesAssignment == Eyes)
             {
                 eyesAssignment = null;
@@ -61,36 +80,8 @@ namespace Creature.Face
             {
                 mouthAssignment = null;
             }
-            faceTexture.SetExpression(grabFace.GrabEyes(eyesAssignment), grabFace.GrabMouth(mouthAssignment));
+            faceTexture.SetExpression(GrabFace.GrabEyes(eyesAssignment), GrabFace.GrabMouth(mouthAssignment));
 
-        }
-
-        public List<FaceAnimation> SortByPriority(List<FaceAnimation> _animations)
-        {
-            List<FaceAnimation> list = new List<FaceAnimation>();
-            while(_animations.Count > 0)
-            {
-                FaceAnimation animation = GetHighestPriority(_animations);
-                list.Add(animation);
-                _animations.Remove(animation);
-            }
-            return list;
-        }
-
-        public FaceAnimation GetHighestPriority(List<FaceAnimation> _animations)
-        {
-            FaceAnimation toReturn = _animations[0];
-            float highest = int.MaxValue;
-            foreach(FaceAnimation fA in _animations)
-            {
-                float priority = fA.priority;
-                if(priority < highest)
-                {
-                    highest = priority;
-                    toReturn = fA;
-                }
-            }
-            return toReturn;
         }
     }
 }
