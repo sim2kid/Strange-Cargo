@@ -40,12 +40,14 @@ MonoBehaviour:
   - Misc\CeramicPlate\PlaceCounter\Full
   - Misc\CeramicPlate\PlaceWood
   - Misc\CeramicPlate\TreatFill
+  - Misc\Clipboard
   - Misc\ComeHere
   - Misc\FoodBag\Grab
   - Misc\FoodBag\Handling
   - Misc\FoodBag\Place
   - Misc\FoodBag\Pour
   - Misc\FoodBag\Spawn
+  - Misc\House
   - Misc\PetBrush\Fur
   - Misc\PetBrush\PickUp
   - Misc\PetBrush\Place
@@ -57,6 +59,7 @@ MonoBehaviour:
   - Player\Footsteps\Grass
   - Player\Footsteps\Tile
   - Player\Footsteps\Wood
+  - UI
   values:
   - FolderName: Animal\Footsteps\Grass
     Files:
@@ -378,16 +381,28 @@ MonoBehaviour:
       FileLocation: Misc\CeramicPlate\TreatFill\SFX_MISC_CeramicPlate_TreatFill6.mp3
     - ParentFolder: Misc\CeramicPlate\TreatFill
       FileLocation: Misc\CeramicPlate\TreatFill\SFX_MISC_CeramicPlate_TreatFill7.mp3
+  - FolderName: Misc\Clipboard
+    Files:
+    - ParentFolder: Misc\Clipboard
+      FileLocation: Misc\Clipboard\SFX_MISC_Clipboard_Close.mp3
+    - ParentFolder: Misc\Clipboard
+      FileLocation: Misc\Clipboard\SFX_MISC_Clipboard_Open.mp3
+    - ParentFolder: Misc\Clipboard
+      FileLocation: Misc\Clipboard\SFX_MISC_Clipboard_PageFlip.mp3
   - FolderName: Misc\ComeHere
     Files:
     - ParentFolder: Misc\ComeHere
-      FileLocation: Misc\ComeHere\comehere1.mp3
+      FileLocation: Misc\ComeHere\SFX_MISC_ComeHere_Whistle1.mp3
     - ParentFolder: Misc\ComeHere
-      FileLocation: Misc\ComeHere\comehere2.mp3
+      FileLocation: Misc\ComeHere\SFX_MISC_ComeHere_Whistle2.mp3
     - ParentFolder: Misc\ComeHere
-      FileLocation: Misc\ComeHere\comehere3.mp3
+      FileLocation: Misc\ComeHere\SFX_MISC_ComeHere_Whistle3.mp3
     - ParentFolder: Misc\ComeHere
-      FileLocation: Misc\ComeHere\pspsps.mp3
+      FileLocation: Misc\ComeHere\SFX_MISC_ComeHere_Whistle4.mp3
+    - ParentFolder: Misc\ComeHere
+      FileLocation: Misc\ComeHere\SFX_MISC_ComeHere_Whistle5.mp3
+    - ParentFolder: Misc\ComeHere
+      FileLocation: Misc\ComeHere\SFX_MISC_ComeHere_Whistle6.mp3
   - FolderName: Misc\FoodBag\Grab
     Files:
     - ParentFolder: Misc\FoodBag\Grab
@@ -470,6 +485,18 @@ MonoBehaviour:
     Files:
     - ParentFolder: Misc\FoodBag\Spawn
       FileLocation: Misc\FoodBag\Spawn\SFX_MISC_FoodBag_Spawn.mp3
+  - FolderName: Misc\House
+    Files:
+    - ParentFolder: Misc\House
+      FileLocation: Misc\House\SFX_MISC_House_BackDoorClose.mp3
+    - ParentFolder: Misc\House
+      FileLocation: Misc\House\SFX_MISC_House_BackDoorOpen.mp3
+    - ParentFolder: Misc\House
+      FileLocation: Misc\House\SFX_MISC_House_BellChime.mp3
+    - ParentFolder: Misc\House
+      FileLocation: Misc\House\SFX_MISC_House_FrontDoorClose.mp3
+    - ParentFolder: Misc\House
+      FileLocation: Misc\House\SFX_MISC_House_FrontDoorOpen.mp3
   - FolderName: Misc\PetBrush\Fur
     Files:
     - ParentFolder: Misc\PetBrush\Fur
@@ -622,3 +649,15 @@ MonoBehaviour:
       FileLocation: Player\Footsteps\Wood\SFX_PL_FS_Wood8.mp3
     - ParentFolder: Player\Footsteps\Wood
       FileLocation: Player\Footsteps\Wood\SFX_PL_FS_Wood9.mp3
+  - FolderName: UI
+    Files:
+    - ParentFolder: UI
+      FileLocation: UI\SFX_UI_BackOrMinus.mp3
+    - ParentFolder: UI
+      FileLocation: UI\SFX_UI_MenuClose.mp3
+    - ParentFolder: UI
+      FileLocation: UI\SFX_UI_MenuOpen.mp3
+    - ParentFolder: UI
+      FileLocation: UI\SFX_UI_Rollover.mp3
+    - ParentFolder: UI
+      FileLocation: UI\SFX_UI_SelectOrPlus.mp3
