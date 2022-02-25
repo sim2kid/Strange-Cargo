@@ -10,8 +10,22 @@ namespace UI.Computer
         [SerializeField]
         public string PrefabDataLocation;
         public PrefabData PrefabData => GetPrefabData();
+        
+        public RenderTexture texture;
 
         private GameObject demoObject;
+
+        private delegate void RenderAction();
+        private RenderAction RenderTexture;
+
+        private void Start()
+        {
+            SpawnObject(new Vector3(0, -100, 0));
+            GameObject cameraObj = Instantiate(new GameObject(), new Vector3(0,-100,-10), Quaternion.identity);
+            Camera cam = cameraObj.AddComponent<Camera>();
+            cam.farClipPlane = 50f;
+            
+        }
 
         public void SpawnObject(Vector3 location) 
         {
@@ -30,7 +44,10 @@ namespace UI.Computer
 
         private void Update()
         {
-            
+            if (RenderTexture != null) 
+            {
+                RenderTexture.Invoke();
+            }
         }
     }
 }
