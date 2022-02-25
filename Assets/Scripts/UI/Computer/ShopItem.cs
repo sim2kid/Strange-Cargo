@@ -2,6 +2,7 @@ using PersistentData.Saving;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.Computer
 {
@@ -9,7 +10,19 @@ namespace UI.Computer
     {
         [SerializeField]
         public string PrefabDataLocation;
-        public PrefabData PrefabData => GetPrefabData();
+        private PrefabData _data = null;
+        public PrefabData PrefabData 
+        {
+            get 
+            { 
+                if (_data == null) 
+                {
+                    _data = GetPrefabData();
+                }
+                return _data;
+            }
+            set { _data = value; }
+        }
         
         private RenderTexture renderTexture;
         public Texture2D texture;
@@ -24,6 +37,8 @@ namespace UI.Computer
 
         private int resolution = 128;
 
+        private System.Func<PrefabData, Texture2D, string, string, bool> onClick = null;
+
         private void Start()
         {
             Rect camRect = new Rect(0, 0, resolution, resolution);
@@ -32,26 +47,40 @@ namespace UI.Computer
 
 
             SpawnObject(new Vector3(0, -100, 0));
-            GameObject cameraObj = Instantiate(new GameObject(), new Vector3(0,-100,-10), Quaternion.identity);
+            GameObject cameraObj = Instantiate(new GameObject(), new Vector3(0,-100,-2), Quaternion.identity);
             Camera cam = cameraObj.AddComponent<Camera>();
             cam.farClipPlane = 50f;
             cam.targetTexture = renderTexture;
             cam.rect = camRect;
+            demoObject.SetActive(false);
 
             RenderTextureMethod = () => 
             {
+                demoObject.SetActive(true);
                 cam.Render();
                 RenderTexture.active = renderTexture;
                 texture.ReadPixels(camRect, 0, 0);
+                demoObject.SetActive(false);
 
-                Destroy(cam.gameObject);
                 RenderTexture.active = null;
-                Destroy(renderTexture);
                 renderTexture = null;
-                Destroy(demoObject);
+
+                RenderTextureMethod = () =>
+                {
+                    Destroy(renderTexture);
+                    Destroy(cam.gameObject);
+                    Destroy(demoObject);
+                    RenderTextureMethod = null;
+
+                    this.GetComponent<Button>().onClick.AddListener(() => {
+                        if (onClick != null)
+                            onClick.Invoke(PrefabData, texture, PrefabData.PrefabResourceLocation, "Demo Item and description");
+                    });
+                };
 
                 texture.Apply();
-                icon.GetComponent<Renderer>().material.mainTexture = texture;
+                Sprite sprite = Sprite.Create(texture, camRect, Vector2.zero);
+                icon.GetComponent<Image>().sprite = sprite;
             };
         }
 
@@ -63,11 +92,25 @@ namespace UI.Computer
 
         private PrefabData GetPrefabData() 
         {
-            string json = Resources.Load<TextAsset>(PrefabDataLocation).ToString();
+            TextAsset ta = Resources.Load<TextAsset>(PrefabDataLocation);
+            string json = ta.text;
             if(string.IsNullOrEmpty(json))
                 return null;
             PrefabData data = Newtonsoft.Json.JsonConvert.DeserializeObject<PrefabData>(json);
             return data;
+        }
+
+        public void SetPrefabData(string json) 
+        {
+            if (string.IsNullOrEmpty(json))
+                return;
+            PrefabData = Newtonsoft.Json.JsonConvert.DeserializeObject<PrefabData>(json);
+            PrefabDataLocation = null;
+        }
+
+        public void OnClickHook(System.Func<PrefabData, Texture2D, string, string, bool> setPannel) 
+        {
+            onClick = setPannel;
         }
 
         private void Update()
@@ -75,7 +118,6 @@ namespace UI.Computer
             if (RenderTextureMethod != null) 
             {
                 RenderTextureMethod.Invoke();
-                RenderTextureMethod = null;
             }
         }
     }
