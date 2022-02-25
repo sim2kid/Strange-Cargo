@@ -2,6 +2,7 @@ using PersistentData.Saving;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace UI.Computer
 {
@@ -13,6 +14,8 @@ namespace UI.Computer
         private TMPro.TextMeshProUGUI Description;
         [SerializeField]
         private UnityEngine.UI.Image Icon;
+
+        public UnityEvent OnItemSpawn;
 
         private PrefabData itemToSpawn;
 
@@ -33,6 +36,7 @@ namespace UI.Computer
         public void SpawnItem()
         {
             FindObjectOfType<ItemSpawner>().Spawn(itemToSpawn);
+            OnItemSpawn.Invoke();
         }
     }
 }
