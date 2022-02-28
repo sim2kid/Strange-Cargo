@@ -9,14 +9,15 @@ using Creature.Brain;
 using UnityEngine.Events;
 using PersistentData.Saving;
 using PersistentData.Component;
+using Creature.Face;
 
 namespace Creature
 {
     [DisallowMultipleComponent]
     [RequireComponent(typeof(TextureConverter.TextureController))]
     [RequireComponent(typeof(NavMeshMovement))]
-    [RequireComponent(typeof(FaceTexture))]
     [RequireComponent(typeof(CreatureSaveable))]
+    [RequireComponent(typeof(FaceController))]
     public class CreatureController : MonoBehaviour, IProgress, ISaveable
     {
         [SerializeField]
@@ -31,7 +32,7 @@ namespace Creature
         public string frontFeetSound { get => data.frontFeetSound; set => data.frontFeetSound = value; }
         public string backFeetSound { get => data.backFeetSound; set => data.backFeetSound = value; }
 
-        public FaceTexture Face { get; private set; }
+        public FaceController Face { get; private set; }
         public NavMeshMovement Move { get; private set; }
         public int TaskCount => tasks.Count;
         public ITask TopTask => tasks.Peek();
@@ -48,6 +49,8 @@ namespace Creature
         private float timeSpentOnLastTask;
 
         private IProgress textureController;
+
+        private IEmotionCheck emotionState;
 
         private UnityEvent UpdateLoop;
 
@@ -144,13 +147,20 @@ namespace Creature
             brain = new BasicBrain(this);
             Utility.Toolbox.Instance.CreatureList.Add(this);
             thinkTimer = 0;
+            emotionState = new DemoEmotionCheck();
         }
 
         private void Start()
         {
             textureController = GetComponent<TextureConverter.TextureController>();
             Move = GetComponent<NavMeshMovement>();
-            Face = GetComponent<FaceTexture>();
+            Face = GetComponent<FaceController>();
+
+            Face.GrabFace = new DemoGrabFace();
+            Face.GrabFace.Hydrate(dna);
+
+            Face.EmotionCheck = emotionState;
+
             UpdateLoop = new UnityEvent();
             timeSpentOnLastTask = 0;
 
