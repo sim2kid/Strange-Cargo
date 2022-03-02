@@ -32,30 +32,39 @@ namespace Importing
             if (string.IsNullOrWhiteSpace(topLevelLocation))
                 topLevelLocation = Application.streamingAssetsPath;
 
+            // Full file location startinf from the toplevel + parent folder loc
             string path = SanitizePath(Path.Combine(topLevelLocation, parentFolder));
 
             // Prevent running files if there is no folder // 
             if (!Directory.Exists(path))
                 return db;
 
-            string[] preFiles = Directory.GetFiles(path);
+            // Pulls files that match the ending pattern
+            string[] preFiles = Directory.GetFiles(path); // absolute paths
             List<string> files = new List<string>();
             foreach (string file in preFiles)
                 if (fileExtensions.Any(x => file.EndsWith(x)))
                     files.Add(file);
+
+            // Resolves Refrences
             string[] refrences = Directory.GetFiles(path, "*.ref");
             foreach (string reff in refrences)
             {
-                
-                string newFile = ResolveRef(reff);
-                if (string.IsNullOrWhiteSpace(newFile))
+                // Returns path related to topLevelLocation
+                string newPath = ResolveRef(reff);
+                // Get absolute location
+                newPath = SanitizePath(Path.Combine(path, newPath));
+
+                if (string.IsNullOrWhiteSpace(newPath))
                     continue;
-                if (fileExtensions.Any(x => newFile.EndsWith(x)))
+                // if the file exists, add it
+                if (fileExtensions.Any(x => newPath.EndsWith(x)))
                 {
-                    files.Add(newFile);
+                    files.Add(newPath);
                 }
             }
 
+            // Creates the parent folder in the database to store each file.
             string parent = SanitizePath(parentFolder);
             if (files.Count > 0)
                 if (!db.Folders.ContainsKey(parent))
@@ -64,6 +73,7 @@ namespace Importing
                         FolderName = parent
                     });
 
+            // store each file in the parent folder in the database
             foreach (string file in files) 
             {
                 db.Folders[parent].Files.Add(new File()
@@ -73,6 +83,7 @@ namespace Importing
                 });
             }
 
+            // Recursivly look through the database/folders
             string[] directories = Directory.GetDirectories(path);
             foreach (string dir in directories) 
             {
