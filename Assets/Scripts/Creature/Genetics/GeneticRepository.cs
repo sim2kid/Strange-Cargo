@@ -7,7 +7,7 @@ namespace Genetics
 {
     public class GeneticRepository
     {
-        private Dictionary<string, Dictionary<string, BodyPart>> Repository;
+        public Dictionary<string, Dictionary<string, BodyPart>> Repository { get; private set; }
         private List<Pattern> Patterns;
 
         public GeneticRepository() 
