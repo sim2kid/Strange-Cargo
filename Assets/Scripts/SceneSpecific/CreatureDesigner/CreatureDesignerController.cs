@@ -10,6 +10,7 @@ public class CreatureDesignerController : MonoBehaviour
     public TextMeshProUGUI partType;
     public TextMeshProUGUI bodyPart;
     public TextMeshProUGUI pattern;
+    public GameObject creatureSpawnLocation;
     GameObject sampleCreature;
     DNA oldDNA;
     DNA newDNA;
@@ -36,8 +37,8 @@ public class CreatureDesignerController : MonoBehaviour
     private void GenerateSampleCreature()
     {
         sampleCreature = CreatureGeneration.CreateCreature();
-        sampleCreature.transform.position = new Vector3(0, 0.5f, 0);
-        sampleCreature.transform.Rotate(new Vector3(0, 180, 0));
+        sampleCreature.transform.position = creatureSpawnLocation.transform.position;
+        sampleCreature.transform.rotation = creatureSpawnLocation.transform.rotation;
         oldDNA = sampleCreature.GetComponent<Creature.CreatureController>().dna;
         newDNA = oldDNA;
     }
@@ -45,8 +46,8 @@ public class CreatureDesignerController : MonoBehaviour
     private void GenerateSampleCreature(DNA _dna)
     {
         sampleCreature = CreatureGeneration.CreateCreature(_dna);
-        sampleCreature.transform.position = new Vector3(0, 0.5f, 0);
-        sampleCreature.transform.Rotate(new Vector3(0, 180, 0));
+        sampleCreature.transform.position = creatureSpawnLocation.transform.position;
+        sampleCreature.transform.rotation = creatureSpawnLocation.transform.rotation;
         oldDNA = sampleCreature.GetComponent<Creature.CreatureController>().dna;
         newDNA = oldDNA;
     }
