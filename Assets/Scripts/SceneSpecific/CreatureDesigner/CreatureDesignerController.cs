@@ -14,6 +14,8 @@ public class CreatureDesignerController : MonoBehaviour
     GameObject sampleCreature;
     DNA oldDNA;
     DNA newDNA;
+    PartHash currentPart;
+    int currentPartIndex;
 
     // Start is called before the first frame update
     void Start()
@@ -56,7 +58,6 @@ public class CreatureDesignerController : MonoBehaviour
 
     public void Next(string _bodypart) 
     {
-        PartHash currentPart = new PartHash();
         foreach(PartHash partHash in oldDNA.BodyPartHashs)
         {
             if(partHash.Category == _bodypart)
@@ -69,7 +70,7 @@ public class CreatureDesignerController : MonoBehaviour
         {
             bodyPartNames.Add(keyValuePair.Key);
         }
-        int currentPartIndex = bodyPartNames.IndexOf(currentPart.BodyPart);
+        currentPartIndex = bodyPartNames.IndexOf(currentPart.BodyPart);
         string newPartName = string.Empty;
         if (currentPartIndex < bodyPartNames.Count)
         {
@@ -92,7 +93,6 @@ public class CreatureDesignerController : MonoBehaviour
 
     public void Last(string _bodypart)
     {
-        PartHash currentPart = new PartHash();
         foreach (PartHash partHash in oldDNA.BodyPartHashs)
         {
             if (partHash.Category == _bodypart)
@@ -105,7 +105,7 @@ public class CreatureDesignerController : MonoBehaviour
         {
             bodyPartNames.Add(keyValuePair.Key);
         }
-        int currentPartIndex = bodyPartNames.IndexOf(currentPart.BodyPart);
+        currentPartIndex = bodyPartNames.IndexOf(currentPart.BodyPart);
         string newPartName = string.Empty;
         if (currentPartIndex > 0)
         {
