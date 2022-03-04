@@ -19,6 +19,7 @@ public class CreatureDesignerController : MonoBehaviour
     void Start()
     {
         genePool = Utility.Toolbox.Instance.GenePool;
+        Utility.Toolbox.Instance.Pause.SetPause(true);
         GenerateSampleCreature();
     }
 
@@ -37,18 +38,19 @@ public class CreatureDesignerController : MonoBehaviour
     private void GenerateSampleCreature()
     {
         sampleCreature = CreatureGeneration.CreateCreature();
-        sampleCreature.transform.position = creatureSpawnLocation.transform.position;
-        sampleCreature.transform.rotation = creatureSpawnLocation.transform.rotation;
-        oldDNA = sampleCreature.GetComponent<Creature.CreatureController>().dna;
-        newDNA = oldDNA;
+        SampleCreatureSetup();
     }
 
     private void GenerateSampleCreature(DNA _dna)
     {
         sampleCreature = CreatureGeneration.CreateCreature(_dna);
-        sampleCreature.transform.position = creatureSpawnLocation.transform.position;
-        sampleCreature.transform.rotation = creatureSpawnLocation.transform.rotation;
+        SampleCreatureSetup();
+    }
+
+    private void SampleCreatureSetup()
+    {
         oldDNA = sampleCreature.GetComponent<Creature.CreatureController>().dna;
+        sampleCreature.transform.SetPositionAndRotation(creatureSpawnLocation.transform.position, creatureSpawnLocation.transform.rotation);
         newDNA = oldDNA;
     }
 
