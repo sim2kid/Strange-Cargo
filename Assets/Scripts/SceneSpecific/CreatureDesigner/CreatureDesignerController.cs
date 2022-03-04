@@ -11,27 +11,66 @@ public class CreatureDesignerController : MonoBehaviour
     public TextMeshProUGUI bodyPart;
     public TextMeshProUGUI pattern;
     GameObject sampleCreature;
-    DNA sampleCreatureDNA;
+    DNA oldDNA;
+    DNA newDNA;
 
     // Start is called before the first frame update
     void Start()
     {
         genePool = Utility.Toolbox.Instance.GenePool;
         sampleCreature = CreatureGeneration.CreateCreature();
-        sampleCreatureDNA = sampleCreature.GetComponent<Creature.CreatureController>().dna;
+        oldDNA = sampleCreature.GetComponent<Creature.CreatureController>().dna;
+        newDNA = oldDNA;
     }
 
     public void Build() 
     {
-
+        if(newDNA != oldDNA)
+        {
+            GameObject.Destroy(sampleCreature);
+            sampleCreature = CreatureGeneration.CreateCreature(newDNA);
+            oldDNA = sampleCreature.GetComponent<Creature.CreatureController>().dna;
+            newDNA = oldDNA;
+        }
     }
 
-    public void Next(string bodypart) 
+    public void Next(string _bodypart) 
     {
+        PartHash currentPart = new PartHash();
+        foreach(PartHash partHash in oldDNA.BodyPartHashs)
+        {
+            if(partHash.Category == _bodypart)
+            {
+                currentPart = partHash;
+            }
+        }
+        List<string> bodyPartNames = new List<string>();
+        foreach(KeyValuePair<string, BodyPart> keyValuePair in genePool.GetPartList(_bodypart))
+        {
+            bodyPartNames.Add(keyValuePair.Key);
+        }
+        int currentPartIndex = bodyPartNames.IndexOf(currentPart.BodyPart);
+        string newPartName = string.Empty;
+        if (currentPartIndex < bodyPartNames.Count)
+        {
+            newPartName = bodyPartNames[currentPartIndex + 1];
+        }
+        else
+        {
+            newPartName = bodyPartNames[0];
+        }
+        newDNA.BodyPartHashs.Remove(currentPart);
+        PartHash newPart = new PartHash
+        {
+            Category = _bodypart,
+            BodyPart = newPartName,
+            Pattern = currentPart.Pattern
+        };
+        newDNA.BodyPartHashs.Add(newPart);
 
     }
 
-    public void Last(string bodypart)
+    public void Last(string _bodypart)
     {
 
     }
