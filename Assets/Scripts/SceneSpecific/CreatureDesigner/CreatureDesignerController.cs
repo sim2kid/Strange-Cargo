@@ -18,9 +18,7 @@ public class CreatureDesignerController : MonoBehaviour
     void Start()
     {
         genePool = Utility.Toolbox.Instance.GenePool;
-        sampleCreature = CreatureGeneration.CreateCreature();
-        oldDNA = sampleCreature.GetComponent<Creature.CreatureController>().dna;
-        newDNA = oldDNA;
+        GenerateSampleCreature();
     }
 
     public void Build() 
@@ -30,11 +28,27 @@ public class CreatureDesignerController : MonoBehaviour
             if (sampleCreature != null)
             {
                 GameObject.Destroy(sampleCreature);
+                GenerateSampleCreature(newDNA);
             }
-            sampleCreature = CreatureGeneration.CreateCreature(newDNA);
-            oldDNA = sampleCreature.GetComponent<Creature.CreatureController>().dna;
-            newDNA = oldDNA;
         }
+    }
+
+    private void GenerateSampleCreature()
+    {
+        sampleCreature = CreatureGeneration.CreateCreature();
+        sampleCreature.transform.position = new Vector3(0, 0.5f, 0);
+        sampleCreature.transform.Rotate(new Vector3(0, 180, 0));
+        oldDNA = sampleCreature.GetComponent<Creature.CreatureController>().dna;
+        newDNA = oldDNA;
+    }
+
+    private void GenerateSampleCreature(DNA _dna)
+    {
+        sampleCreature = CreatureGeneration.CreateCreature(_dna);
+        sampleCreature.transform.position = new Vector3(0, 0.5f, 0);
+        sampleCreature.transform.Rotate(new Vector3(0, 180, 0));
+        oldDNA = sampleCreature.GetComponent<Creature.CreatureController>().dna;
+        newDNA = oldDNA;
     }
 
     public void Next(string _bodypart) 
