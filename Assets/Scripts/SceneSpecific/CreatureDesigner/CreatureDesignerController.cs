@@ -27,7 +27,10 @@ public class CreatureDesignerController : MonoBehaviour
     {
         if(newDNA != oldDNA)
         {
-            GameObject.Destroy(sampleCreature);
+            if (sampleCreature != null)
+            {
+                GameObject.Destroy(sampleCreature);
+            }
             sampleCreature = CreatureGeneration.CreateCreature(newDNA);
             oldDNA = sampleCreature.GetComponent<Creature.CreatureController>().dna;
             newDNA = oldDNA;
@@ -72,6 +75,36 @@ public class CreatureDesignerController : MonoBehaviour
 
     public void Last(string _bodypart)
     {
-
+        PartHash currentPart = new PartHash();
+        foreach (PartHash partHash in oldDNA.BodyPartHashs)
+        {
+            if (partHash.Category == _bodypart)
+            {
+                currentPart = partHash;
+            }
+        }
+        List<string> bodyPartNames = new List<string>();
+        foreach (KeyValuePair<string, BodyPart> keyValuePair in genePool.GetPartList(_bodypart))
+        {
+            bodyPartNames.Add(keyValuePair.Key);
+        }
+        int currentPartIndex = bodyPartNames.IndexOf(currentPart.BodyPart);
+        string newPartName = string.Empty;
+        if (currentPartIndex > 0)
+        {
+            newPartName = bodyPartNames[currentPartIndex - 1];
+        }
+        else
+        {
+            newPartName = bodyPartNames[bodyPartNames.Count];
+        }
+        newDNA.BodyPartHashs.Remove(currentPart);
+        PartHash newPart = new PartHash
+        {
+            Category = _bodypart,
+            BodyPart = newPartName,
+            Pattern = currentPart.Pattern
+        };
+        newDNA.BodyPartHashs.Add(newPart);
     }
 }
