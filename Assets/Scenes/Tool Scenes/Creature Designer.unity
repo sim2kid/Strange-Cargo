@@ -380,8 +380,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1066497034}
         m_TargetAssemblyTypeName: CreatureDesignerController, Assembly-CSharp
-        m_MethodName: Last
-        m_Mode: 5
+        m_MethodName: LastPattern
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -785,8 +785,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1066497034}
         m_TargetAssemblyTypeName: CreatureDesignerController, Assembly-CSharp
-        m_MethodName: Last
-        m_Mode: 5
+        m_MethodName: LastBodyPart
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1599,7 +1599,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1066497034}
         m_TargetAssemblyTypeName: CreatureDesignerController, Assembly-CSharp
-        m_MethodName: Build
+        m_MethodName: Apply
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1676,7 +1676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf065adf665bb74f988b5d5c2137cdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partType: {fileID: 653727765}
+  category: {fileID: 653727765}
   bodyPart: {fileID: 771808108}
   pattern: {fileID: 2055063099}
   creatureSpawnLocation: {fileID: 1343863268}
@@ -1946,8 +1946,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1066497034}
         m_TargetAssemblyTypeName: CreatureDesignerController, Assembly-CSharp
-        m_MethodName: Next
-        m_Mode: 5
+        m_MethodName: NextBodyPart
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2196,8 +2196,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1066497034}
         m_TargetAssemblyTypeName: CreatureDesignerController, Assembly-CSharp
-        m_MethodName: Last
-        m_Mode: 5
+        m_MethodName: LastCategory
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2256,7 +2256,7 @@ GameObject:
   - component: {fileID: 1515192629}
   - component: {fileID: 1515192628}
   m_Layer: 5
-  m_Name: Body Type Picker
+  m_Name: Category Picker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2304,7 +2304,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Part Type
+  m_text: Category
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2676,8 +2676,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1066497034}
         m_TargetAssemblyTypeName: CreatureDesignerController, Assembly-CSharp
-        m_MethodName: Next
-        m_Mode: 5
+        m_MethodName: NextPattern
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3508,8 +3508,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1066497034}
         m_TargetAssemblyTypeName: CreatureDesignerController, Assembly-CSharp
-        m_MethodName: Next
-        m_Mode: 5
+        m_MethodName: NextCategory
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3970,7 +3970,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7375483989245976754}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54f6852bc800e77449cedc5c38977e6d, type: 3}
   m_Name: 
@@ -4266,7 +4266,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7375483989245976754}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
