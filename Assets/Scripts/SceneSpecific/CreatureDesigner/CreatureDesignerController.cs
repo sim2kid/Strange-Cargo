@@ -13,7 +13,6 @@ public class CreatureDesignerController : MonoBehaviour
     public GameObject creatureSpawnLocation;
     GameObject sampleCreature;
     DNA oldDNA;
-    DNA newDNA;
     PartHash bodyPartHashToApply;
 
     // Start is called before the first frame update
@@ -22,9 +21,16 @@ public class CreatureDesignerController : MonoBehaviour
         genePool = Utility.Toolbox.Instance.GenePool;
         Utility.Toolbox.Instance.Pause.SetPause(true);
         GenerateSampleCreature();
-        bodyPartHashToApply.Category = category.text;
-        bodyPartHashToApply.BodyPart = bodyPart.text;
-        bodyPartHashToApply.Pattern = pattern.text;
+        PartHashSetup();
+    }
+
+    private void PartHashSetup()
+    {
+        PartHash defaultPartHash = oldDNA.BodyPartHashs[0];
+        bodyPartHashToApply = defaultPartHash;
+        category.text = defaultPartHash.Category;
+        bodyPart.text = defaultPartHash.BodyPart;
+        pattern.text = defaultPartHash.Pattern;
     }
 
     private void GenerateSampleCreature()
@@ -49,7 +55,7 @@ public class CreatureDesignerController : MonoBehaviour
     {
         if(!oldDNA.BodyPartHashs.Contains(bodyPartHashToApply))
         {
-            newDNA = oldDNA;
+            DNA newDNA = oldDNA;
             PartHash bodyPartHashToRemove = new PartHash();
             foreach(PartHash bodyPartHash in oldDNA.BodyPartHashs)
             {
