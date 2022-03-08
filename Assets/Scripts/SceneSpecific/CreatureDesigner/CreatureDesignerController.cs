@@ -7,13 +7,14 @@ using TMPro;
 public class CreatureDesignerController : MonoBehaviour
 {
     GeneticRepository genePool;
-    public TextMeshProUGUI partType;
+    public TextMeshProUGUI category;
     public TextMeshProUGUI bodyPart;
     public TextMeshProUGUI pattern;
     public GameObject creatureSpawnLocation;
     GameObject sampleCreature;
     DNA oldDNA;
     DNA newDNA;
+    PartHash bodyPartHashToApply;
 
     // Start is called before the first frame update
     void Start()
@@ -21,18 +22,9 @@ public class CreatureDesignerController : MonoBehaviour
         genePool = Utility.Toolbox.Instance.GenePool;
         Utility.Toolbox.Instance.Pause.SetPause(true);
         GenerateSampleCreature();
-    }
-
-    public void Build() 
-    {
-        if(newDNA != oldDNA)
-        {
-            if (sampleCreature != null)
-            {
-                GameObject.Destroy(sampleCreature);
-                GenerateSampleCreature(newDNA);
-            }
-        }
+        bodyPartHashToApply.Category = category.text;
+        bodyPartHashToApply.BodyPart = bodyPart.text;
+        bodyPartHashToApply.Pattern = pattern.text;
     }
 
     private void GenerateSampleCreature()
@@ -51,77 +43,178 @@ public class CreatureDesignerController : MonoBehaviour
     {
         oldDNA = sampleCreature.GetComponent<Creature.CreatureController>().dna;
         sampleCreature.transform.SetPositionAndRotation(creatureSpawnLocation.transform.position, creatureSpawnLocation.transform.rotation);
-        newDNA = oldDNA;
     }
 
-    public void Next(string _bodypart) 
+    public void Apply()
     {
-        PartHash currentPart = new PartHash();
-        foreach(PartHash partHash in oldDNA.BodyPartHashs)
+        if(!oldDNA.BodyPartHashs.Contains(bodyPartHashToApply))
         {
-            if(partHash.Category == _bodypart)
+            newDNA = oldDNA;
+            PartHash bodyPartHashToRemove = new PartHash();
+            foreach(PartHash bodyPartHash in oldDNA.BodyPartHashs)
             {
-                currentPart = partHash;
+                if(bodyPartHash.Category == bodyPartHashToApply.Category)
+                {
+                    bodyPartHashToRemove = bodyPartHash;
+                }
+            }
+            newDNA.BodyPartHashs.Remove(bodyPartHashToRemove);
+            newDNA.BodyPartHashs.Add(bodyPartHashToApply);
+            if (sampleCreature != null)
+            {
+                Destroy(sampleCreature);
+                GenerateSampleCreature(newDNA);
             }
         }
-        List<string> bodyPartNames = new List<string>();
-        foreach(KeyValuePair<string, BodyPart> keyValuePair in genePool.GetPartList(_bodypart))
+    }
+
+    public void NextCategory()
+    {
+        List<string> categories = new List<string>();
+        foreach(string key in genePool.Repository.Keys)
         {
-            bodyPartNames.Add(keyValuePair.Key);
+            categories.Add(key);
         }
-        int currentPartIndex = bodyPartNames.IndexOf(currentPart.BodyPart);
-        string newPartName = string.Empty;
-        if (currentPartIndex < bodyPartNames.Count - 1)
+        string currentCategory = category.text;
+        int currentCategoryIndex = categories.IndexOf(currentCategory);
+        string nextCategory = string.Empty;
+        if(currentCategoryIndex >= categories.Count - 1)
         {
-            newPartName = bodyPartNames[currentPartIndex + 1];
+            nextCategory = categories[0];
         }
         else
         {
-            newPartName = bodyPartNames[0];
+            nextCategory = categories[currentCategoryIndex + 1];
         }
-        newDNA.BodyPartHashs.Remove(currentPart);
-        PartHash newPart = new PartHash
-        {
-            Category = _bodypart,
-            BodyPart = newPartName,
-            Pattern = currentPart.Pattern
-        };
-        newDNA.BodyPartHashs.Add(newPart);
-
+        category.text = nextCategory;
+        bodyPartHashToApply.Category = nextCategory;
     }
 
-    public void Last(string _bodypart)
+    public void LastCategory()
     {
-        PartHash currentPart = new PartHash();
-        foreach (PartHash partHash in oldDNA.BodyPartHashs)
+        List<string> categories = new List<string>();
+        foreach(string key in genePool.Repository.Keys)
         {
-            if (partHash.Category == _bodypart)
-            {
-                currentPart = partHash;
-            }
+            categories.Add(key);
         }
-        List<string> bodyPartNames = new List<string>();
-        foreach (KeyValuePair<string, BodyPart> keyValuePair in genePool.GetPartList(_bodypart))
+        string currentCategory = category.text;
+        int currentCategoryIndex = categories.IndexOf(currentCategory);
+        string lastCategory = string.Empty;
+        if(currentCategoryIndex <= 0)
         {
-            bodyPartNames.Add(keyValuePair.Key);
-        }
-        int currentPartIndex = bodyPartNames.IndexOf(currentPart.BodyPart);
-        string newPartName = string.Empty;
-        if (currentPartIndex > 0)
-        {
-            newPartName = bodyPartNames[currentPartIndex - 1];
+            lastCategory = categories[categories.Count - 1];
         }
         else
         {
-            newPartName = bodyPartNames[bodyPartNames.Count - 1];
+            lastCategory = categories[currentCategoryIndex - 1];
         }
-        newDNA.BodyPartHashs.Remove(currentPart);
-        PartHash newPart = new PartHash
+        category.text = lastCategory;
+        bodyPartHashToApply.Category = lastCategory;
+    }
+
+    public void NextBodyPart()
+    {
+        List<string> bodyParts = new List<string>();
+        string currentCategory = category.text;
+        foreach(string key in genePool.GetPartList(currentCategory).Keys)
         {
-            Category = _bodypart,
-            BodyPart = newPartName,
-            Pattern = currentPart.Pattern
-        };
-        newDNA.BodyPartHashs.Add(newPart);
+            bodyParts.Add(key);
+        }
+        string currentBodyPart = bodyPart.text;
+        int currentBodyPartIndex = bodyParts.IndexOf(currentBodyPart);
+        string nextBodyPart = string.Empty;
+        if(currentBodyPartIndex >= bodyParts.Count - 1)
+        {
+            nextBodyPart = bodyParts[0];
+        }
+        else
+        {
+            nextBodyPart = bodyParts[currentBodyPartIndex + 1];
+        }
+        bodyPart.text = nextBodyPart;
+        bodyPartHashToApply.BodyPart = nextBodyPart;
+    }
+
+    public void LastBodyPart()
+    {
+        List<string> bodyParts = new List<string>();
+        string currentCategory = category.text;
+        foreach(string key in genePool.GetPartList(currentCategory).Keys)
+        {
+            bodyParts.Add(key);
+        }
+        string currentBodyPart = bodyPart.text;
+        int currentBodyPartIndex = bodyParts.IndexOf(currentBodyPart);
+        string lastBodyPart = string.Empty;
+        if(currentBodyPartIndex <= 0)
+        {
+            lastBodyPart = bodyParts[bodyParts.Count - 1];
+        }
+        else
+        {
+            lastBodyPart = bodyParts[currentBodyPartIndex - 1];
+        }
+        bodyPart.text = lastBodyPart;
+        bodyPartHashToApply.BodyPart = lastBodyPart;
+    }
+
+    public void NextPattern()
+    {
+        List<string> patterns = new List<string>();
+        string currentCategory = category.text;
+        string currentBodyPart = bodyPart.text;
+        foreach(KeyValuePair<string,BodyPart> keyValuePair in genePool.GetPartList(currentCategory))
+        {
+            if(keyValuePair.Key == currentBodyPart)
+            {
+                foreach(string pattern in keyValuePair.Value.Patterns)
+                {
+                    patterns.Add(pattern);
+                }
+            }
+        }
+        string currentPattern = pattern.text;
+        int currentPatternIndex = patterns.IndexOf(currentPattern);
+        string nextPattern = string.Empty;
+        if(currentPatternIndex >= patterns.Count - 1)
+        {
+            nextPattern = patterns[0];
+        }
+        else
+        {
+            nextPattern = patterns[currentPatternIndex + 1];
+        }
+        pattern.text = nextPattern;
+        bodyPartHashToApply.Pattern = nextPattern;
+    }
+
+    public void LastPattern()
+    {
+        List<string> patterns = new List<string>();
+        string currentCategory = category.text;
+        string currentBodyPart = bodyPart.text;
+        foreach (KeyValuePair<string, BodyPart> keyValuePair in genePool.GetPartList(currentCategory))
+        {
+            if (keyValuePair.Key == currentBodyPart)
+            {
+                foreach (string pattern in keyValuePair.Value.Patterns)
+                {
+                    patterns.Add(pattern);
+                }
+            }
+        }
+        string currentPattern = pattern.text;
+        int currentPatternIndex = patterns.IndexOf(currentPattern);
+        string lastPattern = string.Empty;
+        if (currentPatternIndex <= 0)
+        {
+            lastPattern = patterns[patterns.Count - 1];
+        }
+        else
+        {
+            lastPattern = patterns[currentPatternIndex - 1];
+        }
+        pattern.text = lastPattern;
+        bodyPartHashToApply.Pattern = lastPattern;
     }
 }
