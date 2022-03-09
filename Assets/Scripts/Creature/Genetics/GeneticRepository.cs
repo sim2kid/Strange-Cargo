@@ -129,7 +129,8 @@ namespace Genetics
         /// <returns></returns>
         public Pattern GetPatternByName(string name)
         {
-            return Patterns.First(p => p.Name == name);
+            string patternName = System.IO.Path.GetFileNameWithoutExtension(name);
+            return GetPattern(Importer.GetHashString(patternName));
         }
 
         /// <summary>
