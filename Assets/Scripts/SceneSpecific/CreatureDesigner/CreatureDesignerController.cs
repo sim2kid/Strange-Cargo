@@ -116,9 +116,27 @@ public class CreatureDesignerController : MonoBehaviour
             nextCategory = categories[currentCategoryIndex + 1];
         }
         currentCategory = nextCategory;
+        if(!HasBodyParts(currentCategory))
+        {
+            NextCategory();
+        }
         category.text = nextCategory;
         bodyPartHashToApply.Category = nextCategory;
         ResetBodyPart(nextCategory);
+    }
+
+    private bool HasBodyParts(string _category)
+    {
+        List<string> bodyParts = new List<string>();
+        foreach (string key in genePool.GetPartList(_category).Keys)
+        {
+            bodyParts.Add(key);
+        }
+        if(bodyParts.Count > 0)
+        {
+            return true;
+        }
+        return false;
     }
 
     private void ResetBodyPart(string _category)
@@ -128,9 +146,18 @@ public class CreatureDesignerController : MonoBehaviour
         {
             bodyParts.Add(key);
         }
-        bodyPart.text = "0";
-        bodyPartHashToApply.BodyPart = bodyParts[0];
-        ResetPattern(_category, bodyParts[0]);
+        int indexToResetTo = 0;
+        for (int i = 0; i < bodyParts.Count; i++)
+        {
+            if(HasPatterns(_category, bodyParts[i]))
+            {
+                indexToResetTo = i;
+                break;
+            }
+        }
+        bodyPart.text = indexToResetTo.ToString();
+        bodyPartHashToApply.BodyPart = bodyParts[indexToResetTo];
+        ResetPattern(_category, bodyParts[indexToResetTo]);
     }
 
     private void ResetPattern(string _category, string _bodyPart)
@@ -168,6 +195,10 @@ public class CreatureDesignerController : MonoBehaviour
             lastCategory = categories[currentCategoryIndex - 1];
         }
         currentCategory = lastCategory;
+        if (!HasBodyParts(currentCategory))
+        {
+            LastCategory();
+        }
         category.text = lastCategory;
         bodyPartHashToApply.Category = lastCategory;
         ResetBodyPart(lastCategory);
@@ -176,7 +207,6 @@ public class CreatureDesignerController : MonoBehaviour
     public void NextBodyPart()
     {
         List<string> bodyParts = new List<string>();
-        string currentCategory = category.text;
         foreach(string key in genePool.GetPartList(currentCategory).Keys)
         {
             bodyParts.Add(key);
@@ -190,9 +220,33 @@ public class CreatureDesignerController : MonoBehaviour
         }
         nextBodyPart = bodyParts[currentBodyPartIndex];
         currentBodyPart = nextBodyPart;
+        if(!HasPatterns(currentCategory, currentBodyPart))
+        {
+            NextBodyPart();
+        }
         bodyPart.text = currentBodyPartIndex.ToString();
         bodyPartHashToApply.BodyPart = nextBodyPart;
         ResetPattern(currentCategory, nextBodyPart);
+    }
+
+    private bool HasPatterns(string _category, string _bodyPart)
+    {
+        List<string> patterns = new List<string>();
+        foreach (KeyValuePair<string, BodyPart> keyValuePair in genePool.GetPartList(_category))
+        {
+            if (keyValuePair.Key == _bodyPart)
+            {
+                foreach (string pattern in keyValuePair.Value.Patterns)
+                {
+                    patterns.Add(genePool.GetPatternByName(pattern).Hash);
+                }
+            }
+        }
+        if(patterns.Count > 0)
+        {
+            return true;
+        }
+        return false;
     }
 
     public void LastBodyPart()
@@ -212,6 +266,10 @@ public class CreatureDesignerController : MonoBehaviour
         }
         lastBodyPart = bodyParts[currentBodyPartIndex];
         currentBodyPart = lastBodyPart;
+        if (!HasPatterns(currentCategory, currentBodyPart))
+        {
+            LastBodyPart();
+        }
         bodyPart.text = currentBodyPartIndex.ToString();
         bodyPartHashToApply.BodyPart = lastBodyPart;
         ResetPattern(currentCategory, lastBodyPart);
@@ -220,8 +278,6 @@ public class CreatureDesignerController : MonoBehaviour
     public void NextPattern()
     {
         List<string> patterns = new List<string>();
-        string currentCategory = category.text;
-        string currentBodyPart = bodyPart.text;
         foreach(KeyValuePair<string,BodyPart> keyValuePair in genePool.GetPartList(currentCategory))
         {
             if(keyValuePair.Key == currentBodyPart)
@@ -256,8 +312,6 @@ public class CreatureDesignerController : MonoBehaviour
     public void LastPattern()
     {
         List<string> patterns = new List<string>();
-        string currentCategory = category.text;
-        string currentBodyPart = bodyPart.text;
         foreach (KeyValuePair<string, BodyPart> keyValuePair in genePool.GetPartList(currentCategory))
         {
             if (keyValuePair.Key == currentBodyPart)
