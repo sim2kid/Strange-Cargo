@@ -12,7 +12,6 @@ namespace Creature.Face
 
         public Texture2D GrabEyes(string action) 
         {
-            
             // Return default eyes
             return Resources.Load<Texture2D>("Face/Generic/Eyes/Neutral");
         }
