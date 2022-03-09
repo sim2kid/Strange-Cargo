@@ -94,6 +94,36 @@ public class CreatureDesignerController : MonoBehaviour
         }
         category.text = nextCategory;
         bodyPartHashToApply.Category = nextCategory;
+        ResetBodyPart(nextCategory);
+    }
+
+    private void ResetBodyPart(string _category)
+    {
+        List<string> bodyParts = new List<string>();
+        foreach (string key in genePool.GetPartList(_category).Keys)
+        {
+            bodyParts.Add(key);
+        }
+        bodyPart.text = bodyParts[0];
+        bodyPartHashToApply.BodyPart = bodyParts[0];
+        ResetPattern(_category, bodyParts[0]);
+    }
+
+    private void ResetPattern(string _category, string _bodyPart)
+    {
+        List<string> patterns = new List<string>();
+        foreach (KeyValuePair<string, BodyPart> keyValuePair in genePool.GetPartList(_category))
+        {
+            if (keyValuePair.Key == _bodyPart)
+            {
+                foreach (string pattern in keyValuePair.Value.Patterns)
+                {
+                    patterns.Add(genePool.GetPatternByName(pattern).Hash);
+                }
+            }
+        }
+        pattern.text = patterns[0];
+        bodyPartHashToApply.Pattern = patterns[0];
     }
 
     public void LastCategory()
@@ -116,6 +146,7 @@ public class CreatureDesignerController : MonoBehaviour
         }
         category.text = lastCategory;
         bodyPartHashToApply.Category = lastCategory;
+        ResetBodyPart(lastCategory);
     }
 
     public void NextBodyPart()
@@ -139,6 +170,7 @@ public class CreatureDesignerController : MonoBehaviour
         }
         bodyPart.text = nextBodyPart;
         bodyPartHashToApply.BodyPart = nextBodyPart;
+        ResetPattern(currentCategory, nextBodyPart);
     }
 
     public void LastBodyPart()
@@ -162,6 +194,7 @@ public class CreatureDesignerController : MonoBehaviour
         }
         bodyPart.text = lastBodyPart;
         bodyPartHashToApply.BodyPart = lastBodyPart;
+        ResetPattern(currentCategory, lastBodyPart);
     }
 
     public void NextPattern()
@@ -175,7 +208,7 @@ public class CreatureDesignerController : MonoBehaviour
             {
                 foreach(string pattern in keyValuePair.Value.Patterns)
                 {
-                    patterns.Add(pattern);
+                    patterns.Add(genePool.GetPatternByName(pattern).Hash);
                 }
             }
         }
@@ -205,7 +238,7 @@ public class CreatureDesignerController : MonoBehaviour
             {
                 foreach (string pattern in keyValuePair.Value.Patterns)
                 {
-                    patterns.Add(pattern);
+                    patterns.Add(genePool.GetPatternByName(pattern).Hash);
                 }
             }
         }
