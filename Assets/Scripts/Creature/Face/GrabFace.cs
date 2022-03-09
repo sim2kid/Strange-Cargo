@@ -32,6 +32,11 @@ namespace Creature.Face
 
         private Texture2D GetTex(string cat, string action) 
         {
+            // Default case
+            if (action == null)
+                return null;
+
+
             var tex = faces.GetTexture(FaceType,
                     PathUtil.SanitizePath(System.IO.Path.Combine(cat, action + ".png")));
             if (tex == null)

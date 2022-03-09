@@ -75,13 +75,21 @@ namespace Creature.Face
                 mouthAssignment = EmotionCheck.GrabEmotion();
             }
 
-            if(eyesAssignment == Eyes)
+            if (eyesAssignment == Eyes)
             {
                 eyesAssignment = null;
+            }
+            else 
+            {
+                Eyes = eyesAssignment;
             }
             if(mouthAssignment == Mouth)
             {
                 mouthAssignment = null;
+            }
+            else
+            {
+                Mouth = mouthAssignment;
             }
             faceTexture.SetExpression(GrabFace.GrabEyes(eyesAssignment), GrabFace.GrabMouth(mouthAssignment));
 
