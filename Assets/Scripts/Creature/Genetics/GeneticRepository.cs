@@ -123,6 +123,16 @@ namespace Genetics
         }
 
         /// <summary>
+        /// Returns a pattern based on its <paramref name="name"/>
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public Pattern GetPatternByName(string name)
+        {
+            return Patterns.First(p => p.Name == name);
+        }
+
+        /// <summary>
         /// Returns the shader to get based on the <paramref name="shaderEnum"/>
         /// </summary>
         /// <param name="shader"></param>
