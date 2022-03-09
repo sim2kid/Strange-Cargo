@@ -10,10 +10,11 @@ namespace Creature.Face
     {
         public List<string> FaceTypes { get; private set; } = new List<string>();
         private Database db;
+        private const string generic = "generic";
         public FaceRepository() 
         {
-            db = Importing.Importer.Import(System.IO.Path.Combine(Application.persistentDataPath, "Faces"),
-                null, "", ".png");
+            db = Importing.Importer.Import("", null, 
+                System.IO.Path.Combine(Application.streamingAssetsPath, "Face"), ".png");
 
             foreach (string folders in db.Folders.Keys) 
             {
@@ -27,8 +28,6 @@ namespace Creature.Face
         public Texture2D GetTexture(string category, string texture) 
         {
             // Clean input
-            category = category.ToLower();
-            texture = texture.ToLower();
             if (!texture.EndsWith(".png"))
             {
                 texture += ".png";
@@ -46,20 +45,29 @@ namespace Creature.Face
             string filename = path[path.Length - 1];
 
             // If folder does not exist, try a different one
-            if (category.Equals("generic") && !db.Folders.ContainsKey(folder))
+            if (!db.Folders.ContainsKey(folder))
             {
-                Console.LogWarning($"Could not find face type of \"{category}\". Using generic faces instead.");
-                return GetTexture("generic", texture);
+                if (category.ToLower().Equals(generic.ToLower()))
+                {
+                    Console.LogError($"Generic folder for face could not be found. " +
+                        $"Category: {category} | Texture: {texture} | Folder: {folder} | File: {filename}");
+                    return null;
+                }
+                else
+                {
+                    Console.LogWarning($"Could not find face type of \"{category}\". Using generic faces instead.");
+                    return GetTexture(generic, texture);
+                }
             }
             // Get category folder
             Folder dir = db.Folders[folder];
 
             // Check if there's a texture in that folder that matches
-            var file = dir.Files.FirstOrDefault(x => x.FileName == filename);
+            var file = dir.Files.FirstOrDefault(x => x.FileName.ToLower().Equals(filename.ToLower()));
 
             if (file == null)
             {
-                if (category.Equals("generic"))
+                if (category.ToLower().Equals(generic.ToLower()))
                 {
                     Console.LogError($"No face was found for file \"{texture}\" in the generic category.");
                     return null;
@@ -67,13 +75,13 @@ namespace Creature.Face
                 else 
                 {
                     Console.LogWarning($"No face was found for file \"{texture}\" in category \"{category}\". Using generics as a backup.");
-                    return GetTexture("generic", texture);
+                    return GetTexture(generic, texture);
                 }
             }
 
             // Load file
             Texture2D texture2D = new Texture2D(1, 1);
-            byte[] textureBytes = System.IO.File.ReadAllBytes(file.FileLocation);
+            byte[] textureBytes = System.IO.File.ReadAllBytes(System.IO.Path.Combine(Application.streamingAssetsPath, "Face", file.FileLocation));
 
             if (ImageConversion.LoadImage(texture2D, textureBytes, false)) 
             {

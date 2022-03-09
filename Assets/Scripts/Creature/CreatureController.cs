@@ -156,7 +156,7 @@ namespace Creature
             Move = GetComponent<NavMeshMovement>();
             Face = GetComponent<FaceController>();
 
-            Face.GrabFace = new DemoGrabFace();
+            Face.GrabFace = new GrabFace();
             Face.GrabFace.Hydrate(dna);
 
             Face.EmotionCheck = emotionState;

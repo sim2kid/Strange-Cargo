@@ -14,16 +14,12 @@ namespace Importing
     {
         /// <summary>
         /// Grabs and records all files from a parent directory.
-        /// <paramref name="parentFolder"/> is the parent folder to look into.
-        /// <paramref name="fileSearchPattern"/> is the file search pattern for a Directory.GetFiles function.
-        /// <paramref name="db"/> is the Database to add info to. Usually used for recursive searches.
-        /// <paramref name="topLevelLocation"/> is the top most level location. It's the Streaming Assets folder by default.
         /// </summary>
-        /// <param name="parentFolder"></param>
-        /// <param name="fileSearchPattern"></param>
-        /// <param name="db"></param>
-        /// <param name="topLevelLocation"></param>
-        /// <returns></returns>
+        /// <param name="parentFolder">The parent folder to look into. This is used for recursive searches.</param>
+        /// <param name="db">The Database to add info to. Usually used for recursive searches.</param>
+        /// <param name="topLevelLocation">The top most level location. It's the Streaming Assets folder by default.</param>
+        /// <param name="fileExtensions">All the file extensions to look for</param>
+        /// <returns>Database full of records.</returns>
         public static Database Import(string parentFolder, Database db = null, string topLevelLocation = null, params string[] fileExtensions) 
         {
             if (db == null)
@@ -43,7 +39,7 @@ namespace Importing
             string[] preFiles = Directory.GetFiles(path); // absolute paths
             List<string> files = new List<string>();
             foreach (string file in preFiles)
-                if (fileExtensions.Any(x => file.EndsWith(x)))
+                if (fileExtensions.Any(x => file.ToLower().EndsWith(x.ToLower())))
                     files.Add(file);
 
             // Resolves Refrences
