@@ -10,6 +10,9 @@ public class CreatureDesignerController : MonoBehaviour
     public TextMeshProUGUI category;
     public TextMeshProUGUI bodyPart;
     public TextMeshProUGUI pattern;
+    private string currentCategory;
+    private string currentBodyPart;
+    private string currentPattern;
     public GameObject creatureSpawnLocation;
     GameObject sampleCreature;
     DNA oldDNA;
@@ -28,9 +31,30 @@ public class CreatureDesignerController : MonoBehaviour
     {
         PartHash defaultPartHash = oldDNA.BodyPartHashs[0];
         bodyPartHashToApply = defaultPartHash;
+        currentCategory = defaultPartHash.Category;
         category.text = defaultPartHash.Category;
-        bodyPart.text = defaultPartHash.BodyPart;
-        pattern.text = defaultPartHash.Pattern;
+
+        currentBodyPart = defaultPartHash.BodyPart;
+        List<string> bodyParts = new List<string>();
+        foreach (string key in genePool.GetPartList(currentCategory).Keys)
+        {
+            bodyParts.Add(key);
+        }
+        bodyPart.text = bodyParts.IndexOf(currentBodyPart).ToString();
+
+        currentPattern = defaultPartHash.Pattern;
+        List<string> patterns = new List<string>();
+        foreach (KeyValuePair<string, BodyPart> keyValuePair in genePool.GetPartList(currentCategory))
+        {
+            if (keyValuePair.Key == currentBodyPart)
+            {
+                foreach (string pattern in keyValuePair.Value.Patterns)
+                {
+                    patterns.Add(genePool.GetPatternByName(pattern).Hash);
+                }
+            }
+        }
+        pattern.text = patterns.IndexOf(currentPattern).ToString();
     }
 
     private void GenerateSampleCreature()
@@ -81,7 +105,6 @@ public class CreatureDesignerController : MonoBehaviour
         {
             categories.Add(key);
         }
-        string currentCategory = category.text;
         int currentCategoryIndex = categories.IndexOf(currentCategory);
         string nextCategory = string.Empty;
         if(currentCategoryIndex >= categories.Count - 1)
@@ -92,6 +115,7 @@ public class CreatureDesignerController : MonoBehaviour
         {
             nextCategory = categories[currentCategoryIndex + 1];
         }
+        currentCategory = nextCategory;
         category.text = nextCategory;
         bodyPartHashToApply.Category = nextCategory;
         ResetBodyPart(nextCategory);
@@ -104,7 +128,7 @@ public class CreatureDesignerController : MonoBehaviour
         {
             bodyParts.Add(key);
         }
-        bodyPart.text = bodyParts[0];
+        bodyPart.text = "0";
         bodyPartHashToApply.BodyPart = bodyParts[0];
         ResetPattern(_category, bodyParts[0]);
     }
@@ -122,7 +146,7 @@ public class CreatureDesignerController : MonoBehaviour
                 }
             }
         }
-        pattern.text = patterns[0];
+        pattern.text = "0";
         bodyPartHashToApply.Pattern = patterns[0];
     }
 
@@ -133,7 +157,6 @@ public class CreatureDesignerController : MonoBehaviour
         {
             categories.Add(key);
         }
-        string currentCategory = category.text;
         int currentCategoryIndex = categories.IndexOf(currentCategory);
         string lastCategory = string.Empty;
         if(currentCategoryIndex <= 0)
@@ -144,6 +167,7 @@ public class CreatureDesignerController : MonoBehaviour
         {
             lastCategory = categories[currentCategoryIndex - 1];
         }
+        currentCategory = lastCategory;
         category.text = lastCategory;
         bodyPartHashToApply.Category = lastCategory;
         ResetBodyPart(lastCategory);
@@ -157,18 +181,16 @@ public class CreatureDesignerController : MonoBehaviour
         {
             bodyParts.Add(key);
         }
-        string currentBodyPart = bodyPart.text;
         int currentBodyPartIndex = bodyParts.IndexOf(currentBodyPart);
         string nextBodyPart = string.Empty;
-        if(currentBodyPartIndex >= bodyParts.Count - 1)
+        currentBodyPartIndex++;
+        if (currentBodyPartIndex > bodyParts.Count - 1)
         {
-            nextBodyPart = bodyParts[0];
+            currentBodyPartIndex = 0;
         }
-        else
-        {
-            nextBodyPart = bodyParts[currentBodyPartIndex + 1];
-        }
-        bodyPart.text = nextBodyPart;
+        nextBodyPart = bodyParts[currentBodyPartIndex];
+        currentBodyPart = nextBodyPart;
+        bodyPart.text = currentBodyPartIndex.ToString();
         bodyPartHashToApply.BodyPart = nextBodyPart;
         ResetPattern(currentCategory, nextBodyPart);
     }
@@ -181,18 +203,16 @@ public class CreatureDesignerController : MonoBehaviour
         {
             bodyParts.Add(key);
         }
-        string currentBodyPart = bodyPart.text;
         int currentBodyPartIndex = bodyParts.IndexOf(currentBodyPart);
         string lastBodyPart = string.Empty;
-        if(currentBodyPartIndex <= 0)
+        currentBodyPartIndex--;
+        if (currentBodyPartIndex < 0)
         {
-            lastBodyPart = bodyParts[bodyParts.Count - 1];
+            currentBodyPartIndex = bodyParts.Count - 1;
         }
-        else
-        {
-            lastBodyPart = bodyParts[currentBodyPartIndex - 1];
-        }
-        bodyPart.text = lastBodyPart;
+        lastBodyPart = bodyParts[currentBodyPartIndex];
+        currentBodyPart = lastBodyPart;
+        bodyPart.text = currentBodyPartIndex.ToString();
         bodyPartHashToApply.BodyPart = lastBodyPart;
         ResetPattern(currentCategory, lastBodyPart);
     }
@@ -212,18 +232,24 @@ public class CreatureDesignerController : MonoBehaviour
                 }
             }
         }
-        string currentPattern = pattern.text;
         int currentPatternIndex = patterns.IndexOf(currentPattern);
         string nextPattern = string.Empty;
-        if(currentPatternIndex >= patterns.Count - 1)
+        if (patterns.Count > 1)
         {
-            nextPattern = patterns[0];
+            currentPatternIndex++;
+
+            if (currentPatternIndex > patterns.Count - 1)
+            {
+                currentPatternIndex = 0;
+            }
         }
         else
         {
-            nextPattern = patterns[currentPatternIndex + 1];
+            currentPatternIndex = 0;
         }
-        pattern.text = nextPattern;
+        nextPattern = patterns[currentPatternIndex];
+        currentPattern = nextPattern;
+        pattern.text = currentPatternIndex.ToString();
         bodyPartHashToApply.Pattern = nextPattern;
     }
 
@@ -242,18 +268,23 @@ public class CreatureDesignerController : MonoBehaviour
                 }
             }
         }
-        string currentPattern = pattern.text;
         int currentPatternIndex = patterns.IndexOf(currentPattern);
         string lastPattern = string.Empty;
-        if (currentPatternIndex <= 0)
+        if (patterns.Count > 1)
         {
-            lastPattern = patterns[patterns.Count - 1];
+            currentPatternIndex--;
+            if (currentPatternIndex < 0)
+            {
+                currentPatternIndex = 0;
+            }
         }
         else
         {
-            lastPattern = patterns[currentPatternIndex - 1];
+            currentPatternIndex = 0;
         }
-        pattern.text = lastPattern;
+        lastPattern = patterns[currentPatternIndex];
+        currentPattern = lastPattern;
+        pattern.text = currentPatternIndex.ToString();
         bodyPartHashToApply.Pattern = lastPattern;
     }
 }
