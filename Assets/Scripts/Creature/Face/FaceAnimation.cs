@@ -40,12 +40,20 @@ namespace Creature.Face
 
         public void Update()
         {
+            if (CurrentFrame == null) return;
+
+            // Increment Animation
             timePassed += Time.deltaTime;
             if(Time.deltaTime < CurrentFrame.duration)
             {
                 timePassed -= CurrentFrame.duration;
                 frame++;
             }
+        }
+
+        public FaceAnimation Copy() 
+        {
+            return new FaceAnimation(faceClips, priority);
         }
     }
 }

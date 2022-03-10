@@ -7,13 +7,14 @@ namespace Creature.Face {
     {
         static FaceAnimation blinkAnimation;
         FaceController face;
+        [SerializeField]
         float cooldown;
 
         private void Awake()
         {
             if (blinkAnimation == null)
             {
-                blinkAnimation = AnimationBuilder.LoadFromResources("Data/FaceAnimations/Blink");
+                blinkAnimation = AnimationBuilder.LoadFromResources("Data/FaceAnimations/Blink", 100);
             }
         }
 
@@ -34,7 +35,7 @@ namespace Creature.Face {
             {
                 if (cooldown <= 0)
                 {
-                    cooldown += Random.Range(2f, 7f);
+                    cooldown += Random.Range(5f, 10f);
                     CloseEyes();
                 }
                 else 
@@ -46,7 +47,7 @@ namespace Creature.Face {
 
         void CloseEyes() 
         {
-            face.PlayAnimation(blinkAnimation);
+            face.PlayAnimation(blinkAnimation.Copy());
         }
     }
 }

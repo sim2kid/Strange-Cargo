@@ -34,7 +34,7 @@ namespace Creature.Face
         public void PlayAnimation(FaceAnimation animation) 
         {
             incomingAnimations.Add(animation);
-            // Sort from highest to lowest
+            // Sort from highest priority to lowest
             incomingAnimations = incomingAnimations.OrderBy(x => -x.priority).ToList();
         }
 
@@ -42,16 +42,20 @@ namespace Creature.Face
         {
             string eyesAssignment = string.Empty;
             string mouthAssignment = string.Empty;
+            // List of animations to remove
             List<FaceAnimation> finished = new List<FaceAnimation>();
+            // Loop through each animation
             foreach (FaceAnimation fA in incomingAnimations)
             {
-                fA.Update();
+                // Get frame
                 FaceClip frame = fA.CurrentFrame;
                 if (frame == null)
                 {
+                    // Mark to discard animation if frame is used up
                     finished.Add(fA);
                     continue;
                 }
+                // Set frame is needed
                 if (string.IsNullOrEmpty(eyesAssignment))
                 {
                     eyesAssignment = frame.eyes;
@@ -60,12 +64,16 @@ namespace Creature.Face
                 {
                     mouthAssignment = frame.mouth;
                 }
+                // Update animation
+                fA.Update();
             }
+            // Remove dead animations
             foreach (var f in finished) 
             {
                 incomingAnimations.Remove(f);
             }
 
+            // Assign base state if null
             if (string.IsNullOrEmpty(eyesAssignment))
             {
                 eyesAssignment = EmotionCheck.GrabEmotion();
@@ -75,6 +83,7 @@ namespace Creature.Face
                 mouthAssignment = EmotionCheck.GrabEmotion();
             }
 
+            // Remove assignment if unchanged or update last assignment if changed
             if (eyesAssignment == Eyes)
             {
                 eyesAssignment = null;
@@ -91,8 +100,9 @@ namespace Creature.Face
             {
                 Mouth = mouthAssignment;
             }
-            faceTexture.SetExpression(GrabFace.GrabEyes(eyesAssignment), GrabFace.GrabMouth(mouthAssignment));
 
+            // Set expression
+            faceTexture.SetExpression(GrabFace.GrabEyes(eyesAssignment), GrabFace.GrabMouth(mouthAssignment));
         }
     }
 }
