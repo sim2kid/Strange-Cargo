@@ -54,11 +54,11 @@ namespace Creature.Face
                 }
                 if (string.IsNullOrEmpty(eyesAssignment))
                 {
-                    eyesAssignment = frame.eyesString;
+                    eyesAssignment = frame.eyes;
                 }
                 if (string.IsNullOrEmpty(mouthAssignment))
                 {
-                    mouthAssignment = frame.mouthString;
+                    mouthAssignment = frame.mouth;
                 }
             }
             foreach (var f in finished) 

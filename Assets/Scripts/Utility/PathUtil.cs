@@ -10,5 +10,9 @@ namespace Utility
         {
             return s.Replace('/', '\\');
         }
+        public static string ForwardSlashPath(string s)
+        {
+            return s.Replace('\\', '/');
+        }
     }
 }

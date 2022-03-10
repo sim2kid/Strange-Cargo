@@ -11,6 +11,18 @@ namespace Creature.Face
         private int frame;
         private float timePassed;
 
+        public FaceAnimation(List<FaceClip> clips, int priority = 0) 
+        {
+            if (clips == null)
+            {
+                clips = new List<FaceClip>();
+            }
+            faceClips = clips;
+            this.priority = priority;
+            frame = 0;
+            timePassed = 0;
+        }
+
         public FaceClip CurrentFrame
         {
             get
