@@ -1,3 +1,4 @@
+using Creature.Emotions;
 using Genetics;
 using System.Collections;
 using System.Collections.Generic;

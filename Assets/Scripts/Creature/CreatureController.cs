@@ -10,6 +10,7 @@ using UnityEngine.Events;
 using PersistentData.Saving;
 using PersistentData.Component;
 using Creature.Face;
+using Creature.Emotions;
 
 namespace Creature
 {
@@ -147,7 +148,7 @@ namespace Creature
             brain = new BasicBrain(this);
             Utility.Toolbox.Instance.CreatureList.Add(this);
             thinkTimer = 0;
-            emotionState = new DemoEmotionCheck();
+            emotionState = gameObject.AddComponent<EmotionCheck>();
         }
 
         private void Start()
