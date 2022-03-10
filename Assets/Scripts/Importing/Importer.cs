@@ -42,40 +42,57 @@ namespace Importing
                 if (fileExtensions.Any(x => file.ToLower().EndsWith(x.ToLower())))
                     files.Add(file);
 
+            // Creates the parent folder in the database to store each file.
+            string parent = SanitizePath(parentFolder);
+            if (files.Count > 0)
+                if (!db.Folders.ContainsKey(parent))
+                    db.Folders.Add(parent, new Folder()
+                    {
+                        FolderName = parent
+                    });
+
             // Resolves Refrences
             string[] refrences = Directory.GetFiles(path, "*.ref");
             foreach (string reff in refrences)
             {
                 // Returns path related to topLevelLocation
-                string newPath = ResolveRef(reff);
+                string relitive = ResolveRef(reff);
                 // Get absolute location
-                newPath = SanitizePath(Path.Combine(path, newPath));
+                string absolutePath = SanitizePath(Path.Combine(topLevelLocation, relitive));
 
-                if (string.IsNullOrWhiteSpace(newPath))
+                if (string.IsNullOrWhiteSpace(absolutePath))
                     continue;
-                // if the file exists, add it
-                if (fileExtensions.Any(x => newPath.EndsWith(x)))
+
+                string refNameNoExtension = Path.GetFileNameWithoutExtension(reff);
+
+                // Check if the file exists
+                if (!System.IO.File.Exists(absolutePath))
                 {
-                    files.Add(newPath);
+                    continue;
+                }
+
+                // if the file exists and has a valid ending, add it to folder directly
+                if (fileExtensions.Any(x => absolutePath.ToLower().EndsWith(x.ToLower())))
+                {
+                    db.Folders[parent].Files.Add(new File() 
+                    {
+                        ParentFolder = parent,
+                        FileLocation = relitive,
+                        FileName = refNameNoExtension + Path.GetExtension(absolutePath)
+                    });
+                    files.Add(absolutePath);
                 }
             }
-
-            // Creates the parent folder in the database to store each file.
-            string parent = SanitizePath(parentFolder);
-            if (files.Count > 0)
-                if (!db.Folders.ContainsKey(parent))
-                    db.Folders.Add(parent, new Folder() 
-                    {
-                        FolderName = parent
-                    });
 
             // store each file in the parent folder in the database
             foreach (string file in files) 
             {
+                string location = SanitizePath(Path.Combine(parent, Path.GetFileName(file)));
                 db.Folders[parent].Files.Add(new File()
                 {
                     ParentFolder = parent,
-                    FileLocation = SanitizePath(Path.Combine(parent, Path.GetFileName(file)))
+                    FileLocation = location,
+                    FileName = Path.GetFileName(location)
                 });
             }
 
