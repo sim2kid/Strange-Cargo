@@ -148,7 +148,7 @@ namespace Creature
             brain = new BasicBrain(this);
             Utility.Toolbox.Instance.CreatureList.Add(this);
             thinkTimer = 0;
-            emotionState = gameObject.AddComponent<EmotionCheck>();
+            emotionState = gameObject.GetComponent<EmotionCheck>();
         }
 
         private void Start()

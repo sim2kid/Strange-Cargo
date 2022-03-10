@@ -6,13 +6,15 @@ namespace Creature.Emotions
 {
     public class EmotionCheck : MonoBehaviour, IEmotionCheck
     {
-        
-
+        public string LastEmotion;
+        public string LastEmotionDetailed;
         private CreatureController creature;
 
         public string GrabEmotion() 
         {
             Emotion closest = EmotionCloud.FindClosestMatch(GeneratreEmotion());
+            LastEmotion = closest.BaseEmotion;
+            LastEmotionDetailed = closest.DetailedEmotion;
             return closest.BaseEmotion;
         }
 

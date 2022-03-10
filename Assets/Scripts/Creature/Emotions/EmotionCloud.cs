@@ -39,9 +39,9 @@ namespace Creature.Emotions
         {
             _emotions = new List<Emotion>();
             TextAsset text = Resources.Load<TextAsset>("Data/Emotions");
-            foreach (string line in text.text.Split(',')) 
+            foreach (string line in text.text.Split('\n')) 
             {
-                Emotion e = new Emotion(line);
+                Emotion e = new Emotion(line.Split(','));
                 _emotions.Add(e);
             }
             Console.Log($"Emotions have been generated. " +
