@@ -14,16 +14,12 @@ namespace Importing
     {
         /// <summary>
         /// Grabs and records all files from a parent directory.
-        /// <paramref name="parentFolder"/> is the parent folder to look into.
-        /// <paramref name="fileSearchPattern"/> is the file search pattern for a Directory.GetFiles function.
-        /// <paramref name="db"/> is the Database to add info to. Usually used for recursive searches.
-        /// <paramref name="topLevelLocation"/> is the top most level location. It's the Streaming Assets folder by default.
         /// </summary>
-        /// <param name="parentFolder"></param>
-        /// <param name="fileSearchPattern"></param>
-        /// <param name="db"></param>
-        /// <param name="topLevelLocation"></param>
-        /// <returns></returns>
+        /// <param name="parentFolder">The parent folder to look into. This is used for recursive searches.</param>
+        /// <param name="db">The Database to add info to. Usually used for recursive searches.</param>
+        /// <param name="topLevelLocation">The top most level location. It's the Streaming Assets folder by default.</param>
+        /// <param name="fileExtensions">All the file extensions to look for</param>
+        /// <returns>Database full of records.</returns>
         public static Database Import(string parentFolder, Database db = null, string topLevelLocation = null, params string[] fileExtensions) 
         {
             if (db == null)
@@ -32,47 +28,75 @@ namespace Importing
             if (string.IsNullOrWhiteSpace(topLevelLocation))
                 topLevelLocation = Application.streamingAssetsPath;
 
+            // Full file location startinf from the toplevel + parent folder loc
             string path = SanitizePath(Path.Combine(topLevelLocation, parentFolder));
 
             // Prevent running files if there is no folder // 
             if (!Directory.Exists(path))
                 return db;
 
-            string[] preFiles = Directory.GetFiles(path);
+            // Pulls files that match the ending pattern
+            string[] preFiles = Directory.GetFiles(path); // absolute paths
             List<string> files = new List<string>();
             foreach (string file in preFiles)
-                if (fileExtensions.Any(x => file.EndsWith(x)))
+                if (fileExtensions.Any(x => file.ToLower().EndsWith(x.ToLower())))
                     files.Add(file);
-            string[] refrences = Directory.GetFiles(path, "*.ref");
-            foreach (string reff in refrences)
-            {
-                
-                string newFile = ResolveRef(reff);
-                if (string.IsNullOrWhiteSpace(newFile))
-                    continue;
-                if (fileExtensions.Any(x => newFile.EndsWith(x)))
-                {
-                    files.Add(newFile);
-                }
-            }
 
+            // Creates the parent folder in the database to store each file.
             string parent = SanitizePath(parentFolder);
             if (files.Count > 0)
                 if (!db.Folders.ContainsKey(parent))
-                    db.Folders.Add(parent, new Folder() 
+                    db.Folders.Add(parent, new Folder()
                     {
                         FolderName = parent
                     });
 
+            // Resolves Refrences
+            string[] refrences = Directory.GetFiles(path, "*.ref");
+            foreach (string reff in refrences)
+            {
+                // Returns path related to topLevelLocation
+                string relitive = ResolveRef(reff);
+                // Get absolute location
+                string absolutePath = SanitizePath(Path.Combine(topLevelLocation, relitive));
+
+                if (string.IsNullOrWhiteSpace(absolutePath))
+                    continue;
+
+                string refNameNoExtension = Path.GetFileNameWithoutExtension(reff);
+
+                // Check if the file exists
+                if (!System.IO.File.Exists(absolutePath))
+                {
+                    continue;
+                }
+
+                // if the file exists and has a valid ending, add it to folder directly
+                if (fileExtensions.Any(x => absolutePath.ToLower().EndsWith(x.ToLower())))
+                {
+                    db.Folders[parent].Files.Add(new File() 
+                    {
+                        ParentFolder = parent,
+                        FileLocation = relitive,
+                        FileName = refNameNoExtension + Path.GetExtension(absolutePath)
+                    });
+                    files.Add(absolutePath);
+                }
+            }
+
+            // store each file in the parent folder in the database
             foreach (string file in files) 
             {
+                string location = SanitizePath(Path.Combine(parent, Path.GetFileName(file)));
                 db.Folders[parent].Files.Add(new File()
                 {
                     ParentFolder = parent,
-                    FileLocation = SanitizePath(Path.Combine(parent, Path.GetFileName(file)))
+                    FileLocation = location,
+                    FileName = Path.GetFileName(location)
                 });
             }
 
+            // Recursivly look through the database/folders
             string[] directories = Directory.GetDirectories(path);
             foreach (string dir in directories) 
             {

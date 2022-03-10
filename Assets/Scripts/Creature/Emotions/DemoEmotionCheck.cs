@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Creature.Face
+namespace Creature.Emotions
 {
     public class DemoEmotionCheck : IEmotionCheck
     {

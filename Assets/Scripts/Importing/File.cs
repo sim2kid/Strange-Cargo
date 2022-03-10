@@ -8,14 +8,6 @@ namespace Importing
     {
         public string ParentFolder;
         public string FileLocation;
-
-        public string FileName 
-        { 
-            get
-            {
-                string[] allparts = FileLocation.Split('\\');
-                return allparts[allparts.Length-1];
-            }
-        }
+        public string FileName;
     }
 }

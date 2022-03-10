@@ -55,6 +55,10 @@ namespace Utility
         /// This unity event will be called when the application is being closed.
         /// </summary>
         public UnityEvent OnClosing { get; private set; }
+        /// <summary>
+        /// All the face images in the game.
+        /// </summary>
+        public Creature.Face.FaceRepository FaceRepo { get; private set; }
 
         private Toolbox()
         {
@@ -63,6 +67,7 @@ namespace Utility
             SoundPool = new SoundRepository();
             CreatureList = new List<CreatureController>();
             OnClosing = new UnityEvent();
+            FaceRepo = new Creature.Face.FaceRepository();
 
             AvalibleTasks = new List<IUtility>();
             AvalibleTasks.Add(new BasicUtility(new DataType.Range(0f, 5f), new Creature.Task.Wait(new DataType.Range(1f, 8f))));

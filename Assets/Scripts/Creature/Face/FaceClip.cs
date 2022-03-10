@@ -4,10 +4,11 @@ using UnityEngine;
 
 namespace Creature.Face
 {
+    [System.Serializable]
     public class FaceClip
     {
-        public string eyesString;
-        public string mouthString;
-        public float duration;
+        public string eyes = null;
+        public string mouth = null;
+        public float duration = 0f;
     }
 }

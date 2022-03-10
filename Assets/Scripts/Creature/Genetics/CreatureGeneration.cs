@@ -222,6 +222,12 @@ namespace Genetics
                 texCon.CONVERSION_SPEED = conversionSpeed.Value;
             }
 
+            // Add blinking
+            creature.AddComponent<Creature.Face.Blink>();
+
+            // Add Emotions
+            creature.AddComponent<Creature.Emotions.EmotionCheck>();
+
             Animator a = mesh.AddComponent<Animator>();
             RuntimeAnimatorController rac = Resources.Load(AnimationControllerLocation) as RuntimeAnimatorController;
             a.runtimeAnimatorController = rac;

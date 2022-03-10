@@ -179,9 +179,6 @@ namespace Sound
             callback(null);
         }
 
-        private static string SanitizePath(string s)
-        {
-            return s.Replace('/', '\\');
-        }
+        private static string SanitizePath(string s) => Utility.PathUtil.SanitizePath(s);
     }
 }
