@@ -189,6 +189,7 @@ namespace UI
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 Utility.Toolbox.Instance.Player.InputState = InputState.UI;
+                UIHook.PlaySound(SFX.OPEN);
             }
         }
 
@@ -213,10 +214,13 @@ namespace UI
         {
             if (OpenMenuOnPause)
             {
+                if(Menu.activeSelf)
+                    UIHook.PlaySound(SFX.CLOSE);
                 Menu.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 Utility.Toolbox.Instance.Player.InputState = InputState.Default;
+                
             }
         }
 
