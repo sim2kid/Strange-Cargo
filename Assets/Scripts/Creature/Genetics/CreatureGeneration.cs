@@ -18,11 +18,11 @@ namespace Genetics
         private const float MUTATION_CHANCE = 0.15f;
         private const string AnimationControllerLocation = "Animation/DemoController";
 
-        private static string[] ImportantPartTypes =
+        public static string[] ImportantPartTypes =
             { "Bodies", "Ears", "Heads", "BackLegs", "FrontLegs" };
-        private static string[] LesserPartTypes =
+        public static string[] LesserPartTypes =
             { "Horns", "Tails" };
-        private static string[] ManMade =
+        public static string[] ManMade =
             { "Accessories", "Hats", "Masks" };
 
         /// <summary>
