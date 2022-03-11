@@ -281,6 +281,7 @@ namespace Genetics
                 BoneToPick.Destroy(bone);
             }
 
+            // Creature interacts with grass shader
             creature.AddComponent<ShaderInteractor>();
 
             CreatureController c = creature.AddComponent<CreatureController>();

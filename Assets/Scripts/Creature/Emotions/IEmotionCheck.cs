@@ -7,5 +7,7 @@ namespace Creature.Emotions
     public interface IEmotionCheck
     {
         public string GrabEmotion();
+        public string LastEmotion { get; }
+        public string LastEmotionDetailed { get; }
     }
 }
