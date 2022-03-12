@@ -39,8 +39,8 @@ namespace Genetics
                     string hash = GetHashString(PathUtil.SanitizePath(file.FileLocation));
                     Pattern pattern = new Pattern()
                     {
-                        Name = file.FileName,
-                        FileLocation = file.FileLocation,
+                        Name = file.FileLocation,
+                        FileLocation = PathUtil.SanitizePath(Path.Combine(TEXTURE_FOLDER, file.FileLocation)),
                         Hash = hash
                     };
                     genePool.AddPattern(pattern);
@@ -59,23 +59,35 @@ namespace Genetics
                     string hash = GetHashString(PathUtil.SanitizePath(file.FileLocation));
                     string name = Path.GetFileNameWithoutExtension(file.FileName);
                     string partJsonName = name + ".json";
+                    if (!partInfo.Folders.Keys.Contains(file.ParentFolder)) 
+                    {
+                        Console.Log($"Could not find config file for \"{file.FileLocation}\"");
+                        continue;
+                    }
                     var jsonFile = partInfo.Folders[file.ParentFolder].Files.FirstOrDefault(
                         x => x.FileName.ToLower().Equals(partJsonName.ToLower()));
 
                     if (jsonFile == null)
                     {
                         Console.Log($"Could not find config file for \"{file.FileLocation}\"");
+                        continue;
                     }
 
                     var jsonTxt = System.IO.File.ReadAllText(PathUtil.SanitizePath(Path.Combine(
                         Application.streamingAssetsPath, BODYPART_FOLDER, jsonFile.FileLocation)));
+
+                    if (string.IsNullOrWhiteSpace(jsonTxt))
+                    {
+                        Console.Log($"Could not find config file for \"{file.FileLocation}\"");
+                        continue;
+                    }
 
                     var json = JToken.Parse(jsonTxt);
                     try
                     {
                         // Variable Pre processing
 
-                        var offset = json["Offset"].Values<float>();
+                        var offset = json["Offset"]?.Values<float>() ?? new List<float>();
                         Vector3 offsetVector = Vector3.zero;
                         if (offset.Count() == 3)
                         {
@@ -83,9 +95,10 @@ namespace Genetics
                         }
 
                         // patterns!!
-                        List<string> patterns = json["Patterns"].Values<string>()?.ToList() ?? new List<string>();
+                        List<string> patterns = json["Patterns"]?.Values<string>()?.ToList() ?? new List<string>();
 
-                        string patternList = json["PatternList"].Value<string>() ?? string.Empty;
+                        string patternList = json["PatternList"]?.Value<string>() ?? string.Empty;
+                        patternList = PathUtil.SanitizePath(patternList);
                         if (!string.IsNullOrEmpty(patternList))
                         {
                             foreach (var patternFile in textures.Folders[patternList].Files)
@@ -100,14 +113,14 @@ namespace Genetics
                             Hash = hash,
                             Name = name,
                             Type = file.ParentFolder,
-                            FileLocation = file.FileLocation,
-                            Sound = json["Sound"].Value<string>() ?? string.Empty,
-                            OffsetBone = json["OffsetBone"].Value<string>() ?? string.Empty,
+                            FileLocation = PathUtil.SanitizePath(Path.Combine(BODYPART_FOLDER, file.FileLocation)),
+                            Sound = json["Sound"]?.Value<string>() ?? string.Empty,
+                            OffsetBone = json["OffsetBone"]?.Value<string>() ?? string.Empty,
                             Offset = offsetVector,
-                            Shader = (ShaderEnum)(json["Shader"].Value<int?>() ?? 0),
+                            Shader = (ShaderEnum)(json["Shader"]?.Value<int?>() ?? 0),
                             Patterns = patterns,
-                            Mouth = json["Mouth"].Value<string>() ?? string.Empty,
-                            Eyes = json["Eyes"].Value<string>() ?? string.Empty,
+                            Mouth = json["Mouth"]?.Value<string>() ?? string.Empty,
+                            Eyes = json["Eyes"]?.Value<string>() ?? string.Empty,
                         };
 
                         partList.Add(hash, bodyPart);
