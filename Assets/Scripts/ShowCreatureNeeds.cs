@@ -9,6 +9,8 @@ public class ShowCreatureNeeds : MonoBehaviour
 {
     public Slider[] sliders;
     public CreatureController creature;
+    public TMPro.TextMeshPro CurrentEmotion;
+    public TMPro.TextMeshPro CurrentEmotionDetailed;
 
     void Start()
     {
@@ -41,5 +43,7 @@ public class ShowCreatureNeeds : MonoBehaviour
         {
             sliders[i].value = creature.needs[i];
         }
+        CurrentEmotion.text = creature.emotionState.LastEmotion;
+        CurrentEmotionDetailed.text = creature.emotionState.LastEmotionDetailed;
     }
 }

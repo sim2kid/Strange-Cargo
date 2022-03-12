@@ -32,6 +32,8 @@ namespace Sound.Source.Internal
         {
         }
 
+        public void Prime() { }
+
         public ISound Clone() 
         {
             SoundClip clone = new SoundClip();

@@ -51,7 +51,7 @@ namespace Creature
 
         private IProgress textureController;
 
-        private IEmotionCheck emotionState;
+        public IEmotionCheck emotionState;
 
         private UnityEvent UpdateLoop;
 

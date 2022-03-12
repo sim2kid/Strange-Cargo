@@ -25,6 +25,10 @@ namespace Sound.Source
 
         public SilentSource() { }
         public void Start() { }
+        public void Prime()
+        {
+            Start();
+        }
         public ISound Clone() 
         {
             SilentSource clone = new SilentSource();

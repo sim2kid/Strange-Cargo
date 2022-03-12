@@ -85,7 +85,6 @@ namespace Creature.Face
 
             if (ImageConversion.LoadImage(texture2D, textureBytes, false)) 
             {
-                texture2D.alphaIsTransparency = true;
                 return texture2D;
             }
 
