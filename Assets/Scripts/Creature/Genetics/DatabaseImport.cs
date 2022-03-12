@@ -40,7 +40,7 @@ namespace Genetics
                     Pattern pattern = new Pattern()
                     {
                         Name = file.FileLocation,
-                        FileLocation = PathUtil.SanitizePath(Path.Combine(TEXTURE_FOLDER, file.FileLocation)),
+                        FileLocation = PathUtil.SanitizePath(Path.Combine(Application.streamingAssetsPath, TEXTURE_FOLDER, file.FileLocation)),
                         Hash = hash
                     };
                     genePool.AddPattern(pattern);
@@ -107,20 +107,32 @@ namespace Genetics
                             }
                         }
 
+                        // Eyes and Moutn
+                        string eyes = json["Eyes"]?.Value<string>() ?? string.Empty;
+                        if (!string.IsNullOrEmpty(eyes))
+                        { 
+                            eyes = PathUtil.SanitizePath(Path.Combine("Eyes", eyes));
+                        }
+                        string mouth = json["Mouth"]?.Value<string>() ?? string.Empty;
+                        if (!string.IsNullOrEmpty(mouth))
+                        {
+                            mouth = PathUtil.SanitizePath(Path.Combine("Mouths", mouth));
+                        }
+
                         // Create bodypart
                         BodyPart bodyPart = new BodyPart()
                         {
                             Hash = hash,
-                            Name = name,
+                            Name = file.FileName,
                             Type = file.ParentFolder,
-                            FileLocation = PathUtil.SanitizePath(Path.Combine(BODYPART_FOLDER, file.FileLocation)),
+                            FileLocation = PathUtil.SanitizePath(Path.Combine(Application.streamingAssetsPath, BODYPART_FOLDER, file.FileLocation)),
                             Sound = json["Sound"]?.Value<string>() ?? string.Empty,
                             OffsetBone = json["OffsetBone"]?.Value<string>() ?? string.Empty,
                             Offset = offsetVector,
                             Shader = (ShaderEnum)(json["Shader"]?.Value<int?>() ?? 0),
                             Patterns = patterns,
-                            Mouth = json["Mouth"]?.Value<string>() ?? string.Empty,
-                            Eyes = json["Eyes"]?.Value<string>() ?? string.Empty,
+                            Mouth = mouth,
+                            Eyes = eyes
                         };
 
                         partList.Add(hash, bodyPart);
