@@ -63,7 +63,7 @@ namespace Utility
         private Toolbox()
         {
             GenePool = new GeneticRepository();
-            Genetics.Importer.Import(GenePool);
+            Genetics.DatabaseImport.Import(GenePool);
             SoundPool = new SoundRepository();
             CreatureList = new List<CreatureController>();
             OnClosing = new UnityEvent();
