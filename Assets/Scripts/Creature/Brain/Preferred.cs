@@ -23,6 +23,13 @@ namespace Creature.Brain
         [JsonIgnore, SerializeField]
         private string _taskName;
 
+        public void Update() 
+        {
+            _objName = TaskObj.Obj.Name;
+            _guid = TaskObj.Obj.Guid;
+            _taskName = TaskObj.TaskName;
+        }
+
         // For unity Editor ^^^
 
         public float Preference;
@@ -34,9 +41,7 @@ namespace Creature.Brain
             this.Preference = preference;
 
             // For the editor
-            _objName = TaskObj.Obj.Name;
-            _guid = TaskObj.Obj.Guid;
-            _taskName = TaskObj.TaskName;
+            Update();
         }
         public Preferred() : this(new UnspecifiedTask()) { }
 

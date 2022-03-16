@@ -123,6 +123,10 @@ namespace Creature.Brain
         public void PostDeserialization(CreatureController controller)
         {
             _controller = controller;
+            foreach (var p in Preferences) 
+            {
+                p.Update();
+            }
             return;
         }
     }
