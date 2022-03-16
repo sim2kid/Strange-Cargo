@@ -17,6 +17,10 @@ namespace Creature.Task
         private float waitAmount;
         private float timer;
 
+        public float Satisfaction { get; private set; }
+        public void SatisfactionHook(System.Func<float> func)
+        {
+        }
         public void EndTask(UnityEvent update)
         {
             update.RemoveListener(Update);

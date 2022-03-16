@@ -24,7 +24,7 @@ namespace Creature.Emotions
 
         private int GetSatisfaction() 
         {
-            return 50;
+            return (int)creature.Satisfaction;
         }
         private int GetBeauty()
         {

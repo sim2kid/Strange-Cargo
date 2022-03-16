@@ -22,7 +22,14 @@ namespace Creature.Task
         public bool IsStarted { get; private set; }
 
         public Vector3 location;
-        CreatureController _caller; 
+        CreatureController _caller;
+
+        System.Func<float> SatisResult;
+        public float Satisfaction { get; private set; }
+        public void SatisfactionHook(System.Func<float> func)
+        {
+            SatisResult = func;
+        }
         public ITask RunTask(CreatureController caller, UnityEvent update)
         {
             _caller = caller;
@@ -40,6 +47,8 @@ namespace Creature.Task
         {
             update.RemoveListener(Update);
             IsStarted = false;
+            if(SatisResult != null)
+                SatisResult.Invoke();
         }
 
         private void Update() 
@@ -49,6 +58,7 @@ namespace Creature.Task
                 _caller.Move.ClearDestination();
                 OnTaskFinished.Invoke();
                 calledFinished = true;
+                Satisfaction = 100;
             }  
         }
 

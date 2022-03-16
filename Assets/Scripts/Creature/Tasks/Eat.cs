@@ -16,6 +16,10 @@ namespace Creature.Task
 
         System.Func<float> SatisResult;
         public float Satisfaction { get; private set; }
+        public void SatisfactionHook(System.Func<float> func)
+        {
+            SatisResult = func;
+        }
 
         private bool calledFinished;
 
@@ -75,7 +79,8 @@ namespace Creature.Task
             if(come != null)
                 come.EndTask(update);
             IsStarted = false;
-            SatisResult.Invoke();
+            if (SatisResult != null)
+                SatisResult.Invoke();
         }
 
         private void Update()
@@ -87,10 +92,7 @@ namespace Creature.Task
             }
         }
 
-        public void SatisfactionHook(System.Func<float> func)
-        {
-            SatisResult = func;
-        }
+        
 
         public Eat(FoodBowl bowl) 
         {

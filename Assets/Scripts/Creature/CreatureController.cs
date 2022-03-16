@@ -63,7 +63,6 @@ namespace Creature
         private BasicBrain brain { get => data.brain; set => data.brain = value; }
 
         [SerializeField]
-        [JsonProperty]
         private Queue<float> lastSatisfaction;
         public float Satisfaction => getSatisfaction();
 
@@ -72,9 +71,9 @@ namespace Creature
         /// </summary>
         private Needs needsDecayRate = new Needs(
             -0.5f, // Appetite
-            0,//-0.1f, // Bladder
+            -0.1f, // Bladder
             -0.2f, // Social
-            0,//-0.1f, // Energy
+            -0.1f, // Energy
             -0.1f, // Hygiene
             0 // Happiness
         );
