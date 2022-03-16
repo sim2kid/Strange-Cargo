@@ -12,7 +12,9 @@ namespace Creature.Brain
         [JsonIgnore]
         IObject obj;
         [JsonConverter(typeof(PersistentData.Loading.GenericObject))]
-        public IObject Obj { get => obj; 
+        public IObject Obj 
+        { 
+            get => obj; 
             set { 
                 obj = value; 
                 name = Obj.Name;
@@ -25,6 +27,7 @@ namespace Creature.Brain
         [SerializeField]
         [JsonIgnore]
         private string name;
+
         public float Preference;
 
         public Preferred(IObject preferredObj) : this(preferredObj, 0) { }
