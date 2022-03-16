@@ -9,8 +9,7 @@ namespace Creature.Brain
     [System.Serializable]
     public class UnspecifiedTask : ITaskObject
     {
-        [JsonConverter(typeof(PersistentData.Loading.GenericObject))]
-        public IObject Obj { get; set; }
+        public UnknownObject Obj { get; set; }
         public string TaskName { get; set; }
 
         public bool Equals(ITaskObject other) 
@@ -26,8 +25,14 @@ namespace Creature.Brain
 
         public UnspecifiedTask(ITaskObject taskObject) 
         {
-            Obj = taskObject.Obj;
+            Obj = new UnknownObject(taskObject.Obj);
             TaskName = taskObject.TaskName;
+        }
+
+        public UnspecifiedTask(IObject obj, string taskName)
+        {
+            Obj = new UnknownObject(obj);
+            TaskName = taskName;
         }
     }
 }

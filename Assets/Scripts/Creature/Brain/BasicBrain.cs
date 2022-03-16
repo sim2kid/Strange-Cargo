@@ -47,14 +47,14 @@ namespace Creature.Brain
                 Preferred p = null;
                 if (task.RelatedObject != null)
                 {
-                    p = Preferences.Find(x => x.Obj.Guid.Equals(task.RelatedObject.Guid));
+                    p = Preferences.Find(x => x.Guid.Equals(task.RelatedObject.Guid));
                     if (p != null)
                     {
                         preference = p.Preference;
                     }
                     else 
                     {
-                        Preferences.Add(new Preferred(task.RelatedObject, 0f));
+                        Preferences.Add(new Preferred(task.RelatedObject, task.GetType().ToString(), 0f));
                     }
                 }
                 float CurrentUtility = Mathf.Clamp(preference, float.MinValue, 15f);
