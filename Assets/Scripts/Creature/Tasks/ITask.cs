@@ -31,5 +31,16 @@ namespace Creature.Task
         /// </summary>
         /// <param name="update"></param>
         public void EndTask(UnityEvent update);
+
+        /// <summary>
+        /// The amount of satisfaction returned after preforming a task
+        /// </summary>
+        public float Satisfaction { get; }
+
+        /// <summary>
+        /// The hook for a satisfaction event
+        /// </summary>
+        /// <returns></returns>
+        public void SatisfactionHook(System.Func<float> func);
     }
 }

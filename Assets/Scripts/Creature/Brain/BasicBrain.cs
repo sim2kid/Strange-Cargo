@@ -27,6 +27,8 @@ namespace Creature.Brain
             lastTasks = new Queue<System.Type>();
         }
 
+        
+
         public void Think() 
         {
             if (lastTasks.Count >= maxTrackSize) 
@@ -99,6 +101,10 @@ namespace Creature.Brain
             lastTasks.Enqueue(pickMe.Task.GetType());
         }
 
+        /// <summary>
+        /// Returns the needs from a range of [0-1] and inverted (Unit Needs)
+        /// </summary>
+        /// <returns></returns>
         private Needs getRealitiveNeeds() 
         {
             Needs f = _controller.needs.Clone();

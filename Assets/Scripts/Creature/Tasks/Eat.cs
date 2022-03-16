@@ -13,6 +13,10 @@ namespace Creature.Task
         public bool IsStarted { get; private set; }
 
         public UnityEvent OnTaskFinished { get; private set; }
+
+        System.Func<float> SatisResult;
+        public float Satisfaction { get; private set; }
+
         private bool calledFinished;
 
         CreatureController _caller;
@@ -27,6 +31,7 @@ namespace Creature.Task
             IsStarted = true;
             _caller = caller;
             _update = update;
+            Satisfaction = 0;
 
             come = new GoHere(_bowl.transform, 1f).RunTask(caller, update);
             come.OnTaskFinished.AddListener(EatTheBowl);
@@ -55,6 +60,7 @@ namespace Creature.Task
 
             _bowl.Eat(200 - _caller.needs.Appetite);
             _caller.ProcessINeed(_bowl);
+            Satisfaction = 100;
 
             Console.LogDebug($"Creature [{_caller.Guid}]: Eating - Finished eating! New Appetite: {_caller.needs.Appetite}");
 
@@ -69,6 +75,7 @@ namespace Creature.Task
             if(come != null)
                 come.EndTask(update);
             IsStarted = false;
+            SatisResult.Invoke();
         }
 
         private void Update()
@@ -78,6 +85,11 @@ namespace Creature.Task
                 OnTaskFinished.Invoke();
                 calledFinished = true;
             }
+        }
+
+        public void SatisfactionHook(System.Func<float> func)
+        {
+            SatisResult = func;
         }
 
         public Eat(FoodBowl bowl) 
