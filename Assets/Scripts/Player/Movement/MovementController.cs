@@ -80,13 +80,13 @@ namespace Player.Movement
             HandleJumping();
         }
 
-        void OnCrouch(InputAction.CallbackContext callbackContext)
+        void OnCrouch(InputValue value)
         {
-            if(callbackContext.performed)
+            if(value.isPressed)
             {
                 crouchIsHeld = true;
             }
-            if(callbackContext.canceled)
+            else
             {
                 crouchIsHeld = false;
             }
