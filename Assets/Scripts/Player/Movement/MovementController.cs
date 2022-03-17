@@ -98,7 +98,7 @@ namespace Player.Movement
             {
                 playerCamera.transform.position = new Vector3(playerCamera.transform.position.x, headAltitudeCrouched, playerCamera.transform.position.z);
             }
-            if(!crouchIsHeld)
+            else if(!crouchIsHeld)
             {
                 playerCamera.transform.position = new Vector3(playerCamera.transform.position.x, headAltitudeDefault, playerCamera.transform.position.z);
             }
