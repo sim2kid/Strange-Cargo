@@ -24,6 +24,14 @@ namespace Player.Movement
         [SerializeField]
         LayerMask interactionMask = 0;
         public LayerMask LayerMask { get => interactionMask; }
+        [Tooltip("Normal altitude of player's head.")]
+        public float headAltitudeDefault = 0.5649999f;
+        [Tooltip("Altitude of player's head while crouched.")]
+        public float headAltitudeCrouched = 0;
+        [Tooltip("The game object which contains the player's head, eyes and camera.")]
+        public GameObject playerCamera;
+        [Tooltip("Is the crouch button currently being held down?")]
+        private bool crouchIsHeld = false;
 
         CharacterController characterController;
         Vector2 moveValue;
@@ -72,6 +80,30 @@ namespace Player.Movement
             HandleJumping();
         }
 
+        void OnCrouch(InputAction.CallbackContext callbackContext)
+        {
+            if(callbackContext.performed)
+            {
+                crouchIsHeld = true;
+            }
+            if(callbackContext.canceled)
+            {
+                crouchIsHeld = false;
+            }
+        }
+
+        void HandleCrouching()
+        {
+            if(crouchIsHeld)
+            {
+                playerCamera.transform.position = new Vector3(playerCamera.transform.position.x, headAltitudeCrouched, playerCamera.transform.position.z);
+            }
+            if(!crouchIsHeld)
+            {
+                playerCamera.transform.position = new Vector3(playerCamera.transform.position.x, headAltitudeDefault, playerCamera.transform.position.z);
+            }
+        }
+
         void HandleJumping()
         {
             if (IsOnGround && !JumpIsHit)
@@ -85,6 +117,7 @@ namespace Player.Movement
         {
             HandleGravity();
             HandleMovement();
+            HandleCrouching();
             _onGround = IsOnGround;
         }
 
