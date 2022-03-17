@@ -145,7 +145,7 @@ namespace Creature
         private void Awake()
         {
             data.GUID = "232fd503-5c82-405f-8e6b-f13a11e6dfae";
-            Console.HideInDebugConsole();
+            //Console.HideInDebugConsole();
             tasks = new Queue<ITask>();
             hotTasks = new Queue<ITask>();
             needs = new Needs();

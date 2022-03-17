@@ -1,4 +1,5 @@
 using Creature.Stats;
+using Creature.Task;
 using DataType;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,11 +17,26 @@ namespace Environment
         [SerializeField]
         public UnityEvent OnPoop;
 
-
+        float multiplier = 0;
+        public override Needs NeedChange => base.NeedChange * multiplier;
+        public override Needs StatsEffect => base.NeedChange;
         public string Name { get => gameObject.name; set { gameObject.name = value; } }
 
+        [SerializeField]
         private string _guid;
         public string Guid => _guid;
+
+        private void OnEnable()
+        {
+            if (!Utility.Toolbox.Instance.AvalibleTasks.Contains(this))
+                Utility.Toolbox.Instance.AvalibleTasks.Add(this);
+        }
+
+        private void OnDisable()
+        {
+            if (Utility.Toolbox.Instance.AvalibleTasks.Contains(this))
+                Utility.Toolbox.Instance.AvalibleTasks.Remove(this);
+        }
 
         public bool Equals(IObject other)
         {
@@ -31,7 +47,7 @@ namespace Environment
         {
             if (string.IsNullOrEmpty(_guid)) 
             {
-                _guid = new System.Guid().ToString();
+                _guid = System.Guid.NewGuid().ToString();
             }
         }
 
@@ -40,10 +56,14 @@ namespace Environment
             return GetComponent<AreaZone>().GetRandomPoint();
         }
 
-        public void Poop(Vector3 location) 
+        public void Poop(Vector3 location, float amount) 
         {
             GameObject model = PoopModels[Random.Range(0, PoopModels.Count)];
+            multiplier = amount;
             Instantiate(model, location, Quaternion.identity);
         }
+
+        public override ITask RelatedTask => new Poop(this);
+        public override IObject RelatedObject => this;
     }
 }

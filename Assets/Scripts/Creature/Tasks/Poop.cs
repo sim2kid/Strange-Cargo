@@ -35,7 +35,6 @@ namespace Creature.Task
             _update = update;
             Satisfaction = 0;
 
-            update.AddListener(Update);
             poopPoint = _poopZone.GetPoint();
 
             come = new GoHere(poopPoint, 1f).RunTask(caller, update);
@@ -54,7 +53,7 @@ namespace Creature.Task
 
             wait = new Wait(3);
             wait.OnTaskFinished.AddListener(DonePooing);
-            wait.RunTask(_caller,_update)
+            wait.RunTask(_caller, _update);
 
         }
         private void DonePooing() 
@@ -63,16 +62,16 @@ namespace Creature.Task
             if (wait != null)
                 wait.EndTask(_update);
 
-            _poopZone.Poop(_caller.transform.position);
+            _poopZone.Poop(_caller.transform.position, 200 - _caller.needs.Bladder);
             _caller.ProcessINeed(_poopZone);
 
             Satisfaction = 100;
 
             IsDone = true;
+            OnTaskFinished.Invoke();
         }
         public void EndTask(UnityEvent update)
         {
-            update.RemoveListener(Update);
             if (come != null)
                 come.EndTask(update);
             if (wait != null)
@@ -81,17 +80,6 @@ namespace Creature.Task
             if (SatisResult != null)
                 SatisResult.Invoke();
         }
-
-        private void Update()
-        {
-            if (IsDone && !calledFinished)
-            {
-                OnTaskFinished.Invoke();
-                calledFinished = true;
-            }
-        }
-
-
         public Poop(PoopZone poopZone) 
         {
             IsStarted = false;

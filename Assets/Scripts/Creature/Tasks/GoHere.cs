@@ -24,6 +24,8 @@ namespace Creature.Task
         public Vector3 location;
         CreatureController _caller;
 
+        bool checkedPath = false;
+
         System.Func<float> SatisResult;
         public float Satisfaction { get; private set; }
         public void SatisfactionHook(System.Func<float> func)
@@ -36,9 +38,8 @@ namespace Creature.Task
             caller.Move.MoveTo(location);
             IsStarted = true;
             calledFinished = false;
+            checkedPath = false;
             update.AddListener(Update);
-
-            caller.RequestMoreTaskTime((caller.Move.Distance * 1f) - 15);
 
             return this;
         }
@@ -46,6 +47,7 @@ namespace Creature.Task
         public void EndTask(UnityEvent update) 
         {
             update.RemoveListener(Update);
+            _caller.Move.ClearDestination();
             IsStarted = false;
             if(SatisResult != null)
                 SatisResult.Invoke();
@@ -59,7 +61,15 @@ namespace Creature.Task
                 OnTaskFinished.Invoke();
                 calledFinished = true;
                 Satisfaction = 100;
-            }  
+            }
+            if (!checkedPath && !_caller.Move.pathPending) 
+            {
+                checkedPath = true;
+                Console.LogDebug($"Creature [{_caller.Guid}]: GoHere - New Location [{location}]. Expected Walk Distance [{_caller.Move.Distance.ToString("0.00")}]");
+
+                if(_caller.Move.Distance < Mathf.Infinity)
+                    _caller.RequestMoreTaskTime(_caller.Move.Distance * 1.5f);
+            }
         }
 
         public GoHere(Transform destination, float minDistance = 1) : this(destination.position, minDistance) { }
