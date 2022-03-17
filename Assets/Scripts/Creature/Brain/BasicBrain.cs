@@ -74,6 +74,9 @@ namespace Creature.Brain
                 {
                     CurrentUtility += (float)task.BaseUtility * 6;
                 }
+                // Add some noise
+                CurrentUtility += Random.value * 1f;
+
 
                 // Add Diminishing Returns
                 System.Type taskType = task.RelatedTask.GetType();
@@ -84,6 +87,7 @@ namespace Creature.Brain
                         count++;
                 }
                 CurrentUtility /= (count * 0.3f * count) + 1;
+
 
                 // Add new option to list for sorting later
                 options.Add(new Option(CurrentUtility, task.RelatedTask, p));
