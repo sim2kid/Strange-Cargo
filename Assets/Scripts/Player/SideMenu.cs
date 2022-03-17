@@ -20,6 +20,10 @@ namespace Player
         Transform inactiveLocation;
         [SerializeField]
         GameObject sideMenu;
+        [Tooltip("The time it takes the clipboard to move between the active and inactive locations.")]
+        public float toggleTime = 0.1875f;
+        [Tooltip("The time it which the player toggled on or off.")]
+        private float toggleStartTime;
 
         public IsActiveData data;
         public bool IsActive { get => data.IsActive; set => data.IsActive = value; }
@@ -44,11 +48,14 @@ namespace Player
         void Update()
         {
             bool thisButton = sidemenu.ReadValue<float>() == 1;
-            if (thisButton && lastButton != thisButton && // Run if button is pressed and it's a new change
-                !Utility.Toolbox.Instance.Pause.Paused && // Run only if not paused
+            if (!Utility.Toolbox.Instance.Pause.Paused && // Run only if not paused
                 (Utility.Toolbox.Instance.Player.InputState == InputState.Default || IsActive)) // Run only if in gameplay or if the menu is open
             {
-                ToggleSideMenu();
+                if (thisButton && lastButton != thisButton) // Run if button is pressed and it's a new change
+                {
+                    ToggleSideMenu();
+                }
+                HandleClipboardPosition();
             }
             lastButton = thisButton;
         }
@@ -58,18 +65,33 @@ namespace Player
             if (isActive)
             {
                 IsActive = true;
-                sideMenu.transform.parent = activeLocation;
                 sideMenu.layer = 8;
             }
             else
             {
                 IsActive = false;
-                sideMenu.transform.parent = inactiveLocation;
                 sideMenu.layer = 0;
             }
-            sideMenu.transform.localPosition = Vector3.zero;
-            sideMenu.transform.localRotation = Quaternion.identity;
+        }
+
+        private void HandleClipboardPosition()
+        {
+            float fracComplete = (Time.time - toggleStartTime) / toggleTime;
+            if (IsActive)
+            {
+                sideMenu.transform.localPosition = Vector3.Slerp(inactiveLocation.localPosition, activeLocation.localPosition, fracComplete);
+            }
+            else
+            {
+                sideMenu.transform.localPosition = Vector3.Slerp(activeLocation.localPosition, inactiveLocation.localPosition, fracComplete);
+            }
+            sideMenu.transform.localRotation = activeLocation.localRotation;
             sideMenu.transform.localScale = Vector3.one;
+        }
+
+        void OnSideMenu()
+        {
+            toggleStartTime = Time.time;
         }
 
         public void ToggleSideMenu() 
