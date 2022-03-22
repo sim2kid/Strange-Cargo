@@ -32,5 +32,6 @@ namespace Genetics
             }
         }
         public string[] HexColors = new string[3];
+        public string FaceType;
     }
 }

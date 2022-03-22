@@ -49,6 +49,10 @@ namespace Sound.Source.Internal
             };
         }
 
+        public void Prime()
+        {
+            Start();
+        }
         public void Start() 
         {
             LoadAudio();

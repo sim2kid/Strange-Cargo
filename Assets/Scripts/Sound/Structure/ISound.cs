@@ -61,5 +61,10 @@ namespace Sound.Structure
         /// </summary>
         /// <returns>A copy of the original ISound</returns>
         public ISound Clone();
+
+        /// <summary>
+        /// Loads all of the sound clips into unity at once.
+        /// </summary>
+        public void Prime();
     }
 }

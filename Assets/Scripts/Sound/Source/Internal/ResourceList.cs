@@ -63,7 +63,10 @@ namespace Sound.Source.Internal
                     Loop = new ValueRange(1)
                 });
         }
-
+        public void Prime() 
+        {
+            Start();
+        }
         public void Start() 
         {
             LoadAudio();

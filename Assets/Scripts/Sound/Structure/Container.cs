@@ -55,6 +55,14 @@ namespace Sound.Structure
 
         protected abstract List<ISound> GetContainerInstance();
 
+        public void Prime() 
+        {
+            foreach (var container in _containers) 
+            {
+                container.Prime();
+            }
+        }
+
         public virtual void Start()
         {
             _onLoop = 1;

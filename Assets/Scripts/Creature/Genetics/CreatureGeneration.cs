@@ -18,11 +18,11 @@ namespace Genetics
         private const float MUTATION_CHANCE = 0.15f;
         private const string AnimationControllerLocation = "Animation/DemoController";
 
-        private static string[] ImportantPartTypes =
+        public static string[] ImportantPartTypes =
             { "Bodies", "Ears", "Heads", "BackLegs", "FrontLegs" };
-        private static string[] LesserPartTypes =
+        public static string[] LesserPartTypes =
             { "Horns", "Tails" };
-        private static string[] ManMade =
+        public static string[] ManMade =
             { "Accessories", "Hats", "Masks" };
 
         /// <summary>
@@ -222,6 +222,12 @@ namespace Genetics
                 texCon.CONVERSION_SPEED = conversionSpeed.Value;
             }
 
+            // Add blinking
+            creature.AddComponent<Creature.Face.Blink>();
+
+            // Add Emotions
+            creature.AddComponent<Creature.Emotions.EmotionCheck>();
+
             Animator a = mesh.AddComponent<Animator>();
             RuntimeAnimatorController rac = Resources.Load(AnimationControllerLocation) as RuntimeAnimatorController;
             a.runtimeAnimatorController = rac;
@@ -274,6 +280,9 @@ namespace Genetics
                 }
                 BoneToPick.Destroy(bone);
             }
+
+            // Creature interacts with grass shader
+            creature.AddComponent<ShaderInteractor>();
 
             CreatureController c = creature.AddComponent<CreatureController>();
             c.SetUp(dna, a, Guid.NewGuid().ToString(), frontFeetSound, backFeetSound);

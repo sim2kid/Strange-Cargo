@@ -397,9 +397,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     _guid: 9efd21b7-e29f-4963-8a94-1f596921c948
-    Time: 0
+    Time: 360
   StartTime: 6
-  CurrentTime: 0
+  CurrentTime: 6
   MinutesInADay: 24
 --- !u!114 &7375483987606595414
 MonoBehaviour:
@@ -730,6 +730,7 @@ GameObject:
   - component: {fileID: 7375483988556080773}
   - component: {fileID: 8819709651608388255}
   - component: {fileID: 5450128472241191581}
+  - component: {fileID: 8170558254811087728}
   m_Layer: 0
   m_Name: Default Game Globals
   m_TagString: MainCamera
@@ -836,8 +837,7 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_Cameras:
-  - {fileID: 0}
+  m_Cameras: []
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
@@ -989,3 +989,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1321
   defaultGaussianStart: 10
+--- !u!114 &8170558254811087728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7375483988556080796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8495dc8e59534948a73768411c30740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

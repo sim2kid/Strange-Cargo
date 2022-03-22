@@ -15,7 +15,7 @@ namespace Genetics
         public string Sound;
         public string OffsetBone;
         public Vector3 Offset;
-        public float Scale;
+        public float Scale = 0.1f;
         public ShaderEnum Shader;
         public List<string> Patterns;
         public string Eyes;

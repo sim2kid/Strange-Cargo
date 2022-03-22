@@ -180,8 +180,8 @@ namespace Player
             {
                 string objGuid = data.StrList[0];
                 // Put the saved object into the hand
-                List<Saveable> saveablesInScene = FindObjectsOfType<Saveable>(true).ToList(); ;
-                Saveable saveable = saveablesInScene.Find(x => x.Data.GUID.Equals(objGuid));
+                List<Saveable> saveablesInScene = FindObjectsOfType<Saveable>(true).ToList();
+                Saveable saveable = saveablesInScene.FirstOrDefault(x => x.Data?.GUID?.Equals(objGuid) == true);
                 if (saveable != null)
                 {
                     IHoldable h = saveable.GetComponent<IHoldable>();

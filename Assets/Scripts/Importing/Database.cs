@@ -12,6 +12,9 @@ namespace Importing
         [SerializeField]
         private List<Folder> values;
 
+        /// <summary>
+        /// Disctionary of < "Folder Location" ,Folder>
+        /// </summary>
         public Dictionary<string, Folder> Folders = new Dictionary<string, Folder>();
 
         public void Serialize() 

@@ -16,7 +16,6 @@ namespace UI
         public Slider ProgrssBar;
         public Cinemachine.CinemachineVirtualCamera camera;
         public GameObject LoadingScene;
-        //public OldAudioPlayer bgm;
         UIManager UIManager;
 
         Cinemachine.CinemachineBlendDefinition saveCameraStyle;
@@ -84,20 +83,24 @@ namespace UI
         public float Report()
         {
             List<CreatureController> creatures = Utility.Toolbox.Instance.CreatureList;
-            float count = 0;
+            float added = 0;
+            int count = 0;
+
+            // Creatures
             foreach (CreatureController c in creatures)
-                count += c.Report();
-            if (creatures.Count > 0)
-                count /= creatures.Count;
-            else
-                count += 1;
+            {
+                added += c.Report();
+                count++;
+            }
+
+            // Timer
             if (baseTime > 0)
             {
-                count += Mathf.Clamp01(time / baseTime);
-                if (creatures.Count > 0)
-                    count /= 2;
+                added += Mathf.Clamp01(time / baseTime);
+                count++;
             }
-            return count;
+
+            return added/count;
         }
 
         public void OnLoad()
@@ -115,7 +118,6 @@ namespace UI
             UIManager.OpenLoading();
             Toolbox.Instance.Pause.SetPause(true);
             Cursor.visible = true;
-            //bgm.Volume = 1;
             ProgrssBar.value = 0;
 
             StartEvent.Invoke();
@@ -128,9 +130,8 @@ namespace UI
             UIManager.OpenGameplay();
             Toolbox.Instance.Pause.SetPause(false);
             Cursor.visible = false;
-            baseTime = 3; // No more extra waiting after first load
+            baseTime = 5; // No more extra waiting after first load
             End.Invoke();
-            //bgm.Volume = 1;
         }
 
 

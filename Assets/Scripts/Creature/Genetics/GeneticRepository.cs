@@ -7,7 +7,7 @@ namespace Genetics
 {
     public class GeneticRepository
     {
-        private Dictionary<string, Dictionary<string, BodyPart>> Repository;
+        public Dictionary<string, Dictionary<string, BodyPart>> Repository { get; private set; }
         private List<Pattern> Patterns;
 
         public GeneticRepository() 
@@ -108,8 +108,7 @@ namespace Genetics
         /// <returns></returns>
         public BodyPart GetBodyPartByName(string name)
         {
-            string partName = System.IO.Path.GetFileNameWithoutExtension(name);
-            return GetBodyPart(Importer.GetHashString(partName));
+            return GetBodyPart(DatabaseImport.GetHashString(name));
         }
 
         /// <summary>
@@ -120,6 +119,16 @@ namespace Genetics
         public Pattern GetPattern(string hash) 
         {
             return Patterns.First(p => p.Hash == hash);
+        }
+
+        /// <summary>
+        /// Returns a pattern based on its <paramref name="name"/>
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public Pattern GetPatternByName(string name)
+        {
+            return GetPattern(Importer.GetHashString(name));
         }
 
         /// <summary>

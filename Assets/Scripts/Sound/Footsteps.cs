@@ -43,6 +43,7 @@ namespace Sound
                     stepSound.Containers.Add(new SilentSource());
                 }
             stepSound.Selection = 0;
+            stepSound.Prime();
             materialType = Environment.Material.None;
         }
 

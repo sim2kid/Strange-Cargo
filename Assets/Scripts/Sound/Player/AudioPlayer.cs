@@ -44,6 +44,10 @@ namespace Sound.Player
         private void Start()
         {
             _source = GetComponent<AudioSource>();
+            if (Container != null)
+            {
+                Container.Prime();
+            }
         }
 
         public void Play(bool force, bool customContainer = false) 

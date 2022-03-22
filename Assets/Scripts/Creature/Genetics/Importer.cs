@@ -206,10 +206,10 @@ namespace Genetics
         /// </summary>
         /// <param name="inputString"></param>
         /// <returns></returns>
+        [System.Obsolete("Please use this method from DatabaseImport.")]
         public static byte[] GetHash(string inputString)
         {
-            using (HashAlgorithm algorithm = SHA1.Create())
-                return algorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString));
+            return DatabaseImport.GetHash(inputString);
         }
 
         /// <summary>
@@ -217,13 +217,10 @@ namespace Genetics
         /// </summary>
         /// <param name="inputString"></param>
         /// <returns></returns>
+        [System.Obsolete("Please use this method from DatabaseImport.")]
         public static string GetHashString(string inputString)
         {
-            StringBuilder sb = new StringBuilder();
-            foreach (byte b in GetHash(inputString))
-                sb.Append(b.ToString("X2"));
-
-            return sb.ToString();
+            return DatabaseImport.GetHashString(inputString);
         }
     }
 }
