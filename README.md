@@ -24,7 +24,7 @@ Sarah Mitrache ([Website](#))
 Ray Martin ([Website](https://vampitup.art/))
 
 **Animator**<br>
-Gabe Sotomayor ([Website](#))
+Gabe Sotomayor ([Website](https://www.linkedin.com/in/gabe-sotomayor-977b211b2/))
 
 **Audio Designer**<br>
 Ashlyn Parsons ([Website](https://www.linkedin.com/in/ashlyn-parsons-15b976191/))
