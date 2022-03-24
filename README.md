@@ -21,10 +21,10 @@ Harrison Maine ([Website](https://www.linkedin.com/in/harrison-maine-9a369922b/)
 Sarah Mitrache ([Website](#))
 
 **Modeler**<br>
-Ray ([Website](#))
+Ray Martin ([Website](https://vampitup.art/))
 
 **Animator**<br>
-Gabe ([Website](#))
+Gabe Sotomayor ([Website](#))
 
 **Audio Designer**<br>
 Ashlyn Parsons ([Website](https://www.linkedin.com/in/ashlyn-parsons-15b976191/))
