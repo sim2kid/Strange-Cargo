@@ -43,5 +43,15 @@ namespace Player
             }
             return true;
         }
+
+        private void OnEnable()
+        {
+            Utility.Toolbox.Instance.AvalibleTasks.Add(this);
+        }
+
+        private void OnDisable()
+        {
+            Utility.Toolbox.Instance.AvalibleTasks.Remove(this);
+        }
     }
 }
