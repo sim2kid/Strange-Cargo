@@ -16,6 +16,8 @@ namespace Creature
         public float Distance => navMeshAgent.remainingDistance;
         public bool pathPending => navMeshAgent.pathPending;
 
+        public bool CanReachDestination => navMeshAgent.hasPath;
+
         // Start is called before the first frame update
         void Start()
         {
