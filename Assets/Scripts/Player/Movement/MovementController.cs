@@ -12,10 +12,14 @@ namespace Player.Movement
     public class MovementController : MonoBehaviour
     {
         // Exposed fields
-        [Tooltip("The speef of the player.")]
+        [Tooltip("The speed of the player.")]
         [Range(1f, 100f)]
         [SerializeField]
         public float MoveSpeed = 10.0f;
+        [Tooltip("The speed of the player.")]
+        [Range(1f, 100f)]
+        [SerializeField]
+        public float CrouchingMoveSpeed = 5.0f;
         [Tooltip("The height of a jump")]
         [Range(0.0f, 5.0f)]
         [SerializeField]
@@ -32,10 +36,12 @@ namespace Player.Movement
         public float timeToCrouch = 0.125f;
         [Tooltip("The time at which the player started crouching or uncrouching.")]
         private float crouchStartTime;
-        [Tooltip("The game object which contains the player's head, eyes and camera.")]
-        public GameObject playerCamera;
+        [Tooltip("The game object which contains the player's head and lookat location")]
+        public GameObject eyes;
+        [Tooltip("The game object representing the center of the head. This part doesn't rotate.")]
+        public GameObject headGroup;
         [Tooltip("Is the crouch button currently being held down?")]
-        private bool crouchIsHeld = false;
+        private bool isCrouching = false;
 
         CharacterController characterController;
         Vector2 moveValue;
@@ -88,11 +94,11 @@ namespace Player.Movement
         {
             if(value.isPressed)
             {
-                crouchIsHeld = true;
+                isCrouching = true;
             }
             else
             {
-                crouchIsHeld = false;
+                isCrouching = false;
             }
             crouchStartTime = Time.time;
         }
@@ -100,13 +106,13 @@ namespace Player.Movement
         void HandleCrouching()
         {
             float fracComplete = (Time.time - crouchStartTime) / timeToCrouch;
-            if(crouchIsHeld)
+            if(isCrouching)
             {
-                playerCamera.transform.localPosition = Vector3.Slerp(headPositionDefault, headPositionCrouched, fracComplete);
+                headGroup.transform.localPosition = Vector3.Lerp(headPositionDefault, headPositionCrouched, fracComplete);
             }
-            else if(!crouchIsHeld)
+            else if(!isCrouching)
             {
-                playerCamera.transform.localPosition = Vector3.Slerp(headPositionCrouched, headPositionDefault, fracComplete);
+                headGroup.transform.localPosition = Vector3.Lerp(headPositionCrouched, headPositionDefault, fracComplete);
             }
         }
 
@@ -129,8 +135,10 @@ namespace Player.Movement
 
         void HandleMovement()
         {
+            float speed = isCrouching ? CrouchingMoveSpeed : MoveSpeed;
+
             moveTo = transform.right * moveValue.x + transform.forward * moveValue.y;
-            _movementSpeed = moveTo.normalized * Time.fixedDeltaTime * MoveSpeed;
+            _movementSpeed = moveTo.normalized * Time.fixedDeltaTime * speed;
             characterController.Move(_movementSpeed);
         }
 
