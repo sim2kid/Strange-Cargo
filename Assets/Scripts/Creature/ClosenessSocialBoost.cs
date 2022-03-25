@@ -9,7 +9,7 @@ namespace Creature
         Player.PlayerController player;
         CreatureController controller;
 
-        float socialBoostPerSecond = 5;
+        float socialBoostPerSecond = 0.3f;
 
         void Start()
         {
@@ -21,18 +21,21 @@ namespace Creature
         {
             var distance = Vector3.Distance(controller.transform.position, player.transform.position);
             float boost = 0;
-            if (distance <= 10) 
+            if (distance <= 10 && !Utility.Toolbox.Instance.Pause.Paused) 
             {
                 distance = (10 - distance) / 10f;
-                boost = function(socialBoostPerSecond, distance);
+                boost = function(distance) * socialBoostPerSecond;
 
-                controller.needs += new Stats.Needs() { Social = boost / Time.deltaTime };
+                var add = Stats.Needs.Zero;
+                add.Social = boost * Time.deltaTime;
+
+                controller.needs += add;
             }
         }
 
-        private float function(float x, float pos) 
+        private float function(float x) 
         {
-            return (Mathf.Pow(-pos, 2) + 1) * x;
+            return (Mathf.Pow(-x, 2) + 1);
         }
     }
 }
