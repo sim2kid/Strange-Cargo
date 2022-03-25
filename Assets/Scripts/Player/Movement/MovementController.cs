@@ -24,6 +24,18 @@ namespace Player.Movement
         [SerializeField]
         LayerMask interactionMask = 0;
         public LayerMask LayerMask { get => interactionMask; }
+        [Tooltip("Normal altitude of player's head.")]
+        public Vector3 headPositionDefault = new Vector3(0, 0.5649999f, 0);
+        [Tooltip("Altitude of player's head while crouched.")]
+        public Vector3 headPositionCrouched = Vector3.zero;
+        [Tooltip("The amount of time it takes the camera to go from crouched to uncrouched or vice versa.")]
+        public float timeToCrouch = 0.125f;
+        [Tooltip("The time at which the player started crouching or uncrouching.")]
+        private float crouchStartTime;
+        [Tooltip("The game object which contains the player's head, eyes and camera.")]
+        public GameObject playerCamera;
+        [Tooltip("Is the crouch button currently being held down?")]
+        private bool crouchIsHeld = false;
 
         CharacterController characterController;
         Vector2 moveValue;
@@ -72,6 +84,32 @@ namespace Player.Movement
             HandleJumping();
         }
 
+        void OnCrouch(InputValue value)
+        {
+            if(value.isPressed)
+            {
+                crouchIsHeld = true;
+            }
+            else
+            {
+                crouchIsHeld = false;
+            }
+            crouchStartTime = Time.time;
+        }
+
+        void HandleCrouching()
+        {
+            float fracComplete = (Time.time - crouchStartTime) / timeToCrouch;
+            if(crouchIsHeld)
+            {
+                playerCamera.transform.localPosition = Vector3.Slerp(headPositionDefault, headPositionCrouched, fracComplete);
+            }
+            else if(!crouchIsHeld)
+            {
+                playerCamera.transform.localPosition = Vector3.Slerp(headPositionCrouched, headPositionDefault, fracComplete);
+            }
+        }
+
         void HandleJumping()
         {
             if (IsOnGround && !JumpIsHit)
@@ -85,6 +123,7 @@ namespace Player.Movement
         {
             HandleGravity();
             HandleMovement();
+            HandleCrouching();
             _onGround = IsOnGround;
         }
 
