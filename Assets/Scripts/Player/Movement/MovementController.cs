@@ -12,10 +12,14 @@ namespace Player.Movement
     public class MovementController : MonoBehaviour
     {
         // Exposed fields
-        [Tooltip("The speef of the player.")]
+        [Tooltip("The speed of the player.")]
         [Range(1f, 100f)]
         [SerializeField]
         public float MoveSpeed = 10.0f;
+        [Tooltip("The speed of the player.")]
+        [Range(1f, 100f)]
+        [SerializeField]
+        public float CrouchingMoveSpeed = 5.0f;
         [Tooltip("The height of a jump")]
         [Range(0.0f, 5.0f)]
         [SerializeField]
@@ -24,6 +28,20 @@ namespace Player.Movement
         [SerializeField]
         LayerMask interactionMask = 0;
         public LayerMask LayerMask { get => interactionMask; }
+        [Tooltip("Normal altitude of player's head.")]
+        public Vector3 headPositionDefault = new Vector3(0, 0.5649999f, 0);
+        [Tooltip("Altitude of player's head while crouched.")]
+        public Vector3 headPositionCrouched = Vector3.zero;
+        [Tooltip("The amount of time it takes the camera to go from crouched to uncrouched or vice versa.")]
+        public float timeToCrouch = 0.125f;
+        [Tooltip("The time at which the player started crouching or uncrouching.")]
+        private float crouchStartTime;
+        [Tooltip("The game object which contains the player's head and lookat location")]
+        public GameObject eyes;
+        [Tooltip("The game object representing the center of the head. This part doesn't rotate.")]
+        public GameObject headGroup;
+        [Tooltip("Is the crouch button currently being held down?")]
+        private bool isCrouching = false;
 
         CharacterController characterController;
         Vector2 moveValue;
@@ -72,6 +90,32 @@ namespace Player.Movement
             HandleJumping();
         }
 
+        void OnCrouch(InputValue value)
+        {
+            if(value.isPressed)
+            {
+                isCrouching = true;
+            }
+            else
+            {
+                isCrouching = false;
+            }
+            crouchStartTime = Time.time;
+        }
+
+        void HandleCrouching()
+        {
+            float fracComplete = (Time.time - crouchStartTime) / timeToCrouch;
+            if(isCrouching)
+            {
+                headGroup.transform.localPosition = Vector3.Lerp(headPositionDefault, headPositionCrouched, fracComplete);
+            }
+            else if(!isCrouching)
+            {
+                headGroup.transform.localPosition = Vector3.Lerp(headPositionCrouched, headPositionDefault, fracComplete);
+            }
+        }
+
         void HandleJumping()
         {
             if (IsOnGround && !JumpIsHit)
@@ -85,13 +129,16 @@ namespace Player.Movement
         {
             HandleGravity();
             HandleMovement();
+            HandleCrouching();
             _onGround = IsOnGround;
         }
 
         void HandleMovement()
         {
+            float speed = isCrouching ? CrouchingMoveSpeed : MoveSpeed;
+
             moveTo = transform.right * moveValue.x + transform.forward * moveValue.y;
-            _movementSpeed = moveTo.normalized * Time.fixedDeltaTime * MoveSpeed;
+            _movementSpeed = moveTo.normalized * Time.fixedDeltaTime * speed;
             characterController.Move(_movementSpeed);
         }
 

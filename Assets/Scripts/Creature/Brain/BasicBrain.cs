@@ -31,6 +31,9 @@ namespace Creature.Brain
 
         public void Think() 
         {
+            //var watch = new System.Diagnostics.Stopwatch();
+            //watch.Start();
+
             if (lastTasks.Count >= maxTrackSize) 
             {
                 lastTasks.Dequeue();
@@ -103,6 +106,9 @@ namespace Creature.Brain
                 pickMe.Preferrence.Preference += 0.01f;
             // Track Task
             lastTasks.Enqueue(pickMe.Task.GetType());
+
+            //watch.Stop();
+            //Console.LogDebug($"Think time: {watch.ElapsedMilliseconds}ms");
         }
 
         /// <summary>
