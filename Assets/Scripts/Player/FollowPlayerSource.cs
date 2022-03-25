@@ -31,7 +31,7 @@ namespace Player
 
         public IObject RelatedObject => this;
 
-        public string Name { get => this.Name; set { } }
+        public string Name { get => gameObject.name; set { } }
 
         public string Guid => GetComponentInParent<PersistentSaveable>().Data.GUID;
 
