@@ -42,12 +42,14 @@ namespace Creature.Task
         {
             update.RemoveListener(Update);
 
-            if (!_caller.Move.CanReachDestination) 
+            if (!_caller.Move.CanReachDestination)
             {
                 Satisfaction = 30;
             }
-
-            _caller.ProcessINeed(_util);
+            else 
+            {
+                _caller.ProcessINeed(_util);
+            }
 
             IsStarted = false;
             if (SatisResult != null)
