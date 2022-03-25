@@ -65,11 +65,13 @@ namespace Player
             if (isActive)
             {
                 IsActive = true;
+                sideMenu.transform.parent = activeLocation;
                 sideMenu.layer = 8;
             }
             else
             {
                 IsActive = false;
+                sideMenu.transform.parent = inactiveLocation;
                 sideMenu.layer = 0;
             }
         }
@@ -79,13 +81,13 @@ namespace Player
             float fracComplete = (Time.time - toggleStartTime) / toggleTime;
             if (IsActive)
             {
-                sideMenu.transform.localPosition = Vector3.Slerp(inactiveLocation.localPosition, activeLocation.localPosition, fracComplete);
+                sideMenu.transform.position = Vector3.Slerp(inactiveLocation.position, activeLocation.position, fracComplete);
+                sideMenu.transform.rotation = activeLocation.rotation;
             }
             else
             {
-                sideMenu.transform.localPosition = Vector3.Slerp(activeLocation.localPosition, inactiveLocation.localPosition, fracComplete);
+                sideMenu.transform.position = Vector3.Slerp(activeLocation.position, inactiveLocation.position, fracComplete);
             }
-            sideMenu.transform.localRotation = activeLocation.localRotation;
             sideMenu.transform.localScale = Vector3.one;
         }
 
