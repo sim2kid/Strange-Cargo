@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.Events;
 
 namespace Player
 {
@@ -21,9 +21,13 @@ namespace Player
         [SerializeField]
         GameObject sideMenu;
         [Tooltip("The time it takes the clipboard to move between the active and inactive locations.")]
-        public float toggleTime = 0.1875f;
-        [Tooltip("The time it which the player toggled on or off.")]
-        private float toggleStartTime;
+        public float toggleTime = 0.2f;
+
+        private float timePassed;
+        private Vector3 initialPosition;
+        private Quaternion initialRotation;
+        private Vector3 initialScale;
+        private UnityEvent LerpEvent;
 
         public IsActiveData data;
         public bool IsActive { get => data.IsActive; set => data.IsActive = value; }
@@ -38,6 +42,11 @@ namespace Player
 
         void Start()
         {
+            LerpEvent = new UnityEvent();
+            initialRotation = Quaternion.identity;
+            initialScale = Vector3.one; 
+            initialPosition = Vector3.zero;
+            timePassed = 0;
             SetSideMenu(false);
             input = GetComponent<PlayerInput>();
             sidemenu = input.actions["SideMenu"];
@@ -55,7 +64,7 @@ namespace Player
                 {
                     ToggleSideMenu();
                 }
-                HandleClipboardPosition();
+                LerpEvent.Invoke();
             }
             lastButton = thisButton;
         }
@@ -74,26 +83,29 @@ namespace Player
                 sideMenu.transform.parent = inactiveLocation;
                 sideMenu.layer = 0;
             }
+            // Setup starting info
+            initialPosition = sideMenu.transform.localPosition;
+            initialRotation = sideMenu.transform.localRotation;
+            initialScale = sideMenu.transform.localScale;
+            timePassed = 0;
+            LerpEvent.AddListener(HandleClipboardPosition);
         }
 
         private void HandleClipboardPosition()
         {
-            float fracComplete = (Time.time - toggleStartTime) / toggleTime;
-            if (IsActive)
-            {
-                sideMenu.transform.position = Vector3.Slerp(inactiveLocation.position, activeLocation.position, fracComplete);
-                sideMenu.transform.rotation = activeLocation.rotation;
+            // Figure out time
+            float fracComplete = timePassed / toggleTime;
+            timePassed += Time.deltaTime;
+            // If event is over, unregister it
+            if (timePassed >= toggleTime)
+            { 
+                LerpEvent.RemoveAllListeners();
             }
-            else
-            {
-                sideMenu.transform.position = Vector3.Slerp(activeLocation.position, inactiveLocation.position, fracComplete);
-            }
-            sideMenu.transform.localScale = Vector3.one;
-        }
 
-        void OnSideMenu()
-        {
-            toggleStartTime = Time.time;
+            // Run Slerp localy
+            sideMenu.transform.localPosition = Vector3.Slerp(initialPosition, Vector3.zero, fracComplete);
+            sideMenu.transform.localRotation = Quaternion.Slerp(initialRotation, Quaternion.identity, fracComplete);
+            sideMenu.transform.localScale = Vector3.Slerp(initialScale, Vector3.one, fracComplete);
         }
 
         public void ToggleSideMenu() 

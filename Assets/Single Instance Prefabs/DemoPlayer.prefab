@@ -4276,6 +4276,7 @@ GameObject:
   - component: {fileID: 4628441539282750614}
   - component: {fileID: 138597451206516799}
   - component: {fileID: 1716438230727556232}
+  - component: {fileID: 2574593526925775934}
   m_Layer: 9
   m_Name: DemoPlayer
   m_TagString: Untagged
@@ -4413,6 +4414,10 @@ MonoBehaviour:
   interactionMask:
     serializedVersion: 2
     m_Bits: 137
+  headPositionDefault: {x: 0, y: 0.5649999, z: 0}
+  headPositionCrouched: {x: 0, y: 0, z: 0}
+  timeToCrouch: 0.125
+  playerCamera: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
   JumpIsHit: 0
   IsHeadHit: 0
@@ -4694,6 +4699,7 @@ MonoBehaviour:
   activeLocation: {fileID: 5000652813891060467}
   inactiveLocation: {fileID: 7123862860731788287}
   sideMenu: {fileID: 684351831206598634}
+  toggleTime: 0.1875
   data:
     _guid: d69cf20f-2938-4c50-80f0-eaa2dd547011
     _isActive: 0
@@ -4740,6 +4746,18 @@ MonoBehaviour:
   StepRate: 0.4
   StepRepository: Player/Footsteps
   materialType: 0
+--- !u!114 &2574593526925775934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8435313185083453008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e47f42deec8865348b5a9e0bce60b273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8435313185657725755
 GameObject:
   m_ObjectHideFlags: 0
