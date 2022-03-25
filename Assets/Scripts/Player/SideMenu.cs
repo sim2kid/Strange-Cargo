@@ -96,16 +96,22 @@ namespace Player
             // Figure out time
             float fracComplete = timePassed / toggleTime;
             timePassed += Time.deltaTime;
+
             // If event is over, unregister it
             if (timePassed >= toggleTime)
-            { 
+            {
                 LerpEvent.RemoveAllListeners();
+                sideMenu.transform.localScale = Vector3.one;
+                sideMenu.transform.localRotation = Quaternion.identity;
+                sideMenu.transform.localPosition = Vector3.zero;
             }
-
-            // Run Slerp localy
-            sideMenu.transform.localPosition = Vector3.Slerp(initialPosition, Vector3.zero, fracComplete);
-            sideMenu.transform.localRotation = Quaternion.Slerp(initialRotation, Quaternion.identity, fracComplete);
-            sideMenu.transform.localScale = Vector3.Slerp(initialScale, Vector3.one, fracComplete);
+            else 
+            {
+                // Run Slerp localy
+                sideMenu.transform.localPosition = Vector3.Slerp(initialPosition, Vector3.zero, fracComplete);
+                sideMenu.transform.localRotation = Quaternion.Slerp(initialRotation, Quaternion.identity, fracComplete);
+                sideMenu.transform.localScale = Vector3.Slerp(initialScale, Vector3.one, fracComplete);
+            }
         }
 
         public void ToggleSideMenu() 
