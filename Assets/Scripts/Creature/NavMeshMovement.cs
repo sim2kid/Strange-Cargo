@@ -14,6 +14,9 @@ namespace Creature
 
         public float Speed => navMeshAgent.velocity.magnitude;
         public float Distance => navMeshAgent.remainingDistance;
+        public bool pathPending => navMeshAgent.pathPending;
+
+        public bool CanReachDestination => navMeshAgent.hasPath;
 
         // Start is called before the first frame update
         void Start()
@@ -38,6 +41,16 @@ namespace Creature
             }
         }
 
+        public void Stop() 
+        {
+            navMeshAgent.isStopped = true;
+        }
+
+        public void Go()
+        {
+            navMeshAgent.isStopped = false;
+        }
+
         /// <summary>
         /// Find and assign the NavMesh Agent component attached to this game object.
         /// </summary>
@@ -56,6 +69,7 @@ namespace Creature
         {
             navMeshAgent.ResetPath();
             lastDestination = Vector3.zero;
+            Stop();
         }
 
         /// <summary>
@@ -74,6 +88,7 @@ namespace Creature
         /// <param name="_destination">Point in 3D space the NavMesh agent will attempt to move to.</param>
         public void MoveTo(Vector3 _destination)
         {
+            Go();
             if (navMeshAgent == null)
                 GetNavMeshAgent();
             navMeshAgent.destination = _destination;

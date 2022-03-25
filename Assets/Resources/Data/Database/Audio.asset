@@ -20,6 +20,18 @@ MonoBehaviour:
   - Animal\Functions\Peeing\Short
   - Animal\Functions\Poop
   - Animal\Functions\Poop\Dings
+  - Animal\Personalities\Aggressive\Anger
+  - Animal\Personalities\Aggressive\Happy
+  - Animal\Personalities\Aggressive\Neutral
+  - Animal\Personalities\Aggressive\Sad
+  - Animal\Personalities\Shy\Anger
+  - Animal\Personalities\Shy\Happy
+  - Animal\Personalities\Shy\Neutral
+  - Animal\Personalities\Shy\Sad
+  - Animal\Personalities\Sweet\Anger
+  - Animal\Personalities\Sweet\Happy
+  - Animal\Personalities\Sweet\Neutral
+  - Animal\Personalities\Sweet\Sad
   - Animal\Vocal\Anger
   - Animal\Vocal\Bark
   - Animal\Vocal\Eat
@@ -30,6 +42,7 @@ MonoBehaviour:
   - Animal\Vocal\Snore
   - Animal\Vocal\Tired
   - Animal\Vocal\TreatMunch
+  - Misc\Accessories
   - Misc\CeramicBowl\PickUp\FromCounter
   - Misc\CeramicBowl\PickUp\FromHolder
   - Misc\CeramicBowl\PlaceInHolder
@@ -53,6 +66,8 @@ MonoBehaviour:
   - Misc\PetBrush\Place
   - Misc\PetBrush\Scales
   - Misc\Pop
+  - Misc\Shower
+  - Misc\SprayBottle
   - Misc\Toy\Throw
   - Misc\Treat\PickUp
   - Music
@@ -133,6 +148,12 @@ MonoBehaviour:
     - ParentFolder: Animal\Functions\Poop
       FileLocation: Animal\Functions\Poop\SFX_AN_Functions_SlideWhistle.mp3
       FileName: SFX_AN_Functions_SlideWhistle.mp3
+    - ParentFolder: Animal\Functions\Poop
+      FileLocation: Animal\Functions\Poop\SFX_AN_FUNC_PooperScooper.mp3
+      FileName: SFX_AN_FUNC_PooperScooper.mp3
+    - ParentFolder: Animal\Functions\Poop
+      FileLocation: Animal\Functions\Poop\SFX_AN_FUNC_PoopWoosh.mp3
+      FileName: SFX_AN_FUNC_PoopWoosh.mp3
   - FolderName: Animal\Functions\Poop\Dings
     Files:
     - ParentFolder: Animal\Functions\Poop\Dings
@@ -153,6 +174,144 @@ MonoBehaviour:
     - ParentFolder: Animal\Functions\Poop\Dings
       FileLocation: Animal\Functions\Poop\Dings\SFX_AN_Functions_Poop_Ding6.mp3
       FileName: SFX_AN_Functions_Poop_Ding6.mp3
+  - FolderName: Animal\Personalities\Aggressive\Anger
+    Files:
+    - ParentFolder: Animal\Personalities\Aggressive\Anger
+      FileLocation: Animal\Personalities\Aggressive\Anger\SFX_AN_VP_AG_Anger1.mp3
+      FileName: SFX_AN_VP_AG_Anger1.mp3
+    - ParentFolder: Animal\Personalities\Aggressive\Anger
+      FileLocation: Animal\Personalities\Aggressive\Anger\SFX_AN_VP_AG_Anger2.mp3
+      FileName: SFX_AN_VP_AG_Anger2.mp3
+    - ParentFolder: Animal\Personalities\Aggressive\Anger
+      FileLocation: Animal\Personalities\Aggressive\Anger\SFX_AN_VP_AG_Anger3.mp3
+      FileName: SFX_AN_VP_AG_Anger3.mp3
+  - FolderName: Animal\Personalities\Aggressive\Happy
+    Files:
+    - ParentFolder: Animal\Personalities\Aggressive\Happy
+      FileLocation: Animal\Personalities\Aggressive\Happy\SFX_AN_VP_AG_Happy1.mp3
+      FileName: SFX_AN_VP_AG_Happy1.mp3
+    - ParentFolder: Animal\Personalities\Aggressive\Happy
+      FileLocation: Animal\Personalities\Aggressive\Happy\SFX_AN_VP_AG_Happy2.mp3
+      FileName: SFX_AN_VP_AG_Happy2.mp3
+    - ParentFolder: Animal\Personalities\Aggressive\Happy
+      FileLocation: Animal\Personalities\Aggressive\Happy\SFX_AN_VP_AG_Happy3.mp3
+      FileName: SFX_AN_VP_AG_Happy3.mp3
+    - ParentFolder: Animal\Personalities\Aggressive\Happy
+      FileLocation: Animal\Personalities\Aggressive\Happy\SFX_AN_VP_AG_Happy4.mp3
+      FileName: SFX_AN_VP_AG_Happy4.mp3
+  - FolderName: Animal\Personalities\Aggressive\Neutral
+    Files:
+    - ParentFolder: Animal\Personalities\Aggressive\Neutral
+      FileLocation: Animal\Personalities\Aggressive\Neutral\SFX_AN_VP_AG_Neutral1.mp3
+      FileName: SFX_AN_VP_AG_Neutral1.mp3
+    - ParentFolder: Animal\Personalities\Aggressive\Neutral
+      FileLocation: Animal\Personalities\Aggressive\Neutral\SFX_AN_VP_AG_Neutral2.mp3
+      FileName: SFX_AN_VP_AG_Neutral2.mp3
+    - ParentFolder: Animal\Personalities\Aggressive\Neutral
+      FileLocation: Animal\Personalities\Aggressive\Neutral\SFX_AN_VP_AG_Neutral3.mp3
+      FileName: SFX_AN_VP_AG_Neutral3.mp3
+  - FolderName: Animal\Personalities\Aggressive\Sad
+    Files:
+    - ParentFolder: Animal\Personalities\Aggressive\Sad
+      FileLocation: Animal\Personalities\Aggressive\Sad\SFX_AN_VP_AG_Sad1.mp3
+      FileName: SFX_AN_VP_AG_Sad1.mp3
+    - ParentFolder: Animal\Personalities\Aggressive\Sad
+      FileLocation: Animal\Personalities\Aggressive\Sad\SFX_AN_VP_AG_Sad2.mp3
+      FileName: SFX_AN_VP_AG_Sad2.mp3
+    - ParentFolder: Animal\Personalities\Aggressive\Sad
+      FileLocation: Animal\Personalities\Aggressive\Sad\SFX_AN_VP_AG_Sad3.mp3
+      FileName: SFX_AN_VP_AG_Sad3.mp3
+  - FolderName: Animal\Personalities\Shy\Anger
+    Files:
+    - ParentFolder: Animal\Personalities\Shy\Anger
+      FileLocation: Animal\Personalities\Shy\Anger\SFX_AN_VP_SH_Anger1.mp3
+      FileName: SFX_AN_VP_SH_Anger1.mp3
+    - ParentFolder: Animal\Personalities\Shy\Anger
+      FileLocation: Animal\Personalities\Shy\Anger\SFX_AN_VP_SH_Anger2.mp3
+      FileName: SFX_AN_VP_SH_Anger2.mp3
+    - ParentFolder: Animal\Personalities\Shy\Anger
+      FileLocation: Animal\Personalities\Shy\Anger\SFX_AN_VP_SH_Anger3.mp3
+      FileName: SFX_AN_VP_SH_Anger3.mp3
+  - FolderName: Animal\Personalities\Shy\Happy
+    Files:
+    - ParentFolder: Animal\Personalities\Shy\Happy
+      FileLocation: Animal\Personalities\Shy\Happy\SFX_AN_VP_SH_Happy1.mp3
+      FileName: SFX_AN_VP_SH_Happy1.mp3
+    - ParentFolder: Animal\Personalities\Shy\Happy
+      FileLocation: Animal\Personalities\Shy\Happy\SFX_AN_VP_SH_Happy2.mp3
+      FileName: SFX_AN_VP_SH_Happy2.mp3
+    - ParentFolder: Animal\Personalities\Shy\Happy
+      FileLocation: Animal\Personalities\Shy\Happy\SFX_AN_VP_SH_Happy3.mp3
+      FileName: SFX_AN_VP_SH_Happy3.mp3
+    - ParentFolder: Animal\Personalities\Shy\Happy
+      FileLocation: Animal\Personalities\Shy\Happy\SFX_AN_VP_SH_Happy4.mp3
+      FileName: SFX_AN_VP_SH_Happy4.mp3
+  - FolderName: Animal\Personalities\Shy\Neutral
+    Files:
+    - ParentFolder: Animal\Personalities\Shy\Neutral
+      FileLocation: Animal\Personalities\Shy\Neutral\SFX_AN_VP_SH_Neutral1.mp3
+      FileName: SFX_AN_VP_SH_Neutral1.mp3
+    - ParentFolder: Animal\Personalities\Shy\Neutral
+      FileLocation: Animal\Personalities\Shy\Neutral\SFX_AN_VP_SH_Neutral2.mp3
+      FileName: SFX_AN_VP_SH_Neutral2.mp3
+    - ParentFolder: Animal\Personalities\Shy\Neutral
+      FileLocation: Animal\Personalities\Shy\Neutral\SFX_AN_VP_SH_Neutral3.mp3
+      FileName: SFX_AN_VP_SH_Neutral3.mp3
+    - ParentFolder: Animal\Personalities\Shy\Neutral
+      FileLocation: Animal\Personalities\Shy\Neutral\SFX_AN_VP_SH_Neutral4.mp3
+      FileName: SFX_AN_VP_SH_Neutral4.mp3
+  - FolderName: Animal\Personalities\Shy\Sad
+    Files:
+    - ParentFolder: Animal\Personalities\Shy\Sad
+      FileLocation: Animal\Personalities\Shy\Sad\SFX_AN_VP_SH_Sad1.mp3
+      FileName: SFX_AN_VP_SH_Sad1.mp3
+    - ParentFolder: Animal\Personalities\Shy\Sad
+      FileLocation: Animal\Personalities\Shy\Sad\SFX_AN_VP_SH_Sad2.mp3
+      FileName: SFX_AN_VP_SH_Sad2.mp3
+    - ParentFolder: Animal\Personalities\Shy\Sad
+      FileLocation: Animal\Personalities\Shy\Sad\SFX_AN_VP_SH_Sad3.mp3
+      FileName: SFX_AN_VP_SH_Sad3.mp3
+  - FolderName: Animal\Personalities\Sweet\Anger
+    Files:
+    - ParentFolder: Animal\Personalities\Sweet\Anger
+      FileLocation: Animal\Personalities\Sweet\Anger\SFX_AN_VP_SW_Anger1.mp3
+      FileName: SFX_AN_VP_SW_Anger1.mp3
+    - ParentFolder: Animal\Personalities\Sweet\Anger
+      FileLocation: Animal\Personalities\Sweet\Anger\SFX_AN_VP_SW_Anger2.mp3
+      FileName: SFX_AN_VP_SW_Anger2.mp3
+    - ParentFolder: Animal\Personalities\Sweet\Anger
+      FileLocation: Animal\Personalities\Sweet\Anger\SFX_AN_VP_SW_Anger3.mp3
+      FileName: SFX_AN_VP_SW_Anger3.mp3
+  - FolderName: Animal\Personalities\Sweet\Happy
+    Files:
+    - ParentFolder: Animal\Personalities\Sweet\Happy
+      FileLocation: Animal\Personalities\Sweet\Happy\SFX_AN_VP_SW_Happy1.mp3
+      FileName: SFX_AN_VP_SW_Happy1.mp3
+    - ParentFolder: Animal\Personalities\Sweet\Happy
+      FileLocation: Animal\Personalities\Sweet\Happy\SFX_AN_VP_SW_Happy2.mp3
+      FileName: SFX_AN_VP_SW_Happy2.mp3
+    - ParentFolder: Animal\Personalities\Sweet\Happy
+      FileLocation: Animal\Personalities\Sweet\Happy\SFX_AN_VP_SW_Happy3.mp3
+      FileName: SFX_AN_VP_SW_Happy3.mp3
+  - FolderName: Animal\Personalities\Sweet\Neutral
+    Files:
+    - ParentFolder: Animal\Personalities\Sweet\Neutral
+      FileLocation: Animal\Personalities\Sweet\Neutral\SFX_AN_VP_SW_Neutral1.mp3
+      FileName: SFX_AN_VP_SW_Neutral1.mp3
+    - ParentFolder: Animal\Personalities\Sweet\Neutral
+      FileLocation: Animal\Personalities\Sweet\Neutral\SFX_AN_VP_SW_Neutral2.mp3
+      FileName: SFX_AN_VP_SW_Neutral2.mp3
+  - FolderName: Animal\Personalities\Sweet\Sad
+    Files:
+    - ParentFolder: Animal\Personalities\Sweet\Sad
+      FileLocation: Animal\Personalities\Sweet\Sad\SFX_AN_VP_SW_Sad1.mp3
+      FileName: SFX_AN_VP_SW_Sad1.mp3
+    - ParentFolder: Animal\Personalities\Sweet\Sad
+      FileLocation: Animal\Personalities\Sweet\Sad\SFX_AN_VP_SW_Sad2.mp3
+      FileName: SFX_AN_VP_SW_Sad2.mp3
+    - ParentFolder: Animal\Personalities\Sweet\Sad
+      FileLocation: Animal\Personalities\Sweet\Sad\SFX_AN_VP_SW_Sad3.mp3
+      FileName: SFX_AN_VP_SW_Sad3.mp3
   - FolderName: Animal\Vocal\Anger
     Files:
     - ParentFolder: Animal\Vocal\Anger
@@ -302,6 +461,104 @@ MonoBehaviour:
     - ParentFolder: Animal\Vocal\TreatMunch
       FileLocation: Animal\Vocal\TreatMunch\SFX_Pet_TreatMunch9.mp3
       FileName: SFX_Pet_TreatMunch9.mp3
+  - FolderName: Misc\Accessories
+    Files:
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_Bowtie_E.mp3
+      FileName: SFX_MISC_ACC_Bowtie_E.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_Bowtie_U.mp3
+      FileName: SFX_MISC_ACC_Bowtie_U.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_Bow_E.mp3
+      FileName: SFX_MISC_ACC_Bow_E.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_Bow_U.mp3
+      FileName: SFX_MISC_ACC_Bow_U.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_Choker_E.mp3
+      FileName: SFX_MISC_ACC_Choker_E.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_Choker_U.mp3
+      FileName: SFX_MISC_ACC_Choker_U.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_Crown_E.mp3
+      FileName: SFX_MISC_ACC_Crown_E.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_Crown_U.mp3
+      FileName: SFX_MISC_ACC_Crown_U.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_DiamondEarrings_E.mp3
+      FileName: SFX_MISC_ACC_DiamondEarrings_E.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_DiamondEarrings_U.mp3
+      FileName: SFX_MISC_ACC_DiamondEarrings_U.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_Eyepatch_E.mp3
+      FileName: SFX_MISC_ACC_Eyepatch_E.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_Eyepatch_U.mp3
+      FileName: SFX_MISC_ACC_Eyepatch_U.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_FlowerCrown_E.mp3
+      FileName: SFX_MISC_ACC_FlowerCrown_E.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_FlowerCrown_U.mp3
+      FileName: SFX_MISC_ACC_FlowerCrown_U.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_HeartGlasses_E.mp3
+      FileName: SFX_MISC_ACC_HeartGlasses_E.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_HeartGlasses_U.mp3
+      FileName: SFX_MISC_ACC_HeartGlasses_U.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_HoopEarrings_E.mp3
+      FileName: SFX_MISC_ACC_HoopEarrings_E.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_HoopEarrings_U.mp3
+      FileName: SFX_MISC_ACC_HoopEarrings_U.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_OvalGlasses_E.mp3
+      FileName: SFX_MISC_ACC_OvalGlasses_E.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_OvalGlasses_U.mp3
+      FileName: SFX_MISC_ACC_OvalGlasses_U.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_PearlNecklace_E.mp3
+      FileName: SFX_MISC_ACC_PearlNecklace_E.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_PearlNecklace_U.mp3
+      FileName: SFX_MISC_ACC_PearlNecklace_U.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_RoundEarrings_E.mp3
+      FileName: SFX_MISC_ACC_RoundEarrings_E.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_RoundEarrings_U.mp3
+      FileName: SFX_MISC_ACC_RoundEarrings_U.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_RoundGlasses_E.mp3
+      FileName: SFX_MISC_ACC_RoundGlasses_E.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_RoundGlasses_U.mp3
+      FileName: SFX_MISC_ACC_RoundGlasses_U.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_Tie_E.mp3
+      FileName: SFX_MISC_ACC_Tie_E.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_Tie_U.mp3
+      FileName: SFX_MISC_ACC_Tie_U.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_TopHat_E.mp3
+      FileName: SFX_MISC_ACC_TopHat_E.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_TopHat_U.mp3
+      FileName: SFX_MISC_ACC_TopHat_U.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_WitchHat_E.mp3
+      FileName: SFX_MISC_ACC_WitchHat_E.mp3
+    - ParentFolder: Misc\Accessories
+      FileLocation: Misc\Accessories\SFX_MISC_ACC_WitchHat_U.mp3
+      FileName: SFX_MISC_ACC_WitchHat_U.mp3
   - FolderName: Misc\CeramicBowl\PickUp\FromCounter
     Files:
     - ParentFolder: Misc\CeramicBowl\PickUp\FromCounter
@@ -762,6 +1019,34 @@ MonoBehaviour:
     - ParentFolder: Misc\Pop
       FileLocation: Misc\Pop\SFX_Pop7.mp3
       FileName: SFX_Pop7.mp3
+  - FolderName: Misc\Shower
+    Files:
+    - ParentFolder: Misc\Shower
+      FileLocation: Misc\Shower\SFX_MISC_SHWR_PetScrubLoop.mp3
+      FileName: SFX_MISC_SHWR_PetScrubLoop.mp3
+    - ParentFolder: Misc\Shower
+      FileLocation: Misc\Shower\SFX_MISC_SHWR_RunningLoop.mp3
+      FileName: SFX_MISC_SHWR_RunningLoop.mp3
+    - ParentFolder: Misc\Shower
+      FileLocation: Misc\Shower\SFX_MISC_SHWR_ShampooBottle.mp3
+      FileName: SFX_MISC_SHWR_ShampooBottle.mp3
+    - ParentFolder: Misc\Shower
+      FileLocation: Misc\Shower\SFX_MISC_SHWR_ValveOff.mp3
+      FileName: SFX_MISC_SHWR_ValveOff.mp3
+    - ParentFolder: Misc\Shower
+      FileLocation: Misc\Shower\SFX_MISC_SHWR_ValveOn.mp3
+      FileName: SFX_MISC_SHWR_ValveOn.mp3
+  - FolderName: Misc\SprayBottle
+    Files:
+    - ParentFolder: Misc\SprayBottle
+      FileLocation: Misc\SprayBottle\SFX_MISC_SPRY_Long1.mp3
+      FileName: SFX_MISC_SPRY_Long1.mp3
+    - ParentFolder: Misc\SprayBottle
+      FileLocation: Misc\SprayBottle\SFX_MISC_SPRY_Long2.mp3
+      FileName: SFX_MISC_SPRY_Long2.mp3
+    - ParentFolder: Misc\SprayBottle
+      FileLocation: Misc\SprayBottle\SFX_MISC_SPRY_Long3.mp3
+      FileName: SFX_MISC_SPRY_Long3.mp3
   - FolderName: Misc\Toy\Throw
     Files:
     - ParentFolder: Misc\Toy\Throw

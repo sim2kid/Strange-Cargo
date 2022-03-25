@@ -35,9 +35,6 @@ namespace Creature.Stats
         [SerializeField]
         public UnityEvent OnEmpty;
 
-        [SerializeField]
-        private string _guid;
-
         private float multiplier = 0;
 
         public float MaxValue => MaxFullness;
@@ -55,7 +52,7 @@ namespace Creature.Stats
 
 
         public string Name { get => gameObject.name; set { gameObject.name = value; } }
-        public string Guid { get => _guid; set => _guid = value; }
+        public string Guid { get => GetComponentInParent<PrefabSaveable>().Data.GUID;  }
         public ISaveData saveData { get => data; set => data = (NeedSourceData)value; }
 
         [SerializeField]
@@ -121,8 +118,6 @@ namespace Creature.Stats
 
         private void Awake()
         {
-            if (string.IsNullOrEmpty(Guid))
-                Guid = System.Guid.NewGuid().ToString();
             Console.HideInDebugConsole();
         }
 

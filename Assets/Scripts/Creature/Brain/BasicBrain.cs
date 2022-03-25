@@ -27,8 +27,13 @@ namespace Creature.Brain
             lastTasks = new Queue<System.Type>();
         }
 
+        
+
         public void Think() 
         {
+            //var watch = new System.Diagnostics.Stopwatch();
+            //watch.Start();
+
             if (lastTasks.Count >= maxTrackSize) 
             {
                 lastTasks.Dequeue();
@@ -47,14 +52,14 @@ namespace Creature.Brain
                 Preferred p = null;
                 if (task.RelatedObject != null)
                 {
-                    p = Preferences.Find(x => x.Obj.Guid.Equals(task.RelatedObject.Guid));
+                    p = Preferences.Find(x => x.Guid.Equals(task.RelatedObject.Guid));
                     if (p != null)
                     {
                         preference = p.Preference;
                     }
                     else 
                     {
-                        Preferences.Add(new Preferred(task.RelatedObject, 0f));
+                        Preferences.Add(new Preferred(task.RelatedObject, task.GetType().ToString(), 0f));
                     }
                 }
                 float CurrentUtility = Mathf.Clamp(preference, float.MinValue, 15f);
@@ -72,6 +77,9 @@ namespace Creature.Brain
                 {
                     CurrentUtility += (float)task.BaseUtility * 6;
                 }
+                // Add some noise
+                CurrentUtility += Random.value * 1f;
+
 
                 // Add Diminishing Returns
                 System.Type taskType = task.RelatedTask.GetType();
@@ -82,6 +90,7 @@ namespace Creature.Brain
                         count++;
                 }
                 CurrentUtility /= (count * 0.3f * count) + 1;
+
 
                 // Add new option to list for sorting later
                 options.Add(new Option(CurrentUtility, task.RelatedTask, p));
@@ -97,8 +106,15 @@ namespace Creature.Brain
                 pickMe.Preferrence.Preference += 0.01f;
             // Track Task
             lastTasks.Enqueue(pickMe.Task.GetType());
+
+            //watch.Stop();
+            //Console.LogDebug($"Think time: {watch.ElapsedMilliseconds}ms");
         }
 
+        /// <summary>
+        /// Returns the needs from a range of [0-1] and inverted (Unit Needs)
+        /// </summary>
+        /// <returns></returns>
         private Needs getRealitiveNeeds() 
         {
             Needs f = _controller.needs.Clone();
@@ -123,6 +139,10 @@ namespace Creature.Brain
         public void PostDeserialization(CreatureController controller)
         {
             _controller = controller;
+            foreach (var p in Preferences) 
+            {
+                p.Update();
+            }
             return;
         }
     }

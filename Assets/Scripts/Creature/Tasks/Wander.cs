@@ -21,6 +21,11 @@ namespace Creature.Task
         private CreatureController _caller;
         private UnityEvent _update;
 
+        public float Satisfaction { get; private set; }
+        public void SatisfactionHook(System.Func<float> func)
+        {
+        }
+
         public void EndTask(UnityEvent update)
         {
             IsStarted = false;

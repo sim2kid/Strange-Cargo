@@ -228,6 +228,9 @@ namespace Genetics
             // Add Emotions
             creature.AddComponent<Creature.Emotions.EmotionCheck>();
 
+            // Add Closeness Boost
+            creature.AddComponent<ClosenessSocialBoost>();
+
             Animator a = mesh.AddComponent<Animator>();
             RuntimeAnimatorController rac = Resources.Load(AnimationControllerLocation) as RuntimeAnimatorController;
             a.runtimeAnimatorController = rac;

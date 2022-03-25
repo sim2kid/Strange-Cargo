@@ -62,14 +62,18 @@ namespace Creature
         [HideInInspector]
         private BasicBrain brain { get => data.brain; set => data.brain = value; }
 
+        [SerializeField]
+        private Queue<float> lastSatisfaction;
+        public float Satisfaction => getSatisfaction();
+
         /// <summary>
         /// Decay rate per second.
         /// </summary>
         private Needs needsDecayRate = new Needs(
             -0.5f, // Appetite
-            0,//-0.1f, // Bladder
+            -0.1f, // Bladder
             -0.2f, // Social
-            0,//-0.1f, // Energy
+            -0.1f, // Energy
             -0.1f, // Hygiene
             0 // Happiness
         );
@@ -141,7 +145,7 @@ namespace Creature
         private void Awake()
         {
             data.GUID = "232fd503-5c82-405f-8e6b-f13a11e6dfae";
-            Console.HideInDebugConsole();
+            //Console.HideInDebugConsole();
             tasks = new Queue<ITask>();
             hotTasks = new Queue<ITask>();
             needs = new Needs();
@@ -165,6 +169,8 @@ namespace Creature
             UpdateLoop = new UnityEvent();
             timeSpentOnLastTask = 0;
 
+            lastSatisfaction = new Queue<float>();
+
             Toolbox.Instance.Pause.OnPause.AddListener(OnPause);
             Toolbox.Instance.Pause.OnUnPause.AddListener(OnUnPause);
 
@@ -180,6 +186,25 @@ namespace Creature
             Toolbox.Instance.Pause.OnUnPause.RemoveListener(OnUnPause);
         }
 
+        private float getSatisfaction()
+        {
+            float result = 0;
+
+            foreach (var s in lastSatisfaction)
+            {
+                result += s;
+            }
+            if (lastSatisfaction.Count > 0)
+            {
+                result = result / lastSatisfaction.Count;
+            }
+            else
+            {
+                result = 50;
+            }
+
+            return result;
+        }
         private void OnPause() 
         {
             Animator.enabled = false;
@@ -204,6 +229,10 @@ namespace Creature
                 thinkTimer = 0;
                 brain.Think();
             }
+            if (lastSatisfaction.Count >= 20)
+            {
+                lastSatisfaction.Dequeue();
+            }
             data.needs = needs;
         }
 
@@ -221,6 +250,10 @@ namespace Creature
                 if (!task.IsStarted)
                 {
                     Console.LogDebug($"Creature [{Guid}]: New Task: {task.GetType()}");
+                    task.SatisfactionHook(() => {
+                        lastSatisfaction.Enqueue(task.Satisfaction);
+                        return task.Satisfaction;
+                    });
                     task.RunTask(this, UpdateLoop);
                     timeSpentOnLastTask = 0;
                 }
