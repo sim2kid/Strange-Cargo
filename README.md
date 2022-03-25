@@ -12,16 +12,25 @@ Brooklyn DiPietrantonio ([Website](https://brooklyndipi.com))
 Owen Ravelo ([Website](https://simmgames.com))
 
 **Programmer**<br>
-Max Garay ([Website]())
+Max Garay ([Website](#))
 
 **Artist**<br>
-Harrison Maine ([Website]())
+Harrison Maine ([Website](https://www.linkedin.com/in/harrison-maine-9a369922b/))
 
 **Modeler/Animator**<br>
-Sarah Mitrache ([Website]())
+Sarah Mitrache ([Website](#))
+
+**Modeler**<br>
+Ray Martin ([Website](https://vampitup.art/))
+
+**Animator**<br>
+Gabe Sotomayor ([Website](https://www.linkedin.com/in/gabe-sotomayor-977b211b2/))
 
 **Audio Designer**<br>
-Ashlyn Parsons ([Website]())
+Ashlyn Parsons ([Website](https://www.linkedin.com/in/ashlyn-parsons-15b976191/))
+
+**OST Musician**<br>
+Paolo Skyrus ([Website](https://www.linkedin.com/in/paolo-skyrus-496b3a1a3/))
 
 # Other Contributors
 ### Code Contributions
