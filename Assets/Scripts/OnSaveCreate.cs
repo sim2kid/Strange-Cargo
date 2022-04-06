@@ -13,6 +13,8 @@ public class OnSaveCreate : MonoBehaviour, ISaveable
     };
     public ISaveData saveData { get => data; set => data = (StringListData)value; }
 
+    bool createdCreature = false;
+
     public void PostDeserialization()
     {
         StartCoroutine(ProcessContent());
@@ -33,9 +35,11 @@ public class OnSaveCreate : MonoBehaviour, ISaveable
 
     private void CreateCreature() 
     {
+        if(createdCreature) return;
         // Create Creature
         var creature = Genetics.CreatureGeneration.CreateCreature();
         creature.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(transform.position);
         //creature.transform.position = this.transform.position;
+        createdCreature = true;
     }
 }
