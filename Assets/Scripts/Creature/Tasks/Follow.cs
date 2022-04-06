@@ -21,34 +21,28 @@ namespace Creature.Task
             SatisResult = func;
         }
 
-        CreatureController _caller;
         INeedChange _util;
         private bool calledFinished;
 
         private Transform _followMe;
-        public ITask RunTask(CreatureController caller, UnityEvent update)
+        public ITask RunTask(CreatureController caller)
         {
             IsDone = false;
             IsStarted = true;
             Satisfaction = 100;
-            _caller = caller;
-
-            update.AddListener(Update);
 
             return this;
         }
 
-        public void EndTask(UnityEvent update)
+        public void EndTask(CreatureController caller)
         {
-            update.RemoveListener(Update);
-
-            if (!_caller.Move.CanReachDestination)
+            if (!caller.Move.CanReachDestination)
             {
                 Satisfaction = 30;
             }
             else 
             {
-                _caller.ProcessINeed(_util);
+                caller.ProcessINeed(_util);
             }
 
             IsStarted = false;
@@ -56,9 +50,9 @@ namespace Creature.Task
                 SatisResult.Invoke();
         }
 
-        private void Update()
+        public void Update(CreatureController caller)
         {
-            _caller.Move.MoveTo(_followMe);
+            caller.Move.MoveTo(_followMe);
         }
 
         public Follow(Transform whoToFollow, INeedChange util)

@@ -8,7 +8,7 @@ namespace Interaction
     [RequireComponent(typeof(Rigidbody))]
     public class Pickup : Interactable
     {
-        private Rigidbody rigidbody;
+        private new Rigidbody rigidbody;
         private GameObject hand;
 
         //get references to the rigidbody component and the player's hand object

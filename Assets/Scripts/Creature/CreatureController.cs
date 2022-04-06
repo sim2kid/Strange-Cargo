@@ -293,7 +293,7 @@ namespace Creature
         private void StopNormalTask() 
         {
             if(tasks.Count > 0)
-                tasks.Peek().EndTask();
+                tasks.Peek().EndTask(this);
         }
 
         public void VoidTask() 
@@ -323,7 +323,7 @@ namespace Creature
                 return;
 
             Console.LogDebug($"Creature [{Guid}]: End of Task: {task.GetType()} TimeLeft: {maxTimeOnTask - timeSpentOnLastTask}");
-            task.EndTask();
+            task.EndTask(this);
             AnimationBool("Stop", true);
         }
 

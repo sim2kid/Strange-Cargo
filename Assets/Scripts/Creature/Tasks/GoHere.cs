@@ -32,32 +32,30 @@ namespace Creature.Task
         {
             SatisResult = func;
         }
-        public ITask RunTask(CreatureController caller, UnityEvent update)
+        public ITask RunTask(CreatureController caller)
         {
             _caller = caller;
             caller.Move.MoveTo(location);
             IsStarted = true;
             calledFinished = false;
             checkedPath = false;
-            update.AddListener(Update);
 
             return this;
         }
 
-        public void EndTask(UnityEvent update) 
+        public void EndTask(CreatureController caller) 
         {
-            update.RemoveListener(Update);
-            _caller.Move.ClearDestination();
+            caller.Move.ClearDestination();
             IsStarted = false;
             if(SatisResult != null)
                 SatisResult.Invoke();
         }
 
-        private void Update() 
+        public void Update(CreatureController caller) 
         {
             if (IsDone && !calledFinished) 
             {
-                _caller.Move.ClearDestination();
+                caller.Move.ClearDestination();
                 OnTaskFinished.Invoke();
                 calledFinished = true;
                 Satisfaction = 100;
@@ -65,10 +63,10 @@ namespace Creature.Task
             if (!checkedPath && !_caller.Move.pathPending) 
             {
                 checkedPath = true;
-                Console.LogDebug($"Creature [{_caller.Guid}]: GoHere - New Location [{location}]. Expected Walk Distance [{_caller.Move.Distance.ToString("0.00")}]");
+                Console.LogDebug($"Creature [{caller.Guid}]: GoHere - New Location [{location}]. Expected Walk Distance [{caller.Move.Distance.ToString("0.00")}]");
 
-                if(_caller.Move.Distance < Mathf.Infinity)
-                    _caller.RequestMoreTaskTime(_caller.Move.Distance * 1.5f);
+                if(caller.Move.Distance < Mathf.Infinity)
+                    caller.RequestMoreTaskTime(caller.Move.Distance * 1.5f);
             }
         }
 

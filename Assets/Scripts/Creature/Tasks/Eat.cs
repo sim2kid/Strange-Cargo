@@ -26,41 +26,38 @@ namespace Creature.Task
         CreatureController _caller;
         ITask come;
         ITask wait;
-        UnityEvent _update;
 
         private FoodBowl _bowl;
-        public ITask RunTask(CreatureController caller, UnityEvent update)
+        public ITask RunTask(CreatureController caller)
         {
             IsDone = false;
             IsStarted = true;
             _caller = caller;
-            _update = update;
             Satisfaction = 0;
 
-            come = new GoHere(_bowl.transform, 1f).RunTask(caller, update);
+            come = new GoHere(_bowl.transform, 1f).RunTask(caller);
             come.OnTaskFinished.AddListener(EatTheBowl);
 
             calledFinished = false;
-            update.AddListener(Update);
             return this;
         }
 
         private void EatTheBowl() 
         {
             Console.LogDebug($"Creature [{_caller.Guid}]: Eating - At Bowl");
-            come.EndTask(_update);
+            come.EndTask(_caller);
 
             _caller.AnimationTrigger("Eat");
             _bowl.BeforeEat();
 
             wait = new Wait(5);
             wait.OnTaskFinished.AddListener(Finish);
-            wait.RunTask(_caller, _update);
+            wait.RunTask(_caller);
         }
 
         private void Finish() 
         {
-            wait.EndTask(_update);
+            wait.EndTask(_caller);
 
             _bowl.Eat(200 - _caller.needs.Appetite);
             _caller.ProcessINeed(_bowl);
@@ -71,28 +68,29 @@ namespace Creature.Task
             IsDone = true;
         }
 
-        public void EndTask(UnityEvent update)
+        public void EndTask(CreatureController caller)
         {
-            update.RemoveListener(Update);
             if(wait != null)
-                wait.EndTask(update);
+                wait.EndTask(caller);
             if(come != null)
-                come.EndTask(update);
+                come.EndTask(caller);
             IsStarted = false;
             if (SatisResult != null)
                 SatisResult.Invoke();
         }
 
-        private void Update()
+        public void Update(CreatureController caller)
         {
+            if (wait != null)
+                wait.Update(caller);
+            if (come != null)
+                come.Update(caller);
             if (IsDone && !calledFinished)
             {
                 OnTaskFinished.Invoke();
                 calledFinished = true;
             }
         }
-
-        
 
         public Eat(FoodBowl bowl) 
         {
