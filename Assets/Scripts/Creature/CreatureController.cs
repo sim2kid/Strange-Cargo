@@ -42,6 +42,9 @@ namespace Creature
 
         Queue<ITask> tasks;
         Queue<ITask> hotTasks;
+        Stack<SubTaskWrapper> subTasks;
+
+        private ITask CurrentTask => hotTasks.Count > 0 ? hotTasks.Peek() : tasks.Peek();
 
         private int maxTasks = 10;
         private float maxTimeOnTask = 15f;
@@ -115,6 +118,11 @@ namespace Creature
             return false;
         }
 
+        public void AddSubTask(ITask subTask, System.Func<CreatureController, ITask, bool> callback) 
+        {
+            subTasks.Push(new SubTaskWrapper(subTask, callback));
+        }
+
         public bool AddHotTask(ITask task)
         {
             if (Toolbox.Instance.Pause.Paused)
@@ -148,6 +156,7 @@ namespace Creature
             //Console.HideInDebugConsole();
             tasks = new Queue<ITask>();
             hotTasks = new Queue<ITask>();
+            subTasks = new Stack<SubTaskWrapper>();
             needs = new Needs();
             brain = new BasicBrain(this);
             Utility.Toolbox.Instance.CreatureList.Add(this);
@@ -241,27 +250,42 @@ namespace Creature
             timeSpentOnLastTask += Time.deltaTime;
             if (tasks.Count + hotTasks.Count > 0)
             {
+                bool hasSubTask = subTasks.Count > 0;
                 ITask task;
-                if (hotTasks.Count > 0)
-                    task = hotTasks.Peek();
+                if (hasSubTask)
+                {
+                    task = subTasks.Peek().SubTask;
+                }
                 else
-                    task = tasks.Peek();
+                {
+                    task = CurrentTask;
+                }
 
                 if (!task.IsStarted)
                 {
                     Console.LogDebug($"Creature [{Guid}]: New Task: {task.GetType()}");
-                    task.SatisfactionHook(() => {
-                        lastSatisfaction.Enqueue(task.Satisfaction);
-                        return task.Satisfaction;
-                    });
-                    task.RunTask(this, UpdateLoop);
+                    if (!hasSubTask)
+                    {
+                        task.SatisfactionHook(() =>
+                        {
+                            lastSatisfaction.Enqueue(task.Satisfaction);
+                            return task.Satisfaction;
+                        });
+                    }
+                    task.RunTask(this);
                     timeSpentOnLastTask = 0;
                 }
                 else if (task.IsDone || timeSpentOnLastTask > maxTimeOnTask)
                 {
                     if (timeSpentOnLastTask > maxTimeOnTask)
+                    {
                         Console.LogDebug($"Creature [{Guid}]: Task Timedout: {task.GetType()}");
+                    }
                     VoidTask();
+                }
+                else 
+                {
+                    task.Update(this);
                 }
             }
         }
@@ -269,26 +293,37 @@ namespace Creature
         private void StopNormalTask() 
         {
             if(tasks.Count > 0)
-                tasks.Peek().EndTask(UpdateLoop);
+                tasks.Peek().EndTask();
         }
 
         public void VoidTask() 
         {
+            bool timedout = timeSpentOnLastTask > maxTimeOnTask;
+            bool subTask = subTasks.Count > 0;
             ITask task = null;
-            if (hotTasks.Count > 0)
+            if (subTask && !timedout)
+            {
+                task = subTasks.Peek().SubTask;
+                subTasks.Peek().OnFinishCallback(this, task);
+                subTasks.Pop();
+            }
+            else if (hotTasks.Count > 0)
+            {
                 task = hotTasks.Peek();
-            else 
-                if(tasks.Count > 0)
-                    task = tasks.Peek();
+                hotTasks.Dequeue();
+                subTasks.Clear();
+            }
+            else if (tasks.Count > 0)
+            {
+                task = tasks.Peek();
+                tasks.Dequeue();
+                subTasks.Clear();
+            }
             if (task == null)
                 return;
 
             Console.LogDebug($"Creature [{Guid}]: End of Task: {task.GetType()} TimeLeft: {maxTimeOnTask - timeSpentOnLastTask}");
-            task.EndTask(UpdateLoop);
-            if (hotTasks.Count > 0)
-                hotTasks.Dequeue();
-            else
-                tasks.Dequeue();
+            task.EndTask();
             AnimationBool("Stop", true);
         }
 

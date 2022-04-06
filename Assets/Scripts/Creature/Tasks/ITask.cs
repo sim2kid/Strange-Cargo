@@ -19,18 +19,26 @@ namespace Creature.Task
         /// Will invoke when IsDone turns true
         /// </summary>
         public UnityEvent OnTaskFinished { get; }
+
         /// <summary>
-        /// Will run the task. Provide the <paramref name="caller"/> and an <paramref name="update"/> method to give tools to the task.
+        /// Will run the task.
         /// </summary>
-        /// <param name="caller"></param>
-        /// <param name="update"></param>
+        /// <param name="caller">The creature calling this task</param>
         /// <returns>Returns the task itself for chaining</returns>
-        public ITask RunTask(CreatureController caller, UnityEvent update);
+        public ITask RunTask(CreatureController caller);
+
+        /// <summary>
+        /// The update loop
+        /// </summary>
+        /// <param name="caller">Creature calling the update</param>
+        /// <returns>Returns itself for chaining</returns>
+        public ITask Update(CreatureController caller);
+
         /// <summary>
         /// Run to clean up a task's resources.
         /// </summary>
         /// <param name="update"></param>
-        public void EndTask(UnityEvent update);
+        public void EndTask();
 
         /// <summary>
         /// The amount of satisfaction returned after preforming a task
