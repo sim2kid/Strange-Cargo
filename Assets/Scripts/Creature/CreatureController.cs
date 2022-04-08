@@ -66,6 +66,7 @@ namespace Creature
         private BasicBrain brain { get => data.brain; set => data.brain = value; }
 
         public string RecentMemory => brain.RecentMemory.Task.GetType().Name;
+        public bool MemoryHasPreference => brain.RecentMemory.Preferrence != null;
         public void NegativeReinforcement() => brain.NegativeReinforcement(brain.RecentMemory);
         public void PositiveReinforcement() => brain.PositiveReinforcement(brain.RecentMemory);
 

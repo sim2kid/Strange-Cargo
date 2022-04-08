@@ -231,6 +231,9 @@ namespace Genetics
             // Add Closeness Boost
             creature.AddComponent<ClosenessSocialBoost>();
 
+            // Adds basic interactable
+            creature.AddComponent<Interaction.BasicInteractable>();
+
             Animator a = mesh.AddComponent<Animator>();
             RuntimeAnimatorController rac = Resources.Load(AnimationControllerLocation) as RuntimeAnimatorController;
             a.runtimeAnimatorController = rac;
