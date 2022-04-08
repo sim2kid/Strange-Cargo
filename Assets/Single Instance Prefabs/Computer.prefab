@@ -680,7 +680,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &926808895788098372
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2744,7 +2744,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6575873121306943391
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4146,6 +4146,78 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: '-'
+--- !u!1 &6205424568724060563
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 126477370972367311}
+  - component: {fileID: 1625833749358540686}
+  - component: {fileID: 6747132849230809982}
+  m_Layer: 5
+  m_Name: RawImage.1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &126477370972367311
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6205424568724060563}
+  m_LocalRotation: {x: -0.000000014901159, y: 0.000000029061114, z: -0.000000007583396, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalScale: {x: 0.0009057822, y: 0.00090578233, z: 0.00090578233}
+  m_Children: []
+  m_Father: {fileID: 1086162608605974243}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0.059698734}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1625833749358540686
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6205424568724060563}
+  m_CullTransparentMesh: 1
+--- !u!114 &6747132849230809982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6205424568724060563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 2800000, guid: 079dbb6c44ca47e43b412d9defdc4183, type: 3}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &6269682628680692073
 GameObject:
   m_ObjectHideFlags: 0
@@ -4587,14 +4659,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "According to all known laws\r\nof aviation,\r\n\r\n  \r\nthere is no way
-    a bee\r\nshould be able to fly.\r\n\r\n  \r\nIts wings are too small to get\r\nits
-    fat little body off the ground.\r\n\r\n  \r\nThe bee, of course, flies anyway\r\n\r\n 
-    \r\nbecause bees don't care\r\nwhat humans think is impossible.\r\n\r\n  \r\nYellow,
-    black. Yellow, black.\r\nYellow, black. Yellow, black.\r\n\r\n  \r\nOoh, black
-    and yellow!\r\nLet's shake it up a little.\r\n\r\n  \r\nBarry! Breakfast is ready!\r\n\r\n 
-    \r\nOoming!\r\n\r\n  \r\nHang on a second.\r\n\r\n  \r\nHello?\r\n\r\n  \r\n-
-    Barry?\r\n- Adam?"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0a1d4d40f92cd7347b03ac08510f1c8b, type: 2}
   m_sharedMaterial: {fileID: 4329221079346667621, guid: 0a1d4d40f92cd7347b03ac08510f1c8b, type: 2}
@@ -4730,6 +4795,78 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 3392105756686159732}
+--- !u!1 &7490718564492390415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5870242219038046730}
+  - component: {fileID: 573399824585856675}
+  - component: {fileID: 5871547250327440914}
+  m_Layer: 5
+  m_Name: RawImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5870242219038046730
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7490718564492390415}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.0009057824, y: 0.0009057823, z: 0.0009057823}
+  m_Children: []
+  m_Father: {fileID: 8877114758863907201}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0.0597}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &573399824585856675
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7490718564492390415}
+  m_CullTransparentMesh: 1
+--- !u!114 &5871547250327440914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7490718564492390415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 2800000, guid: 079dbb6c44ca47e43b412d9defdc4183, type: 3}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &7698624185138741309
 GameObject:
   m_ObjectHideFlags: 0
@@ -4930,14 +5067,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "According to all known laws\r\nof aviation,\r\n\r\n  \r\nthere is no way
-    a bee\r\nshould be able to fly.\r\n\r\n  \r\nIts wings are too small to get\r\nits
-    fat little body off the ground.\r\n\r\n  \r\nThe bee, of course, flies anyway\r\n\r\n 
-    \r\nbecause bees don't care\r\nwhat humans think is impossible.\r\n\r\n  \r\nYellow,
-    black. Yellow, black.\r\nYellow, black. Yellow, black.\r\n\r\n  \r\nOoh, black
-    and yellow!\r\nLet's shake it up a little.\r\n\r\n  \r\nBarry! Breakfast is ready!\r\n\r\n 
-    \r\nOoming!\r\n\r\n  \r\nHang on a second.\r\n\r\n  \r\nHello?\r\n\r\n  \r\n-
-    Barry?\r\n- Adam?"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0a1d4d40f92cd7347b03ac08510f1c8b, type: 2}
   m_sharedMaterial: {fileID: 4329221079346667621, guid: 0a1d4d40f92cd7347b03ac08510f1c8b, type: 2}
@@ -5036,6 +5166,7 @@ RectTransform:
   m_LocalScale: {x: 786.76654, y: 786.76654, z: 786.7666}
   m_Children:
   - {fileID: 920133955582073377}
+  - {fileID: 5870242219038046730}
   m_Father: {fileID: 1988545469495365960}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5237,14 +5368,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "According to all known laws\r\nof aviation,\r\n\r\n  \r\nthere is no way
-    a bee\r\nshould be able to fly.\r\n\r\n  \r\nIts wings are too small to get\r\nits
-    fat little body off the ground.\r\n\r\n  \r\nThe bee, of course, flies anyway\r\n\r\n 
-    \r\nbecause bees don't care\r\nwhat humans think is impossible.\r\n\r\n  \r\nYellow,
-    black. Yellow, black.\r\nYellow, black. Yellow, black.\r\n\r\n  \r\nOoh, black
-    and yellow!\r\nLet's shake it up a little.\r\n\r\n  \r\nBarry! Breakfast is ready!\r\n\r\n 
-    \r\nOoming!\r\n\r\n  \r\nHang on a second.\r\n\r\n  \r\nHello?\r\n\r\n  \r\n-
-    Barry?\r\n- Adam?"
+  m_text: "Your new creature has needs just like you and me. The better you take
+    care of their needs, the better life with them will be. Be sure to buy the necessary
+    supplies that every new pet owner will need. These may include food bowls, food,
+    treats, brushes, toys, and more. \n\nInteracting with your pet and using these
+    tools will allow your pet to live a long, happy, and lucrative life. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0a1d4d40f92cd7347b03ac08510f1c8b, type: 2}
   m_sharedMaterial: {fileID: 4329221079346667621, guid: 0a1d4d40f92cd7347b03ac08510f1c8b, type: 2}
@@ -5527,6 +5655,78 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: START
+--- !u!1 &8235137583249273907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8723883505985984567}
+  - component: {fileID: 7416562878259689318}
+  - component: {fileID: 6325642094778213782}
+  m_Layer: 5
+  m_Name: RawImage.2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8723883505985984567
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8235137583249273907}
+  m_LocalRotation: {x: -0.000000029802319, y: 0.000000029061114, z: -0.000000007583396, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalScale: {x: 0.0009057822, y: 0.00090578233, z: 0.0009057824}
+  m_Children: []
+  m_Father: {fileID: 4018674131704433280}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0.059697583}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7416562878259689318
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8235137583249273907}
+  m_CullTransparentMesh: 1
+--- !u!114 &6325642094778213782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8235137583249273907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 2800000, guid: 079dbb6c44ca47e43b412d9defdc4183, type: 3}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &8306448663343555369
 GameObject:
   m_ObjectHideFlags: 0
@@ -5557,6 +5757,7 @@ RectTransform:
   m_LocalScale: {x: 786.76654, y: 786.76654, z: 786.7666}
   m_Children:
   - {fileID: 562190756230314275}
+  - {fileID: 8723883505985984567}
   m_Father: {fileID: 749880284110544400}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5924,14 +6125,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "According to all known laws\r\nof aviation,\r\n\r\n  \r\nthere is no way
-    a bee\r\nshould be able to fly.\r\n\r\n  \r\nIts wings are too small to get\r\nits
-    fat little body off the ground.\r\n\r\n  \r\nThe bee, of course, flies anyway\r\n\r\n 
-    \r\nbecause bees don't care\r\nwhat humans think is impossible.\r\n\r\n  \r\nYellow,
-    black. Yellow, black.\r\nYellow, black. Yellow, black.\r\n\r\n  \r\nOoh, black
-    and yellow!\r\nLet's shake it up a little.\r\n\r\n  \r\nBarry! Breakfast is ready!\r\n\r\n 
-    \r\nOoming!\r\n\r\n  \r\nHang on a second.\r\n\r\n  \r\nHello?\r\n\r\n  \r\n-
-    Barry?\r\n- Adam?"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0a1d4d40f92cd7347b03ac08510f1c8b, type: 2}
   m_sharedMaterial: {fileID: 4329221079346667621, guid: 0a1d4d40f92cd7347b03ac08510f1c8b, type: 2}
@@ -6344,10 +6538,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "According to all known laws\r\nof aviation,\r\n\r\n  \r\nthere is no way
-    a bee\r\nshould be able to fly.\r\n\r\n  \r\nIts wings are too small to get\r\nits
-    fat little body off the ground.\r\n\r\n  \r\nThe bee, of course, flies anyway\r\n\r\n 
-    \r\nbecause bees don't care\r\nwhat humans think is impossible.\r"
+  m_text: "Welcome to StrangeCargo.com! Have you received some strange cargo recently?
+    If so, you\u2019re in the right place! Here you can find a detailed guide on
+    how to take care of your new \u2018shipment\u2019. Soon, you\u2019ll find the
+    better you take care of your new creature, the more lucrative it can be. \n\nNavigate
+    our site to find all the details you\u2019ll need to get started with your fresh
+    cargo. \n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0a1d4d40f92cd7347b03ac08510f1c8b, type: 2}
   m_sharedMaterial: {fileID: 4329221079346667621, guid: 0a1d4d40f92cd7347b03ac08510f1c8b, type: 2}
@@ -6581,6 +6777,7 @@ RectTransform:
   m_LocalScale: {x: 786.76654, y: 786.76654, z: 786.7666}
   m_Children:
   - {fileID: 7659054309639038281}
+  - {fileID: 126477370972367311}
   m_Father: {fileID: 3964256674732789863}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
