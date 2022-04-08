@@ -59,10 +59,6 @@ namespace Environment
             if (lastObj != null)
             {
                 Creature = lastObj.GameObject.GetComponent<CreatureController>();
-                if (Creature != null && Creature is CreatureController) 
-                {
-                    Creature = null;
-                }
             }
             else
             {
@@ -73,7 +69,14 @@ namespace Environment
 
             if (Creature != null)
             {
-                useString = $"{{use}} to Punish for {Creature.RecentMemory}";
+                if (Creature.MemoryHasPreference)
+                {
+                    useString = $"{{use}} to Punish for {Creature.RecentMemory}";
+                } 
+                else 
+                {
+                    useString = $"{{use}} to Stop {Creature.RecentMemory}";
+                }
             }
             else
             {

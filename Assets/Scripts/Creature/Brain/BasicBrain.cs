@@ -20,7 +20,9 @@ namespace Creature.Brain
         private Queue<System.Type> lastTasks;
         private int maxTrackSize;
 
-        public Option RecentMemory;
+        private Memory lastMemory;
+        private Memory currentMemory;
+        public Option RecentMemory => lastMemory != null ? (lastMemory.timeEnded + 5 > Time.time ? lastMemory.option : currentMemory.option) : null;
 
         public BasicBrain(CreatureController controller) 
         {
@@ -28,7 +30,6 @@ namespace Creature.Brain
             _controller = controller;
             Preferences = new List<Preferred>();
             lastTasks = new Queue<System.Type>();
-            RecentMemory = null;
         }
 
         public void PositiveReinforcement(Option option) 
@@ -39,6 +40,12 @@ namespace Creature.Brain
 
         public void NegativeReinforcement(Option option)
         {
+            if (currentMemory != null && option.Preferrence != null 
+                && currentMemory.option.Preferrence != null && option.Preferrence.Guid.Equals(currentMemory.option.Preferrence.Guid))
+            {
+                _controller.VoidTask();
+            }
+
             if (option.Preferrence != null)
                 option.Preferrence.Preference -= 0.05f;
         }
@@ -119,7 +126,13 @@ namespace Creature.Brain
             if (pickMe.Preferrence != null)
                 pickMe.Preferrence.Preference += 0.01f;
             // Label last option
-            RecentMemory = pickMe;
+            lastMemory = currentMemory;
+            if (lastMemory != null)
+            {
+                lastMemory.timeEnded = Time.time;
+            }
+            currentMemory = new Memory(pickMe);
+
             // Track Task
             lastTasks.Enqueue(pickMe.Task.GetType());
 
