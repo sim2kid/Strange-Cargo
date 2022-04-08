@@ -95,6 +95,12 @@ namespace UI
 
         private void Update()
         {
+            if (Pause == null) 
+            {
+                Pause = playerInput.actions["Pause"];
+                if (Pause == null)
+                    return;
+            }
             if (OpenMenuOnPause && Pause.triggered && IgnorePause <= 0)
             {
                 Toolbox.Instance.Pause.SetPause(!Toolbox.Instance.Pause.Paused);
