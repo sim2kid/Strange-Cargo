@@ -106,6 +106,11 @@ namespace Player
                     enableGravityOnDrop = rb.useGravity;
                     rb.useGravity = false;
                 }
+                var colliders = gameObject.GetComponentsInChildren<Collider>();
+                foreach (Collider collider in colliders) 
+                {
+                    collider.enabled = false;
+                }
             }
             if(tt != null)
                 tt.HoldText = Holding.HoldText;
@@ -132,6 +137,11 @@ namespace Player
                     if (rb != null)
                     {
                         rb.useGravity = enableGravityOnDrop;
+                    }
+                    var colliders = gameObject.GetComponentsInChildren<Collider>();
+                    foreach (Collider collider in colliders)
+                    {
+                        collider.enabled = true;
                     }
                 }
                 Holding.PutDown();
