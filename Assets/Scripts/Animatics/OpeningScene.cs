@@ -15,12 +15,15 @@ namespace Animatics
         void Start()
         {
             video = Resources.Load<VideoClip>("Video/StrangeCargoIntroAnimatic");
+            var bgm = GameObject.FindObjectOfType<Sound.BackgroundMusic>();
 
             Utility.Toolbox.Instance.Pause.SetPause(true);
+            bgm.PauseMusic();
             // play animatic
-            GameObject.FindObjectOfType<UIManager>().OpenVideo(video).AddListener(() => 
+            GameObject.FindObjectOfType<UIManager>().OpenVideo(video)?.AddListener(() => 
             {
                 Utility.Toolbox.Instance.Pause.SetPause(false);
+                bgm.UnpauseMusic();
                 OnFinish.Invoke();
             });
         }

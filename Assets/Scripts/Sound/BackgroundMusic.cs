@@ -16,9 +16,12 @@ namespace Sound
         private SwitchContainer switchContainer;
         private int lastTrack;
 
+        private bool isPlaying;
+
         void Start()
         {
             lastTrack = -1;
+            isPlaying = true;
             ap = GetComponent<AudioPlayer>();
             time = FindObjectOfType<Utility.TimeController>();
             ISound container = ap.Container;
@@ -66,23 +69,33 @@ namespace Sound
 
         public void PlayMusic() 
         {
+            if (!isPlaying) return;
             switchContainer.Selection = ResolveCurrentTrack();
             ap.Play();
         }
 
         public void UnpauseMusic() 
         {
+            isPlaying = true;
             ap.UnPause();
         }
 
         public void PauseMusic() 
         {
+            isPlaying = false;
             ap.Pause();
         }
 
         public void StopMusic() 
         {
+            isPlaying = false;
             ap.Stop();
+        }
+
+        public void StartMusic() 
+        {
+            isPlaying = true;
+            PlayMusic();
         }
 
         int ResolveCurrentTrack() 

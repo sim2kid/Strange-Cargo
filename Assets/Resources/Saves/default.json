@@ -1,1 +1,515 @@
-{"Metadata":{"SaveName":"Unnamed Game","GameVersion":"0.3.206","SaveGuid":"506373ae-3d9b-4cd9-943a-ab97ea15d7bc","SaveTime":1649445871979},"Prefabs":[{"PrefabResourceLocation":"Prefabs/ThrowToy","ExtraData":[{"_constraints":0,"_velocity":null,"_rotation":null,"IsKinematic":false,"DataType":"Rigidbody","GUID":"ae6f4323-6d20-4aa4-89db-f2016e040eda"},{"Color":"0831ff","DataType":"RandomColor","GUID":"9a96ce8f-e854-42bd-a0cf-e627deec9cb5"},{"_position":[487.552765,1.25450969,488.48056],"_rotation":[0.7049595,-0.001422465,-0.00139338535,0.7092447],"_scale":[0.200000018,0.16,0.09999999],"GUID":"65afb809-e98e-4f14-8dc2-c0f20f02b5e6","DataType":"Location"}],"GUID":"ddee5b20-a43d-4dc3-8457-a33f42d75fb7"},{"PrefabResourceLocation":"Prefabs/FlowerCookie","ExtraData":[{"_position":[489.525,1.22940421,492.1568],"_rotation":[2.83483161E-07,0.00016186625,1.19880028E-07,1.0],"_scale":[1.0,1.0,1.0],"GUID":"021c4380-9502-49e1-8a22-0cd567ce9919","DataType":"Location"}],"GUID":"4d9a37dd-a276-48c4-a13c-1a1ba076afe8"},{"PrefabResourceLocation":"Prefabs/BoneTreat","ExtraData":[{"_position":[489.559448,1.23070347,492.489746],"_rotation":[2.259223E-07,-0.0006187131,5.96203449E-07,0.9999999],"_scale":[1.0,1.0,1.0],"GUID":"84cd5c6d-6397-42a4-b2d0-4f215cfbae74","DataType":"Location"}],"GUID":"245f1cdd-be49-452f-9041-b8f8e6d23b63"},{"PrefabResourceLocation":"Prefabs/FoodBag","ExtraData":[{"_constraints":0,"_velocity":null,"_rotation":null,"IsKinematic":false,"DataType":"Rigidbody","GUID":"73012b9a-bd12-444d-8c32-0e3696127bff"},{"_position":[517.5287,1.199114,506.7961],"_rotation":[-2.48431817E-08,6.24892834E-07,2.1207228E-07,1.0],"_scale":[50.9705162,42.63646,28.9504337],"GUID":"fd039ef3-0628-4cbc-9338-e6e19b26a569","DataType":"Location"}],"GUID":"49f7a9be-8748-47ce-9d51-be85c0dd04be"},{"PrefabResourceLocation":"Prefabs/FoodBag","ExtraData":[{"_constraints":0,"_velocity":null,"_rotation":null,"IsKinematic":false,"DataType":"Rigidbody","GUID":"73012b9a-bd12-444d-8c32-0e3696127bff"},{"_position":[517.5266,1.199114,506.340973],"_rotation":[-2.48431817E-08,6.24892834E-07,2.1207228E-07,1.0],"_scale":[50.9705162,42.63646,28.9504337],"GUID":"fd039ef3-0628-4cbc-9338-e6e19b26a569","DataType":"Location"}],"GUID":"b14ececc-1cf4-40e0-b12a-310351c2b417"},{"PrefabResourceLocation":"Prefabs/WaterBowl","ExtraData":[{"_position":[489.7026,1.20541334,488.239441],"_rotation":[0.0,0.0,0.0,1.0],"_scale":[1.0,1.0,1.0],"GUID":"b57c3174-1e80-4cfc-8f2c-76d6a8c48f59","DataType":"Location"},{"Color":"45ff51","DataType":"RandomColor","GUID":"27d8dbea-2f1e-4dca-ab41-17294ba2a76d"},{"BaseNeeds":{"Appetite":0.3,"Bladder":-0.6,"Social":0.0,"Energy":0.4,"Hygiene":0.0,"Happiness":0.2},"Fullness":0.0,"GUID":"4ebd868c-b72c-4d27-8de1-b14e8fd4e18d","DataType":"BasicNeedSource"}],"GUID":"716171aa-843c-4319-b0c0-a2fe6e3c98f3"},{"PrefabResourceLocation":"Prefabs/Brush","ExtraData":[{"_constraints":0,"_velocity":null,"_rotation":null,"IsKinematic":false,"DataType":"Rigidbody","GUID":"a421085c-f595-4aef-925d-04313e6a9c88"},{"_position":[489.573853,1.22785592,493.218445],"_rotation":[-2.30540377E-06,-1.477208E-07,1.0,1.71714419E-06],"_scale":[1.0,1.0,1.0],"GUID":"ccf52332-1781-4b1e-a6ef-cbbed2fce7c2","DataType":"Location"}],"GUID":"03d8ebad-0cc2-4185-a491-14f2b02e8e03"},{"PrefabResourceLocation":"Prefabs/PetBed","ExtraData":[{"Color":"7162c1","DataType":"RandomColor","GUID":"81fa2a03-0b70-4aa5-aac4-2ebf61381f3a"},{"_position":[480.262146,0.239971563,502.5946],"_rotation":[0.0,0.0,0.0,1.0],"_scale":[0.35,0.3,0.3],"GUID":"2db808f0-c5b6-41ba-a163-1abdbebd8980","DataType":"Location"}],"GUID":"1c9b37d4-fa6c-4e9b-b3b0-dbc0e20e0a85"},{"PrefabResourceLocation":"Prefabs/PetBed","ExtraData":[{"Color":"b7506d","DataType":"RandomColor","GUID":"81fa2a03-0b70-4aa5-aac4-2ebf61381f3a"},{"_position":[480.059235,0.239971742,499.9706],"_rotation":[0.0,0.0,0.0,1.0],"_scale":[0.35,0.3,0.3],"GUID":"2db808f0-c5b6-41ba-a163-1abdbebd8980","DataType":"Location"}],"GUID":"77b60a2c-ded1-47c0-a1db-8b03a6bbdab9"},{"PrefabResourceLocation":"Prefabs/PetBed","ExtraData":[{"Color":"f3b59e","DataType":"RandomColor","GUID":"81fa2a03-0b70-4aa5-aac4-2ebf61381f3a"},{"_position":[480.328,0.203,497.168],"_rotation":[0.0,0.0,0.0,1.0],"_scale":[0.35,0.3,0.3],"GUID":"2db808f0-c5b6-41ba-a163-1abdbebd8980","DataType":"Location"}],"GUID":"f4d0eb44-0ee0-420c-8876-39a4068334f1"},{"PrefabResourceLocation":"Prefabs/SprayBottle","ExtraData":[{"_position":[488.7136,1.399541,511.417],"_rotation":[5.14911335E-06,0.917905569,-2.06821483E-06,-0.3967989],"_scale":[1.0,1.0,1.0],"GUID":"f778b34c-e2bb-4c91-9a8c-ca26be74ed99","DataType":"Location"},{"Color":"5e467a","DataType":"RandomColor","GUID":"fb9929a3-23f2-4f0d-b4df-91ad7901421c"},{"_constraints":0,"_velocity":null,"_rotation":null,"IsKinematic":false,"DataType":"Rigidbody","GUID":"535e11e7-5e2b-4b12-b999-838030ea32f1"},{"Color":"5e467a","DataType":"RandomColor","GUID":"e206179c-a830-4a7f-82b6-7de902e71bea"},{"Color":"5e467a","DataType":"RandomColor","GUID":"378acfa4-fade-4e98-8574-ecbc5ac850b4"},{"Color":"5e467a","DataType":"RandomColor","GUID":"95dd3970-d6f8-43cd-aac9-5ffb47ad2d98"},{"Color":"5e467a","DataType":"RandomColor","GUID":"cd89c755-740c-4ab0-a688-2feed404d908"},{"Color":"5e467a","DataType":"RandomColor","GUID":"b7f68a3b-8f99-47c5-b335-27f6cc4aff10"}],"GUID":"74b17f75-ab37-4b01-9343-9737eba66885"},{"PrefabResourceLocation":"Prefabs/NewSaveObj","ExtraData":[{"DataType":"BoolList","GUID":"4d89a9f2-7287-47a9-99b6-3a70469040ac","BoolData":{"createdCreature":true,"playedStartCutscene":false},"BoolName":["createdCreature","playedStartCutscene"],"BoolValue":[true,false]},{"_position":[481.800018,0.2,500.0],"_rotation":[0.0,0.0,0.0,1.0],"_scale":[1.0,1.0,1.0],"GUID":"99a33166-6b19-415f-a6db-582d40fda350","DataType":"Location"}],"GUID":"4b748ffb-6221-49b5-9242-0089db653add"}],"Persistents":[{"ExtraData":[{"Time":360.0899,"GUID":"9efd21b7-e29f-4963-8a94-1f596921c948","DataType":"Time"}],"DataType":"Persistent","GUID":"c61b4756-36bc-4a28-97e6-0f0e7b666d5e"},{"ExtraData":[{"DataType":"IsActive","GUID":"d69cf20f-2938-4c50-80f0-eaa2dd547011","IsActive":false},{"_position":[494.29,1.0,500.0],"_rotation":[0.00259000878,-0.6356852,-0.00213284441,-0.771941066],"_scale":null,"GUID":"1dd5e29e-c435-424c-b848-c4ca892e7804","DataType":"Location"},{"DataType":"StringList","GUID":"5956bb26-9c8e-4b51-b280-2f47e290f91e","StrList":["77dfb918-c67b-43d2-a6aa-26beb7f982ac"]},{"_constraints":0,"_velocity":null,"_rotation":null,"IsKinematic":false,"DataType":"Rigidbody","GUID":"eaf87a39-6e13-4ec5-b5b2-7d0f782187b5"}],"DataType":"Persistent","GUID":"77dfb918-c67b-43d2-a6aa-26beb7f982ac"},{"ExtraData":[{"DataType":"IsActive","GUID":"35b0000b-a3b0-4cfd-a005-6c974ce520e0","IsActive":false},{"DataType":"IsActive","GUID":"f2005f64-de54-4b45-9737-a76ebd00006b","IsActive":false},{"DataType":"IsActive","GUID":"bf1f4b14-c5f6-4c16-bc27-0c7b74029dd0","IsActive":false}],"DataType":"Persistent","GUID":"2a78d432-46e5-4646-8613-aef892b94316"}],"Creatures":[]}
+{
+    "Metadata": {
+      "SaveName": "Unnamed Game",
+      "GameVersion": "0.3.206",
+      "SaveGuid": "506373ae-3d9b-4cd9-943a-ab97ea15d7bc",
+      "SaveTime": 1649445871979
+    },
+    "Prefabs": [
+      {
+        "PrefabResourceLocation": "Prefabs/ThrowToy",
+        "ExtraData": [
+          {
+            "_constraints": 0,
+            "_velocity": null,
+            "_rotation": null,
+            "IsKinematic": false,
+            "DataType": "Rigidbody",
+            "GUID": "ae6f4323-6d20-4aa4-89db-f2016e040eda"
+          },
+          {
+            "Color": "0831ff",
+            "DataType": "RandomColor",
+            "GUID": "9a96ce8f-e854-42bd-a0cf-e627deec9cb5"
+          },
+          {
+            "_position": [
+              487.552765,
+              1.25450969,
+              488.48056
+            ],
+            "_rotation": [
+              0.7049595,
+              -0.001422465,
+              -0.00139338535,
+              0.7092447
+            ],
+            "_scale": [
+              0.200000018,
+              0.16,
+              0.09999999
+            ],
+            "GUID": "65afb809-e98e-4f14-8dc2-c0f20f02b5e6",
+            "DataType": "Location"
+          }
+        ],
+        "GUID": "ddee5b20-a43d-4dc3-8457-a33f42d75fb7"
+      },
+      {
+        "PrefabResourceLocation": "Prefabs/FlowerCookie",
+        "ExtraData": [
+          {
+            "_position": [
+              489.525,
+              1.22940421,
+              492.1568
+            ],
+            "_rotation": [
+              2.83483161e-7,
+              0.00016186625,
+              1.19880028e-7,
+              1
+            ],
+            "_scale": [
+              1,
+              1,
+              1
+            ],
+            "GUID": "021c4380-9502-49e1-8a22-0cd567ce9919",
+            "DataType": "Location"
+          }
+        ],
+        "GUID": "4d9a37dd-a276-48c4-a13c-1a1ba076afe8"
+      },
+      {
+        "PrefabResourceLocation": "Prefabs/BoneTreat",
+        "ExtraData": [
+          {
+            "_position": [
+              489.559448,
+              1.23070347,
+              492.489746
+            ],
+            "_rotation": [
+              2.259223e-7,
+              -0.0006187131,
+              5.96203449e-7,
+              0.9999999
+            ],
+            "_scale": [
+              1,
+              1,
+              1
+            ],
+            "GUID": "84cd5c6d-6397-42a4-b2d0-4f215cfbae74",
+            "DataType": "Location"
+          }
+        ],
+        "GUID": "245f1cdd-be49-452f-9041-b8f8e6d23b63"
+      },
+      {
+        "PrefabResourceLocation": "Prefabs/FoodBag",
+        "ExtraData": [
+          {
+            "_constraints": 0,
+            "_velocity": null,
+            "_rotation": null,
+            "IsKinematic": false,
+            "DataType": "Rigidbody",
+            "GUID": "73012b9a-bd12-444d-8c32-0e3696127bff"
+          },
+          {
+            "_position": [
+              517.5287,
+              1.199114,
+              506.7961
+            ],
+            "_rotation": [
+              -2.48431817e-8,
+              6.24892834e-7,
+              2.1207228e-7,
+              1
+            ],
+            "_scale": [
+              50.9705162,
+              42.63646,
+              28.9504337
+            ],
+            "GUID": "fd039ef3-0628-4cbc-9338-e6e19b26a569",
+            "DataType": "Location"
+          }
+        ],
+        "GUID": "49f7a9be-8748-47ce-9d51-be85c0dd04be"
+      },
+      {
+        "PrefabResourceLocation": "Prefabs/FoodBag",
+        "ExtraData": [
+          {
+            "_constraints": 0,
+            "_velocity": null,
+            "_rotation": null,
+            "IsKinematic": false,
+            "DataType": "Rigidbody",
+            "GUID": "73012b9a-bd12-444d-8c32-0e3696127bff"
+          },
+          {
+            "_position": [
+              517.5266,
+              1.199114,
+              506.340973
+            ],
+            "_rotation": [
+              -2.48431817e-8,
+              6.24892834e-7,
+              2.1207228e-7,
+              1
+            ],
+            "_scale": [
+              50.9705162,
+              42.63646,
+              28.9504337
+            ],
+            "GUID": "fd039ef3-0628-4cbc-9338-e6e19b26a569",
+            "DataType": "Location"
+          }
+        ],
+        "GUID": "b14ececc-1cf4-40e0-b12a-310351c2b417"
+      },
+      {
+        "PrefabResourceLocation": "Prefabs/WaterBowl",
+        "ExtraData": [
+          {
+            "_position": [
+              489.7026,
+              1.20541334,
+              488.239441
+            ],
+            "_rotation": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "_scale": [
+              1,
+              1,
+              1
+            ],
+            "GUID": "b57c3174-1e80-4cfc-8f2c-76d6a8c48f59",
+            "DataType": "Location"
+          },
+          {
+            "Color": "45ff51",
+            "DataType": "RandomColor",
+            "GUID": "27d8dbea-2f1e-4dca-ab41-17294ba2a76d"
+          },
+          {
+            "BaseNeeds": {
+              "Appetite": 0.3,
+              "Bladder": -0.6,
+              "Social": 0,
+              "Energy": 0.4,
+              "Hygiene": 0,
+              "Happiness": 0.2
+            },
+            "Fullness": 0,
+            "GUID": "4ebd868c-b72c-4d27-8de1-b14e8fd4e18d",
+            "DataType": "BasicNeedSource"
+          }
+        ],
+        "GUID": "716171aa-843c-4319-b0c0-a2fe6e3c98f3"
+      },
+      {
+        "PrefabResourceLocation": "Prefabs/Brush",
+        "ExtraData": [
+          {
+            "_constraints": 0,
+            "_velocity": null,
+            "_rotation": null,
+            "IsKinematic": false,
+            "DataType": "Rigidbody",
+            "GUID": "a421085c-f595-4aef-925d-04313e6a9c88"
+          },
+          {
+            "_position": [
+              489.573853,
+              1.22785592,
+              493.218445
+            ],
+            "_rotation": [
+              -0.00000230540377,
+              -1.477208e-7,
+              1,
+              0.00000171714419
+            ],
+            "_scale": [
+              1,
+              1,
+              1
+            ],
+            "GUID": "ccf52332-1781-4b1e-a6ef-cbbed2fce7c2",
+            "DataType": "Location"
+          }
+        ],
+        "GUID": "03d8ebad-0cc2-4185-a491-14f2b02e8e03"
+      },
+      {
+        "PrefabResourceLocation": "Prefabs/PetBed",
+        "ExtraData": [
+          {
+            "Color": "7162c1",
+            "DataType": "RandomColor",
+            "GUID": "81fa2a03-0b70-4aa5-aac4-2ebf61381f3a"
+          },
+          {
+            "_position": [
+              480.262146,
+              0.239971563,
+              502.5946
+            ],
+            "_rotation": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "_scale": [
+              0.35,
+              0.3,
+              0.3
+            ],
+            "GUID": "2db808f0-c5b6-41ba-a163-1abdbebd8980",
+            "DataType": "Location"
+          }
+        ],
+        "GUID": "1c9b37d4-fa6c-4e9b-b3b0-dbc0e20e0a85"
+      },
+      {
+        "PrefabResourceLocation": "Prefabs/PetBed",
+        "ExtraData": [
+          {
+            "Color": "b7506d",
+            "DataType": "RandomColor",
+            "GUID": "81fa2a03-0b70-4aa5-aac4-2ebf61381f3a"
+          },
+          {
+            "_position": [
+              480.059235,
+              0.239971742,
+              499.9706
+            ],
+            "_rotation": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "_scale": [
+              0.35,
+              0.3,
+              0.3
+            ],
+            "GUID": "2db808f0-c5b6-41ba-a163-1abdbebd8980",
+            "DataType": "Location"
+          }
+        ],
+        "GUID": "77b60a2c-ded1-47c0-a1db-8b03a6bbdab9"
+      },
+      {
+        "PrefabResourceLocation": "Prefabs/PetBed",
+        "ExtraData": [
+          {
+            "Color": "f3b59e",
+            "DataType": "RandomColor",
+            "GUID": "81fa2a03-0b70-4aa5-aac4-2ebf61381f3a"
+          },
+          {
+            "_position": [
+              480.328,
+              0.203,
+              497.168
+            ],
+            "_rotation": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "_scale": [
+              0.35,
+              0.3,
+              0.3
+            ],
+            "GUID": "2db808f0-c5b6-41ba-a163-1abdbebd8980",
+            "DataType": "Location"
+          }
+        ],
+        "GUID": "f4d0eb44-0ee0-420c-8876-39a4068334f1"
+      },
+      {
+        "PrefabResourceLocation": "Prefabs/SprayBottle",
+        "ExtraData": [
+          {
+            "_position": [
+              488.7136,
+              1.399541,
+              511.417
+            ],
+            "_rotation": [
+              0.00000514911335,
+              0.917905569,
+              -0.00000206821483,
+              -0.3967989
+            ],
+            "_scale": [
+              1,
+              1,
+              1
+            ],
+            "GUID": "f778b34c-e2bb-4c91-9a8c-ca26be74ed99",
+            "DataType": "Location"
+          },
+          {
+            "Color": "5e467a",
+            "DataType": "RandomColor",
+            "GUID": "fb9929a3-23f2-4f0d-b4df-91ad7901421c"
+          },
+          {
+            "_constraints": 0,
+            "_velocity": null,
+            "_rotation": null,
+            "IsKinematic": false,
+            "DataType": "Rigidbody",
+            "GUID": "535e11e7-5e2b-4b12-b999-838030ea32f1"
+          },
+          {
+            "Color": "5e467a",
+            "DataType": "RandomColor",
+            "GUID": "e206179c-a830-4a7f-82b6-7de902e71bea"
+          },
+          {
+            "Color": "5e467a",
+            "DataType": "RandomColor",
+            "GUID": "378acfa4-fade-4e98-8574-ecbc5ac850b4"
+          },
+          {
+            "Color": "5e467a",
+            "DataType": "RandomColor",
+            "GUID": "95dd3970-d6f8-43cd-aac9-5ffb47ad2d98"
+          },
+          {
+            "Color": "5e467a",
+            "DataType": "RandomColor",
+            "GUID": "cd89c755-740c-4ab0-a688-2feed404d908"
+          },
+          {
+            "Color": "5e467a",
+            "DataType": "RandomColor",
+            "GUID": "b7f68a3b-8f99-47c5-b335-27f6cc4aff10"
+          }
+        ],
+        "GUID": "74b17f75-ab37-4b01-9343-9737eba66885"
+      },
+      {
+        "PrefabResourceLocation": "Prefabs/NewSaveObj",
+        "ExtraData": [
+          {
+            "DataType": "BoolList",
+            "GUID": "4d89a9f2-7287-47a9-99b6-3a70469040ac",
+            "BoolData": {
+              "createdCreature": false,
+              "playedStartCutscene": false
+            }
+          },
+          {
+            "_position": [
+              481.800018,
+              0.2,
+              500
+            ],
+            "_rotation": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "_scale": [
+              1,
+              1,
+              1
+            ],
+            "GUID": "99a33166-6b19-415f-a6db-582d40fda350",
+            "DataType": "Location"
+          }
+        ],
+        "GUID": "4b748ffb-6221-49b5-9242-0089db653add"
+      }
+    ],
+    "Persistents": [
+      {
+        "ExtraData": [
+          {
+            "Time": 360.0899,
+            "GUID": "9efd21b7-e29f-4963-8a94-1f596921c948",
+            "DataType": "Time"
+          }
+        ],
+        "DataType": "Persistent",
+        "GUID": "c61b4756-36bc-4a28-97e6-0f0e7b666d5e"
+      },
+      {
+        "ExtraData": [
+          {
+            "DataType": "IsActive",
+            "GUID": "d69cf20f-2938-4c50-80f0-eaa2dd547011",
+            "IsActive": false
+          },
+          {
+            "_position": [
+              494.29,
+              1,
+              500
+            ],
+            "_rotation": [
+              0.00259000878,
+              -0.6356852,
+              -0.00213284441,
+              -0.771941066
+            ],
+            "_scale": null,
+            "GUID": "1dd5e29e-c435-424c-b848-c4ca892e7804",
+            "DataType": "Location"
+          },
+          {
+            "DataType": "StringList",
+            "GUID": "5956bb26-9c8e-4b51-b280-2f47e290f91e",
+            "StrList": [
+              "77dfb918-c67b-43d2-a6aa-26beb7f982ac"
+            ]
+          },
+          {
+            "_constraints": 0,
+            "_velocity": null,
+            "_rotation": null,
+            "IsKinematic": false,
+            "DataType": "Rigidbody",
+            "GUID": "eaf87a39-6e13-4ec5-b5b2-7d0f782187b5"
+          }
+        ],
+        "DataType": "Persistent",
+        "GUID": "77dfb918-c67b-43d2-a6aa-26beb7f982ac"
+      },
+      {
+        "ExtraData": [
+          {
+            "DataType": "IsActive",
+            "GUID": "35b0000b-a3b0-4cfd-a005-6c974ce520e0",
+            "IsActive": false
+          },
+          {
+            "DataType": "IsActive",
+            "GUID": "f2005f64-de54-4b45-9737-a76ebd00006b",
+            "IsActive": false
+          },
+          {
+            "DataType": "IsActive",
+            "GUID": "bf1f4b14-c5f6-4c16-bc27-0c7b74029dd0",
+            "IsActive": false
+          }
+        ],
+        "DataType": "Persistent",
+        "GUID": "2a78d432-46e5-4646-8613-aef892b94316"
+      }
+    ],
+    "Creatures": []
+  }

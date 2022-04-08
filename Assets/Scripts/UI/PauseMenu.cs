@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 using Utility;
+using System.Linq;
 
 namespace UI
 {
@@ -38,6 +39,9 @@ namespace UI
 
         private float IgnorePause = 0;
 
+        delegate void RunThis();
+        List<Pair<RunThis, int>> toRun = new List<Pair<RunThis, int>>();
+
         private void OnEnable()
         {
             OpenMenuOnPause = false;
@@ -51,6 +55,11 @@ namespace UI
 
             if (Toolbox.Instance.Pause.Paused)
                 OnPause();
+        }
+
+        private void RunNextFrame(RunThis function, int numFrames)
+        {
+            toRun.Add(new Pair<RunThis, int>(function, numFrames));
         }
 
         private void OnDisable()
@@ -92,6 +101,18 @@ namespace UI
             {
                 IgnorePause -= Time.deltaTime;
             }
+            for (int i = 0; i < toRun.Count; i++)
+            {
+                if (toRun[i].Second > 0)
+                {
+                    toRun[i].Second--;
+                }
+                if(toRun[i].Second == 0)
+                {
+                    toRun[i].First.Invoke();
+                }
+            }
+            toRun.RemoveAll(val => val.Second <= 0);
         }
 
         public void CancelPauseInput()
@@ -232,9 +253,13 @@ namespace UI
         public UnityEvent PlayVideo(VideoClip video) 
         {
             TurnOffAllMenus();
+            Menu.SetActive(true);
             videoPlayer.gameObject.SetActive(true);
-            videoPlayer.clip = video;
-            videoPlayer.Play();
+            RunNextFrame(() => {
+                Console.Log("Playing Video");
+                videoPlayer.clip = video;
+                videoPlayer.Play();
+            }, 2);
 
             onEnd = new UnityEvent();
 
