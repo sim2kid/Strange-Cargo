@@ -2,9 +2,11 @@ using PersistentData;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 using Utility;
 
 namespace UI
@@ -26,6 +28,8 @@ namespace UI
         public GameObject exitDefault;
         public GameObject loadDefault;
         public GameObject mainDefault;
+
+        public VideoPlayer videoPlayer;
 
         public Cinemachine.CinemachineVirtualCamera MenuCamera;
 
@@ -224,6 +228,33 @@ namespace UI
             }
         }
 
+        UnityEvent onEnd;
+        public UnityEvent PlayVideo(VideoClip video) 
+        {
+            TurnOffAllMenus();
+            videoPlayer.gameObject.SetActive(true);
+            videoPlayer.clip = video;
+            videoPlayer.Play();
+
+            onEnd = new UnityEvent();
+
+            videoPlayer.loopPointReached += OnVideoEnd;
+            return onEnd;
+        }
+
+        private void OnVideoEnd(VideoPlayer source) 
+        {
+            source.loopPointReached -= OnVideoEnd;
+            onEnd.Invoke();
+            StopVideo();
+        }
+
+        public void StopVideo() 
+        {
+            videoPlayer.Pause();
+            videoPlayer.gameObject.SetActive(false);
+        }
+
         public void DisablePauseMenu()
         {
             OpenMenuOnPause = false;
@@ -261,6 +292,8 @@ namespace UI
             pauseMenu.SetActive(false);
             OptionsMenu.SetActive(false);
             ExitMenu.SetActive(false);
+            videoPlayer.Pause();
+            videoPlayer.gameObject.SetActive(false);
         }
     }
 }

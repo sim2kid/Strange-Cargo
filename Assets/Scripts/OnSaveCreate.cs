@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PersistentData.Component;
 using PersistentData.Saving;
+using Animatics;
 
 public class OnSaveCreate : MonoBehaviour, ISaveable
 {
@@ -12,7 +13,13 @@ public class OnSaveCreate : MonoBehaviour, ISaveable
     };
     public ISaveData saveData { get => data; set => data = (BoolListData)value; }
 
-    bool createdCreature = false;
+    Dictionary<string, bool> Events => data.BoolData;
+
+    private void Start()
+    {
+        Events.Add("createdCreature", false);
+        Events.Add("playedStartCutscene", false);
+    }
 
     public void PostDeserialization()
     {
@@ -35,16 +42,24 @@ public class OnSaveCreate : MonoBehaviour, ISaveable
 
     public void TryOpeningCutScene() 
     {
-    
+        if (Events["playedStartCutscene"]) return;
+
+        Console.Log("Running starting cutscene.");
+        // Run start cutscene
+        OpeningScene os = new OpeningScene();
+        Instantiate(os);
+        os.OnFinish.AddListener(() => {
+            Events["playedStartCutscene"] = true;
+        });
     }
 
     private void CreateCreature() 
     {
-        if(createdCreature) return;
+        if(Events["createdCreature"]) return;
         // Create Creature
         var creature = Genetics.CreatureGeneration.CreateCreature();
         creature.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(transform.position);
         //creature.transform.position = this.transform.position;
-        createdCreature = true;
+        Events["createdCreature"] = true;
     }
 }

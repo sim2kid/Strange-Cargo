@@ -3,6 +3,7 @@ using PersistentData;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace UI
 {
@@ -14,7 +15,7 @@ namespace UI
         public Menu currentMenu { get; private set; }
 
 
-        private CinemachineBlendDefinition saveCameraStyle;
+        private CinemachineBlendDefinition defaultCameraStyle = new CinemachineBlendDefinition(CinemachineBlendDefinition.Style.EaseInOut, 1f);
 
         // public MainMenu MainMenuManager;
 
@@ -29,12 +30,27 @@ namespace UI
             FindObjectOfType<SaveManager>().DestroyAllUnloadedCreatures();
         }
 
+        delegate void RunThis();
+        List<RunThis> toRun = new List<RunThis>();
+        private void LateUpdate()
+        {
+            foreach (var func in toRun) 
+            {
+                func();
+            }
+            toRun.Clear();
+        }
+
+        private void RunNextFrame(RunThis function) 
+        {
+            toRun.Add(function);
+        }
+
         public UIManager CloseAllMenus()
         {
             Utility.Toolbox.Instance.Player.InputState = InputState.Default;
-            saveCameraStyle = Camera.main.gameObject.GetComponent<Cinemachine.CinemachineBrain>().m_DefaultBlend;
             Camera.main.gameObject.GetComponent<Cinemachine.CinemachineBrain>().m_DefaultBlend.m_Style = Cinemachine.CinemachineBlendDefinition.Style.Cut;
-            Invoke("SetCamToNormal", 2f);
+            SetCamToNormal();
 
             currentMenu = Menu.None;
             Camera.main.cullingMask &= ~(1 << LayerMask.NameToLayer("Player"));
@@ -44,6 +60,23 @@ namespace UI
             PauseMenuManager.DisablePauseMenu();
             PauseMenuManager.DisableMainMenu();
             return this;
+        }
+
+        public UIManager NextState(Menu menu) 
+        {
+            switch (menu) 
+            {
+                case Menu.Main:
+                    return OpenMainMenu();
+                case Menu.Loading:
+                    return OpenLoading();
+                case Menu.Gameplay:
+                    return OpenGameplay();
+                case Menu.Focus:
+                    return OpenFocus();
+                default:
+                    return OpenGameplay();
+            }
         }
 
         public UIManager OpenMainMenu()
@@ -95,9 +128,30 @@ namespace UI
             return this;
         }
 
+        public UnityEvent OpenVideo(UnityEngine.Video.VideoClip videoClip) 
+        {
+            var lastState = currentMenu;
+            if (currentMenu == Menu.Video)
+                return null;
+            Console.Log("Opening Video Player.");
+            CloseAllMenus();
+            currentMenu = Menu.Video;
+            Utility.Toolbox.Instance.Pause.SetPause(true);
+            UnityEvent onFinish = new UnityEvent();
+            PauseMenuManager.PlayVideo(videoClip).AddListener(() => 
+            {
+                Utility.Toolbox.Instance.Pause.SetPause(false);
+                onFinish.Invoke();
+                NextState(lastState);
+            });
+            return onFinish;
+        }
+
         public UIManager SetCamToNormal()
         {
-            Camera.main.gameObject.GetComponent<Cinemachine.CinemachineBrain>().m_DefaultBlend = saveCameraStyle;
+            RunNextFrame(() => {
+                Camera.main.gameObject.GetComponent<Cinemachine.CinemachineBrain>().m_DefaultBlend = defaultCameraStyle;
+            });
             return this;
         }
     }
@@ -108,6 +162,7 @@ namespace UI
         Main,
         Gameplay,
         Focus,
+        Video,
         None
     }
 }
