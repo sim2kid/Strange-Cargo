@@ -6,31 +6,36 @@ using PersistentData.Saving;
 
 public class OnSaveCreate : MonoBehaviour, ISaveable
 {
-    StringListData data = new StringListData()
+    BoolListData data = new BoolListData()
     {
-        _guid = "4d89a9f2-7287-47a9-99b6-3a70469040ac",
-        StrList = new List<string>()
+        _guid = "4d89a9f2-7287-47a9-99b6-3a70469040ac"
     };
-    public ISaveData saveData { get => data; set => data = (StringListData)value; }
+    public ISaveData saveData { get => data; set => data = (BoolListData)value; }
 
     bool createdCreature = false;
 
     public void PostDeserialization()
     {
+        data.PostDeserialize();
         StartCoroutine(ProcessContent());
     }
 
     public void PreDeserialization() { }
 
-    public void PreSerialization() { }
+    public void PreSerialization() 
+    {
+        data.PreSerialize();
+    }
 
     private IEnumerator ProcessContent() 
     {
         yield return new WaitForFixedUpdate();
         CreateCreature();
+    }
 
-        yield return new WaitForSeconds(5f);
-        Destroy(gameObject);
+    public void TryOpeningCutScene() 
+    {
+    
     }
 
     private void CreateCreature() 

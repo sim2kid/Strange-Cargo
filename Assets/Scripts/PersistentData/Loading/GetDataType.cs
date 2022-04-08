@@ -64,6 +64,9 @@ namespace PersistentData.Loading
                 case "Item":
                     DataType = new ItemData();
                     break;
+                case "BoolList":
+                    DataType = new BoolListData();
+                    break;
             }
             serializer.Populate(jsonObject.CreateReader(), DataType);
             return DataType;
