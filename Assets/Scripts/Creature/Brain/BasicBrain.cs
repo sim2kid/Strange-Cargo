@@ -19,15 +19,29 @@ namespace Creature.Brain
         [JsonProperty]
         private Queue<System.Type> lastTasks;
         private int maxTrackSize;
+
+        public Option RecentMemory;
+
         public BasicBrain(CreatureController controller) 
         {
             maxTrackSize = 50;
             _controller = controller;
             Preferences = new List<Preferred>();
             lastTasks = new Queue<System.Type>();
+            RecentMemory = null;
         }
 
-        
+        public void PositiveReinforcement(Option option) 
+        {
+            if (option.Preferrence != null)
+                option.Preferrence.Preference += 0.02f;
+        }
+
+        public void NegativeReinforcement(Option option)
+        {
+            if (option.Preferrence != null)
+                option.Preferrence.Preference -= 0.05f;
+        }
 
         public void Think() 
         {
@@ -104,6 +118,8 @@ namespace Creature.Brain
             // Update preferrence
             if (pickMe.Preferrence != null)
                 pickMe.Preferrence.Preference += 0.01f;
+            // Label last option
+            RecentMemory = pickMe;
             // Track Task
             lastTasks.Enqueue(pickMe.Task.GetType());
 

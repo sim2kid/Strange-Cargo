@@ -26,34 +26,38 @@ namespace Creature.Task
         {
         }
 
-        public void EndTask(UnityEvent update)
+        public void EndTask(CreatureController caller)
         {
             IsStarted = false;
         }
 
-        public ITask RunTask(CreatureController caller, UnityEvent update)
+        public ITask RunTask(CreatureController caller)
         {
             IsStarted = true;
             IsDone = false;
             movementSubtask = new GoHere(caller.transform.position + (Random.insideUnitSphere * distance), 1);
-            movementSubtask.RunTask(caller, update).OnTaskFinished.AddListener(AfterTask);
+            movementSubtask.RunTask(caller).OnTaskFinished.AddListener(AfterTask);
             _caller = caller;
-            _update = update;
             return this;
+        }
+
+        public void Update(CreatureController caller) 
+        {
+        
         }
 
         void AfterTask() 
         {
             if(movementSubtask != null)
-                movementSubtask.EndTask(_update);
+                movementSubtask.EndTask(_caller);
             waitTask = new Wait(maxTime);
-            waitTask.RunTask(_caller, _update).OnTaskFinished.AddListener(Finished);
+            waitTask.RunTask(_caller).OnTaskFinished.AddListener(Finished);
         }
 
         void Finished() 
         {
             if(waitTask != null)
-                waitTask.EndTask(_update);
+                waitTask.EndTask(_caller);
             IsDone = true;
             OnTaskFinished.Invoke();
         }

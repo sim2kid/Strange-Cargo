@@ -21,24 +21,22 @@ namespace Creature.Task
         public void SatisfactionHook(System.Func<float> func)
         {
         }
-        public void EndTask(UnityEvent update)
+        public void EndTask(CreatureController caller)
         {
-            update.RemoveListener(Update);
             IsStarted = false;
         }
 
-        public ITask RunTask(CreatureController caller, UnityEvent update)
+        public ITask RunTask(CreatureController caller)
         {
             waitInit = waitAmount;
             timer = 0;
             IsDone = false;
             IsStarted = true;
-            update.AddListener(Update);
             caller.RequestMoreTaskTime(waitAmount);
             return this;
         }
 
-        void Update()
+        public void Update(CreatureController caller)
         {
             timer += Time.deltaTime;
             if (timer >= waitAmount)

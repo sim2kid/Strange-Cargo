@@ -22,64 +22,60 @@ namespace Creature.Task
 
 
         Vector3 poopPoint;
-        CreatureController _caller;
-        UnityEvent _update;
 
-        ITask come, wait;
-
-        public ITask RunTask(CreatureController caller, UnityEvent update)
+        public ITask RunTask(CreatureController caller)
         {
             IsDone = false;
             IsStarted = true;
-            _caller = caller;
-            _update = update;
             Satisfaction = 0;
 
             poopPoint = _poopZone.GetPoint();
 
-            come = new GoHere(poopPoint, 1f).RunTask(caller, update);
-            come.OnTaskFinished.AddListener(TakeAPoo);
+            ITask come = new GoHere(poopPoint, 1f);
+            ITask wait = new Wait(3);
 
+            // Must add in reverse order because it's a stack
 
+            caller.AddSubTask(wait, (creatue, task) =>
+            {
+                DonePooing(creatue);
+                return true;
+            });
+
+            caller.AddSubTask(come, (creatue, task) => {
+                TakeAPoo(creatue);
+                return true;
+            });
+            
             return this;
         }
-        private void TakeAPoo() 
+        private void TakeAPoo(CreatureController caller) 
         {
-            Console.LogDebug($"Creature [{_caller.Guid}]: Poop - In Poop Position");
-            if (come != null)
-                come.EndTask(_update);
-
+            Console.LogDebug($"Creature [{caller.Guid}]: Poop - In Poop Position");
             // Start poop animation
-
-            wait = new Wait(3);
-            wait.OnTaskFinished.AddListener(DonePooing);
-            wait.RunTask(_caller, _update);
-
+            Console.Log($"Missing Poop Animation in Creature.Task.Poop.cs");
         }
-        private void DonePooing() 
+        private void DonePooing(CreatureController caller) 
         {
-            Console.LogDebug($"Creature [{_caller.Guid}]: Poop - Poop has been left!");
-            if (wait != null)
-                wait.EndTask(_update);
+            Console.LogDebug($"Creature [{caller.Guid}]: Poop - Poop has been left!");
 
-            _poopZone.Poop(_caller.transform.position, 200 - _caller.needs.Bladder);
-            _caller.ProcessINeed(_poopZone);
+            _poopZone.Poop(caller.transform.position, 200 - caller.needs.Bladder);
+            caller.ProcessINeed(_poopZone);
 
             Satisfaction = 100;
 
             IsDone = true;
             OnTaskFinished.Invoke();
         }
-        public void EndTask(UnityEvent update)
+        public void EndTask(CreatureController caller)
         {
-            if (come != null)
-                come.EndTask(update);
-            if (wait != null)
-                wait.EndTask(update);
             IsStarted = false;
             if (SatisResult != null)
                 SatisResult.Invoke();
         }
+
+        public void Update(CreatureController caller) { }
+
         public Poop(PoopZone poopZone) 
         {
             IsStarted = false;

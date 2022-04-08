@@ -1,3 +1,5 @@
+using Creature;
+using Creature.Stats;
 using Interaction;
 using Player;
 using System.Collections;
@@ -7,27 +9,37 @@ using UnityEngine.Events;
 
 namespace Environment
 {
-    public class SprayBottle : Pickupable, IUseable
+    public class SprayBottle : Pickupable, IUseable, INeedChange
     {
         public UnityEvent OnUse;
         public string UseText => useString;
 
+        public Needs NeedChange => needChange;
+
+        public Needs needChange;
+
         private PlayerController Player;
         private Creature.CreatureController Creature;
 
-        private string useString;
         [SerializeField]
-        private string useOnCreature;
+        private string useString;
+
+        public UnityEvent onUseCreature;
+        public UnityEvent onUseNotCreature;
 
         public void Use()
         {
-            //if (Bowl != null)
-            //{
-            //    OnUse.Invoke();
-            //    Player.HandController.LetGo();
-            //    Bowl.Fill(200);
-            //    Destroy(this.gameObject);
-            //}
+            if (Creature != null)
+            {
+                Creature.NegativeReinforcement();
+
+                Creature.ProcessINeed(this);
+                onUseCreature.Invoke();
+            }
+            else 
+            {
+                onUseNotCreature.Invoke();
+            }
         }
         public void Mod1Use()
         {
@@ -43,29 +55,30 @@ namespace Environment
 
         public void HoldUpdate()
         {
-            //IInteractable lastObj = Player.Interaction.Previous;
-            //if (lastObj != null)
-            //{
-            //    Bowl = lastObj.GameObject.GetComponent<FoodBowl>();
-            //    if (Bowl != null)
-            //        if (Bowl.GetType() != typeof(FoodBowl))
-            //            Bowl = null;
-            //}
-            //else
-            //{
-            //    Bowl = null;
-            //}
+            IInteractable lastObj = Player.Interaction.Previous;
+            if (lastObj != null)
+            {
+                Creature = lastObj.GameObject.GetComponent<CreatureController>();
+                if (Creature != null && Creature is CreatureController) 
+                {
+                    Creature = null;
+                }
+            }
+            else
+            {
+                Creature = null;
+            }
 
 
 
-            //if (Bowl != null)
-            //{
-            //    useString = useOnBowl;// "{use} to Refill";
-            //}
-            //else
-            //{
-            //    useString = string.Empty;
-            //}
+            if (Creature != null)
+            {
+                useString = $"{{use}} to Punish for {Creature.RecentMemory}";
+            }
+            else
+            {
+                useString = string.Empty;
+            }
         }
     }
 }
