@@ -1,4 +1,5 @@
 using Creature;
+using Creature.Stats;
 using Interaction;
 using Player;
 using System.Collections;
@@ -8,10 +9,14 @@ using UnityEngine.Events;
 
 namespace Environment
 {
-    public class SprayBottle : Pickupable, IUseable
+    public class SprayBottle : Pickupable, IUseable, INeedChange
     {
         public UnityEvent OnUse;
         public string UseText => useString;
+
+        public Needs NeedChange => needChange;
+
+        public Needs needChange;
 
         private PlayerController Player;
         private Creature.CreatureController Creature;
@@ -21,15 +26,24 @@ namespace Environment
         [SerializeField]
         private string useOnCreature;
 
+        public UnityEvent onEveryUse;
+        public UnityEvent onUseCreature;
+        public UnityEvent onUseNotCreature;
+
         public void Use()
         {
-            //if (bowl != null)
-            //{
-            //    onuse.invoke();
-            //    player.handcontroller.letgo();
-            //    bowl.fill(200);
-            //    destroy(this.gameobject);
-            //}
+            onEveryUse.Invoke();
+            if (Creature != null)
+            {
+                Creature.NegativeReinforcement();
+
+                Creature.ProcessINeed(this);
+                onUseCreature.Invoke();
+            }
+            else 
+            {
+                onUseNotCreature.Invoke();
+            }
         }
         public void Mod1Use()
         {
@@ -61,14 +75,14 @@ namespace Environment
 
 
 
-            //if (Creature != null)
-            //{
-            //    useString = useOnBowl;// "{use} to Refill";
-            //}
-            //else
-            //{
-            //    useString = string.Empty;
-            //}
+            if (Creature != null)
+            {
+                useString = $"{{use}} to Punish for {Creature.RecentMemory}";
+            }
+            else
+            {
+                useString = string.Empty;
+            }
         }
     }
 }

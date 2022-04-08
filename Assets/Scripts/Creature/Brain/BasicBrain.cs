@@ -37,7 +37,7 @@ namespace Creature.Brain
                 option.Preferrence.Preference += 0.02f;
         }
 
-        public void NegitiveReinforcement(Option option)
+        public void NegativeReinforcement(Option option)
         {
             if (option.Preferrence != null)
                 option.Preferrence.Preference -= 0.05f;
