@@ -22,7 +22,24 @@ namespace Creature.Brain
 
         private Memory lastMemory;
         private Memory currentMemory;
-        public Option RecentMemory => lastMemory != null ? (lastMemory.timeEnded + 5 > Time.time ? lastMemory.option : currentMemory.option) : null;
+        public Option RecentMemory => defineRecentMemory();
+
+        private Option defineRecentMemory() 
+        {
+            if (lastMemory == null) 
+            {
+                if (currentMemory != null) 
+                {
+                    return currentMemory.option;
+                }
+                return null;
+            }
+            if (lastMemory.option.Preferrence != null && lastMemory.timeEnded + 5 > Time.time)
+            {
+                return lastMemory.option;
+            }
+            return currentMemory.option;
+        }
 
         public BasicBrain(CreatureController controller) 
         {

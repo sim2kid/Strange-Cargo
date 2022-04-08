@@ -27,14 +27,20 @@ namespace Environment
         public UnityEvent onUseCreature;
         public UnityEvent onUseNotCreature;
 
+        [SerializeField]
+        private float useCooldown = 5f;
+        float cooldown = 0;
+
         public void Use()
         {
-            if (Creature != null)
+            if (Creature != null && cooldown <= 0)
             {
                 Creature.NegativeReinforcement();
 
                 Creature.ProcessINeed(this);
                 onUseCreature.Invoke();
+
+                cooldown = useCooldown;
             }
             else 
             {
@@ -55,6 +61,11 @@ namespace Environment
 
         public void HoldUpdate()
         {
+            if (cooldown > 0) 
+            {
+                cooldown -= Time.deltaTime;
+            }
+
             IInteractable lastObj = Player.Interaction.Previous;
             if (lastObj != null)
             {
@@ -65,9 +76,7 @@ namespace Environment
                 Creature = null;
             }
 
-
-
-            if (Creature != null)
+            if (Creature != null && cooldown <= 0)
             {
                 if (Creature.MemoryHasPreference)
                 {
