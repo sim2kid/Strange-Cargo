@@ -23,16 +23,12 @@ namespace Environment
 
         [SerializeField]
         private string useString;
-        [SerializeField]
-        private string useOnCreature;
 
-        public UnityEvent onEveryUse;
         public UnityEvent onUseCreature;
         public UnityEvent onUseNotCreature;
 
         public void Use()
         {
-            onEveryUse.Invoke();
             if (Creature != null)
             {
                 Creature.NegativeReinforcement();

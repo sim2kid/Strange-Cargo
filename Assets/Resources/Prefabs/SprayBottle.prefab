@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7135808390046984091}
   - component: {fileID: 7151720636358527087}
   - component: {fileID: 2809072195373929340}
+  - component: {fileID: 6444005607477552085}
   m_Layer: 0
   m_Name: SprayBottle
   m_TagString: Untagged
@@ -110,6 +111,52 @@ MonoBehaviour:
     Color: 
     _guid: fb9929a3-23f2-4f0d-b4df-91ad7901421c
   ColorPalette: Data/ColorPalette/default
+--- !u!114 &6444005607477552085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7632935607171127193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 128feeec81129f34eaa3628c283c8ec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverText: '{use} to Pickup'
+  positionOffset: {x: 0, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 0, z: 0}
+  rbData:
+    _guid: 535e11e7-5e2b-4b12-b999-838030ea32f1
+    IsKinematic: 0
+  _textOnHold: '{drop} to Drop'
+  OnPickup:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPutDown:
+    m_PersistentCalls:
+      m_Calls: []
+  OnShake:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUse:
+    m_PersistentCalls:
+      m_Calls: []
+  needChange:
+    _myNeeds:
+    - 0
+    - 0
+    - -10
+    - 0
+    - 0
+    - 0
+  useString: 
+  onUseCreature:
+    m_PersistentCalls:
+      m_Calls: []
+  onUseNotCreature:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1277028033403074750
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -236,13 +283,13 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6803495875925973113, guid: f4ebe1143ab1073468cd2929bb3618ce, type: 3}
   m_PrefabInstance: {fileID: 1277028033403074750}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3617460843482780449
+--- !u!114 &6983802272706455759
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4436233044418113298}
+  m_GameObject: {fileID: 970341799063317159}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0be20053db58f3a429d86ef5560206dc, type: 3}
@@ -250,7 +297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorData:
     Color: 
-    _guid: e206179c-a830-4a7f-82b6-7de902e71bea
+    _guid: cd89c755-740c-4ab0-a688-2feed404d908
   ColorPalette: Data/ColorPalette/default
 --- !u!114 &7785795904173433233
 MonoBehaviour:
@@ -268,13 +315,13 @@ MonoBehaviour:
     Color: 
     _guid: 378acfa4-fade-4e98-8574-ecbc5ac850b4
   ColorPalette: Data/ColorPalette/default
---- !u!114 &1551107280140672592
+--- !u!114 &3617460843482780449
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7182714277226739965}
+  m_GameObject: {fileID: 4436233044418113298}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0be20053db58f3a429d86ef5560206dc, type: 3}
@@ -282,23 +329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorData:
     Color: 
-    _guid: 95dd3970-d6f8-43cd-aac9-5ffb47ad2d98
-  ColorPalette: Data/ColorPalette/default
---- !u!114 &6983802272706455759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 970341799063317159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0be20053db58f3a429d86ef5560206dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colorData:
-    Color: 
-    _guid: cd89c755-740c-4ab0-a688-2feed404d908
+    _guid: e206179c-a830-4a7f-82b6-7de902e71bea
   ColorPalette: Data/ColorPalette/default
 --- !u!114 &7927191459795744047
 MonoBehaviour:
@@ -315,4 +346,20 @@ MonoBehaviour:
   colorData:
     Color: 
     _guid: b7f68a3b-8f99-47c5-b335-27f6cc4aff10
+  ColorPalette: Data/ColorPalette/default
+--- !u!114 &1551107280140672592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7182714277226739965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0be20053db58f3a429d86ef5560206dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorData:
+    Color: 
+    _guid: 95dd3970-d6f8-43cd-aac9-5ffb47ad2d98
   ColorPalette: Data/ColorPalette/default
