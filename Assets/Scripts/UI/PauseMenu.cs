@@ -86,6 +86,8 @@ namespace UI
             Toolbox.Instance.Pause.OnPause.AddListener(OnPause);
             Toolbox.Instance.Pause.OnUnPause.AddListener(OnUnPause);
 
+            videoPlayer.gameObject.GetComponent<UnityEngine.UIElements.Button>().clicked += StopVideo; 
+
             IgnorePause = 0;
 
             Pause = playerInput.actions["Pause"];
@@ -255,11 +257,12 @@ namespace UI
             TurnOffAllMenus();
             Menu.SetActive(true);
             videoPlayer.gameObject.SetActive(true);
-            RunNextFrame(() => {
-                Console.Log("Playing Video");
-                videoPlayer.clip = video;
-                videoPlayer.Play();
-            }, 2);
+
+            EventSystem.current.SetSelectedGameObject(videoPlayer.gameObject);
+
+            Console.Log("Playing Video");
+            videoPlayer.clip = video;
+            videoPlayer.Play();
 
             onEnd = new UnityEvent();
 
@@ -270,7 +273,6 @@ namespace UI
         private void OnVideoEnd(VideoPlayer source) 
         {
             source.loopPointReached -= OnVideoEnd;
-            onEnd.Invoke();
             StopVideo();
         }
 
@@ -278,6 +280,7 @@ namespace UI
         {
             videoPlayer.Pause();
             videoPlayer.gameObject.SetActive(false);
+            onEnd.Invoke();
         }
 
         public void DisablePauseMenu()
