@@ -35,7 +35,7 @@ namespace PersistentData.Component
             Vector3 bodyRotation = new Vector3(0, rotation.y, 0);
             eyes.transform.localRotation = Quaternion.Euler(eyesRotation);
             transform.localRotation = Quaternion.Euler(bodyRotation);
-            SetGlobalScale(transform, _location.Scale);
+            //SetGlobalScale(transform, _location.Scale);
         }
 
         public void PreDeserialization()
@@ -53,7 +53,7 @@ namespace PersistentData.Component
             _location.Rotation = Quaternion.Euler(compoundRotation);
 
 
-            _location.Scale = transform.lossyScale;
+            //_location.Scale = transform.lossyScale;
         }
 
         public static void SetGlobalScale(Transform transform, Vector3 globalScale)
