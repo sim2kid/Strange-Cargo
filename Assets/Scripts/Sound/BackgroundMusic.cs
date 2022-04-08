@@ -64,10 +64,25 @@ namespace Sound
             }
         }
 
-        void PlayMusic() 
+        public void PlayMusic() 
         {
             switchContainer.Selection = ResolveCurrentTrack();
             ap.Play();
+        }
+
+        public void UnpauseMusic() 
+        {
+            ap.UnPause();
+        }
+
+        public void PauseMusic() 
+        {
+            ap.Pause();
+        }
+
+        public void StopMusic() 
+        {
+            ap.Stop();
         }
 
         int ResolveCurrentTrack() 

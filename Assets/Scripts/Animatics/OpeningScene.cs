@@ -14,6 +14,8 @@ namespace Animatics
 
         void Start()
         {
+            video = Resources.Load<VideoClip>("Video/StrangeCargoIntroAnimatic");
+
             Utility.Toolbox.Instance.Pause.SetPause(true);
             // play animatic
             GameObject.FindObjectOfType<UIManager>().OpenVideo(video).AddListener(() => 

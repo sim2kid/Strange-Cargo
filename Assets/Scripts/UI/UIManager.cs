@@ -138,9 +138,14 @@ namespace UI
             currentMenu = Menu.Video;
             Utility.Toolbox.Instance.Pause.SetPause(true);
             UnityEvent onFinish = new UnityEvent();
+
+            var bgm = GameObject.FindObjectOfType<Sound.BackgroundMusic>();
+            bgm.PauseMusic();
+
             PauseMenuManager.PlayVideo(videoClip).AddListener(() => 
             {
                 Utility.Toolbox.Instance.Pause.SetPause(false);
+                bgm.UnpauseMusic();
                 onFinish.Invoke();
                 NextState(lastState);
             });
