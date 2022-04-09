@@ -61,11 +61,13 @@ MonoBehaviour:
   - Misc\FoodBag\Pour
   - Misc\FoodBag\Spawn
   - Misc\House
+  - Misc\Mop
   - Misc\PetBrush\Fur
   - Misc\PetBrush\PickUp
   - Misc\PetBrush\Place
   - Misc\PetBrush\Scales
   - Misc\Pop
+  - Misc\Rag
   - Misc\Shower
   - Misc\SprayBottle
   - Misc\Toy\Throw
@@ -937,6 +939,11 @@ MonoBehaviour:
     - ParentFolder: Misc\House
       FileLocation: Misc\House\SFX_MISC_House_FrontDoorOpen.mp3
       FileName: SFX_MISC_House_FrontDoorOpen.mp3
+  - FolderName: Misc\Mop
+    Files:
+    - ParentFolder: Misc\Mop
+      FileLocation: Misc\Mop\SFX_MISC_Mop_Loop.wav
+      FileName: SFX_MISC_Mop_Loop.wav
   - FolderName: Misc\PetBrush\Fur
     Files:
     - ParentFolder: Misc\PetBrush\Fur
@@ -1019,6 +1026,11 @@ MonoBehaviour:
     - ParentFolder: Misc\Pop
       FileLocation: Misc\Pop\SFX_Pop7.mp3
       FileName: SFX_Pop7.mp3
+  - FolderName: Misc\Rag
+    Files:
+    - ParentFolder: Misc\Rag
+      FileLocation: Misc\Rag\SFX_MISC_Rag_Loop.wav
+      FileName: SFX_MISC_Rag_Loop.wav
   - FolderName: Misc\Shower
     Files:
     - ParentFolder: Misc\Shower
