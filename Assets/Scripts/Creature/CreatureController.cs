@@ -347,8 +347,11 @@ namespace Creature
         }
         public void AnimationTrigger(string _triggerName)
         {
-            AnimationBool("Stop", false);
             Animator.SetTrigger(_triggerName);
+        }
+        public void AnimationResetTrigger(string _triggerName)
+        {
+            Animator.ResetTrigger(_triggerName);
         }
 
         public void PreSerialization()

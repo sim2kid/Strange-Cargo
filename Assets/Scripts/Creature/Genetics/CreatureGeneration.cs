@@ -16,7 +16,7 @@ namespace Genetics
         /// The chance of a mutation between 0-1 percent
         /// </summary>
         private const float MUTATION_CHANCE = 0.15f;
-        private const string AnimationControllerLocation = "Animation/DemoController";
+        private const string AnimationControllerLocation = "Animation/CreatureAnimationController";
 
         public static string[] ImportantPartTypes =
             { "Bodies", "Ears", "Heads", "BackLegs", "FrontLegs" };

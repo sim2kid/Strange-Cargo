@@ -52,7 +52,7 @@ namespace Creature.Task
         private void TakeAPoo(CreatureController caller) 
         {
             Console.LogDebug($"Creature [{caller.Guid}]: Poop - In Poop Position");
-            // Start poop animation
+            caller.AnimationTrigger("Wiggle");
             Console.Log($"Missing Poop Animation in Creature.Task.Poop.cs");
         }
         private void DonePooing(CreatureController caller) 
@@ -69,6 +69,7 @@ namespace Creature.Task
         }
         public void EndTask(CreatureController caller)
         {
+            caller.AnimationResetTrigger("Wiggle");
             IsStarted = false;
             if (SatisResult != null)
                 SatisResult.Invoke();

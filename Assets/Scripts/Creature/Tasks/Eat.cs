@@ -70,6 +70,7 @@ namespace Creature.Task
 
         public void EndTask(CreatureController caller)
         {
+            caller.AnimationResetTrigger("Eat");
             if(wait != null)
                 wait.EndTask(caller);
             if(come != null)
