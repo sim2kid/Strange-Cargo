@@ -22,6 +22,7 @@ namespace Creature.Brain
 
         private Memory lastMemory;
         private Memory currentMemory;
+        [JsonIgnore]
         public Option RecentMemory => defineRecentMemory();
 
         private Option defineRecentMemory() 
