@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3646891894600006954}
   - component: {fileID: 2692529681870053677}
   - component: {fileID: 2692529681870053676}
-  - component: {fileID: 2692529681870053674}
+  - component: {fileID: 1078295610660129975}
   m_Layer: 0
   m_Name: Ball02
   m_TagString: Untagged
@@ -115,7 +115,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 100.00005
   m_Center: {x: 0.000038146976, y: -0.000015258789, z: -0.000015258789}
---- !u!114 &2692529681870053674
+--- !u!114 &1078295610660129975
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,14 +124,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2998448108512075007}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f86dcd5f7d06e7e4ebcedc9dd374cacd, type: 3}
+  m_Script: {fileID: 11500000, guid: 984bf3bc147a02e43ba2ceddb1393c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hoverText: Ball
+  _hoverText: 
   positionOffset: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 0, y: 0, z: 0}
   rbData:
-    _guid: 9c229ed0-f4d8-44cc-8ce6-a84de61c9f17
+    _guid: 9c17495c-358a-455c-8c21-7ccdb607ae36
     IsKinematic: 0
   _textOnHold: 
   OnPickup:
@@ -141,5 +141,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnShake:
+    m_PersistentCalls:
+      m_Calls: []
+  throwHeight: 5
+  throwForce: 5
+  OnThrow:
     m_PersistentCalls:
       m_Calls: []

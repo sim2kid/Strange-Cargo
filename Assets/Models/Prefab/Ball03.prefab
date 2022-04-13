@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8873351692658219994}
   - component: {fileID: 4277754316336253190}
   - component: {fileID: 7855804773686353744}
-  - component: {fileID: 7502924624651370282}
   m_Layer: 0
   m_Name: p_Ball03_2
   m_TagString: Untagged
@@ -82,20 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7502924624651370282
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3148844734482417454}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4198406285896697059, guid: 47ac0d22f6d95134d818b7e2e61187bc, type: 3}
 --- !u!1 &3327448336967008448
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,6 +90,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2695026207792192122}
+  - component: {fileID: 9025438140946109953}
+  - component: {fileID: 5497877946849422350}
+  - component: {fileID: 5992445347799015265}
   m_Layer: 0
   m_Name: Ball03
   m_TagString: Untagged
@@ -129,6 +117,68 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &9025438140946109953
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3327448336967008448}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 20.243835
+  m_Center: {x: 37.19635, y: 11.135846, z: 0}
+--- !u!54 &5497877946849422350
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3327448336967008448}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &5992445347799015265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3327448336967008448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984bf3bc147a02e43ba2ceddb1393c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverText: 
+  positionOffset: {x: 0, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 0, z: 0}
+  rbData:
+    _guid: 37c88e29-20c2-4811-a444-a41c7fc62a56
+    IsKinematic: 0
+  _textOnHold: 
+  OnPickup:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPutDown:
+    m_PersistentCalls:
+      m_Calls: []
+  OnShake:
+    m_PersistentCalls:
+      m_Calls: []
+  throwHeight: 5
+  throwForce: 5
+  OnThrow:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4874652305444569065
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +190,6 @@ GameObject:
   - component: {fileID: 6332531822081659560}
   - component: {fileID: 8195242501181539236}
   - component: {fileID: 8955662740059111328}
-  - component: {fileID: 4507448342339215407}
   m_Layer: 0
   m_Name: p_Ball03_1
   m_TagString: Untagged
@@ -211,20 +260,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4507448342339215407
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4874652305444569065}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6489938773180923091, guid: 47ac0d22f6d95134d818b7e2e61187bc, type: 3}
 --- !u!1 &6220924981905378201
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +271,6 @@ GameObject:
   - component: {fileID: 3454857235334782009}
   - component: {fileID: 2663431303692916416}
   - component: {fileID: 2929560765887677553}
-  - component: {fileID: 6586634204100080256}
   m_Layer: 0
   m_Name: p_Ball03_3
   m_TagString: Untagged
@@ -307,17 +341,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6586634204100080256
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6220924981905378201}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6327700926217569698, guid: 47ac0d22f6d95134d818b7e2e61187bc, type: 3}
