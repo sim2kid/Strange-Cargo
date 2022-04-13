@@ -9,6 +9,7 @@ using UnityEngine.Events;
 
 namespace Environment
 {
+    [RequireComponent(typeof(AudioSource))]
     public class Treat : Pickupable, IUseable, INeedChange
     {
         public UnityEvent OnUse;
@@ -39,6 +40,8 @@ namespace Environment
                 onUseCreature.Invoke();
 
                 Creature.AnimationTrigger("Eating");
+                this.GetComponent<AudioSource>().PlayOneShot(eatSound);
+                Destroy(gameObject);
             }
         }
         public void Mod1Use()
