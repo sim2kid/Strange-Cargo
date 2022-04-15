@@ -65,6 +65,7 @@ namespace Player.Movement
 
         private void Update()
         {
+            MouseSensitivity = Settings.Instance.Values.MouseSensitivity;
             MouseLook();
         }
 

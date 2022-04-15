@@ -192,7 +192,6 @@ namespace UI
 
         public void Options()
         {
-            Console.Log("Options Menu has not been implemented yet.");
             TurnOffAllMenus();
             OptionsMenu.SetActive(true);
             EventSystem.current.SetSelectedGameObject(optionsDefault);

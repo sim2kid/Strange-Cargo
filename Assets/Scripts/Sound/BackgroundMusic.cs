@@ -56,6 +56,8 @@ namespace Sound
 
         private void FixedUpdate()
         {
+            if(ap.Volume != Settings.Instance.Values.MusicVolume)
+                ap.Volume = Settings.Instance.Values.MusicVolume;
             int expectedTrack = ResolveCurrentTrack();
             if (lastTrack != expectedTrack)
             {

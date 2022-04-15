@@ -127,6 +127,8 @@ namespace Player.Movement
 
         void FixedUpdate()
         {
+            MoveSpeed = Settings.Instance.Values.PlayerSpeed;
+            CrouchingMoveSpeed = MoveSpeed / 2;
             HandleGravity();
             HandleMovement();
             HandleCrouching();
