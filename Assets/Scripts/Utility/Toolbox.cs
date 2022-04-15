@@ -27,6 +27,10 @@ namespace Utility
         /// </summary>
         public TimeController TimeController { get; set; }
         /// <summary>
+        /// The date controller component
+        /// </summary>
+        public DateController DateController { get; set; }
+        /// <summary>
         /// The repository for all the sound in the game.
         /// </summary>
         public SoundRepository SoundPool {  get; private set; }
