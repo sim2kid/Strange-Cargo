@@ -70,6 +70,9 @@ namespace PersistentData.Loading
                 case "FloatList":
                     DataType = new FloatListData();
                     break;
+                case "Date":
+                    DataType = new DateData();
+                    break;
             }
             serializer.Populate(jsonObject.CreateReader(), DataType);
             return DataType;

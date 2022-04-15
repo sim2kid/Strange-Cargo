@@ -13,6 +13,8 @@ namespace PersistentData.Saving
         public string GUID { get => _guid; set => _guid = value; }
         public string DataType => "Date";
         [HideInInspector]
-        public Vector2 Date;
+        public float Day;
+        [HideInInspector]
+        public float Month;
     }
 }

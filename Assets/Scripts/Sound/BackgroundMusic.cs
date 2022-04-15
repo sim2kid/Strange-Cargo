@@ -65,6 +65,10 @@ namespace Sound
                 ap.Stop();
                 // Stopping happens to autoplay the next track
             }
+            if (!ap.IsPlaying && isPlaying) 
+            {
+                PlayMusic();
+            }
             if (ap != null && Settings.Instance != null)
                 if (ap.Volume != Settings.Instance.Values.MusicVolume)
                     ap.Volume = Settings.Instance.Values.MusicVolume;

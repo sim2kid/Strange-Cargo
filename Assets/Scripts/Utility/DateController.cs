@@ -11,7 +11,7 @@ namespace Utility
     {
         TimeController timeController;
 
-        private Vector2 _date { get => data.Date; set => data.Date = value; }
+        private Vector2 _date { get => CurrentDate; set => CurrentDate = value; }
 
         [SerializeField]
         DateData data;
@@ -129,12 +129,12 @@ namespace Utility
         {
             int day = (int)CurrentDate.y;
             int month = (int)CurrentDate.x;
-            return $"{month}/{day}";
+            return $"{day.ToString("00")}/{month.ToString("00")}";
         }
 
         public void PostDeserialization()
         {
-            throw new System.NotImplementedException();
+            _date = new Vector2(data.Day, data.Month);
         }
 
         public void PreDeserialization()
@@ -144,7 +144,8 @@ namespace Utility
 
         public void PreSerialization()
         {
-            return;
+            data.Day = _date.x;
+            data.Month = _date.y;
         }
     }
 }
