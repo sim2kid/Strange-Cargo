@@ -126,9 +126,9 @@ namespace Sound.Player
                     float pitch = bites[i].Pitch.Read();
                     _source.pitch = pitch;
                     _clipVolume = bites[i].Volume.Read();
-                    float volume = _clipVolume * Volume;
+                    _source.volume = Volume;
                     if (bites[i].Clip != null)
-                        _source.PlayOneShot(bites[i].Clip, volume);
+                        _source.PlayOneShot(bites[i].Clip, _clipVolume);
                     while (_source.isPlaying)
                     {
                         yield return new WaitForFixedUpdate();
@@ -147,12 +147,12 @@ namespace Sound.Player
                             pitch = bites[i].Pitch.Read();
                             _source.pitch = pitch;
                             _clipVolume = bites[i].Volume.Read();
-                            volume = _clipVolume * Volume;
+                            _source.volume = Volume;
                             if (bites[i].Clip != null)
                             {
                                 _source.loop = false;
                                 _source.clip = bites[i].Clip;
-                                _source.volume = volume;
+                                _source.volume = _clipVolume;
                                 _source.Play();
                                 _source.time = currentPos;
                             }

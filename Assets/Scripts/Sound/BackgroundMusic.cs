@@ -56,8 +56,6 @@ namespace Sound
 
         private void FixedUpdate()
         {
-            if(ap.Volume != Settings.Instance.Values.MusicVolume)
-                ap.Volume = Settings.Instance.Values.MusicVolume;
             int expectedTrack = ResolveCurrentTrack();
             if (lastTrack != expectedTrack)
             {
@@ -67,6 +65,9 @@ namespace Sound
                 ap.Stop();
                 // Stopping happens to autoplay the next track
             }
+            if (ap != null && Settings.Instance != null)
+                if (ap.Volume != Settings.Instance.Values.MusicVolume)
+                    ap.Volume = Settings.Instance.Values.MusicVolume;
         }
 
         public void PlayMusic() 

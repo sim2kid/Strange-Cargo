@@ -33,10 +33,7 @@ public class Settings : MonoBehaviour
 
     private void OnEnable()
     {
-        if (Values != null)
-        {
-            LoadSettings();
-        }
+        LoadSettings();
     }
 
     public void SaveSettings()
@@ -56,6 +53,6 @@ public class Settings : MonoBehaviour
             SaveSettings();
         }
         string json = File.ReadAllText(SettingsLocation);
-
+        Values = JsonConvert.DeserializeObject<SettingsData>(json);
     }
 }
