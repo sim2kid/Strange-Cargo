@@ -55,6 +55,7 @@ MonoBehaviour:
   - Misc\CeramicPlate\TreatFill
   - Misc\Clipboard
   - Misc\ComeHere
+  - Misc\Computer
   - Misc\FoodBag\Grab
   - Misc\FoodBag\Handling
   - Misc\FoodBag\Place
@@ -70,6 +71,10 @@ MonoBehaviour:
   - Misc\Rag
   - Misc\Shower
   - Misc\SprayBottle
+  - Misc\Toy\Ball
+  - Misc\Toy\Grab
+  - Misc\Toy\Land
+  - Misc\Toy\Rope
   - Misc\Toy\Throw
   - Misc\Treat\PickUp
   - Music
@@ -156,6 +161,15 @@ MonoBehaviour:
     - ParentFolder: Animal\Functions\Poop
       FileLocation: Animal\Functions\Poop\SFX_AN_FUNC_PoopWoosh.mp3
       FileName: SFX_AN_FUNC_PoopWoosh.mp3
+    - ParentFolder: Animal\Functions\Poop
+      FileLocation: Animal\Functions\Poop\SFX_AN_FUNC_Poop_HomingSparkle.wav
+      FileName: SFX_AN_FUNC_Poop_HomingSparkle.wav
+    - ParentFolder: Animal\Functions\Poop
+      FileLocation: Animal\Functions\Poop\SFX_AN_FUNC_Poop_OnHardMaterial.wav
+      FileName: SFX_AN_FUNC_Poop_OnHardMaterial.wav
+    - ParentFolder: Animal\Functions\Poop
+      FileLocation: Animal\Functions\Poop\SFX_AN_FUNC_Poop_OnSoftMaterial.wav
+      FileName: SFX_AN_FUNC_Poop_OnSoftMaterial.wav
   - FolderName: Animal\Functions\Poop\Dings
     Files:
     - ParentFolder: Animal\Functions\Poop\Dings
@@ -804,6 +818,44 @@ MonoBehaviour:
     - ParentFolder: Misc\ComeHere
       FileLocation: Misc\ComeHere\SFX_MISC_ComeHere_Whistle6.mp3
       FileName: SFX_MISC_ComeHere_Whistle6.mp3
+  - FolderName: Misc\Computer
+    Files:
+    - ParentFolder: Misc\Computer
+      FileLocation: Misc\Computer\SFX_MISC_Computer_ChaChing.wav
+      FileName: SFX_MISC_Computer_ChaChing.wav
+    - ParentFolder: Misc\Computer
+      FileLocation: Misc\Computer\SFX_MISC_KeyboardInput.wav
+      FileName: SFX_MISC_KeyboardInput.wav
+    - ParentFolder: Misc\Computer
+      FileLocation: Misc\Computer\SFX_MISC_MonitorActive.wav
+      FileName: SFX_MISC_MonitorActive.wav
+    - ParentFolder: Misc\Computer
+      FileLocation: Misc\Computer\SFX_MISC_MonitorOff.wav
+      FileName: SFX_MISC_MonitorOff.wav
+    - ParentFolder: Misc\Computer
+      FileLocation: Misc\Computer\SFX_MISC_MonitorOn.wav
+      FileName: SFX_MISC_MonitorOn.wav
+    - ParentFolder: Misc\Computer
+      FileLocation: Misc\Computer\SFX_MISC_MouseClick1.wav
+      FileName: SFX_MISC_MouseClick1.wav
+    - ParentFolder: Misc\Computer
+      FileLocation: Misc\Computer\SFX_MISC_MouseClick2.wav
+      FileName: SFX_MISC_MouseClick2.wav
+    - ParentFolder: Misc\Computer
+      FileLocation: Misc\Computer\SFX_MISC_MouseClick3.wav
+      FileName: SFX_MISC_MouseClick3.wav
+    - ParentFolder: Misc\Computer
+      FileLocation: Misc\Computer\SFX_MISC_MouseClick4.wav
+      FileName: SFX_MISC_MouseClick4.wav
+    - ParentFolder: Misc\Computer
+      FileLocation: Misc\Computer\SFX_MISC_MouseClick5.wav
+      FileName: SFX_MISC_MouseClick5.wav
+    - ParentFolder: Misc\Computer
+      FileLocation: Misc\Computer\SFX_MISC_MouseClick6.wav
+      FileName: SFX_MISC_MouseClick6.wav
+    - ParentFolder: Misc\Computer
+      FileLocation: Misc\Computer\SFX_MISC_YouveGotMail.wav
+      FileName: SFX_MISC_YouveGotMail.wav
   - FolderName: Misc\FoodBag\Grab
     Files:
     - ParentFolder: Misc\FoodBag\Grab
@@ -1059,6 +1111,62 @@ MonoBehaviour:
     - ParentFolder: Misc\SprayBottle
       FileLocation: Misc\SprayBottle\SFX_MISC_SPRY_Long3.mp3
       FileName: SFX_MISC_SPRY_Long3.mp3
+  - FolderName: Misc\Toy\Ball
+    Files:
+    - ParentFolder: Misc\Toy\Ball
+      FileLocation: Misc\Toy\Ball\SFX_MISC_Toy_AttentionGet.wav
+      FileName: SFX_MISC_Toy_AttentionGet.wav
+  - FolderName: Misc\Toy\Grab
+    Files:
+    - ParentFolder: Misc\Toy\Grab
+      FileLocation: Misc\Toy\Grab\SFX_MISC_Toy_Grab1.wav
+      FileName: SFX_MISC_Toy_Grab1.wav
+    - ParentFolder: Misc\Toy\Grab
+      FileLocation: Misc\Toy\Grab\SFX_MISC_Toy_Grab2.wav
+      FileName: SFX_MISC_Toy_Grab2.wav
+    - ParentFolder: Misc\Toy\Grab
+      FileLocation: Misc\Toy\Grab\SFX_MISC_Toy_Grab3.wav
+      FileName: SFX_MISC_Toy_Grab3.wav
+    - ParentFolder: Misc\Toy\Grab
+      FileLocation: Misc\Toy\Grab\SFX_MISC_Toy_Grab4.wav
+      FileName: SFX_MISC_Toy_Grab4.wav
+    - ParentFolder: Misc\Toy\Grab
+      FileLocation: Misc\Toy\Grab\SFX_MISC_Toy_Grab5.wav
+      FileName: SFX_MISC_Toy_Grab5.wav
+    - ParentFolder: Misc\Toy\Grab
+      FileLocation: Misc\Toy\Grab\SFX_MISC_Toy_Grab6.wav
+      FileName: SFX_MISC_Toy_Grab6.wav
+    - ParentFolder: Misc\Toy\Grab
+      FileLocation: Misc\Toy\Grab\SFX_MISC_Toy_Grab7.wav
+      FileName: SFX_MISC_Toy_Grab7.wav
+  - FolderName: Misc\Toy\Land
+    Files:
+    - ParentFolder: Misc\Toy\Land
+      FileLocation: Misc\Toy\Land\SFX_MISC_Toy_LandOnGround1.wav
+      FileName: SFX_MISC_Toy_LandOnGround1.wav
+    - ParentFolder: Misc\Toy\Land
+      FileLocation: Misc\Toy\Land\SFX_MISC_Toy_LandOnGround2.wav
+      FileName: SFX_MISC_Toy_LandOnGround2.wav
+    - ParentFolder: Misc\Toy\Land
+      FileLocation: Misc\Toy\Land\SFX_MISC_Toy_LandOnGround3.wav
+      FileName: SFX_MISC_Toy_LandOnGround3.wav
+    - ParentFolder: Misc\Toy\Land
+      FileLocation: Misc\Toy\Land\SFX_MISC_Toy_LandOnGround4.wav
+      FileName: SFX_MISC_Toy_LandOnGround4.wav
+  - FolderName: Misc\Toy\Rope
+    Files:
+    - ParentFolder: Misc\Toy\Rope
+      FileLocation: Misc\Toy\Rope\SFX_MISC_Toy_Rope_Tug1.wav
+      FileName: SFX_MISC_Toy_Rope_Tug1.wav
+    - ParentFolder: Misc\Toy\Rope
+      FileLocation: Misc\Toy\Rope\SFX_MISC_Toy_Rope_Tug2.wav
+      FileName: SFX_MISC_Toy_Rope_Tug2.wav
+    - ParentFolder: Misc\Toy\Rope
+      FileLocation: Misc\Toy\Rope\SFX_MISC_Toy_Rope_Tug3.wav
+      FileName: SFX_MISC_Toy_Rope_Tug3.wav
+    - ParentFolder: Misc\Toy\Rope
+      FileLocation: Misc\Toy\Rope\SFX_MISC_Toy_Rope_Tug4.wav
+      FileName: SFX_MISC_Toy_Rope_Tug4.wav
   - FolderName: Misc\Toy\Throw
     Files:
     - ParentFolder: Misc\Toy\Throw
