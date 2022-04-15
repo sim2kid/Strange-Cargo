@@ -14,6 +14,9 @@ namespace Utility
         /// </summary>
         private float _time { get => data.Time; set => data.Time = value; }
 
+        public delegate void DayPassed();
+        public static event DayPassed OnDayPass;
+
         [SerializeField]
         TimeData data;
 
@@ -88,6 +91,7 @@ namespace Utility
             if (_time > MinutesInADay * 60)
             {
                 _time -= MinutesInADay * 60;
+                OnDayPass?.Invoke();
             }
 
             CurrentTime = GetTime();
