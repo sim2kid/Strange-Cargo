@@ -4,13 +4,28 @@ using UnityEngine;
 
 public class DestoryAfterTime : MonoBehaviour
 {
-    public float secondsUntilDestory = float.MaxValue;
+    private float _time = float.MaxValue;
+    private float _max = float.MaxValue;
+    public float secondsUntilDestory 
+    { 
+        get => _time; 
+        set {
+            _time = value;
+            _max = value;
+        } 
+    }
+
+
     private void Update()
     {
-        secondsUntilDestory -= Time.deltaTime;
-        if (secondsUntilDestory < 0) 
+        _time -= Time.deltaTime;
+        if (_time < 0) 
         {
             Destroy(gameObject);
+        }
+        if (_time > 0) 
+        {
+            gameObject.transform.localScale = Vector3.one * (_time/_max);
         }
     }
 }

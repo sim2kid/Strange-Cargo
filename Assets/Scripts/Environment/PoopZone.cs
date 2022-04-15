@@ -60,7 +60,7 @@ namespace Environment
         {
             GameObject model = PoopModels[Random.Range(0, PoopModels.Count)];
             multiplier = amount;
-            Instantiate(model, location, Quaternion.identity);
+            Instantiate(model, location + new Vector3(0,0.5f,0), Quaternion.identity);
         }
 
         public override ITask RelatedTask => new Poop(this);

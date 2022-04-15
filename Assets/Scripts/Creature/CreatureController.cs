@@ -329,7 +329,6 @@ namespace Creature
 
             Console.LogDebug($"Creature [{Guid}]: End of Task: {task.GetType()} TimeLeft: {maxTimeOnTask - timeSpentOnLastTask}");
             task.EndTask(this);
-            AnimationBool("Stop", true);
         }
 
         private void DecayNeeds() 

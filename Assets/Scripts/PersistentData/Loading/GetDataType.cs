@@ -67,6 +67,9 @@ namespace PersistentData.Loading
                 case "BoolList":
                     DataType = new BoolListData();
                     break;
+                case "FloatList":
+                    DataType = new FloatListData();
+                    break;
             }
             serializer.Populate(jsonObject.CreateReader(), DataType);
             return DataType;
