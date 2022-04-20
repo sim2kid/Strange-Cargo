@@ -19,6 +19,8 @@ namespace UI.Computer
 
         private PrefabData itemToSpawn;
 
+        private int amountToSpawn;
+
         public void UpdatePanel(PrefabData data, Texture2D newIcon, string title, string description) 
         {
             gameObject.SetActive(true);
@@ -37,6 +39,16 @@ namespace UI.Computer
         {
             FindObjectOfType<ItemSpawner>().Spawn(itemToSpawn);
             OnItemSpawn.Invoke();
+        }
+
+        public void IncrementQuantity()
+        {
+
+        }
+
+        public void DecrementQuantity()
+        {
+
         }
     }
 }
