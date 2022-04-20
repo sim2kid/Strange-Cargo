@@ -11,11 +11,15 @@ namespace UI
         private GameObject Desktop;
         [SerializeField]
         private GameObject Shop;
+        [SerializeField]
+        private GameObject Cart;
 
         [SerializeField]
         private GameObject DesktopDefault;
         [SerializeField]
         private GameObject ShopDefault;
+        [SerializeField]
+        private GameObject CartDefault;
 
         private delegate void MenuAction();
         private MenuAction OpenLastMenu;
@@ -40,6 +44,14 @@ namespace UI
             Shop.SetActive(true);
             EventSystem.current.SetSelectedGameObject(ShopDefault);
             OpenLastMenu = OpenShop;
+        }
+
+        public void OpenCart()
+        {
+            AllOff();
+            Cart.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(CartDefault);
+            OpenLastMenu = OpenCart;
         }
 
         public void TurnOn()
