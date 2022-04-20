@@ -25,7 +25,7 @@ namespace UI.Computer
 
         private void RenderShop()
         {
-            DestoryShop();
+            DestroyShop();
             RectTransform rT = ViewPort.GetComponent<RectTransform>();
             float maxSize = itemMargin + (Mathf.Ceil(ItemList.Count / 2f) * (itemSize + itemMargin));
             rT.sizeDelta = new Vector2(0, maxSize);
@@ -52,7 +52,7 @@ namespace UI.Computer
             }
         }
 
-        private void DestoryShop()
+        private void DestroyShop()
         {
             foreach (Transform child in ViewPort.transform)
                 child.gameObject.SetActive(true);
@@ -69,7 +69,7 @@ namespace UI.Computer
 
         private void OnDisable()
         {
-            DestoryShop();
+            DestroyShop();
         }
 
         public bool SetSelected(PrefabData data, Texture2D icon, string title, string description) 
