@@ -13,7 +13,7 @@ public class Settings : MonoBehaviour
 
     public static Settings Instance { get; private set; }
     [SerializeField]
-    public SettingsData Values;
+    public SettingsData Values = new SettingsData();
 
     private void Awake()
     {
@@ -50,9 +50,16 @@ public class Settings : MonoBehaviour
     {
         if (!File.Exists(SettingsLocation))
         {
+            if (Values == null) 
+            {
+                Values = new SettingsData();
+            }
             SaveSettings();
         }
-        string json = File.ReadAllText(SettingsLocation);
-        Values = JsonConvert.DeserializeObject<SettingsData>(json);
+        else
+        {
+            string json = File.ReadAllText(SettingsLocation);
+            Values = JsonConvert.DeserializeObject<SettingsData>(json);
+        }
     }
 }
