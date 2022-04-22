@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PersistentData.Saving;
+using UnityEngine.Events;
 
 namespace UI.Computer
 {
@@ -19,7 +20,9 @@ namespace UI.Computer
         private float itemSize = 100;
         private float itemMargin = 10;
 
-        public Dictionary<PrefabData, int> shoppingCart;
+        public UnityEvent OnItemSpawn;
+
+        private Dictionary<PrefabData, int> shoppingCart;
 
         PrefabData selected;
 
@@ -65,6 +68,7 @@ namespace UI.Computer
 
         private void OnEnable()
         {
+            shoppingCart = FindObjectOfType<ComputerManager>().shoppingCart;
             SetPositions = new Queue<System.Func<GameObject>>();
             RenderCart();
             ItemPanel.OnItemRemove += DestroyCart;
@@ -122,6 +126,18 @@ namespace UI.Computer
                 }
             }
             SetPositions.Clear();
+        }
+
+        public void Checkout()
+        {
+            foreach (KeyValuePair<PrefabData, int> item in shoppingCart)
+            {
+                FindObjectOfType<ItemSpawner>().Spawn(item.Key);
+                for (int i = 1; i <= item.Value; i++)
+                {
+                    OnItemSpawn.Invoke();
+                }
+            }
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using PersistentData.Saving;
 
 namespace UI
 {
@@ -23,6 +24,8 @@ namespace UI
 
         private delegate void MenuAction();
         private MenuAction OpenLastMenu;
+
+        public Dictionary<PrefabData, int> shoppingCart;
 
         private void AllOff()
         {

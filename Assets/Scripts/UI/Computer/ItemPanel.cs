@@ -18,8 +18,6 @@ namespace UI.Computer
         [SerializeField]
         private InputField quantityDisplay;
 
-        public UnityEvent OnItemSpawn;
-
         private PrefabData activeItem;
 
         private int activeItemQuantity;
@@ -65,19 +63,7 @@ namespace UI.Computer
 
         private void OnEnable()
         {
-            shoppingCart = FindObjectOfType<CartManager>().shoppingCart;
-        }
-
-        public void Checkout()
-        {
-            foreach (KeyValuePair<PrefabData, int> item in shoppingCart)
-            {
-                FindObjectOfType<ItemSpawner>().Spawn(item.Key);
-                for (int i = 0; i < item.Value; i++)
-                {
-                    OnItemSpawn.Invoke();
-                }
-            }
+            shoppingCart = FindObjectOfType<ComputerManager>().shoppingCart;
         }
 
         public void IncrementQuantity()
@@ -127,7 +113,7 @@ namespace UI.Computer
 
         private void UpdateShoppingCart()
         {
-            FindObjectOfType<CartManager>().shoppingCart = shoppingCart;
+            FindObjectOfType<ComputerManager>().shoppingCart = shoppingCart;
         }
     }
 }
