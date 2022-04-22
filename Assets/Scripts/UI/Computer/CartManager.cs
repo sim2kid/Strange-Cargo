@@ -104,7 +104,7 @@ namespace UI.Computer
             return true;
         }
 
-        void Start()
+        void Awake()
         {
             if (!string.IsNullOrEmpty(ShopItemResourceFolder))
             {
