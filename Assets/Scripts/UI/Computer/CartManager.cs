@@ -19,6 +19,7 @@ namespace UI.Computer
         private List<GameObject> ItemList = new List<GameObject>();
         private float itemSize = 100;
         private float itemMargin = 10;
+        private TextAsset[] allItems;
 
         public UnityEvent OnItemSpawn;
 
@@ -30,7 +31,22 @@ namespace UI.Computer
 
         private void RenderCart()
         {
+
             DestroyCart();
+
+            foreach (var item in allItems)
+            {
+                var obj = Instantiate(ShopItem);
+                var shop = obj.GetComponent<ShopItem>();
+                shop.SetPrefabData(item.text);
+                shoppingCart = FindObjectOfType<ComputerManager>().shoppingCart;
+                if (shoppingCart.ContainsKey(shop.PrefabData))
+                {
+                    ItemList.Add(obj);
+                }
+                obj.SetActive(false);
+            }
+
             RectTransform rT = ViewPort.GetComponent<RectTransform>();
             float maxSize = itemMargin + (Mathf.Ceil(ItemList.Count / 2f) * (itemSize + itemMargin));
             rT.sizeDelta = new Vector2(0, maxSize);
@@ -64,6 +80,7 @@ namespace UI.Computer
             RectTransform rT = ViewPort.GetComponent<RectTransform>();
             rT.sizeDelta = new Vector2(0, 0);
             selected = null;
+            ItemList.Clear();
         }
 
         private void OnEnable()
@@ -91,7 +108,7 @@ namespace UI.Computer
         {
             if (!string.IsNullOrEmpty(ShopItemResourceFolder))
             {
-                var all = Resources.LoadAll<TextAsset>(ShopItemResourceFolder);
+                allItems = Resources.LoadAll<TextAsset>(ShopItemResourceFolder);
                 foreach (var item in ItemList)
                 {
                     if (item.scene.IsValid())
@@ -100,18 +117,7 @@ namespace UI.Computer
                     }
                 }
                 ItemList.Clear();
-                foreach (var item in all)
-                {
-                    var obj = Instantiate(ShopItem);
-                    var shop = obj.GetComponent<ShopItem>();
-                    shop.SetPrefabData(item.text);
-                    shoppingCart = FindObjectOfType<ComputerManager>().shoppingCart;
-                    if (shoppingCart.ContainsKey(shop.PrefabData))
-                    {
-                        ItemList.Add(obj);
-                    }
-                    obj.SetActive(false);
-                }
+                
             }
         }
 
