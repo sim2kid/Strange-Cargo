@@ -64,6 +64,7 @@ namespace UI.Computer
         private void OnEnable()
         {
             shoppingCart = FindObjectOfType<ComputerManager>().shoppingCart;
+            SetQuantityDisplay(activeItemQuantity);
         }
 
         public void IncrementQuantity()
@@ -106,8 +107,8 @@ namespace UI.Computer
             {
                 shoppingCart.Remove(activeItem);
                 UpdateShoppingCart();
+                OnItemRemove.Invoke();
             }
-            OnItemRemove.Invoke();
             gameObject.SetActive(false);
         }
 
