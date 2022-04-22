@@ -31,18 +31,19 @@ namespace UI.Computer
 
         private void RenderCart()
         {
-
             DestroyCart();
-
+            shoppingCart = FindObjectOfType<ComputerManager>().shoppingCart;
             foreach (var item in allItems)
             {
                 var obj = Instantiate(ShopItem);
                 var shop = obj.GetComponent<ShopItem>();
                 shop.SetPrefabData(item.text);
-                shoppingCart = FindObjectOfType<ComputerManager>().shoppingCart;
-                if (shoppingCart.ContainsKey(shop.PrefabData))
+                foreach(KeyValuePair<PrefabData, int> _item in shoppingCart)
                 {
-                    ItemList.Add(obj);
+                    if(_item.Key.Equals(shop.PrefabData))
+                    {
+                        ItemList.Add(obj);
+                    }
                 }
                 obj.SetActive(false);
             }
@@ -85,17 +86,17 @@ namespace UI.Computer
 
         private void OnEnable()
         {
-            SetPositions = new Queue<System.Func<GameObject>>();
-            RenderCart();
             ItemPanel.OnItemRemove += DestroyCart;
             ItemPanel.OnItemRemove += RenderCart;
+            SetPositions = new Queue<System.Func<GameObject>>();
+            RenderCart();
         }
 
         private void OnDisable()
         {
-            DestroyCart();
             ItemPanel.OnItemRemove -= DestroyCart;
             ItemPanel.OnItemRemove -= RenderCart;
+            DestroyCart();
         }
 
         public bool SetSelected(PrefabData data, Texture2D icon, string title, string description)
