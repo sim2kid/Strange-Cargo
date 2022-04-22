@@ -31,6 +31,7 @@ namespace UI
         {
             Desktop.SetActive(false);
             Shop.SetActive(false);
+            Cart.SetActive(false);
         }
 
         public void ShowDesktop()
