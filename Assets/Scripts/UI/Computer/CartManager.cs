@@ -68,7 +68,6 @@ namespace UI.Computer
 
         private void OnEnable()
         {
-            shoppingCart = FindObjectOfType<ComputerManager>().shoppingCart;
             SetPositions = new Queue<System.Func<GameObject>>();
             RenderCart();
             ItemPanel.OnItemRemove += DestroyCart;
@@ -106,6 +105,7 @@ namespace UI.Computer
                     var obj = Instantiate(ShopItem);
                     var shop = obj.GetComponent<ShopItem>();
                     shop.SetPrefabData(item.text);
+                    shoppingCart = FindObjectOfType<ComputerManager>().shoppingCart;
                     if (shoppingCart.ContainsKey(shop.PrefabData))
                     {
                         ItemList.Add(obj);

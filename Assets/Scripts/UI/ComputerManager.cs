@@ -71,6 +71,7 @@ namespace UI
         void Start()
         {
             OpenLastMenu = ShowDesktop;
+            shoppingCart = new Dictionary<PrefabData, int>();
             AllOff();
         }
     }
