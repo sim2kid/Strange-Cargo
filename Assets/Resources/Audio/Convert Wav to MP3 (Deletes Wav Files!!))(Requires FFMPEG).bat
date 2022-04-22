@@ -6,7 +6,7 @@ goto :eof
 :treeProcess
 
 for %%F in (*.wav) DO (
-    ffmpeg -i "%%F" "%%~nF.mp3"
+    ffmpeg -y -i "%%F" "%%~nF.mp3"
     DEL %%F
 )
 
