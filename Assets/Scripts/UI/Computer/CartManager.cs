@@ -132,9 +132,9 @@ namespace UI.Computer
         {
             foreach (KeyValuePair<PrefabData, int> item in shoppingCart)
             {
-                FindObjectOfType<ItemSpawner>().Spawn(item.Key);
                 for (int i = 1; i <= item.Value; i++)
                 {
+                    FindObjectOfType<ItemSpawner>().Spawn(item.Key);
                     OnItemSpawn.Invoke();
                 }
             }
