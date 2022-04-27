@@ -3,94 +3,97 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class UIScreen : MonoBehaviour
+namespace UI
 {
-    public string Name => gameObject.name;
-    public UIScreen ParentScreen;
-    public List<UIScreen> ChildrenScreens;
-
-    private void Start()
+    public class UIScreen : MonoBehaviour
     {
-        if (ParentScreen == null)
+        public string Name => gameObject.name;
+        public UIScreen ParentScreen;
+        public List<UIScreen> ChildrenScreens;
+
+        private void Start()
         {
-            var parent = this.transform.parent.GetComponent<UIScreen>();
-            if (parent != null)
+            if (ParentScreen == null)
             {
-                ParentScreen = parent;
+                var parent = this.transform.parent.GetComponent<UIScreen>();
+                if (parent != null)
+                {
+                    ParentScreen = parent;
+                }
+            }
+            int childCount = transform.childCount;
+            for (int i = 0; i < childCount; i++)
+            {
+                var child = transform.GetChild(i);
+                UIScreen screen = child.GetComponent<UIScreen>();
+                if (screen != null)
+                    continue;
+                ChildrenScreens.Add(screen);
+            }
+
+        }
+
+        public void CloseWholeMenu()
+        {
+            CloseMenu();
+            if (ParentScreen != null)
+            {
+                CloseWholeMenu();
             }
         }
-        int childCount = transform.childCount;
-        for (int i = 0; i < childCount; i++) 
+        public void CloseMenu()
         {
-            var child = transform.GetChild(i);
-            UIScreen screen = child.GetComponent<UIScreen>();
-            if (screen != null)
-                continue;
-            ChildrenScreens.Add(screen);
+            this.gameObject.SetActive(false);
         }
-        
-    }
-
-    public void CloseWholeMenu() 
-    {
-        CloseMenu();
-        if (ParentScreen != null)
+        public void OpenMenu()
         {
-            CloseWholeMenu();
+            this.gameObject.SetActive(true);
         }
-    }
-    public void CloseMenu() 
-    {
-        this.gameObject.SetActive(false);
-    }
-    public void OpenMenu() 
-    {
-        this.gameObject.SetActive(true);
-    }
-    public void OpenParent() 
-    {
-        if (ParentScreen == null)
+        public void OpenParent()
         {
-            Console.LogError($"There is no Parent UI for \"{Name}\".");
+            if (ParentScreen == null)
+            {
+                Console.LogError($"There is no Parent UI for \"{Name}\".");
+            }
+            else
+            {
+                ParentScreen.OpenMenu();
+                this.CloseMenu();
+            }
         }
-        else 
+        public void OpenRoot()
         {
-            ParentScreen.OpenMenu();
-            this.CloseMenu();
+            if (ParentScreen != null)
+            {
+                ParentScreen.OpenMenu();
+                this.CloseMenu();
+                ParentScreen.OpenRoot();
+            }
         }
-    }
-    public void OpenRoot() 
-    {
-        if (ParentScreen != null) 
+        public void OpenScreen(string ScreenName)
         {
-            ParentScreen.OpenMenu();
-            this.CloseMenu();
-            ParentScreen.OpenRoot();
+            var obj = ChildrenScreens.FirstOrDefault(x => x.Name.ToLower().Equals(ScreenName.ToLower()));
+            if (obj == null)
+            {
+                Console.LogError($"\"{ScreenName}\" could not be found. UIScreen, \"{Name}\" chould not be switched.");
+            }
+            else
+            {
+                obj.OpenMenu();
+                this.CloseMenu();
+            }
         }
-    }
-    public void OpenScreen(string ScreenName) 
-    {
-        var obj = ChildrenScreens.FirstOrDefault(x => x.Name.ToLower().Equals(ScreenName.ToLower()));
-        if (obj == null)
+        public void OpenSiblingScreen(string ScreenName)
         {
-            Console.LogError($"\"{ScreenName}\" could not be found. UIScreen, \"{Name}\" chould not be switched.");
-        }
-        else
-        {
-            obj.OpenMenu();
-            this.CloseMenu();
-        }
-    }
-    public void OpenSiblingScreen(string ScreenName) 
-    {
-        if (ParentScreen == null)
-        {
-            Console.LogError($"There is no Parent UI for \"{Name}\". As such, we can't locate siblings");
-        }
-        else 
-        {
-            ParentScreen.OpenScreen(ScreenName);
-            CloseMenu();
+            if (ParentScreen == null)
+            {
+                Console.LogError($"There is no Parent UI for \"{Name}\". As such, we can't locate siblings");
+            }
+            else
+            {
+                ParentScreen.OpenScreen(ScreenName);
+                CloseMenu();
+            }
         }
     }
 }
