@@ -86,14 +86,12 @@ namespace UI.Computer
 
         private void OnEnable()
         {
-            panel.OnItemRemove.AddListener(RenderCart);
             SetPositions = new Queue<System.Func<GameObject>>();
             RenderCart();
         }
 
         private void OnDisable()
         {
-            panel.OnItemRemove.RemoveAllListeners();
             DestroyCart();
         }
 
@@ -140,7 +138,10 @@ namespace UI.Computer
                 for (int i = 1; i <= item.Value; i++)
                 {
                     FindObjectOfType<ItemSpawner>().Spawn(item.Key);
-                    OnItemSpawn.Invoke();
+                    if (item.Value > 0)
+                    {
+                        OnItemSpawn.Invoke();
+                    }
                 }
             }
         }

@@ -24,8 +24,6 @@ namespace UI.Computer
 
         private Dictionary<PrefabData, int> shoppingCart;
 
-        public UnityEvent OnItemRemove;
-
         public void UpdatePanel(PrefabData data, Texture2D newIcon, string title, string description) 
         {
             gameObject.SetActive(true);
@@ -83,14 +81,6 @@ namespace UI.Computer
         {
             activeItemQuantity--;
             int minQuantity = 0;
-            if (GetComponentInParent<ShopManager>() != null)
-            {
-                minQuantity = 0;
-            }
-            else if(GetComponentInParent<CartManager>() != null)
-            {
-                minQuantity = 1;
-            }
             if (activeItemQuantity < minQuantity)
             {
                 activeItemQuantity = minQuantity;
@@ -116,18 +106,6 @@ namespace UI.Computer
                 shoppingCart.Add(activeItem, activeItemQuantity);
                 UpdateShoppingCart();
             }
-        }
-
-        public void RemoveItemFromCart()
-        {
-            GetCartReference();
-            if(shoppingCart.ContainsKey(activeItem))
-            {
-                shoppingCart.Remove(activeItem);
-            }
-            UpdateShoppingCart();
-            OnItemRemove.Invoke();
-            gameObject.SetActive(false);
         }
 
         private void UpdateShoppingCart()
