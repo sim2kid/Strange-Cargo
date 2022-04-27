@@ -24,8 +24,7 @@ namespace UI.Computer
 
         private Dictionary<PrefabData, int> shoppingCart;
 
-        public delegate void ItemRemoved();
-        public static event ItemRemoved OnItemRemove;
+        public UnityEvent OnItemRemove;
 
         public void UpdatePanel(PrefabData data, Texture2D newIcon, string title, string description) 
         {
@@ -34,6 +33,7 @@ namespace UI.Computer
             Title.text = title;
             Description.text = description; 
             Icon.sprite = Sprite.Create(newIcon, new Rect(0,0,128,128), Vector2.zero);
+            GetCartReference();
             if (shoppingCart.ContainsKey(activeItem))
             {
                 foreach (KeyValuePair<PrefabData, int> item in shoppingCart)
@@ -63,14 +63,20 @@ namespace UI.Computer
 
         private void OnEnable()
         {
-            shoppingCart = FindObjectOfType<ComputerManager>().shoppingCart;
+            GetCartReference();
             SetQuantityDisplay(activeItemQuantity);
+        }
+
+        private void GetCartReference()
+        {
+            shoppingCart = FindObjectOfType<ComputerManager>().shoppingCart;
         }
 
         public void IncrementQuantity()
         {
             activeItemQuantity++;
             SetQuantityDisplay(activeItemQuantity);
+            UpdateShoppingCart();
         }
 
         public void DecrementQuantity()
@@ -90,12 +96,23 @@ namespace UI.Computer
                 activeItemQuantity = minQuantity;
             }
             SetQuantityDisplay(activeItemQuantity);
+            UpdateShoppingCart();
         }
 
         public void AddItemToCart()
         {
-            if (activeItemQuantity > 0)
+            GetCartReference();
+            if (!shoppingCart.ContainsKey(activeItem))
             {
+                if (activeItemQuantity > 0)
+                {
+                    shoppingCart.Add(activeItem, activeItemQuantity);
+                    UpdateShoppingCart();
+                }
+            }
+            else
+            {
+                shoppingCart.Remove(activeItem);
                 shoppingCart.Add(activeItem, activeItemQuantity);
                 UpdateShoppingCart();
             }
@@ -103,18 +120,23 @@ namespace UI.Computer
 
         public void RemoveItemFromCart()
         {
+            GetCartReference();
             if(shoppingCart.ContainsKey(activeItem))
             {
                 shoppingCart.Remove(activeItem);
-                UpdateShoppingCart();
-                OnItemRemove.Invoke();
             }
+            UpdateShoppingCart();
+            OnItemRemove.Invoke();
             gameObject.SetActive(false);
         }
 
         private void UpdateShoppingCart()
         {
-            FindObjectOfType<ComputerManager>().shoppingCart = shoppingCart;
+            FindObjectOfType<ComputerManager>().shoppingCart.Clear();
+            foreach (KeyValuePair<PrefabData, int> item in shoppingCart)
+            {
+                FindObjectOfType<ComputerManager>().shoppingCart.Add(item.Key, item.Value);
+            }
         }
     }
 }

@@ -86,16 +86,14 @@ namespace UI.Computer
 
         private void OnEnable()
         {
-            ItemPanel.OnItemRemove += DestroyCart;
-            ItemPanel.OnItemRemove += RenderCart;
+            panel.OnItemRemove.AddListener(RenderCart);
             SetPositions = new Queue<System.Func<GameObject>>();
             RenderCart();
         }
 
         private void OnDisable()
         {
-            ItemPanel.OnItemRemove -= DestroyCart;
-            ItemPanel.OnItemRemove -= RenderCart;
+            panel.OnItemRemove.RemoveAllListeners();
             DestroyCart();
         }
 
