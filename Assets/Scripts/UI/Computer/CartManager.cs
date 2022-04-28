@@ -23,7 +23,7 @@ namespace UI.Computer
 
         public UnityEvent OnItemSpawn;
 
-        private Dictionary<PrefabData, int> shoppingCart;
+        private ComputerManager computerManager;
 
         PrefabData selected;
 
@@ -32,13 +32,13 @@ namespace UI.Computer
         private void RenderCart()
         {
             DestroyCart();
-            shoppingCart = FindObjectOfType<ComputerManager>().shoppingCart;
+            computerManager = FindObjectOfType<ComputerManager>();
             foreach (var item in allItems)
             {
                 var obj = Instantiate(ShopItem);
                 var shop = obj.GetComponent<ShopItem>();
                 shop.SetPrefabData(item.text);
-                foreach(KeyValuePair<PrefabData, int> _item in shoppingCart)
+                foreach(KeyValuePair<PrefabData, int> _item in computerManager.shoppingCart)
                 {
                     if(_item.Key.Equals(shop.PrefabData))
                     {
@@ -133,13 +133,13 @@ namespace UI.Computer
 
         public void Checkout()
         {
-            foreach (KeyValuePair<PrefabData, int> item in shoppingCart)
+            foreach (KeyValuePair<PrefabData, int> item in computerManager.shoppingCart)
             {
-                for (int i = 1; i <= item.Value; i++)
+                if (item.Value > 0)
                 {
-                    FindObjectOfType<ItemSpawner>().Spawn(item.Key);
-                    if (item.Value > 0)
+                    for (int i = 1; i <= item.Value; i++)
                     {
+                        FindObjectOfType<ItemSpawner>().Spawn(item.Key);
                         OnItemSpawn.Invoke();
                     }
                 }

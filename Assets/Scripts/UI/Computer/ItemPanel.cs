@@ -22,7 +22,7 @@ namespace UI.Computer
 
         private int activeItemQuantity;
 
-        private Dictionary<PrefabData, int> shoppingCart;
+        private ComputerManager computerManager;
 
         public void UpdatePanel(PrefabData data, Texture2D newIcon, string title, string description) 
         {
@@ -31,10 +31,9 @@ namespace UI.Computer
             Title.text = title;
             Description.text = description; 
             Icon.sprite = Sprite.Create(newIcon, new Rect(0,0,128,128), Vector2.zero);
-            GetCartReference();
-            if (shoppingCart.ContainsKey(activeItem))
+            if (computerManager.shoppingCart.ContainsKey(activeItem))
             {
-                foreach (KeyValuePair<PrefabData, int> item in shoppingCart)
+                foreach (KeyValuePair<PrefabData, int> item in computerManager.shoppingCart)
                 {
                     if (item.Key == activeItem)
                     {
@@ -61,20 +60,14 @@ namespace UI.Computer
 
         private void OnEnable()
         {
-            GetCartReference();
+            computerManager = FindObjectOfType<ComputerManager>();
             SetQuantityDisplay(activeItemQuantity);
-        }
-
-        private void GetCartReference()
-        {
-            shoppingCart = FindObjectOfType<ComputerManager>().shoppingCart;
         }
 
         public void IncrementQuantity()
         {
             activeItemQuantity++;
             SetQuantityDisplay(activeItemQuantity);
-            UpdateShoppingCart();
         }
 
         public void DecrementQuantity()
@@ -86,34 +79,21 @@ namespace UI.Computer
                 activeItemQuantity = minQuantity;
             }
             SetQuantityDisplay(activeItemQuantity);
-            UpdateShoppingCart();
         }
 
         public void AddItemToCart()
         {
-            GetCartReference();
-            if (!shoppingCart.ContainsKey(activeItem))
+            if (!computerManager.shoppingCart.ContainsKey(activeItem))
             {
                 if (activeItemQuantity > 0)
                 {
-                    shoppingCart.Add(activeItem, activeItemQuantity);
-                    UpdateShoppingCart();
+                    computerManager.shoppingCart.Add(activeItem, activeItemQuantity);
                 }
             }
             else
             {
-                shoppingCart.Remove(activeItem);
-                shoppingCart.Add(activeItem, activeItemQuantity);
-                UpdateShoppingCart();
-            }
-        }
-
-        private void UpdateShoppingCart()
-        {
-            FindObjectOfType<ComputerManager>().shoppingCart.Clear();
-            foreach (KeyValuePair<PrefabData, int> item in shoppingCart)
-            {
-                FindObjectOfType<ComputerManager>().shoppingCart.Add(item.Key, item.Value);
+                computerManager.shoppingCart.Remove(activeItem);
+                computerManager.shoppingCart.Add(activeItem, activeItemQuantity);
             }
         }
     }
