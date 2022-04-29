@@ -311,8 +311,13 @@ namespace Creature
             if (subTask && !timedout)
             {
                 task = subTasks.Peek().SubTask;
-                subTasks.Peek().OnFinishCallback(this, task);
+                bool success = subTasks.Peek().OnFinishCallback(this, task);
                 subTasks.Pop();
+                if (!success) 
+                {
+                    subTasks.Clear();
+                    Console.LogDebug($"Creature [{Guid}]: SubTask Failed: {task.GetType()}");
+                }
             }
             else if (hotTasks.Count > 0)
             {

@@ -32,7 +32,7 @@ namespace Creature.Task
 
 
 
-            ITask gotoObject = new GoHere(FetchObj.transform, 1f);
+            ITask gotoObject = new GoHere(FetchObj.transform, 0.7f);
             ITask pickUpObject = new Wait(1);
             ITask returnToThrower = new GoHere(Thrower.transform, 2f);
 
@@ -57,6 +57,11 @@ namespace Creature.Task
 
             caller.AddSubTask(gotoObject, (creatue, task) => {
                 Console.LogDebug($"Creature [{caller.Guid}]: Fetch - Pickup Object!");
+                if (Vector3.Distance(FetchObj.transform.position, caller.transform.position) > 2f) 
+                {
+                    Console.LogDebug($"Creature [{caller.Guid}]: Fetch - Fetch object could not be grabbed!!");
+                    return false;
+                }
                 caller.AnimationTrigger("Eat");
                 return true;
             });
