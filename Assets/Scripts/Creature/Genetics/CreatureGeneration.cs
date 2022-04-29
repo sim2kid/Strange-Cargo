@@ -293,6 +293,8 @@ namespace Genetics
             CreatureController c = creature.AddComponent<CreatureController>();
             c.SetUp(dna, a, Guid.NewGuid().ToString(), frontFeetSound, backFeetSound);
 
+            creature.GetComponentInChildren<Mouth>().Populate(c);
+
             SphereCollider sphere = creature.AddComponent<SphereCollider>();
             sphere.center = new Vector3(0, 0.3f, 0);
             sphere.radius = 0.3f;
@@ -342,8 +344,12 @@ namespace Genetics
                         renderer.gameObject.AddComponent<BoneToPick>().Populate(bodyPart.OffsetBone, bodyPart.Offset);
                     if (bodyPart.Type == "FrontLegs" || bodyPart.Type == "BackLegs")
                         renderer.gameObject.AddComponent<FeetSound>().Populate(bodyPart.Sound, bodyPart.Type == "FrontLegs");
+                    if (bodyPart.Type == "Heads")
+                    {
+                        renderer.gameObject.AddComponent<Mouth>();
+                    }
                 }
-                i++;
+                    i++;
                 if (useTexture && texture2D.width != 1)
                 {
                     renderer.gameObject.AddComponent<MaterialConversion>()
