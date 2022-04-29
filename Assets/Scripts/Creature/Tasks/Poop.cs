@@ -52,7 +52,7 @@ namespace Creature.Task
         private void TakeAPoo(CreatureController caller) 
         {
             Console.LogDebug($"Creature [{caller.Guid}]: Poop - In Poop Position");
-            caller.AnimationTrigger("Wiggle");
+            caller.AnimationBool("Wiggle", true);
         }
         private void DonePooing(CreatureController caller) 
         {
@@ -60,6 +60,7 @@ namespace Creature.Task
 
             _poopZone.Poop(caller.transform.position, 200 - caller.needs.Bladder);
             caller.ProcessINeed(_poopZone);
+            caller.AnimationBool("Wiggle", false);
 
             Satisfaction = 100;
 
@@ -68,7 +69,7 @@ namespace Creature.Task
         }
         public void EndTask(CreatureController caller)
         {
-            caller.AnimationResetTrigger("Wiggle");
+            caller.AnimationBool("Wiggle", false);
             IsStarted = false;
             if (SatisResult != null)
                 SatisResult.Invoke();
