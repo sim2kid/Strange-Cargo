@@ -30,6 +30,10 @@ namespace UI.Computer
         [SerializeField]
         private GameObject icon;
 
+        [SerializeField]
+        private float itemPrice = 0.00f;
+        public float ItemPrice { get { return itemPrice; } }
+
         private GameObject demoObject;
 
         private delegate void RenderAction();
@@ -37,7 +41,7 @@ namespace UI.Computer
 
         private int resolution = 128;
 
-        private System.Func<PrefabData, Texture2D, string, string, bool> onClick = null;
+        private System.Func<PrefabData, Texture2D, string, string, string, bool> onClick = null;
 
         private void Start()
         {
@@ -74,7 +78,7 @@ namespace UI.Computer
 
                     this.GetComponent<Button>().onClick.AddListener(() => {
                         if (onClick != null)
-                            onClick.Invoke(PrefabData, texture, PrefabData.PrefabResourceLocation, "Demo Item and description");
+                            onClick.Invoke(PrefabData, texture, PrefabData.PrefabResourceLocation, "Demo Item and description", itemPrice.ToString("0.00"));
                     });
                 };
 
@@ -108,7 +112,7 @@ namespace UI.Computer
             PrefabDataLocation = null;
         }
 
-        public void OnClickHook(System.Func<PrefabData, Texture2D, string, string, bool> setPanel) 
+        public void OnClickHook(System.Func<PrefabData, Texture2D, string, string, string, bool> setPanel) 
         {
             onClick = setPanel;
         }

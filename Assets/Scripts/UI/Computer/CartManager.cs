@@ -93,9 +93,9 @@ namespace UI.Computer
             DestroyCart();
         }
 
-        public bool SetSelected(PrefabData data, Texture2D icon, string title, string description)
+        public bool SetSelected(PrefabData data, Texture2D icon, string title, string description, string price)
         {
-            panel.UpdatePanel(data, icon, title, description);
+            panel.UpdatePanel(data, icon, title, description, price);
             return true;
         }
 
@@ -114,7 +114,15 @@ namespace UI.Computer
 
         public void Checkout()
         {
-            StartCoroutine(SpawnItems(computerManager.shoppingCart));
+            float total = 0.00f;
+            foreach(var item in CartItemList)
+            {
+                total += item.GetComponent<ShopItem>().ItemPrice;
+            }
+            if (total <= FindObjectOfType<Player.PlayerController>().GetComponent<Player.Money>().Value)
+            {
+                StartCoroutine(SpawnItems(computerManager.shoppingCart));
+            }
         }
 
         private IEnumerator SpawnItems(Dictionary<PrefabData, int> _itemsToSpawn)

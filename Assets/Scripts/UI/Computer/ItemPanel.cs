@@ -14,6 +14,8 @@ namespace UI.Computer
         [SerializeField]
         private TMPro.TextMeshProUGUI Description;
         [SerializeField]
+        private TMPro.TextMeshProUGUI Price;
+        [SerializeField]
         private UnityEngine.UI.Image Icon;
         [SerializeField]
         private InputField quantityDisplay;
@@ -24,12 +26,13 @@ namespace UI.Computer
 
         private ComputerManager computerManager;
 
-        public void UpdatePanel(PrefabData data, Texture2D newIcon, string title, string description) 
+        public void UpdatePanel(PrefabData data, Texture2D newIcon, string title, string description, string price) 
         {
             gameObject.SetActive(true);
             activeItem = data;
             Title.text = title;
-            Description.text = description; 
+            Description.text = description;
+            Price.text = price;
             Icon.sprite = Sprite.Create(newIcon, new Rect(0,0,128,128), Vector2.zero);
             if (FindObjectOfType<CartManager>() != null && computerManager.shoppingCart.ContainsKey(activeItem))
             {
