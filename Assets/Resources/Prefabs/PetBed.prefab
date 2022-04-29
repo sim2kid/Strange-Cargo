@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2586031052044702480}
   - component: {fileID: 8815603121468995992}
   - component: {fileID: -6324649183456619860}
+  - component: {fileID: 7684322184996595871}
   m_Layer: 0
   m_Name: PetBed
   m_TagString: Untagged
@@ -159,3 +160,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemPrefab: {fileID: 3800630937309533782, guid: d0ad58fd320f14444ac52bcb13462d0c, type: 3}
+--- !u!114 &7684322184996595871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2207190824373406551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7322374fe556f384fb7e36cb8eb76407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Appetite: 0
+  Bladder: 0
+  Social: 0
+  Energy: 200
+  Hygiene: 0
+  Happiness: 0
+  UtilityRate: 0

@@ -80,6 +80,7 @@ namespace Creature.Task
             IsStarted = false;
             if (SatisResult != null)
                 SatisResult.Invoke();
+            OnTaskFinished.Invoke();
         }
 
         public void Update(CreatureController caller) { }

@@ -25,6 +25,7 @@ namespace Interaction
         [SerializeField]
         private float fetchableCooldown = 20f;
         private float timer = 0;
+        private bool canFlinch = true;
 
 
 
@@ -84,17 +85,31 @@ namespace Interaction
                 Utility.Toolbox.Instance.AvalibleTasks.Add(this);
                 timer = fetchableCooldown;
             }
+            canFlinch = true;
         }
 
         private void Timeout() 
         {
+            canFlinch = true;
             if (Utility.Toolbox.Instance.AvalibleTasks.Contains(this))
                 Utility.Toolbox.Instance.AvalibleTasks.Remove(this);
         }
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (rigidbody.velocity.magnitude <= 0.1f || timer <= 0 || !canFlinch) { return; }
+            var creature = collision.gameObject.GetComponent<Creature.CreatureController>();
+            if (creature != null) 
+            {
+                creature.AddHotTask(new Flinch());
+                canFlinch = false;
+                timer = 0;
+            }
+        }
+
         public bool Equals(IObject other)
         {
-            throw new System.NotImplementedException();
+            return Guid == other.Guid;
         }
     }
 }

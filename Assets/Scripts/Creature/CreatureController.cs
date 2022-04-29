@@ -303,8 +303,11 @@ namespace Creature
 
         private void StopNormalTask() 
         {
-            if(tasks.Count > 0)
+            if (tasks.Count > 0)
+            {
                 tasks.Peek().EndTask(this);
+                tasks.Dequeue();
+            }
         }
 
         public void VoidTask() 

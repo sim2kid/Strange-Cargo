@@ -37,6 +37,8 @@ namespace Environment
             {
                 Creature.NegativeReinforcement();
 
+                Creature.AnimationTrigger("Flinch");
+
                 Creature.ProcessINeed(this);
                 onUseCreature.Invoke();
 
