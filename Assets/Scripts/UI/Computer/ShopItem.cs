@@ -108,9 +108,9 @@ namespace UI.Computer
             PrefabDataLocation = null;
         }
 
-        public void OnClickHook(System.Func<PrefabData, Texture2D, string, string, bool> setPannel) 
+        public void OnClickHook(System.Func<PrefabData, Texture2D, string, string, bool> setPanel) 
         {
-            onClick = setPannel;
+            onClick = setPanel;
         }
 
         private void Update()
