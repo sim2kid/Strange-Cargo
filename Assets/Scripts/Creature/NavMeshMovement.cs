@@ -15,6 +15,7 @@ namespace Creature
         public float Speed => navMeshAgent.velocity.magnitude;
         public float Distance => navMeshAgent.remainingDistance;
         public bool pathPending => navMeshAgent.pathPending;
+        public NavMeshPathStatus pathStatus => navMeshAgent.pathStatus;
 
         public bool CanReachDestination => navMeshAgent.hasPath;
 

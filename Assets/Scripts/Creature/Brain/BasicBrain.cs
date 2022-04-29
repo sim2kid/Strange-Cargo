@@ -89,6 +89,7 @@ namespace Creature.Brain
                 // Add preference
                 float preference = 0;
                 Preferred p = null;
+                if (task == null) { continue; }
                 if (task.RelatedObject != null)
                 {
                     p = Preferences.Find(x => x.Guid.Equals(task.RelatedObject.Guid));

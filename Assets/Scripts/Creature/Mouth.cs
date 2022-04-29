@@ -12,7 +12,7 @@ namespace Creature
     public class Mouth : MonoBehaviour
     {
         [SerializeField]
-        Vector3 OffsetFromHeadbone = new Vector3(0, 0, 0.16f);
+        Vector3 OffsetFromHeadbone = new Vector3(0.24f, 0.1f, -0.49f);
 
         public IHoldable Holding { get; private set; }
         public StringListData data;
@@ -21,6 +21,8 @@ namespace Creature
         private CreatureController creature;
 
         private bool enableGravityOnDrop;
+
+        public bool HasObj => Holding != null;
 
         private void Awake()
         {
@@ -51,7 +53,8 @@ namespace Creature
             if (Holding is MonoBehaviour)
             {
                 GameObject obj = ((MonoBehaviour)Holding).gameObject;
-                obj.transform.position = transform.position + OffsetFromHeadbone + Holding.PositionOffset;
+                Vector3 ful = (transform.forward * OffsetFromHeadbone.x) + (transform.up * OffsetFromHeadbone.y) + (transform.right * OffsetFromHeadbone.z);
+                obj.transform.position = transform.position + ful + Holding.PositionOffset;
                 obj.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + Holding.RotationOffset);
             }
         }
