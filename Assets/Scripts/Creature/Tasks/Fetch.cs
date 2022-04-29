@@ -44,6 +44,7 @@ namespace Creature.Task
                 caller.Mouth.LetGo();
                 Satisfaction = 100;
                 IsDone = true;
+                caller.ProcessNeedChange(new Stats.Needs(0, 0, 25f, 0, 0, 0));
                 OnTaskFinished.Invoke();
                 return true;
             });

@@ -112,6 +112,10 @@ namespace Creature
         {
             needs += needChanges.NeedChange;
         }
+        public void ProcessNeedChange(Needs needChanges)
+        {
+            needs += needChanges;
+        }
 
         public bool AddTask(ITask task) 
         {

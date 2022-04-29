@@ -31,7 +31,7 @@ namespace Interaction
         public UnityEvent OnThrow;
         public string ThrowText => throwString;
 
-        public ValueRange BaseUtility => 10;
+        public ValueRange BaseUtility => 5;
 
         public Needs NeedsFromFetch = new Needs(0,0,25,0,0,0);
         public Needs StatsEffect => NeedsFromFetch;
