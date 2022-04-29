@@ -25,6 +25,8 @@ namespace UI
         private delegate void MenuAction();
         private MenuAction OpenLastMenu;
 
+        public List<TextAsset> allItems = new List<TextAsset>();
+        public List<GameObject> itemList = new List<GameObject>();
         public Dictionary<PrefabData, int> shoppingCart;
 
         private void AllOff()
@@ -65,6 +67,7 @@ namespace UI
 
         public void TurnOff()
         {
+            shoppingCart.Clear();
             AllOff();
         }
 

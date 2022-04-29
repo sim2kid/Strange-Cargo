@@ -16,10 +16,11 @@ namespace UI.Computer
         private GameObject ShopItem;
         [SerializeField]
         private ItemPanel panel;
-        private List<GameObject> ItemList = new List<GameObject>();
+        [SerializeField]
+        private float itemSpawnDelayInSeconds = 0.1f;
+        private List<GameObject> CartItemList = new List<GameObject>();
         private float itemSize = 100;
         private float itemMargin = 10;
-        private TextAsset[] allItems;
 
         public UnityEvent OnItemSpawn;
 
@@ -33,27 +34,24 @@ namespace UI.Computer
         {
             DestroyCart();
             computerManager = FindObjectOfType<ComputerManager>();
-            foreach (var item in allItems)
+            foreach (var item in computerManager.itemList)
             {
-                var obj = Instantiate(ShopItem);
-                var shop = obj.GetComponent<ShopItem>();
-                shop.SetPrefabData(item.text);
+                var shop = item.GetComponent<ShopItem>();
                 foreach(KeyValuePair<PrefabData, int> _item in computerManager.shoppingCart)
                 {
                     if(_item.Key.Equals(shop.PrefabData))
                     {
-                        ItemList.Add(obj);
+                        CartItemList.Add(item);
                     }
                 }
-                obj.SetActive(false);
             }
 
             RectTransform rT = ViewPort.GetComponent<RectTransform>();
-            float maxSize = itemMargin + (Mathf.Ceil(ItemList.Count / 2f) * (itemSize + itemMargin));
+            float maxSize = itemMargin + (Mathf.Ceil(CartItemList.Count / 2f) * (itemSize + itemMargin));
             rT.sizeDelta = new Vector2(0, maxSize);
-            for (int i = 0; i < ItemList.Count; i++)
+            for (int i = 0; i < CartItemList.Count; i++)
             {
-                GameObject obj = ItemList[i];
+                GameObject obj = CartItemList[i];
                 obj.transform.position = rT.position;
                 obj.transform.rotation = rT.rotation;
                 obj.transform.SetParent(rT);
@@ -81,7 +79,7 @@ namespace UI.Computer
             RectTransform rT = ViewPort.GetComponent<RectTransform>();
             rT.sizeDelta = new Vector2(0, 0);
             selected = null;
-            ItemList.Clear();
+            CartItemList.Clear();
         }
 
         private void OnEnable()
@@ -101,23 +99,6 @@ namespace UI.Computer
             return true;
         }
 
-        void Awake()
-        {
-            if (!string.IsNullOrEmpty(ShopItemResourceFolder))
-            {
-                allItems = Resources.LoadAll<TextAsset>(ShopItemResourceFolder);
-                foreach (var item in ItemList)
-                {
-                    if (item.scene.IsValid())
-                    {
-                        Destroy(item);
-                    }
-                }
-                ItemList.Clear();
-                
-            }
-        }
-
         // Update is called once per frame
         void Update()
         {
@@ -133,13 +114,20 @@ namespace UI.Computer
 
         public void Checkout()
         {
-            foreach (KeyValuePair<PrefabData, int> item in computerManager.shoppingCart)
+            StartCoroutine(SpawnItems(computerManager.shoppingCart));
+        }
+
+        private IEnumerator SpawnItems(Dictionary<PrefabData, int> _itemsToSpawn)
+        {
+            var itemSpawner = FindObjectOfType<ItemSpawner>();
+            foreach(KeyValuePair<PrefabData, int> item in _itemsToSpawn)
             {
-                if (item.Value > 0)
+                if(item.Value > 0)
                 {
-                    for (int i = 1; i <= item.Value; i++)
+                    for(int i = 1; i <= item.Value; i++)
                     {
-                        FindObjectOfType<ItemSpawner>().Spawn(item.Key);
+                        yield return new WaitForSeconds(itemSpawnDelayInSeconds);
+                        itemSpawner.Spawn(item.Key);
                         OnItemSpawn.Invoke();
                     }
                 }

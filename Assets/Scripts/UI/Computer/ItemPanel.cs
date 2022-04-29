@@ -31,7 +31,7 @@ namespace UI.Computer
             Title.text = title;
             Description.text = description; 
             Icon.sprite = Sprite.Create(newIcon, new Rect(0,0,128,128), Vector2.zero);
-            if (computerManager.shoppingCart.ContainsKey(activeItem))
+            if (FindObjectOfType<CartManager>() != null && computerManager.shoppingCart.ContainsKey(activeItem))
             {
                 foreach (KeyValuePair<PrefabData, int> item in computerManager.shoppingCart)
                 {
@@ -68,6 +68,7 @@ namespace UI.Computer
         {
             activeItemQuantity++;
             SetQuantityDisplay(activeItemQuantity);
+            UpdateActiveItemQuantityInCart();
         }
 
         public void DecrementQuantity()
@@ -79,6 +80,15 @@ namespace UI.Computer
                 activeItemQuantity = minQuantity;
             }
             SetQuantityDisplay(activeItemQuantity);
+            UpdateActiveItemQuantityInCart();
+        }
+
+        private void UpdateActiveItemQuantityInCart()
+        {
+            if (FindObjectOfType<CartManager>() != null)
+            {
+                computerManager.shoppingCart[activeItem] = activeItemQuantity;
+            }
         }
 
         public void AddItemToCart()
@@ -92,8 +102,7 @@ namespace UI.Computer
             }
             else
             {
-                computerManager.shoppingCart.Remove(activeItem);
-                computerManager.shoppingCart.Add(activeItem, activeItemQuantity);
+                computerManager.shoppingCart[activeItem] += activeItemQuantity;
             }
         }
     }
