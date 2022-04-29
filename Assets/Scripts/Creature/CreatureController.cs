@@ -38,6 +38,8 @@ namespace Creature
         public int TaskCount => tasks.Count;
         public ITask TopTask => tasks.Peek();
 
+        public Mouth Mouth => this.GetComponentInChildren<Mouth>();
+
         public Animator Animator { get; private set; }
 
         Queue<ITask> tasks;
