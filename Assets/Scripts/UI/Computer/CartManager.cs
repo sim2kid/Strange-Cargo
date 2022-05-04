@@ -93,9 +93,9 @@ namespace UI.Computer
             DestroyCart();
         }
 
-        public bool SetSelected(PrefabData data, Texture2D icon, string title, string description)
+        public bool SetSelected(PrefabData data, Texture2D icon, ShopItemData itemData)
         {
-            panel.UpdatePanel(data, icon, title, description);
+            panel.UpdatePanel(data, icon, itemData);
             return true;
         }
 

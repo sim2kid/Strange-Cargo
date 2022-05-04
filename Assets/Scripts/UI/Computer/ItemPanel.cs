@@ -26,12 +26,13 @@ namespace UI.Computer
 
         private ComputerManager computerManager;
 
-        public void UpdatePanel(PrefabData data, Texture2D newIcon, string title, string description) 
+        public void UpdatePanel(PrefabData data, Texture2D newIcon, ShopItemData shopItem) 
         {
             gameObject.SetActive(true);
             activeItem = data;
-            Title.text = title;
-            Description.text = description;
+            Title.text = shopItem.Name;
+            Description.text = shopItem.Description;
+            Price.text = $"${shopItem.Price.ToString("0.00")}";
             Icon.sprite = Sprite.Create(newIcon, new Rect(0,0,128,128), Vector2.zero);
             if (FindObjectOfType<CartManager>() != null && computerManager.shoppingCart.ContainsKey(activeItem))
             {
