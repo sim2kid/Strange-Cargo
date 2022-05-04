@@ -72,9 +72,9 @@ namespace UI.Computer
             DestroyShop();
         }
 
-        public bool SetSelected(PrefabData data, Texture2D icon, string title, string description, string price) 
+        public bool SetSelected(PrefabData data, Texture2D icon, string title, string description) 
         {
-            panel.UpdatePanel(data, icon, title, description, price);
+            panel.UpdatePanel(data, icon, title, description);
             return true;
         }
 
