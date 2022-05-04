@@ -114,15 +114,16 @@ namespace UI.Computer
 
         public void Checkout()
         {
-            //float total = 0.00f;
-            /*foreach(var item in CartItemList)
+            float total = 0.00f;
+            foreach(var item in CartItemList)
             {
-                total += item.GetComponent<ShopItem>().ItemPrice;
-            }*/
-            //if (total <= FindObjectOfType<Player.PlayerController>().GetComponent<Player.Money>().Value)
-            //{
+                int quantity = computerManager.shoppingCart[item.GetComponent<PrefabData>()];
+                total += (item.GetComponent<ShopItem>().ShopItemData.Price * quantity);
+            }
+            if (total <= FindObjectOfType<Player.PlayerController>().GetComponent<Player.Money>().Value)
+            {
                 StartCoroutine(SpawnItems(computerManager.shoppingCart));
-            //}
+            }
         }
 
         private IEnumerator SpawnItems(Dictionary<PrefabData, int> _itemsToSpawn)
