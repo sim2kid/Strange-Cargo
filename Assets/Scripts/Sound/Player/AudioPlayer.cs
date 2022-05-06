@@ -186,6 +186,7 @@ namespace Sound.Player
         }
         public void UnPause() 
         {
+            IsPlaying = true;
             _source.UnPause();
         }
 

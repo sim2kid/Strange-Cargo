@@ -102,7 +102,7 @@ namespace Player.Movement
 
             if (rotation.y > 180)
                 rotation.y -= 360;
-            rotation.y = Mathf.Clamp(rotation.y, -90, 90);
+            rotation.y = Mathf.Clamp(rotation.y, -89, 89);
 
             // Update our gameobjects
             transform.localEulerAngles = new Vector3(0, rotation.x, 0);
