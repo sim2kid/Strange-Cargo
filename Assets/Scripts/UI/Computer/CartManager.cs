@@ -17,7 +17,19 @@ namespace UI.Computer
         [SerializeField]
         private ItemPanel panel;
         [SerializeField]
+        private GameObject checkoutButton;
+        [SerializeField]
+        private UnityEngine.UI.Text Result;
+        [SerializeField]
+        private string successMessage = "Purchase successful!";
+        [SerializeField]
+        private string failureMessage = "Error: Insufficient funds";
+        [SerializeField]
+        private string emptyCartMessage = "Error: Cart is empty";
+        [SerializeField]
         private float itemSpawnDelayInSeconds = 0.1f;
+        [SerializeField]
+        private float failureMessageDurationInSeconds = 2f;
         private List<GameObject> CartItemList = new List<GameObject>();
         private float itemSize = 100;
         private float itemMargin = 10;
@@ -86,6 +98,7 @@ namespace UI.Computer
         {
             SetPositions = new Queue<System.Func<GameObject>>();
             RenderCart();
+            ShowCheckoutButton();
         }
 
         private void OnDisable()
@@ -115,14 +128,41 @@ namespace UI.Computer
         public void Checkout()
         {
             float total = 0.00f;
-            foreach(var item in CartItemList)
+            bool cartHasItems = false;
+            if (computerManager.shoppingCart.Count > 0)
             {
-                int quantity = computerManager.shoppingCart[item.GetComponent<PrefabData>()];
-                total += (item.GetComponent<ShopItem>().ShopItemData.Price * quantity);
+                foreach (var item in computerManager.shoppingCart)
+                {
+                    if (item.Value > 0)
+                    {
+                        cartHasItems = true;
+                        break;
+                    }
+                }
             }
-            if (total <= FindObjectOfType<Player.PlayerController>().GetComponent<Player.Money>().Value)
+            if (cartHasItems)
             {
-                StartCoroutine(SpawnItems(computerManager.shoppingCart));
+                bool purchaseSuccessful;
+                foreach (var item in CartItemList)
+                {
+                    int quantity = computerManager.shoppingCart[item.GetComponent<ShopItem>().PrefabData];
+                    total += (item.GetComponent<ShopItem>().ShopItemData.Price * quantity);
+                }
+                if (total <= FindObjectOfType<Player.PlayerController>().GetComponent<Player.Money>().Value)
+                {
+                    purchaseSuccessful = true;
+                    FindObjectOfType<Player.PlayerController>().GetComponent<Player.Money>().Value -= total;
+                    StartCoroutine(SpawnItems(computerManager.shoppingCart));
+                }
+                else
+                {
+                    purchaseSuccessful = false;
+                }
+                StartCoroutine(ShowResultMessage(purchaseSuccessful));
+            }
+            else
+            {
+                StartCoroutine(ShowCartEmptyMessage());
             }
         }
 
@@ -141,6 +181,40 @@ namespace UI.Computer
                     }
                 }
             }
+            ShowCheckoutButton();
+        }
+
+        private void ShowCheckoutButton()
+        {
+            Result.enabled = false;
+            checkoutButton.SetActive(true);
+            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(ViewPort); //restore checkout button's normal color
+        }
+
+        private IEnumerator ShowResultMessage(bool _purchaseSuccessful)
+        {
+            checkoutButton.SetActive(false);
+            Result.enabled = true;
+            if(_purchaseSuccessful)
+            {
+                Result.text = successMessage;
+                yield return null;
+            }
+            else
+            {
+                Result.text = failureMessage;
+                yield return new WaitForSeconds(failureMessageDurationInSeconds);
+                ShowCheckoutButton();
+            }
+        }
+
+        private IEnumerator ShowCartEmptyMessage()
+        {
+            checkoutButton.SetActive(false);
+            Result.enabled = true;
+            Result.text = emptyCartMessage;
+            yield return new WaitForSeconds(failureMessageDurationInSeconds);
+            ShowCheckoutButton();
         }
     }
 }
