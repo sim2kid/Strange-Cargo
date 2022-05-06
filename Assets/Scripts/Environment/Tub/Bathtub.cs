@@ -9,7 +9,9 @@ namespace Environment.Tub
         [SerializeField]
         Showerhead Showerhead;
         [SerializeField]
-        Shampoo SoapBottle;
+        Shampoo SoapBottle1;
+        [SerializeField]
+        Shampoo SoapBottle2;
 
 
 

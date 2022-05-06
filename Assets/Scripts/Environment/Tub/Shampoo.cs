@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace Environment.Tub
 {
+    [RequireComponent(typeof(InSceneView.ResetPosition))]
     public class Shampoo : MonoBehaviour
     {
         InputAction StationaryUse;
@@ -16,6 +17,8 @@ namespace Environment.Tub
         [SerializeField]
         GameObject spawnSoapLoaction;
         float cooldown = 0;
+        
+        public InSceneView.ResetPosition reset;
 
         [SerializeField]
         int totalActive = 0;
@@ -25,6 +28,7 @@ namespace Environment.Tub
 
         void Start()
         {
+            reset = GetComponent<InSceneView.ResetPosition>();
             inHand = false;
             PlayerInput input = GameObject.FindObjectOfType<PlayerInput>();
             if (input == null)

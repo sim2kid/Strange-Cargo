@@ -4,12 +4,14 @@ using UnityEngine;
 
 namespace Environment.Tub
 {
+    [RequireComponent(typeof(InSceneView.ResetPosition))]
     public class Showerhead : MonoBehaviour
     {
-        // Start is called before the first frame update
+        public InSceneView.ResetPosition reset;
+
         void Start()
         {
-
+            reset = GetComponent<InSceneView.ResetPosition>();
         }
 
         // Update is called once per frame
