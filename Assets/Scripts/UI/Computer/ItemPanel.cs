@@ -26,10 +26,6 @@ namespace UI.Computer
 
         private ComputerManager computerManager;
 
-        public delegate void OnItemRemoved();
-
-        public static event OnItemRemoved onItemRemoved;
-
         public void UpdatePanel(PrefabData data, Texture2D newIcon, ShopItemData shopItem) 
         {
             gameObject.SetActive(true);
@@ -110,15 +106,6 @@ namespace UI.Computer
             else
             {
                 computerManager.shoppingCart[activeItem] += activeItemQuantity;
-            }
-        }
-
-        public void RemoveItemFromCart()
-        {
-            if (computerManager.shoppingCart.ContainsKey(activeItem))
-            {
-                computerManager.shoppingCart.Remove(activeItem);
-                onItemRemoved.Invoke();
             }
         }
     }
