@@ -21,6 +21,8 @@ namespace UI.Computer
         [SerializeField]
         private UnityEngine.UI.Text Result;
         [SerializeField]
+        private UnityEngine.UI.Text TotalDisplay;
+        [SerializeField]
         private string successMessage = "Purchase successful!";
         [SerializeField]
         private string failureMessage = "Error: Insufficient funds";
@@ -34,6 +36,7 @@ namespace UI.Computer
         private float itemSize = 100;
         private float itemMargin = 10;
         private bool checkoutWasPressed;
+        private float total = 0.00f;
 
         public UnityEvent OnItemSpawn;
 
@@ -106,6 +109,8 @@ namespace UI.Computer
             RenderCart();
             ShowCheckoutButton();
             checkoutWasPressed = false;
+            UpdateTotal();
+            ItemPanel.onCartModified += UpdateTotal;
         }
 
         private void OnDisable()
@@ -126,7 +131,9 @@ namespace UI.Computer
             if(checkoutWasPressed)
             {
                 computerManager.shoppingCart.Clear();
+                UpdateTotal();
             }
+            ItemPanel.onCartModified -= UpdateTotal;
         }
 
         public bool SetSelected(PrefabData data, Texture2D icon, ShopItemData itemData)
@@ -147,11 +154,36 @@ namespace UI.Computer
                 }
             }
             SetPositions.Clear();
+
+            TotalDisplay.text = "Total:" + $"${total.ToString("0.00")}";
+        }
+
+        private void UpdateTotal()
+        {
+            total = 0.00f;
+            bool cartHasItems = false;
+            if(computerManager.shoppingCart.Count > 0)
+            {
+                foreach(var item in computerManager.shoppingCart)
+                    if (item.Value > 0)
+                    {
+                        cartHasItems = true;
+                        break;
+                    }
+            }
+            if(cartHasItems)
+            {
+                foreach(var item in CartItemList)
+                {
+                    int quantity = computerManager.shoppingCart[item.GetComponent<ShopItem>().PrefabData];
+                    total += (item.GetComponent<ShopItem>().ShopItemData.Price * quantity);
+                }
+            }
         }
 
         public void Checkout()
         {
-            float total = 0.00f;
+            UpdateTotal();
             bool cartHasItems = false;
             if (computerManager.shoppingCart.Count > 0)
             {
@@ -167,11 +199,6 @@ namespace UI.Computer
             if (cartHasItems)
             {
                 bool purchaseSuccessful;
-                foreach (var item in CartItemList)
-                {
-                    int quantity = computerManager.shoppingCart[item.GetComponent<ShopItem>().PrefabData];
-                    total += (item.GetComponent<ShopItem>().ShopItemData.Price * quantity);
-                }
                 if (total <= FindObjectOfType<Player.PlayerController>().GetComponent<Player.Money>().Value)
                 {
                     purchaseSuccessful = true;

@@ -26,6 +26,10 @@ namespace UI.Computer
 
         private ComputerManager computerManager;
 
+        public delegate void OnCartModified();
+
+        public static event OnCartModified onCartModified;
+
         public void UpdatePanel(PrefabData data, Texture2D newIcon, ShopItemData shopItem) 
         {
             gameObject.SetActive(true);
@@ -91,6 +95,7 @@ namespace UI.Computer
             if (FindObjectOfType<CartManager>() != null)
             {
                 computerManager.shoppingCart[activeItem] = activeItemQuantity;
+                onCartModified.Invoke();
             }
         }
 
