@@ -33,6 +33,7 @@ namespace UI.Computer
         private List<GameObject> CartItemList = new List<GameObject>();
         private float itemSize = 100;
         private float itemMargin = 10;
+        private bool checkoutWasPressed;
 
         public UnityEvent OnItemSpawn;
 
@@ -104,6 +105,7 @@ namespace UI.Computer
             computerManager = FindObjectOfType<ComputerManager>();
             RenderCart();
             ShowCheckoutButton();
+            checkoutWasPressed = false;
         }
 
         private void OnDisable()
@@ -120,6 +122,10 @@ namespace UI.Computer
             foreach(var item in itemsToRemove)
             {
                 computerManager.shoppingCart.Remove(item);
+            }
+            if(checkoutWasPressed)
+            {
+                computerManager.shoppingCart.Clear();
             }
         }
 
@@ -171,6 +177,7 @@ namespace UI.Computer
                     purchaseSuccessful = true;
                     FindObjectOfType<Player.PlayerController>().GetComponent<Player.Money>().Value -= total;
                     StartCoroutine(SpawnItems(computerManager.shoppingCart));
+                    checkoutWasPressed = true;
                 }
                 else
                 {
