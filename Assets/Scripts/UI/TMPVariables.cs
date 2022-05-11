@@ -5,10 +5,10 @@ using System.Linq;
 using TMPro;
 using System.Text.RegularExpressions;
 
-[RequireComponent(typeof(TextMeshPro))]
+[RequireComponent(typeof(TextMeshProUGUI))]
 public class TMPVariables : MonoBehaviour
 {
-    TextMeshPro tmp;
+    TextMeshProUGUI tmp;
 
     string originalText;
     string oldText;
@@ -16,11 +16,11 @@ public class TMPVariables : MonoBehaviour
     /// <summary>
     /// populate this field with key value pairs to replace text in a TMP object
     /// </summary>
-    public Dictionary<string, string> Variables = new Dictionary<string, string>();;
+    public Dictionary<string, string> Variables = new Dictionary<string, string>();
 
     void Start()
     {
-        tmp = GetComponent<TextMeshPro>();
+        tmp = GetComponent<TextMeshProUGUI>();
 
         originalText = oldText = tmp.text;
     }
