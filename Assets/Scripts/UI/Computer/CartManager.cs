@@ -45,7 +45,6 @@ namespace UI.Computer
         private void RenderCart()
         {
             DestroyCart();
-            computerManager = FindObjectOfType<ComputerManager>();
             foreach (var item in computerManager.itemList)
             {
                 var shop = item.GetComponent<ShopItem>();
@@ -57,6 +56,7 @@ namespace UI.Computer
                     }
                 }
             }
+
 
             RectTransform rT = ViewPort.GetComponent<RectTransform>();
             float maxSize = itemMargin + (Mathf.Ceil(CartItemList.Count / 2f) * (itemSize + itemMargin));
@@ -82,6 +82,10 @@ namespace UI.Computer
                     return objRT.gameObject;
                 });
             }
+            if(CartItemList.Count == 0)
+            {
+                panel.gameObject.SetActive(false);
+            }
         }
 
         private void DestroyCart()
@@ -97,6 +101,7 @@ namespace UI.Computer
         private void OnEnable()
         {
             SetPositions = new Queue<System.Func<GameObject>>();
+            computerManager = FindObjectOfType<ComputerManager>();
             RenderCart();
             ShowCheckoutButton();
         }
@@ -104,10 +109,23 @@ namespace UI.Computer
         private void OnDisable()
         {
             DestroyCart();
+            List<PrefabData> itemsToRemove = new List<PrefabData>();
+            foreach(var item in computerManager.shoppingCart)
+            {
+                if(item.Value == 0)
+                {
+                    itemsToRemove.Add(item.Key);
+                }
+            }
+            foreach(var item in itemsToRemove)
+            {
+                computerManager.shoppingCart.Remove(item);
+            }
         }
 
         public bool SetSelected(PrefabData data, Texture2D icon, ShopItemData itemData)
         {
+            panel.gameObject.SetActive(true);
             panel.UpdatePanel(data, icon, itemData);
             return true;
         }

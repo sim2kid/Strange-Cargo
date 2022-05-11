@@ -77,5 +77,17 @@ namespace UI
             shoppingCart = new Dictionary<PrefabData, int>();
             AllOff();
         }
+
+        private void OnEnable()
+        {
+            Computer.ItemPanel.onItemRemoved += OpenShop;
+            Computer.ItemPanel.onItemRemoved += OpenCart;
+        }
+
+        private void OnDisable()
+        {
+            Computer.ItemPanel.onItemRemoved -= OpenShop;
+            Computer.ItemPanel.onItemRemoved -= OpenCart;
+        }
     }
 }
