@@ -62,6 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soapBubblePrefab: {fileID: 6303820846844091785, guid: 41dcb6498757c4f4097ae9a913331f9d, type: 3}
   spawnSoapLoaction: {fileID: 909683515}
+  reset: {fileID: 0}
   totalActive: 0
   inHand: 0
 --- !u!114 &4356416887590689545
@@ -294,6 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c00cfc76c9bbb2a40ad4353a02724e5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reset: {fileID: 0}
 --- !u!114 &4109872337056969148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,7 +749,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2936009945030437685}
   m_LocalRotation: {x: -0, y: -0.38268322, z: -0, w: 0.9238797}
-  m_LocalPosition: {x: -0.009, y: 0, z: -0.045}
+  m_LocalPosition: {x: 0.007, y: 0, z: -0.034}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8039897127627673397}
@@ -778,7 +780,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3509083505296159470}
   m_LocalRotation: {x: -0, y: 0.4999995, z: -0, w: 0.86602575}
-  m_LocalPosition: {x: -0.32479858, y: 0, z: -0.0446167}
+  m_LocalPosition: {x: -0.30880737, y: 0, z: -0.033599854}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 666393615}
@@ -847,6 +849,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soapBubblePrefab: {fileID: 6303820846844091785, guid: 41dcb6498757c4f4097ae9a913331f9d, type: 3}
   spawnSoapLoaction: {fileID: 164900796386104608}
+  reset: {fileID: 0}
   totalActive: 0
   inHand: 0
 --- !u!114 &274088913363508646
@@ -944,7 +947,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: -100
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
@@ -1623,6 +1626,8 @@ GameObject:
   - component: {fileID: 7392161851984117356}
   - component: {fileID: 7392161851984117358}
   - component: {fileID: 7392161851984117357}
+  - component: {fileID: 6581171633676208222}
+  - component: {fileID: 3059826270601202796}
   m_Layer: 0
   m_Name: Bathtub
   m_TagString: Untagged
@@ -1659,13 +1664,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83be43579e5f8f548854bb15fdd5e927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualCamera: {fileID: 0}
+  virtualCamera: {fileID: 3933419024446239527}
   OnFocus:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7392161851984117357}
+        m_TargetAssemblyTypeName: Environment.Tub.Bathtub, Assembly-CSharp
+        m_MethodName: SetActive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnUnFocus:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7392161851984117357}
+        m_TargetAssemblyTypeName: Environment.Tub.Bathtub, Assembly-CSharp
+        m_MethodName: SetInactive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7392161851984117357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1681,6 +1710,65 @@ MonoBehaviour:
   Showerhead: {fileID: 2185370033800643275}
   SoapBottle1: {fileID: 666393613}
   SoapBottle2: {fileID: 6153745018426299395}
+  active: 0
+  Soap: 0
+--- !u!65 &6581171633676208222
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7392161851984117355}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2445068, y: 1.1389898, z: 1}
+  m_Center: {x: 0, y: 0.71780795, z: 0}
+--- !u!114 &3059826270601202796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7392161851984117355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26917d7f130b3ea4b9612448f77e21b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverText: '{use} to Wash Pet'
+  events:
+    OnEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    OnHover:
+      m_PersistentCalls:
+        m_Calls: []
+    OnExit:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDown:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7392161851984117358}
+          m_TargetAssemblyTypeName: Environment.FocusOn, Assembly-CSharp
+          m_MethodName: Focus
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnHold:
+      m_PersistentCalls:
+        m_Calls: []
+    OnUp:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &7662687679201818402
 GameObject:
   m_ObjectHideFlags: 0
