@@ -156,7 +156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8041978396236165520, guid: 709b9f53b6f924748a90e42e0eed6655, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8613930919838631573, guid: 709b9f53b6f924748a90e42e0eed6655, type: 3}
       propertyPath: m_text
@@ -168,3 +168,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 709b9f53b6f924748a90e42e0eed6655, type: 3}
+--- !u!1 &5754241866422035388 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2875582309154873322, guid: 709b9f53b6f924748a90e42e0eed6655, type: 3}
+  m_PrefabInstance: {fileID: 7508400677611568214}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5477794222129058637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5754241866422035388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f715814dae8371a44a89c22cc06dae27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ParentScreen: {fileID: 5477794222129058637}
+  ChildrenScreens:
+  - {fileID: 0}
