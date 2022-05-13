@@ -16,6 +16,9 @@ public class EoDUIManager : MonoBehaviour
     {
         // Saves and Exits to Main Menu
         FindObjectOfType<UI.PauseMenu>().SaveAndExit();
+
+        // Close Menu
+        EoD_UI.SetActive(false);
     }
 
     public void Continue()
@@ -39,7 +42,15 @@ public class EoDUIManager : MonoBehaviour
     public void OpenEoD_UI()
     {
         // pause
-        pause.SetPause(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        Utility.Toolbox.Instance.Player.InputState = InputState.UI;
+
+        FindObjectOfType<UI.PauseMenu>().OpenMenuOnPause = false;
+        Utility.Toolbox.Instance.Pause.SetPause(true);
+        FindObjectOfType<UI.PauseMenu>().OpenMenuOnPause = true;
+
         // open menu
         EoD_UI.SetActive(true);
     }
