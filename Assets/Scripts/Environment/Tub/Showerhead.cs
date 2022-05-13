@@ -43,8 +43,6 @@ namespace Environment.Tub
         public void Pickup()
         {
             active = true;
-            if(ap.IsPlaying)
-                ap.Stop();
             ((SwitchContainer)(ap.Container)).Selection = 0;
             ap.Play();
         }
@@ -56,7 +54,7 @@ namespace Environment.Tub
             if (ap.IsPlaying)
                 ap.Stop();
             ((SwitchContainer)(ap.Container)).Selection = 1;
-            ap.Play();
+            ap.Play(true);
         }
 
         void Start()

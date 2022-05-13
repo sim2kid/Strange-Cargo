@@ -123,12 +123,24 @@ namespace Sound.Player
                         if (bites.Length != max)
                             break;
                     }
+                    if (bites[i].loopCount == -1)
+                    {
+                        int loopCount = Mathf.RoundToInt(bites[i].Loop.Read());
+                        if (loopCount == -1) 
+                        {
+                            loopCount = int.MaxValue;
+                        }
+                        bites[i].loopCount = loopCount;
+                    }
                     float pitch = bites[i].Pitch.Read();
                     _source.pitch = pitch;
                     _clipVolume = bites[i].Volume.Read();
                     _source.volume = Volume;
                     if (bites[i].Clip != null)
+                    {
                         _source.PlayOneShot(bites[i].Clip, _clipVolume);
+                        bites[i].loopCount--;
+                    }
                     while (_source.isPlaying)
                     {
                         yield return new WaitForFixedUpdate();
@@ -148,6 +160,15 @@ namespace Sound.Player
                             _source.pitch = pitch;
                             _clipVolume = bites[i].Volume.Read();
                             _source.volume = Volume;
+                            if (bites[i].loopCount == -1)
+                            {
+                                int loopCount = Mathf.RoundToInt(bites[i].Loop.Read());
+                                if (loopCount == -1)
+                                {
+                                    loopCount = int.MaxValue;
+                                }
+                                bites[i].loopCount = loopCount;
+                            }
                             if (bites[i].Clip != null)
                             {
                                 _source.loop = false;
@@ -162,6 +183,10 @@ namespace Sound.Player
                     }
                     if (_stopSignal)
                         break;
+                    if (bites[i].loopCount > 0)
+                    {
+                        i--;
+                    }
                 }
                 if (_stopSignal)
                     break;
