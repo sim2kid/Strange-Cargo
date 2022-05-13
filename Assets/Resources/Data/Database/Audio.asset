@@ -55,6 +55,7 @@ MonoBehaviour:
   - Misc\CeramicPlate\PlaceCounter\Full
   - Misc\CeramicPlate\PlaceWood
   - Misc\CeramicPlate\TreatFill
+  - Misc\Chest
   - Misc\Clipboard
   - Misc\ComeHere
   - Misc\Computer
@@ -833,6 +834,14 @@ MonoBehaviour:
     - ParentFolder: Misc\CeramicPlate\TreatFill
       FileLocation: Misc\CeramicPlate\TreatFill\SFX_MISC_CeramicPlate_TreatFill7.mp3
       FileName: SFX_MISC_CeramicPlate_TreatFill7.mp3
+  - FolderName: Misc\Chest
+    Files:
+    - ParentFolder: Misc\Chest
+      FileLocation: Misc\Chest\SFX_MISC_Chest_Close.mp3
+      FileName: SFX_MISC_Chest_Close.mp3
+    - ParentFolder: Misc\Chest
+      FileLocation: Misc\Chest\SFX_MISC_Chest_Open.mp3
+      FileName: SFX_MISC_Chest_Open.mp3
   - FolderName: Misc\Clipboard
     Files:
     - ParentFolder: Misc\Clipboard
@@ -1131,6 +1140,12 @@ MonoBehaviour:
       FileName: SFX_MISC_Rag_Loop.mp3
   - FolderName: Misc\Shower
     Files:
+    - ParentFolder: Misc\Shower
+      FileLocation: Misc\Shower\SFX_MISC_Shower_Sponge_PickUp.mp3
+      FileName: SFX_MISC_Shower_Sponge_PickUp.mp3
+    - ParentFolder: Misc\Shower
+      FileLocation: Misc\Shower\SFX_MISC_Shower_Sponge_PutDown.mp3
+      FileName: SFX_MISC_Shower_Sponge_PutDown.mp3
     - ParentFolder: Misc\Shower
       FileLocation: Misc\Shower\SFX_MISC_SHWR_PetScrubLoop.mp3
       FileName: SFX_MISC_SHWR_PetScrubLoop.mp3
