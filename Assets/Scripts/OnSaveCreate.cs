@@ -63,8 +63,11 @@ public class OnSaveCreate : MonoBehaviour, ISaveable
 
         Console.Log("Creating First Creature.");
         // Create Creature
-        var creature = Genetics.CreatureGeneration.CreateCreature();
-        creature.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(transform.position);
+        for (int i = 0; i < 2; i++)
+        {
+            var creature = Genetics.CreatureGeneration.CreateCreature();
+            creature.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(transform.position);
+        }
         //creature.transform.position = this.transform.position;
         Events["createdCreature"] = true;
     }
