@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2771289261062119543}
   - component: {fileID: 3455489900130670414}
   - component: {fileID: 6843802400744632263}
+  - component: {fileID: 1996904372752279846}
   m_Layer: 0
   m_Name: Ball1
   m_TagString: Untagged
@@ -178,3 +179,20 @@ MonoBehaviour:
   prefabData:
     _guid: 
     PrefabResourceLocation: Prefabs/Ball1
+--- !u!114 &1996904372752279846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4192628319748263752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f6f5a6afc9e29743b4059ac27444df5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemData:
+    _guid: 7cdb6b2a-804e-4830-9312-42270e8d191a
+    Price: 0.99
+    Name: Ball
+    Description: For hours of bouncy fun.

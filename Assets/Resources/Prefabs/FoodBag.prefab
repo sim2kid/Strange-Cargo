@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 887220212}
   - component: {fileID: 1931620300245613643}
   - component: {fileID: 7109299790799072536}
+  - component: {fileID: 3751451443021578745}
   m_Layer: 0
   m_Name: FoodBag
   m_TagString: Untagged
@@ -370,3 +371,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _location:
     _guid: fd039ef3-0628-4cbc-9338-e6e19b26a569
+--- !u!114 &3751451443021578745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362419747329184999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f6f5a6afc9e29743b4059ac27444df5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemData:
+    _guid: 7cdb6b2a-804e-4830-9312-42270e8d191a
+    Price: 2.99
+    Name: Critter Chow
+    Description: Top of the line food for the little monster in your home.

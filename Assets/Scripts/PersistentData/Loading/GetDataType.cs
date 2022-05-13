@@ -73,6 +73,9 @@ namespace PersistentData.Loading
                 case "Date":
                     DataType = new DateData();
                     break;
+                case "ShopItem":
+                    DataType = new ShopItemData();
+                    break;
             }
             serializer.Populate(jsonObject.CreateReader(), DataType);
             return DataType;

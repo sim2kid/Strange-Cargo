@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 namespace UI.Computer
 {
@@ -23,6 +24,7 @@ namespace UI.Computer
             }
             set { _data = value; }
         }
+        public ShopItemData ShopItemData { get; private set; }
         
         private RenderTexture renderTexture;
         public Texture2D texture;
@@ -37,7 +39,7 @@ namespace UI.Computer
 
         private int resolution = 128;
 
-        private System.Func<PrefabData, Texture2D, string, string, bool> onClick = null;
+        private System.Func<PrefabData, Texture2D, ShopItemData, bool> onClick = null;
 
         private void Start()
         {
@@ -74,7 +76,7 @@ namespace UI.Computer
 
                     this.GetComponent<Button>().onClick.AddListener(() => {
                         if (onClick != null)
-                            onClick.Invoke(PrefabData, texture, PrefabData.PrefabResourceLocation, "Demo Item and description");
+                            onClick.Invoke(PrefabData, texture, ShopItemData);
                     });
                 };
 
@@ -82,6 +84,24 @@ namespace UI.Computer
                 Sprite sprite = Sprite.Create(texture, camRect, Vector2.zero);
                 icon.GetComponent<Image>().sprite = sprite;
             };
+
+            // Set item data
+            var itemData = PrefabData.ExtraData.FirstOrDefault(x => x.DataType == "ShopItem");
+            if (itemData != null)
+            {
+                // assign data
+                ShopItemData = (ShopItemData)itemData;
+            }
+            else 
+            {
+                // default case
+                ShopItemData = new ShopItemData()
+                {
+                    Price = 0,
+                    Name = PrefabData.PrefabResourceLocation,
+                    Description = "A Generic Object"
+                };
+            }
         }
 
         public void SpawnObject(Vector3 location) 
@@ -108,9 +128,9 @@ namespace UI.Computer
             PrefabDataLocation = null;
         }
 
-        public void OnClickHook(System.Func<PrefabData, Texture2D, string, string, bool> setPannel) 
+        public void OnClickHook(System.Func<PrefabData, Texture2D, ShopItemData, bool> setPanel) 
         {
-            onClick = setPannel;
+            onClick = setPanel;
         }
 
         private void Update()

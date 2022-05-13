@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6499636412113659051}
   - component: {fileID: 7402402520576166361}
   - component: {fileID: 9187831930682199237}
+  - component: {fileID: 8456063186635565602}
   m_Layer: 0
   m_Name: Brush
   m_TagString: Untagged
@@ -298,6 +299,23 @@ MonoBehaviour:
             Max: 0
         _audioPool: 
         _soundBites: []
+--- !u!114 &8456063186635565602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6279976858420598512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f6f5a6afc9e29743b4059ac27444df5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemData:
+    _guid: 7cdb6b2a-804e-4830-9312-42270e8d191a
+    Price: 3.99
+    Name: Brush
+    Description: Cleanliness is next to godliness. So brush your pet today!
 --- !u!1001 &6279976859528713520
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -349,6 +367,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 45aa76111f8125149a2dae89a2f6a3f6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2bc05079b8286864795e6cde64abcfa2, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 45aa76111f8125149a2dae89a2f6a3f6, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2bc05079b8286864795e6cde64abcfa2, type: 2}
     - target: {fileID: -425565630206218756, guid: 45aa76111f8125149a2dae89a2f6a3f6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

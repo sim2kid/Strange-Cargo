@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2278323802577321046}
   - component: {fileID: 20795500128147703}
   - component: {fileID: 5778481949278450083}
+  - component: {fileID: 7479142603845242510}
   m_Layer: 0
   m_Name: WaterBowl
   m_TagString: Untagged
@@ -62,6 +63,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _location:
     _guid: b57c3174-1e80-4cfc-8f2c-76d6a8c48f59
+--- !u!114 &7479142603845242510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501365269208000236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f6f5a6afc9e29743b4059ac27444df5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemData:
+    _guid: 7cdb6b2a-804e-4830-9312-42270e8d191a
+    Price: 3.99
+    Name: Water Bowl
+    Description: How is your pet supposed to drink without a bowl? Buy one today!
+      (And please fill only with water).
 --- !u!1 &1735154761697574772
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,7 +871,6 @@ MonoBehaviour:
   OnEmpty:
     m_PersistentCalls:
       m_Calls: []
-  _guid: 
   data:
     _guid: 4ebd868c-b72c-4d27-8de1-b14e8fd4e18d
     BaseNeeds:

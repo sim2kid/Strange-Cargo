@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6444005607477552085}
   - component: {fileID: 424010761799027739}
   - component: {fileID: 4695420821630967493}
+  - component: {fileID: 4256681321797546400}
   m_Layer: 0
   m_Name: SprayBottle
   m_TagString: Untagged
@@ -341,6 +342,23 @@ MonoBehaviour:
             Max: 0
         _audioPool: Misc\SprayBottle
         _soundBites: []
+--- !u!114 &4256681321797546400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7632935607171127193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f6f5a6afc9e29743b4059ac27444df5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemData:
+    _guid: 7cdb6b2a-804e-4830-9312-42270e8d191a
+    Price: 2.99
+    Name: Spray Bottle
+    Description: For all your squirting needs.
 --- !u!1001 &1277028033403074750
 PrefabInstance:
   m_ObjectHideFlags: 0
