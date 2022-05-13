@@ -192,6 +192,8 @@ GameObject:
   - component: {fileID: 666393614}
   - component: {fileID: 666393613}
   - component: {fileID: 4356416887590689545}
+  - component: {fileID: 1064957459}
+  - component: {fileID: 1064957458}
   m_Layer: 0
   m_Name: Shampoo
   m_TagString: Untagged
@@ -262,6 +264,203 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   originalRotation: {x: 0, y: 0, z: 0, w: 0}
   originalParent: {fileID: 0}
+--- !u!82 &1064957459
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666393611}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1064957458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666393611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc2441dbb9ca2784d8143a3ba0ed928b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sourceVolume: 1
+  OnPlay:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  Container:
+    id: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: SequenceContainer, ns: Sound.Structure, asm: Assembly-CSharp}
+      data:
+        _pitch:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _volume:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _deley:
+          Value: 0
+          Range:
+            Min: 0
+            Max: 0
+        _loop:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _containers:
+        - id: 1
+        - id: 2
+    00000001:
+      type: {class: SoundClip, ns: Sound.Source.Internal, asm: Assembly-CSharp}
+      data:
+        _soundBite:
+          Clip: {fileID: 8300000, guid: 7d795bfcc22d3d742aa38117c225723e, type: 3}
+          Pitch:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          Volume:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          Delay:
+            Value: 0
+            Range:
+              Min: 0
+              Max: 0
+          Loop:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          loopCount: -1
+    00000002:
+      type: {class: SoundClip, ns: Sound.Source.Internal, asm: Assembly-CSharp}
+      data:
+        _soundBite:
+          Clip: {fileID: 8300000, guid: fabb70d8a5b750744a2f8a6689eb6e90, type: 3}
+          Pitch:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          Volume:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          Delay:
+            Value: 0
+            Range:
+              Min: 0
+              Max: 0
+          Loop:
+            Value: -1
+            Range:
+              Min: 0
+              Max: 0
+          loopCount: -1
 --- !u!1 &895289890
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,7 +813,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1104
+  m_VersionIndex: 1110
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1604,6 +1803,8 @@ GameObject:
   - component: {fileID: 7441022624847051012}
   - component: {fileID: 2185370033800643275}
   - component: {fileID: 4109872337056969148}
+  - component: {fileID: 1745300057}
+  - component: {fileID: 1745300060}
   m_Layer: 0
   m_Name: Showerhead
   m_TagString: Untagged
@@ -1675,6 +1876,255 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   originalRotation: {x: 0, y: 0, z: 0, w: 0}
   originalParent: {fileID: 0}
+--- !u!82 &1745300057
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 188273867268652742}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1745300060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 188273867268652742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc2441dbb9ca2784d8143a3ba0ed928b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sourceVolume: 1
+  OnPlay:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  Container:
+    id: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: SwitchContainer, ns: Sound.Structure, asm: Assembly-CSharp}
+      data:
+        _pitch:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _volume:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _deley:
+          Value: 0
+          Range:
+            Min: 0
+            Max: 0
+        _loop:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _containers:
+        - id: 1
+        - id: 2
+    00000001:
+      type: {class: SequenceContainer, ns: Sound.Structure, asm: Assembly-CSharp}
+      data:
+        _pitch:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _volume:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _deley:
+          Value: 0
+          Range:
+            Min: 0
+            Max: 0
+        _loop:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _containers:
+        - id: 3
+        - id: 4
+    00000002:
+      type: {class: SoundClip, ns: Sound.Source.Internal, asm: Assembly-CSharp}
+      data:
+        _soundBite:
+          Clip: {fileID: 8300000, guid: 22e65f8bb66754746b5948d8369b1d1b, type: 3}
+          Pitch:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          Volume:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          Delay:
+            Value: 0
+            Range:
+              Min: 0
+              Max: 0
+          Loop:
+            Value: 1
+            Range:
+              Min: 1
+              Max: 2
+          loopCount: 0
+    00000003:
+      type: {class: SoundClip, ns: Sound.Source.Internal, asm: Assembly-CSharp}
+      data:
+        _soundBite:
+          Clip: {fileID: 8300000, guid: 3f96a1dee60fad14898a88821088ddf4, type: 3}
+          Pitch:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          Volume:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          Delay:
+            Value: 0
+            Range:
+              Min: 0
+              Max: 0
+          Loop:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 1
+          loopCount: 0
+    00000004:
+      type: {class: SoundClip, ns: Sound.Source.Internal, asm: Assembly-CSharp}
+      data:
+        _soundBite:
+          Clip: {fileID: 8300000, guid: b2f993c8984f71543867019895538e29, type: 3}
+          Pitch:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          Volume:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          Delay:
+            Value: 0
+            Range:
+              Min: 0
+              Max: 0
+          Loop:
+            Value: -1
+            Range:
+              Min: 0
+              Max: 0
+          loopCount: 0
 --- !u!1 &435357679225850125
 GameObject:
   m_ObjectHideFlags: 0
@@ -2164,6 +2614,8 @@ GameObject:
   - component: {fileID: 3859869388444253266}
   - component: {fileID: 6153745018426299395}
   - component: {fileID: 274088913363508646}
+  - component: {fileID: 427748922}
+  - component: {fileID: 427748925}
   m_Layer: 0
   m_Name: Shampoo
   m_TagString: Untagged
@@ -2234,6 +2686,203 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   originalRotation: {x: 0, y: 0, z: 0, w: 0}
   originalParent: {fileID: 0}
+--- !u!82 &427748922
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3793290425688564352}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &427748925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3793290425688564352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc2441dbb9ca2784d8143a3ba0ed928b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sourceVolume: 1
+  OnPlay:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  Container:
+    id: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: SequenceContainer, ns: Sound.Structure, asm: Assembly-CSharp}
+      data:
+        _pitch:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _volume:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _deley:
+          Value: 0
+          Range:
+            Min: 0
+            Max: 0
+        _loop:
+          Value: 1
+          Range:
+            Min: 0
+            Max: 0
+        _containers:
+        - id: 1
+        - id: 2
+    00000001:
+      type: {class: SoundClip, ns: Sound.Source.Internal, asm: Assembly-CSharp}
+      data:
+        _soundBite:
+          Clip: {fileID: 8300000, guid: 7d795bfcc22d3d742aa38117c225723e, type: 3}
+          Pitch:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          Volume:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          Delay:
+            Value: 0
+            Range:
+              Min: 0
+              Max: 0
+          Loop:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          loopCount: -1
+    00000002:
+      type: {class: SoundClip, ns: Sound.Source.Internal, asm: Assembly-CSharp}
+      data:
+        _soundBite:
+          Clip: {fileID: 8300000, guid: fabb70d8a5b750744a2f8a6689eb6e90, type: 3}
+          Pitch:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          Volume:
+            Value: 1
+            Range:
+              Min: 0
+              Max: 0
+          Delay:
+            Value: 0
+            Range:
+              Min: 0
+              Max: 0
+          Loop:
+            Value: -1
+            Range:
+              Min: 0
+              Max: 0
+          loopCount: -1
 --- !u!1 &3947992661153535155
 GameObject:
   m_ObjectHideFlags: 0
@@ -3190,6 +3839,7 @@ MonoBehaviour:
   destination: {fileID: 4044518150671941863}
   cursor: {fileID: 4206808340117491111}
   tubDistance: 1.6
+  UI: {fileID: 1768347070}
   shampoo: {fileID: 1988862382}
   Hygiene: {fileID: 1624811266}
   active: 0
