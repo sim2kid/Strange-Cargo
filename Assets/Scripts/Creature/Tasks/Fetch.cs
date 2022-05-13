@@ -30,17 +30,15 @@ namespace Creature.Task
             IsStarted = true;
             Satisfaction = 0;
 
-
-
             ITask gotoObject = new GoHere(FetchObj.transform, 0.7f);
             ITask pickUpObject = new Wait(1);
             ITask returnToThrower = new GoHere(Thrower.transform, 2f);
+            ITask dropObj = new Wait(1);
 
             // Must add in reverse order because it's a stack
-
-            caller.AddSubTask(returnToThrower, (creatue, task) =>
+            caller.AddSubTask(dropObj, (creature, task) => 
             {
-                Console.LogDebug($"Creature [{caller.Guid}]: Fetch - Dropping Object");
+                caller.AnimationBool("Eat", false);
                 caller.Mouth.LetGo();
                 Satisfaction = 100;
                 IsDone = true;
@@ -49,10 +47,18 @@ namespace Creature.Task
                 return true;
             });
 
+            caller.AddSubTask(returnToThrower, (creatue, task) =>
+            {
+                Console.LogDebug($"Creature [{caller.Guid}]: Fetch - Dropping Object");
+                caller.AnimationBool("Eat", true);
+                return true;
+            });
+
             caller.AddSubTask(pickUpObject, (creatue, task) => {
                 Console.LogDebug($"Creature [{caller.Guid}]: Fetch - Returning to Thrower");
                 caller.Mouth.PickUp(ObjectToFetch);
                 Satisfaction = 50;
+                caller.AnimationBool("Eat", false);
                 return true;
             });
 
@@ -63,7 +69,7 @@ namespace Creature.Task
                     Console.LogDebug($"Creature [{caller.Guid}]: Fetch - Fetch object could not be grabbed!!");
                     return false;
                 }
-                caller.AnimationTrigger("Eat");
+                caller.AnimationBool("Eat", true);
                 return true;
             });
 
@@ -72,7 +78,7 @@ namespace Creature.Task
 
         public void EndTask(CreatureController caller)
         {
-            caller.AnimationResetTrigger("Eat");
+            caller.AnimationBool("Eat", false);
             if (caller.Mouth.HasObj) 
             {
                 caller.Mouth.LetGo();

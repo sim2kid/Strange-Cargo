@@ -55,6 +55,7 @@ MonoBehaviour:
   - Misc\CeramicPlate\PlaceCounter\Full
   - Misc\CeramicPlate\PlaceWood
   - Misc\CeramicPlate\TreatFill
+  - Misc\Chest
   - Misc\Clipboard
   - Misc\ComeHere
   - Misc\Computer
@@ -64,6 +65,7 @@ MonoBehaviour:
   - Misc\FoodBag\Pour
   - Misc\FoodBag\Spawn
   - Misc\House
+  - Misc\House\AC
   - Misc\Mop
   - Misc\PetBrush\Fur
   - Misc\PetBrush\PickUp
@@ -87,6 +89,7 @@ MonoBehaviour:
   - Misc\Toy\Throw
   - Misc\Treat\PickUp
   - Music
+  - Player\Footsteps\Carpet
   - Player\Footsteps\Grass
   - Player\Footsteps\Tile
   - Player\Footsteps\Wood
@@ -833,6 +836,14 @@ MonoBehaviour:
     - ParentFolder: Misc\CeramicPlate\TreatFill
       FileLocation: Misc\CeramicPlate\TreatFill\SFX_MISC_CeramicPlate_TreatFill7.mp3
       FileName: SFX_MISC_CeramicPlate_TreatFill7.mp3
+  - FolderName: Misc\Chest
+    Files:
+    - ParentFolder: Misc\Chest
+      FileLocation: Misc\Chest\SFX_MISC_Chest_Close.mp3
+      FileName: SFX_MISC_Chest_Close.mp3
+    - ParentFolder: Misc\Chest
+      FileLocation: Misc\Chest\SFX_MISC_Chest_Open.mp3
+      FileName: SFX_MISC_Chest_Open.mp3
   - FolderName: Misc\Clipboard
     Files:
     - ParentFolder: Misc\Clipboard
@@ -1037,6 +1048,23 @@ MonoBehaviour:
     - ParentFolder: Misc\House
       FileLocation: Misc\House\SFX_MISC_House_FrontDoorOpen.mp3
       FileName: SFX_MISC_House_FrontDoorOpen.mp3
+  - FolderName: Misc\House\AC
+    Files:
+    - ParentFolder: Misc\House\AC
+      FileLocation: Misc\House\AC\AC-Stage1.mp3
+      FileName: AC-Stage1.mp3
+    - ParentFolder: Misc\House\AC
+      FileLocation: Misc\House\AC\AC-Stage2-Loop.mp3
+      FileName: AC-Stage2-Loop.mp3
+    - ParentFolder: Misc\House\AC
+      FileLocation: Misc\House\AC\AC-Stage3.mp3
+      FileName: AC-Stage3.mp3
+    - ParentFolder: Misc\House\AC
+      FileLocation: Misc\House\AC\AC-Stage4-Loop.mp3
+      FileName: AC-Stage4-Loop.mp3
+    - ParentFolder: Misc\House\AC
+      FileLocation: Misc\House\AC\AC-Stage5.mp3
+      FileName: AC-Stage5.mp3
   - FolderName: Misc\Mop
     Files:
     - ParentFolder: Misc\Mop
@@ -1131,6 +1159,12 @@ MonoBehaviour:
       FileName: SFX_MISC_Rag_Loop.mp3
   - FolderName: Misc\Shower
     Files:
+    - ParentFolder: Misc\Shower
+      FileLocation: Misc\Shower\SFX_MISC_Shower_Sponge_PickUp.mp3
+      FileName: SFX_MISC_Shower_Sponge_PickUp.mp3
+    - ParentFolder: Misc\Shower
+      FileLocation: Misc\Shower\SFX_MISC_Shower_Sponge_PutDown.mp3
+      FileName: SFX_MISC_Shower_Sponge_PutDown.mp3
     - ParentFolder: Misc\Shower
       FileLocation: Misc\Shower\SFX_MISC_SHWR_PetScrubLoop.mp3
       FileName: SFX_MISC_SHWR_PetScrubLoop.mp3
@@ -1386,6 +1420,26 @@ MonoBehaviour:
     - ParentFolder: Music
       FileLocation: Music\2_Strange_Cargo_-_Night_ThemeAlt1-PaoloSkyrus.mp3
       FileName: 2_Strange_Cargo_-_Night_ThemeAlt1-PaoloSkyrus.mp3
+  - FolderName: Player\Footsteps\Carpet
+    Files:
+    - ParentFolder: Player\Footsteps\Carpet
+      FileLocation: Player\Footsteps\Carpet\CarpetStep1.mp3
+      FileName: CarpetStep1.mp3
+    - ParentFolder: Player\Footsteps\Carpet
+      FileLocation: Player\Footsteps\Carpet\CarpetStep4.mp3
+      FileName: CarpetStep4.mp3
+    - ParentFolder: Player\Footsteps\Carpet
+      FileLocation: Player\Footsteps\Carpet\CarpetStep5.mp3
+      FileName: CarpetStep5.mp3
+    - ParentFolder: Player\Footsteps\Carpet
+      FileLocation: Player\Footsteps\Carpet\CarpetStep6.mp3
+      FileName: CarpetStep6.mp3
+    - ParentFolder: Player\Footsteps\Carpet
+      FileLocation: Player\Footsteps\Carpet\CarpetStep7.mp3
+      FileName: CarpetStep7.mp3
+    - ParentFolder: Player\Footsteps\Carpet
+      FileLocation: Player\Footsteps\Carpet\CarpetStep8.mp3
+      FileName: CarpetStep8.mp3
   - FolderName: Player\Footsteps\Grass
     Files:
     - ParentFolder: Player\Footsteps\Grass

@@ -66,6 +66,7 @@ namespace Creature
 
         [HideInInspector]
         private BasicBrain brain { get => data.brain; set => data.brain = value; }
+        public bool BrainDead { get => !brain.canThink; set => brain.canThink = !value; }
 
         public string RecentMemory => brain.RecentMemory.Task.GetType().Name;
         public bool MemoryHasPreference => brain.RecentMemory.Preferrence != null;

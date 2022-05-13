@@ -9,6 +9,7 @@ namespace Environment
         None = 0,
         Grass = 1,
         Tile = 2,
-        Wood = 3
+        Wood = 3,
+        Carpet = 4,
     }
 }
