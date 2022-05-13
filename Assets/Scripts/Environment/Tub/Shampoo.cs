@@ -1,3 +1,4 @@
+using Sound.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,10 +32,13 @@ namespace Environment.Tub
         [SerializeField]
         int totalActive = 0;
 
+        AudioPlayer ap;
+
         public bool inHand;
 
         void Start()
         {
+            ap = GetComponent<AudioPlayer>();
             reset = GetComponent<InSceneView.ResetPosition>();
             inHand = false;
             PlayerInput input = GameObject.FindObjectOfType<PlayerInput>();
@@ -90,16 +94,31 @@ namespace Environment.Tub
             }
         }
 
+        bool playedAudio = false;
         private void Update()
         {
             bool isHeld = inHand && StationaryUse.ReadValue<float>() > 0.5f;
             if (isHeld)
             {
+                if (!playedAudio)
+                {
+                    ap.Play();
+                    playedAudio = true;
+                }
                 cooldown -= Time.deltaTime;
-                if (cooldown < 0) 
+                if (cooldown < 0)
                 {
                     cooldown -= 0.2f;
                     SpawnBubble();
+                }
+
+            }
+            else 
+            {
+                if (playedAudio == true)
+                {
+                    ap.Stop();
+                    playedAudio = false;
                 }
                 
             }
@@ -117,11 +136,13 @@ namespace Environment.Tub
         public void Pickup()
         {
             inHand = true;
+            
         }
 
         public void Putdown()
         {
             inHand = false;
+            ap.Stop();
             reset.LerpHome(2f);
         }
     }

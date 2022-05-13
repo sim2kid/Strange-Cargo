@@ -103,6 +103,11 @@ namespace Environment.Tub
             Creature.transform.rotation = Quaternion.Lerp(Creature.transform.rotation, destination.rotation, Time.deltaTime * 2f);
         }
 
+        public void Shake() 
+        {
+            Creature.AnimationTrigger("Wiggle");
+        }
+
         void Start()
         {
             input = FindObjectOfType<PlayerInput>();

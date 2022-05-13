@@ -55,6 +55,7 @@ namespace Environment.Tub
                 ap.Stop();
             ((SwitchContainer)(ap.Container)).Selection = 1;
             ap.Play(true);
+            tub.Shake();
         }
 
         void Start()
