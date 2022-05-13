@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 namespace Environment.Tub
 {
     [RequireComponent(typeof(InSceneView.ResetPosition))]
-    public class Shampoo : MonoBehaviour
+    public class Shampoo : MonoBehaviour, IReplaceable
     {
         InputAction StationaryUse;
         [SerializeField]
@@ -17,12 +17,19 @@ namespace Environment.Tub
         [SerializeField]
         GameObject spawnSoapLoaction;
         float cooldown = 0;
-        
+        [SerializeField]
+        Bathtub tub;
+
+        [SerializeField]
+        float spawnSpread = 0.01f;
+
+        public GameObject GameObject => gameObject;
+        public Vector3 rotationOffset => Vector3.zero;
+
         public InSceneView.ResetPosition reset;
 
         [SerializeField]
         int totalActive = 0;
-
 
         public bool inHand;
 
@@ -49,6 +56,7 @@ namespace Environment.Tub
                 soapBubbles.Add(obj);
                 obj.SetActive(false);
             }
+            tub = FindObjectOfType<Bathtub>();
         }
 
         private void OnDestroy()
@@ -60,7 +68,10 @@ namespace Environment.Tub
         {
             GameObject NextBubble = soapBubbles[bubbleIndex];
 
-            NextBubble.transform.position = spawnSoapLoaction.transform.position;
+
+
+            NextBubble.transform.position = spawnSoapLoaction.transform.position + 
+                new Vector3(Random.Range(-spawnSpread, spawnSpread), Random.Range(-spawnSpread, spawnSpread), 0);
             NextBubble.transform.rotation = spawnSoapLoaction.transform.rotation;
 
             if (NextBubble.activeSelf)
@@ -101,6 +112,17 @@ namespace Environment.Tub
                     totalActive++;
                 }
             }
+        }
+
+        public void Pickup()
+        {
+            inHand = true;
+        }
+
+        public void Putdown()
+        {
+            inHand = false;
+            reset.LerpHome(2f);
         }
     }
 }
