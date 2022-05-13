@@ -37,7 +37,7 @@ namespace Sound.Player
         {
             if (SetSelection(selection)) 
             {
-                ap.Play();
+                ap.Play(true);
             }
         }
     }

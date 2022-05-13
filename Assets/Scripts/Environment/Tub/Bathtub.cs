@@ -105,7 +105,13 @@ namespace Environment.Tub
 
         public void Shake() 
         {
-            Creature.AnimationTrigger("Wiggle");
+            Creature.AnimationBool("Wiggle", true);
+            Invoke("StopShake", 0.8f);
+        }
+
+        private void StopShake()
+        {
+            Creature.AnimationBool("Wiggle", false);
         }
 
         void Start()

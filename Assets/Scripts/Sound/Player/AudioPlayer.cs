@@ -180,6 +180,12 @@ namespace Sound.Player
                             else
                                 break;
                         }
+                        if (bites[i].Clip.length - _source.time < 0.02f && bites[i].loopCount > 0) // 200ms left
+                        {
+                            _stopSignal = false;
+                            _updateAudio = false;
+                            break;
+                        }
                     }
                     if (_stopSignal)
                         break;
