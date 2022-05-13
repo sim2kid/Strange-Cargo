@@ -32,6 +32,8 @@ MonoBehaviour:
   - Animal\Personalities\Sweet\Happy
   - Animal\Personalities\Sweet\Neutral
   - Animal\Personalities\Sweet\Sad
+  - Animal\Toy\Drop
+  - Animal\Toy\PickUp
   - Animal\Vocal\Anger
   - Animal\Vocal\Bark
   - Animal\Vocal\Eat
@@ -71,7 +73,14 @@ MonoBehaviour:
   - Misc\Rag
   - Misc\Shower
   - Misc\SprayBottle
+  - Misc\Toy
   - Misc\Toy\Ball
+  - Misc\Toy\Bounce\Grass\Hard
+  - Misc\Toy\Bounce\Grass\Med
+  - Misc\Toy\Bounce\Grass\Soft
+  - Misc\Toy\Bounce\Wood\Hard
+  - Misc\Toy\Bounce\Wood\Med
+  - Misc\Toy\Bounce\Wood\Soft
   - Misc\Toy\Grab
   - Misc\Toy\Land
   - Misc\Toy\Rope
@@ -328,6 +337,43 @@ MonoBehaviour:
     - ParentFolder: Animal\Personalities\Sweet\Sad
       FileLocation: Animal\Personalities\Sweet\Sad\SFX_AN_VP_SW_Sad3.mp3
       FileName: SFX_AN_VP_SW_Sad3.mp3
+  - FolderName: Animal\Toy\Drop
+    Files:
+    - ParentFolder: Animal\Toy\Drop
+      FileLocation: Animal\Toy\Drop\SFX_Animal_Misc_Toy_Drop1.mp3
+      FileName: SFX_Animal_Misc_Toy_Drop1.mp3
+    - ParentFolder: Animal\Toy\Drop
+      FileLocation: Animal\Toy\Drop\SFX_Animal_Misc_Toy_Drop2.mp3
+      FileName: SFX_Animal_Misc_Toy_Drop2.mp3
+    - ParentFolder: Animal\Toy\Drop
+      FileLocation: Animal\Toy\Drop\SFX_Animal_Misc_Toy_Drop3.mp3
+      FileName: SFX_Animal_Misc_Toy_Drop3.mp3
+    - ParentFolder: Animal\Toy\Drop
+      FileLocation: Animal\Toy\Drop\SFX_Animal_Misc_Toy_Drop4.mp3
+      FileName: SFX_Animal_Misc_Toy_Drop4.mp3
+  - FolderName: Animal\Toy\PickUp
+    Files:
+    - ParentFolder: Animal\Toy\PickUp
+      FileLocation: Animal\Toy\PickUp\SFX_Animal_Misc_Toy_PickUp1.mp3
+      FileName: SFX_Animal_Misc_Toy_PickUp1.mp3
+    - ParentFolder: Animal\Toy\PickUp
+      FileLocation: Animal\Toy\PickUp\SFX_Animal_Misc_Toy_PickUp2.mp3
+      FileName: SFX_Animal_Misc_Toy_PickUp2.mp3
+    - ParentFolder: Animal\Toy\PickUp
+      FileLocation: Animal\Toy\PickUp\SFX_Animal_Misc_Toy_PickUp3.mp3
+      FileName: SFX_Animal_Misc_Toy_PickUp3.mp3
+    - ParentFolder: Animal\Toy\PickUp
+      FileLocation: Animal\Toy\PickUp\SFX_Animal_Misc_Toy_PickUp4.mp3
+      FileName: SFX_Animal_Misc_Toy_PickUp4.mp3
+    - ParentFolder: Animal\Toy\PickUp
+      FileLocation: Animal\Toy\PickUp\SFX_Animal_Misc_Toy_PickUp5.mp3
+      FileName: SFX_Animal_Misc_Toy_PickUp5.mp3
+    - ParentFolder: Animal\Toy\PickUp
+      FileLocation: Animal\Toy\PickUp\SFX_Animal_Misc_Toy_PickUp6.mp3
+      FileName: SFX_Animal_Misc_Toy_PickUp6.mp3
+    - ParentFolder: Animal\Toy\PickUp
+      FileLocation: Animal\Toy\PickUp\SFX_Animal_Misc_Toy_PickUp7.mp3
+      FileName: SFX_Animal_Misc_Toy_PickUp7.mp3
   - FolderName: Animal\Vocal\Anger
     Files:
     - ParentFolder: Animal\Vocal\Anger
@@ -1111,11 +1157,145 @@ MonoBehaviour:
     - ParentFolder: Misc\SprayBottle
       FileLocation: Misc\SprayBottle\SFX_MISC_SPRY_Long3.mp3
       FileName: SFX_MISC_SPRY_Long3.mp3
+  - FolderName: Misc\Toy
+    Files:
+    - ParentFolder: Misc\Toy
+      FileLocation: Misc\Toy\SFX_Misc_Toy_GrannyStepOnToy.mp3
+      FileName: SFX_Misc_Toy_GrannyStepOnToy.mp3
   - FolderName: Misc\Toy\Ball
     Files:
     - ParentFolder: Misc\Toy\Ball
       FileLocation: Misc\Toy\Ball\SFX_MISC_Toy_AttentionGet.mp3
       FileName: SFX_MISC_Toy_AttentionGet.mp3
+  - FolderName: Misc\Toy\Bounce\Grass\Hard
+    Files:
+    - ParentFolder: Misc\Toy\Bounce\Grass\Hard
+      FileLocation: Misc\Toy\Bounce\Grass\Hard\SFX_Misc_Toy_Bounce_Grass_Hard1.mp3
+      FileName: SFX_Misc_Toy_Bounce_Grass_Hard1.mp3
+    - ParentFolder: Misc\Toy\Bounce\Grass\Hard
+      FileLocation: Misc\Toy\Bounce\Grass\Hard\SFX_Misc_Toy_Bounce_Grass_Hard2.mp3
+      FileName: SFX_Misc_Toy_Bounce_Grass_Hard2.mp3
+    - ParentFolder: Misc\Toy\Bounce\Grass\Hard
+      FileLocation: Misc\Toy\Bounce\Grass\Hard\SFX_Misc_Toy_Bounce_Grass_Hard3.mp3
+      FileName: SFX_Misc_Toy_Bounce_Grass_Hard3.mp3
+    - ParentFolder: Misc\Toy\Bounce\Grass\Hard
+      FileLocation: Misc\Toy\Bounce\Grass\Hard\SFX_Misc_Toy_Bounce_Grass_Hard4.mp3
+      FileName: SFX_Misc_Toy_Bounce_Grass_Hard4.mp3
+    - ParentFolder: Misc\Toy\Bounce\Grass\Hard
+      FileLocation: Misc\Toy\Bounce\Grass\Hard\SFX_Misc_Toy_Bounce_Grass_Hard5.mp3
+      FileName: SFX_Misc_Toy_Bounce_Grass_Hard5.mp3
+    - ParentFolder: Misc\Toy\Bounce\Grass\Hard
+      FileLocation: Misc\Toy\Bounce\Grass\Hard\SFX_Misc_Toy_Bounce_Grass_Hard6.mp3
+      FileName: SFX_Misc_Toy_Bounce_Grass_Hard6.mp3
+    - ParentFolder: Misc\Toy\Bounce\Grass\Hard
+      FileLocation: Misc\Toy\Bounce\Grass\Hard\SFX_Misc_Toy_Bounce_Grass_Hard7.mp3
+      FileName: SFX_Misc_Toy_Bounce_Grass_Hard7.mp3
+  - FolderName: Misc\Toy\Bounce\Grass\Med
+    Files:
+    - ParentFolder: Misc\Toy\Bounce\Grass\Med
+      FileLocation: Misc\Toy\Bounce\Grass\Med\SFX_Misc_Toy_Bounce_Grass_Med1.mp3
+      FileName: SFX_Misc_Toy_Bounce_Grass_Med1.mp3
+    - ParentFolder: Misc\Toy\Bounce\Grass\Med
+      FileLocation: Misc\Toy\Bounce\Grass\Med\SFX_Misc_Toy_Bounce_Grass_Med2.mp3
+      FileName: SFX_Misc_Toy_Bounce_Grass_Med2.mp3
+    - ParentFolder: Misc\Toy\Bounce\Grass\Med
+      FileLocation: Misc\Toy\Bounce\Grass\Med\SFX_Misc_Toy_Bounce_Grass_Med3.mp3
+      FileName: SFX_Misc_Toy_Bounce_Grass_Med3.mp3
+    - ParentFolder: Misc\Toy\Bounce\Grass\Med
+      FileLocation: Misc\Toy\Bounce\Grass\Med\SFX_Misc_Toy_Bounce_Grass_Med4.mp3
+      FileName: SFX_Misc_Toy_Bounce_Grass_Med4.mp3
+    - ParentFolder: Misc\Toy\Bounce\Grass\Med
+      FileLocation: Misc\Toy\Bounce\Grass\Med\SFX_Misc_Toy_Bounce_Grass_Med5.mp3
+      FileName: SFX_Misc_Toy_Bounce_Grass_Med5.mp3
+    - ParentFolder: Misc\Toy\Bounce\Grass\Med
+      FileLocation: Misc\Toy\Bounce\Grass\Med\SFX_Misc_Toy_Bounce_Grass_Med6.mp3
+      FileName: SFX_Misc_Toy_Bounce_Grass_Med6.mp3
+    - ParentFolder: Misc\Toy\Bounce\Grass\Med
+      FileLocation: Misc\Toy\Bounce\Grass\Med\SFX_Misc_Toy_Bounce_Grass_Med7.mp3
+      FileName: SFX_Misc_Toy_Bounce_Grass_Med7.mp3
+  - FolderName: Misc\Toy\Bounce\Grass\Soft
+    Files:
+    - ParentFolder: Misc\Toy\Bounce\Grass\Soft
+      FileLocation: Misc\Toy\Bounce\Grass\Soft\SFX_Misc_Toy_Bounce_Grass_Soft1.mp3
+      FileName: SFX_Misc_Toy_Bounce_Grass_Soft1.mp3
+    - ParentFolder: Misc\Toy\Bounce\Grass\Soft
+      FileLocation: Misc\Toy\Bounce\Grass\Soft\SFX_Misc_Toy_Bounce_Grass_Soft2.mp3
+      FileName: SFX_Misc_Toy_Bounce_Grass_Soft2.mp3
+    - ParentFolder: Misc\Toy\Bounce\Grass\Soft
+      FileLocation: Misc\Toy\Bounce\Grass\Soft\SFX_Misc_Toy_Bounce_Grass_Soft3.mp3
+      FileName: SFX_Misc_Toy_Bounce_Grass_Soft3.mp3
+    - ParentFolder: Misc\Toy\Bounce\Grass\Soft
+      FileLocation: Misc\Toy\Bounce\Grass\Soft\SFX_Misc_Toy_Bounce_Grass_Soft4.mp3
+      FileName: SFX_Misc_Toy_Bounce_Grass_Soft4.mp3
+    - ParentFolder: Misc\Toy\Bounce\Grass\Soft
+      FileLocation: Misc\Toy\Bounce\Grass\Soft\SFX_Misc_Toy_Bounce_Grass_Soft5.mp3
+      FileName: SFX_Misc_Toy_Bounce_Grass_Soft5.mp3
+    - ParentFolder: Misc\Toy\Bounce\Grass\Soft
+      FileLocation: Misc\Toy\Bounce\Grass\Soft\SFX_Misc_Toy_Bounce_Grass_Soft6.mp3
+      FileName: SFX_Misc_Toy_Bounce_Grass_Soft6.mp3
+    - ParentFolder: Misc\Toy\Bounce\Grass\Soft
+      FileLocation: Misc\Toy\Bounce\Grass\Soft\SFX_Misc_Toy_Bounce_Grass_Soft7.mp3
+      FileName: SFX_Misc_Toy_Bounce_Grass_Soft7.mp3
+  - FolderName: Misc\Toy\Bounce\Wood\Hard
+    Files:
+    - ParentFolder: Misc\Toy\Bounce\Wood\Hard
+      FileLocation: Misc\Toy\Bounce\Wood\Hard\SFX_Misc_Toy_Bounce_Wood_Hard1.mp3
+      FileName: SFX_Misc_Toy_Bounce_Wood_Hard1.mp3
+    - ParentFolder: Misc\Toy\Bounce\Wood\Hard
+      FileLocation: Misc\Toy\Bounce\Wood\Hard\SFX_Misc_Toy_Bounce_Wood_Hard2.mp3
+      FileName: SFX_Misc_Toy_Bounce_Wood_Hard2.mp3
+    - ParentFolder: Misc\Toy\Bounce\Wood\Hard
+      FileLocation: Misc\Toy\Bounce\Wood\Hard\SFX_Misc_Toy_Bounce_Wood_Hard3.mp3
+      FileName: SFX_Misc_Toy_Bounce_Wood_Hard3.mp3
+    - ParentFolder: Misc\Toy\Bounce\Wood\Hard
+      FileLocation: Misc\Toy\Bounce\Wood\Hard\SFX_Misc_Toy_Bounce_Wood_Hard4.mp3
+      FileName: SFX_Misc_Toy_Bounce_Wood_Hard4.mp3
+    - ParentFolder: Misc\Toy\Bounce\Wood\Hard
+      FileLocation: Misc\Toy\Bounce\Wood\Hard\SFX_Misc_Toy_Bounce_Wood_Hard5.mp3
+      FileName: SFX_Misc_Toy_Bounce_Wood_Hard5.mp3
+    - ParentFolder: Misc\Toy\Bounce\Wood\Hard
+      FileLocation: Misc\Toy\Bounce\Wood\Hard\SFX_Misc_Toy_Bounce_Wood_Hard6.mp3
+      FileName: SFX_Misc_Toy_Bounce_Wood_Hard6.mp3
+  - FolderName: Misc\Toy\Bounce\Wood\Med
+    Files:
+    - ParentFolder: Misc\Toy\Bounce\Wood\Med
+      FileLocation: Misc\Toy\Bounce\Wood\Med\SFX_Misc_Toy_Bounce_Wood_Med1.mp3
+      FileName: SFX_Misc_Toy_Bounce_Wood_Med1.mp3
+    - ParentFolder: Misc\Toy\Bounce\Wood\Med
+      FileLocation: Misc\Toy\Bounce\Wood\Med\SFX_Misc_Toy_Bounce_Wood_Med2.mp3
+      FileName: SFX_Misc_Toy_Bounce_Wood_Med2.mp3
+    - ParentFolder: Misc\Toy\Bounce\Wood\Med
+      FileLocation: Misc\Toy\Bounce\Wood\Med\SFX_Misc_Toy_Bounce_Wood_Med3.mp3
+      FileName: SFX_Misc_Toy_Bounce_Wood_Med3.mp3
+    - ParentFolder: Misc\Toy\Bounce\Wood\Med
+      FileLocation: Misc\Toy\Bounce\Wood\Med\SFX_Misc_Toy_Bounce_Wood_Med4.mp3
+      FileName: SFX_Misc_Toy_Bounce_Wood_Med4.mp3
+    - ParentFolder: Misc\Toy\Bounce\Wood\Med
+      FileLocation: Misc\Toy\Bounce\Wood\Med\SFX_Misc_Toy_Bounce_Wood_Med5.mp3
+      FileName: SFX_Misc_Toy_Bounce_Wood_Med5.mp3
+    - ParentFolder: Misc\Toy\Bounce\Wood\Med
+      FileLocation: Misc\Toy\Bounce\Wood\Med\SFX_Misc_Toy_Bounce_Wood_Med6.mp3
+      FileName: SFX_Misc_Toy_Bounce_Wood_Med6.mp3
+  - FolderName: Misc\Toy\Bounce\Wood\Soft
+    Files:
+    - ParentFolder: Misc\Toy\Bounce\Wood\Soft
+      FileLocation: Misc\Toy\Bounce\Wood\Soft\SFX_Misc_Toy_Bounce_Wood_Soft1.mp3
+      FileName: SFX_Misc_Toy_Bounce_Wood_Soft1.mp3
+    - ParentFolder: Misc\Toy\Bounce\Wood\Soft
+      FileLocation: Misc\Toy\Bounce\Wood\Soft\SFX_Misc_Toy_Bounce_Wood_Soft2.mp3
+      FileName: SFX_Misc_Toy_Bounce_Wood_Soft2.mp3
+    - ParentFolder: Misc\Toy\Bounce\Wood\Soft
+      FileLocation: Misc\Toy\Bounce\Wood\Soft\SFX_Misc_Toy_Bounce_Wood_Soft3.mp3
+      FileName: SFX_Misc_Toy_Bounce_Wood_Soft3.mp3
+    - ParentFolder: Misc\Toy\Bounce\Wood\Soft
+      FileLocation: Misc\Toy\Bounce\Wood\Soft\SFX_Misc_Toy_Bounce_Wood_Soft4.mp3
+      FileName: SFX_Misc_Toy_Bounce_Wood_Soft4.mp3
+    - ParentFolder: Misc\Toy\Bounce\Wood\Soft
+      FileLocation: Misc\Toy\Bounce\Wood\Soft\SFX_Misc_Toy_Bounce_Wood_Soft5.mp3
+      FileName: SFX_Misc_Toy_Bounce_Wood_Soft5.mp3
+    - ParentFolder: Misc\Toy\Bounce\Wood\Soft
+      FileLocation: Misc\Toy\Bounce\Wood\Soft\SFX_Misc_Toy_Bounce_Wood_Soft6.mp3
+      FileName: SFX_Misc_Toy_Bounce_Wood_Soft6.mp3
   - FolderName: Misc\Toy\Grab
     Files:
     - ParentFolder: Misc\Toy\Grab

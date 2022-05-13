@@ -86,8 +86,6 @@ namespace UI
             Toolbox.Instance.Pause.OnPause.AddListener(OnPause);
             Toolbox.Instance.Pause.OnUnPause.AddListener(OnUnPause);
 
-            videoPlayer.gameObject.GetComponent<UnityEngine.UIElements.Button>().clicked += StopVideo; 
-
             IgnorePause = 0;
 
             Pause = playerInput.actions["Pause"];
