@@ -91,7 +91,10 @@ namespace Utility
             _expectedDate = CurrentDate;
         }
 
-        private void IncrementDate()
+        /// <summary>
+        /// Adds 1 to the day and moves everything else forward
+        /// </summary>
+        public void IncrementDate()
         {
             //Increment days by 1
             _date += new Vector2(0f, 1f);
@@ -107,6 +110,7 @@ namespace Utility
                 _date = new Vector2(1f, 1f);
             }
         }
+
         /// <summary>
         /// Returns the current date as a Vector2 in (Month, Day) format
         /// </summary>
