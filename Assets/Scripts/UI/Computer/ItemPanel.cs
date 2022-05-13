@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace UI.Computer
 {
@@ -13,19 +14,50 @@ namespace UI.Computer
         [SerializeField]
         private TMPro.TextMeshProUGUI Description;
         [SerializeField]
+        private TMPro.TextMeshProUGUI Price;
+        [SerializeField]
         private UnityEngine.UI.Image Icon;
+        [SerializeField]
+        private InputField quantityDisplay;
 
-        public UnityEvent OnItemSpawn;
+        private PrefabData activeItem;
 
-        private PrefabData itemToSpawn;
+        private int activeItemQuantity;
 
-        public void UpdatePanel(PrefabData data, Texture2D newIcon, string title, string description) 
+        private ComputerManager computerManager;
+
+        public delegate void OnCartModified();
+
+        public static event OnCartModified onCartModified;
+
+        public void UpdatePanel(PrefabData data, Texture2D newIcon, ShopItemData shopItem) 
         {
             gameObject.SetActive(true);
-            itemToSpawn = data;
-            Title.text = title;
-            Description.text = description; 
+            activeItem = data;
+            Title.text = shopItem.Name;
+            Description.text = shopItem.Description;
+            Price.text = $"${shopItem.Price.ToString("0.00")}";
             Icon.sprite = Sprite.Create(newIcon, new Rect(0,0,128,128), Vector2.zero);
+            if (FindObjectOfType<CartManager>() != null && computerManager.shoppingCart.ContainsKey(activeItem))
+            {
+                foreach (KeyValuePair<PrefabData, int> item in computerManager.shoppingCart)
+                {
+                    if (item.Key == activeItem)
+                    {
+                        activeItemQuantity = item.Value;
+                    }
+                }
+            }
+            else
+            {
+                activeItemQuantity = 0;
+            }
+            SetQuantityDisplay(activeItemQuantity);
+        }
+
+        private void SetQuantityDisplay(int _quantity)
+        {
+            quantityDisplay.text = _quantity.ToString();
         }
 
         void Start() 
@@ -33,10 +65,53 @@ namespace UI.Computer
             gameObject.SetActive(false);
         }
 
-        public void SpawnItem()
+        private void OnEnable()
         {
-            FindObjectOfType<ItemSpawner>().Spawn(itemToSpawn);
-            OnItemSpawn.Invoke();
+            computerManager = FindObjectOfType<ComputerManager>();
+            SetQuantityDisplay(activeItemQuantity);
+        }
+
+        public void IncrementQuantity()
+        {
+            activeItemQuantity++;
+            SetQuantityDisplay(activeItemQuantity);
+            UpdateActiveItemQuantityInCart();
+        }
+
+        public void DecrementQuantity()
+        {
+            activeItemQuantity--;
+            int minQuantity = 0;
+            if (activeItemQuantity < minQuantity)
+            {
+                activeItemQuantity = minQuantity;
+            }
+            SetQuantityDisplay(activeItemQuantity);
+            UpdateActiveItemQuantityInCart();
+        }
+
+        private void UpdateActiveItemQuantityInCart()
+        {
+            if (FindObjectOfType<CartManager>() != null)
+            {
+                computerManager.shoppingCart[activeItem] = activeItemQuantity;
+                onCartModified.Invoke();
+            }
+        }
+
+        public void AddItemToCart()
+        {
+            if (!computerManager.shoppingCart.ContainsKey(activeItem))
+            {
+                if (activeItemQuantity > 0)
+                {
+                    computerManager.shoppingCart.Add(activeItem, activeItemQuantity);
+                }
+            }
+            else
+            {
+                computerManager.shoppingCart[activeItem] += activeItemQuantity;
+            }
         }
     }
 }

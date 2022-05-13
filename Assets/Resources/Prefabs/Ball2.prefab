@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 808922491305656458}
   - component: {fileID: 1931120122686617484}
   - component: {fileID: 2541180524440731914}
+  - component: {fileID: 9206321987930710795}
   m_Layer: 0
   m_Name: Ball2
   m_TagString: Untagged
@@ -179,3 +180,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _location:
     _guid: 8b6af1e9-3313-4edb-9a51-4ee80c1331b7
+--- !u!114 &9206321987930710795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2496540189595589751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f6f5a6afc9e29743b4059ac27444df5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemData:
+    _guid: 7cdb6b2a-804e-4830-9312-42270e8d191a
+    Price: 1.99
+    Name: Brain Ball
+    Description: Playing with this will make your pet smarter. We think.

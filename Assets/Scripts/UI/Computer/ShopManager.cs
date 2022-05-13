@@ -15,23 +15,23 @@ namespace UI.Computer
         private GameObject ShopItem;
         [SerializeField]
         private ItemPanel panel;
-        private List<GameObject> ItemList = new List<GameObject>();
         private float itemSize = 100;
         private float itemMargin = 10;
 
         PrefabData selected;
 
+        private ComputerManager computerManager;
         private Queue<System.Func<GameObject>> SetPositions;
 
         private void RenderShop()
         {
-            DestoryShop();
+            DestroyShop();
             RectTransform rT = ViewPort.GetComponent<RectTransform>();
-            float maxSize = itemMargin + (Mathf.Ceil(ItemList.Count / 2f) * (itemSize + itemMargin));
+            float maxSize = itemMargin + (Mathf.Ceil(computerManager.itemList.Count / 2f) * (itemSize + itemMargin));
             rT.sizeDelta = new Vector2(0, maxSize);
-            for (int i = 0; i < ItemList.Count; i++)
+            for (int i = 0; i < computerManager.itemList.Count; i++)
             {
-                GameObject obj = ItemList[i];
+                GameObject obj = computerManager.itemList[i];
                 obj.transform.position = rT.position;
                 obj.transform.rotation = rT.rotation;
                 obj.transform.SetParent(rT);
@@ -52,7 +52,7 @@ namespace UI.Computer
             }
         }
 
-        private void DestoryShop()
+        private void DestroyShop()
         {
             foreach (Transform child in ViewPort.transform)
                 child.gameObject.SetActive(true);
@@ -69,34 +69,37 @@ namespace UI.Computer
 
         private void OnDisable()
         {
-            DestoryShop();
+            DestroyShop();
         }
 
-        public bool SetSelected(PrefabData data, Texture2D icon, string title, string description) 
+        public bool SetSelected(PrefabData data, Texture2D icon, ShopItemData shopItem) 
         {
-            panel.UpdatePanel(data, icon, title, description);
+            panel.UpdatePanel(data, icon, shopItem);
             return true;
         }
 
         void Start()
         {
+            computerManager = FindObjectOfType<ComputerManager>();
             if (!string.IsNullOrEmpty(ShopItemResourceFolder)) 
             {
                 var all = Resources.LoadAll<TextAsset>(ShopItemResourceFolder);
-                foreach (var item in ItemList) 
+                foreach (var item in computerManager.itemList) 
                 {
                     if (item.scene.IsValid()) 
                     {
                         Destroy(item);
                     }
                 }
-                ItemList.Clear();
+                computerManager.itemList.Clear();
+                computerManager.allItems.Clear();
                 foreach (var item in all) 
                 {
+                    computerManager.allItems.Add(item);
                     var obj = Instantiate(ShopItem);
                     var shop = obj.GetComponent<ShopItem>();
                     shop.SetPrefabData(item.text);
-                    ItemList.Add(obj);
+                    computerManager.itemList.Add(obj);
                     obj.SetActive(false);
                 }
             }

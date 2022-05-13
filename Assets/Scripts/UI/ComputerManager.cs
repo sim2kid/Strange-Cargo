@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using PersistentData.Saving;
 
 namespace UI
 {
@@ -11,19 +12,28 @@ namespace UI
         private GameObject Desktop;
         [SerializeField]
         private GameObject Shop;
+        [SerializeField]
+        private GameObject Cart;
 
         [SerializeField]
         private GameObject DesktopDefault;
         [SerializeField]
         private GameObject ShopDefault;
+        [SerializeField]
+        private GameObject CartDefault;
 
         private delegate void MenuAction();
         private MenuAction OpenLastMenu;
+
+        public List<TextAsset> allItems = new List<TextAsset>();
+        public List<GameObject> itemList = new List<GameObject>();
+        public Dictionary<PrefabData, int> shoppingCart;
 
         private void AllOff()
         {
             Desktop.SetActive(false);
             Shop.SetActive(false);
+            Cart.SetActive(false);
         }
 
         public void ShowDesktop()
@@ -42,6 +52,14 @@ namespace UI
             OpenLastMenu = OpenShop;
         }
 
+        public void OpenCart()
+        {
+            AllOff();
+            Cart.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(CartDefault);
+            OpenLastMenu = OpenCart;
+        }
+
         public void TurnOn()
         {
             OpenLastMenu?.Invoke();
@@ -49,12 +67,14 @@ namespace UI
 
         public void TurnOff()
         {
+            shoppingCart.Clear();
             AllOff();
         }
 
         void Start()
         {
             OpenLastMenu = ShowDesktop;
+            shoppingCart = new Dictionary<PrefabData, int>();
             AllOff();
         }
     }
