@@ -1,3 +1,4 @@
+using Environment.Tub;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class SoapBubble : MonoBehaviour
     [SerializeField]
     float force = 1;
     Rigidbody body;
+    public Bathtub tub;
+    public float bubbleWorth = 0.1f;
 
     public void OnEnable()
     {
@@ -25,6 +28,7 @@ public class SoapBubble : MonoBehaviour
     private void Start()
     {
         body = GetComponent<Rigidbody>();
+        tub = FindObjectOfType<Bathtub>();
     }
 
     private void Update()
@@ -41,6 +45,10 @@ public class SoapBubble : MonoBehaviour
         if (collision.gameObject.GetComponent<Creature.CreatureController>() != null) 
         {
             // Hit Creature;
+            if (tub != null) 
+            {
+                tub.ModSoap(bubbleWorth);
+            }
         }
     }
 }

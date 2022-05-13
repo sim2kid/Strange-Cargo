@@ -110,6 +110,7 @@ namespace Utility
                 _date = new Vector2(1f, 1f);
             }
         }
+
         /// <summary>
         /// Returns the current date as a Vector2 in (Month, Day) format
         /// </summary>
