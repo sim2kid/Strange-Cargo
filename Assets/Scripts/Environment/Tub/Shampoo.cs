@@ -1,3 +1,4 @@
+using Sound.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,8 @@ using UnityEngine.InputSystem;
 
 namespace Environment.Tub
 {
-    public class Shampoo : MonoBehaviour
+    [RequireComponent(typeof(InSceneView.ResetPosition))]
+    public class Shampoo : MonoBehaviour, IReplaceable
     {
         InputAction StationaryUse;
         [SerializeField]
@@ -16,15 +18,28 @@ namespace Environment.Tub
         [SerializeField]
         GameObject spawnSoapLoaction;
         float cooldown = 0;
+        [SerializeField]
+        Bathtub tub;
+
+        [SerializeField]
+        float spawnSpread = 0.01f;
+
+        public GameObject GameObject => gameObject;
+        public Vector3 rotationOffset => Vector3.zero;
+
+        public InSceneView.ResetPosition reset;
 
         [SerializeField]
         int totalActive = 0;
 
+        AudioPlayer ap;
 
         public bool inHand;
 
         void Start()
         {
+            ap = GetComponent<AudioPlayer>();
+            reset = GetComponent<InSceneView.ResetPosition>();
             inHand = false;
             PlayerInput input = GameObject.FindObjectOfType<PlayerInput>();
             if (input == null)
@@ -45,6 +60,7 @@ namespace Environment.Tub
                 soapBubbles.Add(obj);
                 obj.SetActive(false);
             }
+            tub = FindObjectOfType<Bathtub>();
         }
 
         private void OnDestroy()
@@ -56,7 +72,10 @@ namespace Environment.Tub
         {
             GameObject NextBubble = soapBubbles[bubbleIndex];
 
-            NextBubble.transform.position = spawnSoapLoaction.transform.position;
+
+
+            NextBubble.transform.position = spawnSoapLoaction.transform.position + 
+                new Vector3(Random.Range(-spawnSpread, spawnSpread), Random.Range(-spawnSpread, spawnSpread), 0);
             NextBubble.transform.rotation = spawnSoapLoaction.transform.rotation;
 
             if (NextBubble.activeSelf)
@@ -75,16 +94,31 @@ namespace Environment.Tub
             }
         }
 
+        bool playedAudio = false;
         private void Update()
         {
             bool isHeld = inHand && StationaryUse.ReadValue<float>() > 0.5f;
             if (isHeld)
             {
+                if (!playedAudio)
+                {
+                    ap.Play();
+                    playedAudio = true;
+                }
                 cooldown -= Time.deltaTime;
-                if (cooldown < 0) 
+                if (cooldown < 0)
                 {
                     cooldown -= 0.2f;
                     SpawnBubble();
+                }
+
+            }
+            else 
+            {
+                if (playedAudio == true)
+                {
+                    ap.Stop();
+                    playedAudio = false;
                 }
                 
             }
@@ -97,6 +131,19 @@ namespace Environment.Tub
                     totalActive++;
                 }
             }
+        }
+
+        public void Pickup()
+        {
+            inHand = true;
+            
+        }
+
+        public void Putdown()
+        {
+            inHand = false;
+            ap.Stop();
+            reset.LerpHome(2f);
         }
     }
 }

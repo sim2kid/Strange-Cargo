@@ -47,7 +47,7 @@ namespace Creature.Task
             Console.LogDebug($"Creature [{_caller.Guid}]: Eating - At Bowl");
             come.EndTask(_caller);
 
-            _caller.AnimationTrigger("Eat");
+            _caller.AnimationBool("Eat", true);
             _bowl.BeforeEat();
 
             wait = new Wait(5);
@@ -59,6 +59,7 @@ namespace Creature.Task
         {
             wait.EndTask(_caller);
 
+            _caller.AnimationBool("Eat", false);
             _bowl.Eat(200 - _caller.needs.Appetite);
             _caller.ProcessINeed(_bowl);
             Satisfaction = 100;
@@ -70,8 +71,8 @@ namespace Creature.Task
 
         public void EndTask(CreatureController caller)
         {
-            caller.AnimationResetTrigger("Eat");
-            if(wait != null)
+            _caller.AnimationBool("Eat", false);
+            if (wait != null)
                 wait.EndTask(caller);
             if(come != null)
                 come.EndTask(caller);

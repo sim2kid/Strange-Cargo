@@ -83,12 +83,15 @@ namespace Sound
 
         public void UnpauseMusic() 
         {
+            if (isPlaying) return;
             isPlaying = true;
             ap.UnPause();
+            Invoke("UnhaultPlay", 10);
         }
 
         public void PauseMusic() 
         {
+            if(!isPlaying) return;
             isPlaying = false;
             ap.Pause();
         }
@@ -101,6 +104,7 @@ namespace Sound
 
         public void StartMusic() 
         {
+            if (isPlaying) return;
             isPlaying = true;
             PlayMusic();
         }

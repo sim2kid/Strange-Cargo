@@ -25,6 +25,8 @@ namespace Creature.Brain
         [JsonIgnore]
         public Option RecentMemory => defineRecentMemory();
 
+        public bool canThink = true;
+
         private Option defineRecentMemory() 
         {
             if (lastMemory == null) 
@@ -70,6 +72,10 @@ namespace Creature.Brain
 
         public void Think() 
         {
+            if (!canThink) 
+            {
+                return;
+            }
             //var watch = new System.Diagnostics.Stopwatch();
             //watch.Start();
 

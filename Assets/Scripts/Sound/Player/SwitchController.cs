@@ -32,5 +32,13 @@ namespace Sound.Player
             }
             return false;
         }
+
+        public void PlaySelection(int selection)
+        {
+            if (SetSelection(selection)) 
+            {
+                ap.Play(true);
+            }
+        }
     }
 }
