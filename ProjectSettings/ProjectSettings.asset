@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: MyCompany
   productName: Strange-Cargo
-  defaultCursor: {fileID: 0}
+  defaultCursor: {fileID: 2800000, guid: 4c8829e3c0831e044ba036badc82d2d5, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
@@ -87,8 +87,8 @@ PlayerSettings:
   hideHomeButton: 0
   submitAnalytics: 1
   usePlayerLog: 1
-  bakeCollisionMeshes: 1
-  forceSingleInstance: 0
+  bakeCollisionMeshes: 0
+  forceSingleInstance: 1
   useFlipModelSwapchain: 1
   resizableWindow: 1
   useMacAppStoreValidation: 0
@@ -131,12 +131,12 @@ PlayerSettings:
   vulkanEnableLateAcquireNextImage: 0
   vulkanEnableCommandBufferRecycling: 1
   m_SupportedAspectRatios:
-    4:3: 1
-    5:4: 1
-    16:10: 1
+    4:3: 0
+    5:4: 0
+    16:10: 0
     16:9: 1
     Others: 0
-  bundleVersion: 0.3.344
+  bundleVersion: 0.3.345
   preloadedAssets:
   - {fileID: 0}
   - {fileID: 0}
@@ -151,9 +151,10 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: -8426688158082476039, guid: 3a8406893a5cc3041b9b79fc925a14ce, type: 2}
   - {fileID: 0}
-  - {fileID: 11400000, guid: 27b9cf9a559800a428e8391ac686bb98, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: -8426688158082476039, guid: 3a8406893a5cc3041b9b79fc925a14ce, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -189,7 +190,7 @@ PlayerSettings:
   ForceSDCardPermission: 0
   CreateWallpaper: 0
   APKExpansionFiles: 0
-  keepLoadedShadersAlive: 1
+  keepLoadedShadersAlive: 0
   StripUnusedMeshComponents: 1
   VertexChannelCompressionMask: 4054
   iPhoneSdkVersion: 988
